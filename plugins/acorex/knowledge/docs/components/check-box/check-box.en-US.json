@@ -1,0 +1,277 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Checkbox",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/checkbox--documentation"
+    }
+  ],
+  "description": "Checkbox component offers various features to enhance user interaction and understanding. It supports disabled and readonly modes, includes labels for descriptive text, provides hints for additional information, and allows for an indeterminate state. These capabilities make it a versatile tool for facilitating user selections and improving the overall user experience in applications.",
+  "imports": [
+    "import { AXCheckBoxComponent } from '@acorex/components/check-box';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-check-box</code>",
+      "content": {
+        "type": "api",
+        "data": "check-box/usage"
+      }
+    },
+    {
+      "title": "Hint",
+      "description": "You can add <code>ax-form-hint</code> to the check box",
+      "content": {
+        "type": "api",
+        "data": "check-box/hint"
+      }
+    },
+    {
+      "title": "Indeterminate",
+      "description": "You can pass true to indeterminate property in <code>ax-check-box</code> and the value must be null",
+      "content": {
+        "type": "api",
+        "data": "check-box/indeterminate"
+      }
+    },
+    {
+      "title": "Disabled and Readonly",
+      "description": "Demonstrates disabled and readonly states of <code>ax-check-box</code>.",
+      "content": {
+        "type": "api",
+        "data": "check-box/disabled-readonly"
+      }
+    },
+    {
+      "title": "Loading state",
+      "description": "Shows <code>isLoading</code> with a toggle button.",
+      "content": {
+        "type": "api",
+        "data": "check-box/loading"
+      }
+    },
+    {
+      "title": "Color variants",
+      "description": "Examples of default, primary and success colors.",
+      "content": {
+        "type": "api",
+        "data": "check-box/colors"
+      }
+    },
+    {
+      "title": "Validation (required)",
+      "description": "Using <code>ax-form-field</code> and <code>ax-validation-rule</code> to show an error message.",
+      "content": {
+        "type": "api",
+        "data": "check-box/validation"
+      },
+      "height": "300px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCheckBoxComponent",
+      "props": [
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tab index of the checkbox. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Determines whether the checkbox is read-only. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Disables the checkbox. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "boolean"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Sets the value of the checkbox. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Sets the name of the checkbox."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Sets the ID of the checkbox."
+        },
+        {
+          "name": "indeterminate",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the checkbox is in an indeterminate state."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Specifies the color theme of the checkbox. Inherited from MXColorComponent."
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Shows a loading state for the checkbox."
+        }
+      ],
+      "events": [
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the checkbox loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the checkbox gains focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "Deprecated: use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the value of the checkbox changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\npublic getHostElement<T = HTMLElement>(): T;"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\npublic setOption<T = any>(option: MXComponentSetOption<T>);"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus();"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur();"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean;"
+        }
+      ]
+    }
+  ]
+}

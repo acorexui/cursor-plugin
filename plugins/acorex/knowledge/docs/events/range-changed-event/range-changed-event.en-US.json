@@ -1,0 +1,32 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRangeChangedEvent",
+  "description": "Emitted when a range changes, providing the start and end values.",
+  "imports": ["import { AXRangeChangedEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Event carrying start and end values for a range.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXRangeChangedEvent<T> extends AXEvent {\n  start?: T;\n  end?: T;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRangeChangedEvent",
+      "props": [
+        { "name": "start", "type": [{ "name": "any" }], "description": "The range start value." },
+        { "name": "end", "type": [{ "name": "any" }], "description": "The range end value." }
+      ]
+    }
+  ],
+  "tokens": []
+}

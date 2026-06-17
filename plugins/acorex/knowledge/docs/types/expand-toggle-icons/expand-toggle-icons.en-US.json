@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXExpandToggleIcons",
+  "description": "Defines custom icons for expand/collapse toggles in tree view components.",
+  "imports": ["import { AXExpandToggleIcons } from '@acorex/cdk/common';"],
+  "types": [
+    {
+      "title": "AXExpandToggleIcons",
+      "props": [
+        {
+          "name": "expanded",
+          "type": [{ "name": "string" }],
+          "description": "Icon class for expanded state."
+        },
+        {
+          "name": "collapsed",
+          "type": [{ "name": "string" }],
+          "description": "Icon class for collapsed state."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript definition of the expand toggle icons type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "common.types.ts",
+            "content": "export interface AXExpandToggleIcons {\n  expanded: string;\n  collapsed: string;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

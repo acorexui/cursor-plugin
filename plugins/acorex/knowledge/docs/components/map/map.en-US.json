@@ -1,0 +1,758 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Map",
+  "description": "Map provides an interactive map powered by Leaflet. It supports markers, location tracking, and configurable zoom, latitude, longitude, and marker behavior. The component allows easy integration and manipulation of map features.",
+  "imports": [
+    "import { AXMapComponent } from '@acorex/components/map';"
+  ],
+  "sections": [
+    {
+      "height": "450px",
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-map</code>",
+      "content": {
+        "type": "api",
+        "data": "map/usage"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Markers Demo",
+      "description": "Demonstrates marker functionality with add, remove, and interactive features",
+      "content": {
+        "type": "api",
+        "data": "map/markers"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Polygons Demo",
+      "description": "Shows polygon drawing and management with different shapes and styles",
+      "content": {
+        "type": "api",
+        "data": "map/polygons"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Location Demo",
+      "description": "GPS location tracking and user position detection",
+      "content": {
+        "type": "api",
+        "data": "map/location"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Draw Controls Demo",
+      "description": "Interactive drawing tools for markers and polygons",
+      "content": {
+        "type": "api",
+        "data": "map/draw-controls"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Boundary Demo",
+      "description": "Drawing restrictions and boundary limitations",
+      "content": {
+        "type": "api",
+        "data": "map/boundary"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Popup Demo",
+      "description": "Interactive marker popups with dynamic content updates",
+      "content": {
+        "type": "api",
+        "data": "map/popup"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Fit Bounds Demo",
+      "description": "Automatic map fitting to show all markers and polygons",
+      "content": {
+        "type": "api",
+        "data": "map/fitbounds"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "POI Demo",
+      "description": "Demonstrates Points of Interest (POI) functionality with different categories and zoom-based visibility",
+      "content": {
+        "type": "api",
+        "data": "map/poi"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMapComponent",
+      "props": [
+        {
+          "name": "zoomLevel",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Two-way binding for the zoom level of the map. Supports both input and output via model() signal."
+        },
+        {
+          "name": "latitude",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Two-way binding for the latitude of the map center. Supports both input and output via model() signal."
+        },
+        {
+          "name": "longitude",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Two-way binding for the longitude of the map center. Supports both input and output via model() signal."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "The native DOM element associated with this component. Read-only property inherited from NXComponent."
+        },
+        {
+          "name": "maxMarker",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Maximum number of markers allowed on the map."
+        },
+        {
+          "name": "maxPolygon",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Maximum number of polygons allowed on the map."
+        },
+        {
+          "name": "hasDraw",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the map should have a marker control."
+        },
+        {
+          "name": "hasLocator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the map should have a location control."
+        },
+        {
+          "name": "fitToDraw",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether map should contain all draw items."
+        },
+        {
+          "name": "limitDraw",
+          "type": [
+            {
+              "name": "AXMapPolygon[]",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "default": "undefined",
+          "description": "Whether map draw has to limit in area."
+        },
+        {
+          "name": "addPoiToFitDraw",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether to include POIs when fitting the map to draw items."
+        },
+        {
+          "name": "addMarkerOnTap",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If true, user can add a marker by clicking/tapping on the map."
+        },
+        {
+          "name": "markerPlace",
+          "type": [
+            {
+              "name": "AXMapControlPlace",
+              "link": "/en-US/docs/types/ax-map-control-place"
+            }
+          ],
+          "default": "'topleft'",
+          "description": "Position of the marker control on the map."
+        },
+        {
+          "name": "locatePlace",
+          "type": [
+            {
+              "name": "AXMapControlPlace",
+              "link": "/en-US/docs/types/ax-map-control-place"
+            }
+          ],
+          "default": "'bottomright'",
+          "description": "Position of the locate control on the map."
+        },
+        {
+          "name": "poiMinZoom",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "10",
+          "description": "Minimum zoom level at which POI markers become visible."
+        },
+        {
+          "name": "markers",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            },
+            {
+              "name": "AXMapMarker[]",
+              "link": "/en-US/docs/types/ax-map-marker"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "default": "undefined",
+          "description": "Array or single marker location(s) to be placed on the map."
+        },
+        {
+          "name": "polygons",
+          "type": [
+            {
+              "name": "AXMapPolygon",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            },
+            {
+              "name": "AXMapPolygon[]",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "default": "undefined",
+          "description": "Array or single polygon location(s) to be placed on the map."
+        },
+        {
+          "name": "pois",
+          "type": [
+            {
+              "name": "AXPoiMarker",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            },
+            {
+              "name": "AXPoiMarker[]",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "default": "undefined",
+          "description": "Array or single POI marker(s) to be placed on the map."
+        }
+      ],
+      "events": [
+        {
+          "name": "onMarkerAdded",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Event triggered when a new marker is added to the map."
+        },
+        {
+          "name": "onMarkerClick",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Event triggered when a marker is clicked on the map."
+        },
+        {
+          "name": "onMarkerChanged",
+          "type": [
+            {
+              "name": "AXMapMarker[]",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Event triggered when marker positions are changed on the map."
+        },
+        {
+          "name": "onPolygonAdded",
+          "type": [
+            {
+              "name": "AXMapPolygon",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Event triggered when a new polygon is added to the map."
+        },
+        {
+          "name": "onPolygonClick",
+          "type": [
+            {
+              "name": "AXMapPolygon",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Event triggered when a polygon is clicked on the map."
+        },
+        {
+          "name": "onPolygonChanged",
+          "type": [
+            {
+              "name": "AXMapPolygon[]",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Event triggered when polygon positions are changed on the map."
+        },
+        {
+          "name": "onLocationFound",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Event triggered when a location is found via the location control."
+        },
+        {
+          "name": "onPoiChanged",
+          "type": [
+            {
+              "name": "AXPoiMarker[]",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            }
+          ],
+          "description": "Event triggered when POI positions are changed on the map."
+        },
+        {
+          "name": "onPoiAdded",
+          "type": [
+            {
+              "name": "AXPoiMarker",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            }
+          ],
+          "description": "Event triggered when a new POI is added to the map."
+        },
+        {
+          "name": "onMapReady",
+          "type": [
+            {
+              "name": "void"
+            }
+          ],
+          "description": "Event triggered map is loaded."
+        },
+        {
+          "name": "onLoadError",
+          "type": [
+            {
+              "name": "Error"
+            }
+          ],
+          "description": "Event triggered when map loading/initialization fails."
+        },
+        {
+          "name": "zoomLevel",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Two-way binding for the zoom level of the map. Emits when zoom level changes."
+        },
+        {
+          "name": "latitude",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Two-way binding for the latitude of the map center. Emits when center latitude changes."
+        },
+        {
+          "name": "longitude",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Two-way binding for the longitude of the map center. Emits when center longitude changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Adds a marker to the specified location on the map.\n * @param location - The location where the marker should be placed.\n * @param emitEvents - Whether to emit events for the marker.\n */\nasync addMarker(location: AXMapMarker | AXMapMarker[], emitEvents = false)"
+        },
+        {
+          "content": "/**\n * Removes markers by id or location; if not provided removes all markers\n */\nremoveMarker(location?: AXMapMarker | AXMapMarker[])"
+        },
+        {
+          "content": "/**\n * Adds a polygon to the specified location on the map.\n * @param location - The location where the polygon should be placed.\n * @param emitEvents - Whether to emit events for the polygon.\n */\naddPolygon(location: AXMapPolygon | AXMapPolygon[], emitEvents = false)"
+        },
+        {
+          "content": "/**\n * Removes polygons by id or geometry; if not provided removes all polygons\n */\nremovePolygon(location?: AXMapPolygon | AXMapPolygon[])"
+        },
+        {
+          "content": "/**\n * Retrieves all markers currently placed on the map.\n * @returns An array of `AXMapMarker` representing all markers.\n */\ngetMarkers(): AXMapMarker[]"
+        },
+        {
+          "content": "/**\n * Retrieves all polygons currently placed on the map.\n * @returns An array of `AXMapPolygon` representing all polygons.\n */\ngetPolygons(): AXMapPolygon[]"
+        },
+        {
+          "content": "/**\n * Retrieves all POI markers currently placed on the map.\n * @returns An array of `AXPoiMarker` representing all POI markers.\n */\ngetPois(): AXPoiMarker[]"
+        },
+        {
+          "content": "/**\n * Clear all markers and polygons\n */\nclearDrawItems()"
+        },
+        {
+          "content": "/**\n * Get all markers and polygons\n */\ngetDrawItem()"
+        },
+        {
+          "content": "/**\n * set markers and polygons\n */\nasync setDrawItem(data: AXMapData)"
+        },
+        {
+          "content": "/**\n * Adjusts the map view to fit all markers and polygons currently on the map.\n */\nfitBoundsToDrawItems()"
+        },
+        {
+          "content": "/**\n * Sets the boundary limit for drawing\n * @param data - The polygon data defining the boundary\n */\nsetLimitDraw(data: AXMapPolygon[])"
+        },
+        {
+          "content": "/**\n * Removes the boundary limit for drawing\n */\nremoveLimitDraw()"
+        },
+        {
+          "content": "/**\n * Flies the map to a specific location with optional zoom, marker placement, and animation duration.\n *\n * @param location - The target location to fly to.\n * @param zoom - Optional zoom level for the map.\n * @param setMarker - Whether to set a marker at the destination.\n * @param duration - Optional duration for the fly animation.\n */\nflyTo(location: AXMapMarker, zoom?: number, setMarker?: boolean, duration?: number)"
+        },
+        {
+          "content": "/**\n * Update popup for a specific marker\n * @param marker - The marker to update\n * @param popup - The new popup text\n * @param open - Whether the popup should be opened after update\n * @param closeButton - Whether the popup should have a close button\n * @returns True if the update was successful, false otherwise\n */\nupdateMarkerPopup(marker: AXMapMarker, popup: string, open = false, closeButton = true): boolean"
+        },
+        {
+          "content": "/**\n * Update popup for multiple markers\n * @param updates - Array of marker popup updates\n * @returns Number of markers successfully updated\n */\nupdateMarkersPopups(\n  updates: { marker: AXMapMarker; popup: string; open?: boolean; closeButton?: boolean }[],\n): number"
+        },
+        {
+          "content": "/**\n * Refreshes POIs from providers, clearing existing POIs first\n */\nasync refreshPois(): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXLeafletService",
+      "description": "Service for managing Leaflet maps and related functionalities.",
+      "props": [],
+      "events": [
+        {
+          "name": "onZoomChanged",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emits when the zoom level of the map changes."
+        },
+        {
+          "name": "onLongitudeChanged",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emits when the longitude of the map center changes."
+        },
+        {
+          "name": "onLatitudeChanged",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emits when the latitude of the map center changes."
+        },
+        {
+          "name": "onMarkerChanged",
+          "type": [
+            {
+              "name": "AXMapMarker[]",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Emits when marker data changes."
+        },
+        {
+          "name": "onPoiAdded",
+          "type": [
+            {
+              "name": "AXPoiMarker",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            }
+          ],
+          "description": "Emits when a poi is added."
+        },
+        {
+          "name": "onPoiChanged",
+          "type": [
+            {
+              "name": "AXPoiMarker[]",
+              "link": "/en-US/docs/types/ax-poi-marker"
+            }
+          ],
+          "description": "Emits when a poi is changed."
+        },
+        {
+          "name": "onMarkerAdded",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Emits when a marker is added."
+        },
+        {
+          "name": "onMarkerClick",
+          "type": [
+            {
+              "name": "AXMapMarker",
+              "link": "/en-US/docs/types/ax-map-marker"
+            }
+          ],
+          "description": "Emits when a marker is clicked."
+        },
+        {
+          "name": "onLocationFound",
+          "type": [
+            {
+              "name": "AXMapLocation",
+              "link": "/en-US/docs/types/ax-map-location"
+            }
+          ],
+          "description": "Emits when the user's location is found."
+        },
+        {
+          "name": "onPolygonChanged",
+          "type": [
+            {
+              "name": "AXMapPolygon[]",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Emits when polygon data changes."
+        },
+        {
+          "name": "onLoadError",
+          "type": [
+            {
+              "name": "Error"
+            }
+          ],
+          "description": "Emits when an error occurs during map load/initialization"
+        },
+        {
+          "name": "onPolygonAdded",
+          "type": [
+            {
+              "name": "AXMapPolygon",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Emits when a polygon is added."
+        },
+        {
+          "name": "onPolygonClick",
+          "type": [
+            {
+              "name": "AXMapPolygon",
+              "link": "/en-US/docs/types/ax-map-polygon"
+            }
+          ],
+          "description": "Emits when a polygon is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Loads the Leaflet library and its plugins.\n */\nasync loadLeaflet(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Initializes the Leaflet map.\n * @param mapElement The HTML element to render the map in.\n * @param location The initial map center.\n * @param zoom The initial zoom level. Defaults to 13.\n */\nasync initMap(mapElement: HTMLElement, location: AXMapLatLng, zoom = 13)"
+        },
+        {
+          "content": "/**\n * Creates a custom icon from SVG string or URL using the icon resolver if possible\n * @param iconSrc Path to the icon, SVG string, or icon key\n * @returns Leaflet icon\n */\nasync setCustomIcon(iconSrc: string): Promise<any>"
+        },
+        {
+          "content": "/**\n * Gets the current Leaflet map instance.\n * @returns The Leaflet map instance or undefined if not initialized.\n */\ngetMap(): L.Map | undefined"
+        },
+        {
+          "content": "/**\n * Gets the loaded Leaflet package.\n * @returns The Leaflet package.\n */\ngetLeafletPackage(): typeof import('leaflet')"
+        },
+        {
+          "content": "/**\n * Sets the zoom level of the map.\n * @param zoom The new zoom level.\n */\nsetZoomLevel(zoom: number): void"
+        },
+        {
+          "content": "/**\n * Sets the center of the map.\n * @param location The new center coordinates.\n */\nsetCenter(location: AXMapLatLng): void"
+        },
+        {
+          "content": "/**\n * Flies the map to a specific location.\n * @param location The target location.\n * @param zoom Optional zoom level.\n * @param setMarker Whether to set a marker at the destination.\n * @param duration Animation duration in seconds.\n */\nflyTo(location: AXMapLatLng, zoom?: number, setMarker = false, duration = 1.0): void"
+        },
+        {
+          "content": "/**\n * Gets all markers currently on the map.\n * @returns Array of map markers.\n */\ngetMarkers(): AXMapMarker[]"
+        },
+        {
+          "content": "/**\n * Gets all polygons currently on the map.\n * @returns Array of map polygons.\n */\ngetPolygons(): AXMapPolygon[]"
+        },
+        {
+          "content": "/**\n * Gets all POI markers currently on the map.\n * @returns Array of POI markers.\n */\ngetPois(): AXPoiMarker[]"
+        },
+        {
+          "content": "/**\n * Adds draw control to the map.\n * @param position Position of the draw control.\n * @param maxMarkers Maximum number of markers allowed.\n * @param maxPolygons Maximum number of polygons allowed.\n */\naddDrawControl(\n  position: AXMapControlPlace = 'topleft',\n  maxMarkers = 1,\n  maxPolygons = 1\n): void"
+        },
+        {
+          "content": "/**\n * Adds locate control to the map.\n * @param position Position of the locate control.\n */\naddLocateControl(position: AXMapControlPlace = 'bottomright'): void"
+        },
+        {
+          "content": "/**\n * Removes the draw control from the map.\n */\nremoveDrawControl(): void"
+        },
+        {
+          "content": "/**\n * Removes the locate control from the map.\n */\nremoveLocateControl(): void"
+        },
+        {
+          "content": "/**\n * Clears all drawn items from the map.\n * @param clearPois Whether to also clear POI markers.\n */\nclearDrawItems(clearPois = false): void"
+        },
+        {
+          "content": "/**\n * Gets all drawn items (markers and polygons).\n * @returns Object containing all drawn items.\n */\ngetDrawItem(): AXMapData"
+        },
+        {
+          "content": "/**\n * Sets all drawn items on the map.\n * @param data The data to set.\n */\nasync setDrawItem(data: AXMapData)"
+        },
+        {
+          "content": "/**\n * Fits the map view to all drawn items.\n * @param includePois Whether to include POIs in the fit.\n */\nfitBoundsToDrawItems(includePois = false): void"
+        },
+        {
+          "content": "/**\n * Sets a boundary for drawing operations.\n * @param boundaryPolygons Array of polygons defining the boundary.\n */\nsetBoundary(boundaryPolygons: AXMapPolygon[]): void"
+        },
+        {
+          "content": "/**\n * Removes the boundary restriction.\n */\nremoveBoundary(): void"
+        },
+        {
+          "content": "/**\n * Destroys the map and cleans up resources.\n */\ndestroyMap(): void"
+        },
+        {
+          "content": "/**\n * Updates the popup for a specific marker.\n * @param marker The marker to update.\n * @param popup The new popup text.\n * @param open Whether to open the popup.\n * @param closeButton Whether to show a close button.\n * @returns True if successful, false otherwise.\n */\nupdateMarkerPopup(marker: AXMapMarker, popup: string, open = false, closeButton = true): boolean"
+        },
+        {
+          "content": "/**\n * Updates popups for multiple markers.\n * @param updates Array of marker popup updates.\n * @returns Number of successfully updated markers.\n */\nupdateMarkerPopups(\n  updates: { marker: AXMapMarker; popup: string; open?: boolean; closeButton?: boolean }[]\n): number"
+        },
+        {
+          "content": "/**\n * Adds markers to the map.\n * @param locations Single marker or array of markers.\n * @param emitEvents Whether to emit events.\n */\nasync addMarker(locations: AXMapMarker | AXMapMarker[], emitEvents = true): Promise<void>"
+        },
+        {
+          "content": "/**\n * Adds polygons to the map.\n * @param polygons Single polygon or array of polygons.\n * @param emitEvents Whether to emit events.\n */\naddPolygon(polygons: AXMapPolygon | AXMapPolygon[], emitEvents = true): void"
+        },
+        {
+          "content": "/**\n * Adds POI markers to the map.\n * @param locations Single POI or array of POIs.\n */\nasync addPoi(locations: AXPoiMarker | AXPoiMarker[]): Promise<void>"
+        },
+        {
+          "content": "/**\n * Sets the minimum zoom level for POI visibility.\n * @param minZoom The minimum zoom level.\n */\nsetPoiMinZoom(minZoom: number): void"
+        },
+        {
+          "content": "/**\n * Gets the minimum zoom level for POI visibility.\n * @returns The minimum zoom level.\n */\ngetPoiMinZoom(): number"
+        },
+        {
+          "content": "/**\n * Loads POIs from configured providers.\n */\nasync loadPoisFromProviders(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Refreshes all POIs from providers.\n */\nasync refreshPois(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Refreshes POIs from a specific provider.\n * @param providerKey The provider key.\n */\nasync refreshPoiByProvider(providerKey: string): Promise<void>"
+        },
+        {
+          "content": "/**\n * Enables or disables adding markers on tap.\n * @param enabled Whether to enable the feature.\n */\nsetAddMarkerOnTap(enabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Removes markers from the map.\n * @param locations Single marker or array of markers to remove.\n */\nremoveMarker(locations?: AXMapMarker | AXMapMarker[]): void"
+        },
+        {
+          "content": "/**\n * Removes polygons from the map.\n * @param locations Single polygon or array of polygons to remove.\n */\nremovePolygon(locations?: AXMapPolygon | AXMapPolygon[]): void"
+        },
+        {
+          "content": "/**\n * Sets the maximum number of markers allowed.\n * @param maxMarkers The maximum number of markers.\n */\nsetMaxMarkers(maxMarkers: number): void"
+        },
+        {
+          "content": "/**\n * Sets the maximum number of polygons allowed.\n * @param maxPolygons The maximum number of polygons.\n */\nsetMaxPolygons(maxPolygons: number): void"
+        }
+      ]
+    }
+  ]
+}

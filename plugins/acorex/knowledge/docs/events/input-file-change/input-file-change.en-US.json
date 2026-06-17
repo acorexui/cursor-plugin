@@ -1,0 +1,28 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXInputFileChange",
+  "description": "Emitted when the input file changes, providing the new file data.",
+  "imports": ["import { AXInputFileChange } from '@acorex/components/conversation';"],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload for input file changes.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "input-file-change.ts",
+            "language": "ts",
+            "content": "interface AXInputFileChange {\n  files: FileList;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXInputFileChange",
+      "props": [{ "name": "data", "type": [{ "name": "any" }], "description": "The new file data." }]
+    }
+  ]
+}

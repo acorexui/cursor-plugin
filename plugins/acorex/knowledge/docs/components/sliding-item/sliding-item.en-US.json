@@ -1,0 +1,113 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXSlidingItemModule } from '@acorex/components/sliding-item';"
+  ],
+  "title": "Sliding Item",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/slidingitem--documentation"
+    }
+  ],
+  "description": "A component that provides a swipeable item with revealable action buttons, commonly used in lists to show additional actions. Users can drag an item horizontally to reveal hidden option buttons, enabling quick actions like edit, delete, or share.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-sliding-item</code> with prefix and suffix action buttons",
+      "content": {
+        "type": "api",
+        "data": "sliding-item/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSlidingItemComponent",
+      "props": [],
+      "events": [],
+      "methods": []
+    },
+    {
+      "title": "AXSlidingItemPrefixComponent",
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "The color theme for the prefix action button"
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The text label to display on the prefix action button"
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the prefix action button is clicked"
+        }
+      ],
+      "methods": []
+    },
+    {
+      "title": "AXSlidingItemSuffixComponent",
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "The color theme for the suffix action button"
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The text label to display on the suffix action button"
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the suffix action button is clicked"
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRailLook",
+  "description": "Visual appearance options for rail navigation component.",
+  "imports": ["import { AXRailLook } from '@acorex/components/rail-navigation';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The type definition for rail navigation look options.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "rail-navigation.class.ts",
+            "language": "ts",
+            "content": "export type AXRailLook = 'default' | 'pills' | 'pills-color' | 'with-line' | 'with-line-color';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRailLook",
+      "description": "Visual appearance options for rail navigation component.",
+      "props": [
+        {
+          "name": "AXRailLook",
+          "type": [
+            { "name": "'default'" },
+            { "name": "'pills'" },
+            { "name": "'pills-color'" },
+            { "name": "'with-line'" },
+            { "name": "'with-line-color'" }
+          ],
+          "description": "Defines the visual style of the rail navigation component."
+        }
+      ]
+    }
+  ]
+}

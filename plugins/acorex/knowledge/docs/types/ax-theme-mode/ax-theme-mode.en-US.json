@@ -1,0 +1,40 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXThemeMode",
+  "imports": ["import { AXThemeMode } from '@acorex/core/platform';"],
+  "description": "The theme mode",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXThemeMode type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-theme-mode.ts",
+            "content": "export type AXThemeMode = 'light' | 'dark' | 'system' | 'system-dark' | 'system-light';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXThemeMode",
+      "props": [
+        {
+          "name": "AXThemeMode",
+          "type": [
+            { "name": "'light'" },
+            { "name": "'dark'" },
+            { "name": "'system'" },
+            { "name": "'system-dark'" },
+            { "name": "'system-light'" }
+          ],
+          "description": "The theme mode"
+        }
+      ]
+    }
+  ]
+}

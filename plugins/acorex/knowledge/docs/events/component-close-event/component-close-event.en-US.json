@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXComponentCloseEvent",
+  "description": "Event emitted when a component is closed, providing component reference, HTML element, and optional data.",
+  "imports": ["import { AXComponentCloseEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the component close event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "components.class.ts",
+            "content": "export class AXComponentCloseEvent extends AXEvent {\n  data?: any;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXComponentCloseEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component instance. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element associated with the component. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates whether the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "description": "Optional data passed when the component was closed."
+        }
+      ]
+    }
+  ]
+}

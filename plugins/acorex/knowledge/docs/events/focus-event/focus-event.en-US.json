@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Focus Event",
+  "description": "Represents the event payload emitted when a component gains or loses focus.",
+  "imports": ["import { AXFocusEvent } from '@acorex/cdk/common';"],
+  "types": [
+    {
+      "title": "AXFocusEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component instance. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element associated with the component. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates whether the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "FocusEvent" }],
+          "description": "The underlying native focus event. Inherited from AXHtmlEvent."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "events.class.ts",
+            "content": "export class AXEvent {\n  component: any;\n  htmlElement?: HTMLElement;\n  isUserInteraction?: boolean = false;\n}\n\nexport class AXHtmlEvent<E extends Event = Event> extends AXEvent {\n  nativeEvent?: E;\n}\n\nexport class AXFocusEvent extends AXHtmlEvent<FocusEvent> {}"
+          }
+        ]
+      }
+    }
+  ]
+}

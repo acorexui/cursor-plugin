@@ -1,0 +1,38 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNotificationContentType",
+  "description": "Union type defining the allowed content types for notification content.",
+  "imports": ["import { AXNotificationContentType } from '@acorex/components/notification';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Union type definition for notification content types.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.class.ts",
+            "content": "export type AXNotificationContentType = string | TemplateRef<unknown> | ComponentType<unknown>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationContentType",
+      "props": [
+        {
+          "name": "AXNotificationContentType",
+          "type": [
+            { "name": "string" },
+            { "name": "TemplateRef<unknown>" },
+            { "name": "ComponentType<unknown>" }
+          ],
+          "description": "Union type defining the allowed content types for notification content. Can be a string for simple text, a template reference for custom HTML, or a component type for dynamic content."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXColorMode",
+  "imports": ["import { AXColorMode } from '@acorex/core/utils';"],
+  "description": "The mode to convert the color to.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXColorMode type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-color-mode.ts",
+            "content": "export type AXColorMode = 'rgba' | 'hex' | 'hsla' | 'hsva' | null;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXColorMode",
+      "props": [
+        {
+          "name": "AXColorMode",
+          "type": [
+            { "name": "'rgba'" },
+            { "name": "'hex'" },
+            { "name": "'hsla'" },
+            { "name": "'hsva'" },
+            { "name": "null" }
+          ],
+          "description": "The mode to convert the color to."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHierarchyChartToggleEvent",
+  "description": "Event interface emitted when a node in the hierarchy chart is expanded or collapsed, providing access to the affected node and its new expansion state",
+  "imports": ["import { AXHierarchyChartToggleEvent } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartToggleEvent",
+      "description": "Event data for node expansion/collapse events",
+      "props": [
+        {
+          "name": "node",
+          "type": [{ "name": "AXHierarchyChartNode", "link": "/en-US/docs/types/hierarchy-chart-node" }],
+          "description": "The node that was toggled"
+        },
+        {
+          "name": "expanded",
+          "type": [{ "name": "boolean" }],
+          "description": "The new expansion state"
+        }
+      ],
+      "inherited": [
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Canonical event interface from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "hierarchy-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXHierarchyChartToggleEvent {\n  node: AXHierarchyChartNode;\n  expanded: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

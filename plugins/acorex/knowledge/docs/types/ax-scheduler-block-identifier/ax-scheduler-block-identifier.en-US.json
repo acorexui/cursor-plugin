@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerBlockIdentifier",
+  "imports": ["import { AXSchedulerBlockIdentifier } from '@acorex/components/scheduler';"],
+  "description": "Identifies a specific time block within a scheduler view.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing a block identifier with day and block indices.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-block-identifier.ts",
+            "content": "interface AXSchedulerBlockIdentifier { dayIndex: number; blockIndex: number; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerBlockIdentifier",
+      "props": [
+        {
+          "name": "dayIndex",
+          "type": [{ "name": "number" }],
+          "description": "Index of the day within the view."
+        },
+        {
+          "name": "blockIndex",
+          "type": [{ "name": "number" }],
+          "description": "Index of the time block within the day."
+        }
+      ]
+    }
+  ]
+}

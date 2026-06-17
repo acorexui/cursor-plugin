@@ -1,0 +1,157 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Outline",
+  "description": "The ACoreX outline directives provide a robust and streamlined way to create dynamic, scroll-linked navigation menus within ACoreX applications. These directives simplify the process of generating table of contents or side navigation elements that automatically highlight the currently visible section of a page as the user scrolls, enhancing user experience on long-form content.",
+  "imports": [
+    "import { AXOutlineContainerDirective } from '@acorex/cdk/outline';",
+    "import { AXOutlineItemDirective } from '@acorex/cdk/outline';",
+    "import { AXOutlineSideMenuDirective } from '@acorex/components/side-menu';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A complete example showing how to use the outline directives together to create a dynamic navigation system.",
+      "content": {
+        "type": "api",
+        "data": "cdk/outline/usage"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Hash Links",
+      "description": "Demonstrates how to enable hash links with the outline directive for better navigation and URL sharing.",
+      "content": {
+        "type": "api",
+        "data": "cdk/outline/hash-links"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Scroll Offset",
+      "description": "Shows how to configure the activation offset to control when outline items become active during scrolling.",
+      "content": {
+        "type": "api",
+        "data": "cdk/outline/scroll-offset"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Target Selector",
+      "description": "Demonstrates how to use CSS selectors to automatically include elements in the outline navigation.",
+      "content": {
+        "type": "api",
+        "data": "cdk/outline/target-selector"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXOutlineContainerDirective",
+      "props": [
+        {
+          "name": "target",
+          "type": [{ "name": "string" }],
+          "description": "A CSS selector string. Elements matching this selector will also be included as outline items, in addition to elements with the data-ax-outline-item=\"true\" attribute. Use this to include elements that shouldn't have the data attribute."
+        },
+        {
+          "name": "smoothScroll",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Enables smooth scrolling when navigating via the side menu. This uses CSS scroll-behavior: smooth."
+        },
+        {
+          "name": "showHashItem",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Shows a hash link (#) next to each outline item that can be used to copy the URL to that section."
+        },
+        {
+          "name": "activationOffset",
+          "type": [{ "name": "number" }],
+          "default": "16",
+          "description": "The offset, in pixels, from the top of an outline item that triggers its activation."
+        },
+        {
+          "name": "copyUrlOnClick",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "When showHashItem is true, clicking the hash link will copy the URL to the clipboard instead of navigating."
+        },
+        {
+          "name": "activateLastAtBottom",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Activates the last outline item when the user scrolls to the bottom of the container."
+        },
+        {
+          "name": "scrollableElementId",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "default": "null",
+          "description": "Use this if the element that scrolls is not the same element the axOutlineContainer directive is applied to. Provide the id of the scrollable element (the one that has the scrollbar)."
+        },
+        {
+          "name": "outlineItems$",
+          "type": [{ "name": "BehaviorSubject<outlineItemType[]>" }],
+          "description": "A BehaviorSubject that emits the current array of outline items. Subscribe to this observable to get real-time updates when outline items change or when the active state changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Refreshes the outline items by re-scanning the container for elements.\n * This method is useful when content is dynamically added or removed.\n *\n * @returns void - No return value. The outline items are updated and the active state is recalculated.\n */\nrefreshOutlineItems(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXOutlineItemDirective",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "A unique identifier for the outline item. This is crucial for navigation and scrolling. If the element already has an id, this input will be ignored. If not, the directive generates an id based on the element's text content or a random string."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Disables the outline item. When disabled, the item will not appear in the outline navigation."
+        }
+      ]
+    },
+    {
+      "title": "outlineItemType",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the outline item."
+        },
+        {
+          "name": "el",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element associated with this outline item."
+        },
+        {
+          "name": "active",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this outline item is currently active."
+        },
+        {
+          "name": "scrollY",
+          "type": [{ "name": "number" }],
+          "description": "The vertical scroll position of this outline item."
+        },
+        {
+          "name": "parentId",
+          "type": [{ "name": "string" }],
+          "description": "Optional parent ID for hierarchical outline structures."
+        },
+        {
+          "name": "hasAnchor",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this outline item has an anchor link."
+        }
+      ]
+    }
+  ]
+}

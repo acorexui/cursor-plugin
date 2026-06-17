@@ -1,0 +1,35 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXGaugeChartValue",
+  "description": "Gauge chart data type - represents a single numeric value for the gauge chart",
+  "imports": ["import { AXGaugeChartValue } from '@acorex/charts/gauge-chart';"],
+  "types": [
+    {
+      "title": "AXGaugeChartValue",
+      "description": "Gauge chart data type - represents a single gauge value",
+      "props": [
+        {
+          "name": "AXGaugeChartValue",
+          "type": [{ "name": "number" }],
+          "description": "Numeric value for the gauge chart"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical type definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "gauge-chart.type.ts",
+            "language": "ts",
+            "content": "export type AXGaugeChartValue = number;"
+          }
+        ]
+      }
+    }
+  ]
+}

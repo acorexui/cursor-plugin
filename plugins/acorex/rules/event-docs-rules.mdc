@@ -1,0 +1,299 @@
+---
+description: Generate bilingual JSON documentation for ACoreX shared event interfaces and types.
+alwaysApply: false
+---
+# JSON Documentation Generation Rule for Event Interfaces and Types
+
+## 0. Schema Adherence
+
+- **Crucially, all generated JSON documentation files MUST strictly adhere to the schema defined in `apps/documentation/docs/document.schema.json`.** This schema dictates the structure and valid properties for the documentation.
+
+---
+
+## 1. File Structure & Naming
+
+- Each event interface/type must have two JSON documentation files:
+  - `event-name.en-US.json`
+  - `event-name.fa-IR.json`
+- Place these files in: `apps/documentation/docs/events/event-name/`
+- The `event-name` should be the kebab-case version of the interface/type name (e.g., `AXActionSheetEvent` becomes `ax-action-sheet-event`).
+
+---
+
+## 2. Schema Reference
+
+- Use the schema reference:
+  - `"$schema": "../../document.schema.json"`
+    (This is a self-reference within the JSON to the master schema defined in `apps/documentation/docs/document.schema.json`.)
+
+---
+
+## 2.5 Imports
+
+- Always include an `imports` array showing how to import the documented event/interface/type from the public API.
+- Use top-level package entry points (no deep or relative paths):
+  - Correct: `"import { AXContextMenuItemsClickEvent } from '@acorex/components/menu';"`
+  - Correct: `"import { AXClickEvent } from '@acorex/cdk/common';"`
+  - Correct: `"import { AXPlatformEvent } from '@acorex/core/platform';"`
+  - Incorrect: `"import { AXContextMenuItemsClickEvent } from '../../package/src/lib/...';"`
+- For built-in/DOM/global events or types, omit the import or include a clarifying comment entry if needed.
+
+---
+
+## 3. Title & Description
+
+- English: Use a clear, concise description of the event's purpose and when it is emitted.
+- Farsi: **Translate the title and description accurately to Farsi. Do NOT use English text with placeholders like "Translate to Farsi." The content must be in Farsi.**
+- If a property lacks a description, generate a simple, sensible one based on its name (e.g., `"value": "The value associated with the event."`). If generating a sensible description is not possible, use `"Description needed."` as the value.
+
+---
+
+## 4. Types (Properties of the Event Interface/Class)
+
+This section details how to document the properties of the event interface or class itself.
+
+The `type` for all properties is documented as an array of `DocType` objects within the JSON. Each `DocType` object has a `name: string` (the type string itself) and an optional `link: string` (uri-reference to the type's documentation if available).
+
+**Core Principle for Representing Types and Inheritance (STRICT):**
+
+- Always resolve inheritance fully before documenting:
+  - Walk the chain from the target event → parent → base(s).
+  - Include public fields from bases unless hidden/overridden.
+  - When a subclass overrides a field type or default, document the subclass’s effective type/default.
+  - Note inheritance in descriptions when helpful (e.g., "Inherited from AXEvent").
+- If a TypeScript type is a union (e.g., `string | number` or `TypeA | TypeB<GenericParam>`), each member of that union is listed as a separate and distinct `DocType` object in the `type` array.
+- The `|` union symbol itself is **NOT** included as a `DocType` object.
+- Complex types, including generics (e.g., `Promise<string>`, `MyGeneric<number>`), are represented as a single `DocType` object with the full type string as its `name`. There is no splitting of `<`, `>`, or generic parameters into separate `DocType` objects.
+
+**Defaults Policy (STRICT):**
+
+- Only include defaults explicitly assigned in code (e.g., `= null`, `= false`).
+- Optional properties without assignment have no default.
+- Respect overrides: if the subclass sets a default, document that value.
+- Example mappings from current base events:
+  - `AXEvent.isUserInteraction?: boolean = false` → default "false".
+  - `AXHtmlEvent<E>.nativeEvent?: E` → no default (undefined).
+  - `AXClickEvent.override nativeEvent?: any = null` → default "null".
+  - `AXClickEvent.data?: any = null` → default "null".
+
+### Event API (`types` array)
+
+- For each exported `interface`, `class`, or `type alias` found by the glob, create a new `DocApi` object within the `types` array.
+- The `title` of this `DocApi` object should be the original TypeScript name of the interface/class/type (e.g., `"AXActionSheetEvent"`).
+- Document all public properties of the interface/class under the `props` array (an array of `DocProperty` items).
+- Each property object must include:
+  - `name: string`: The name of the property.
+  - `type?: DocType[]`: An optional array of `DocType` objects representing the property's type.
+    - TS: `string` => JSON: `[{name: 'string'}]`
+    - TS: `MyCustomType` (linkable) => JSON: `[{name: 'MyCustomType', link: 'path/to/doc'}]`
+    - TS: `string | number` => JSON: `[{name: 'string'}, {name: 'number'}]`
+    - TS: `boolean | MyInterface` (linkable) => JSON: `[{name: 'boolean'}, {name: 'MyInterface', link: 'path/to/doc'}]`
+    - TS: `TypeA | TypeB<Param> | TypeC` (TypeB<Param> linkable, if `TypeB<Param>` has its own documentation) => JSON: `[{name: 'TypeA'}, {name: 'TypeB<Param>', link: 'path/to/doc'}, {name: 'TypeC'}]`
+    - **CRITICAL LINKING:** If a property's type (or a part of a union type) refers to another documented interface, class, or type, the `DocType` object for that type MUST include a `link` property. The `link` should point to its corresponding documentation JSON using the kebab-case name (e.g., `/en-US/docs/components/button`).
+  - `description: string`: A clear explanation of the property's purpose. Include inheritance notes where appropriate.
+  - `default?: string`: The default value only if explicitly set in code (stringified), respecting subclass overrides.
+- Empty States Policy (STRICT): If there are no public properties for an event interface/class, omit the `props` key entirely rather than adding an empty array. If an event would result in a `types` item that only contains a `title` and no `props`, `events`, or `methods`, omit that entire `types` item.
+- The `events` and `methods` arrays for event interfaces/types should generally be empty, as these files primarily define data structures.
+- Do not include empty `events` or `methods` arrays; omit these keys when they have no entries.
+
+- Example for `AXActionSheetEvent`:
+  ```json
+  {
+    "$schema": "../../document.schema.json",
+    "title": "Action Sheet Event",
+    "description": "Represents the event payload when an action sheet is interacted with or closed.",
+    "types": [
+      {
+        "title": "AXActionSheetEvent",
+        "props": [
+          {
+            "name": "type",
+            "type": [{ "name": "'cancel'" }, { "name": "'select'" }],
+            "description": "The type of action sheet event, either 'cancel' or 'select'."
+          },
+          {
+            "name": "data",
+            "type": [{ "name": "any" }, { "name": "null" }],
+            "description": "The data returned by the action sheet, if any. This could be the selected item's value."
+          }
+        ]
+      }
+    ]
+  }
+  ```
+
+---
+
+## 5. Link Format Specification
+
+**CRITICAL REQUIREMENT:** The `link` property in `DocType` objects MUST use URL paths, NOT file paths.
+
+### 5.1 Correct Link Format
+
+- **Use URL paths:** `/en-US/docs/events/event-name` or `/fa-IR/docs/types/type-name`
+- **Do NOT use file paths:** `../../events/event-name/event-name.en-US.json`
+- **Do NOT use relative paths:** `../events/event-name`
+
+### 5.2 Link Structure Examples
+
+```json
+// CORRECT - URL paths
+"type": [{ "name": "AXClickEvent", "link": "/en-US/docs/events/click-event" }]
+"type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }]
+
+// INCORRECT - File paths (DO NOT USE)
+"type": [{ "name": "AXClickEvent", "link": "../../events/click-event/click-event.en-US.json" }]
+"type": [{ "name": "AXStyleColorType", "link": "../types/style-color-type/style-color-type.en-US.json" }]
+```
+
+### 5.3 Language-Specific Links
+
+- **English documentation:** Use `/en-US/docs/` prefix
+- **Farsi documentation:** Use `/fa-IR/docs/` prefix
+- **Category paths:** Follow the structure `/language/docs/category/name`
+
+### 5.4 Validation
+
+Before finalizing event documentation, verify that all `link` properties:
+
+- Start with `/en-US/docs/` or `/fa-IR/docs/`
+- Use kebab-case naming for the target
+- Point to the correct category (events, types, components, etc.)
+- Do NOT contain file extensions (.json)
+
+---
+
+## 6. Documentation Structure Decision
+
+**CRITICAL UNDERSTANDING:** There are two different approaches for documenting events, and you must choose the correct one based on the event's purpose.
+
+**DEFAULT POLICY (Read First):**
+
+- If an event is intended to be linked from component tables (e.g., base component events like `AXOptionChangedEvent`), include a `types` array with detailed `props` so the component docs can link to it.
+- If an event is simple and will not be linked from components, you may document it using a code section (`sections` with `type: "code"`).
+
+### 6.1.1 Dual-format guidance (Recommended for shared/linkable events)
+
+- For shared, linkable events, include BOTH:
+  - A `types` block with the full property table (used for links from components)
+  - A single `sections` entry with `type: "code"` showing the canonical TypeScript definition for quick scanning
+- To avoid duplicate headings in the rendered page:
+  - Keep `types[0].title` set to the exact TypeScript name (e.g., `AXOptionChangedEvent`)
+  - Name the code section title descriptively, e.g., "Class Definition" or "Event Definition" (not the type name)
+- Ensure the code section exactly mirrors the runtime source (no placeholders); update it when the source changes. When the event is a type alias to a base event (e.g., `export type AXContextMenuItemsClickEvent = AXMenuItemClickBaseEvent<AXContextMenuComponent>;`), the table must reflect inherited fields from the base (e.g., `sender`, `nativeEvent`) in addition to any extended fields. Use links for component/event types when docs exist.
+
+### 6.1 Approach 1: Detailed Event Documentation (`types` array)
+
+**Use this approach for:**
+
+- Events that have multiple properties that need detailed documentation
+- Events that are complex and require explanation of each property
+- Events that will be linked FROM component documentation
+
+**Structure:**
+
+```json
+{
+  "types": [
+    {
+      "title": "MyEvent",
+      "props": [
+        {
+          "name": "property1",
+          "type": [{ "name": "string" }],
+          "description": "Description of property1"
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}
+```
+
+**Example:** Events with multiple properties like `AXActionSheetEvent` that have `type`, `data`, and other properties.
+
+### 6.2 Approach 2: Simple Code Display (`sections` array)
+
+**Use this approach for:**
+
+- Simple events that are self-explanatory
+- Events that don't have multiple properties to document
+- Events that are primarily for internal use but need to be shown
+
+**Structure:**
+
+```json
+{
+  "sections": [
+    {
+      "title": "MyEvent",
+      "description": "Description of the event",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "my-event.ts",
+            "content": "interface MyEvent { value: string; }"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Example:** Simple events with minimal properties that are self-explanatory.
+
+**Notes:**
+
+- Prefer this approach for non-linkable events to keep docs concise and avoid unnecessary tables.
+- For shared/linkable events, prefer the dual-format approach above.
+
+### 6.3 Decision Matrix
+
+| Event Characteristic                        | Documentation Approach             | Example                   |
+| ------------------------------------------- | ---------------------------------- | ------------------------- |
+| **Multiple properties** + **Complex**       | `types` array with detailed props  | `AXActionSheetEvent`      |
+| **Simple structure** + **Self-explanatory** | `sections` array with code display | Simple click events       |
+| **Internal use** + **Minimal properties**   | `sections` array with code display | Component-specific events |
+
+### 6.4 Implementation Guidelines
+
+1. **For Complex Events**: Use `types` array when you have multiple properties to document
+2. **For Simple Events**: Use `sections` array when the event is self-explanatory
+3. **Consistency**: Choose one approach per event and stick with it
+4. **Linking**: Events documented with `types` array can be linked FROM component documentation
+5. **Code Display**: Events documented with `sections` array are shown as inline code examples
+
+---
+
+## 7. Cross-referencing Strategy (STRICT)
+
+- Cross-references MUST be implemented via `DocType.link` inside the `type` arrays of props/events/methods (where types are declared).
+  - Example: If an event uses `AXCalendarNavigateEvent`, set `"link": "/en-US/docs/events/ax-calendar-navigate-event"` on that type.
+  - Example: If a property refers to `AXCalendarComponent` (e.g., in an event payload), set `"link": "/en-US/docs/components/calendar"` on that type.
+- Do NOT add general cross-links via `extraLinks` for component-to-component relationships; rely on precise `DocType.link` references at the point of type declaration.
+- Ensure links follow Section 10 (URL paths, kebab-case, language-specific prefixes) and only reference existing docs.
+
+---
+
+## 8. Validation Checklist
+
+Before finalizing event interface/type documentation, verify:
+
+- [ ] All public properties are documented with correct types and links
+- [ ] Both English and Farsi versions are complete and consistent
+- [ ] The `imports` array is present and uses the correct public import path
+- [ ] All type references include proper links to documented types
+- [ ] Schema validation passes for both language versions
+- [ ] Union types are properly documented as separate DocType objects
+- [ ] Complex types and generics are documented as single DocType objects
+- [ ] All `link` properties use URL paths (not file paths)
+- [ ] No file extensions (.json) appear in link properties
+- [ ] Simple, non-linkable events are documented using code sections (not tables)
+- [ ] Event documentation files contain no `tokens` section
+- [ ] Shared/linkable events include both a property table (`types`) and a code section with a non-duplicative title
+- [ ] **Type-level links used for cross-references**: Related components/events are linked via `DocType.link` where types are declared; no `extraLinks` used for this purpose.
+- [ ] **No empty structures**: No empty arrays (`props`, `events`, `methods`) or empty `types` entries present

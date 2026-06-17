@@ -1,0 +1,227 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Bar Chart",
+  "description": "A powerful and customizable bar chart component for displaying categorical data with interactive features, animations, and responsive design.",
+  "imports": ["import { AXBarChartComponent } from '@acorex/charts/bar-chart';"],
+  "showcase": {
+    "title": "Bar Chart Showcase",
+    "description": "Interactive bar chart demonstrating various features and configurations",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXBarChartComponent } from '@acorex/charts/bar-chart';\nimport { AXBarChartData } from '@acorex/charts/bar-chart';\nimport { AXBarChartOption } from '@acorex/charts/bar-chart';\nimport { AXBarChartClickEvent } from '@acorex/charts/bar-chart';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive Bar Chart</h2>\n      <ax-bar-chart \n        [data]=\"showcaseData()\" \n        [options]=\"showcaseOptions()\"\n        (barClick)=\"onBarClick($event)\"\n      />\n      <div class=\"chart-info\">\n        <p>Click on any bar to see detailed information</p>\n      </div>\n    </div>\n  `,\n  imports: [AXBarChartComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n    }\n    .chart-info {\n      margin-top: 1rem;\n      text-align: center;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class BarChartShowcaseComponent {\n  showcaseData = signal<AXBarChartData[]>([\n    { id: 'sales', label: 'Sales', value: 45000, color: '#3498db' },\n    { id: 'marketing', label: 'Marketing', value: 32000, color: '#e74c3c' },\n    { id: 'development', label: 'Development', value: 38000, color: '#2ecc71' },\n    { id: 'support', label: 'Support', value: 25000, color: '#f39c12' },\n    { id: 'research', label: 'Research', value: 18000, color: '#9b59b6' }\n  ]);\n\n  showcaseOptions = signal<AXBarChartOption>({\n    showXAxis: true,\n    showYAxis: true,\n    showGrid: true,\n    showTooltip: true,\n    showDataLabels: true,\n    width: 600,\n    height: 400,\n    barWidth: 80,\n    cornerRadius: 6,\n    xAxisLabel: 'Departments',\n    yAxisLabel: 'Budget ($)',\n    animationDuration: 1500,\n    animationEasing: 'cubic-out'\n  });\n\n  onBarClick(event: AXBarChartClickEvent): void {\n    console.log('Bar clicked:', event.item);\n    // Handle bar click interaction\n  }\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple bar chart with basic configuration",
+      "content": { "type": "api", "data": "bar-chart/usage" },
+      "height": "500px"
+    },
+    {
+      "title": "Axis Configuration",
+      "description": "Bar chart with custom axis labels and rotation",
+      "content": { "type": "api", "data": "bar-chart/axis" },
+      "height": "500px"
+    },
+    {
+      "title": "Animation Effects",
+      "description": "Bar chart with custom animation duration and easing",
+      "content": { "type": "api", "data": "bar-chart/animation" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Styling",
+      "description": "Bar chart with custom colors and styling options",
+      "content": { "type": "api", "data": "bar-chart/styling" },
+      "height": "500px"
+    },
+    {
+      "title": "Interactive Features",
+      "description": "Bar chart with click events and interactive tooltips",
+      "content": { "type": "api", "data": "bar-chart/interactive" },
+      "height": "500px"
+    },
+    {
+      "title": "Size Variations",
+      "description": "Bar charts in different sizes for various use cases",
+      "content": { "type": "api", "data": "bar-chart/size" },
+      "height": "500px"
+    },
+    {
+      "title": "Clustered Data",
+      "description": "Bar chart with clustered/grouped data structure",
+      "content": { "type": "api", "data": "bar-chart/clustered" },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBarChartComponent",
+      "description": "Bar Chart Component - Renders data as vertical bars with interactive hover effects and animations",
+      "props": [
+        {
+          "name": "data",
+          "type": [{ "name": "AXBarChartValue", "link": "/en-US/docs/types/bar-chart-value" }],
+          "description": "Chart data input",
+          "default": "[]"
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXBarChartOption", "link": "/en-US/docs/types/bar-chart-option" }],
+          "description": "Chart options input",
+          "default": "{}"
+        },
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ],
+      "events": [
+        {
+          "name": "barClick",
+          "type": [{ "name": "AXBarChartClickEvent", "link": "/en-US/docs/events/bar-chart-click-event" }],
+          "description": "Emitted when a bar is clicked"
+        }
+      ],
+      "methods": [
+        {
+          "name": "createChart",
+          "content": "/**\n * Creates the bar chart SVG and renders all elements\n */\ncreateChart(): void",
+          "description": "Creates the bar chart SVG and renders all elements"
+        },
+        {
+          "name": "updateChart",
+          "content": "/**\n * Updates the chart when inputs change\n */\nupdateChart(): void",
+          "description": "Updates the chart when inputs change"
+        },
+        {
+          "name": "cleanupChart",
+          "content": "/**\n * Cleans up chart resources\n */\ncleanupChart(): void",
+          "description": "Cleans up chart resources"
+        },
+        {
+          "name": "getLegendItems",
+          "content": "/**\n * Implementation of AXChartLegendCompatible interface\n * Returns legend items based on the chart data\n */\ngetLegendItems(): AXChartLegendItem[]",
+          "description": "Implementation of AXChartLegendCompatible interface - Returns legend items based on the chart data"
+        },
+        {
+          "name": "highlightSegment",
+          "content": "/**\n * Implementation of AXChartLegendCompatible interface\n * Highlights a specific bar by ID\n */\nhighlightSegment(id: string | null): void",
+          "description": "Implementation of AXChartLegendCompatible interface - Highlights a specific bar by ID"
+        },
+        {
+          "name": "toggleSegment",
+          "content": "/**\n * Implementation of AXChartLegendCompatible interface\n * Toggles visibility of a bar by ID\n * @returns New visibility state (true = visible, false = hidden)\n */\ntoggleSegment(id: string): boolean",
+          "description": "Implementation of AXChartLegendCompatible interface - Toggles visibility of a bar by ID. Returns new visibility state (true = visible, false = hidden)"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "--ax-comp-bar-chart-labels-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for axis labels in option (X/Y axis titles). Applied with 0.7 opacity where needed."
+        },
+        {
+          "name": "--ax-comp-bar-chart-data-labels-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for data value labels displayed above each bar."
+        },
+        {
+          "name": "--ax-comp-bar-chart-axis-label-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for X/Y axis lines."
+        },
+        {
+          "name": "--ax-comp-bar-chart-grid-lines-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for grid lines. Applied with 0.2 opacity."
+        },
+        {
+          "name": "--ax-comp-bar-chart-bg-color",
+          "default": "var(--ax-sys-color-lightest-surface)",
+          "description": "Background color for the chart area."
+        }
+      ]
+    },
+    {
+      "title": "AX_BAR_CHART_CONFIG",
+      "description": "Default configuration token providing effective AXBarChartOption values",
+      "props": [
+        {
+          "name": "showXAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show X axis",
+          "default": "true"
+        },
+        {
+          "name": "showYAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show Y axis",
+          "default": "true"
+        },
+        {
+          "name": "showGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show grid lines",
+          "default": "true"
+        },
+        {
+          "name": "showDataLabels",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show data value labels above each bar",
+          "default": "true"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "rotateXAxisLabels",
+          "type": [{ "name": "boolean" }, { "name": "'auto'" }],
+          "description": "Control X-axis label rotation: true=always rotate, false=never rotate, 'auto'=intelligent calculation",
+          "default": "'auto'"
+        },
+        {
+          "name": "barWidth",
+          "type": [{ "name": "number" }],
+          "description": "Percentage of available width to use for each bar",
+          "default": "80"
+        },
+        {
+          "name": "cornerRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of bar corners in pixels",
+          "default": "4"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in ms",
+          "default": "800"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Animation easing function",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXBarChartMessages", "link": "/en-US/docs/types/bar-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

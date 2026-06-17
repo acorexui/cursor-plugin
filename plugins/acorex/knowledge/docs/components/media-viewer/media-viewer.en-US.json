@@ -1,0 +1,135 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Media Viewer",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/mediaviewer--documentation"
+    }
+  ],
+  "description": "A component that provides a rich media viewing experience with support for images, videos, and documents. It includes features like zooming, panning, rotation, and fullscreen mode, along with a gallery view for browsing multiple media items.",
+  "imports": [
+    "import { AXMediaViewerModule } from '@acorex/components/media-viewer';",
+    "import { AXMediaViewerComponent } from '@acorex/components/media-viewer';"
+  ],
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "A simple example of using the <code>ax-media-viewer</code> component to display media content",
+      "height": "650px",
+      "content": {
+        "type": "api",
+        "data": "media-viewer/usage"
+      }
+    },
+    {
+      "title": "Image Viewing",
+      "description": "View and interact with images using zoom, pan, and rotation controls",
+      "height": "650px",
+      "content": {
+        "type": "api",
+        "data": "media-viewer/imageviewing"
+      }
+    },
+    {
+      "title": "Video Playback",
+      "description": "Play and control video content with custom controls",
+      "height": "650px",
+      "content": {
+        "type": "api",
+        "data": "media-viewer/videoplay"
+      }
+    },
+    {
+      "title": "Gallery View",
+      "description": "Browse through multiple media items in a gallery layout",
+      "height": "650px",
+      "content": {
+        "type": "api",
+        "data": "media-viewer/gallery"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMediaViewerComponent",
+      "description": "The main component for displaying media content",
+      "props": [
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "MediaItem[]"
+            }
+          ],
+          "description": "Array of media items to display",
+          "default": "[]"
+        },
+        {
+          "name": "currentIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Index of the currently displayed media item",
+          "default": "0"
+        },
+        {
+          "name": "showControls",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the media controls",
+          "default": "true"
+        },
+        {
+          "name": "fullscreen",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the viewer is in fullscreen mode",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "itemChange",
+          "description": "Emitted when the current media item changes",
+          "type": "number"
+        },
+        {
+          "name": "fullscreenChange",
+          "description": "Emitted when the fullscreen state changes",
+          "type": "boolean"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Navigates to the next media item.\n */\nnext(): void"
+        },
+        {
+          "content": "/**\n * Navigates to the previous media item.\n */\nprevious(): void"
+        },
+
+        {
+          "content": "/**\n * Zooms the current media item.\n * @param level - The zoom level (1 = 100%)\n */\nzoom(level: number): void"
+        },
+        {
+          "content": "/**\n * Rotates the current media item.\n * @param degrees - The rotation angle in degrees\n */\nrotate(degrees: number): void"
+        }
+      ]
+    }
+  ]
+}

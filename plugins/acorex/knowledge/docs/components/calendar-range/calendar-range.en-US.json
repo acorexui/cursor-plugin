@@ -1,0 +1,598 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Range",
+  "description": "Calendar Range component enables users to select a range of dates using two synchronized calendar views. It provides an intuitive interface for date range selection with visual indicators for start, end, and in-between dates, making it perfect for booking systems, date filters, and scheduling applications.",
+  "imports": ["import { AXCalendarRangeComponent } from '@acorex/components/calendar';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-calendar-range</code>",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "calendar-range/usage"
+      }
+    },
+    {
+      "title": "Min/Max",
+      "description": "Restrict selectable dates using <code>minValue</code> and <code>maxValue</code>.",
+      "height": "500px",
+      "content": {
+        "type": "api",
+        "data": "calendar-range/min-max"
+      }
+    },
+    {
+      "title": "Disabled & Holiday Dates",
+      "description": "Disable dates and highlight holidays using <code>disabledDates</code> and <code>holidayDates</code>.",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "calendar-range/disabled-holiday"
+      }
+    },
+    {
+      "title": "Depth",
+      "description": "Switch between day, month, and year via <code>depth</code>.",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "calendar-range/depth-active-view"
+      }
+    },
+    {
+      "title": "Disabled/Readonly",
+      "description": "Toggle component interactivity using <code>disabled</code> and <code>readonly</code>.",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "calendar-range/disabled-readonly"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarRangeComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "-",
+          "description": "The unique identifier for the calendar range component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "interface",
+          "type": [
+            {
+              "name": "'calendar'"
+            },
+            {
+              "name": "'picker'"
+            }
+          ],
+          "default": "'calendar'",
+          "description": "Determines the component interface mode. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "rtl",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Enables right-to-left layout for the calendar range component."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Determines whether the calendar range is read-only. Inherited from MXValueComponent."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "AXRange<Date>",
+              "link": "/en-US/docs/types/ax-range"
+            }
+          ],
+          "default": "{ from: null, end: null }",
+          "description": "The selected date range value with from and end dates. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "-",
+          "description": "Sets the name of the calendar range component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disables the calendar range component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the calendar range component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the calendar range component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the calendar range component has been modified. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/ax-component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "The current state of the calendar range component (clear, success, error). Inherited from MXValueComponent."
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the calendar range component is required. Inherited from MXValueComponent."
+        },
+        {
+          "name": "depth",
+          "type": [
+            {
+              "name": "AXCalendarViewDepth",
+              "link": "/en-US/docs/types/ax-calendar-view-depth"
+            }
+          ],
+          "default": "day",
+          "description": "Specifies the depth of the calendar view. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "activeView",
+          "type": [
+            {
+              "name": "AXCalendarViewType",
+              "link": "/en-US/docs/types/ax-calendar-view-type"
+            }
+          ],
+          "default": "day",
+          "description": "Specifies the active view of the calendar. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "minValue",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "default": "-",
+          "description": "Sets the minimum value for the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "maxValue",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "default": "-",
+          "description": "Sets the maximum value for the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "disabledDates",
+          "type": [
+            {
+              "name": "AXCalendarDisabledDates",
+              "link": "/en-US/docs/types/ax-calendar-disabled-dates"
+            }
+          ],
+          "default": "-",
+          "description": "Specifies the dates that are disabled in the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "holidayDates",
+          "type": [
+            {
+              "name": "AXCalendarHolidayDates",
+              "link": "/en-US/docs/types/ax-calendar-holiday-dates"
+            }
+          ],
+          "default": "-",
+          "description": "Specifies the holiday dates in the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "gregorian",
+          "description": "Specifies the calendar system (gregorian, solar-hijri). Deprecated: prefer configuring the calendar globally via locale profile. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "count",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "1",
+          "description": "Specifies the count of months to be displayed in the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "dayCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "default": "-",
+          "description": "Template for customizing day cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "monthCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "default": "-",
+          "description": "Template for customizing month cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "yearCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "default": "-",
+          "description": "Template for customizing year cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "cellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "default": "-",
+          "description": "Custom template for calendar cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "cellClass",
+          "type": [
+            {
+              "name": "AXCalendarCellCssClass",
+              "link": "/en-US/docs/types/ax-calendar-cell-css-class"
+            }
+          ],
+          "default": "-",
+          "description": "Function to determine CSS classes for calendar cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "showNavigation",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Determines whether navigation is shown in the calendar range. Inherited from MXCalendarBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "AXRange<Date>",
+              "link": "/en-US/docs/types/ax-range"
+            }
+          ],
+          "description": "Specifies the function to be called when the value of the calendar range changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<AXRange<Date>>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/ax-component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]",
+              "link": "/en-US/docs/types/ax-form-validation-rule"
+            }
+          ],
+          "description": "Emitted when validation rules change. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndexChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emitted when the tabIndex changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "depthChange",
+          "type": [
+            {
+              "name": "AXCalendarViewDepth",
+              "link": "/en-US/docs/types/ax-calendar-view-depth"
+            }
+          ],
+          "description": "Specifies the function to be called when the depth of the calendar range changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "typeChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Specifies the function to be called when the type of the calendar range changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "activeViewChange",
+          "type": [
+            {
+              "name": "AXCalendarViewType",
+              "link": "/en-US/docs/types/ax-calendar-view-type"
+            }
+          ],
+          "description": "Specifies the function to be called when the active view of the calendar range changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "minValueChange",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Emitted when the minimum date changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "maxValueChange",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Emitted when the maximum date changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "disabledDatesChange",
+          "type": [
+            {
+              "name": "AXCalendarDisabledDates",
+              "link": "/en-US/docs/types/ax-calendar-disabled-dates"
+            }
+          ],
+          "description": "Specifies the function to be called when the disabled dates of the calendar range change. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "holidayDatesChange",
+          "type": [
+            {
+              "name": "AXCalendarHolidayDates",
+              "link": "/en-US/docs/types/ax-calendar-holiday-dates"
+            }
+          ],
+          "description": "Specifies the function to be called when the holiday dates of the calendar range change. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "onNavigate",
+          "type": [
+            {
+              "name": "AXCalendarNavigateEvent",
+              "link": "/en-US/docs/events/ax-calendar-navigate-event"
+            }
+          ],
+          "description": "Specifies the function to be called when navigation occurs in the calendar range. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "onSlotClick",
+          "type": [
+            {
+              "name": "AXCalendarSlotClick",
+              "link": "/en-US/docs/events/ax-calendar-slot-click"
+            }
+          ],
+          "description": "Specifies the function to be called when a slot in the calendar range is clicked. Inherited from MXCalendarBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getHostElement",
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\npublic getHostElement<T = HTMLElement>(): T",
+          "description": "Gets the host HTML element of the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "setOption",
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\npublic setOption<T = any>(option: MXComponentSetOption<T>)",
+          "description": "Sets a component option with optional lifecycle callbacks. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "focus",
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void",
+          "description": "Focuses the calendar range component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "blur",
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void",
+          "description": "Removes focus from the calendar range component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "hasFocus",
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean",
+          "description": "Checks if the calendar range component is focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "setDisabledState",
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void",
+          "description": "Sets the disabled state of the calendar range component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "registerOnChange",
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnChange(fn: (value: T) => void): void",
+          "description": "Registers a change callback function. Inherited from MXValueComponent."
+        },
+        {
+          "name": "registerOnTouched",
+          "content": "/**\n * Registers a touched callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void",
+          "description": "Registers a touched callback function. Inherited from MXValueComponent."
+        },
+        {
+          "name": "writeValue",
+          "content": "/**\n * Writes a value to the component (ControlValueAccessor method).\n *\n * @param value - The value to write.\n */\nwriteValue(value: T): void",
+          "description": "Writes a value to the calendar range component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "commitValue",
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\npublic commitValue(value: T, u = false): void",
+          "description": "Commits a value with optional user interaction flag. Inherited from MXValueComponent."
+        },
+        {
+          "name": "reset",
+          "content": "/**\n * Resets the component value.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e = false): void",
+          "description": "Resets the calendar range component value. Inherited from MXValueComponent."
+        },
+        {
+          "name": "resetErrors",
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void",
+          "description": "Resets validation errors. Inherited from MXValueComponent."
+        },
+        {
+          "name": "validate",
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nasync validate(): Promise<AXValidationSummary>",
+          "description": "Validates the calendar range component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "addValidationRule",
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void",
+          "description": "Adds a validation rule to the calendar range component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "removeValidationRule",
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void",
+          "description": "Removes a validation rule from the calendar range component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "markAsDirty",
+          "content": "/**\n * Marks the calendar range component as dirty.\n */\nmarkAsDirty()",
+          "description": "Marks the calendar range component as dirty. Inherited from MXValueComponent."
+        }
+      ]
+    }
+  ]
+}

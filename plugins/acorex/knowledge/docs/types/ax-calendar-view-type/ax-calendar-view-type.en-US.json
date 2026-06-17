@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar View Type",
+  "imports": ["import { AXCalendarViewType } from '@acorex/components/calendar';"],
+  "description": "Defines the different view types available for calendar components, specifying how dates are displayed and organized.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Allowed calendar view types.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar-view-type.ts",
+            "content": "type AXCalendarViewType = 'year' | 'month' | 'day';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarViewType",
+      "props": [
+        {
+          "name": "year",
+          "type": [{ "name": "'year'" }],
+          "description": "Displays calendar in year view, showing multiple years for selection."
+        },
+        {
+          "name": "month",
+          "type": [{ "name": "'month'" }],
+          "description": "Displays calendar in month view, showing multiple months for selection."
+        },
+        {
+          "name": "day",
+          "type": [{ "name": "'day'" }],
+          "description": "Displays calendar in day view, showing individual days in a month grid."
+        }
+      ]
+    }
+  ]
+}

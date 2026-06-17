@@ -1,0 +1,154 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Loading Dialog",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/loadingdialog--documentation"
+    }
+  ],
+  "description": "Displays a modal dialog with a progress indicator and optional actions. Use it to inform users about the status of long-running operations and optionally provide a cancel or confirm action.",
+  "imports": [
+    "import { AXLoadingDialogComponent } from '@acorex/components/loading-dialog';",
+    "import { AXLoadingDialogService } from '@acorex/components/loading-dialog';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-loading-dialog</code> with determinate progress",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/usage"
+      }
+    },
+    {
+      "title": "Indeterminate Mode",
+      "description": "Shows a loading dialog with indeterminate progress (spinner) for operations where progress cannot be measured",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/indeterminate"
+      }
+    },
+    {
+      "title": "Multiple Buttons",
+      "description": "Demonstrates a loading dialog with multiple action buttons (Pause, Cancel, Continue) for complex workflows",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/multiple-buttons"
+      }
+    },
+    {
+      "title": "Button States",
+      "description": "Shows different button states including disabled, loading, and enabled buttons with various colors and looks",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/button-states"
+      }
+    },
+    {
+      "title": "Progress Colors",
+      "description": "Demonstrates how progress colors change dynamically during different phases of an operation",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/progress-colors"
+      }
+    },
+    {
+      "title": "Dynamic Updates",
+      "description": "Comprehensive example showing all dynamic update methods including restart functionality",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/dynamic-updates"
+      }
+    },
+    {
+      "title": "No Buttons",
+      "description": "Shows a loading dialog without any action buttons, useful for non-interruptible operations",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/no-buttons"
+      }
+    },
+    {
+      "title": "Long Text Handling",
+      "description": "Demonstrates how the component handles very long titles and text content with proper wrapping",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/long-text",
+        "height": "700px"
+      },
+      "height": "350px"
+    },
+    {
+      "title": "Accessibility",
+      "description": "Shows keyboard navigation, hotkeys, and focus management features for accessibility compliance",
+      "content": {
+        "type": "api",
+        "data": "loading-dialog/accessibility"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLoadingDialogComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Closes the loading dialog.\n *\n * @returns void - No return value. The dialog is closed and control returns to the caller.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Sets the displayed progress text inside the dialog.\n *\n * @param text The text to display under the progress bar.\n * @returns void\n */\nsetProgressText(text: string): void"
+        },
+        {
+          "content": "/**\n * Sets the status text, typically representing the current step out of total steps (e.g., \"5/10\").\n *\n * @param status The status text to display.\n * @returns void\n */\nsetProgressStatus(status: string): void"
+        },
+        {
+          "content": "/**\n * Sets the color used by the progress indicator.\n *\n * @param color The color token to apply to the progress UI.\n * @returns void\n */\nsetProgressColor(color: AXStyleColorType): void"
+        },
+        {
+          "content": "/**\n * Sets the dialog title text.\n *\n * @param text The title text to display at the top of the dialog.\n * @returns void\n */\nsetDialogTitle(text: string): void"
+        },
+        {
+          "content": "/**\n * Sets the numeric progress value.\n *\n * @param value A number in the range 0–100 representing the current progress.\n * @returns void\n */\nsetProgressValue(value: number): void"
+        }
+      ]
+    },
+    {
+      "title": "AXLoadingDialogService",
+      "methods": [
+        {
+          "content": "/**\n * Opens a loading dialog with the specified configuration.\n *\n * @param options Configuration for the loading dialog, including title, progress mode, and optional initial values.\n * @returns AXDialogRef - A reference with helper methods to control the dialog lifecycle and UI (close, setProgressValue, setProgressText, setDialogTitle, setProgressColor, setProgressStatus).\n */\nshow(options: AXLoadingDialogConfig): AXDialogRef"
+        }
+      ]
+    }
+  ]
+}

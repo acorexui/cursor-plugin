@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSizeType",
+  "imports": ["import { AXSizeType } from '@acorex/cdk/common';"],
+  "description": "Type definition for component size variants used throughout the UI library.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that specifies the available size variants for components. Used to maintain consistent sizing across the application.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "size-type.ts",
+            "content": "type AXSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSizeType",
+      "props": [
+        {
+          "name": "AXSizeType",
+          "type": [{ "name": "'xs'" }, { "name": "'sm'" }, { "name": "'md'" }, { "name": "'lg'" }, { "name": "'xl'" }],
+          "description": "Union type defining supported size variants across components."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

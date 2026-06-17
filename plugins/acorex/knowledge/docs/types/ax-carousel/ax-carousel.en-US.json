@@ -1,0 +1,24 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXCarousel",
+  "description": "Type alias for the Swiper instance used by the carousel directive.",
+  "imports": [
+    "import { AXCarousel } from '@acorex/cdk/carousel';"
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXCarousel type represents a Swiper instance",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "carousel.directive.ts",
+            "content": "export type AXCarousel = Swiper;"
+          }
+        ]
+      }
+    }
+  ]
+}

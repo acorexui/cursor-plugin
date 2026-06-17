@@ -1,0 +1,112 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXBarChartOption",
+  "description": "Bar chart options interface for configuring chart appearance, behavior, and functionality",
+  "imports": [
+    "import { AXBarChartOption } from '@acorex/charts/bar-chart';",
+    "import { AXBarChartMessages } from '@acorex/charts/bar-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXBarChartOption",
+      "description": "Bar chart options interface",
+      "props": [
+        {
+          "name": "width",
+          "type": [{ "name": "number" }],
+          "description": "Chart width (default: container width)"
+        },
+        {
+          "name": "height",
+          "type": [{ "name": "number" }],
+          "description": "Chart height (default: 300)"
+        },
+        {
+          "name": "showXAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show X axis",
+          "default": "true"
+        },
+        {
+          "name": "showYAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show Y axis",
+          "default": "true"
+        },
+        {
+          "name": "showGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show grid lines",
+          "default": "true"
+        },
+        {
+          "name": "showDataLabels",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show data value labels above each bar",
+          "default": "true"
+        },
+        {
+          "name": "xAxisLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label for X axis"
+        },
+        {
+          "name": "yAxisLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label for Y axis"
+        },
+        {
+          "name": "rotateXAxisLabels",
+          "type": [{ "name": "boolean" }, { "name": "'auto'" }],
+          "description": "Control X-axis label rotation: true=always rotate, false=never rotate, 'auto'=intelligent calculation",
+          "default": "'auto'"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "barWidth",
+          "type": [{ "name": "number" }],
+          "description": "Percentage of available width to use for each bar",
+          "default": "80"
+        },
+        {
+          "name": "cornerRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of bar corners in pixels",
+          "default": "4"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in ms",
+          "default": "800"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Animation easing function",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXBarChartMessages", "link": "/en-US/docs/types/bar-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

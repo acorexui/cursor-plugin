@@ -1,0 +1,70 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXPoiMarker",
+  "description": "Represents a Point of Interest marker on the map with the same properties as AXMapMarker plus additional POI-specific properties.",
+  "imports": ["import { AXPoiMarker } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXPoiMarker",
+      "extends": [{ "name": "AXMapLatLng", "link": "/en-US/docs/types/ax-map-latlng" }],
+      "props": [
+        {
+          "name": "latitude",
+          "type": [{ "name": "number" }],
+          "description": "The latitude coordinate of the POI marker."
+        },
+        {
+          "name": "longitude",
+          "type": [{ "name": "number" }],
+          "description": "The longitude coordinate of the POI marker."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title for the POI marker."
+        },
+        {
+          "name": "iconKey",
+          "type": [{ "name": "string" }],
+          "description": "Key for icon resolver service."
+        },
+        {
+          "name": "popup",
+          "type": [{ "name": "string" }],
+          "description": "Optional popup text content."
+        },
+        {
+          "name": "popupOpen",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should be open by default."
+        },
+        {
+          "name": "popupCloseButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should have a close button."
+        },
+        {
+          "name": "minZoom",
+          "type": [{ "name": "number" }],
+          "description": "Minimum zoom level at which this POI marker becomes visible."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for POI markers.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXPoiMarker extends AXMapLatLng {\n  title?: string;\n  iconKey?: string;\n  popup?: string;\n  popupOpen?: boolean;\n  popupCloseButton?: boolean;\n  minZoom?: number;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDonutChartData",
+  "description": "Interface representing a single segment in the donut chart with properties for identification, value, styling, and labeling",
+  "imports": ["import { AXDonutChartData } from '@acorex/charts/donut-chart';"],
+  "types": [
+    {
+      "title": "AXDonutChartData",
+      "description": "Represents a single segment in the donut chart",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the segment"
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "number" }],
+          "description": "Numeric value for the segment"
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "string" }],
+          "description": "Optional color for the segment"
+        },
+        {
+          "name": "tooltipLabel",
+          "type": [{ "name": "string" }],
+          "description": "Optional label for tooltip display"
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Optional display label for the segment"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "donut-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXDonutChartData {\n  id: string;\n  value: number;\n  color?: string;\n  tooltipLabel?: string;\n  label?: string;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

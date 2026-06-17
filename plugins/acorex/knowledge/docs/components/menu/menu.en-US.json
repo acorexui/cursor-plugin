@@ -1,0 +1,311 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Menu",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/menu--documentation"
+    }
+  ],
+  "description": "Displays a hierarchical action list with support for nested items, icons, and decorators. Supports horizontal and vertical orientations with configurable open/close triggers.",
+  "imports": [
+    "import { AXMenuComponent } from '@acorex/components/menu';",
+    "import { AXMenuItemComponent } from '@acorex/components/menu';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-menu</code>",
+      "content": {
+        "type": "api",
+        "data": "menu/usage"
+      }
+    },
+    {
+      "title": "Use decorators",
+      "description": "Use <code>ax-prefix</code> and <code>ax-suffix</code> to add elements at the start and end of a menu item.",
+      "content": {
+        "type": "api",
+        "data": "menu/use-decorators"
+      }
+    },
+    {
+      "title": "Multi level",
+      "description": "Menu can have a nested structure.",
+      "content": {
+        "type": "api",
+        "data": "menu/multi-level"
+      },
+      "height": "780px"
+    },
+    {
+      "title": "Vertical menu",
+      "description": "Menu can have vertical mode.",
+      "content": {
+        "type": "api",
+        "data": "menu/vertical"
+      }
+    },
+    {
+      "title": "Data-driven items",
+      "height": "480px",
+      "description": "Render items from <code>AXMenuItem[]</code> via the <code>[items]</code> input.",
+      "content": {
+        "type": "api",
+        "data": "menu/data-driven"
+      }
+    },
+    {
+      "title": "Open/Close triggers",
+      "height": "300px",
+      "description": "Compare <code>openOn</code> and <code>closeOn</code> combinations.",
+      "content": {
+        "type": "api",
+        "data": "menu/open-close"
+      }
+    },
+    {
+      "title": "Disabled items",
+      "description": "Show disabled items that neither open nor emit events.",
+      "content": {
+        "type": "api",
+        "data": "menu/disabled"
+      }
+    },
+    {
+      "title": "Color variants",
+      "description": "Apply different <code>[color]</code> values to items.",
+      "content": {
+        "type": "api",
+        "data": "menu/color"
+      }
+    },
+    {
+      "title": "Hide arrows",
+      "description": "Hide submenu indicators via <code>[hasArrow]</code>.",
+      "content": {
+        "type": "api",
+        "data": "menu/hide-arrows"
+      }
+    },
+    {
+      "title": "Dividers and group headers",
+      "height": "500px",
+      "description": "Use <code>ax-title</code>/<code>ax-divider</code> in projection and <code>group</code>/<code>break</code> in data.",
+      "content": {
+        "type": "api",
+        "data": "menu/dividers"
+      }
+    },
+    {
+      "title": "Programmatic close",
+      "height": "400px",
+      "description": "Close all menus by calling <code>menuRef.close()</code>.",
+      "content": {
+        "type": "api",
+        "data": "menu/programmatic-close"
+      }
+    },
+    {
+      "title": "RTL behavior",
+      "description": "Demonstrate submenu arrows and placement in RTL.",
+      "content": {
+        "type": "api",
+        "data": "menu/rtl"
+      }
+    },
+    {
+      "title": "Scrollable container",
+      "description": "Scrolling the container closes open submenus.",
+      "height": "280px",
+      "content": {
+        "type": "api",
+        "data": "menu/scrollable"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMenuComponent",
+      "props": [
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "The root DOM element of the component. Inherited from NXComponent."
+        },
+        {
+          "name": "isRendered",
+          "type": [
+            {
+              "name": "Signal<boolean>"
+            }
+          ],
+          "default": "false",
+          "description": "Signal indicating if the component has been rendered. Inherited from NXComponent."
+        },
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "'vertical'"
+            },
+            {
+              "name": "'horizontal'"
+            }
+          ],
+          "default": "'horizontal'",
+          "description": "Menu orientation."
+        },
+        {
+          "name": "openOn",
+          "type": [
+            {
+              "name": "'click'"
+            },
+            {
+              "name": "'hover'"
+            }
+          ],
+          "default": "'hover'",
+          "description": "Trigger for opening submenus."
+        },
+        {
+          "name": "closeOn",
+          "type": [
+            {
+              "name": "'click'"
+            },
+            {
+              "name": "'leave'"
+            }
+          ],
+          "default": "'leave'",
+          "description": "Trigger for closing submenus."
+        },
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "AXMenuItem[]",
+              "link": "/en-US/docs/types/ax-menu-item"
+            }
+          ],
+          "default": "[]",
+          "description": "Array of menu items to render recursively."
+        },
+        {
+          "name": "hasArrow",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows an arrow indicator for items that contain submenus."
+        }
+      ],
+      "events": [
+        {
+          "name": "onItemClick",
+          "type": [
+            {
+              "name": "AXMenuItemsClickEvent",
+              "link": "/en-US/docs/events/ax-menu-items-click-event"
+            }
+          ],
+          "description": "Emitted when a menu item is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Closes all open menus and submenus for this root menu.\n *\n * @returns void - No return value. All open menu overlays are closed and hidden.\n */\nclose(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXMenuItemComponent",
+      "props": [
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "The root DOM element of the component. Inherited from NXComponent."
+        },
+        {
+          "name": "isRendered",
+          "type": [
+            {
+              "name": "Signal<boolean>"
+            }
+          ],
+          "description": "Signal indicating if the component has been rendered. Inherited from NXComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique name identifier for the item."
+        },
+        {
+          "name": "data",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "Arbitrary data associated with the item."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the item is disabled."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Color theme applied to the item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXMenuItemClickEvent",
+              "link": "/en-US/docs/events/ax-menu-item-click-event"
+            }
+          ],
+          "description": "Emitted when the user clicks the item."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Opens the submenu of this menu item if it has sub-items and is not disabled.\n *\n * Inherited behavior: Uses the injected service to notify other items to close.\n *\n * @returns void - No return value. Triggers submenu opening side-effects.\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Closes the submenu of this menu item if open.\n *\n * @returns void - No return value. Triggers submenu closing side-effects.\n */\nclose(): void"
+        }
+      ]
+    }
+  ]
+}

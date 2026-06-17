@@ -1,0 +1,168 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Chips",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/chips--documentation"
+    }
+  ],
+  "description": "Chips component is a versatile UI element that offers an elegant and flexible way to display and manage small pieces of information or content. It supports prefixes and suffixes, text content, size adjustments, and customizable colors, making it an ideal tool for creating visually appealing and functional chip-based interfaces in Angular applications.",
+  "imports": [
+    "import { AXChipsComponent } from '@acorex/components/chips';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-chips</code>",
+      "content": {
+        "type": "api",
+        "data": "chips/usage"
+      }
+    },
+    {
+      "title": "Colors",
+      "description": "You can change chips colors to (primary, danger, warning, success, secondary, ghost).",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "chips/colors"
+      }
+    },
+    {
+      "title": "Look",
+      "description": "You can change chips looks.",
+      "content": {
+        "type": "api",
+        "data": "chips/look"
+      }
+    },
+    {
+      "title": "Sizes",
+      "description": "You can change chips sizes to ax-sm, ax-md, and ax-lg.",
+      "content": {
+        "type": "api",
+        "data": "chips/size"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXChipsComponent",
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the component. Inherited from MXColorComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXChipsLookType",
+              "link": "/en-US/docs/types/ax-chips-look-type"
+            }
+          ],
+          "default": "solid",
+          "description": "Determines the appearance of the chips."
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "AXChipsSizeType",
+              "link": "/en-US/docs/types/ax-chips-size-type"
+            }
+          ],
+          "default": "ax-md",
+          "description": "Specifies the size of the chips."
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "The text displayed on the chips."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color of the component changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXChipsLookType",
+              "link": "/en-US/docs/types/ax-chips-look-type"
+            }
+          ],
+          "description": "Emitted when the look of the component changes."
+        },
+        {
+          "name": "sizeChange",
+          "type": [
+            {
+              "name": "AXChipsSizeType",
+              "link": "/en-US/docs/types/ax-chips-size-type"
+            }
+          ],
+          "description": "Emitted when the size of the component changes."
+        },
+        {
+          "name": "textChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the text of the component changes."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapPolygon",
+  "description": "Represents a polygon on the map with points and optional styling properties.",
+  "imports": ["import { AXMapPolygon } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapPolygon",
+      "props": [
+        {
+          "name": "points",
+          "type": [{ "name": "AXMapLatLng[]", "link": "/en-US/docs/types/ax-map-latlng" }],
+          "description": "Array of coordinate points defining the polygon shape."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title for the polygon."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "string" }],
+          "description": "Optional color for the polygon styling."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for map polygons.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXMapPolygon {\n  points: AXMapLatLng[];\n  title?: string;\n  color?: string;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

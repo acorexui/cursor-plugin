@@ -1,0 +1,58 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerSlotDropEvent",
+  "description": "Event emitted when an appointment is dropped onto a scheduler slot.",
+  "imports": ["import { AXSchedulerSlotDropEvent } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Shape of the scheduler slot drop event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-slot-drop-event.ts",
+            "content": "export interface AXSchedulerSlotDropEvent extends NXEvent<AXSchedulerComponent> {\n  dropEvent: AXDropZoneDropEvent;\n  appointment: AXSchedulerAppointment;\n  slot: {\n    endDate: AXDateTime;\n    startDate: AXDateTime;\n    view: AXSchedulerView;\n  };\n  isSameSlotDrop: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerSlotDropEvent",
+      "props": [
+        {
+          "name": "dropEvent",
+          "type": [{ "name": "AXDropZoneDropEvent", "link": "/en-US/docs/events/ax-drop-zone-drop-event" }],
+          "description": "Underlying drop event payload."
+        },
+        {
+          "name": "appointment",
+          "type": [{ "name": "AXSchedulerAppointment", "link": "/en-US/docs/types/ax-scheduler-appointment" }],
+          "description": "The appointment being dropped."
+        },
+        { "name": "slot.startDate", "type": [{ "name": "AXDateTime" }], "description": "Target slot start date." },
+        { "name": "slot.endDate", "type": [{ "name": "AXDateTime" }], "description": "Target slot end date." },
+        {
+          "name": "slot.view",
+          "type": [{ "name": "AXSchedulerView", "link": "/en-US/docs/types/ax-scheduler-view" }],
+          "description": "Target view."
+        },
+        {
+          "name": "isSameSlotDrop",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the drop occurred on the same slot as the source."
+        },
+        {
+          "name": "sender",
+          "type": [{ "name": "AXSchedulerComponent", "link": "/en-US/docs/components/scheduler" }],
+          "description": "The component that sent the event. Inherited from NXEvent."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

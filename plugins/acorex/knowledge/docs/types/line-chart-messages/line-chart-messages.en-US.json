@@ -1,0 +1,65 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart Messages",
+  "description": "Interface for customizable messages displayed in line chart empty states",
+  "imports": ["import { AXLineChartMessages } from '@acorex/charts/line-chart';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the line chart messages interface.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "line-chart.type.ts",
+            "content": "export interface AXLineChartMessages {\n  /** Message shown when no data is available */\n  noData?: string;\n  /** Help text shown when no data is available */\n  noDataHelp?: string;\n  /** Message shown when all series are hidden */\n  allHidden?: string;\n  /** Help text shown when all series are hidden */\n  allHiddenHelp?: string;\n  /** Icon for no data state */\n  noDataIcon?: string;\n  /** Icon for all hidden state */\n  allHiddenIcon?: string;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartMessages",
+      "props": [
+        {
+          "name": "noData",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when no data is available",
+          "default": "'No data available'"
+        },
+        {
+          "name": "noDataHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when no data is available",
+          "default": "'Please provide data to display the chart'"
+        },
+        {
+          "name": "allHidden",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when all series are hidden",
+          "default": "'All series are hidden'"
+        },
+        {
+          "name": "allHiddenHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when all series are hidden",
+          "default": "'Click legend items to show series in the chart'"
+        },
+        {
+          "name": "noDataIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for no data state",
+          "default": "'fa-light fa-chart-line'"
+        },
+        {
+          "name": "allHiddenIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for all hidden state",
+          "default": "'fa-light fa-eye-slash'"
+        }
+      ]
+    }
+  ]
+}

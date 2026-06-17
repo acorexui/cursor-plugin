@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXBarChartValue",
+  "description": "Bar chart data type - represents an array of bar chart data items or clustered data groups",
+  "imports": [
+    "import { AXBarChartValue } from '@acorex/charts/bar-chart';",
+    "import { AXBarChartData } from '@acorex/charts/bar-chart';",
+    "import { AXBarChartClusteredData } from '@acorex/charts/bar-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXBarChartValue",
+      "description": "Bar chart data type - represents an array of bar chart data items or clustered data groups",
+      "props": [
+        {
+          "name": "AXBarChartValue",
+          "type": [
+            { "name": "AXBarChartData[]", "link": "/en-US/docs/types/bar-chart-data" },
+            { "name": "AXBarChartClusteredData[]", "link": "/en-US/docs/types/bar-chart-clustered-data" }
+          ],
+          "description": "Union type that can be either an array of simple bar chart data or an array of clustered data groups"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical type definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "bar-chart.type.ts",
+            "language": "ts",
+            "content": "export type AXBarChartValue = AXBarChartData[] | AXBarChartClusteredData[];"
+          }
+        ]
+      }
+    }
+  ]
+}

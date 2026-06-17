@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar View Depth",
+  "imports": ["import { AXCalendarViewDepth } from '@acorex/components/calendar';"],
+  "description": "Defines the depth level for calendar view selection, determining the granularity of date selection and navigation.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Allowed calendar view depths.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar-view-depth.ts",
+            "content": "type AXCalendarViewDepth = 'year' | 'month' | 'day';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarViewDepth",
+      "props": [
+        {
+          "name": "year",
+          "type": [{ "name": "'year'" }],
+          "description": "Allows selection at year level, enabling year-based navigation and selection."
+        },
+        {
+          "name": "month",
+          "type": [{ "name": "'month'" }],
+          "description": "Allows selection at month level, enabling month-based navigation and selection."
+        },
+        {
+          "name": "day",
+          "type": [{ "name": "'day'" }],
+          "description": "Allows selection at day level, enabling day-based navigation and selection."
+        }
+      ]
+    }
+  ]
+}

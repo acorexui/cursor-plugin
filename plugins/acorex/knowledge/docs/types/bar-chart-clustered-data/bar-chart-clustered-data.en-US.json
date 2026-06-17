@@ -1,0 +1,30 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXBarChartClusteredData } from '@acorex/charts/bar-chart';",
+    "import { AXBarChartData } from '@acorex/charts/bar-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXBarChartClusteredData",
+      "description": "Interface for clustered bar chart data groups",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the group"
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Label for the group displayed on the X-axis"
+        },
+        {
+          "name": "chartData",
+          "type": [{ "name": "AXBarChartData[]", "link": "/en-US/docs/types/bar-chart-data" }],
+          "description": "Array of bar chart data items for this group"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXChipsLookType",
+  "description": "Defines the appearance styles available for chips components. This type is a subset of AXStyleLookType, specifically excluding certain styles that are not applicable to chips.",
+  "imports": ["import { AXChipsLookType } from '@acorex/components/chips';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Union type of supported look styles for chips.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-chips-look-type.ts",
+            "content": "export type AXChipsLookType = Extract<AXStyleLookType, 'solid' | 'outline' | 'twotone'>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXChipsLookType",
+      "props": [
+        {
+          "name": "AXChipsLookType",
+          "type": [{ "name": "'solid'" }, { "name": "'outline'" }, { "name": "'twotone'" }],
+          "description": "Look styles supported by chips (subset of AXStyleLookType)."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

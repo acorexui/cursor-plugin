@@ -1,0 +1,45 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Conversation Menu Opening Event",
+  "description": "Represents the event payload when a conversation action menu is about to open. This event allows you to modify the menu items or cancel the opening process.",
+  "imports": ["import { AXConversationMenuOpeningEvent } from '@acorex/components/conversation';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Class definition for conversation menu opening event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "conversation-menu-opening-event.ts",
+            "content": "export class AXConversationMenuOpeningEvent {\n  items: AXConversationMessageAction[];\n  canceled = false;\n  data: AXConversationMessage;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXConversationMenuOpeningEvent",
+      "props": [
+        {
+          "name": "items",
+          "type": [{ "name": "AXConversationMessageAction[]", "link": "/en-US/docs/types/ax-conversation-message-action" }],
+          "description": "The array of action items that will be displayed in the conversation menu."
+        },
+        {
+          "name": "canceled",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "A flag that can be set to true to cancel the opening of the conversation menu."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "AXConversationMessage", "link": "/en-US/docs/types/ax-conversation-message" }],
+          "description": "The conversation message data associated with the menu opening event."
+        }
+      ]
+    }
+  ]
+}

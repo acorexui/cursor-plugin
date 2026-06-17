@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "NXClickEvent",
+  "description": "Base click event class for NX components that extends NXNativeEvent with MouseEvent.",
+  "imports": ["import { NXClickEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Base NX click event class that provides mouse event functionality.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.types.ts",
+            "language": "ts",
+            "content": "export class NXClickEvent<T extends NXComponent = NXComponent> extends NXNativeEvent<T, MouseEvent> {}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "NXClickEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "T", "description": "NXComponent" }],
+          "description": "The NX component that sent the event. Inherited from NXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event. Inherited from NXNativeEvent."
+        }
+      ]
+    }
+  ]
+}

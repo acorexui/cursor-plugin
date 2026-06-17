@@ -1,0 +1,139 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Notification",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/notification--documentation"
+    }
+  ],
+  "description": "A component that displays toast notifications with support for different types (success, error, warning, info), custom content, action buttons, auto-dismissal, and pause-on-hover functionality. It provides a non-intrusive way to show important messages to users.",
+  "imports": [
+    "import { AXNotificationComponent } from '@acorex/components/notification';",
+    "import { AXNotificationService } from '@acorex/components/notification';"
+  ],
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "A simple example of using the notification service to display a basic notification",
+      "content": {
+        "type": "api",
+        "data": "notification/usage"
+      }
+    },
+    {
+      "title": "Asynchronous Process",
+      "description": "Demonstrates notifications with action buttons and async operations",
+      "content": {
+        "type": "api",
+        "data": "notification/asynchronous-process"
+      }
+    },
+    {
+      "title": "Custom Content",
+      "description": "Shows how to use custom templates and components as notification content",
+      "height": "300px",
+      "content": {
+        "type": "api",
+        "data": "notification/custom-content"
+      }
+    },
+    {
+      "title": "Different Locations",
+      "description": "Demonstrates all available notification positions on screen",
+      "content": {
+        "type": "api",
+        "data": "notification/locations"
+      }
+    },
+    {
+      "title": "Timeout and Progress",
+      "description": "Shows timeout features, progress bars, and pause-on-hover functionality",
+      "content": {
+        "type": "api",
+        "data": "notification/timeout-progress"
+      }
+    },
+    {
+      "title": "Interactive Features",
+      "description": "Demonstrates programmatic control, dynamic buttons, and advanced interactions",
+      "content": {
+        "type": "api",
+        "data": "notification/interactive-features"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationComponent",
+      "description": "The main component for displaying notifications",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "config",
+          "type": [
+            {
+              "name": "AXNotificationData",
+              "link": "/en-US/docs/types/notification-data"
+            }
+          ],
+          "description": "The notification configuration data injected via DIALOG_DATA."
+        },
+        {
+          "name": "dialogRef",
+          "type": [
+            {
+              "name": "DialogRef<AXComponentCloseEvent>",
+              "link": "/en-US/docs/events/component-close-event"
+            }
+          ],
+          "description": "Dialog reference for managing the notification lifecycle."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Closes the dialog and provides the component and HTML element for reference.\n */\nclose(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXNotificationService",
+      "description": "Service for managing notifications programmatically",
+      "methods": [
+        {
+          "content": "/**\n * Shows a notification with the specified configuration options.\n *\n * @param config - Configuration options for the notification including content, title, color, location, buttons, etc.\n * @returns AXNotificationRef - Reference to the created notification for programmatic control.\n */\nshow(config: AXNotificationOptions): AXNotificationRef"
+        },
+        {
+          "content": "/**\n * Hides all active notifications and clears the reserved notification queue.\n */\nhideAll(): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDownloadStatus",
+  "imports": ["import { AXDownloadStatus } from '@acorex/core/network';"],
+  "description": "The AXDownloadStatus type",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXDownloadStatus type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-download-status.ts",
+            "content": "export enum AXDownloadStatus { Downloading = 'Downloading...', DownloadComplete = 'Download complete', StartingDownload = 'Starting download', DownloadFailed = 'Download failed' }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDownloadStatus",
+      "props": [
+        { "name": "Downloading", "type": [{ "name": "string" }], "description": "Downloading..." },
+        { "name": "DownloadComplete", "type": [{ "name": "string" }], "description": "Download complete" },
+        { "name": "StartingDownload", "type": [{ "name": "string" }], "description": "Starting download" },
+        { "name": "DownloadFailed", "type": [{ "name": "string" }], "description": "Download failed" }
+      ]
+    }
+  ]
+}

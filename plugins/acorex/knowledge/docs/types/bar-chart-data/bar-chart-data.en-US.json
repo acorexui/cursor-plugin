@@ -1,0 +1,52 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXBarChartData",
+  "description": "Interface defining the structure of individual data items for bar charts",
+  "imports": ["import { AXBarChartData } from '@acorex/charts/bar-chart';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete TypeScript interface definition for bar chart data items",
+      "content": {
+        "type": "code",
+        "data": {
+          "fileName": "bar-chart.type.ts",
+          "language": "typescript",
+          "content": "/**\n * Bar chart data item interface\n */\nexport interface AXBarChartData {\n  id: string; // Unique identifier for the bar\n  label: string; // Label displayed below each bar\n  value: number; // Numeric value represented by the bar height\n  tooltipLabel?: string; // Optional tooltip label for the bar\n  color?: string; // Optional custom color for this specific bar\n}"
+        }
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBarChartData",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the bar"
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Label displayed below each bar"
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "number" }],
+          "description": "Numeric value represented by the bar height"
+        },
+        {
+          "name": "tooltipLabel",
+          "type": [{ "name": "string" }],
+          "description": "Optional tooltip label for the bar"
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "string" }],
+          "description": "Optional custom color for this specific bar"
+        }
+      ]
+    }
+  ]
+}

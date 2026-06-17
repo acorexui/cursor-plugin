@@ -1,0 +1,40 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStepWizardState",
+  "description": "Defines the available state options for step wizard items",
+  "imports": ["import { AXStepWizardState } from '@acorex/components/step-wizard';"],
+  "types": [
+    {
+      "title": "AXStepWizardState",
+      "props": [
+        {
+          "name": "AXStepWizardState",
+          "type": [
+            { "name": "'pending'" },
+            { "name": "'success'" },
+            { "name": "'error'" },
+            { "name": "'warning'" },
+            { "name": "'clear'" }
+          ],
+          "description": "State options for step wizard items"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete type definition for AXStepWizardState",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "step-wizard-state.ts",
+            "content": "export type AXStepWizardState = 'pending' | 'success' | 'error' | 'warning' | 'clear';"
+          }
+        ]
+      }
+    }
+  ]
+}

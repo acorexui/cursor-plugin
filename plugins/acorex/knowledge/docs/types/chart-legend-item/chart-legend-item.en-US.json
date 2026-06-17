@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXChartLegendItem } from '@acorex/charts/chart-legend';"],
+  "types": [
+    {
+      "title": "AXChartLegendItem",
+      "description": "Defines a legend item",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the legend item"
+        },
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Display name for the legend item"
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "number" }, { "name": "string" }],
+          "description": "Value associated with the legend item"
+        },
+        {
+          "name": "percentage",
+          "type": [{ "name": "number" }],
+          "description": "Optional percentage value for the legend item"
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "string" }],
+          "description": "Optional color for the legend item"
+        },
+        {
+          "name": "hidden",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the legend item is hidden"
+        }
+      ]
+    }
+  ]
+}

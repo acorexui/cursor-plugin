@@ -1,0 +1,450 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "OTP",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/one-time-password--documentation"
+    }
+  ],
+  "description": "A component for OTP input fields with state management and custom styling support. Provides multiple input fields for entering verification codes, PINs, and other numeric sequences with auto-focus, copy-paste support, and keyboard navigation.",
+  "imports": ["import { AXOtpComponent } from '@acorex/components/otp';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic usage of the OTP component with default settings",
+      "content": {
+        "type": "api",
+        "data": "otp/usage"
+      }
+    },
+    {
+      "title": "Length",
+      "description": "Configuring the number of digits in the OTP input",
+      "content": {
+        "type": "api",
+        "data": "otp/length"
+      }
+    },
+    {
+      "title": "Copy Paste",
+      "height": "350px",
+      "description": "Demonstrating copy and paste functionality for OTP input",
+      "content": {
+        "type": "api",
+        "data": "otp/copy-paste"
+      }
+    },
+    {
+      "title": "Validation",
+      "description": "Implementing validation for the OTP input with state management",
+      "content": {
+        "type": "api",
+        "data": "otp/validation"
+      }
+    },
+    {
+      "title": "Auto Focus",
+      "description": "Enabling automatic focus on the first input field",
+      "content": {
+        "type": "api",
+        "data": "otp/auto-focus"
+      }
+    },
+    {
+      "title": "Look Variations",
+      "description": "Different visual styles for the OTP component",
+      "height": "360px",
+      "content": {
+        "type": "api",
+        "data": "otp/looks"
+      }
+    },
+    {
+      "title": "Validation States",
+      "description": "Different validation states for the OTP component",
+      "height": "380px",
+      "content": {
+        "type": "api",
+        "data": "otp/states"
+      }
+    },
+    {
+      "title": "Disabled & Readonly",
+      "description": "Control the disabled and readonly states of the OTP component",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "otp/disabled-readonly"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXOtpComponent",
+      "description": "The main component for OTP input with multiple digit support",
+      "props": [
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "'number'"
+            },
+            {
+              "name": "'text'"
+            }
+          ],
+          "description": "The input type for OTP fields. 'number' restricts input to digits only, 'text' allows any character.",
+          "default": "'number'"
+        },
+        {
+          "name": "length",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The number of input fields in the OTP component.",
+          "default": "undefined"
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The current value of the OTP input. Inherited from MXValueComponent.",
+          "default": "undefined"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "'clear'"
+            },
+            {
+              "name": "'success'"
+            },
+            {
+              "name": "'error'"
+            }
+          ],
+          "description": "The validation state of the component. Inherited from MXValueComponent.",
+          "default": "'clear'"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the OTP input is disabled. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the OTP input is readonly. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "'solid'"
+            },
+            {
+              "name": "'outline'"
+            },
+            {
+              "name": "'flat'"
+            },
+            {
+              "name": "'fill'"
+            }
+          ],
+          "description": "The visual appearance style of the component. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component value has been modified. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has required validation rules. Inherited from MXValueComponent.",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "onCompleted",
+          "type": [
+            {
+              "name": "AXOtpCompletedEvent",
+              "link": "/en-US/docs/events/otp-completed-event"
+            }
+          ],
+          "description": "Emitted when the OTP input is completed, providing the entered value and completion status."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Detailed value change event with old/new values. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Deprecated: use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component gains focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]",
+              "link": "/en-US/docs/types/form-validation-rule"
+            }
+          ],
+          "description": "Emitted when validation rules are added or removed. Inherited from MXValueComponent."
+        },
+        {
+          "name": "lengthChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emitted when the length property changes."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "'clear'"
+            },
+            {
+              "name": "'success'"
+            },
+            {
+              "name": "'error'"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "'solid'"
+            },
+            {
+              "name": "'outline'"
+            },
+            {
+              "name": "'flat'"
+            },
+            {
+              "name": "'fill'"
+            }
+          ],
+          "description": "Emitted when the look style changes. Inherited from MXLookComponent."
+        }
+      ],
+      "methods": [
+        {
+          "name": "reset",
+          "description": "Resets the input values to an empty array.",
+          "content": "/**\n * Resets the input values to an empty array.\n */\nreset() {\n  this.inputValues = [];\n  for (let index = 0; index < this.length(); index++) {\n    this.inputValues.push(' ');\n  }\n}"
+        },
+        {
+          "name": "mapValueToInputs",
+          "description": "Converts the value string to input values and updates the inputValues array.",
+          "content": "/**\n * Converts the value string to input values and updates the inputValues array.\n */\nmapValueToInputs() {\n  this._emitOnComplete();\n  if (!this.value) {\n    return;\n  }\n  this.value.split('').map((v, i) => {\n    this.inputValues[i] = v;\n  });\n}"
+        },
+        {
+          "name": "focus",
+          "description": "Focuses the component. Inherited from MXInteractiveComponent.",
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void {\n  AXHtmlUtil.focusElement(this.getHostElement());\n}"
+        },
+        {
+          "name": "blur",
+          "description": "Removes focus from the component. Inherited from MXInteractiveComponent.",
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void {\n  AXHtmlUtil.blurElement(this.getHostElement());\n}"
+        },
+        {
+          "name": "hasFocus",
+          "description": "Checks if the component is focused or has any focused element. Inherited from MXInteractiveComponent.",
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean {\n  return AXHtmlUtil.hasFocus(this.getHostElement());\n}"
+        },
+        {
+          "name": "validate",
+          "description": "Validates the component. Inherited from MXValueComponent.",
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nasync validate(): Promise<AXValidationSummary> {\n  const container_classes = ['ax-editor-container', 'ax-checkbox', 'ax-radio'];\n  const container = container_classes.some((c) => this.getHostElement().classList.contains(c))\n    ? this.getHostElement()\n    : this.getHostElement().querySelector('.ax-editor-container');\n  const formField = container?.closest('ax-form-field') || container?.closest('ax-checkbox');\n  const label = formField?.querySelector('ax-label') || formField?.querySelector('label');\n  //\n  const rules = this.validationService.ruleFor(this.value);\n  this.validationRules.forEach((r) => {\n    r.options['title'] = (label?.firstChild?.textContent ?? this.name)?.replace('*', '').trim();\n    rules.addRule(r.rule as any, r.options);\n  });\n  const result = await rules.validate();\n  if (result.result) {\n    this.setState('clear');\n  } else {\n    const message = result.rules.find((c) => !c.result).message;\n    this.setState('error', message);\n  }\n  return result;\n}"
+        },
+        {
+          "name": "resetErrors",
+          "description": "Resets validation errors. Inherited from MXValueComponent.",
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void {\n  this.setState('clear');\n}"
+        },
+        {
+          "name": "commitValue",
+          "description": "Commits a value with optional user interaction flag. Inherited from MXValueComponent.",
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: T, u = false): void {\n  if (u) {\n    this.markAsTouched();\n    this.markAsDirty();\n    this._isUserInteraction = true;\n  }\n  this.writeValue(value);\n}"
+        },
+        {
+          "name": "writeValue",
+          "description": "Writes a value to the component (ControlValueAccessor method). Inherited from MXValueComponent.",
+          "content": "/**\n * Writes a value to the component (ControlValueAccessor method).\n *\n * @param value - The value to write.\n */\nwriteValue(value: T): void {\n  this.value = value;\n}"
+        },
+        {
+          "name": "registerOnChange",
+          "description": "Registers a change callback function (ControlValueAccessor method). Inherited from MXValueComponent.",
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnChange(fn: (value: T) => void): void {\n  this.onChangeCallback = fn;\n}"
+        },
+        {
+          "name": "registerOnTouched",
+          "description": "Registers a touched callback function (ControlValueAccessor method). Inherited from MXInteractiveComponent.",
+          "content": "/**\n * Registers a touched callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void {\n  this.onTouchedCallback = fn;\n}"
+        },
+        {
+          "name": "setDisabledState",
+          "description": "Sets the disabled state of the component (ControlValueAccessor method). Inherited from MXInteractiveComponent.",
+          "content": "/**\n * Sets the disabled state of the component (ControlValueAccessor method).\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void {\n  this.disabled = isDisabled;\n}"
+        },
+        {
+          "name": "addValidationRule",
+          "description": "Adds a validation rule. Inherited from MXValueComponent.",
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void {\n  this.validationRules.push(rule);\n  this.validationRulesChange.emit(this.validationRules);\n}"
+        },
+        {
+          "name": "removeValidationRule",
+          "description": "Removes a validation rule. Inherited from MXValueComponent.",
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void {\n  this.validationRules = this.validationRules.filter((r) => {\n    if (r.rule !== ruleToRemove.rule) {\n      return true;\n    }\n    // Create copies of options without the 'title' property\n    const rOptionsSanitized = omit(r.options, ['title']);\n    const ruleToRemoveOptionsSanitized = omit(ruleToRemove.options, ['title']);\n\n    return !isEqual(rOptionsSanitized, ruleToRemoveOptionsSanitized);\n  });\n  this.validationRulesChange.emit(this.validationRules);\n  this.setState('clear');\n}"
+        },
+        {
+          "name": "getHostElement",
+          "description": "Gets the host HTML element of the component. Inherited from MXBaseComponent.",
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T {\n  return this._elementRef?.nativeElement as T;\n}"
+        },
+        {
+          "name": "setOption",
+          "description": "Sets a component option with optional lifecycle callbacks. Inherited from MXBaseComponent.",
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>) {\n  const oldValue = this[option.name];\n  let newValue = this.internalOptionChanging({\n    name: option.name,\n    value: option.value,\n  });\n  if (option.beforeCallback) {\n    newValue = option.beforeCallback(oldValue, newValue);\n  }\n  if (oldValue != newValue) {\n    this[`_${option.name}`] = option.value;\n    this.onOptionChanged.emit({\n      component: this,\n      name: option.name,\n      newValue,\n      oldValue,\n    });\n    const emitter = this[`${option.name}Change`] as EventEmitter<any>;\n    emitter?.emit(newValue);\n    this.internalOptionChanged({ name: option.name, value: newValue });\n  }\n  if (option.afterCallback) option.afterCallback(oldValue, newValue);\n}"
+        }
+      ]
+    }
+  ]
+}

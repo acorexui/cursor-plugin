@@ -1,0 +1,310 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Network Service",
+  "description": "Browser-aware network utilities: online/offline status signal, file uploads and downloads with progress tracking, cancellation, and typed status events built on Angular HttpClient.",
+  "imports": [
+    "import { AXNetworkService, AXUploadTask, AXDownloadTask, AXUploadStatus, AXDownloadStatus, AXUploadResponse, AXDownloadResponse } from '@acorex/core/network';"
+  ],
+  "hints": [
+    {
+      "title": "No extra packages",
+      "content": "<code>AXNetworkService</code> is <code>providedIn: 'root'</code>. You only need <code>provideHttpClient()</code> — do <strong>not</strong> import <code>@acorex/core/platform</code> or other core packages for basic uploads/downloads.",
+      "status": "primary"
+    },
+    {
+      "title": "HttpClient required",
+      "content": "Register <code>provideHttpClient()</code> (or <code>HttpClientModule</code>) in your app config. AXNetworkService injects Angular <code>HttpClient</code> internally.",
+      "status": "primary"
+    },
+    {
+      "title": "Upload needs start()",
+      "content": "After creating an <code>AXUploadTask</code>, subscribe to <code>task.events</code> then call <code>task.start()</code>. Downloads begin when you subscribe to <code>task.events</code> — no separate start method.",
+      "status": "primary"
+    },
+    {
+      "title": "Online status is browser-only",
+      "content": "<code>status</code> tracks <code>window</code> online/offline events. On the server it defaults to <code>true</code> and does not update.",
+      "status": "warning"
+    },
+    {
+      "title": "Progress from File sizes",
+      "content": "Upload progress percent is calculated from the total <code>File.size</code> sum inside <code>FormData</code>. Non-file FormData entries do not contribute to <code>totalBytes</code>.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNetworkService",
+      "description": "Root singleton for connectivity monitoring and transfer tasks.",
+      "props": [
+        {
+          "name": "status",
+          "type": [{ "name": "Signal<boolean>" }],
+          "description": "Readonly signal — true when online, false when offline (browser only)."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Creates an upload task. Does not start the HTTP request until task.start().\n * @overload upload(url, formData)\n * @overload upload(httpRequest)\n */\nupload<T>(url: string, formData: FormData): AXUploadTask<T>\nupload<T>(request: HttpRequest<any>): AXUploadTask<T>"
+        },
+        {
+          "content": "/**\n * Creates a download task. HTTP stream starts on first subscription to task.events.\n * @overload download(url)\n * @overload download(httpRequest)\n */\ndownload(url: string): AXDownloadTask\ndownload(request: HttpRequest<Blob>): AXDownloadTask"
+        }
+      ]
+    },
+    {
+      "title": "AXUploadTask<T>",
+      "description": "Handles a single upload with progress events and cancellation.",
+      "props": [
+        {
+          "name": "events",
+          "type": [{ "name": "BehaviorSubject<AXUploadResponse<T>>" }],
+          "description": "Hot stream of upload progress and final result. Subscribe before start()."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Begins the HttpClient request pipeline.\n */\nstart(): void"
+        },
+        {
+          "content": "/**\n * Aborts the in-flight upload via takeUntil.\n */\ncancel(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDownloadTask",
+      "description": "Handles a single blob download with progress events and cancellation.",
+      "props": [
+        {
+          "name": "events",
+          "type": [{ "name": "Observable<AXDownloadResponse>" }],
+          "description": "Cold-to-hot stream — subscribing triggers the download."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Unsubscribes from the download stream.\n */\ncancel(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXUploadResponse<T>",
+      "description": "Payload emitted on each upload event.",
+      "props": [
+        {
+          "name": "progress",
+          "type": [{ "name": "number" }],
+          "description": "0–100 percent complete."
+        },
+        {
+          "name": "bytesTransferred",
+          "type": [{ "name": "number" }],
+          "description": "Bytes uploaded so far."
+        },
+        {
+          "name": "totalBytes",
+          "type": [{ "name": "number" }],
+          "description": "Total file bytes in FormData."
+        },
+        {
+          "name": "status",
+          "type": [{ "name": "AXUploadStatus" }],
+          "description": "Current upload phase."
+        },
+        {
+          "name": "result?",
+          "type": [{ "name": "T" }],
+          "description": "Server JSON body when status is UploadComplete."
+        },
+        {
+          "name": "message?",
+          "type": [{ "name": "string" }],
+          "description": "Error message when status is UploadFailed."
+        }
+      ]
+    },
+    {
+      "title": "AXDownloadResponse",
+      "description": "Payload emitted on each download event.",
+      "props": [
+        {
+          "name": "progress",
+          "type": [{ "name": "number" }],
+          "description": "0–100 percent complete."
+        },
+        {
+          "name": "bytesReceived",
+          "type": [{ "name": "number" }],
+          "description": "Bytes downloaded so far."
+        },
+        {
+          "name": "totalBytes",
+          "type": [{ "name": "number" }],
+          "description": "Expected total from Content-Length when available."
+        },
+        {
+          "name": "status",
+          "type": [{ "name": "AXDownloadStatus" }],
+          "description": "Current download phase."
+        },
+        {
+          "name": "data?",
+          "type": [{ "name": "Blob" }],
+          "description": "Downloaded blob when status is DownloadComplete."
+        }
+      ]
+    },
+    {
+      "title": "AXUploadStatus",
+      "description": "Upload lifecycle enum values.",
+      "props": [
+        { "name": "StartingUpload", "type": [{ "name": "'Starting upload'" }] },
+        { "name": "Uploading", "type": [{ "name": "'Uploading...'" }] },
+        { "name": "UploadComplete", "type": [{ "name": "'Upload complete'" }] },
+        { "name": "UploadFailed", "type": [{ "name": "'Upload failed'" }] },
+        { "name": "UploadCanceled", "type": [{ "name": "'Upload Canceled'" }] }
+      ]
+    },
+    {
+      "title": "AXDownloadStatus",
+      "description": "Download lifecycle enum values.",
+      "props": [
+        { "name": "StartingDownload", "type": [{ "name": "'Starting download'" }] },
+        { "name": "Downloading", "type": [{ "name": "'Downloading...'" }] },
+        { "name": "DownloadComplete", "type": [{ "name": "'Download complete'" }] },
+        { "name": "DownloadFailed", "type": [{ "name": "'Download failed'" }] }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the network package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/network package wraps Angular HttpClient for file transfers with progress reporting:\n\n• AXNetworkService.status — reactive online/offline signal\n• upload() — returns AXUploadTask with BehaviorSubject events\n• download() — returns AXDownloadTask with Observable events\n\nDesigned for integration with @acorex/cdk/uploader and custom progress UIs (progress bars, loading dialogs)."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Register HttpClient once, then inject AXNetworkService to read connectivity and create upload/download tasks.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "network-basic.component.ts",
+            "language": "typescript",
+            "content": "import { Component, DestroyRef, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXDownloadStatus, AXNetworkService, AXUploadStatus } from '@acorex/core/network';\n\n@Component({\n  selector: 'app-network-basic',\n  template: `\n    @if (network.status()) {\n      <span>Online</span>\n    } @else {\n      <span>Offline - transfers are unavailable</span>\n    }\n\n    <input type=\"file\" (change)=\"upload($event)\" />\n    <button type=\"button\" (click)=\"download()\">Download report</button>\n\n    <progress [value]=\"progress()\" max=\"100\"></progress>\n    <p>{{ statusText() }}</p>\n  `,\n})\nexport class NetworkBasicComponent {\n  private readonly destroyRef = inject(DestroyRef);\n  protected readonly network = inject(AXNetworkService);\n\n  protected readonly progress = signal(0);\n  protected readonly statusText = signal('');\n\n  upload(event: Event) {\n    const file = (event.target as HTMLInputElement).files?.[0];\n    if (!file) return;\n\n    const formData = new FormData();\n    formData.append('file', file);\n\n    const task = this.network.upload<{ id: string }>('/api/files', formData);\n    task.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {\n      this.progress.set(event.progress);\n      this.statusText.set(event.status);\n\n      if (event.status === AXUploadStatus.UploadComplete) {\n        console.log('Uploaded file id:', event.result?.id);\n      }\n    });\n\n    task.start();\n  }\n\n  download() {\n    const task = this.network.download('/api/files/report.pdf');\n    task.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {\n      this.progress.set(event.progress);\n      this.statusText.set(event.status);\n\n      if (event.status === AXDownloadStatus.DownloadComplete && event.data) {\n        console.log('Downloaded bytes:', event.data.size);\n      }\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Upload a File",
+      "description": "Basic upload with progress and completion handling.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "upload.component.ts",
+            "language": "typescript",
+            "content": "import { Component, DestroyRef, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXNetworkService, AXUploadStatus } from '@acorex/core/network';\n\n@Component({\n  selector: 'app-upload',\n  template: `\n    <input type=\"file\" (change)=\"onFile($event)\" />\n    <progress [value]=\"progress()\" max=\"100\"></progress>\n    <p>{{ statusText() }}</p>\n  `,\n})\nexport class UploadComponent {\n  private readonly destroyRef = inject(DestroyRef);\n  private network = inject(AXNetworkService);\n\n  progress = signal(0);\n  statusText = signal('');\n\n  onFile(event: Event) {\n    const file = (event.target as HTMLInputElement).files?.[0];\n    if (!file) return;\n\n    const formData = new FormData();\n    formData.append('file', file);\n\n    const task = this.network.upload<{ id: string }>('/api/files', formData);\n\n    task.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {\n      this.progress.set(event.progress);\n      this.statusText.set(event.status);\n\n      if (event.status === AXUploadStatus.UploadComplete) {\n        console.log('Server response:', event.result);\n      }\n      if (event.status === AXUploadStatus.UploadFailed) {\n        console.error(event.message);\n      }\n    });\n\n    task.start(); // Required — upload does not auto-start\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Upload with HttpRequest",
+      "description": "Custom headers, method, or response type.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "custom-upload.ts",
+            "language": "typescript",
+            "content": "import { HttpRequest } from '@angular/common/http';\nimport { inject } from '@angular/core';\nimport { AXNetworkService } from '@acorex/core/network';\n\nasync function uploadWithAuth(file: File, token: string) {\n  const network = inject(AXNetworkService);\n\n  const formData = new FormData();\n  formData.append('files', file);\n\n  const request = new HttpRequest('POST', '/api/v1/files', formData, {\n    reportProgress: true,\n    responseType: 'json',\n    headers: { Authorization: `Bearer ${token}` },\n  });\n\n  const task = network.upload<{ url: string }>(request);\n  task.events.subscribe(console.log);\n  task.start();\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Cancel an Upload",
+      "description": "Abort in-flight transfers.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "cancel-upload.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXNetworkService, AXUploadTask } from '@acorex/core/network';\n\nlet activeTask: AXUploadTask<unknown> | null = null;\n\nfunction startUpload(formData: FormData) {\n  const network = inject(AXNetworkService);\n  activeTask = network.upload('/api/upload', formData);\n  activeTask.events.subscribe((e) => console.log(e.progress));\n  activeTask.start();\n}\n\nfunction cancelUpload() {\n  activeTask?.cancel();\n  activeTask = null;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Download a File",
+      "description": "Track download progress and save the blob.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "download.component.ts",
+            "language": "typescript",
+            "content": "import { Component, DestroyRef, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXDownloadStatus, AXNetworkService } from '@acorex/core/network';\n\n@Component({\n  selector: 'app-download',\n  template: `\n    <button type=\"button\" (click)=\"download()\">Download</button>\n    <p>{{ progress() }}% — {{ label() }}</p>\n  `,\n})\nexport class DownloadComponent {\n  private readonly destroyRef = inject(DestroyRef);\n  private network = inject(AXNetworkService);\n  private task: ReturnType<AXNetworkService['download']> | null = null;\n\n  progress = signal(0);\n  label = signal('');\n\n  download() {\n    this.task = this.network.download('https://example.com/files/report.pdf');\n\n    this.task.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {\n      this.progress.set(event.progress);\n      this.label.set(event.status);\n\n      if (event.status === AXDownloadStatus.DownloadComplete && event.data) {\n        this.saveBlob(event.data, 'report.pdf');\n      }\n    });\n    // No start() — subscribing to events triggers the request\n  }\n\n  cancel() {\n    this.task?.cancel();\n  }\n\n  private saveBlob(blob: Blob, filename: string) {\n    const url = URL.createObjectURL(blob);\n    const a = document.createElement('a');\n    a.href = url;\n    a.download = filename;\n    a.click();\n    URL.revokeObjectURL(url);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Download with Loading Dialog",
+      "description": "Real pattern from the showcase uploader page.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "download-with-dialog.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXLoadingDialogService } from '@acorex/components/loading-dialog';\nimport { AXDownloadTask, AXNetworkService } from '@acorex/core/network';\n\nfunction downloadLargeFile(url: string) {\n  const loadingDialog = inject(AXLoadingDialogService);\n  const network = inject(AXNetworkService);\n\n  let downloadTask: AXDownloadTask | null = null;\n\n  const dialog = loadingDialog.show({\n    title: 'Download file...',\n    mode: 'determinate',\n    progressValue: 0,\n    text: 'Waiting...',\n    buttons: [\n      {\n        text: 'Cancel',\n        color: 'danger',\n        onClick: () => {\n          downloadTask?.cancel();\n          dialog.close();\n        },\n      },\n    ],\n  });\n\n  downloadTask = network.download(url);\n  downloadTask.events.subscribe((event) => {\n    dialog.setProgressText(event.status);\n    dialog.setProgressStatus(`${event.progress}%`);\n    dialog.setProgressValue(event.progress);\n  });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "CDK Uploader Integration",
+      "description": "Wire AXUploadTask to AXUploaderService requests.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "uploader-integration.ts",
+            "language": "typescript",
+            "content": "import { AXUploaderChangedEvent } from '@acorex/cdk/uploader';\nimport { inject } from '@angular/core';\nimport { AXNetworkService, AXUploadStatus } from '@acorex/core/network';\n\nfunction handleUploaderChanged(e: AXUploaderChangedEvent) {\n  const network = inject(AXNetworkService);\n  const apiUrl = 'https://api.example.com/files';\n\n  e.requests.forEach((request) => {\n    const formData = new FormData();\n    formData.append('files', request.file);\n\n    const task = network.upload(apiUrl, formData);\n\n    task.events.subscribe((event) => {\n      if (event.status === AXUploadStatus.UploadFailed) {\n        request.error(event.message);\n      } else if (event.status === AXUploadStatus.UploadComplete) {\n        request.finish(event.result);\n      } else {\n        request.setTransferredBytes(event.bytesTransferred);\n      }\n    });\n\n    request.onStart.subscribe(() => task.start());\n    request.onCancel.subscribe(() => task.cancel());\n    request.upload();\n  });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Upload vs Download API Differences",
+      "description": "Key behavioral differences between task types.",
+      "content": {
+        "type": "text",
+        "data": "| Feature | AXUploadTask | AXDownloadTask |\n|---------|--------------|----------------|\n| events type | BehaviorSubject | Observable (getter) |\n| Start transfer | Call start() explicitly | Subscribe to events |\n| Response body | JSON (generic T) | Blob |\n| Progress basis | Sum of File sizes in FormData | HttpEvent loaded/total |\n| Cancel | takeUntil on HttpClient stream | Unsubscribe from events |\n\nBoth tasks enable reportProgress on the underlying HttpRequest."
+      }
+    },
+    {
+      "title": "Status Enum Reference",
+      "description": "When each status value is emitted.",
+      "content": {
+        "type": "text",
+        "data": "Upload statuses:\n• StartingUpload — request sent / headers received\n• Uploading — HttpEventType.UploadProgress\n• UploadComplete — HttpEventType.Response with JSON body in result\n• UploadFailed — HTTP error (message from statusText)\n• UploadCanceled — after cancel() is called\n\nDownload statuses:\n• StartingDownload — before first progress event\n• Downloading — HttpEventType.DownloadProgress\n• DownloadComplete — response body available as data Blob\n• DownloadFailed — defined in enum but errors propagate via Observable error callback"
+      }
+    }
+  ]
+}

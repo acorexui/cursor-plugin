@@ -1,0 +1,113 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXCalendar",
+  "imports": ["import { AXCalendar } from '@acorex/core/date-time';"],
+  "description": "AXCalendar is an abstract base class that defines the interface for calendar implementations. It provides methods for date calculations and manipulations specific to different calendar systems.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "AXCalendar is an abstract base class that represents a calendar system with methods for date calculations and manipulations.",
+      "content": {
+        "type": "code",
+        "data": "export abstract class AXCalendar {\n  private _config: AXCalendarConfig;\n\n  constructor(config: AXCalendarConfig) {\n    this._config = config;\n  }\n\n  public get weekend(): number[]\n  public get weekdays(): number[]\n  \n  abstract name(): string;\n  abstract dayOfMonth(date: Date): number;\n  abstract dayOfYear(date: Date): number;\n  abstract dayOfWeek(date: Date): number;\n  abstract monthOfYear(date: Date): number;\n  abstract weekOfYear(date: Date): number;\n  abstract year(date: Date): number;\n  abstract add(date: Date, unit: TimeUnit, amount: number): AXDateTime;\n  abstract set(date: Date, unit: TimeUnit, value: number): AXDateTime;\n  abstract startOf(date: Date, unit: TimeUnit): AXDateTime;\n  abstract endOf(date: Date, unit: TimeUnit): AXDateTime;\n  abstract create(value: AXDateValue): AXDateTime;\n  abstract parse(value: string): AXDateTime;\n}"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendar",
+      "props": [
+        {
+          "name": "weekend",
+          "type": [{ "name": "number[]" }],
+          "description": "Returns an array of weekend day numbers (0-6, where 0 is Sunday)."
+        },
+        {
+          "name": "weekdays",
+          "type": [{ "name": "number[]" }],
+          "description": "Returns an array of weekday numbers in the calendar's week order."
+        }
+      ],
+      "methods": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Returns the name of the calendar system (e.g., 'gregorian', 'persian', 'islamic').",
+          "content": "abstract name(): string;"
+        },
+        {
+          "name": "dayOfMonth",
+          "type": [{ "name": "number" }],
+          "description": "Returns the day of the month (1-31) for the given date.",
+          "content": "abstract dayOfMonth(date: Date): number;"
+        },
+        {
+          "name": "dayOfYear",
+          "type": [{ "name": "number" }],
+          "description": "Returns the day of the year (1-365/366) for the given date.",
+          "content": "abstract dayOfYear(date: Date): number;"
+        },
+        {
+          "name": "dayOfWeek",
+          "type": [{ "name": "number" }],
+          "description": "Returns the day of the week (1-7) for the given date.",
+          "content": "abstract dayOfWeek(date: Date): number;"
+        },
+        {
+          "name": "monthOfYear",
+          "type": [{ "name": "number" }],
+          "description": "Returns the month of the year (1-12) for the given date.",
+          "content": "abstract monthOfYear(date: Date): number;"
+        },
+        {
+          "name": "weekOfYear",
+          "type": [{ "name": "number" }],
+          "description": "Returns the week of the year (1-52/53) for the given date.",
+          "content": "abstract weekOfYear(date: Date): number;"
+        },
+        {
+          "name": "year",
+          "type": [{ "name": "number" }],
+          "description": "Returns the year for the given date.",
+          "content": "abstract year(date: Date): number;"
+        },
+        {
+          "name": "add",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Adds a specified amount of time units to the given date and returns a new AXDateTime instance.",
+          "content": "abstract add(date: Date, unit: TimeUnit, amount: number): AXDateTime;"
+        },
+        {
+          "name": "set",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Sets a specific time unit to a given value and returns a new AXDateTime instance.",
+          "content": "abstract set(date: Date, unit: TimeUnit, value: number): AXDateTime;"
+        },
+        {
+          "name": "startOf",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Returns the start of the specified time unit for the given date.",
+          "content": "abstract startOf(date: Date, unit: TimeUnit): AXDateTime;"
+        },
+        {
+          "name": "endOf",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Returns the end of the specified time unit for the given date.",
+          "content": "abstract endOf(date: Date, unit: TimeUnit): AXDateTime;"
+        },
+        {
+          "name": "create",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Creates a new AXDateTime instance from an AXDateValue object.",
+          "content": "abstract create(value: AXDateValue): AXDateTime;"
+        },
+        {
+          "name": "parse",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Parses a date string and returns a new AXDateTime instance.",
+          "content": "abstract parse(value: string): AXDateTime;"
+        }
+      ]
+    }
+  ]
+}

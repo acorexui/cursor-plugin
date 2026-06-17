@@ -1,0 +1,269 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Breadcrumb",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/breadcrumbs--documentation"
+    }
+  ],
+  "description": "The Breadcrumbs component displays a navigation trail of links, helping users track their location within an application's hierarchy and easily navigate back to previous sections. The component consists of two main parts: AXBreadCrumbsComponent (container) and AXBreadCrumbsItemComponent (individual items).",
+
+  "imports": [
+    "import { AXBreadCrumbsComponent } from '@acorex/components/breadcrumbs';",
+    "import { AXBreadCrumbsItemComponent } from '@acorex/components/breadcrumbs';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-breadcrumbs</code>.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/usage"
+      }
+    },
+    {
+      "title": "Activated mode",
+      "description": "You can activate a breadcrumb item.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/activated-mode"
+      }
+    },
+    {
+      "title": "Disabled mode",
+      "description": "You can disable a breadcrumb item.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/disabled-mode"
+      }
+    },
+    {
+      "title": "Icon Mode",
+      "description": "You can use icons with breadcrumb items.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/icon-mode"
+      }
+    },
+    {
+      "title": "Custom Divider",
+      "description": "Use a custom divider template between items.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/custom-divider"
+      }
+    },
+    {
+      "title": "Prefix and Suffix",
+      "description": "Add icons and badges using prefix/suffix slots.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/prefix-suffix"
+      }
+    },
+    {
+      "title": "Dynamic (Async)",
+      "description": "Build breadcrumbs dynamically from the URL; includes a button to restart the async load.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/dynamic-async"
+      }
+    },
+    {
+      "title": "Overflow and Auto-Scroll",
+      "description": "Many levels to demonstrate horizontal overflow and auto-scroll to the last item.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/overflow-scroll"
+      }
+    },
+    {
+      "title": "Long labels with tooltip",
+      "description": "Truncate long breadcrumb labels and reveal full text on hover via tooltip.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/long-labels-tooltip"
+      }
+    },
+    {
+      "title": "Disabled change",
+      "description": "Toggle the disabled state of an item at runtime and observe disabledChange events.",
+      "content": {
+        "type": "api",
+        "data": "breadcrumb/disabled-change"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBreadCrumbsComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXBreadCrumbsItemComponent",
+      "props": [
+        {
+          "name": "active",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether this breadcrumb item is the current active item."
+        },
+        {
+          "name": "_parent",
+          "type": [
+            {
+              "name": "AXBreadCrumbsComponent"
+            }
+          ],
+          "description": "Reference to the parent breadcrumbs component."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Disables the breadcrumb item. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndexChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emits an event whenever the tabIndex of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns HTMLElement - The native DOM element.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional callbacks.\n *\n * @param option - The option configuration object.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

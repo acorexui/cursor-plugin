@@ -1,0 +1,366 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Translation Service",
+  "description": "Multi-language i18n for Angular: load JSON translation files by lang and scope, cache them, resolve nested keys and inline references, interpolate params, and react to locale changes via pipe, directive, and service APIs.",
+  "imports": [
+    "import { AXTranslationService, AXTranslationModule, AXTranslatorPipe, AXTranslatorDirective, AXTranslationLoaderService, AX_TRANSLATION_CONFIG, AX_TRANSLATION_LOADER, translationConfig, loadTranslationScope, translateSync, createMultiLanguageString, AXMultiLanguageMap, AXTranslateOptions } from '@acorex/core/translation';"
+  ],
+  "hints": [
+    {
+      "title": "Pipe returns Observable",
+      "content": "The <code>translate</code> pipe returns <code>Observable&lt;string&gt;</code>. Always chain <code>| async</code> in templates: <code>{{ 'common.actions.save' | translate | async }}</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Register a custom loader",
+      "content": "Provide <code>AX_TRANSLATION_LOADER</code> to fetch JSON files. Default loader returns an empty object — translations will not work until you implement it.",
+      "status": "primary"
+    },
+    {
+      "title": "Locale sync",
+      "content": "<code>AXTranslationService</code> listens to <code>AXLocaleService.profileChanged$</code> and calls <code>setActiveLang()</code> automatically. Prefer changing locale via <code>AXLocaleService.setProfile()</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Preload on startup",
+      "content": "Import <code>AXTranslationModule</code> in your bootstrap config to run <code>preload()</code> via <code>provideAppInitializer</code> using langs/scopes from <code>AX_TRANSLATION_CONFIG</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Inline reference syntax",
+      "content": "Use <code>@scope:nested.key</code> (e.g. <code>@acorex:common.actions.cancel</code>) or explicit <code>@lang:scope:key</code>. Legacy <code>t('key', { scope: 'common' })</code> is also supported inside strings.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTranslationService",
+      "description": "Main API for translating keys, multi-language maps, and inline expressions. providedIn: 'root'.",
+      "props": [
+        {
+          "name": "langChanges$",
+          "type": [{ "name": "Observable<AXTranslateLang>" }],
+          "description": "Emits when active language changes."
+        },
+        {
+          "name": "currentLocale$",
+          "type": [{ "name": "Observable<string>" }],
+          "description": "Distinct stream of locale changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "setActiveLang(lang: AXTranslateLang): void"
+        },
+        {
+          "content": "getActiveLang(): AXTranslateLang"
+        },
+        {
+          "content": "getDefaultLang(): AXTranslateLang"
+        },
+        {
+          "content": "/**\n * Reactive translation. Re-emits when language changes.\n * Accepts plain keys or AXMultiLanguageMap.\n */\ntranslate$(value, options?: AXTranslateOptions): Observable<string>"
+        },
+        {
+          "content": "/**\n * Async translation. Loads scope if missing.\n * Accepts string | AXMultiLanguageMap.\n */\ntranslateAsync(text, options?: AXTranslateOptions): Promise<string>"
+        },
+        {
+          "content": "/**\n * Sync translation from cache. Use waitForLoad for keys not yet loaded.\n */\ntranslateSync(text: string, options?: AXTranslateOptions & { waitForLoad?: boolean; timeoutMs?: number }): string"
+        },
+        {
+          "content": "toLocaleMap(value, activeLocale?): AXMultiLanguageMap"
+        },
+        {
+          "content": "isValidMultiLanguageObject(value): value is AXMultiLanguageMap"
+        },
+        {
+          "content": "/** @deprecated Use translateAsync for multi-language resolution. */\nresolve(value, locale?): string"
+        }
+      ]
+    },
+    {
+      "title": "AXTranslationLoaderService",
+      "description": "Caches and loads translation JSON per lang:scope pair.",
+      "props": [],
+      "methods": [
+        {
+          "content": "load(lang, scope): Observable<AXTranslation>"
+        },
+        {
+          "content": "peek(lang, scope, key): string | null"
+        },
+        {
+          "content": "preload(options?: { langs?; scopes? }): Promise<void>"
+        },
+        {
+          "content": "clear(): void"
+        },
+        {
+          "content": "getFallbackLangs(lang): AXTranslateLang[]"
+        },
+        {
+          "content": "getFallbackScopes(scope): AXTranslateScope[]"
+        }
+      ]
+    },
+    {
+      "title": "AXTranslatorPipe",
+      "description": "Pure pipe named translate. Returns Observable<string>.",
+      "props": [],
+      "methods": [
+        {
+          "content": "transform(value, options?: AXTranslateOptions): Observable<string>"
+        }
+      ]
+    },
+    {
+      "title": "AXTranslatorDirective",
+      "description": "Structural helper: exposes translate function as template context variable t.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "AXTranslationLoader",
+      "description": "Interface for custom translation file loading.",
+      "props": [],
+      "methods": [
+        {
+          "content": "load(options: { lang: AXTranslateLang; scope?: AXTranslateScope }): Observable<AXTranslation>"
+        }
+      ]
+    },
+    {
+      "title": "AXTranslationConfig",
+      "description": "Configuration provided via AX_TRANSLATION_CONFIG.",
+      "props": [
+        {
+          "name": "defaults",
+          "type": [{ "name": "{ lang; scope }" }],
+          "description": "Default language and scope when options are omitted."
+        },
+        {
+          "name": "preload?",
+          "type": [{ "name": "{ langs; scopes }" }],
+          "description": "Languages and scopes to load on app init."
+        },
+        {
+          "name": "fallbacks?",
+          "type": [{ "name": "{ langs?; scopes? }" }],
+          "description": "Fallback chains per lang or scope."
+        },
+        {
+          "name": "resolver?",
+          "type": [{ "name": "{ scopeKey }" }],
+          "description": "Route data key for loadTranslationScope (default: 'scope')."
+        }
+      ]
+    },
+    {
+      "title": "AXTranslateOptions",
+      "description": "Per-call translation options.",
+      "props": [
+        {
+          "name": "lang?",
+          "type": [{ "name": "AXTranslateLang" }],
+          "description": "Override active language."
+        },
+        {
+          "name": "scope?",
+          "type": [{ "name": "AXTranslateScope" }],
+          "description": "Translation file scope (JSON filename)."
+        },
+        {
+          "name": "params?",
+          "type": [{ "name": "Record<string, unknown>" }],
+          "description": "Interpolates {{param}} placeholders in translated text."
+        }
+      ]
+    },
+    {
+      "title": "loadTranslationScope",
+      "description": "Route resolver — preloads scopes from route.data.scope before navigation completes.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "translateSync",
+      "description": "Standalone function delegating to the singleton AXTranslationService instance.",
+      "props": [],
+      "methods": []
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How the translation system works.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/translation package loads JSON dictionaries organized by language (e.g. en-US, fa-IR) and scope (e.g. acorex, common, document). Each scope maps to one JSON file.\n\nFlow:\n1. You provide AX_TRANSLATION_LOADER to fetch JSON\n2. AXTranslationLoaderService caches files by lang:scope\n3. AXTranslationService resolves keys (including nested dot paths and inline @ references)\n4. Templates use the translate pipe; services use translateAsync / translateSync\n\nNested JSON keys are accessed with dot notation: common.actions.cancel resolves { common: { actions: { cancel: \"...\" } } }.\n\nParameter interpolation uses {{name}} placeholders in translation values."
+      }
+    },
+    {
+      "title": "Translation File Structure",
+      "description": "Organize JSON files by lang and scope.",
+      "content": {
+        "type": "code",
+        "language": "json",
+        "data": [
+          {
+            "fileName": "assets/i18n/en-US/acorex.json",
+            "language": "json",
+            "content": "{\n  \"common\": {\n    \"actions\": {\n      \"cancel\": \"Cancel\",\n      \"save\": \"Save\"\n    },\n    \"notifications\": {\n      \"more\": \"{{count}} more notifications\"\n    }\n  },\n  \"validation\": {\n    \"messages\": {\n      \"title\": \"Validation Error\"\n    }\n  }\n}\n"
+          },
+          {
+            "fileName": "assets/i18n/fa-IR/acorex.json",
+            "language": "json",
+            "content": "{\n  \"common\": {\n    \"actions\": {\n      \"cancel\": \"لغو\",\n      \"save\": \"ذخیره\"\n    },\n    \"notifications\": {\n      \"more\": \"{{count}} اعلان دیگر\"\n    }\n  },\n  \"validation\": {\n    \"messages\": {\n      \"title\": \"خطای اعتبارسنجی\"\n    }\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "App Setup",
+      "description": "Configure loader, defaults, and preload.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app.loaders.ts",
+            "language": "typescript",
+            "content": "import { AXTranslation, AXTranslationLoader, AXTranslationLoaderOptions } from '@acorex/core/translation';\nimport { HttpClient } from '@angular/common/http';\nimport { inject, Injectable } from '@angular/core';\nimport { first, Observable } from 'rxjs';\n\n@Injectable()\nexport class AppTranslationLoader implements AXTranslationLoader {\n  private http = inject(HttpClient);\n\n  load(options: AXTranslationLoaderOptions): Observable<AXTranslation> {\n    return this.http\n      .get<AXTranslation>(`/assets/i18n/${options.lang}/${options.scope}.json`)\n      .pipe(first());\n  }\n}\n"
+          },
+          {
+            "fileName": "app.config.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig, importProvidersFrom } from '@angular/core';\nimport { provideHttpClient } from '@angular/common/http';\nimport {\n  AXTranslationModule,\n  AX_TRANSLATION_CONFIG,\n  AX_TRANSLATION_LOADER,\n  translationConfig,\n} from '@acorex/core/translation';\nimport { AppTranslationLoader } from './app.loaders';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideHttpClient(),\n    importProvidersFrom(AXTranslationModule),\n    { provide: AX_TRANSLATION_LOADER, useClass: AppTranslationLoader },\n    {\n      provide: AX_TRANSLATION_CONFIG,\n      useValue: translationConfig({\n        defaults: { lang: 'en-US', scope: 'acorex' },\n        preload: {\n          langs: ['en-US', 'fa-IR'],\n          scopes: ['acorex', 'common'],\n        },\n      }),\n    },\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Template — translate Pipe",
+      "description": "Reactive translation in HTML templates.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "product.page.html",
+            "language": "html",
+            "content": "<!-- Plain key (uses default scope from config) -->\n<h1>{{ 'name' | translate | async }}</h1>\n\n<!-- Nested key with params -->\n<p>{{ 'common.actions.save' | translate:{ scope: 'acorex' } | async }}</p>\n\n<!-- Inline scope reference -->\n<button>{{ '@acorex:common.actions.cancel' | translate | async }}</button>\n\n<!-- Params interpolation -->\n<span>{{ 'common.notifications.more' | translate:{ scope: 'acorex', params: { count: 3 } } | async }}</span>\n"
+          },
+          {
+            "fileName": "product.page.ts",
+            "language": "typescript",
+            "content": "import { AsyncPipe } from '@angular/common';\nimport { Component } from '@angular/core';\nimport { AXTranslatorPipe } from '@acorex/core/translation';\n\n@Component({\n  imports: [AsyncPipe, AXTranslatorPipe],\n  templateUrl: './product.page.html',\n})\nexport class ProductPage {}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Service — Async and Sync",
+      "description": "Translate from TypeScript code.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "notification.service.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport { AXTranslationService } from '@acorex/core/translation';\n\n@Injectable({ providedIn: 'root' })\nexport class NotificationService {\n  private translation = inject(AXTranslationService);\n\n  async showMore(count: number) {\n    const title = await this.translation.translateAsync(\n      '@acorex:common.notifications.more',\n      { params: { count } },\n    );\n    console.log(title);\n  }\n\n  getTitleSync() {\n    return this.translation.translateSync('@acorex:validation.messages.title', {\n      waitForLoad: true,\n      timeoutMs: 200,\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Changing Language",
+      "description": "Switch locale and react to changes.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "language-switcher.component.ts",
+            "language": "typescript",
+            "content": "import { AsyncPipe } from '@angular/common';\nimport { Component, inject } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXLocaleService } from '@acorex/core/locale';\nimport { AXTranslationService, AXTranslatorPipe } from '@acorex/core/translation';\n\n@Component({\n  imports: [AsyncPipe, AXTranslatorPipe],\n  template: `\n    <button type=\"button\" (click)=\"setFa()\">FA</button>\n    <button type=\"button\" (click)=\"setEn()\">EN</button>\n    <p>{{ '@acorex:common.actions.save' | translate | async }}</p>\n  `,\n})\nexport class LanguageSwitcherComponent {\n  private locale = inject(AXLocaleService);\n  private translation = inject(AXTranslationService);\n\n  constructor() {\n    this.translation.langChanges$\n      .pipe(takeUntilDestroyed())\n      .subscribe((lang) => console.log('Active lang:', lang));\n  }\n\n  setFa() {\n    this.locale.setProfile('fa-IR'); // also updates translation service\n  }\n\n  setEn() {\n    this.locale.setProfile('en-US');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Multi-Language Maps",
+      "description": "Store per-locale strings in one object.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "multi-language.ts",
+            "language": "typescript",
+            "content": "import {\n  AXMultiLanguageMap,\n  AXTranslationService,\n  createMultiLanguageString,\n  resolveMultiLanguageString,\n} from '@acorex/core/translation';\nimport { inject } from '@angular/core';\n\nconst label: AXMultiLanguageMap = createMultiLanguageString('Save', 'ذخیره');\n// { 'en-US': 'Save', 'fa-IR': 'ذخیره' }\n\nfunction resolveLabel() {\n  const translation = inject(AXTranslationService);\n  const locale = translation.getActiveLang();\n\n  // Direct resolve (no JSON lookup)\n  resolveMultiLanguageString(label, locale);\n\n  // Or translate via service (pipe-compatible)\n  return translation.translateAsync(label);\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Inline Reference Syntax",
+      "description": "Embed translation keys inside strings.",
+      "content": {
+        "type": "text",
+        "data": "The parser recognizes two inline formats inside any string passed to translateAsync / translateSync / the pipe:\n\n• @scope:nested.key — e.g. @acorex:common.actions.cancel\n• @lang:scope:nested.key — explicit language override\n• Legacy: t('nested.key', { scope: 'acorex' })\n\nExamples used in ACoreX components:\n• @acorex:validation.messages.title — validation summary title\n• @acorex:common.general.full-screen — full-screen button aria-label\n• @acorex:common.notifications.more — notification counter\n\nWhen a resolved translation value itself contains @ references, the resolver resolves them recursively."
+      }
+    },
+    {
+      "title": "Lazy-Load Scope per Route",
+      "description": "Preload translations before a route activates.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app.routes.ts",
+            "language": "typescript",
+            "content": "import { Routes } from '@angular/router';\nimport { loadTranslationScope } from '@acorex/core/translation';\n\nexport const routes: Routes = [\n  {\n    path: 'theme-builder',\n    loadChildren: () => import('./theme-builder/routes'),\n    resolve: { translations: loadTranslationScope },\n    data: { scope: 'common' },\n  },\n  {\n    path: 'admin',\n    loadChildren: () => import('./admin/routes'),\n    resolve: { translations: loadTranslationScope },\n    data: { scope: ['common', 'admin'] }, // multiple scopes\n  },\n];\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "translate Directive",
+      "description": "Expose t() helper in template context.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "custom-block.component.html",
+            "language": "html",
+            "content": "<ng-container *translate=\"let t\">\n  <h2>{{ t('common.actions.save', { scope: 'acorex' }) | async }}</h2>\n  <p>{{ t('@acorex:common.actions.cancel') | async }}</p>\n</ng-container>\n"
+          },
+          {
+            "fileName": "custom-block.component.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { AsyncPipe } from '@angular/common';\nimport { AXTranslatorDirective } from '@acorex/core/translation';\n\n@Component({\n  imports: [AsyncPipe, AXTranslatorDirective],\n  templateUrl: './custom-block.component.html',\n})\nexport class CustomBlockComponent {}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Configuration Reference",
+      "description": "Default values and translationConfig helper.",
+      "content": {
+        "type": "text",
+        "data": "Default config (AXTranslationDefaultConfig):\n• defaults.lang: en-US\n• defaults.scope: acorex\n• preload.langs: [en-US]\n• preload.scopes: [acorex]\n• resolver.scopeKey: scope\n\nUse translationConfig(partial) to merge overrides:\n\n• defaults — fallback lang/scope for every translate call\n• preload — langs/scopes loaded on startup (via AXTranslationModule)\n• fallbacks.langs — e.g. { 'fa-IR': ['en-US'] } when a key is missing\n• fallbacks.scopes — fallback scope chain\n• available — document supported langs/scopes (optional metadata)\n\nEvents emitted via AXEventService:\n• AXSystemEvents.AXLanguageChanged — active lang changed\n• AXSystemEvents.AXLanguageLoaded — a scope finished loading"
+      }
+    },
+    {
+      "title": "API Quick Reference",
+      "description": "When to use which API.",
+      "content": {
+        "type": "text",
+        "data": "| API | Use when |\n|-----|----------|\n| translate pipe + async | Template text that updates on lang change |\n| translateAsync | Services, await before showing toast/dialog |\n| translateSync | Immediate read from cache; set waitForLoad: true if preload may not be done |\n| translate$ | Custom RxJS pipelines |\n| langChanges$ | Reload data or re-render on language switch |\n| loader.preload() | Manual preload before first translate |\n| loadTranslationScope | Route-level lazy scope loading |\n| createMultiLanguageString | Seed data with en-US + fa-IR entries |\n\nLocale keys in AXMultiLanguageMap must match /^[a-z]{2}-[A-Z]{2}$/ (e.g. en-US, fa-IR)."
+      }
+    }
+  ]
+}

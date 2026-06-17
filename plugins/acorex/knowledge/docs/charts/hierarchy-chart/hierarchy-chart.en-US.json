@@ -1,0 +1,248 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Hierarchy Chart",
+  "description": "An interactive hierarchy chart component for visualizing organizational structures, family trees, and hierarchical relationships with collapsible nodes and custom templates.",
+  "imports": ["import { AXHierarchyChartComponent } from '@acorex/charts/hierarchy-chart';"],
+  "showcase": {
+    "title": "Hierarchy Chart Showcase",
+    "description": "Interactive hierarchy chart demonstrating organizational structure and node interactions",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXHierarchyChartComponent } from '@acorex/charts/hierarchy-chart';\nimport { AXHierarchyChartData } from '@acorex/charts/hierarchy-chart';\nimport { AXHierarchyChartOption } from '@acorex/charts/hierarchy-chart';\nimport { AXHierarchyChartClickEvent } from '@acorex/charts/hierarchy-chart';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive Hierarchy Chart</h2>\n      <ax-hierarchy-chart \n        [data]=\"showcaseData()\" \n        [options]=\"showcaseOptions()\"\n        (itemClick)=\"onNodeClick($event)\"\n      />\n      <div class=\"hierarchy-info\">\n        <p>Click on nodes to interact with the organizational structure</p>\n      </div>\n    </div>\n  `,\n  imports: [AXHierarchyChartComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n    }\n    .hierarchy-info {\n      margin-top: 1rem;\n      text-align: center;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class HierarchyChartShowcaseComponent {\n  showcaseData = signal<AXHierarchyChartData>({\n    id: 'ceo',\n    name: 'Alex Thompson',\n    subtitle: 'Chief Executive Officer',\n    icon: 'fa-user-tie',\n    tooltip: 'CEO with 15+ years experience',\n    color: '#2c3e50',\n    isExpanded: true,\n    children: [\n      {\n        id: 'cto',\n        name: 'Maria Rodriguez',\n        subtitle: 'Chief Technology Officer',\n        icon: 'fa-laptop-code',\n        tooltip: 'CTO leading technology strategy',\n        color: '#3498db',\n        children: [\n          {\n            id: 'eng-manager',\n            name: 'James Wilson',\n            subtitle: 'Engineering Manager',\n            icon: 'fa-users-cog',\n            tooltip: 'Manages development teams',\n            color: '#e74c3c'\n          }\n        ]\n      },\n      {\n        id: 'cfo',\n        name: 'Jennifer Davis',\n        subtitle: 'Chief Financial Officer',\n        icon: 'fa-chart-line',\n        tooltip: 'CFO managing financial strategy',\n        color: '#27ae60'\n      }\n    ]\n  });\n\n  showcaseOptions = signal<AXHierarchyChartOption>({\n    direction: 'vertical',\n    width: 800,\n    height: 600,\n    nodeWidth: 180,\n    nodeHeight: 70,\n    nodeStrokeWidth: 2,\n    linkWidth: 2,\n    linkStyle: 'curved',\n    nodeSpacingX: 100,\n    nodeSpacingY: 140,\n    collapsible: true,\n    expandAll: false,\n    margin: { top: 50, right: 50, bottom: 50, left: 50 }\n  });\n\n  onNodeClick(event: AXHierarchyChartClickEvent): void {\n    const node = event.item;\n    console.log('Node clicked:', node.name, node.subtitle);\n  }\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple hierarchy chart with organizational structure and basic configuration",
+      "content": { "type": "api", "data": "hierarchy-chart/usage" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Styling",
+      "description": "Hierarchy chart with custom styling options and visual appearance",
+      "content": { "type": "api", "data": "hierarchy-chart/styling" },
+      "height": "500px"
+    },
+    {
+      "title": "Interactive Features",
+      "description": "Hierarchy chart with click events, node toggling, and interactive tooltips",
+      "content": { "type": "api", "data": "hierarchy-chart/interactive" },
+      "height": "500px"
+    },
+    {
+      "title": "Direction Options",
+      "description": "Hierarchy charts with vertical and horizontal layout directions",
+      "content": { "type": "api", "data": "hierarchy-chart/direction" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Templates",
+      "description": "Hierarchy chart with custom node templates and enhanced styling",
+      "content": { "type": "api", "data": "hierarchy-chart/custom-template" },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXHierarchyChartComponent",
+      "description": "Hierarchy Chart Component - Interactive hierarchy chart for visualizing organizational structures and hierarchical relationships",
+      "props": [
+        {
+          "name": "data",
+          "type": [
+            { "name": "AXHierarchyChartData", "link": "/en-US/docs/types/hierarchy-chart-data" },
+            { "name": "AXHierarchyChartData[]", "link": "/en-US/docs/types/hierarchy-chart-data" }
+          ],
+          "description": "Chart data input - can be a single node or array of nodes",
+          "default": "[]"
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXHierarchyChartOption", "link": "/en-US/docs/types/hierarchy-chart-option" }],
+          "description": "Chart options input",
+          "default": "{}"
+        },
+        {
+          "name": "nodeTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<AXHierarchyChartNodeContext>",
+              "link": "/en-US/docs/types/hierarchy-chart-node-context"
+            },
+            { "name": "null" }
+          ],
+          "description": "Custom node template for rendering nodes",
+          "default": "null"
+        }
+      ],
+      "events": [
+        {
+          "name": "itemClick",
+          "type": [{ "name": "AXHierarchyChartClickEvent", "link": "/en-US/docs/events/hierarchy-chart-click-event" }],
+          "description": "Emitted when a node is clicked"
+        },
+        {
+          "name": "nodeToggle",
+          "type": [
+            { "name": "AXHierarchyChartToggleEvent", "link": "/en-US/docs/events/hierarchy-chart-toggle-event" }
+          ],
+          "description": "Emitted when a node is expanded or collapsed"
+        }
+      ],
+      "methods": [
+        {
+          "name": "createChart",
+          "content": "/**\n * Create and render the hierarchy chart\n */\ncreateChart(): void"
+        },
+        {
+          "name": "updateChart",
+          "content": "/**\n * Redraws the chart based on current state and options\n */\nupdateChart(): void"
+        },
+        {
+          "name": "toggleNode",
+          "content": "/**\n * Toggle node expansion state\n * @param nodeId The ID of the node to toggle\n */\ntoggleNode(nodeId: string): void"
+        },
+        {
+          "name": "cleanupChart",
+          "content": "/**\n * Clear existing chart\n */\ncleanupChart(): void"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "--ax-comp-hierarchy-chart-node-color",
+          "default": "var(--ax-sys-color-primary-500)",
+          "description": "Fill color for nodes when no custom template is used"
+        },
+        {
+          "name": "--ax-comp-hierarchy-chart-node-stroke-color",
+          "default": "var(--ax-sys-color-primary-400)",
+          "description": "Stroke color for node outlines when no custom template is used"
+        },
+        {
+          "name": "--ax-comp-hierarchy-chart-link-color",
+          "default": "var(--ax-sys-color-primary-400)",
+          "description": "Color for the connection lines between nodes"
+        },
+        {
+          "name": "--ax-comp-hierarchy-chart-text-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Text color for labels and other text content"
+        },
+        {
+          "name": "--ax-comp-hierarchy-chart-bg-color",
+          "default": "var(--ax-sys-color-lightest-surface)",
+          "description": "Background color for the chart area"
+        }
+      ]
+    },
+    {
+      "title": "AX_HIERARCHY_CHART_CONFIG",
+      "description": "Default configuration token providing effective AXHierarchyChartOption values",
+      "props": [
+        {
+          "name": "direction",
+          "type": [{ "name": "'vertical'" }, { "name": "'horizontal'" }],
+          "description": "Layout direction of the hierarchy chart",
+          "default": "'vertical'"
+        },
+        {
+          "name": "margin",
+          "type": [{ "name": "object" }],
+          "description": "Chart margins configuration",
+          "default": "{ top: 40, right: 120, bottom: 40, left: 120 }"
+        },
+        {
+          "name": "nodeRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of circular nodes in pixels",
+          "default": "30"
+        },
+        {
+          "name": "nodeStrokeWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of node stroke in pixels",
+          "default": "1.5"
+        },
+        {
+          "name": "linkWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of connection lines in pixels",
+          "default": "1.5"
+        },
+        {
+          "name": "linkStyle",
+          "type": [{ "name": "'straight'" }, { "name": "'curved'" }, { "name": "'rounded'" }, { "name": "'step'" }],
+          "description": "Style of connection lines between nodes",
+          "default": "'curved'"
+        },
+        {
+          "name": "nodeWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of rectangular nodes in pixels",
+          "default": "120"
+        },
+        {
+          "name": "nodeHeight",
+          "type": [{ "name": "number" }],
+          "description": "Height of rectangular nodes in pixels",
+          "default": "60"
+        },
+        {
+          "name": "nodeSpacingX",
+          "type": [{ "name": "number" }],
+          "description": "Horizontal spacing between nodes in pixels",
+          "default": "80"
+        },
+        {
+          "name": "nodeSpacingY",
+          "type": [{ "name": "number" }],
+          "description": "Vertical spacing between nodes in pixels",
+          "default": "120"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "collapsible",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether nodes can be collapsed/expanded",
+          "default": "true"
+        },
+        {
+          "name": "expandAll",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to expand all nodes by default",
+          "default": "false"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in ms",
+          "default": "100"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Animation easing function",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXHierarchyChartMessages", "link": "/en-US/docs/types/hierarchy-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

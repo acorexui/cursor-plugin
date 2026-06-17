@@ -1,0 +1,1155 @@
+---
+description: Comprehensive reference of all @acorex/* secondary entry points — always prefer existing packages over new implementations.
+alwaysApply: true
+---
+**CRITICAL USAGE INSTRUCTION**: When building features, components, or functionality in this workspace, ALWAYS use components, services, directives, pipes, and utilities from the @acorex library packages documented below. DO NOT create new implementations or use external libraries if equivalent functionality exists in @acorex packages.
+
+# Secondary Entry Points Reference
+
+## Overview
+
+The Acorex UI workspace follows Angular's secondary entry point pattern, allowing granular imports and better tree-shaking. This document catalogs all available entry points across the monorepo.
+
+## AI Development Guidelines
+
+When asked to build or implement features:
+
+1. **ALWAYS CHECK THIS RULE FIRST**: Before creating any component, service, directive, or utility, review this document to see if the functionality already exists in @acorex packages
+2. **PREFER EXISTING OVER NEW**: Use existing @acorex components and services rather than creating new ones
+3. **USE @acorex/core**: Leverage core services for common tasks:
+   - Use `@acorex/core/translation` for i18n instead of ngx-translate
+   - Use `@acorex/core/storage` for storage instead of custom implementations
+   - Use `@acorex/core/validation` for form validation
+   - Use `@acorex/core/date-time` for date/time operations
+4. **USE @acorex/cdk**: Leverage CDK for low-level functionality:
+   - Use `@acorex/cdk/overlay` for overlays/popovers
+   - Use `@acorex/cdk/drag-drop` for drag and drop
+   - Use `@acorex/cdk/clipboard` for clipboard operations
+   - Use directives from `@acorex/cdk/common` (ripple, hotkey, auto-focus, etc.)
+5. **USE @acorex/components**: Leverage existing UI components instead of building from scratch
+6. **COMPOSE, DON'T DUPLICATE**: If building complex features, compose existing components together
+7. **ONLY CREATE NEW**: Only create new implementations if:
+   - The functionality doesn't exist in any @acorex package
+   - The existing component doesn't meet the specific requirements
+   - You're explicitly asked to create something new
+
+### Example Decision Process
+
+**When user requests ANY feature, your first action should be: "Let me check what's available in @acorex packages..."**
+
+```
+User asks: "Create a dialog with a loading spinner"
+✅ CORRECT: Use @acorex/components/dialog + @acorex/components/loading
+❌ WRONG: Create a new dialog component from scratch
+
+User asks: "Add translation support"
+✅ CORRECT: Use @acorex/core/translation
+❌ WRONG: Install ngx-translate or create custom translation service
+
+User asks: "Add a date picker"
+✅ CORRECT: Use @acorex/components/datetime-picker
+❌ WRONG: Install Angular Material datepicker or create custom
+
+User asks: "Format numbers with currency"
+✅ CORRECT: Use @acorex/core/locale with currency formatter
+❌ WRONG: Use Angular's CurrencyPipe or create custom formatter
+
+User asks: "Add drag and drop"
+✅ CORRECT: Use @acorex/cdk/drag-drop
+❌ WRONG: Install ng-dnd or Angular CDK drag-drop
+
+
+User asks: "Show a data table with pagination"
+✅ CORRECT: Use @acorex/components/data-table + @acorex/components/data-pager
+❌ WRONG: Install ag-grid or create custom table
+
+User asks: "Add a chart"
+✅ CORRECT: Use @acorex/charts/* (bar, line, donut, gauge, hierarchy)
+❌ WRONG: Install Chart.js or other charting library
+
+User asks: "Build a scheduler"
+✅ CORRECT: Use @acorex/components/scheduler
+❌ WRONG: Install FullCalendar or build custom
+
+User asks: "Add image editing"
+✅ CORRECT: Use @acorex/components/image-editor
+❌ WRONG: Install cropperjs or other image library
+```
+
+---
+
+## Package Structure
+
+The workspace contains four main packages:
+
+1. **@acorex/cdk** - Component Development Kit (low-level utilities, directives)
+2. **@acorex/charts** - Chart components
+3. **@acorex/components** - UI components
+4. **@acorex/core** - Core services, utilities, and foundational logic
+
+---
+
+## 1. @acorex/cdk
+
+CDK provides low-level functionality for building components.
+
+### Entry Points:
+
+#### @acorex/cdk/accordion
+
+- **Path**: `packages/cdk/accordion`
+- **Exports**:
+  - Directives: `AXAccordionCloseButtonDirective`, `AXAccordionGroupDirective`, `AXAccordionItemDirective`, `AXAccordionItemHeaderDirective`, `AXAccordionItemContentDirective`
+  - Module: `AXAccordionModule`
+
+#### @acorex/cdk/carousel
+
+- **Path**: `packages/cdk/carousel`
+- **Exports**:
+  - Directives: `AXCarouselDirective`
+
+#### @acorex/cdk/clipboard
+
+- **Path**: `packages/cdk/clipboard`
+- **Exports**:
+  - Services: `AXClipboardService`
+  - Directives: `AXCopyClipboardDirective`
+
+#### @acorex/cdk/common
+
+- **Path**: `packages/cdk/common`
+- **Exports**:
+  - Types: Animation, Base, Direction, Orientation, Placement, Range, SelectionMode
+  - Classes: Components, DataList, DataSource, Events, Styles
+  - Base Components: BaseComponent, ButtonBaseComponent, ColorComponent, ColorLookComponent, InputBaseValueComponent, InteractiveComponent, LookComponent, SelectionBaseComponent, ValueComponent
+  - Directives: AutoFocus, DelayedValueChanged, Hotkey, InfiniteScroll, InvertedColor, Responsive, Ripple
+  - Services: DOMService, HotkeyService
+  - Interfaces: Component interfaces
+  - Module: `AXCommonModule`
+
+#### @acorex/cdk/dom
+
+- **Path**: `packages/cdk/dom`
+- **Exports**:
+  - Directives: `AXDOMChangeDirective`
+
+#### @acorex/cdk/drag-drop
+
+- **Path**: `packages/cdk/drag-drop`
+- **Exports**:
+  - Directives: `AXDragDirective`, `AXDragHandleDirective`, `AXDropListDirective`, `AXDropZoneDirective`
+  - Utils: Drag-drop utilities
+  - Module: `AXDragDropModule`
+
+#### @acorex/cdk/drawer
+
+- **Path**: `packages/cdk/drawer`
+- **Exports**:
+  - Directives: `AXDrawerContainerDirective`, `AXDrawerItemDirective`
+  - Module: `AXDrawerModule`
+
+#### @acorex/cdk/focus-trap
+
+- **Path**: `packages/cdk/focus-trap`
+- **Exports**:
+  - Directives: `AXFocusTrapDirective`
+
+#### @acorex/cdk/input-mask
+
+- **Path**: `packages/cdk/input-mask`
+- **Exports**:
+  - Directives: `AXInputMaskDirective`
+
+#### @acorex/cdk/list-navigation
+
+- **Path**: `packages/cdk/list-navigation`
+- **Exports**:
+  - Directives: `AXListNavigationDirective`, `AXListNavigationItemDirective`
+  - Module: `AXListNavigationModule`
+
+#### @acorex/cdk/outline
+
+- **Path**: `packages/cdk/outline`
+- **Exports**:
+  - Directives: `AXOutlineContainerDirective`, `AXOutlineItemDirective`, `AXOutlineCustomMenuDirective`
+
+#### @acorex/cdk/overlay
+
+- **Path**: `packages/cdk/overlay`
+- **Exports**:
+  - Services: `AXOverlayService`
+  - Types: Overlay types
+
+#### @acorex/cdk/pan-view
+
+- **Path**: `packages/cdk/pan-view`
+- **Exports**:
+  - Directives: `AXPanViewDirective`
+
+#### @acorex/cdk/qrcode
+
+- **Path**: `packages/cdk/qrcode`
+- **Exports**:
+  - Classes: QRCode class
+
+#### @acorex/cdk/resizable
+
+- **Path**: `packages/cdk/resizable`
+- **Exports**:
+  - Directives: `AXResizeDirective`
+
+#### @acorex/cdk/selection
+
+- **Path**: `packages/cdk/selection`
+- **Exports**:
+  - Directives: `AXSelectionGroupDirective`, `AXSelectionItemDirective`
+  - Module: `AXSelectionModule`
+
+#### @acorex/cdk/sliding-item
+
+- **Path**: `packages/cdk/sliding-item`
+- **Exports**:
+  - Directives: `AXSlidingItemDirective`
+
+#### @acorex/cdk/sticky
+
+- **Path**: `packages/cdk/sticky`
+- **Exports**:
+  - Directives: `AXStickyDirective`
+
+#### @acorex/cdk/virtual-scroll
+
+- **Path**: `packages/cdk/virtual-scroll`
+- **Exports**:
+  - Components: Virtual scrolling container, Virtual scrolling item
+  - Module: `AXVirtualScrollModule`
+
+#### @acorex/cdk/wysiwyg
+
+- **Path**: `packages/cdk/wysiwyg`
+- **Exports**:
+  - Classes: WYSIWYG class
+
+---
+
+## 2. @acorex/charts
+
+Chart components for data visualization.
+
+### Entry Points:
+
+#### @acorex/charts/bar-chart
+
+- **Path**: `packages/charts/bar-chart`
+- **Exports**:
+  - Components: `AXBarChartComponent`
+  - Config: Bar chart configuration
+  - Types: Bar chart types
+
+#### @acorex/charts/chart-legend
+
+- **Path**: `packages/charts/chart-legend`
+- **Exports**:
+  - Components: `AXChartLegendComponent`
+  - Types: Chart legend types
+
+#### @acorex/charts/chart-tooltip
+
+- **Path**: `packages/charts/chart-tooltip`
+- **Exports**:
+  - Components: `AXChartTooltipComponent`
+  - Types: Chart tooltip types
+
+#### @acorex/charts/donut-chart
+
+- **Path**: `packages/charts/donut-chart`
+- **Exports**:
+  - Components: `AXDonutChartComponent`
+  - Config: Donut chart configuration
+  - Types: Donut chart types
+
+#### @acorex/charts/gauge-chart
+
+- **Path**: `packages/charts/gauge-chart`
+- **Exports**:
+  - Components: `AXGaugeChartComponent`
+  - Config: Gauge chart configuration
+  - Types: Gauge chart types
+
+#### @acorex/charts/hierarchy-chart
+
+- **Path**: `packages/charts/hierarchy-chart`
+- **Exports**:
+  - Components: `AXHierarchyChartComponent`
+  - Config: Hierarchy chart configuration
+  - Types: Hierarchy chart types
+
+#### @acorex/charts/line-chart
+
+- **Path**: `packages/charts/line-chart`
+- **Exports**:
+  - Components: `AXLineChartComponent`
+  - Config: Line chart configuration
+  - Types: Line chart types
+
+---
+
+## 3. @acorex/components
+
+UI components library (100+ components).
+
+### Entry Points:
+
+#### @acorex/components/accordion
+
+- **Path**: `packages/components/accordion`
+- **Exports**: Components, types related to accordion UI
+
+#### @acorex/components/action-sheet
+
+- **Path**: `packages/components/action-sheet`
+- **Exports**: Action sheet component and related types
+
+#### @acorex/components/alert
+
+- **Path**: `packages/components/alert`
+- **Exports**: Alert component and related types
+
+#### @acorex/components/audio-wave
+
+- **Path**: `packages/components/audio-wave`
+- **Exports**: Audio wave visualization component
+
+#### @acorex/components/autocomplete
+
+- **Path**: `packages/components/autocomplete`
+- **Exports**: Autocomplete component and related types
+
+#### @acorex/components/avatar
+
+- **Path**: `packages/components/avatar`
+- **Exports**: Avatar component with multiple variants
+
+#### @acorex/components/badge
+
+- **Path**: `packages/components/badge`
+- **Exports**: Badge component for notifications and labels
+
+#### @acorex/components/bottom-navigation
+
+- **Path**: `packages/components/bottom-navigation`
+- **Exports**: Bottom navigation component for mobile UI
+
+#### @acorex/components/breadcrumbs
+
+- **Path**: `packages/components/breadcrumbs`
+- **Exports**: Breadcrumbs navigation component
+
+#### @acorex/components/button
+
+- **Path**: `packages/components/button`
+- **Exports**:
+  - Components: `AXButtonComponent`, `AXButtonItemComponent`, `AXButtonItemListComponent`
+  - Classes: Button item class
+  - Module: `AXButtonModule`
+
+#### @acorex/components/button-group
+
+- **Path**: `packages/components/button-group`
+- **Exports**: Button group component
+
+#### @acorex/components/calendar
+
+- **Path**: `packages/components/calendar`
+- **Exports**: Calendar component with date selection
+
+#### @acorex/components/check-box
+
+- **Path**: `packages/components/check-box`
+- **Exports**: Checkbox component
+
+#### @acorex/components/chips
+
+- **Path**: `packages/components/chips`
+- **Exports**: Chips component for tags and selections
+
+#### @acorex/components/circular-progress
+
+- **Path**: `packages/components/circular-progress`
+- **Exports**: Circular progress indicator
+
+#### @acorex/components/code-editor
+
+- **Path**: `packages/components/code-editor`
+- **Exports**: Code editor component with syntax highlighting
+
+#### @acorex/components/collapse
+
+- **Path**: `packages/components/collapse`
+- **Exports**: Collapse/expand component
+
+#### @acorex/components/color-box
+
+- **Path**: `packages/components/color-box`
+- **Exports**: Color picker box component
+
+#### @acorex/components/color-palette
+
+- **Path**: `packages/components/color-palette`
+- **Exports**: Color palette selector component
+
+#### @acorex/components/command
+
+- **Path**: `packages/components/command`
+- **Exports**: Command palette component
+
+#### @acorex/components/comment
+
+- **Path**: `packages/components/comment`
+- **Exports**: Comment component for threaded discussions
+
+#### @acorex/components/conversation
+
+- **Path**: `packages/components/conversation`
+- **Exports**: Legacy conversation/chat component
+
+#### @acorex/components/cron-job
+
+- **Path**: `packages/components/cron-job`
+- **Exports**: Cron job expression builder component
+
+#### @acorex/components/data-list
+
+- **Path**: `packages/components/data-list`
+- **Exports**: Data list component for rendering lists
+
+#### @acorex/components/data-pager
+
+- **Path**: `packages/components/data-pager`
+- **Exports**: Data pagination component
+
+#### @acorex/components/data-table
+
+- **Path**: `packages/components/data-table`
+- **Exports**: Advanced data table component
+
+#### @acorex/components/datetime-box
+
+- **Path**: `packages/components/datetime-box`
+- **Exports**: DateTime input box component
+
+#### @acorex/components/datetime-input
+
+- **Path**: `packages/components/datetime-input`
+- **Exports**: DateTime input component
+
+#### @acorex/components/datetime-picker
+
+- **Path**: `packages/components/datetime-picker`
+- **Exports**: DateTime picker component
+
+#### @acorex/components/decorators
+
+- **Path**: `packages/components/decorators`
+- **Exports**: Component decorators and utilities
+
+#### @acorex/components/dialog
+
+- **Path**: `packages/components/dialog`
+- **Exports**: Dialog/modal component
+
+#### @acorex/components/drawer
+
+- **Path**: `packages/components/drawer`
+- **Exports**: Drawer/sidebar component
+
+#### @acorex/components/drawer-2
+
+- **Path**: `packages/components/drawer-2`
+- **Exports**: Drawer component (v2)
+
+#### @acorex/components/dropdown
+
+- **Path**: `packages/components/dropdown`
+- **Exports**: Dropdown menu component
+
+#### @acorex/components/dropdown-button
+
+- **Path**: `packages/components/dropdown-button`
+- **Exports**: Dropdown button component
+
+#### @acorex/components/flow-chart
+
+- **Path**: `packages/components/flow-chart`
+- **Exports**: Flow chart/diagram component
+
+#### @acorex/components/form
+
+- **Path**: `packages/components/form`
+- **Exports**: Dynamic form builder component
+
+#### @acorex/components/grid-layout-builder
+
+- **Path**: `packages/components/grid-layout-builder`
+- **Exports**: Grid layout builder component
+
+#### @acorex/components/image
+
+- **Path**: `packages/components/image`
+- **Exports**: Image component with lazy loading
+
+#### @acorex/components/image-editor
+
+- **Path**: `packages/components/image-editor`
+- **Exports**: Image editing component
+
+#### @acorex/components/json-viewer
+
+- **Path**: `packages/components/json-viewer`
+- **Exports**: JSON viewer component
+
+#### @acorex/components/kanban
+
+- **Path**: `packages/components/kanban`
+- **Exports**: Kanban board component
+
+#### @acorex/components/kbd
+
+- **Path**: `packages/components/kbd`
+- **Exports**: Keyboard shortcut display component
+
+#### @acorex/components/label
+
+- **Path**: `packages/components/label`
+- **Exports**: Label component
+
+#### @acorex/components/list
+
+- **Path**: `packages/components/list`
+- **Exports**: List component
+
+#### @acorex/components/loading
+
+- **Path**: `packages/components/loading`
+- **Exports**: Loading indicator component
+
+#### @acorex/components/loading-dialog
+
+- **Path**: `packages/components/loading-dialog`
+- **Exports**: Loading dialog component
+
+#### @acorex/components/map
+
+- **Path**: `packages/components/map`
+- **Exports**: Map component with mapping services
+
+#### @acorex/components/media-viewer
+
+- **Path**: `packages/components/media-viewer`
+- **Exports**: Media viewer component for images/videos
+
+#### @acorex/components/menu
+
+- **Path**: `packages/components/menu`
+- **Exports**: Menu component
+
+#### @acorex/components/modal
+
+- **Path**: `packages/components/modal`
+- **Exports**: Modal component
+
+#### @acorex/components/navbar
+
+- **Path**: `packages/components/navbar`
+- **Exports**: Navigation bar component
+
+#### @acorex/components/notification
+
+- **Path**: `packages/components/notification`
+- **Exports**: Notification component
+
+#### @acorex/components/number-box
+
+- **Path**: `packages/components/number-box`
+- **Exports**: Number input component
+
+#### @acorex/components/number-box-2
+
+- **Path**: `packages/components/number-box-2`
+- **Exports**: Number input component (v2)
+
+#### @acorex/components/otp
+
+- **Path**: `packages/components/otp`
+- **Exports**: OTP input component
+
+#### @acorex/components/page
+
+- **Path**: `packages/components/page`
+- **Exports**: Page layout component
+
+#### @acorex/components/paint
+
+- **Path**: `packages/components/paint`
+- **Exports**: Paint/drawing component
+
+#### @acorex/components/password-box
+
+- **Path**: `packages/components/password-box`
+- **Exports**: Password input component
+
+#### @acorex/components/pdf-reader
+
+- **Path**: `packages/components/pdf-reader`
+- **Exports**: PDF reader component
+
+#### @acorex/components/phone-box
+
+- **Path**: `packages/components/phone-box`
+- **Exports**: Phone number input component
+
+#### @acorex/components/picker
+
+- **Path**: `packages/components/picker`
+- **Exports**: Generic picker component
+
+#### @acorex/components/popover
+
+- **Path**: `packages/components/popover`
+- **Exports**: Popover component
+
+#### @acorex/components/popup
+
+- **Path**: `packages/components/popup`
+- **Exports**: Popup component
+
+#### @acorex/components/progress-bar
+
+- **Path**: `packages/components/progress-bar`
+- **Exports**: Progress bar component
+
+#### @acorex/components/qrcode
+
+- **Path**: `packages/components/qrcode`
+- **Exports**: QR code component
+
+#### @acorex/components/query-builder
+
+- **Path**: `packages/components/query-builder`
+- **Exports**: Query builder component
+
+#### @acorex/components/radio
+
+- **Path**: `packages/components/radio`
+- **Exports**: Radio button component
+
+#### @acorex/components/rail-navigation
+
+- **Path**: `packages/components/rail-navigation`
+- **Exports**: Rail navigation component
+
+#### @acorex/components/range-slider
+
+- **Path**: `packages/components/range-slider`
+- **Exports**: Range slider component
+
+#### @acorex/components/rate-picker
+
+- **Path**: `packages/components/rate-picker`
+- **Exports**: Rate/rating picker component
+
+#### @acorex/components/rest-api-generator
+
+- **Path**: `packages/components/rest-api-generator`
+- **Exports**: REST API generator component
+
+#### @acorex/components/result
+
+- **Path**: `packages/components/result`
+- **Exports**: Result display component
+
+#### @acorex/components/routing-progress
+
+- **Path**: `packages/components/routing-progress`
+- **Exports**: Routing progress indicator component
+
+#### @acorex/components/rrule
+
+- **Path**: `packages/components/rrule`
+- **Exports**: Recurring rule component
+
+#### @acorex/components/scheduler
+
+- **Path**: `packages/components/scheduler`
+- **Exports**: Scheduler/calendar component
+
+#### @acorex/components/scss
+
+- **Path**: `packages/components/scss`
+- **Exports**: SCSS utilities and mixins
+
+#### @acorex/components/search-box
+
+- **Path**: `packages/components/search-box`
+- **Exports**: Search box component
+
+#### @acorex/components/select-box
+
+- **Path**: `packages/components/select-box`
+- **Exports**: Select box/dropdown component
+
+#### @acorex/components/selection-list
+
+- **Path**: `packages/components/selection-list`
+- **Exports**: Selection list component
+
+#### @acorex/components/selection-list-2
+
+- **Path**: `packages/components/selection-list-2`
+- **Exports**: Selection list component (v2)
+
+#### @acorex/components/side-menu
+
+- **Path**: `packages/components/side-menu`
+- **Exports**: Side menu component
+
+#### @acorex/components/skeleton
+
+- **Path**: `packages/components/skeleton`
+- **Exports**: Skeleton loader component
+
+#### @acorex/components/slider
+
+- **Path**: `packages/components/slider`
+- **Exports**: Slider component
+
+#### @acorex/components/sliding-item
+
+- **Path**: `packages/components/sliding-item`
+- **Exports**: Sliding item component
+
+#### @acorex/components/step-wizard
+
+- **Path**: `packages/components/step-wizard`
+- **Exports**: Step wizard component
+
+#### @acorex/components/switch
+
+- **Path**: `packages/components/switch`
+- **Exports**: Switch/toggle component
+
+#### @acorex/components/tabs
+
+- **Path**: `packages/components/tabs`
+- **Exports**: Tabs component
+
+#### @acorex/components/tag
+
+- **Path**: `packages/components/tag`
+- **Exports**: Tag component
+
+#### @acorex/components/tag-box
+
+- **Path**: `packages/components/tag-box`
+- **Exports**: Tag input component
+
+#### @acorex/components/text-area
+
+- **Path**: `packages/components/text-area`
+- **Exports**: Text area component
+
+#### @acorex/components/text-box
+
+- **Path**: `packages/components/text-box`
+- **Exports**: Text input component
+
+#### @acorex/components/time-duration
+
+- **Path**: `packages/components/time-duration`
+- **Exports**: Time duration input component
+
+#### @acorex/components/time-line
+
+- **Path**: `packages/components/time-line`
+- **Exports**: Timeline component
+
+#### @acorex/components/toast
+
+- **Path**: `packages/components/toast`
+- **Exports**: Toast notification component
+
+#### @acorex/components/toolbar
+
+- **Path**: `packages/components/toolbar`
+- **Exports**: Toolbar component
+
+#### @acorex/components/tooltip
+
+- **Path**: `packages/components/tooltip`
+- **Exports**: Tooltip component
+
+#### @acorex/components/tree-view
+
+- **Path**: `packages/components/tree-view`
+- **Exports**: Tree view component
+
+#### @acorex/components/uploader
+
+- **Path**: `packages/components/uploader`
+- **Exports**: File uploader component
+
+#### @acorex/components/video-player
+
+- **Path**: `packages/components/video-player`
+- **Exports**: Video player component
+
+#### @acorex/components/wysiwyg
+
+- **Path**: `packages/components/wysiwyg`
+- **Exports**: WYSIWYG editor component
+
+---
+
+## 4. @acorex/core
+
+Core services, utilities, and foundational logic.
+
+### Entry Points:
+
+#### @acorex/core/components
+
+- **Path**: `packages/core/components`
+- **Exports**:
+  - Services: `AXComponentService`
+  - Types: Component types
+
+#### @acorex/core/config
+
+- **Path**: `packages/core/config`
+- **Exports**:
+  - Services: `AXConfigsService`
+  - Module: `AXConfigModule`
+  - Types: Configuration types
+
+#### @acorex/core/constants
+
+- **Path**: `packages/core/constants`
+- **Exports**:
+  - Data: Countries data
+  - Types: Country types
+
+#### @acorex/core/date-time
+
+- **Path**: `packages/core/date-time`
+- **Exports**:
+  - Services: `AXCalendarService`
+  - Formatters: Date, DateTime, Time, TimeDuration, TimeLeft formatters
+  - Calendars: Gregorian, Solar Hijri
+  - Pipes: DateTime pipe
+  - Module: `AXDateTimeModule`
+  - Config: DateTime configuration
+  - Types: DateTime types
+  - Loaders: Holidays loader
+
+#### @acorex/core/events
+
+- **Path**: `packages/core/events`
+- **Exports**:
+  - Services: `AXEventService`
+  - Module: `AXEventsModule`
+
+#### @acorex/core/file
+
+- **Path**: `packages/core/file`
+- **Exports**:
+  - Services: `AXFileService`
+  - Formatters: File size formatter
+  - Module: `AXFileModule`
+
+#### @acorex/core/format
+
+- **Path**: `packages/core/format`
+- **Exports**:
+  - Services: `AXFormatService`
+  - Directives: `AXFormatDirective`
+  - Pipes: `AXFormatPipe`
+  - Formatters: Number, String formatters
+  - Module: `AXFormatModule`
+  - Config: Format configuration
+  - Types: Format types
+
+#### @acorex/core/icon
+
+- **Path**: `packages/core/icon`
+- **Exports**:
+  - Services: `AXIconResolverService`
+  - Types: Icon types
+
+#### @acorex/core/image
+
+- **Path**: `packages/core/image`
+- **Exports**:
+  - Services: `AXImageService`
+  - Module: `AXImageModule`
+
+#### @acorex/core/locale
+
+- **Path**: `packages/core/locale`
+- **Exports**:
+  - Services: `AXLocaleService`, `AXLocaleProfileProviderService`
+  - Formatters: Currency formatter
+  - Profiles: Locale profiles (en-US, fa-IR, etc.)
+  - Module: `AXLocaleModule`
+  - Config: Locale configuration
+  - Types: Locale types
+
+#### @acorex/core/memoize
+
+- **Path**: `packages/core/memoize`
+- **Exports**:
+  - Decorators: `@Memoize` decorator
+  - Module: `AXMemoizeModule`
+
+#### @acorex/core/network
+
+- **Path**: `packages/core/network`
+- **Exports**:
+  - Services: `AXNetworkService`
+  - Classes: `AXDownloadTask`, `AXUploadTask`
+  - Types: Network types
+
+#### @acorex/core/pipes
+
+- **Path**: `packages/core/pipes`
+- **Exports**:
+  - Pipes: Safe pipes (safe HTML, safe URL, etc.)
+  - Module: `AXPipesModule`
+
+#### @acorex/core/platform
+
+- **Path**: `packages/core/platform`
+- **Exports**:
+  - Services: `AXPlatformService`
+  - Module: `AXPlatformModule`
+
+#### @acorex/core/storage
+
+- **Path**: `packages/core/storage`
+- **Exports**:
+  - Services: `AXLocalStorageService`, `AXSessionStorageService`, `AXCookieStorageService`
+  - Interfaces: Storage interface
+  - Module: `AXStorageModule`
+
+#### @acorex/core/translation
+
+- **Path**: `packages/core/translation`
+- **Exports**:
+  - Services: `AXTranslationService`
+  - Resolvers: `AXTranslationScopeResolver`
+  - Loaders: Translation loader
+  - Directives: `AXTranslatorDirective`
+  - Pipes: `AXTranslatorPipe`
+  - Module: `AXTranslationModule`
+  - Config: Translation configuration
+  - Types: Translation types
+  - Parsers: Translation parser
+
+#### @acorex/core/utils
+
+- **Path**: `packages/core/utils`
+- **Exports**:
+  - Utils: Color utilities, Drawing utilities, Execution utilities, HTML utilities, Lifecycle helpers, String utilities
+
+#### @acorex/core/validation
+
+- **Path**: `packages/core/validation`
+- **Exports**:
+  - Services: `AXValidationService`
+  - Rules: Validation rules (email, phone, required, min, max, pattern, etc.)
+  - Module: `AXValidationModule`
+  - Config: Validation configuration
+  - Types: Validation types
+
+---
+
+## Usage Guidelines
+
+### Import Examples
+
+```typescript
+// CDK imports
+import { AXAccordionGroupDirective } from '@acorex/cdk/accordion';
+import { AXDragDirective } from '@acorex/cdk/drag-drop';
+import { AXOverlayService } from '@acorex/cdk/overlay';
+
+// Charts imports
+import { AXBarChartComponent } from '@acorex/charts/bar-chart';
+import { AXLineChartComponent } from '@acorex/charts/line-chart';
+
+// Components imports
+import { AXButtonComponent } from '@acorex/components/button';
+import { AXDataTableComponent } from '@acorex/components/data-table';
+
+// Core imports
+import { AXTranslationService } from '@acorex/core/translation';
+import { AXDateTimeService } from '@acorex/core/date-time';
+import { AXValidationService } from '@acorex/core/validation';
+```
+
+### Best Practices
+
+1. **Use Specific Imports**: Always import from the most specific entry point (e.g., `@acorex/components/button` instead of `@acorex/components`)
+2. **Tree-Shaking**: Granular imports enable better tree-shaking and smaller bundle sizes
+3. **Consistent Naming**: All exports follow the `AX` prefix convention
+4. **TypeScript Support**: All packages include full TypeScript definitions
+5. **Module vs Standalone**: Some packages provide both Module and Standalone component exports
+
+### Common Scenarios & What to Use
+
+When building features, refer to these mappings:
+
+#### UI Components & Forms
+
+- **Buttons**: Use `@acorex/components/button`
+- **Form inputs**: Use `@acorex/components/text-box`, `@acorex/components/number-box`, `@acorex/components/password-box`, etc.
+- **Date/Time selection**: Use `@acorex/components/datetime-picker`, `@acorex/components/datetime-box`, `@acorex/components/calendar`
+- **Dropdowns & Selection**: Use `@acorex/components/select-box`, `@acorex/components/dropdown`, `@acorex/components/autocomplete`
+- **File handling**: Use `@acorex/components/uploader` + `@acorex/core/file`
+- **Rich text**: Use `@acorex/components/wysiwyg`
+- **Code editing**: Use `@acorex/components/code-editor`
+
+#### Data Display
+
+- **Tables**: Use `@acorex/components/data-table` + `@acorex/components/data-pager`
+- **Lists**: Use `@acorex/components/list`, `@acorex/components/data-list`
+- **Charts**: Use components from `@acorex/charts/*` (bar, line, donut, gauge, hierarchy)
+- **JSON display**: Use `@acorex/components/json-viewer`
+- **Timeline**: Use `@acorex/components/time-line`
+- **Tree structures**: Use `@acorex/components/tree-view`
+
+#### Feedback & Notifications
+
+- **Modals/Dialogs**: Use `@acorex/components/dialog`, `@acorex/components/modal`
+- **Notifications**: Use `@acorex/components/toast`, `@acorex/components/notification`
+- **Loading states**: Use `@acorex/components/loading`, `@acorex/components/loading-dialog`, `@acorex/components/skeleton`
+- **Progress**: Use `@acorex/components/progress-bar`, `@acorex/components/circular-progress`
+- **Alerts**: Use `@acorex/components/alert`
+- **Results**: Use `@acorex/components/result`
+
+#### Navigation
+
+- **Menus**: Use `@acorex/components/menu`, `@acorex/components/side-menu`
+- **Navigation bars**: Use `@acorex/components/navbar`, `@acorex/components/bottom-navigation`, `@acorex/components/rail-navigation`
+- **Tabs**: Use `@acorex/components/tabs`
+- **Breadcrumbs**: Use `@acorex/components/breadcrumbs`
+- **Wizards**: Use `@acorex/components/step-wizard`
+
+#### Overlays & Popups
+
+- **Popovers**: Use `@acorex/components/popover`
+- **Tooltips**: Use `@acorex/components/tooltip`
+- **Drawers**: Use `@acorex/components/drawer`, `@acorex/components/drawer-2`
+- **Action sheets**: Use `@acorex/components/action-sheet`
+- **Popups**: Use `@acorex/components/popup`
+
+#### Messaging & Communication
+
+- **Chat/Conversation**: Use `@acorex/components/conversation` (fully-featured with messaging, attachments, reactions, etc.)
+- **Comments**: Use `@acorex/components/comment`
+
+#### Core Services
+
+- **Translation/i18n**: Use `@acorex/core/translation`
+- **Date/Time operations**: Use `@acorex/core/date-time` (supports multiple calendars including Gregorian and Solar Hijri)
+- **Storage**: Use `@acorex/core/storage` (localStorage, sessionStorage, cookies)
+- **Validation**: Use `@acorex/core/validation`
+- **Formatting**: Use `@acorex/core/format` (numbers, strings, dates)
+- **Locale/Currency**: Use `@acorex/core/locale`
+- **File operations**: Use `@acorex/core/file`
+- **Network operations**: Use `@acorex/core/network` (upload/download tasks)
+- **Events**: Use `@acorex/core/events`
+- **Configuration**: Use `@acorex/core/config`
+
+#### CDK Utilities
+
+- **Drag & Drop**: Use `@acorex/cdk/drag-drop`
+- **Overlay positioning**: Use `@acorex/cdk/overlay`
+- **Clipboard**: Use `@acorex/cdk/clipboard`
+- **Virtual scrolling**: Use `@acorex/cdk/virtual-scroll`
+- **Focus management**: Use `@acorex/cdk/focus-trap`
+- **Accordion behavior**: Use `@acorex/cdk/accordion`
+- **Selection logic**: Use `@acorex/cdk/selection`
+- **Directives**: Use `@acorex/cdk/common` (ripple, hotkey, auto-focus, responsive, infinite-scroll, etc.)
+
+#### Advanced Components
+
+- **Scheduler/Calendar**: Use `@acorex/components/scheduler`
+- **Kanban board**: Use `@acorex/components/kanban`
+- **Flow charts**: Use `@acorex/components/flow-chart`
+- **Image editing**: Use `@acorex/components/image-editor`
+- **Paint/Drawing**: Use `@acorex/components/paint`
+- **Media viewer**: Use `@acorex/components/media-viewer`
+- **Query builder**: Use `@acorex/components/query-builder`
+- **REST API generator**: Use `@acorex/components/rest-api-generator`
+- **Form builder**: Use `@acorex/components/form`
+- **Grid layout**: Use `@acorex/components/grid-layout-builder`
+- **Cron expressions**: Use `@acorex/components/cron-job`
+- **Recurring rules**: Use `@acorex/components/rrule`
+
+### Package Information
+
+- **CDK**: 22 secondary entry points
+- **Charts**: 7 secondary entry points
+- **Components**: 100+ secondary entry points
+- **Core**: 17 secondary entry points
+
+### Related Configuration Files
+
+- Each secondary entry point contains:
+  - `ng-package.json` - Angular package configuration
+  - `README.md` - Component documentation
+  - `src/index.ts` - Public API surface
+  - `src/lib/` - Implementation files
+
+---
+
+## Maintenance Notes
+
+- This document should be updated when new secondary entry points are added
+- Each entry point should maintain backward compatibility
+- Breaking changes should follow semantic versioning
+- Entry points should be documented in the main package README
+
+---
+
+## Additional Resources
+
+- Main documentation: `apps/documentation`
+- Component rules: `.cursor/rules/component-docs-rules.mdc`
+- Shared types rules: `.cursor/rules/shared-types-rules.mdc`
+- Event docs rules: `.cursor/rules/event-docs-rules.mdc`
+
+---
+
+## 🚨 CRITICAL REMINDER FOR AI DEVELOPMENT
+
+**Before writing ANY code in this workspace:**
+
+1. ✅ **CHECK THIS RULE** - Review what's available in @acorex packages
+2. ✅ **USE EXISTING** - Leverage @acorex components, services, and utilities
+3. ✅ **COMPOSE** - Combine existing components to build complex features
+4. ❌ **DON'T DUPLICATE** - Never recreate functionality that exists in @acorex
+5. ❌ **DON'T INSTALL** - Avoid external libraries if @acorex has equivalent functionality
+
+**Quick Reference for Common Needs:**
+
+- Need a UI component? → Check `@acorex/components/*`
+- Need a service? → Check `@acorex/core/*`
+- Need low-level utility? → Check `@acorex/cdk/*`
+- Need a chart? → Check `@acorex/charts/*`
+
+**This library is comprehensive** - it has 100+ components, extensive services, and utilities. The answer to "does this exist?" is almost always YES. Look here first!
+
+---
+
+Last Updated: October 7, 2025

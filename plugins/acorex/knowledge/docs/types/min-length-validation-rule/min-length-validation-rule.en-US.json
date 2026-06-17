@@ -1,0 +1,58 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMinLengthValidationRule",
+  "imports": ["import { AXMinLengthValidationRule } from '@acorex/core/validation';"],
+  "description": "Validation rule class that ensures a string value meets a minimum length requirement.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Min length validation rule shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "min-length-validation-rule.ts",
+            "content": "class AXMinLengthValidationRule {\n  options: AXMinLengthValidationRuleOptions;\n  validate(value: string): AXValidationRuleResult<string>;\n  validateAsync(value: string): Promise<AXValidationRuleResult<string>>;\n  setMinLength(min: number): void;\n  getMinLength(): number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMinLengthValidationRule",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            {
+              "name": "AXMinLengthValidationRuleOptions",
+              "link": "/en-US/docs/types/min-length-validation-rule-options"
+            }
+          ],
+          "description": "Configuration options for the minimum length validation rule."
+        }
+      ],
+      "description": "Validation rule that checks if a string value has at least the specified minimum length.",
+      "methods": [
+        {
+          "name": "validate",
+          "description": "Validates that the string length is greater than or equal to the minimum length."
+        },
+        {
+          "name": "validateAsync",
+          "description": "Asynchronously validates that the string length is greater than or equal to the minimum length."
+        },
+        {
+          "name": "setMinLength",
+          "description": "Sets the minimum required length for validation."
+        },
+        {
+          "name": "getMinLength",
+          "description": "Returns the current minimum length requirement."
+        }
+      ]
+    }
+  ]
+}

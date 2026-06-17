@@ -1,0 +1,35 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXPlatforms",
+  "description": "The platform type",
+  "imports": ["import { AXPlatforms } from '@acorex/core/platform';"],
+
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXPlatforms type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-platforms.ts",
+            "content": "export type AXPlatforms = 'Android' | 'Desktop' | 'iOS' | 'Mobile';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPlatforms",
+      "props": [
+        {
+          "name": "AXPlatforms",
+          "type": [{ "name": "'Android'" }, { "name": "'Desktop'" }, { "name": "'iOS'" }, { "name": "'Mobile'" }],
+          "description": "The platform type"
+        }
+      ]
+    }
+  ]
+}

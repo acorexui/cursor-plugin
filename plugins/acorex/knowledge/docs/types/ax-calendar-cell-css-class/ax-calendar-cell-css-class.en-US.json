@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Cell CSS Class",
+  "imports": ["import { AXCalendarCellCssClass } from '@acorex/components/calendar';"],
+  "description": "Defines the type for specifying CSS classes for calendar cells, allowing custom styling of individual date cells.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "CSS class via string, map, or predicate.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar-cell-css-class.ts",
+            "content": "type AXCalendarCellCssClass = string | { [key: string]: boolean } | ((date: Date) => string);"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarCellCssClass",
+      "props": [
+        {
+          "name": "string",
+          "type": [{ "name": "string" }],
+          "description": "A string containing CSS class names separated by spaces to apply to calendar cells."
+        },
+        {
+          "name": "object",
+          "type": [{ "name": "{ [key: string]: boolean }" }],
+          "description": "An object where keys are CSS class names and values are booleans indicating whether the class should be applied."
+        },
+        {
+          "name": "function",
+          "type": [{ "name": "(date: Date) => string" }],
+          "description": "A function that takes a Date parameter and returns a string of CSS class names to apply to that specific date cell."
+        }
+      ]
+    }
+  ]
+}

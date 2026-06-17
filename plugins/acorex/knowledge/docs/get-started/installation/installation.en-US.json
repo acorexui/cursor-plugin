@@ -1,0 +1,139 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Installation",
+  "description": "To install and use ACoreX, you must complete the following steps in full and then move on to the next step.",
+  "sections": [
+    {
+      "title": "Install ACoreX Packages",
+      "description": "You need to add ACoreX to the project using the installation commands. @acorex/chart is optional and can be removed if not needed.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "NPM",
+            "language": "bash",
+            "icon": "npm",
+            "content": "npm i @acorex/cdk @acorex/core @acorex/components @acorex/styles @acorex/charts"
+          },
+          {
+            "fileName": "PNPM",
+            "icon": "pnpm",
+            "language": "bash",
+            "content": "pnpm add @acorex/cdk @acorex/core @acorex/components @acorex/styles @acorex/charts"
+          },
+          {
+            "fileName": "YARN",
+            "icon": "yarn",
+            "language": "bash",
+            "content": "yarn add @acorex/cdk @acorex/core @acorex/components @acorex/styles @acorex/charts"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Install Tailwindcss",
+      "description": "ACoreX can work independently of TailwindCSS, but we recommend using it. To install and configure TailwindCSS, follow the steps below. Additionally, ACoreX provides custom classes tailored to the ACoreX design system through TailwindCSS.<u> ACoreX currently supports Tailwind 3, but it will soon migrate to version 4. </u>",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "NPM",
+            "icon": "npm",
+            "language": "bash",
+            "content": "npm install -D tailwindcss@3"
+          },
+          {
+            "fileName": "PNPM",
+            "icon": "pnpm",
+            "language": "bash",
+            "content": "pnpm add -D tailwindcss@3"
+          },
+          {
+            "fileName": "YARN",
+            "icon": "yarn",
+            "language": "bash",
+            "content": "yarn add tailwindcss@3 -D"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Configuration Tailwindcss",
+      "description": "To add the Tailwind config, first run the command to automatically generate the config file, then add the ACoreX preset to it.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "Terminal",
+            "language": "bash",
+            "content": "npx tailwindcss init"
+          },
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "/** @type {import('tailwindcss').Config} */\nexport default {\n  presets: [require(\"@acorex/styles/tailwind-base.js\")],\n  content: [\"./src/**/*.{html,js}\"],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n};"
+          },
+          {
+            "fileName": "tailwind.config.js (for NX)",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');\nconst { join } = require('path');\n\n/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  presets: [require('@acorex/styles/tailwind-base.js')],\n  content: [join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'), ...createGlobPatternsForDependencies(__dirname)],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n}"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Setup Styles",
+      "description": "To load styles, simply import a few files into the main style file of the project. You can also use other icon fonts within the integrated icon font system instead of Font Awesome. Adding any icon style file to the project does not mean that the original icon files are also added. In fact, these icon files in ACoreX serve as a map that specifies, for example, which icon in the icon package should be used for the chevron-right icon (ax-icon-chevron-right). Therefore, you need to load both the ACoreX icon map file and the full icon font.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "styles.scss",
+            "language": "scss",
+            "content": "@use \"@acorex/styles/index.scss\" as *;\n@use \"@acorex/styles/themes/default.scss\" as *;\n@use \"@acorex/styles/icons/fontawesome/index.scss\" as *;\n\n@tailwind base;\n@tailwind components;\n@tailwind utilities;"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Setup Translation",
+      "description": "First of all download the translation files from here: <a href='i18n.zip' target='_blank'>Download i18n.zip</a> and unzip it in the public folder of the project.\nYou need to setup the translation of the project. You can do this by adding the following code to the app.config.ts file of the project. it's important to set the default language to the language of the project.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "app.config.ts",
+            "language": "ts",
+            "content": "import {\n  AX_TRANSLATION_CONFIG,\n  AX_TRANSLATION_LOADER,\n  translationConfig,\n} from \"@acorex/core/translation\";\nimport { AppTranslationLoader } from \"./app.loaders\";\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    {\n      provide: AX_TRANSLATION_LOADER,\n      useClass: AppTranslationLoader,\n    },\n    {\n      provide: AX_TRANSLATION_CONFIG,\n      useValue: translationConfig({\n        preload: {\n          langs: [\"en-US\"],\n          scopes: [\"acorex\"],\n        },\n        defaults: {\n          lang: \"en-US\",\n          scope: \"acorex\",\n        },\n      }),\n    },\n  ],\n};"
+          },
+          {
+            "fileName": "app.loaders.ts",
+            "language": "ts",
+            "content": "import { AXTranslation, AXTranslationLoader, AXTranslationLoaderOptions } from '@acorex/core/translation';\nimport { HttpClient } from '@angular/common/http';\nimport { inject, Injectable } from '@angular/core';\nimport { first, Observable } from 'rxjs';\n\n@Injectable()\nexport class AppTranslationLoader implements AXTranslationLoader {\n  private http = inject(HttpClient);\n\n  load(options: AXTranslationLoaderOptions): Observable<AXTranslation> {\n    // The i18n folder is located in the public project folder.\n    const httpRequest = this.http.get<AXTranslation>(`/i18n/${options.lang}/${options.scope}.json`).pipe(first());\n    return httpRequest;\n  }\n}"
+          }
+        ]
+      }
+    },
+    {
+      "title": "A complete configuration (optional)",
+      "description": "A complete configuration for using all components and features of ACoreX. Depending on your needs, you can remove the loaded modules and features. This example is provided solely to familiarize you with the essential elements required to use each feature.Please note that you also need the app.loaders.ts file.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "app.config.ts",
+            "language": "ts",
+            "content": "import { AXConversationModule } from '@acorex/components/conversation';\nimport { AXDialogModule } from '@acorex/components/dialog';\nimport { AXMediaViewerModule } from '@acorex/components/media-viewer';\nimport { AXToastModule } from '@acorex/components/toast';\nimport { AX_DATETIME_HOLIDAYS_LOADER } from '@acorex/core/date-time';\nimport { AXFormatModule } from '@acorex/core/format';\nimport { AX_LOCALE_CONFIG } from '@acorex/core/locale';\nimport { AXLocalStorageService, AX_LOCALSTORAGE_SECRET_KEY } from '@acorex/core/storage';\nimport { AX_TRANSLATION_CONFIG, AX_TRANSLATION_LOADER, translationConfig } from '@acorex/core/translation';\nimport { AXValidationModule } from '@acorex/core/validation';\nimport { OverlayModule } from '@angular/cdk/overlay';\nimport { provideHttpClient } from '@angular/common/http';\nimport { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';\nimport { provideAnimations } from '@angular/platform-browser/animations';\nimport { provideRouter } from '@angular/router';\nimport { AppCustomHolidaysLoader, AppTranslationLoader } from './app.loaders';\nimport { appRoutes } from './app.routes';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideHttpClient(),\n    provideAnimations(),\n    provideZoneChangeDetection({ eventCoalescing: true }),\n    provideRouter(appRoutes),\n    importProvidersFrom(\n      AXValidationModule.forRoot(),\n      AXConversationModule.forRoot(),\n      AXMediaViewerModule.forRoot(),\n      AXFormatModule.forRoot(),\n      OverlayModule,\n      AXDialogModule,\n      AXToastModule,\n    ),\n    {\n      provide: AX_DATETIME_HOLIDAYS_LOADER,\n      useClass: AppCustomHolidaysLoader,\n    },\n    {\n      provide: AX_TRANSLATION_LOADER,\n      useClass: AppTranslationLoader,\n    },\n    {\n      provide: AX_LOCALE_CONFIG,\n      useValue: {\n        default: 'en-US',\n      },\n    },\n    {\n      provide: AX_TRANSLATION_CONFIG,\n      useValue: translationConfig({\n        preload: {\n          langs: ['en-US'],\n          scopes: ['acorex'],\n        },\n        defaults: {\n          lang: 'en-US',\n          scope: 'acorex',\n        },\n      }),\n    },\n    {\n      provide: AXLocalStorageService,\n    },\n    {\n      provide: AX_LOCALSTORAGE_SECRET_KEY,\n      useValue: 'secretkey',\n    },\n  ],\n};"
+          },
+          {
+            "fileName": "app.loaders.ts",
+            "language": "ts",
+            "content": "import { AXHolidayDate, AXHolidaysLoader, AXHolidaysLoaderOptions } from '@acorex/core/date-time';\nimport { AXTranslation, AXTranslationLoader, AXTranslationLoaderOptions } from '@acorex/core/translation';\nimport { HttpClient } from '@angular/common/http';\nimport { inject, Injectable } from '@angular/core';\nimport { first, Observable } from 'rxjs';\n\n@Injectable()\nexport class AppCustomHolidaysLoader implements AXHolidaysLoader {\n  getHolidays(options?: AXHolidaysLoaderOptions): Promise<AXHolidayDate[]> {\n    return new Promise((resolve) => {\n      setTimeout(() => {\n        resolve([\n          {\n            date: new Date(2023, 8, 10),\n            title: 'Test 1',\n          },\n          {\n            date: new Date(2023, 8, 20),\n            title: 'Test 2',\n          },\n          {\n            date: new Date(2025, 3, 9),\n            title: 'ACoreX world day',\n          },\n        ]);\n      }, 500);\n    });\n  }\n}\n\n@Injectable()\nexport class AppTranslationLoader implements AXTranslationLoader {\n  private http = inject(HttpClient);\n  load(options: AXTranslationLoaderOptions): Observable<AXTranslation> {\n    const httpRequest = this.http.get<AXTranslation>(`/i18n/${options.lang}/${options.scope}.json`).pipe(first());\n    return httpRequest;\n  }\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Toolbar",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/toolbar--documentation"
+    }
+  ],
+  "description": "The Toolbar component provides a horizontal container for grouping buttons, decorators, and content in a compact layout.",
+  "imports": ["import { AXToolBarComponent } from '@acorex/components/toolbar';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-toolbar</code> to group buttons and decorators in a horizontal bar.",
+      "content": {
+        "type": "api",
+        "data": "toolbar/usage"
+      }
+    }
+  ],
+  "types": []
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Table Row Click Event",
+  "description": "Represents the event payload when a row in the data table is clicked.",
+  "types": [
+    {
+      "title": "AXDataTableRowClick",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXDataTableComponent" }],
+          "description": "The data table component that emitted the event."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element that was clicked."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "description": "The data associated with the clicked row."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

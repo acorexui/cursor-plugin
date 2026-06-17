@@ -1,0 +1,52 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHierarchyChartClickEvent",
+  "description": "Event interface emitted when a node in the hierarchy chart is clicked, providing access to the clicked node data, DOM event, and target element",
+  "imports": ["import { AXHierarchyChartClickEvent } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartClickEvent",
+      "description": "Event data for node click events",
+      "props": [
+        {
+          "name": "event",
+          "type": [{ "name": "NXNativeEvent" }],
+          "description": "The original DOM event"
+        },
+        {
+          "name": "item",
+          "type": [{ "name": "AXHierarchyChartNode", "link": "/en-US/docs/types/hierarchy-chart-node" }],
+          "description": "The data item that was clicked"
+        },
+        {
+          "name": "element",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The DOM element that was clicked"
+        }
+      ],
+      "inherited": [
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Canonical event interface from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "hierarchy-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXHierarchyChartClickEvent {\n  event: NXNativeEvent;\n  item: AXHierarchyChartNode;\n  element: HTMLElement;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

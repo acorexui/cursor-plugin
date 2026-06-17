@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSurfaceType",
+  "imports": ["import { AXSurfaceType } from '@acorex/cdk/common';"],
+  "description": "Type definition for surface color variants used in design system theming.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that specifies the available surface color variants for creating depth and hierarchy in the UI design system.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "surface-type.ts",
+            "content": "type AXSurfaceType = 'lightest' | 'lighter' | 'light' | 'surface' | 'dark' | 'darker' | 'darkest';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSurfaceType",
+      "props": [
+        {
+          "name": "AXSurfaceType",
+          "type": [
+            { "name": "'lightest'" },
+            { "name": "'lighter'" },
+            { "name": "'light'" },
+            { "name": "'surface'" },
+            { "name": "'dark'" },
+            { "name": "'darker'" },
+            { "name": "'darkest'" }
+          ],
+          "description": "Union type defining surface tokens used across the design system."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

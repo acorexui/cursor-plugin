@@ -1,0 +1,79 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNotificationData",
+  "description": "Internal data structure used by the notification component for configuration and state management.",
+  "imports": ["import { AXNotificationData } from '@acorex/components/notification';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Complete interface definition for internal notification data structure.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.class.ts",
+            "content": "export interface AXNotificationData {\n  buttons?: AXNotificationButtonItem[];\n  icon?: string;\n  title?: string;\n  content?: AXNotificationContentType;\n  location: AXLocation;\n  closeButton: boolean;\n  color: AXStyleColorType;\n  timeOut?: number;\n  timeOutProgress: boolean;\n  pauseOnHover?: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationData",
+      "props": [
+        {
+          "name": "buttons",
+          "type": [{ "name": "AXNotificationButtonItem[]", "link": "/en-US/docs/types/notification-button-item" }],
+          "description": "Optional array of action buttons to display in the notification."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Optional icon class name to display in the notification. If not provided, a default icon based on color will be used."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title text to display in the notification."
+        },
+        {
+          "name": "content",
+          "type": [{ "name": "AXNotificationContentType", "link": "/en-US/docs/types/notification-content-type" }],
+          "description": "Content to display in the notification. Can be a string, template reference, or component type."
+        },
+        {
+          "name": "location",
+          "type": [{ "name": "AXLocation", "link": "/en-US/docs/types/location" }],
+          "description": "Position where the notification should appear on screen."
+        },
+        {
+          "name": "closeButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a close button."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Color theme for the notification (primary, secondary, success, warning, danger, default)."
+        },
+        {
+          "name": "timeOut",
+          "type": [{ "name": "number" }],
+          "description": "Duration in milliseconds before the notification automatically closes."
+        },
+        {
+          "name": "timeOutProgress",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a progress bar indicating the remaining time."
+        },
+        {
+          "name": "pauseOnHover",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to pause the timeout countdown when hovering over the notification."
+        }
+      ]
+    }
+  ]
+}

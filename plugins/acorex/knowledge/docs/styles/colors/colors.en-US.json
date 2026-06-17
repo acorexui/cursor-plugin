@@ -1,0 +1,163 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Colors",
+  "description": "In ACoreX, we have five primary colors — primary, secondary, success, warning, and danger — as well as seven accent colors, which are not defined by default but can be configured as needed.Each color has seven corresponding surface shades, which are used to define the colors of components and the overall application.Additionally, to ensure compatibility with TailwindCSS, the colors also include shades ranging from 50 to 950.",
+  "sections": [
+    {
+      "title": "Main colors",
+      "description": "By default, we use five colors, which you can modify or remove based on your application’s needs or design.For example, if you’re not using the secondary color, you can remove it from your theme. This way, all related code, variables, and secondary color styles will be eliminated from your project.This is demonstrated with an example on the <a href='/en-US/docs/styles/theming'>Theming</a> page.",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Name", "Color"],
+          "rows": [
+            ["Primary", "<div class='color-card bg-primary-500'></div>"],
+            ["Secondary", "<div class='color-card bg-secondary-500'></div>"],
+            ["Success", "<div class='color-card bg-success-500'></div>"],
+            ["Warning", "<div class='color-card bg-warning-500'></div>"],
+            ["Danger", "<div class='color-card bg-danger-500'></div>"]
+          ]
+        }
+      }
+    },
+    {
+      "title": "On colors",
+      "description": "In our color system, we use ON colors to ensure that each color has a suitable contrasting color to be placed on top of it. For example, on-primary is a color that provides sufficient contrast with the primary color.",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Name", "Color"],
+          "rows": [
+            ["Primary", "<div class='color-card bg-primary-500 text-primary-on-surface'>ON Primary surface</div>"],
+            [
+              "Secondary",
+              "<div class='color-card bg-secondary-500 text-secondary-on-surface'>ON Secondary surface</div>"
+            ],
+            ["Success", "<div class='color-card bg-success-500 text-success-on-surface'>ON Success surface</div>"],
+            ["Warning", "<div class='color-card bg-warning-500 text-warning-on-surface'>ON Warning surface</div>"],
+            ["Danger", "<div class='color-card bg-danger-500 text-danger-on-surface'>ON Danger surface</div>"]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Surface colors",
+      "description": "In addition to the primary colors, we also have a neutral color used for layouts, which brings the total to six main surface groups. Each surface group includes seven colors: three light shades, three dark shades, and one regular shade.",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Class", "Preview"],
+          "rows": [
+            ["lightest-surface", "<div class='color-card lightest-surface'>On Lightest</div>"],
+            ["lighter-surface", "<div class='color-card lighter-surface'>On Lighter</div>"],
+            ["light-surface", "<div class='color-card light-surface'>On Light</div>"],
+            ["surface", "<div class='color-card surface'>On Surface</div>"],
+            ["dark-surface", "<div class='color-card dark-surface'>On Dark</div>"],
+            ["darker-surface", "<div class='color-card darker-surface'>On Darker</div>"],
+            ["darkest-surface", "<div class='color-card darkest-surface'>On Darkest</div>"],
+            ["primary-lightest", "<div class='color-card primary-lightest'>On Lightest</div>"],
+            ["primary-lighter", "<div class='color-card primary-lighter'>On Lighter</div>"],
+            ["primary-light", "<div class='color-card primary-light'>On Light</div>"],
+            ["primary-surface", "<div class='color-card primary-surface'>On Surface</div>"],
+            ["primary-dark", "<div class='color-card primary-dark'>On Dark</div>"],
+            ["primary-darker", "<div class='color-card primary-darker'>On Darker</div>"],
+            ["primary-darkest", "<div class='color-card primary-darkest'>On Darkest</div>"],
+            ["secondary-lightest", "<div class='color-card secondary-lightest'>On Lightest</div>"],
+            ["secondary-lighter", "<div class='color-card secondary-lighter'>On Lighter</div>"],
+            ["secondary-light", "<div class='color-card secondary-light'>On Light</div>"],
+            ["secondary-surface", "<div class='color-card secondary-surface'>On Surface</div>"],
+            ["secondary-dark", "<div class='color-card secondary-dark'>On Dark</div>"],
+            ["secondary-darker", "<div class='color-card secondary-darker'>On Darker</div>"],
+            ["secondary-darkest", "<div class='color-card secondary-darkest'>On Darkest</div>"],
+            ["success-lightest", "<div class='color-card success-lightest'>On Lightest</div>"],
+            ["success-lighter", "<div class='color-card success-lighter'>On Lighter</div>"],
+            ["success Light", "<div class='color-card success-light'>On Light</div>"],
+            ["success-surface", "<div class='color-card success-surface'>On Surface</div>"],
+            ["success-dark", "<div class='color-card success-dark'>On Dark</div>"],
+            ["success-darker", "<div class='color-card success-darker'>On Darker</div>"],
+            ["success-darkest", "<div class='color-card success-darkest'>On Darkest</div>"],
+            ["warning-lightest", "<div class='color-card warning-lightest'>On Lightest</div>"],
+            ["warning-lighter", "<div class='color-card warning-lighter'>On Lighter</div>"],
+            ["warning-light", "<div class='color-card warning-light'>On Light</div>"],
+            ["warning-surface", "<div class='color-card warning-surface'>On Surface</div>"],
+            ["warning-dark", "<div class='color-card warning-dark'>On Dark</div>"],
+            ["warning-darker", "<div class='color-card warning-darker'>On Darker</div>"],
+            ["warning-darkest", "<div class='color-card warning-darkest'>On Darkest</div>"],
+            ["danger-lightest", "<div class='color-card danger-lightest'>On Lightest</div>"],
+            ["danger-lighter", "<div class='color-card danger-lighter'>On Lighter</div>"],
+            ["danger-light", "<div class='color-card danger-light'>On Light</div>"],
+            ["danger-surface", "<div class='color-card danger-surface'>On Surface</div>"],
+            ["danger-dark", "<div class='color-card danger-dark'>On Dark</div>"],
+            ["danger-darker", "<div class='color-card danger-darker'>On Darker</div>"],
+            ["danger-darkest", "<div class='color-card danger-darkest'>On Darkest</div>"]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Range colors",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Class", "Preview"],
+          "rows": [
+            ["Primary 50", "<div class='color-card bg-primary-50'></div>"],
+            ["Primary 100", "<div class='color-card bg-primary-100'></div>"],
+            ["Primary 200", "<div class='color-card bg-primary-200'></div>"],
+            ["Primary 300", "<div class='color-card bg-primary-300'></div>"],
+            ["Primary 400", "<div class='color-card bg-primary-400'></div>"],
+            ["Primary 500", "<div class='color-card bg-primary-500'></div>"],
+            ["Primary 600", "<div class='color-card bg-primary-600'></div>"],
+            ["Primary 700", "<div class='color-card bg-primary-700'></div>"],
+            ["Primary 800", "<div class='color-card bg-primary-800'></div>"],
+            ["Primary 900", "<div class='color-card bg-primary-900'></div>"],
+            ["Primary 950", "<div class='color-card bg-primary-950'></div>"],
+            ["Secondary 50", "<div class='color-card bg-secondary-50'></div>"],
+            ["Secondary 100", "<div class='color-card bg-secondary-100'></div>"],
+            ["Secondary 200", "<div class='color-card bg-secondary-200'></div>"],
+            ["Secondary 300", "<div class='color-card bg-secondary-300'></div>"],
+            ["Secondary 400", "<div class='color-card bg-secondary-400'></div>"],
+            ["Secondary 500", "<div class='color-card bg-secondary-500'></div>"],
+            ["Secondary 600", "<div class='color-card bg-secondary-600'></div>"],
+            ["Secondary 700", "<div class='color-card bg-secondary-700'></div>"],
+            ["Secondary 800", "<div class='color-card bg-secondary-800'></div>"],
+            ["Secondary 900", "<div class='color-card -bg-secondary-900'></div>"],
+            ["Secondary 950", "<div class='color-card -bg-secondary-950'></div>"],
+            ["Success 50", "<div class='color-card bg-success-50'></div>"],
+            ["Success 100", "<div class='color-card bg-success-100'></div>"],
+            ["Success 200", "<div class='color-card bg-success-200'></div>"],
+            ["Success 300", "<div class='color-card bg-success-300'></div>"],
+            ["Success 400", "<div class='color-card bg-success-400'></div>"],
+            ["Success 500", "<div class='color-card bg-success-500'></div>"],
+            ["Success 600", "<div class='color-card bg-success-600'></div>"],
+            ["Success 700", "<div class='color-card bg-success-700'></div>"],
+            ["Success 800", "<div class='color-card bg-success-800'></div>"],
+            ["Success 900", "<div class='color-card bg-success-900'></div>"],
+            ["Success 950", "<div class='color-card bg-success-950'></div>"],
+            ["Warning 50", "<div class='color-card bg-warning-50'></div>"],
+            ["Warning 100", "<div class='color-card bg-warning-100'></div>"],
+            ["Warning 200", "<div class='color-card bg-warning-200'></div>"],
+            ["Warning 300", "<div class='color-card bg-warning-300'></div>"],
+            ["Warning 400", "<div class='color-card bg-warning-400'></div>"],
+            ["Warning 500", "<div class='color-card bg-warning-500'></div>"],
+            ["Warning 600", "<div class='color-card bg-warning-600'></div>"],
+            ["Warning 700", "<div class='color-card bg-warning-700'></div>"],
+            ["Warning 800", "<div class='color-card bg-warning-800'></div>"],
+            ["Warning 900", "<div class='color-card bg-warning-900'></div>"],
+            ["Warning 950", "<div class='color-card bg-warning-950'></div>"],
+            ["Danger 50", "<div class='color-card bg-danger-50'></div>"],
+            ["Danger 100", "<div class='color-card bg-danger-100'></div>"],
+            ["Danger 200", "<div class='color-card bg-danger-200'></div>"],
+            ["Danger 300", "<div class='color-card bg-danger-300'></div>"],
+            ["Danger 400", "<div class='color-card bg-danger-400'></div>"],
+            ["Danger 500", "<div class='color-card bg-danger-500'></div>"],
+            ["Danger 600", "<div class='color-card bg-danger-600'></div>"],
+            ["Danger 700", "<div class='color-card bg-danger-700'></div>"],
+            ["Danger 800", "<div class='color-card bg-danger-800'></div>"],
+            ["Danger 900", "<div class='color-card bg-danger-900'></div>"]
+          ]
+        }
+      }
+    }
+  ]
+}

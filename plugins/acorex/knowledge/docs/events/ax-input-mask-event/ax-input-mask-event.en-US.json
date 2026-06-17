@@ -1,0 +1,46 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Input Mask Event",
+  "description": "Represents the event payload when an input mask value changes, providing both masked and unmasked values along with completion status.",
+  "imports": [
+    "import { AXInputMaskEvent } from '@acorex/cdk/input-mask';"
+  ],
+  "types": [
+    {
+      "title": "AXInputMaskEvent",
+      "props": [
+        {
+          "name": "masked",
+          "type": [{ "name": "string" }],
+          "description": "The formatted/masked value as displayed to the user."
+        },
+        {
+          "name": "unmasked",
+          "type": [{ "name": "string" }],
+          "description": "The raw/unmasked value without formatting."
+        },
+        {
+          "name": "completed",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether the input mask is completely filled."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "The complete TypeScript definition for the input mask event interface.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-input-mask-event.ts",
+            "content": "export type AXInputMaskEvent = {\n  masked: string;\n  unmasked: string;\n  completed: boolean;\n};"
+          }
+        ]
+      }
+    }
+  ]
+}

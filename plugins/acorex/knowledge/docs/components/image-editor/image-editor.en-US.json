@@ -1,0 +1,321 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Image Editor",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/imageeditor--documentation"
+    }
+  ],
+  "description": "Image Editor component provides users with a comprehensive set of tools to modify and enhance images. Features such as cropping, resizing, and other editing options allow for detailed adjustments. With its user-friendly interface, it enables real-time modifications, offering a smooth and efficient image editing experience that caters to various needs, from basic touch-ups to more advanced adjustments.",
+  "imports": [
+    "import { AXImageEditorModule } from '@acorex/components/image-editor';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-image-editor-container</code>",
+      "content": {
+        "type": "api",
+        "data": "image-editor/usage"
+      },
+      "height": "800px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXImageEditorContainerComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "Blob[]"
+            }
+          ],
+          "description": "The current value of the component as an array of Blob objects representing the edited image in different formats (JPEG, PNG, WebP). Inherited from MXValueComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the component. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<Blob[]>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the value of the component changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "Deprecated event. Use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the readonly state of the component changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]",
+              "link": "/en-US/docs/types/form-validation-rule"
+            }
+          ],
+          "description": "Emits an event whenever the validation rules of the component change. Inherited from MXValueComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emits an event whenever the look style of the component changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user presses a key down. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user releases a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user presses a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the user changes the text. Inherited from MXInputBaseValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n * @returns void - No return value.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n *\n * @returns void - No return value.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n *\n * @returns void - No return value.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n * @returns void - No return value.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Registers a touched callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n * @returns void - No return value.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n * @returns void - No return value.\n */\nregisterOnChange(fn: (value: any) => void): void"
+        },
+        {
+          "content": "/**\n * Writes a new value to the element (ControlValueAccessor method).\n *\n * @param value - The new value to write.\n * @returns void - No return value.\n */\nwriteValue(value: any): void"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n * @returns void - No return value.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param rule - The validation rule to remove.\n * @returns void - No return value.\n */\nremoveValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - A promise that resolves to the validation summary.\n */\nvalidate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Saves the current edited image and commits the value to the component.\n * If the image has been modified, it commits the image blob array. If no changes were made, it commits null.\n *\n * @returns void - No return value. The edited image is saved and the onValueChanged event is emitted.\n */\nsave(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXImageEditorViewComponent",
+      "props": [
+        {
+          "name": "showGrid",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Controls whether the grid overlay is displayed on the image editor canvas."
+        },
+        {
+          "name": "lockRatio",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Controls whether the aspect ratio is locked during cropping operations."
+        },
+        {
+          "name": "src",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "The source URL or path of the image to be loaded and edited."
+        }
+      ]
+    }
+  ]
+}

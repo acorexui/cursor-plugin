@@ -1,0 +1,89 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRRuleType",
+  "description": "RRule class type representing recurrence rule instances from the rrule.js library, providing comprehensive methods for querying, generating, and manipulating recurring date patterns",
+  "imports": ["import { AXRRuleType } from '@acorex/components/rrule';"],
+  "types": [
+    {
+      "title": "AXRRuleType",
+      "description": "RRule class instance from the 'rrule' package. Provides methods to query recurrence patterns and generate date sequences.",
+      "methods": [
+        {
+          "name": "all",
+          "content": "all(iterator?: (d: Date, len: number) => boolean): Date[]",
+          "description": "Returns all occurrences of the recurrence rule"
+        },
+        {
+          "name": "between",
+          "content": "between(after: Date, before: Date, inc?: boolean, iterator?: (d: Date, len: number) => boolean): Date[]",
+          "description": "Returns occurrences between two dates"
+        },
+        {
+          "name": "before",
+          "content": "before(dt: Date, inc?: boolean): Date | null",
+          "description": "Returns the last occurrence before the given date"
+        },
+        {
+          "name": "after",
+          "content": "after(dt: Date, inc?: boolean): Date | null",
+          "description": "Returns the first occurrence after the given date"
+        },
+        {
+          "name": "count",
+          "content": "count(): number",
+          "description": "Returns the total number of occurrences"
+        },
+        {
+          "name": "toString",
+          "content": "toString(): string",
+          "description": "Converts the rule to RFC 2445 string format"
+        },
+        {
+          "name": "toText",
+          "content": "toText(gettext?: GetText, language?: Language, dateFormatter?: DateFormatter): string",
+          "description": "Converts the rule to human-readable text"
+        },
+        {
+          "name": "clone",
+          "content": "clone(): RRule",
+          "description": "Creates a copy of the RRule instance"
+        }
+      ],
+      "properties": [
+        {
+          "name": "options",
+          "type": [{ "name": "ParsedOptions" }],
+          "description": "The parsed options used by this rule"
+        },
+        {
+          "name": "origOptions",
+          "type": [{ "name": "Partial<Options>" }],
+          "description": "The original options passed to the constructor"
+        }
+      ],
+      "inherited": [
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Canonical RRule class type from rrule.js library",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "rrule.type.ts",
+            "language": "ts",
+            "content": "export type AXRRuleType = RRule;"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Component Service",
+  "description": "A root-level utility service for dynamically creating Angular components and embedded views from templates at runtime. It provides the low-level building block used by overlay, popup, and other dynamic UI layers in AcoreX.",
+  "imports": [
+    "import { AXComponentService, AXComponentType, AXComponentContent, AXComponentInputs, AXComponentOptions } from '@acorex/core/components';"
+  ],
+  "hints": [
+    {
+      "title": "Low-level API",
+      "content": "AXComponentService renders content into the application's root ViewContainerRef. For most use cases — modals, popovers, tooltips, and toasts — prefer <code>AXOverlayService</code> or <code>AXPopupService</code>, which handle positioning, backdrop, z-index, and disposal for you.",
+      "status": "primary"
+    },
+    {
+      "title": "Cleanup",
+      "content": "Always destroy dynamically created components and embedded views when they are no longer needed. Call <code>componentRef.destroy()</code> or <code>embeddedViewRef.destroy()</code> to avoid memory leaks.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXComponentService",
+      "description": "Injectable service that creates components and template views at the application root.",
+      "methods": [
+        {
+          "content": "/**\n * Creates and inserts a component instance into the application's root ViewContainerRef.\n *\n * @typeParam T - Component class type\n * @param content - Component type to instantiate\n * @returns ComponentRef<T> - Reference to the created component\n */\ncreateFromComponent<T>(content: AXComponentType<T>): ComponentRef<T>"
+        },
+        {
+          "content": "/**\n * Creates and inserts an embedded view from a TemplateRef into the application's root ViewContainerRef.\n *\n * @typeParam T - Template context type\n * @param content - TemplateRef to render\n * @returns EmbeddedViewRef<T> - Reference to the created embedded view\n */\ncreateFromTemplate<T>(content: TemplateRef<T>): EmbeddedViewRef<T>"
+        }
+      ]
+    },
+    {
+      "title": "AXComponentType<T>",
+      "description": "Type constraint for a component class constructor.",
+      "props": [
+        {
+          "name": "new (...args)",
+          "type": [{ "name": "T" }],
+          "description": "Constructor signature of the target component class."
+        }
+      ]
+    },
+    {
+      "title": "AXComponentContent<T>",
+      "description": "Union type accepted by higher-level services such as AXOverlayService.",
+      "props": [
+        {
+          "name": "content",
+          "type": [
+            { "name": "AXComponentType<T>" },
+            { "name": "|" },
+            { "name": "TemplateRef<T>" }
+          ],
+          "description": "Either a component class or a template reference."
+        }
+      ]
+    },
+    {
+      "title": "AXComponentInputs",
+      "description": "Key-value map of input names to values passed when creating dynamic components.",
+      "props": [
+        {
+          "name": "[key: string]",
+          "type": [{ "name": "unknown" }],
+          "description": "Input name mapped to its runtime value."
+        }
+      ]
+    },
+    {
+      "title": "AXComponentOptions",
+      "description": "Optional configuration when rendering dynamic content.",
+      "props": [
+        {
+          "name": "inputs?",
+          "type": [{ "name": "AXComponentInputs" }],
+          "description": "Initial input values to set on the created component via setInput()."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How AXComponentService works under the hood.",
+      "content": {
+        "type": "text",
+        "data": "AXComponentService uses Angular's ApplicationRef to locate the first bootstrapped application component and obtain its root ViewContainerRef. From there it can instantiate any component class or render any TemplateRef at runtime.\n\nThis is useful when you need to inject UI outside the normal component tree — for example global overlays, programmatic dialogs, or portal-like rendering. Internally, AXOverlayService and AXPopupComponent rely on this service to create their content."
+      }
+    },
+    {
+      "title": "Basic Setup",
+      "description": "Inject the service and import from the secondary entry point.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "setup.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXComponentService } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-demo',\n  template: `<button (click)=\"open()\">Open</button>`,\n})\nexport class DemoComponent {\n  private componentService = inject(AXComponentService);\n\n  open() {\n    // use createFromComponent or createFromTemplate here\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Creating a Component",
+      "description": "Dynamically instantiate a component class and access its instance.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "create-component.ts",
+            "language": "typescript",
+            "content": "import { Component, ComponentRef, inject } from '@angular/core';\nimport { AXComponentService } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-alert',\n  template: `<p>{{ message }}</p>`,\n})\nexport class AlertComponent {\n  message = 'Hello from dynamic component!';\n}\n\n@Component({\n  selector: 'app-host',\n  template: `<button (click)=\"showAlert()\">Show Alert</button>`,\n})\nexport class HostComponent {\n  private componentService = inject(AXComponentService);\n  private alertRef: ComponentRef<AlertComponent> | null = null;\n\n  showAlert() {\n    this.alertRef = this.componentService.createFromComponent(AlertComponent);\n\n    // Access and modify the live instance\n    this.alertRef.instance.message = 'Updated at runtime';\n\n    // Or use the modern setInput API\n    this.alertRef.setInput('message', 'Set via setInput');\n  }\n\n  hideAlert() {\n    this.alertRef?.destroy();\n    this.alertRef = null;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Creating from a Template",
+      "description": "Render an ng-template as an embedded view at the application root.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "create-template.ts",
+            "language": "typescript",
+            "content": "import {\n  Component,\n  EmbeddedViewRef,\n  inject,\n  TemplateRef,\n  viewChild,\n} from '@angular/core';\nimport { AXComponentService } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-template-demo',\n  template: `\n    <ng-template #panel let-name=\"name\">\n      <div class=\"panel\">Hello, {{ name }}!</div>\n    </ng-template>\n\n    <button (click)=\"openPanel()\">Open Panel</button>\n    <button (click)=\"closePanel()\">Close Panel</button>\n  `,\n})\nexport class TemplateDemoComponent {\n  private componentService = inject(AXComponentService);\n\n  panelTemplate = viewChild.required<TemplateRef<{ name: string }>>('panel');\n  private viewRef: EmbeddedViewRef<{ name: string }> | null = null;\n\n  openPanel() {\n    this.viewRef = this.componentService.createFromTemplate(this.panelTemplate());\n\n    // Pass context data to the template\n    // Note: createFromTemplate does not accept context directly.\n    // Use ViewContainerRef.createEmbeddedView on a local container\n    // when you need template context, or set data via component inputs.\n  }\n\n  closePanel() {\n    this.viewRef?.destroy();\n    this.viewRef = null;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Setting Inputs",
+      "description": "Pass data to dynamically created components using setInput().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "set-inputs.ts",
+            "language": "typescript",
+            "content": "import { Component, ComponentRef, inject, input } from '@angular/core';\nimport { AXComponentService, AXComponentInputs } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-user-card',\n  template: `<h3>{{ name() }}</h3><p>{{ email() }}</p>`,\n})\nexport class UserCardComponent {\n  name = input<string>('');\n  email = input<string>('');\n}\n\n@Component({\n  selector: 'app-user-host',\n  template: `<button (click)=\"openUserCard()\">Show User</button>`,\n})\nexport class UserHostComponent {\n  private componentService = inject(AXComponentService);\n\n  openUserCard() {\n    const inputs: AXComponentInputs = {\n      name: 'Jane Doe',\n      email: 'jane@example.com',\n    };\n\n    const ref = this.componentService.createFromComponent(UserCardComponent);\n    this.applyInputs(ref, inputs);\n  }\n\n  private applyInputs(ref: ComponentRef<UserCardComponent>, inputs: AXComponentInputs) {\n    Object.entries(inputs).forEach(([key, value]) => {\n      ref.setInput(key, value);\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Moving Content to a Container",
+      "description": "Attach the dynamically created host element to a specific DOM container — the pattern used by AXPopupComponent.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "move-to-container.ts",
+            "language": "typescript",
+            "content": "import { Component, ComponentRef, ElementRef, inject, viewChild } from '@angular/core';\nimport { AXComponentService } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-dialog-body',\n  template: `<p>Dialog body content</p>`,\n})\nexport class DialogBodyComponent {}\n\n@Component({\n  selector: 'app-dialog-shell',\n  template: `\n    <div class=\"dialog\">\n      <div #contentContainer class=\"dialog__body\"></div>\n    </div>\n  `,\n})\nexport class DialogShellComponent {\n  private componentService = inject(AXComponentService);\n  contentContainer = viewChild.required<ElementRef<HTMLElement>>('contentContainer');\n\n  renderBody() {\n    const ref = this.componentService.createFromComponent(DialogBodyComponent);\n    const hostElement = ref.location.nativeElement;\n\n    // Move the component's host element into the dialog body\n    this.contentContainer().nativeElement.appendChild(hostElement);\n\n    return ref;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Cleanup and Lifecycle",
+      "description": "Destroy dynamic content when it is dismissed to prevent memory leaks.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "cleanup.ts",
+            "language": "typescript",
+            "content": "import { Component, ComponentRef, inject, OnDestroy } from '@angular/core';\nimport { AXComponentService } from '@acorex/core/components';\n\n@Component({\n  selector: 'app-overlay-host',\n  template: `<button (click)=\"toggle()\">Toggle</button>`,\n})\nexport class OverlayHostComponent implements OnDestroy {\n  private componentService = inject(AXComponentService);\n  private activeRef: ComponentRef<unknown> | null = null;\n\n  toggle() {\n    if (this.activeRef) {\n      this.dispose();\n    } else {\n      this.activeRef = this.componentService.createFromComponent(MyOverlayComponent);\n    }\n  }\n\n  private dispose() {\n    this.activeRef?.destroy();\n    this.activeRef = null;\n  }\n\n  ngOnDestroy() {\n    this.dispose();\n  }\n}\n\n@Component({ selector: 'app-my-overlay', template: `<p>Overlay</p>` })\nclass MyOverlayComponent {}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "When to Use Higher-level Services",
+      "description": "Prefer AXOverlayService for positioned overlays, backdrops, and z-index management.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "overlay-integration.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXOverlayService } from '@acorex/cdk/overlay';\n\n@Component({\n  selector: 'app-tooltip-content',\n  template: `<span>Tooltip text</span>`,\n})\nexport class TooltipContentComponent {}\n\n@Component({\n  selector: 'app-tooltip-trigger',\n  template: `<button #anchor (click)=\"showTooltip(anchor)\">Hover me</button>`,\n})\nexport class TooltipTriggerComponent {\n  private overlayService = inject(AXOverlayService);\n\n  async showTooltip(anchor: HTMLElement) {\n    const ref = await this.overlayService.create(TooltipContentComponent, {\n      anchorOptions: { anchor, placement: 'top' },\n      backdrop: { enabled: false },\n    });\n\n    // ref.dispose() handles component destruction and DOM cleanup\n    setTimeout(() => ref.dispose(), 3000);\n  }\n}\n"
+          }
+        ]
+      }
+    }
+  ]
+}

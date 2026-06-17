@@ -1,0 +1,336 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXSwitchComponent } from '@acorex/components/switch';"
+  ],
+  "title": "Switch",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/switch--documentation"
+    }
+  ],
+  "description": "A component that provides a toggle switch control, allowing users to enable or disable a setting with a sliding animation.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-switch</code>",
+      "content": {
+        "type": "api",
+        "data": "switch/usage"
+      }
+    },
+    {
+      "title": "Color Variants",
+      "description": "Example of switch with different color variants",
+      "content": {
+        "type": "api",
+        "data": "switch/color"
+      }
+    },
+    {
+      "title": "On/Off States",
+      "description": "Example of switch with on/off state indicators",
+      "content": {
+        "type": "api",
+        "data": "switch/on-off"
+      }
+    },
+    {
+      "title": "Custom Content",
+      "description": "Example of switch with custom content in different states",
+      "content": {
+        "type": "api",
+        "data": "switch/content"
+      }
+    },
+    {
+      "title": "On/Off with Content",
+      "description": "Example of switch with both on/off indicators and custom content",
+      "content": {
+        "type": "api",
+        "data": "switch/on-off-content"
+      }
+    },
+    {
+      "title": "Loading State",
+      "description": "Example of switch in loading state",
+      "content": {
+        "type": "api",
+        "data": "switch/loading"
+      }
+    },
+    {
+      "height": "400px",
+      "title": "Size Variants",
+      "description": "Example of switch with different size options using utility classes",
+      "content": {
+        "type": "api",
+        "data": "switch/size"
+      }
+    },
+    {
+      "height": "450px",
+      "title": "Disabled and Readonly States",
+      "description": "Example of switch in different interaction states",
+      "content": {
+        "type": "api",
+        "data": "switch/disabled-readonly"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSwitchComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "The current value of the switch (checked state)"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the switch is disabled. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "default",
+          "description": "Predefined color schemes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name attribute for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component is in a loading state."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component value has been modified. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Current validation state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has required validation. Inherited from MXValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<boolean>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the user changes the value. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]",
+              "link": "/en-US/docs/types/form-validation-rule"
+            }
+          ],
+          "description": "Emitted when validation rules change. Inherited from MXValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: boolean, u = false): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e = false): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nasync validate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Marks the component as dirty.\n */\nmarkAsDirty(): void"
+        }
+      ]
+    }
+  ]
+}

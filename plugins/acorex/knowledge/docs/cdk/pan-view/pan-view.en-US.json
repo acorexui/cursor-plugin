@@ -1,0 +1,153 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Pan View",
+  "description": "The AXPanViewDirective provides a way to implement pan and zoom functionality for a designated content area within your application. This directive allows users to interact with content by panning (dragging) it around and zooming in or out, which is useful for scenarios where you have content that might be larger than the viewport or require detailed inspection.",
+  "imports": ["import { AXPanViewDirective } from '@acorex/cdk/pan-view';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic pan and zoom functionality with an image.",
+      "content": {
+        "type": "api",
+        "data": "cdk/pan-view/usage"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Free Mode",
+      "description": "Toggle between standard middle-click panning and free left-click panning mode.",
+      "content": {
+        "type": "api",
+        "data": "cdk/pan-view/free-mode"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Zoom Controls",
+      "description": "Programmatic zoom control using directive methods and zoom change events.",
+      "content": {
+        "type": "api",
+        "data": "cdk/pan-view/zoom-controls"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Model Properties",
+      "description": "Two-way binding with panX, panY, and zoom model properties.",
+      "content": {
+        "type": "api",
+        "data": "cdk/pan-view/model-properties"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPanViewDirective",
+      "props": [
+        {
+          "name": "zoomStep",
+          "type": [{ "name": "number" }],
+          "default": "7",
+          "description": "Defines the amount of zoom applied with each zoom event (e.g., mouse wheel, zoomIn and zoomOut methods)."
+        },
+        {
+          "name": "minZoom",
+          "type": [{ "name": "number" }],
+          "default": "25",
+          "description": "Sets the minimum zoom level allowed (as a percentage)."
+        },
+        {
+          "name": "maxZoom",
+          "type": [{ "name": "number" }],
+          "default": "400",
+          "description": "Sets the maximum zoom level allowed (as a percentage)."
+        },
+        {
+          "name": "freeMode",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Enables 'free mode' panning. In free mode, panning is activated by a standard mouse drag (left mouse button). When freeMode is disabled, panning is activated by the middle mouse button."
+        },
+        {
+          "name": "fitContent",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "If true, the content will be scaled to fit within the wrapper element. The zoom level will be set to the smaller of the values required to fit the content's width and height. If the content is smaller than the wrapper, the zoom level will be set to 100%."
+        },
+        {
+          "name": "disablePan",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Disables panning functionality altogether."
+        },
+        {
+          "name": "disableZoom",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Disables zooming functionality altogether."
+        },
+        {
+          "name": "wrapperClasses",
+          "type": [{ "name": "string" }],
+          "default": "''",
+          "description": "A string of CSS classes to be applied to the wrapper element created by the directive. This allows you to add custom styles to the pan view wrapper."
+        },
+        {
+          "name": "panX",
+          "type": [{ "name": "number" }],
+          "default": "0",
+          "description": "The current horizontal pan position in pixels. This is a two-way binding property (model)."
+        },
+        {
+          "name": "panY",
+          "type": [{ "name": "number" }],
+          "default": "0",
+          "description": "The current vertical pan position in pixels. This is a two-way binding property (model)."
+        },
+        {
+          "name": "zoom",
+          "type": [{ "name": "number" }],
+          "default": "100",
+          "description": "The current zoom level as a percentage. This is a two-way binding property (model)."
+        }
+      ],
+      "events": [
+        {
+          "name": "zoomChange",
+          "type": [{ "name": "number" }],
+          "description": "Emits the current zoom level (as a percentage) after the zoom level changes."
+        },
+        {
+          "name": "positionChange",
+          "type": [{ "name": "{ x: number; y: number }" }],
+          "description": "Emits an object containing the current pan position (x and y in pixels) relative to the top-left corner of the wrapper element. This event is emitted after each pan operation."
+        },
+        {
+          "name": "panXChange",
+          "type": [{ "name": "number" }],
+          "description": "Emits when the panX model property changes. This is the change event for the panX two-way binding."
+        },
+        {
+          "name": "panYChange",
+          "type": [{ "name": "number" }],
+          "description": "Emits when the panY model property changes. This is the change event for the panY two-way binding."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Updates the transform style of the pan view element to reflect the current pan and zoom values.\n * This method is typically called internally by the directive but can be used if you need to manually update the position.\n * It triggers the positionChange and zoomChange outputs.\n *\n * @returns void - No return value. The element's transform style is updated and events are emitted.\n */\nsetElementPosition(): void"
+        },
+        {
+          "content": "/**\n * Resets the pan and zoom position to the initial state.\n * It centers the content within the container, maintaining aspect ratio, and sets the zoom level to 100%\n * (or the fit content scale if applicable).\n *\n * @returns void - No return value. The pan and zoom are reset to initial values.\n */\nresetPosition(): void"
+        },
+        {
+          "content": "/**\n * Zooms the content in by the amount specified by the zoomStep input, respecting the minZoom and maxZoom limits.\n *\n * @returns void - No return value. The zoom level is increased and the element position is updated.\n */\nzoomIn(): void"
+        },
+        {
+          "content": "/**\n * Zooms the content out by the amount specified by the zoomStep input, respecting the minZoom and maxZoom limits.\n *\n * @returns void - No return value. The zoom level is decreased and the element position is updated.\n */\nzoomOut(): void"
+        }
+      ]
+    }
+  ]
+}

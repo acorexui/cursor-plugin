@@ -1,0 +1,52 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXModalRef",
+  "description": "Reference object returned when opening a modal that provides methods to control the modal's behavior and state.",
+  "imports": ["import { AXModalRef } from '@acorex/components/modal';"],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Modal reference interface with control methods.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "modal-ref.ts",
+            "language": "ts",
+            "content": "export interface AXModalRef<TResult = any> {\n  minimize: () => void;\n  maximize: () => void;\n  restore: () => void;\n  close: (data?: TResult) => void;\n  setInputs: (values: AXComponentInputs) => void;\n  onClose: Subject<TResult>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXModalRef",
+      "description": "Reference object for controlling modal behavior",
+      "props": [
+        {
+          "name": "onClose",
+          "type": [{ "name": "Subject<TResult>" }],
+          "description": "Observable that emits when the modal is closed, with optional result data."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Minimizes the modal to the bottom bar.\n */\nminimize(): void"
+        },
+        {
+          "content": "/**\n * Maximizes the modal to fullscreen.\n */\nmaximize(): void"
+        },
+        {
+          "content": "/**\n * Restores the modal from minimized or maximized state.\n */\nrestore(): void"
+        },
+        {
+          "content": "/**\n * Closes the modal with optional result data.\n * @param data - Optional data to pass to the close event\n */\nclose(data?: TResult): void"
+        },
+        {
+          "content": "/**\n * Sets input values for the modal content component.\n * @param values - Object containing input values to set\n */\nsetInputs(values: AXComponentInputs): void"
+        }
+      ]
+    }
+  ]
+}

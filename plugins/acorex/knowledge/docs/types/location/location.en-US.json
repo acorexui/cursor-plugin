@@ -1,0 +1,45 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXLocation",
+  "imports": ["import { AXLocation } from '@acorex/cdk/common';"],
+  "description": "Type definition for positioning locations used in overlays, tooltips, and other positioned components.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that specifies the available positioning locations for components. Used for overlays, tooltips, and other positioned components.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "location.ts",
+            "content": "type AXLocation = 'bottom-start' | 'bottom-center' | 'bottom-end' | 'top-start' | 'top-center' | 'top-end' | 'center-end' | 'center-start';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLocation",
+      "props": [
+        {
+          "name": "AXLocation",
+          "type": [
+            { "name": "'bottom-start'" },
+            { "name": "'bottom-center'" },
+            { "name": "'bottom-end'" },
+            { "name": "'top-start'" },
+            { "name": "'top-center'" },
+            { "name": "'top-end'" },
+            { "name": "'center-end'" },
+            { "name": "'center-start'" }
+          ],
+          "description": "Union of supported placement values for positioned components."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

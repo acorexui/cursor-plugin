@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSlidingItemDirective } from '@acorex/cdk/sliding-item';"],
+  "title": "Sliding Item",
+  "description": "A directive that enables horizontal sliding functionality for elements. It provides interactive drag-to-slide behavior with configurable sliding directions and smooth animations. The directive automatically handles pointer events and provides visual feedback during interactions.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using the <code>axSlidingItem</code> directive",
+      "content": {
+        "type": "api",
+        "data": "cdk/sliding-item/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSlidingItemDirective",
+      "props": [
+        {
+          "name": "currentX",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "A signal that tracks the current horizontal position of the sliding element in pixels."
+        },
+        {
+          "name": "stopPoint",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "A signal that defines the stopping position for the sliding animation in pixels."
+        },
+        {
+          "name": "disableSlidingRight",
+          "type": [{ "name": "Signal<boolean>" }],
+          "default": "false",
+          "description": "When set to true, prevents the element from sliding to the right."
+        },
+        {
+          "name": "disableSlidingLeft",
+          "type": [{ "name": "Signal<boolean>" }],
+          "default": "false",
+          "description": "When set to true, prevents the element from sliding to the left."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets the position of the sliding element.\n *\n * @param pos - The horizontal position in pixels to set the element to\n * @returns void - No return value. The element's transform is updated to the specified position.\n */\nsetPosition(pos: number): void"
+        }
+      ]
+    }
+  ]
+}

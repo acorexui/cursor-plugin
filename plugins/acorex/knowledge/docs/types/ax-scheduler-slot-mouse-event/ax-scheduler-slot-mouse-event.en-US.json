@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerSlotMouseEvent",
+  "imports": ["import { AXSchedulerSlotMouseEvent } from '@acorex/components/scheduler';"],
+  "description": "Event data for slot mouse interactions in the scheduler.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing slot mouse event with event data and slot information.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-slot-mouse-event.ts",
+            "content": "interface AXSchedulerSlotMouseEvent { event: MouseEvent; slot: { startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView }; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerSlotMouseEvent",
+      "props": [
+        {
+          "name": "event",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The mouse event."
+        },
+        {
+          "name": "slot",
+          "type": [{ "name": "{ startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView }" }],
+          "description": "Data about the clicked slot."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapLatLng",
+  "description": "Represents a geographical coordinate point with latitude and longitude.",
+  "imports": ["import { AXMapLatLng } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapLatLng",
+      "props": [
+        {
+          "name": "latitude",
+          "type": [{ "name": "number" }],
+          "description": "The latitude coordinate in decimal degrees."
+        },
+        {
+          "name": "longitude",
+          "type": [{ "name": "number" }],
+          "description": "The longitude coordinate in decimal degrees."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for geographical coordinates.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXMapLatLng {\n  latitude: number;\n  longitude: number;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

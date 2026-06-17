@@ -1,0 +1,20 @@
+{
+  "name": "acorex-plugins",
+  "owner": {
+    "name": "ACoreX",
+    "email": "dev@acorex.io"
+  },
+  "metadata": {
+    "description": "Official Cursor plugins for ACoreX UI with component blueprints and Tailwind theme",
+    "version": "0.3.0"
+  },
+  "plugins": [
+    {
+      "name": "acorex",
+      "source": "./plugins/acorex",
+      "description": "ACoreX UI blueprints, Tailwind theme, component development, and Storybook tooling",
+      "version": "0.3.0",
+      "keywords": ["acorex", "angular", "design-system", "components"]
+    }
+  ]
+}

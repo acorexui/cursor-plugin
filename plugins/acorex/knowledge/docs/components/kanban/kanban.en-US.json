@@ -1,0 +1,316 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Kanban",
+  "description": "Kanban component displays items grouped by statuses with drag-and-drop reordering and cross-status movement. It supports custom item, header, footer, and empty templates, action icons, tooltips, and emits detailed sorting and mouse events.",
+  "imports": [
+    "import { AXKanbanComponent } from '@acorex/components/kanban';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "600px",
+      "description": "A simple example of using <code>ax-kanban</code>",
+      "content": {
+        "type": "api",
+        "data": "kanban/usage"
+      }
+    },
+    {
+      "title": "Action click",
+      "height": "600px",
+      "description": "Enable action icon and handle <code>onActionClick</code> to perform contextual actions.",
+      "content": {
+        "type": "api",
+        "data": "kanban/action-click"
+      }
+    },
+    {
+      "title": "Drag start delay",
+      "height": "600px",
+      "description": "Avoid accidental drags on touch by setting <code>dragStartDelay</code>.",
+      "content": {
+        "type": "api",
+        "data": "kanban/drag-start-delay"
+      }
+    },
+    {
+      "title": "Empty state",
+      "height": "600px",
+      "description": "Show a custom template when a status has no items using <code>emptyTemplate</code>.",
+      "content": {
+        "type": "api",
+        "data": "kanban/empty-state"
+      }
+    },
+    {
+      "title": "Priority indicator",
+      "height": "600px",
+      "description": "Display item priority using the built-in indicator classes.",
+      "content": {
+        "type": "api",
+        "data": "kanban/priority"
+      }
+    },
+    {
+      "title": "Tooltips",
+      "height": "600px",
+      "description": "Provide item hints using string or template-based <code>tooltipTemplate</code>.",
+      "content": {
+        "type": "api",
+        "data": "kanban/tooltips"
+      }
+    },
+    {
+      "title": "Custom templates",
+      "height": "700px",
+      "description": "Customize headers, footers, content footers, and item rendering using template inputs.",
+      "content": {
+        "type": "api",
+        "data": "kanban/custom-templates"
+      }
+    },
+    {
+      "title": "Mouse events",
+      "height": "700px",
+      "description": "Handle click, double-click, and right-click events on kanban items.",
+      "content": {
+        "type": "api",
+        "data": "kanban/mouse-events"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKanbanComponent",
+      "props": [
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Shows an action icon on each item to trigger a contextual action."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Delay in milliseconds before drag starts after pointer down."
+        },
+        {
+          "name": "statuses",
+          "type": [
+            {
+              "name": "AXKanbanStatus[]",
+              "link": "/en-US/docs/types/ax-kanban-status"
+            }
+          ],
+          "description": "List of board statuses (columns) with key, title and optional index/cssClass."
+        },
+        {
+          "name": "itemTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Optional template to fully customize item rendering. When set, items are rendered from the original data source."
+        },
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXKanbanItem[]",
+              "link": "/en-US/docs/types/ax-kanban-item"
+            },
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Items to render in the board. Either typed as AXKanbanItem[] or mapped at runtime using field inputs."
+        },
+        {
+          "name": "keyField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"id\"",
+          "description": "Field name on dataSource objects that uniquely identifies an item."
+        },
+        {
+          "name": "indexField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"index\"",
+          "description": "Field name holding the item's index within its status."
+        },
+        {
+          "name": "titleField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"title\"",
+          "description": "Field name for the item's display title."
+        },
+        {
+          "name": "cssClassField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"cssClass\"",
+          "description": "Field name for custom CSS class applied to the item container."
+        },
+        {
+          "name": "priorityField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"priority\"",
+          "description": "Field name indicating item priority which affects indicator color."
+        },
+        {
+          "name": "statusKeyField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"statusKey\"",
+          "description": "Field name pointing to the status key (column) of the item."
+        },
+        {
+          "name": "descriptionField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "\"description\"",
+          "description": "Field name for the item's subtitle/description."
+        },
+        {
+          "name": "emptyTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template shown when a status has no items."
+        },
+        {
+          "name": "headerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template to customize the status header area."
+        },
+        {
+          "name": "footerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template to customize the status footer area."
+        },
+        {
+          "name": "contentFooterTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template rendered as sticky footer inside the scrollable content area of a status."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Text or template used as tooltip for items."
+        }
+      ],
+      "events": [
+        {
+          "name": "onSortChanged",
+          "type": [
+            {
+              "name": "AXKanbanSortEvent",
+              "link": "/en-US/docs/events/ax-kanban-sort-event"
+            }
+          ],
+          "description": "Emitted after an item is dropped to a new index or status with the updated data source."
+        },
+        {
+          "name": "onItemClick",
+          "type": [
+            {
+              "name": "AXKanbanMouseEvent",
+              "link": "/en-US/docs/events/ax-kanban-mouse-event"
+            }
+          ],
+          "description": "Emitted when an item is clicked."
+        },
+        {
+          "name": "onActionClick",
+          "type": [
+            {
+              "name": "AXKanbanMouseEvent",
+              "link": "/en-US/docs/events/ax-kanban-mouse-event"
+            }
+          ],
+          "description": "Emitted when the action icon on an item is clicked."
+        },
+        {
+          "name": "onItemDblClick",
+          "type": [
+            {
+              "name": "AXKanbanMouseEvent",
+              "link": "/en-US/docs/events/ax-kanban-mouse-event"
+            }
+          ],
+          "description": "Emitted when an item is double-clicked."
+        },
+        {
+          "name": "onItemRightClick",
+          "type": [
+            {
+              "name": "AXKanbanMouseEvent",
+              "link": "/en-US/docs/events/ax-kanban-mouse-event"
+            }
+          ],
+          "description": "Emitted when an item is right-clicked (context menu)."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Handles a drop operation to reorder items or move them between statuses.\n * It uses the component's current rendered state (`this.items`) as the source\n * of truth, performs precise re-indexing, and emits a comprehensive event with\n * the updated data source.\n *\n * @param event AXDropListDroppedEvent - The drag-and-drop event including indices and container information.\n * @returns void\n */\ndrop(event: AXDropListDroppedEvent): void"
+        }
+      ]
+    }
+  ]
+}

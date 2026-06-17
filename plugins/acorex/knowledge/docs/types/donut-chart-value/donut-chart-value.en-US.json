@@ -1,0 +1,38 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDonutChartValue",
+  "description": "Data structure provided to the donut chart component - represents an array of donut chart data items",
+  "imports": [
+    "import { AXDonutChartValue } from '@acorex/charts/donut-chart';",
+    "import { AXDonutChartData } from '@acorex/charts/donut-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXDonutChartValue",
+      "description": "Data structure provided to the chart component - can be an array of AXDonutChartData directly",
+      "props": [
+        {
+          "name": "AXDonutChartValue",
+          "type": [{ "name": "AXDonutChartData[]", "link": "/en-US/docs/types/donut-chart-data" }],
+          "description": "Array of donut chart data items"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical type definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "donut-chart.type.ts",
+            "language": "ts",
+            "content": "export type AXDonutChartValue = AXDonutChartData[];"
+          }
+        ]
+      }
+    }
+  ]
+}

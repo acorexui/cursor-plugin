@@ -1,0 +1,117 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Navbar",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/navbar--documentation"
+    }
+  ],
+  "description": "A navigation bar component that supports custom styling and encapsulation. It provides a consistent way to display navigation elements with prefix, title, and suffix content areas.",
+  "imports": [
+    "import { AXNavbarComponent } from '@acorex/components/navbar';"
+  ],
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "A simple example of using the <code>ax-navbar</code> component to display a navigation bar with prefix, title, and suffix content",
+      "content": {
+        "type": "api",
+        "data": "navbar/simple-usage"
+      }
+    },
+    {
+      "title": "Look Variants",
+      "description": "Different visual appearance styles for the navbar component",
+      "content": {
+        "type": "api",
+        "data": "navbar/look-variants"
+      }
+    },
+    {
+      "title": "Content Projection",
+      "height": "400px",
+      "description": "Using content projection slots to customize navbar content",
+      "content": {
+        "type": "api",
+        "data": "navbar/content-projection"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNavbarComponent",
+      "description": "A navigation bar component that supports custom styling and encapsulation",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Component identifier. Inherited from MXBaseComponent.",
+          "default": "auto-generated"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Visual appearance style of the navbar. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "EventEmitter<AXOptionChangedEvent>",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "EventEmitter<AXStyleLookType>",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getHostElement",
+          "description": "Gets the host HTML element of the component. Inherited from MXBaseComponent.",
+          "parameters": [],
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "name": "setOption",
+          "description": "Sets a component option with optional lifecycle callbacks. Inherited from MXBaseComponent.",
+          "parameters": [
+            {
+              "name": "option",
+              "type": [
+                {
+                  "name": "MXComponentSetOption<T>"
+                }
+              ],
+              "description": "The option configuration containing the name, value and optional before/after callbacks."
+            }
+          ],
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Comment",
+  "description": "Comment component is an interactive element for displaying and managing user comments on posts. It's essential for social media, blogs, and content-sharing platforms, enabling seamless user engagement in discussions.",
+  "imports": [
+    "import { AXCommentModule } from '@acorex/components/comment';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using comment.",
+      "content": {
+        "type": "api",
+        "data": "comment/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Interactions",
+      "description": "Demonstrates like toggle and reply action on comment items.",
+      "content": {
+        "type": "api",
+        "data": "comment/interactions"
+      }
+    },
+    {
+      "title": "Programmatic control",
+      "description": "Toggle replies and scroll to a specific reply using public methods.",
+      "content": {
+        "type": "api",
+        "data": "comment/programmatic"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCommentContainerComponent",
+      "props": [],
+      "events": [],
+      "methods": [
+        {
+          "content": "/**\n* Scrolls to a specific comment reply by its ID and highlights it temporarily.\n* \n* @param id - The ID of the comment reply to scroll to\n* @returns void\n*/\nscrollToReply(id: string): void"
+        }
+      ]
+    },
+    {
+      "title": "AXCommentItemComponent",
+      "props": [
+        {
+          "name": "replyCount",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The number of replies to this comment item."
+        }
+      ],
+      "events": [],
+      "methods": [
+        {
+          "content": "/**\n* Toggles the collapse state of the comment replies section.\n* \n* @returns void\n*/\ntoggleCollapse(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXCommentLikeComponent",
+      "props": [
+        {
+          "name": "like",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the comment is liked. This property supports two-way binding."
+        }
+      ],
+      "events": [
+        {
+          "name": "likeChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the like state changes."
+        }
+      ]
+    }
+  ]
+}

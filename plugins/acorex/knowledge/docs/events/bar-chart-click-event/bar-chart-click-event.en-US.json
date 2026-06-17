@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXBarChartClickEvent",
+  "description": "Emitted when a bar is clicked, providing the clicked bar data and native event details",
+  "imports": [
+    "import { AXBarChartClickEvent } from '@acorex/charts/bar-chart';",
+    "import { AXBarChartData } from '@acorex/charts/bar-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXBarChartClickEvent",
+      "description": "Bar chart click event interface",
+      "props": [
+        {
+          "name": "item",
+          "type": [{ "name": "AXBarChartData", "link": "/en-US/docs/types/bar-chart-data" }],
+          "description": "The bar chart data item that was clicked"
+        },
+        {
+          "name": "event",
+          "type": [{ "name": "NXNativeEvent" }],
+          "description": "The native event object containing event details"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Canonical event interface from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "bar-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXBarChartClickEvent {\n  item: AXBarChartData;\n  event: NXNativeEvent;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

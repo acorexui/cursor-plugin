@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXHierarchyChartMargin } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartMargin",
+      "description": "Margin configuration for the chart",
+      "props": [
+        {
+          "name": "top",
+          "type": [{ "name": "number" }],
+          "description": "Top margin in pixels"
+        },
+        {
+          "name": "right",
+          "type": [{ "name": "number" }],
+          "description": "Right margin in pixels"
+        },
+        {
+          "name": "bottom",
+          "type": [{ "name": "number" }],
+          "description": "Bottom margin in pixels"
+        },
+        {
+          "name": "left",
+          "type": [{ "name": "number" }],
+          "description": "Left margin in pixels"
+        },
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ]
+    }
+  ]
+}

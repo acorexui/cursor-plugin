@@ -1,0 +1,105 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Uploader",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/uploader--documentation"
+    }
+  ],
+  "description": "The Uploader component provides a flexible interface for uploading files, supporting drag-and-drop, file lists, and dialog containers.",
+  "imports": [
+    "import { AXUploaderDropZoneComponent } from '@acorex/components/uploader';",
+    "import { AXUploaderListComponent } from '@acorex/components/uploader';",
+    "import { AXUploaderDialogContainerComponent } from '@acorex/components/uploader';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-uploader-drop-zone</code> for drag-and-drop uploads.",
+      "content": {
+        "type": "api",
+        "data": "uploader/feature-title"
+      }
+    },
+    {
+      "title": "Drag & Drop Zone",
+      "height": "400px",
+      "description": "Shows the <code>ax-uploader-drop-zone</code> component with drag-and-drop functionality and visual feedback.",
+      "content": {
+        "type": "api",
+        "data": "uploader/drag-drop-zone"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXUploaderDropZoneComponent",
+      "props": [
+        {
+          "name": "description",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Description text for the drop zone."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXUploaderDialogContainerComponent",
+      "props": [
+        {
+          "name": "isCollapsed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component is in a collapsed state."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Closes the parent dialog or container.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Toggles the collapsed state of the component.\n */\ntoggle(): void"
+        }
+      ]
+    }
+  ]
+}

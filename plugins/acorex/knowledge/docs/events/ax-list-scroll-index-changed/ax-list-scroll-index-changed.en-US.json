@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXListScrollIndexChanged",
+  "description": "Payload emitted when the scrolled item index changes in AXListComponent.",
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Canonical TypeScript definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "list.component.ts",
+            "content": "export interface AXListScrollIndexChanged extends AXEvent {\n  index: number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXListScrollIndexChanged",
+      "props": [
+        {
+          "name": "index",
+          "type": [{ "name": "number" }],
+          "description": "The current first visible item index in the viewport."
+        },
+        {
+          "name": "component",
+          "type": [{ "name": "AXListComponent", "link": "/en-US/docs/components/list" }],
+          "description": "Sender component. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "Component host element. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether the event originated from user interaction. Inherited from AXEvent."
+        }
+      ]
+    }
+  ]
+}

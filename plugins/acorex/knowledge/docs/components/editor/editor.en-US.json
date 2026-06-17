@@ -1,0 +1,346 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Editor",
+  "description": "A rich text editor component built on EditorJS that provides a block-based editing experience with various tools for creating formatted content including headers, lists, quotes, code blocks, and more.",
+  "imports": ["import { AXEditorComponent } from '@acorex/components/editor';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-editor</code> with basic configuration",
+      "content": {
+        "type": "api",
+        "data": "editor/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Read-only Mode",
+      "description": "Demonstrate the editor in read-only mode for displaying content without editing capabilities.",
+      "content": {
+        "type": "api",
+        "data": "editor/readonly-mode"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Disabled State",
+      "description": "Show how the editor behaves when disabled, preventing user interaction.",
+      "content": {
+        "type": "api",
+        "data": "editor/disabled-state"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXEditorComponent",
+      "props": [
+        {
+          "name": "modules",
+          "type": [
+            {
+              "name": "EditorJsTool[]",
+              "link": "/en-US/docs/types/editor-js-tool"
+            }
+          ],
+          "default": "[]",
+          "description": "Array of EditorJS tools to enable in the editor. Available tools include 'header', 'list', 'raw', 'image', 'quote', 'code', 'underline', and 'color'."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "OutputData",
+              "link": "https://editorjs.io/output-data"
+            }
+          ],
+          "description": "The current content of the editor in EditorJS OutputData format. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text shown when the editor is empty. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the editor is disabled, preventing user interaction. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the editor is read-only, displaying content without editing capabilities. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the editor field. Inherited from MXValueComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "The validation state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "allowNull",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether null values are allowed. Inherited from MXValueComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<OutputData>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the editor content changes. Emitted with the new OutputData content."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "OutputData"
+            }
+          ],
+          "description": "Emitted when the editor value changes as part of two-way binding. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Saves the current editor content and returns the OutputData.\n * \n * @returns Promise<OutputData> - The current editor content in EditorJS format.\n */\nasync save(): Promise<OutputData>"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnChange(fn: (value: OutputData) => void): void"
+        },
+        {
+          "content": "/**\n * Writes a value to the component (ControlValueAccessor method).\n *\n * @param value - The value to write.\n */\nwriteValue(value: OutputData): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: OutputData, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nvalidate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void"
+        }
+      ]
+    },
+    {
+      "title": "EditorJsTool",
+      "props": [
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The type of EditorJS tool. Available values: 'header', 'list', 'raw', 'image', 'quote', 'code', 'underline', 'color'."
+        }
+      ]
+    },
+    {
+      "title": "ImageToolConfig",
+      "props": [
+        {
+          "name": "endpoints",
+          "type": [
+            {
+              "name": "object"
+            }
+          ],
+          "description": "Configuration for image upload endpoints."
+        },
+        {
+          "name": "endpoints.byFile",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Endpoint URL for file upload."
+        },
+        {
+          "name": "endpoints.byUrl",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Endpoint URL for URL-based image upload."
+        }
+      ]
+    }
+  ]
+}

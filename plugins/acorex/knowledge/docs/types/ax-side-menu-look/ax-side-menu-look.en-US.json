@@ -1,0 +1,23 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSideMenuLook } from '@acorex/components/side-menu';"],
+  "title": "Side Menu Look Type",
+  "description": "Type definition for the visual appearance style of the side menu component.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Available look styles for the side menu component.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-side-menu-look.ts",
+            "content": "type AXSideMenuLook = 'pills' | 'with-line' | 'with-line-color' | 'default';"
+          }
+        ]
+      }
+    }
+  ]
+}
+

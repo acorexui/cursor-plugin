@@ -1,0 +1,93 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXHierarchyChartNode } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartNode",
+      "description": "Represents a node in the hierarchy chart",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the node"
+        },
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Display name for the node"
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Display label for the node (alternative to name)"
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "number" }],
+          "description": "Value associated with the node (used for calculations if needed)"
+        },
+        {
+          "name": "tooltip",
+          "type": [{ "name": "string" }],
+          "description": "Optional tooltip text to display on hover"
+        },
+        {
+          "name": "subtitle",
+          "type": [{ "name": "string" }],
+          "description": "Optional subtitle text to be displayed"
+        },
+        {
+          "name": "description",
+          "type": [{ "name": "string" }],
+          "description": "Optional description or additional information"
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Optional icon to be displayed with the node"
+        },
+        {
+          "name": "type",
+          "type": [{ "name": "string" }],
+          "description": "Optional type category for the node"
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "string" }],
+          "description": "Optional color to apply to the node"
+        },
+        {
+          "name": "isExpanded",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the node is initially expanded (if it has children)"
+        },
+        {
+          "name": "children",
+          "type": [{ "name": "AXHierarchyChartNode[]", "link": "/en-US/docs/types/hierarchy-chart-node" }],
+          "description": "Child nodes"
+        },
+        {
+          "name": "parentId",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "description": "Reference to parent node ID"
+        },
+        {
+          "name": "metadata",
+          "type": [{ "name": "Record<string, any>" }],
+          "description": "Additional metadata (can be used for custom rendering or logic)"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for hierarchy chart nodes",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "code": "export interface AXHierarchyChartNode {\n  /** Unique identifier for the node */\n  id: string;\n  \n  /** Display name for the node */\n  name?: string;\n  \n  /** Display label for the node (alternative to name) */\n  label?: string;\n  \n  /** Value associated with the node (used for calculations if needed) */\n  value?: number;\n  \n  /** Optional tooltip text to display on hover */\n  tooltip?: string;\n  \n  /** Optional subtitle text to be displayed */\n  subtitle?: string;\n  \n  /** Optional description or additional information */\n  description?: string;\n  \n  /** Optional icon to be displayed with the node */\n  icon?: string;\n  \n  /** Optional type category for the node */\n  type?: string;\n  \n  /** Optional color to apply to the node */\n  color?: string;\n  \n  /** Whether the node is initially expanded (if it has children) */\n  isExpanded?: boolean;\n  \n  /** Child nodes */\n  children?: AXHierarchyChartNode[];\n  \n  /** Reference to parent node ID */\n  parentId?: string | null;\n  \n  /** Additional metadata (can be used for custom rendering or logic) */\n  metadata?: Record<string, any>;\n}"
+      }
+    }
+  ]
+}

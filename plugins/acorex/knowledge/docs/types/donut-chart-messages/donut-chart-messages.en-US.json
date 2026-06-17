@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXDonutChartMessages } from '@acorex/charts/donut-chart';"],
+  "types": [
+    {
+      "title": "AXDonutChartMessages",
+      "description": "Messages configuration for donut chart empty states",
+      "props": [
+        {
+          "name": "noData",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when no data is available",
+          "default": "'No data available'"
+        },
+        {
+          "name": "noDataHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when no data is available",
+          "default": "'Please provide data to display the chart'"
+        },
+        {
+          "name": "allHidden",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when all segments are hidden",
+          "default": "'All segments are hidden'"
+        },
+        {
+          "name": "allHiddenHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when all segments are hidden",
+          "default": "'Please toggle visibility of at least one segment'"
+        },
+        {
+          "name": "noDataIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for no data state",
+          "default": "'fa-light fa-chart-pie'"
+        },
+        {
+          "name": "allHiddenIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for all hidden state",
+          "default": "'fa-light fa-eye-slash'"
+        }
+      ]
+    }
+  ]
+}

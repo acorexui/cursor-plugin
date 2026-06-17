@@ -1,0 +1,59 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXChartLegendOptions",
+  "description": "Legend configuration options for customizing legend appearance and behavior",
+  "imports": ["import { AXChartLegendOptions } from '@acorex/charts/chart-legend';"],
+  "types": [
+    {
+      "title": "AXChartLegendOptions",
+      "description": "Legend configuration options",
+      "props": [
+        {
+          "name": "showValues",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show values in legend items",
+          "default": "true"
+        },
+        {
+          "name": "showPercentage",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show percentage values in legend items",
+          "default": "true"
+        },
+        {
+          "name": "className",
+          "type": [{ "name": "string" }],
+          "description": "Custom CSS class name for the legend container"
+        },
+        {
+          "name": "interactive",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the legend items are interactive",
+          "default": "true"
+        },
+        {
+          "name": "mode",
+          "type": [{ "name": "'vertical'" }, { "name": "'horizontal'" }],
+          "description": "Display mode for the legend",
+          "default": "'vertical'"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "chart-legend.type.ts",
+            "language": "ts",
+            "content": "export interface AXChartLegendOptions {\n  showValues?: boolean;\n  showPercentage?: boolean;\n  className?: string;\n  interactive?: boolean;\n  mode?: 'vertical' | 'horizontal';\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

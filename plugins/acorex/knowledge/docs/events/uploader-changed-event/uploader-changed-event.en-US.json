@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXUploaderChangedEvent",
+  "description": "Event fired when files are changed in the uploader (added, removed, etc.).",
+  "imports": ["import { AXUploaderChangedEvent } from '@acorex/components/uploader';"],
+  "types": [
+    {
+      "title": "AXUploaderChangedEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The component that fired the event. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element associated with the event. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates if the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "requests",
+          "type": [{ "name": "AXUploadRequest[]", "link": "/en-US/docs/types/upload-request" }],
+          "description": "Array of upload requests that were changed."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "uploader.models.ts",
+            "content": "export interface AXUploaderChangedEvent extends AXEvent {\n  requests: AXUploadRequest[];\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

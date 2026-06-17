@@ -1,0 +1,67 @@
+{
+  "$schema": "../document.schema.json",
+  "title": "AXButtonItemListItem",
+  "description": "Interface defining the structure of a button item within a button item list. This type is used to programmatically create button items from an array of data.",
+  "imports": [
+    "import { AXButtonItemListItem } from '@acorex/components/button';",
+    "import { AXStyleColorType } from '@acorex/cdk/common';"
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Button item list item interface shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "button-item-list-item.ts",
+            "content": "interface AXButtonItemListItem {\n  name: string;\n  text: string;\n  icon: string;\n  divided?: boolean;\n  disabled?: boolean;\n  selected?: boolean;\n  color?: AXStyleColorType;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXButtonItemListItem",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the button item."
+        },
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "Text displayed on the button item."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Icon class name to display on the button item."
+        },
+        {
+          "name": "divided",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a divider after this item."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button item is disabled."
+        },
+        {
+          "name": "selected",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button item is in selected state."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Color variant for the button item."
+        }
+      ]
+    }
+  ]
+}

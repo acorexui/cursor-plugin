@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStepWizardSize",
+  "description": "Defines the available size options for step wizard components",
+  "imports": ["import { AXStepWizardSize } from '@acorex/components/step-wizard';"],
+  "types": [
+    {
+      "title": "AXStepWizardSize",
+      "props": [
+        {
+          "name": "AXStepWizardSize",
+          "type": [{ "name": "'ax-sm'" }, { "name": "'ax-md'" }, { "name": "'ax-lg'" }],
+          "description": "Size options for step wizard components"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete type definition for AXStepWizardSize",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "step-wizard-size.ts",
+            "content": "export type AXStepWizardSize = 'ax-sm' | 'ax-md' | 'ax-lg';"
+          }
+        ]
+      }
+    }
+  ]
+}

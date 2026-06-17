@@ -1,0 +1,60 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Kanban Item",
+  "imports": ["import { AXKanbanItem } from '@acorex/components/kanban';"],
+  "description": "Type for items rendered in the Kanban component.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of AXKanbanItem.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-kanban-item.ts",
+            "language": "ts",
+            "content": "export type AXKanbanItem = {\n  id: any;\n  index?: number;\n  title?: string;\n  statusKey: any;\n  cssClass?: string;\n  description?: string;\n  priority?: 'highest' | 'high' | 'medium' | 'low' | 'lowest';\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKanbanItem",
+      "props": [
+        { "name": "id", "type": [{ "name": "any" }], "description": "Unique identifier of the item." },
+        { "name": "index", "type": [{ "name": "number" }], "description": "Index of the item inside its status list." },
+        { "name": "title", "type": [{ "name": "string" }], "description": "Display title of the item." },
+        {
+          "name": "statusKey",
+          "type": [{ "name": "any" }],
+          "description": "Key of the status (column) the item belongs to."
+        },
+        {
+          "name": "cssClass",
+          "type": [{ "name": "string" }],
+          "description": "Optional CSS class applied to the item container."
+        },
+        {
+          "name": "description",
+          "type": [{ "name": "string" }],
+          "description": "Optional description or subtitle for the item."
+        },
+        {
+          "name": "priority",
+          "type": [
+            { "name": "'highest'" },
+            { "name": "'high'" },
+            { "name": "'medium'" },
+            { "name": "'low'" },
+            { "name": "'lowest'" }
+          ],
+          "description": "Priority of the item, affecting the indicator color."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

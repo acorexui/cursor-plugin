@@ -1,0 +1,201 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXTooltipComponent } from '@acorex/components/tooltip';",
+    "import { AXTooltipDirective } from '@acorex/components/tooltip';"
+  ],
+  "title": "Tooltip",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/tooltip--documentation"
+    }
+  ],
+  "description": "A component and directive that displays additional information when hovering over or focusing on an element, with support for different positions, themes, and custom content. Provides keyboard navigation support and follows accessibility guidelines.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>axTooltip</code> directive",
+      "content": {
+        "type": "api",
+        "data": "tooltip/usage"
+      }
+    },
+    {
+      "height": "500px",
+      "title": "Custom Template",
+      "description": "Example of tooltip with custom template content",
+      "content": {
+        "type": "api",
+        "data": "tooltip/custom-template"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTooltipComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The text content displayed in the tooltip."
+        },
+        {
+          "name": "position",
+          "type": [
+            {
+              "name": "AXPlacement",
+              "link": "/en-US/docs/types/placement"
+            }
+          ],
+          "description": "Specifies the position of the tooltip relative to the target element."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXTooltipDirective",
+      "props": [
+        {
+          "name": "axTooltip",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "default": "''",
+          "description": "The content to display in the tooltip. Can be a string or a template reference."
+        },
+        {
+          "name": "axTooltipContext",
+          "type": [
+            {
+              "name": "unknown"
+            }
+          ],
+          "default": "{}",
+          "description": "Context data to pass to the tooltip template."
+        },
+        {
+          "name": "axTooltipDisabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the tooltip is disabled."
+        },
+        {
+          "name": "axTooltipPlacement",
+          "type": [
+            {
+              "name": "AXPlacementType",
+              "link": "/en-US/docs/types/placement-type"
+            }
+          ],
+          "default": "'top'",
+          "description": "Specifies the position of the tooltip relative to the target element."
+        },
+        {
+          "name": "axTooltipOffsetX",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Horizontal offset for the tooltip position."
+        },
+        {
+          "name": "axTooltipOffsetY",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Vertical offset for the tooltip position."
+        },
+        {
+          "name": "axTooltipOpenAfter",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "100",
+          "description": "Delay in milliseconds before showing the tooltip."
+        },
+        {
+          "name": "axTooltipCloseAfter",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "100",
+          "description": "Delay in milliseconds before hiding the tooltip."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOpened",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the tooltip is opened."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the tooltip is closed."
+        }
+      ]
+    }
+  ]
+}

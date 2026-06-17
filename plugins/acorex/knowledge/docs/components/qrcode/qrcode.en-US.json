@@ -1,0 +1,154 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "QR Code",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/qrcode--documentation"
+    }
+  ],
+  "description": "A component that generates and displays QR codes. It supports size, error correction levels, colors, and multiple output types (canvas, svg, url).",
+  "imports": ["import { AXQrcodeComponent } from '@acorex/components/qrcode';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-qrcode</code>",
+      "content": {
+        "type": "api",
+        "data": "qrcode/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Logo",
+      "description": "QR code with a logo inside.",
+      "content": {
+        "type": "api",
+        "data": "qrcode/logo"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Output Types",
+      "description": "Different QR code output formats: canvas, svg, and url.",
+      "content": {
+        "type": "api",
+        "data": "qrcode/output-types"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Error Levels",
+      "description": "Different error correction levels affect QR code resilience and size.",
+      "content": {
+        "type": "api",
+        "data": "qrcode/error-levels"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Sizes",
+      "description": "Different QR code sizes for various use cases.",
+      "content": {
+        "type": "api",
+        "data": "qrcode/sizes"
+      },
+      "height": "1300px"
+    },
+    {
+      "title": "Colors",
+      "description": "Different color combinations for QR codes.",
+      "content": {
+        "type": "api",
+        "data": "qrcode/colors"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXQrcodeComponent",
+      "description": "The main component for generating and displaying QR codes.",
+      "props": [
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Data to encode in the QR code.",
+          "default": "(required)"
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Size in pixels.",
+          "default": "256"
+        },
+        {
+          "name": "level",
+          "type": [
+            {
+              "name": "'L'"
+            },
+            {
+              "name": "'M'"
+            },
+            {
+              "name": "'Q'"
+            },
+            {
+              "name": "'H'"
+            }
+          ],
+          "description": "Error correction level.",
+          "default": "'M'"
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Foreground color (hex or CSS color).",
+          "default": "'#000000'"
+        },
+        {
+          "name": "backgroundColor",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Background color (hex or CSS color).",
+          "default": "'#FFFFFF'"
+        },
+        {
+          "name": "outputType",
+          "type": [
+            {
+              "name": "'canvas'"
+            },
+            {
+              "name": "'svg'"
+            },
+            {
+              "name": "'url'"
+            }
+          ],
+          "description": "Type of output element.",
+          "default": "'canvas'"
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

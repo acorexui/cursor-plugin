@@ -1,0 +1,47 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXPlacement } from '@acorex/cdk/common';"],
+  "title": "AXPlacement",
+  "description": "String literal type defining all available placement options for positioning elements relative to a target.",
+  "types": [
+    {
+      "title": "AXPlacement",
+      "props": [
+        {
+          "name": "AXPlacement",
+          "type": [
+            { "name": "'top'" },
+            { "name": "'top-start'" },
+            { "name": "'top-end'" },
+            { "name": "'bottom'" },
+            { "name": "'bottom-start'" },
+            { "name": "'bottom-end'" },
+            { "name": "'end'" },
+            { "name": "'end-top'" },
+            { "name": "'end-bottom'" },
+            { "name": "'start'" },
+            { "name": "'start-top'" },
+            { "name": "'start-bottom'" }
+          ],
+          "description": "String literal type defining all available placement options for positioning elements."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript definition of the placement type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "placement.ts",
+            "content": "export type AXPlacement =\n  | 'top'\n  | 'top-start'\n  | 'top-end'\n  | 'bottom'\n  | 'bottom-start'\n  | 'bottom-end'\n  | 'end'\n  | 'end-top'\n  | 'end-bottom'\n  | 'start'\n  | 'start-top'\n  | 'start-bottom';"
+          }
+        ]
+      }
+    }
+  ]
+}

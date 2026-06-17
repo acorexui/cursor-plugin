@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTabLook",
+  "description": "Predefined look styles available for tab components.",
+  "imports": ["import { AXTabLook } from '@acorex/components/tabs';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the tab look type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "tabs.class.ts",
+            "content": "export type AXTabLook = 'default' | 'pills' | 'pills-color' | 'with-line' | 'with-line-color' | 'classic' | 'custom';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTabLook",
+      "props": [
+        {
+          "name": "AXTabLook",
+          "type": [
+            { "name": "'default'" },
+            { "name": "'pills'" },
+            { "name": "'pills-color'" },
+            { "name": "'with-line'" },
+            { "name": "'with-line-color'" },
+            { "name": "'classic'" },
+            { "name": "'custom'" }
+          ],
+          "description": "Look options for tab components."
+        }
+      ]
+    }
+  ]
+}

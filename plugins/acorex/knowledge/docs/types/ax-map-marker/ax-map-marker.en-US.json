@@ -1,0 +1,75 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapMarker",
+  "description": "Represents a marker on the map with position and optional display properties.",
+  "imports": ["import { AXMapMarker } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapMarker",
+      "extends": [{ "name": "AXMapLatLng", "link": "/en-US/docs/types/ax-map-latlng" }],
+      "props": [
+        {
+          "name": "latitude",
+          "type": [{ "name": "number" }],
+          "description": "The latitude coordinate of the marker."
+        },
+        {
+          "name": "longitude",
+          "type": [{ "name": "number" }],
+          "description": "The longitude coordinate of the marker."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title for the marker."
+        },
+        {
+          "name": "iconKey",
+          "type": [{ "name": "string" }],
+          "description": "Key for icon resolver service."
+        },
+        {
+          "name": "popup",
+          "type": [{ "name": "string" }],
+          "description": "Optional popup text content."
+        },
+        {
+          "name": "popupOpen",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should be open by default."
+        },
+        {
+          "name": "popupCloseButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should have a close button."
+        },
+        {
+          "name": "isLocked",
+          "type": [{ "name": "boolean" }],
+          "description": "If true, the marker cannot be deleted or moved/edited via draw interactions."
+        },
+        {
+          "name": "id",
+          "type": [{ "name": "string" }, { "name": "number" }],
+          "description": "Optional unique identifier for id-based operations."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for map markers.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXMapMarker extends AXMapLatLng {\n  title?: string;\n  iconKey?: string;\n  popup?: string;\n  popupOpen?: boolean;\n  popupCloseButton?: boolean;\n  isLocked?: boolean;\n  id?: string | number;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

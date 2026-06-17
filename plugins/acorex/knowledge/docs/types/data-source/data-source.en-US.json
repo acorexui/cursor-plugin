@@ -1,0 +1,86 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXDataSource } from '@acorex/cdk/common';"],
+  "title": "AXDataSource",
+  "description": "Generic data source class for managing data with filtering, sorting, and pagination capabilities.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Accurate API surface from the source (trimmed to signatures).",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "data-source.ts",
+            "content": "export interface AXDataSourceQuery {\n  take: number;\n  skip: number;\n  filter?: AXDataSourceFilterOption;\n  sort: AXDataSourceSortOption[];\n}\nexport interface AXDataSourceConfig<T = unknown> {\n  key?: string;\n  pageSize: number;\n  load: AXDataSourceLoadCallback<T>;\n  byKey?: AXDataSourceByKeyCallback<T>;\n}\nexport class AXDataSource<T = unknown> {\n  config: AXDataSourceConfig<T>;\n  useCache: boolean;\n  readonly totalCount: number;\n  readonly totalPages: number;\n  readonly pageSize: number;\n  readonly cachedItems: T[];\n  readonly items: T[];\n  onChanged: Subject<AXDataSourceChangedEvent<T>>;\n  onItemExpanded: Subject<AXDataSourceItemExpandedEvent<T>>;\n  onItemRefreshChildren: Subject<{ id: string }>;\n  onLoadingChanged: Subject<boolean>;\n  readonly isLoading: boolean;\n  constructor(config: AXDataSourceConfig<T>);\n  setPage(page: number): void;\n  setPageSize(pageSize: number): void;\n  filter(value: AXDataSourceFilterOption): void;\n  sort(...value: AXDataSourceSortOption[]): void;\n  clearFilter(): void;\n  reset(): void;\n  refresh(options?: { reset?: boolean }): void;\n  find(key: unknown): T | Promise<T>;\n  getItemsByFilter(filter: AXDataSourceFilterOption): Promise<AXDataSourceCallbackResult<T>>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDataSource",
+      "props": [
+        {
+          "name": "config",
+          "type": [{ "name": "AXDataSourceConfig<T>" }],
+          "description": "Configuration including key, pageSize and loader callbacks."
+        },
+        {
+          "name": "useCache",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to reuse previously fetched pages."
+        },
+        { "name": "totalCount", "type": [{ "name": "number" }], "description": "Total item count from the last load." },
+        {
+          "name": "totalPages",
+          "type": [{ "name": "number" }],
+          "description": "Total pages derived from totalCount and pageSize."
+        },
+        { "name": "pageSize", "type": [{ "name": "number" }], "description": "Current page size." },
+        {
+          "name": "cachedItems",
+          "type": [{ "name": "T[]" }],
+          "description": "Backing store containing cached items by page."
+        },
+        { "name": "items", "type": [{ "name": "T[]" }], "description": "Items of the current page." },
+        {
+          "name": "isLoading",
+          "type": [{ "name": "boolean" }],
+          "description": "Loading state (emitted via onLoadingChanged)."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Navigate to a page and load its items.\n *\n * @param page - The page number to navigate to.\n * @returns void - No return value.\n */\nsetPage(page: number): void"
+        },
+        {
+          "content": "/**\n * Change page size and reload.\n *\n * @param pageSize - The new page size.\n * @returns void - No return value.\n */\nsetPageSize(pageSize: number): void"
+        },
+        {
+          "content": "/**\n * Set the filter condition applied on load.\n *\n * @param value - The filter option to apply.\n * @returns void - No return value.\n */\nfilter(value: AXDataSourceFilterOption): void"
+        },
+        {
+          "content": "/**\n * Set sorting descriptors.\n *\n * @param value - The sort options to apply.\n * @returns void - No return value.\n */\nsort(...value: AXDataSourceSortOption[]): void"
+        },
+        {
+          "content": "/**\n * Clear the active filter.\n *\n * @returns void - No return value.\n */\nclearFilter(): void"
+        },
+        {
+          "content": "/**\n * Reset query, cache and counters.\n *\n * @returns void - No return value.\n */\nreset(): void"
+        },
+        {
+          "content": "/**\n * Reload with the current query (optionally reset first).\n *\n * @param options - Optional configuration object.\n * @param options.reset - Whether to reset before reloading. Defaults to true.\n * @returns void - No return value.\n */\nrefresh(options?: { reset?: boolean }): void"
+        },
+        {
+          "content": "/**\n * Find an item by key from cache or via byKey callback.\n *\n * @param key - The key to search for.\n * @returns T | Promise<T> - The found item or a promise that resolves to the item.\n */\nfind(key: unknown): T | Promise<T>"
+        },
+        {
+          "content": "/**\n * Load items by a one-off filter using the loader.\n *\n * @param filter - The filter option to apply.\n * @returns Promise<AXDataSourceCallbackResult<T>> - A promise that resolves to the filtered results.\n */\ngetItemsByFilter(filter: AXDataSourceFilterOption): Promise<AXDataSourceCallbackResult<T>>"
+        }
+      ]
+    }
+  ]
+}

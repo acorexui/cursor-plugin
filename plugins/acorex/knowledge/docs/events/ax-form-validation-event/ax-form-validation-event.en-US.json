@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Form Validation Event",
+  "description": "Event emitted when form validation is performed. Contains the validation results and component context.",
+  "imports": ["import { AXFormValidationEvent } from '@acorex/components/form';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "The AXFormValidationEvent class definition showing inheritance from AXEvent",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "form.component.ts",
+            "content": "export class AXFormValidationEvent extends AXEvent {\n  result: AXValidationSummary;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormValidationEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates if the event was triggered by user interaction. Inherited from AXEvent.",
+          "default": "false"
+        },
+        {
+          "name": "result",
+          "type": [{ "name": "AXValidationSummary", "link": "/en-US/docs/core/validation" }],
+          "description": "The validation results containing the overall result and per-rule results."
+        }
+      ]
+    }
+  ]
+}

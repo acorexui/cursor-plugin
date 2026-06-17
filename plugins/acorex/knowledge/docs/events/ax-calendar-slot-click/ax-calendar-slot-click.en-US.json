@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Slot Click Event",
+  "imports": ["import { AXCalendarSlotClick } from '@acorex/components/calendar';"],
+  "description": "Represents the event payload when a calendar slot (date cell) is clicked by the user.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload for calendar date cell clicks.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-calendar-slot-click.ts",
+            "language": "ts",
+            "content": "interface AXCalendarSlotClick {\n  component: AXCalendarComponent;\n  item: Date;\n  isUserInteraction: boolean;\n  nativeEvent: MouseEvent;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarSlotClick",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXCalendarComponent" }],
+          "description": "The calendar component instance that triggered the slot click event."
+        },
+        {
+          "name": "item",
+          "type": [{ "name": "Date" }],
+          "description": "The date value of the clicked calendar slot."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether the click was triggered by user interaction."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native browser mouse event that triggered the slot click."
+        }
+      ]
+    }
+  ]
+}

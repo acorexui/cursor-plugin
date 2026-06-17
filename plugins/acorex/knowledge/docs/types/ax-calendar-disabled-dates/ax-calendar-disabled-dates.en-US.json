@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Disabled Dates",
+  "imports": ["import { AXCalendarDisabledDates } from '@acorex/components/calendar';"],
+  "description": "Defines the type for specifying dates that should be disabled in calendar components, preventing user selection of those dates.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Disable dates by list or predicate.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar-disabled-dates.ts",
+            "content": "type AXCalendarDisabledDates = Date[] | ((date: Date) => boolean);"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarDisabledDates",
+      "props": [
+        {
+          "name": "Date[]",
+          "type": [{ "name": "Date[]" }],
+          "description": "An array of Date objects representing specific dates that should be disabled in the calendar."
+        },
+        {
+          "name": "function",
+          "type": [{ "name": "(date: Date) => boolean" }],
+          "description": "A function that takes a Date parameter and returns a boolean indicating whether that date should be disabled."
+        }
+      ]
+    }
+  ]
+}

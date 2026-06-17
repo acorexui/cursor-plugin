@@ -1,0 +1,348 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Date & Time",
+  "description": "Calendar abstraction and date/time utilities for AcoreX. Supports Gregorian and Solar Hijri calendars, locale-aware formatting, holiday loading, date arithmetic, comparison, ranges, and registered formatters integrated with AXFormatService.",
+  "imports": [
+    "import { AXCalendarService, AXDateTime, AXDateValue, AXDateTimeRange } from '@acorex/core/date-time';",
+    "import { AXGregorianCalendar, AXSolarHijriCalendar } from '@acorex/core/date-time';",
+    "import { AXDateTimeModule, AXDateTimePipe } from '@acorex/core/date-time';",
+    "import { AXDateFormatter, AXDateTimeFormatter, AXTimeFormatter, AXTimeDurationFormatter, AXTimeLeftFormatter } from '@acorex/core/date-time';",
+    "import { AX_DATETIME_HOLIDAYS_LOADER, AXHolidaysLoader, AXHolidayDate } from '@acorex/core/date-time';"
+  ],
+  "hints": [
+    {
+      "title": "Calendar systems",
+      "content": "Two built-in calendars are registered by default: <code>gregorian</code> and <code>solar-hijri</code>. Switch at runtime with <code>setActiveCalendar()</code> or automatically via locale profile changes from <code>AXLocaleService</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Preferred formatting",
+      "content": "Use <code>AXFormatService</code> or the <code>format</code> pipe from <code>@acorex/core/format</code> for display. Import <code>AXDateTimeModule</code> to register date/time formatters. The <code>axDate</code> pipe is deprecated.",
+      "status": "warning"
+    },
+    {
+      "title": "Internal Date storage",
+      "content": "<code>AXDateTime</code> always wraps a native <code>Date</code> internally. Calendar-specific year/month/day are computed through the active <code>AXCalendar</code> implementation — the same instant can be displayed in Gregorian or Solar Hijri.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarService",
+      "description": "Central service for creating, converting, formatting, and managing the active calendar.",
+      "props": [
+        {
+          "name": "calendar",
+          "type": [{ "name": "AXCalendar" }],
+          "description": "Shortcut for getActiveCalendar()."
+        },
+        {
+          "name": "calendarChanges$",
+          "type": [{ "name": "Observable<AXCalendar>" }],
+          "description": "Emits when the active calendar changes."
+        },
+        {
+          "name": "holidays",
+          "type": [{ "name": "AXHolidayDate[]" }],
+          "description": "Last loaded holiday list."
+        },
+        {
+          "name": "onHolidaysChanged",
+          "type": [{ "name": "Subject<AXHolidayDate[]>" }],
+          "description": "Notifies subscribers when holidays are reloaded."
+        }
+      ],
+      "methods": [
+        { "content": "getDefaultCalendar(): AXCalendar" },
+        { "content": "getActiveCalendar(): AXCalendar" },
+        { "content": "setActiveCalendar(name: string): void" },
+        { "content": "resolveCalendar(name: string): AXCalendar" },
+        { "content": "loadHolidays(options?: AXHolidaysLoaderOptions): Promise<void>" },
+        { "content": "isValidDate(value: unknown): boolean" },
+        { "content": "create(value: AXDateValue | Date | string | AXDateTime, calendarName?: string): AXDateTime" },
+        { "content": "convert(value: AXValidDateTimeValue, calendarName?: string): AXDateTime" },
+        { "content": "now(calendarName?: string): AXDateTime" },
+        { "content": "format(value: AXValidDateTimeValue, format: string, options?: AXDateTimeFormatterOptions): string" }
+      ]
+    },
+    {
+      "title": "AXDateValue",
+      "props": [
+        { "name": "year", "type": [{ "name": "number" }], "description": "Calendar year (e.g. 2025 or 1404)." },
+        { "name": "month", "type": [{ "name": "number" }], "description": "Month number (1-12)." },
+        { "name": "day", "type": [{ "name": "number" }], "description": "Day of month (1-31)." },
+        { "name": "hours?", "type": [{ "name": "number" }], "description": "Optional hour (0-23)." },
+        { "name": "minutes?", "type": [{ "name": "number" }], "description": "Optional minute (0-59)." },
+        { "name": "seconds?", "type": [{ "name": "number" }], "description": "Optional second (0-59)." },
+        { "name": "ms?", "type": [{ "name": "number" }], "description": "Optional milliseconds (0-999)." }
+      ]
+    },
+    {
+      "title": "AXDateTime",
+      "props": [
+        { "name": "date", "type": [{ "name": "Date" }], "description": "Underlying JavaScript Date." },
+        { "name": "calendar", "type": [{ "name": "AXCalendar" }], "description": "Calendar used for calculations." },
+        { "name": "year", "type": [{ "name": "number" }], "description": "Year in the active calendar." },
+        { "name": "monthOfYear", "type": [{ "name": "number" }], "description": "Month (1-12) in the active calendar." },
+        { "name": "dayOfMonth", "type": [{ "name": "number" }], "description": "Day of month in the active calendar." },
+        { "name": "dayOfWeek", "type": [{ "name": "number" }], "description": "Day of week (1-7)." },
+        { "name": "weekOfYear", "type": [{ "name": "number" }], "description": "Week index in the year." }
+      ],
+      "methods": [
+        { "content": "clone(): AXDateTime" },
+        { "content": "add(unit: TimeUnit, amount: number): AXDateTime" },
+        { "content": "set(unit: TimeUnit, value: number): AXDateTime" },
+        { "content": "startOf(unit: TimeUnit): AXDateTime" },
+        { "content": "endOf(unit: TimeUnit): AXDateTime" },
+        { "content": "format(format?: string, options?: { locale?: string }): string" },
+        { "content": "duration(end: Date | AXDateTime): AXTimeSpan" },
+        { "content": "compare(value: Date | AXDateTime, unit?: TimeUnit): number" },
+        { "content": "isBefore(value: Date | AXDateTime, unit?: TimeUnit): boolean" },
+        { "content": "isAfter(value: Date | AXDateTime, unit?: TimeUnit): boolean" },
+        { "content": "isSame(value: Date | AXDateTime, unit?: TimeUnit): boolean" }
+      ]
+    },
+    {
+      "title": "AXDateTimeRange",
+      "description": "Represents a start/end pair of AXDateTime values with duration and enumeration helpers.",
+      "methods": [
+        { "content": "duration(): AXTimeSpan" },
+        { "content": "enumerate(unit?: TimeUnit, amount?: number): AXDateTime[]" }
+      ]
+    },
+    {
+      "title": "TimeUnit",
+      "description": "Supported units for add, set, startOf, endOf, and compare.",
+      "props": [
+        {
+          "name": "unit",
+          "type": [
+            { "name": "'ms'" },
+            { "name": "| 'second'" },
+            { "name": "| 'minute'" },
+            { "name": "| 'hour'" },
+            { "name": "| 'day'" },
+            { "name": "| 'week'" },
+            { "name": "| 'month'" },
+            { "name": "| 'year'" }
+          ],
+          "description": "Time unit identifier."
+        }
+      ]
+    },
+    {
+      "title": "AXCalendar (abstract)",
+      "props": [
+        { "name": "weekdays", "type": [{ "name": "number[]" }], "description": "Ordered weekday indices." },
+        { "name": "weekend", "type": [{ "name": "number[]" }], "description": "Weekend day indices." }
+      ],
+      "methods": [
+        { "content": "name(): string" },
+        { "content": "create(value: AXDateValue): AXDateTime" },
+        { "content": "parse(value: string): AXDateTime" },
+        { "content": "add(date: Date, unit: TimeUnit, amount: number): AXDateTime" },
+        { "content": "startOf(date: Date, unit: TimeUnit): AXDateTime" },
+        { "content": "endOf(date: Date, unit: TimeUnit): AXDateTime" }
+      ]
+    },
+    {
+      "title": "AXHolidayDate",
+      "props": [
+        { "name": "date", "type": [{ "name": "Date" }], "description": "Holiday date." },
+        { "name": "title", "type": [{ "name": "string" }], "description": "Display title." },
+        { "name": "cssClass?", "type": [{ "name": "string" }], "description": "Optional CSS class." },
+        { "name": "description?", "type": [{ "name": "string" }], "description": "Optional description." }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "Architecture of the date-time module.",
+      "content": {
+        "type": "text",
+        "data": "The date-time module wraps JavaScript Date with calendar-aware logic. AXCalendarService is the main entry point — it creates AXDateTime instances, switches between gregorian and solar-hijri calendars, formats values, and loads holidays.\n\nAXDateTime provides immutable-style operations (add, startOf, compare) that return new instances. Formatters register with AXFormatService through AXDateTimeModule, enabling the format pipe in templates."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "AXCalendarService is providedIn root — inject it to create, format, and manipulate calendar-aware dates.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "date-time-usage.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport { AXCalendarService } from '@acorex/core/date-time';\n\n@Injectable({ providedIn: 'root' })\nexport class DateTimeBasicDemo {\n  private calendar = inject(AXCalendarService);\n\n  demo() {\n    // Current moment in the active calendar\n    const today = this.calendar.now();\n\n    // Create from calendar parts\n    const birthDate = this.calendar.create(\n      { year: 1370, month: 1, day: 15 },\n      'solar-hijri',\n    );\n\n    // Create from ISO string or native Date\n    const fromIso = this.calendar.create('2025-06-10T12:30:00');\n\n    // Date arithmetic — returns a new AXDateTime instance\n    const nextWeek = today.add('day', 7);\n    const monthStart = today.startOf('month');\n\n    // Format for display\n    const label = today.format('yyyy/MM/dd HH:mm');\n    const shortLabel = this.calendar.format(today, 'shortDate', {\n      calendar: 'solar-hijri',\n    });\n\n    // Switch active calendar at runtime\n    this.calendar.setActiveCalendar('solar-hijri');\n\n    return { today, birthDate, fromIso, nextWeek, monthStart, label, shortLabel };\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Module Setup",
+      "description": "Register formatters and the axDate pipe.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app.config.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig, importProvidersFrom } from '@angular/core';\nimport { AXDateTimeModule } from '@acorex/core/date-time';\nimport { AXFormatModule } from '@acorex/core/format';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    // Registers date, datetime, time, timeleft, time-duration formatters\n    importProvidersFrom(AXDateTimeModule, AXFormatModule.forRoot()),\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Creating Dates",
+      "description": "Create AXDateTime from Date, string, AXDateValue, or calendar parts.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "create-dates.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXCalendarService } from '@acorex/core/date-time';\n\nexport class DateDemo {\n  private calendar = inject(AXCalendarService);\n\n  examples() {\n    // Current moment in active calendar\n    const now = this.calendar.now();\n\n    // From native Date or ISO string\n    const fromDate = this.calendar.create(new Date());\n    const fromIso = this.calendar.create('2025-06-10T12:30:00');\n\n    // From calendar parts (Gregorian)\n    const gregorian = this.calendar.create(\n      { year: 2025, month: 6, day: 10, hours: 14, minutes: 30 },\n      'gregorian',\n    );\n\n    // From Solar Hijri parts\n    const persian = this.calendar.create(\n      { year: 1404, month: 3, day: 20 },\n      'solar-hijri',\n    );\n\n    // Validation\n    this.calendar.isValidDate({ year: 1404, month: 3, day: 20 }); // true\n    this.calendar.isValidDate('not-a-date'); // false\n\n    return { now, fromDate, fromIso, gregorian, persian };\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Switching Calendars",
+      "description": "Change the active calendar and react to changes.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "calendar-switch.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, OnInit } from '@angular/core';\nimport { AXCalendarService } from '@acorex/core/date-time';\n\n@Component({\n  selector: 'app-calendar-toggle',\n  template: `\n    <button (click)=\"useGregorian()\">Gregorian</button>\n    <button (click)=\"usePersian()\">Solar Hijri</button>\n    <p>Active: {{ activeCalendar }}</p>\n    <p>Today: {{ todayFormatted }}</p>\n  `,\n})\nexport class CalendarToggleComponent implements OnInit {\n  private calendarService = inject(AXCalendarService);\n\n  activeCalendar = this.calendarService.calendar.name();\n  todayFormatted = '';\n\n  ngOnInit() {\n    this.refresh();\n\n    this.calendarService.calendarChanges$.subscribe((cal) => {\n      this.activeCalendar = cal.name();\n      this.refresh();\n    });\n  }\n\n  useGregorian() {\n    this.calendarService.setActiveCalendar('gregorian');\n  }\n\n  usePersian() {\n    this.calendarService.setActiveCalendar('solar-hijri');\n  }\n\n  private refresh() {\n    const today = this.calendarService.now();\n    this.todayFormatted = today.format('yyyy/MM/dd');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Date Arithmetic & Comparison",
+      "description": "Add time, get boundaries, and compare dates.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "date-math.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXCalendarService, AXDateTimeRange } from '@acorex/core/date-time';\n\nexport class DateMathDemo {\n  private calendar = inject(AXCalendarService);\n\n  demo() {\n    const start = this.calendar.now('solar-hijri');\n\n    // Add / subtract\n    const nextWeek = start.add('day', 7);\n    const prevMonth = start.add('month', -1);\n\n    // Start / end of unit\n    const monthStart = start.startOf('month');\n    const monthEnd = start.endOf('month');\n\n    // Comparison\n    const isPast = start.isBefore(nextWeek, 'day');\n    const sameMonth = start.isSame(prevMonth, 'month');\n\n    // Duration between two dates\n    const span = start.duration(nextWeek);\n    console.log(span.days, span.hours);\n\n    // Enumerate days in a range\n    const range = new AXDateTimeRange(monthStart, monthEnd);\n    const daysInMonth = range.enumerate('day');\n\n    return { nextWeek, monthStart, monthEnd, isPast, sameMonth, daysInMonth };\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Formatting",
+      "description": "Format dates via AXCalendarService, formatters, or the format pipe.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "formatting.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXCalendarService, AXDateTimeFormatter } from '@acorex/core/date-time';\nimport { AXFormatPipe } from '@acorex/core/format';\nimport { AsyncPipe } from '@angular/common';\n\n@Component({\n  selector: 'app-formatted-date',\n  imports: [AXFormatPipe, AsyncPipe],\n  template: `\n    <!-- Recommended: format pipe -->\n    <p>{{ today | format: 'date' : { format: 'long', calendar: 'solar-hijri' } | async }}</p>\n    <p>{{ today | format: 'datetime' : { format: 'short' } | async }}</p>\n    <p>{{ today | format: 'time' : { format: 'HH:mm' } | async }}</p>\n\n    <!-- Custom pattern via service -->\n    <p>{{ customFormatted }}</p>\n  `,\n})\nexport class FormattedDateComponent {\n  private calendar = inject(AXCalendarService);\n  private datetimeFormatter = inject(AXDateTimeFormatter);\n\n  today = this.calendar.now();\n\n  customFormatted = this.calendar.format(this.today, 'yyyy/MM/dd HH:mm', {\n    calendar: 'solar-hijri',\n  });\n\n  // Or via formatter directly\n  longPersian = this.datetimeFormatter.format(this.today, {\n    format: 'full',\n    calendar: 'solar-hijri',\n    locale: 'fa-IR',\n  });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Format Tokens",
+      "description": "Common pattern tokens supported by AXDateTime.format().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "format-tokens.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXCalendarService } from '@acorex/core/date-time';\n\nexport class FormatTokensDemo {\n  private calendar = inject(AXCalendarService);\n\n  demo() {\n    const dt = this.calendar.now('solar-hijri');\n\n    return {\n      date: dt.format('yyyy/MM/dd'),       // 1404/03/20\n      time24: dt.format('HH:mm:ss'),       // 14:30:00\n      weekday: dt.format('dddd'),          // localized weekday name\n      monthName: dt.format('MMMM'),        // localized month name\n      preset: dt.format('shortDate'),      // locale short date\n      datetime: dt.format('yyyy/MM/dd HH:mm'),\n    };\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Duration & Time Left",
+      "description": "Format elapsed time and relative countdowns.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "duration-formatters.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport {\n  AXTimeDurationFormatter,\n  AXTimeLeftFormatter,\n} from '@acorex/core/date-time';\n\nexport class DurationDemo {\n  private durationFormatter = inject(AXTimeDurationFormatter);\n  private timeLeftFormatter = inject(AXTimeLeftFormatter);\n\n  demo() {\n    // Duration from milliseconds\n    const elapsed = this.durationFormatter.format(125_000, { format: 'HH:mm:ss' });\n\n    // Relative time (auto unit: now, minutes, hours, days...)\n    const deadline = new Date(Date.now() + 5 * 60 * 1000);\n    const remaining = this.timeLeftFormatter.format(deadline);\n\n    // Past event\n    const past = this.timeLeftFormatter.format(\n      new Date(Date.now() - 3 * 60 * 60 * 1000),\n      { format: 'h' },\n    );\n\n    return { elapsed, remaining, past };\n  }\n\n  async breakdown() {\n    // Full unit breakdown with labels\n    return this.durationFormatter.millisecondsToMask(\n      9_876_543_210,\n      'DAY',\n      'SECOND',\n      true,\n    );\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Solar Hijri Calendar",
+      "description": "Direct use of AXSolarHijriCalendar for conversion and validation.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "solar-hijri.ts",
+            "language": "typescript",
+            "content": "import { AXSolarHijriCalendar } from '@acorex/core/date-time';\n\nconst calendar = new AXSolarHijriCalendar({\n  weekdays: [6, 0, 1, 2, 3, 4, 5],\n  weekend: [6],\n});\n\n// Create a Jalali date\nconst dt = calendar.create({ year: 1403, month: 10, day: 1, hours: 12 });\n\n// Convert between systems\nconst gregorianDate = calendar.toGregorian(1403, 10, 1);\nconst jalaliParts = calendar.toSolarHijri(new Date());\n\n// Calendar math\nconst nextMonth = calendar.add(new Date(), 'month', 1);\nconst startOfYear = calendar.startOf(new Date(), 'year');\n\n// Validation\nconst isValid = calendar.isValidSolarHijriDate(1403, 10, 1);\nconst isLeap = calendar.isLeapSolarHijriYear(1403);\n\nconsole.log({ dt, gregorianDate, jalaliParts, nextMonth, isValid, isLeap });\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Gregorian Calendar",
+      "description": "Direct use of AXGregorianCalendar.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "gregorian.ts",
+            "language": "typescript",
+            "content": "import { AXGregorianCalendar } from '@acorex/core/date-time';\n\nconst calendar = new AXGregorianCalendar({\n  weekdays: [0, 1, 2, 3, 4, 5, 6],\n  weekend: [5, 6],\n});\n\nconst dt = calendar.create({ year: 2025, month: 6, day: 10 });\n\nconst year = calendar.year(dt.date);           // 2025\nconst month = calendar.monthOfYear(dt.date);   // 6\nconst day = calendar.dayOfMonth(dt.date);      // 10\n\nconst endOfMonth = calendar.endOf(dt.date, 'month');\nconst inTwoWeeks = calendar.add(dt.date, 'week', 2);\n\nconsole.log({ year, month, day, endOfMonth, inTwoWeeks });\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Holidays Loader",
+      "description": "Provide a custom holidays loader and consume holidays in components.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "holidays.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, OnInit } from '@angular/core';\nimport {\n  AXCalendarService,\n  AX_DATETIME_HOLIDAYS_LOADER,\n  AXHolidayDate,\n  AXHolidaysLoader,\n} from '@acorex/core/date-time';\n\n// Custom loader implementation\nclass MyHolidaysLoader implements AXHolidaysLoader {\n  getHolidays() {\n    return Promise.resolve<AXHolidayDate[]>([\n      { date: new Date(2025, 2, 20), title: 'Nowruz', cssClass: 'holiday' },\n    ]);\n  }\n}\n\n// Register in app config:\n// { provide: AX_DATETIME_HOLIDAYS_LOADER, useClass: MyHolidaysLoader }\n\n@Component({ selector: 'app-holiday-list', template: `@for (h of holidays; track h.title) { <li>{{ h.title }}</li> }` })\nexport class HolidayListComponent implements OnInit {\n  private calendarService = inject(AXCalendarService);\n  holidays: AXHolidayDate[] = [];\n\n  ngOnInit() {\n    this.calendarService.onHolidaysChanged.subscribe((list) => {\n      this.holidays = list;\n    });\n\n    this.calendarService.loadHolidays({ calendar: 'solar-hijri' });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "axDate Pipe (Deprecated)",
+      "description": "Legacy pipe — prefer the format pipe instead.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "ax-date-pipe.html",
+            "language": "html",
+            "content": "<!-- Deprecated -->\n<p>{{ today | axDate: 'yyyy/MM/dd' : 'solar-hijri' }}</p>\n\n<!-- Recommended -->\n<p>{{ today | format: 'datetime' : { format: 'yyyy/MM/dd', calendar: 'solar-hijri' } | async }}</p>\n"
+          }
+        ]
+      }
+    }
+  ]
+}

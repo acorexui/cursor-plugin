@@ -1,0 +1,74 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Dialog Configuration",
+  "imports": ["import { AXDialogConfig } from '@acorex/components/dialog';"],
+  "description": "Configuration interface for dialog appearance and behavior. This interface defines all the properties that can be used to customize the dialog component, including title, content, buttons, and interaction options.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Dialog configuration shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-dialog-config.ts",
+            "content": "interface AXDialogConfig {\n  title: string;\n  content: string;\n  type: AXStyleColorType;\n  buttons: AXDialogButtonItem[];\n  closeButton?: boolean;\n  orientation?: 'horizontal' | 'vertical';\n  icon?: string | 'none';\n  draggable?: boolean;\n  direction?: 'rtl' | 'ltr';\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDialogConfig",
+      "props": [
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "The title displayed at the top of the dialog."
+        },
+        {
+          "name": "content",
+          "type": [{ "name": "string" }],
+          "description": "The main content message displayed in the dialog body."
+        },
+        {
+          "name": "type",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "The color theme type of the dialog (primary, success, warning, danger, etc.)."
+        },
+        {
+          "name": "buttons",
+          "type": [{ "name": "AXDialogButtonItem[]", "link": "/en-US/docs/types/ax-dialog-button-item" }],
+          "description": "Array of button items to display in the dialog footer."
+        },
+        {
+          "name": "closeButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a close button in the dialog header."
+        },
+        {
+          "name": "orientation",
+          "type": [{ "name": "'horizontal'" }, { "name": "'vertical'" }],
+          "description": "The orientation of the dialog content and buttons layout."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }, { "name": "'none'" }],
+          "description": "The icon to display in the dialog header, or 'none' to hide the icon."
+        },
+        {
+          "name": "draggable",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the dialog can be dragged by the user."
+        },
+        {
+          "name": "direction",
+          "type": [{ "name": "'rtl'" }, { "name": "'ltr'" }],
+          "description": "The text direction of the dialog content (right-to-left or left-to-right)."
+        }
+      ]
+    }
+  ]
+}

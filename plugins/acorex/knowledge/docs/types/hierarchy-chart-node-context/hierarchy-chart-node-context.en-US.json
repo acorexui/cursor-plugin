@@ -1,0 +1,70 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHierarchyChartNodeContext",
+  "description": "Context data interface for node template rendering in hierarchy charts, providing access to node properties, expansion state, and interaction functions",
+  "imports": ["import { AXHierarchyChartNodeContext } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartNodeContext",
+      "description": "Context data for node template rendering. This object is passed to the custom node template. The node with expanded state and toggle function is passed as $implicit.",
+      "props": [
+        {
+          "name": "expanded",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the node is currently expanded"
+        },
+        {
+          "name": "toggleExpanded",
+          "type": [{ "name": "() => void" }],
+          "description": "Function to toggle the expanded state of the node"
+        },
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the node",
+          "link": "/en-US/docs/types/hierarchy-chart-node"
+        },
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Display name of the node",
+          "link": "/en-US/docs/types/hierarchy-chart-node"
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "number" }],
+          "description": "Numeric value associated with the node",
+          "link": "/en-US/docs/types/hierarchy-chart-node"
+        },
+        {
+          "name": "children",
+          "type": [{ "name": "AXHierarchyChartNode[]", "link": "/en-US/docs/types/hierarchy-chart-node" }],
+          "description": "Array of child nodes"
+        }
+      ],
+      "inherited": [
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element. Inherited from NXComponent"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "hierarchy-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXHierarchyChartNodeContext {\n  expanded: boolean;\n  toggleExpanded: () => void;\n  id: string;\n  name?: string;\n  value?: number;\n  children?: AXHierarchyChartNode[];\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

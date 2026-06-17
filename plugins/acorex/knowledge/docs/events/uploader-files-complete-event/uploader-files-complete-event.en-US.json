@@ -1,0 +1,55 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXUploaderFilesCompleteEvent",
+  "description": "Event fired when all files upload is completed.",
+  "imports": ["import { AXUploaderFilesCompleteEvent } from '@acorex/components/uploader';"],
+  "types": [
+    {
+      "title": "AXUploaderFilesCompleteEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The component that fired the event. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element associated with the event. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates if the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "uploadedFiles",
+          "type": [{ "name": "AXUploadRequest[]", "link": "/en-US/docs/types/upload-request" }],
+          "description": "Array of all upload requests that were completed."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "description": "Optional additional data associated with the completion."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "uploader.models.ts",
+            "content": "export interface AXUploaderFilesCompleteEvent extends AXEvent {\n  uploadedFiles: AXUploadRequest[];\n  data?: any;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+---
+description: ACoreX Tailwind v4 theme and styling rules — use design tokens from default.css, never hardcode colors, apply ax-* color/look/size patterns.
+alwaysApply: true
+---
+
+# ACoreX Tailwind Theme & Styling
+
+The ACoreX design system theme lives in `knowledge/theme/default.css` (source: `packages/styles/themes/default.css`). **Always style using theme tokens**, not arbitrary hex/rgb values.
+
+## Knowledge files
+
+| File | Purpose |
+| --- | --- |
+| `knowledge/theme/TAILWIND-GUIDE.md` | Quick reference for agents |
+| `knowledge/theme/tailwind-theme.json` | Parsed tokens, utilities, patterns |
+| `knowledge/theme/default.css` | Full theme source (Tailwind v4) |
+| `knowledge/theme/tailwind-base.js` | Tailwind v3 preset |
+| `knowledge/docs/get-started/tailwind-compatibility/` | Setup instructions |
+
+## Required styling rules
+
+1. **Use Tailwind utilities mapped to @theme tokens:**
+   - Surfaces: `bg-lightest`, `bg-surface`, `bg-darkest`, `text-on-lightest`, `border-border-lightest`
+   - Semantic: `bg-primary`, `text-on-primary`, `bg-success-100`, `text-danger-800`
+   - Defaults: `bg-default`, `text-default`, `rounded-default`
+
+2. **Component color/look/size** — on `ax-*` components and custom hosts:
+   - Size: `ax-xs`, `ax-sm`, `ax-md`, `ax-lg`, `ax-xl`
+   - Color: `ax-default`, `ax-primary`, `ax-secondary`, `ax-success`, `ax-warning`, `ax-danger`
+   - Look: `ax-solid`, `ax-outline`, `ax-twotone`, `ax-flat`, `ax-fill`, `ax-blank` (+ `-interactive` variants)
+
+3. **Dark mode** — use `ax-dark` on `<html>`; apply `dark:` variants for custom markup.
+
+4. **Component-specific tokens** — when styling `ax-*` components, also read `tokens` from the component blueprint JSON (`--ax-comp-*` variables).
+
+5. **Never** invent colors outside the theme. If a token is missing, use the closest palette step (50–950) or surface level.
+
+## Examples
+
+```html
+<!-- Layout with neutral surface -->
+<div class="bg-lightest text-on-lightest border border-border-lightest p-4 rounded-default">
+
+<!-- Semantic block -->
+<div class="bg-primary-50 text-primary-900 border border-primary-200 p-3">
+
+<!-- Component host styling -->
+<ax-button class="ax-md ax-primary ax-solid">Save</ax-button>
+```
+
+## Setup (consumer projects)
+
+```css
+@import '@acorex/styles/themes/default.css';
+```
+
+For Tailwind v3: `presets: [require('@acorex/styles/tailwind-base.js')]`

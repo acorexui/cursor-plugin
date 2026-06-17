@@ -1,0 +1,198 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Uploader",
+  "description": "The Uploader CDK provides directives and services for file upload functionality, including drag-and-drop support, file browsing, and upload management. The <code>[axUploaderZone]</code> directive can be applied to any element to enable drag-and-drop file uploads. The <code>[axUploaderBrowseHandle]</code> directive provides click-to-browse functionality when used within an uploader zone.",
+  "imports": [
+    "import { AXUploaderZoneDirective } from '@acorex/cdk/uploader';",
+    "import { AXUploaderBrowseDirective } from '@acorex/cdk/uploader';",
+    "import { AXUploaderService } from '@acorex/cdk/uploader';",
+    "import { AXUploadRequest } from '@acorex/cdk/uploader';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "400px",
+      "description": "A simple example of using the <code>[axUploaderZone]</code> directive with the <code>fileChange</code> output to handle file selection.",
+      "content": { "type": "api", "data": "uploader/usage" }
+    },
+    {
+      "title": "Zone Directive",
+      "height": "400px",
+      "description": "Demonstrates the <code>[axUploaderZone]</code> directive with drag-and-drop overlay and file type restrictions.",
+      "content": { "type": "api", "data": "uploader/zone-directive" }
+    },
+    {
+      "title": "Browse Handle",
+      "height": "400px",
+      "description": "Shows the <code>[axUploaderBrowseHandle]</code> directive for click-to-browse functionality.",
+      "content": { "type": "api", "data": "uploader/browse-handle" }
+    },
+    {
+      "title": "Service Integration",
+      "height": "600px",
+      "description": "Demonstrates programmatic usage of <code>AXUploaderService</code> with event handling and file management.",
+      "content": { "type": "api", "data": "uploader/service-integration" }
+    },
+    {
+      "title": "Custom Overlay Template",
+      "height": "500px",
+      "description": "Shows how to use a custom template for the drag-and-drop overlay using the <code>overlayTemplate</code> input.",
+      "content": { "type": "api", "data": "uploader/custom-template" }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXUploaderZoneDirective",
+      "props": [
+        {
+          "name": "multiple",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Whether multiple files can be selected."
+        },
+        {
+          "name": "accept",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "default": "null",
+          "description": "File types that are accepted for upload."
+        },
+        {
+          "name": "overlayTemplate",
+          "type": [{ "name": "TemplateRef<unknown>" }],
+          "description": "Custom template for the drag overlay. If provided, this will be used instead of the default overlay."
+        },
+        {
+          "name": "disableBrowse",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether browsing files by clicking on the container is disabled."
+        },
+        {
+          "name": "disableDragDrop",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether drag and drop functionality is disabled."
+        }
+      ],
+      "events": [
+        {
+          "name": "fileChange",
+          "type": [{ "name": "{ event: Event; files: File[] }" }],
+          "description": "Emitted when files are selected or dropped (like HTML file input). Emits an event with files property containing the selected files."
+        },
+        {
+          "name": "onChanged",
+          "type": [{ "name": "AXUploaderChangedEvent", "link": "/en-US/docs/events/uploader-changed-event" }],
+          "description": "Emitted when files are changed (added, removed, etc.). Deprecated: Use fileChange instead for simpler file input-like behavior."
+        },
+        {
+          "name": "dragEnter",
+          "type": [{ "name": "DragEvent" }],
+          "description": "Emitted on drag enter event."
+        },
+        {
+          "name": "dragLeave",
+          "type": [{ "name": "DragEvent" }],
+          "description": "Emitted on drag leave event."
+        },
+        {
+          "name": "dragOver",
+          "type": [{ "name": "DragEvent" }],
+          "description": "Emitted on drag over event."
+        },
+        {
+          "name": "onFileUploadComplete",
+          "type": [
+            { "name": "AXUploaderFileCompleteEvent", "link": "/en-US/docs/events/uploader-file-complete-event" }
+          ],
+          "description": "Emitted when a single file upload is completed."
+        },
+        {
+          "name": "onFilesUploadComplete",
+          "type": [
+            { "name": "AXUploaderFilesCompleteEvent", "link": "/en-US/docs/events/uploader-files-complete-event" }
+          ],
+          "description": "Emitted when all files upload is completed."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Opens the file browser dialog and processes selected files.\n * @returns Promise that resolves when files are processed\n */\nbrowser(): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXUploaderService",
+      "props": [
+        {
+          "name": "files",
+          "type": [{ "name": "Observable<AXUploadRequest[]>" }],
+          "description": "Gets the files observable for observing upload requests."
+        },
+        {
+          "name": "isAnyDetermined",
+          "type": [{ "name": "Signal<boolean>" }],
+          "description": "Signal indicating if any upload has determined progress."
+        },
+        {
+          "name": "totalEstimateTime",
+          "type": [{ "name": "Observable<number>" }],
+          "description": "Observable for total estimated upload time."
+        }
+      ],
+      "events": [
+        {
+          "name": "onFileUploadStart",
+          "type": [
+            { "name": "Subject<AXUploaderFileStartEvent>", "link": "/en-US/docs/events/uploader-file-start-event" }
+          ],
+          "description": "Subject for file upload start events."
+        },
+        {
+          "name": "onFileUploadComplete",
+          "type": [
+            {
+              "name": "Subject<AXUploaderFileCompleteEvent>",
+              "link": "/en-US/docs/events/uploader-file-complete-event"
+            }
+          ],
+          "description": "Subject for file upload complete events."
+        },
+        {
+          "name": "onFilesUploadComplete",
+          "type": [
+            {
+              "name": "Subject<AXUploaderFilesCompleteEvent>",
+              "link": "/en-US/docs/events/uploader-files-complete-event"
+            }
+          ],
+          "description": "Subject for all files upload complete events."
+        },
+        {
+          "name": "onFileUploadCanceled",
+          "type": [
+            { "name": "Subject<AXUploaderFileCancelEvent>", "link": "/en-US/docs/events/uploader-file-cancel-event" }
+          ],
+          "description": "Subject for file upload canceled events."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Opens the file browser dialog and returns selected files as upload requests.\n * @param options - Configuration options for file selection\n * @returns Promise that resolves to an array of upload requests\n */\nbrowse(options: { multiple?: boolean; accept?: string }): Promise<AXUploadRequest[]>"
+        },
+        {
+          "content": "/**\n * Adds files to the upload queue and starts the upload process.\n * @param files - Files to add to the upload queue\n * @returns Promise that resolves to an array of upload requests\n */\nadd(files: FileList | File[]): Promise<AXUploadRequest[]>"
+        },
+        {
+          "content": "/**\n * Cancels all pending and in-progress uploads.\n */\ncancelAll(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Clears all completed uploads from the queue.\n */\nclearAll(): void"
+        },
+        {
+          "content": "/**\n * Removes a specific upload request from the queue.\n * @param item - The upload request to remove\n */\nremove(item: AXUploadRequest): void"
+        }
+      ]
+    }
+  ]
+}

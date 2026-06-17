@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXBarChartMessages } from '@acorex/charts/bar-chart';"],
+  "types": [
+    {
+      "title": "AXBarChartMessages",
+      "description": "Messages configuration for bar chart empty states",
+      "props": [
+        {
+          "name": "noData",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when no data is available",
+          "default": "'No data available'"
+        },
+        {
+          "name": "noDataHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when no data is available",
+          "default": "'Please provide data to display the chart'"
+        },
+        {
+          "name": "allHidden",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when all bars are hidden",
+          "default": "'All bars are hidden'"
+        },
+        {
+          "name": "allHiddenHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when all bars are hidden",
+          "default": "'Click on legend items to show bars'"
+        },
+        {
+          "name": "noDataIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for no data state",
+          "default": "'fa-light fa-chart-column'"
+        },
+        {
+          "name": "allHiddenIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for all hidden state",
+          "default": "'fa-light fa-eye-slash'"
+        }
+      ]
+    }
+  ]
+}

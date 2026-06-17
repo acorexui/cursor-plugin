@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXFormatter",
+  "imports": ["import { AXFormatter } from '@acorex/core/format';"],
+  "description": "The AXFormatter type",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXFormatter type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-formatter.ts",
+            "content": "export abstract class AXFormatter { abstract get name(): string; abstract format(value: unknown, options?: AXFormatOptions | string): string; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormatter",
+      "props": [
+        { "name": "name", "type": [{ "name": "string" }], "description": "The name of the formatter." },
+        { "name": "format", "type": [{ "name": "function" }], "description": "The format function." }
+      ],
+      "methods": [
+        { "content": "/**\n * The unique name used for registration and lookup.\n */\nget name(): string" },
+        {
+          "content": "/**\n * Formats a value with optional options.\n * @returns The formatted value.\n */\nformat(value: unknown, options?: AXFormatOptions | string): string"
+        }
+      ]
+    }
+  ]
+}

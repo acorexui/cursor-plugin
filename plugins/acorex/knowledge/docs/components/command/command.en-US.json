@@ -1,0 +1,138 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Command",
+  "description": "The Command Component provides a lightweight, fast, and accessible command palette interface for searching and executing actions. It helps users quickly find items, filter lists, or trigger commands using keyboard interactions.",
+  "imports": ["import { AXCommandComponent } from '@acorex/components/command';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-command</code>",
+      "height": "500px",
+      "content": {
+        "type": "api",
+        "data": "command/usage"
+      }
+    },
+    {
+      "title": "Custom Template",
+      "description": "Pass a custom template to the command component and render it instead of the default layout.",
+      "height": "500px",
+      "content": {
+        "type": "api",
+        "data": "command/template"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCommandComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "CommandMenuItem[]",
+              "link": "/en-US/docs/types/menu-item"
+            }
+          ],
+          "default": "''",
+          "description": "Array of menu items to display in the command palette. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the search input. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState"
+            }
+          ],
+          "description": "The validation state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The unique identifier of the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType"
+            }
+          ],
+          "description": "Predefined look schemes for the component. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        }
+      ],
+
+      "events": [
+        {
+          "name": "onSubmit",
+          "type": [
+            {
+              "name": "AXCommandComponentEvent",
+              "link": "/en-US/docs/events/ax-command-component-event"
+            }
+          ],
+          "description": "Fires when a menu item is selected or submitted."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

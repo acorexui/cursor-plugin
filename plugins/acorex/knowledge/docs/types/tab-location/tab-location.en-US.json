@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTabLocation",
+  "description": "Predefined location positions available for tab components.",
+  "imports": ["import { AXTabLocation } from '@acorex/components/tabs';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the tab location type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "tabs.class.ts",
+            "content": "export type AXTabLocation = 'top' | 'bottom' | 'start' | 'end';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTabLocation",
+      "props": [
+        {
+          "name": "AXTabLocation",
+          "type": [{ "name": "'top'" }, { "name": "'bottom'" }, { "name": "'start'" }, { "name": "'end'" }],
+          "description": "Location options for tab components."
+        }
+      ]
+    }
+  ]
+}

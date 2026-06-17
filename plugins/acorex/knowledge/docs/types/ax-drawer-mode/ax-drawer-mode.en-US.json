@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drawer Mode",
+  "description": "Type definition for the display mode of a drawer. Determines how the drawer appears relative to the main content.",
+  "imports": ["import { AXDrawerMode } from '@acorex/cdk/drawer';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXDrawerMode type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "drawer-item.directive.ts",
+            "content": "export type AXDrawerMode = 'push' | 'overlay';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDrawerMode",
+      "props": [
+        {
+          "name": "AXDrawerMode",
+          "type": [{ "name": "'push'" }, { "name": "'overlay'" }],
+          "description": "Union type that defines the display mode of a drawer. 'push' moves the content aside to make room for the drawer, while 'overlay' positions the drawer over the content."
+        }
+      ]
+    }
+  ]
+}

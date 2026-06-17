@@ -1,0 +1,162 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Badge",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/badge--documentation"
+    }
+  ],
+  "description": "Badges are small status descriptors or counts used for quick recognition of an item's state or to display notifications. They support multiple look styles and can display text or be used as compact indicators.",
+  "imports": [
+    "import { AXBadgeComponent } from '@acorex/components/badge';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using the <code>ax-badge</code> component.",
+      "content": {
+        "type": "api",
+        "data": "badge/usage"
+      }
+    },
+    {
+      "title": "Prefix & Suffix",
+      "description": "Use the ax-prefix and ax-suffix slots to decorate the badge with indicators or icons.",
+      "content": {
+        "type": "api",
+        "data": "badge/prefix-suffix"
+      }
+    },
+    {
+      "title": "Colors",
+      "description": "You can change badge colors.",
+      "content": {
+        "type": "api",
+        "data": "badge/colors"
+      }
+    },
+    {
+      "title": "Look",
+      "description": "You can change badge looks.",
+      "content": {
+        "type": "api",
+        "data": "badge/look"
+      }
+    },
+    {
+      "title": "Using the badge in the button",
+      "description": "You can use the <code>ax-badge</code> tag to display the badge on the button and use CSS classes to determine its location.",
+      "content": {
+        "type": "api",
+        "data": "badge/badge-in-button"
+      }
+    },
+    {
+      "title": "Mini badge",
+      "description": "If you do not set text on the badge, it will be shown as a mini badge.",
+      "content": {
+        "type": "api",
+        "data": "badge/mini-badge"
+      }
+    },
+    {
+      "title": "Single-character",
+      "description": "Demonstrates visual behavior when text length is 1 versus multiple characters.",
+      "content": {
+        "type": "api",
+        "data": "badge/single-character"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBadgeComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "auto-generated",
+          "description": "Unique identifier of the component instance. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Defines the text displayed inside the badge. When empty, the badge becomes a mini badge."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the badge. Inherited from MXColorComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the badge. Inherited from MXLookComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color property changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

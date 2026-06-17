@@ -1,0 +1,171 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart Option",
+  "description": "Configuration interface for line chart component with comprehensive styling and behavior options",
+  "imports": [
+    "import { AXLineChartOption } from '@acorex/charts/line-chart';",
+    "import { AXLineChartMessages } from '@acorex/charts/line-chart';",
+    "import { AXAnimationEasing } from '@acorex/cdk/common';"
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the line chart options interface.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "line-chart.type.ts",
+            "content": "export interface AXLineChartOption {\n  // Size and layout\n  width?: number;\n  height?: number;\n\n  // Margins\n  margins?: {\n    top?: number;\n    right?: number;\n    bottom?: number;\n    left?: number;\n  };\n\n  // Axis settings\n  showXAxis?: boolean;\n  showYAxis?: boolean;\n  showGrid?: boolean;\n  showVerticalGrid?: boolean;\n  xAxisLabel?: string;\n  yAxisLabel?: string;\n  yAxisStartsAtZero?: boolean;\n  axisPadding?: number;\n\n  // Tooltip\n  showTooltip?: boolean;\n\n  // Line appearance\n  lineWidth?: number;\n  showPoints?: boolean;\n  pointRadius?: number;\n  smoothLine?: boolean;\n  fillArea?: boolean;\n  fillOpacity?: number;\n\n  // Crosshair\n  showCrosshair?: boolean;\n\n  // Animation\n  animationDuration?: number;\n  animationEasing?: AXAnimationEasing;\n\n  // Messages\n  messages?: AXLineChartMessages;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartOption",
+      "description": "Configuration options for the line chart",
+      "props": [
+        {
+          "name": "width",
+          "type": [{ "name": "number" }],
+          "description": "Chart width (default: container width)"
+        },
+        {
+          "name": "height",
+          "type": [{ "name": "number" }],
+          "description": "Chart height (default: container height)"
+        },
+        {
+          "name": "margins",
+          "type": [{ "name": "{ top?: number; right?: number; bottom?: number; left?: number }" }],
+          "description": "Margins around the chart content",
+          "default": "{ top: 20, right: 25, bottom: 40, left: 50 }"
+        },
+        {
+          "name": "showXAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show X axis",
+          "default": "true"
+        },
+        {
+          "name": "showYAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show Y axis",
+          "default": "true"
+        },
+        {
+          "name": "showGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show grid lines",
+          "default": "true"
+        },
+        {
+          "name": "showVerticalGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show vertical grid lines",
+          "default": "false"
+        },
+        {
+          "name": "xAxisLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label for X axis"
+        },
+        {
+          "name": "yAxisLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label for Y axis"
+        },
+        {
+          "name": "yAxisStartsAtZero",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether Y axis starts at zero",
+          "default": "true"
+        },
+        {
+          "name": "axisPadding",
+          "type": [{ "name": "number" }],
+          "description": "Percentage padding for axis domains",
+          "default": "5"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "lineWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of the line in pixels",
+          "default": "2"
+        },
+        {
+          "name": "showPoints",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show data points on the line",
+          "default": "true"
+        },
+        {
+          "name": "pointRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of data points in pixels",
+          "default": "4"
+        },
+        {
+          "name": "smoothLine",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to use curved lines",
+          "default": "false"
+        },
+        {
+          "name": "fillArea",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to fill area under the line",
+          "default": "false"
+        },
+        {
+          "name": "fillOpacity",
+          "type": [{ "name": "number" }],
+          "description": "Opacity of the fill as percentage (0-100)",
+          "default": "20"
+        },
+        {
+          "name": "showCrosshair",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show crosshair lines on hover",
+          "default": "false"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in milliseconds",
+          "default": "1000"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Type of easing function to use for animations",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXLineChartMessages", "link": "/en-US/docs/types/line-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

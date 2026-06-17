@@ -1,0 +1,58 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Flow Chart Nodes",
+  "description": "Represents a node in the flow chart with identity, type, label, and position.",
+  "imports": [
+    "import { AXFlowChartNodes } from '@acorex/components/flow-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXFlowChartNodes",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier of the node."
+        },
+        {
+          "name": "type",
+          "type": [{ "name": "string" }],
+          "description": "Visual or semantic type of the node."
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Human-readable label displayed for the node."
+        },
+        {
+          "name": "x",
+          "type": [{ "name": "number" }],
+          "description": "X coordinate of the node position."
+        },
+        {
+          "name": "y",
+          "type": [{ "name": "number" }],
+          "description": "Y coordinate of the node position."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the node type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "flow-chart.type.ts",
+            "content": "export interface AXFlowChartNodes { id: string; type: string; label: string; x: number; y: number; }"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+

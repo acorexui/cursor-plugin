@@ -1,0 +1,45 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Outline Item Type",
+  "description": "Type definition for outline items used by the ACoreX outline navigation system. This type represents the structure of individual navigation items within an outline container.",
+  "imports": [
+    "import { outlineItemType } from '@acorex/cdk/outline';"
+  ],
+  "types": [
+    {
+      "title": "outlineItemType",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "The unique identifier of the outline item. This is used for navigation and URL fragment generation."
+        },
+        {
+          "name": "el",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The DOM element that represents this outline item in the document."
+        },
+        {
+          "name": "active",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this outline item is currently active (visible in the viewport or at the scroll position)."
+        },
+        {
+          "name": "scrollY",
+          "type": [{ "name": "number" }],
+          "description": "The vertical scroll position of this outline item relative to the container."
+        },
+        {
+          "name": "parentId",
+          "type": [{ "name": "string" }],
+          "description": "Optional parent identifier for hierarchical outline structures. Used to create nested navigation menus."
+        },
+        {
+          "name": "hasAnchor",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this outline item has an anchor link (hash link) for direct URL navigation."
+        }
+      ]
+    }
+  ]
+}

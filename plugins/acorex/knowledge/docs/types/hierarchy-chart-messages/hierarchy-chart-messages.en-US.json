@@ -1,0 +1,30 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXHierarchyChartMessages } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartMessages",
+      "description": "Messages configuration for hierarchy chart empty states",
+      "props": [
+        {
+          "name": "noData",
+          "type": [{ "name": "string" }],
+          "description": "Message shown when no data is available",
+          "default": "'No data available'"
+        },
+        {
+          "name": "noDataHelp",
+          "type": [{ "name": "string" }],
+          "description": "Help text shown when no data is available",
+          "default": "'Please provide hierarchy data to display the chart'"
+        },
+        {
+          "name": "noDataIcon",
+          "type": [{ "name": "string" }],
+          "description": "Icon for no data state",
+          "default": "'fa-light fa-sitemap'"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Aspect Ratio",
+  "description": "A component that maintains a specific aspect ratio for its content, useful for responsive layouts and consistent sizing.",
+  "imports": ["import { AXAspectRatioComponent } from '@acorex/components/aspect-ratio';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-aspect-ratio</code> to maintain a 16:9 aspect ratio for content.",
+      "content": {
+        "type": "api",
+        "data": "aspect-ratio/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Different Ratios",
+      "description": "Examples showing different aspect ratios including square (1:1), widescreen (16:9), and portrait (4:3).",
+      "content": {
+        "type": "api",
+        "data": "aspect-ratio/different-ratios"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Responsive Content",
+      "description": "Demonstrates how content adapts to different aspect ratios while maintaining proper proportions.",
+      "content": {
+        "type": "api",
+        "data": "aspect-ratio/responsive-content"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAspectRatioComponent",
+      "props": [
+        {
+          "name": "ratio",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "16/9",
+          "description": "The aspect ratio to maintain. Default is 16/9 (approximately 1.78)."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Navigate Event",
+  "imports": ["import { AXCalendarNavigateEvent } from '@acorex/components/calendar';"],
+  "description": "Represents the event payload when navigation occurs in a calendar component, such as when moving between months or years.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload for calendar navigation actions.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-calendar-navigate-event.ts",
+            "language": "ts",
+            "content": "interface AXCalendarNavigateEvent {\n  component: AXCalendarComponent;\n  isUserInteraction: boolean;\n  start: Date;\n  end: Date;\n  htmlElement: HTMLElement;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarNavigateEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXCalendarComponent", "link": "/en-US/docs/components/calendar" }],
+          "description": "The calendar component instance that triggered the navigation event."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether the navigation was triggered by user interaction or programmatically."
+        },
+        {
+          "name": "start",
+          "type": [{ "name": "Date" }],
+          "description": "The start date of the current view range."
+        },
+        {
+          "name": "end",
+          "type": [{ "name": "Date" }],
+          "description": "The end date of the current view range."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element of the calendar component."
+        }
+      ]
+    }
+  ]
+}

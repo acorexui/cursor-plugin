@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Calendar Holiday Dates",
+  "imports": ["import { AXCalendarHolidayDates } from '@acorex/components/calendar';"],
+  "description": "Defines the type for specifying holiday dates in calendar components, allowing special styling and behavior for these dates.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Holiday dates by list or predicate.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar-holiday-dates.ts",
+            "content": "type AXCalendarHolidayDates = Date[] | ((date: Date) => boolean);"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCalendarHolidayDates",
+      "props": [
+        {
+          "name": "Date[]",
+          "type": [{ "name": "Date[]" }],
+          "description": "An array of Date objects representing specific holiday dates that should be highlighted in the calendar."
+        },
+        {
+          "name": "function",
+          "type": [{ "name": "(date: Date) => boolean" }],
+          "description": "A function that takes a Date parameter and returns a boolean indicating whether that date should be treated as a holiday."
+        }
+      ]
+    }
+  ]
+}

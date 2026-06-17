@@ -1,0 +1,19 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "EditorJsTool",
+  "description": "Configuration object describing an EditorJS tool that can be enabled in the editor.",
+  "types": [
+    {
+      "title": "EditorJsTool",
+      "props": [
+        {
+          "name": "type",
+          "type": [{ "name": "string" }],
+          "description": "The tool identifier, e.g., 'header', 'list', 'raw', 'image', 'quote', 'code', 'underline', 'color'."
+        }
+      ]
+    }
+  ]
+}
+
+

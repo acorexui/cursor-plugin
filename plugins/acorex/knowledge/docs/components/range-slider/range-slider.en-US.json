@@ -1,0 +1,450 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Range Slider",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/rangeslider--documentation"
+    }
+  ],
+  "description": "A range slider with single/dual modes, horizontal/vertical orientations, step and snap options, and optional tooltips/labels. Extends MXInteractiveComponent and MXBaseComponent.",
+  "imports": [
+    "import { AXRangeSliderComponent } from '@acorex/components/range-slider';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-range-slider</code>",
+      "content": {
+        "type": "api",
+        "data": "range-slider/usage"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Vertical",
+      "description": "The simple vertical range slider.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/vertical"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Music Player",
+      "description": "A simple music player.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/music-player"
+      }
+    },
+    {
+      "title": "Modes",
+      "description": "Single and dual mode sliders.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/modes"
+      },
+      "height": "300px"
+    },
+    {
+      "title": "Steps",
+      "description": "Different step precision values (1, 5, 10).",
+      "content": {
+        "type": "api",
+        "data": "range-slider/steps"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Snap Modes",
+      "description": "Different snap display modes (start, end, both).",
+      "content": {
+        "type": "api",
+        "data": "range-slider/snap-modes"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Tooltip Modes",
+      "description": "Different tooltip display modes and positions.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/tooltip-modes"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Colors",
+      "description": "Different color themes (primary, success, warning, danger).",
+      "content": {
+        "type": "api",
+        "data": "range-slider/colors"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "States",
+      "description": "Normal, readonly, and disabled states.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/states"
+      },
+      "height": "300px"
+    },
+    {
+      "title": "Ranges",
+      "description": "Different min/max value ranges (0-50, 0-100, 0-200).",
+      "content": {
+        "type": "api",
+        "data": "range-slider/ranges"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Snap Labels",
+      "description": "With and without snap point labels.",
+      "content": {
+        "type": "api",
+        "data": "range-slider/snap-labels"
+      },
+      "height": "300px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRangeSliderComponent",
+      "props": [
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, disables the component. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name identifier for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component value has been modified. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Current state of the component (clear, success, error). Inherited from MXValueComponent."
+        },
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "'horizontal'"
+            },
+            {
+              "name": "'vertical'"
+            }
+          ],
+          "description": "Orientation of the slider.",
+          "default": "'horizontal'"
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "Exclude<AXStyleColorType, 'default'>",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Color theme of the slider.",
+          "default": "'primary'"
+        },
+        {
+          "name": "values",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "[number, number]"
+            }
+          ],
+          "description": "Single value or [start, end] in dual mode."
+        },
+        {
+          "name": "mode",
+          "type": [
+            {
+              "name": "'single'"
+            },
+            {
+              "name": "'dual'"
+            }
+          ],
+          "description": "Slider mode.",
+          "default": "'single'"
+        },
+        {
+          "name": "min",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Minimum value.",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Maximum value.",
+          "default": "100"
+        },
+        {
+          "name": "step",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Step increment.",
+          "default": "1"
+        },
+        {
+          "name": "snap",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Snapping increment.",
+          "default": "1"
+        },
+        {
+          "name": "tooltipMode",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "'both'"
+            }
+          ],
+          "description": "Tooltip display mode.",
+          "default": "'end'"
+        },
+        {
+          "name": "snapMode",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "'both'"
+            }
+          ],
+          "description": "Snap display mode.",
+          "default": "'start'"
+        },
+        {
+          "name": "hasStep",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show steps.",
+          "default": "true"
+        },
+        {
+          "name": "hasSnap",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show snap marks.",
+          "default": "false"
+        },
+        {
+          "name": "hasLable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show labels for snap marks.",
+          "default": "derived from hasSnap()"
+        },
+        {
+          "name": "hasTooltip",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show tooltips.",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<AXRangeSliderValue>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the slider value changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n * @returns T - The native DOM element associated with this component.\n * @method getHostElement\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n * @method setOption\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n * @method focus\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n * @method blur\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n * @returns boolean - True if the component has focus.\n * @method hasFocus\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component (ControlValueAccessor method).\n * @param isDisabled - Whether the component should be disabled.\n * @method setDisabledState\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n * @method commitValue\n */\ncommitValue(value: AXRangeSliderValue, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n * @param e - Optional flag indicating if this is a user interaction.\n * @method reset\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n * @method resetErrors\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Marks the component as dirty.\n * @method markAsDirty\n */\nmarkAsDirty(): void"
+        },
+        {
+          "content": "/**\n * Increase a step to value if slider in single mode and increase a step for the second value if in dual mode.\n * @method increaseStep\n */\nincreaseStep(): void"
+        },
+        {
+          "content": "/**\n * Decrease a step to value if slider in single mode and decrease a step for the second value if in dual mode.\n * @method decreaseStep\n */\ndecreaseStep(): void"
+        }
+      ]
+    }
+  ]
+}

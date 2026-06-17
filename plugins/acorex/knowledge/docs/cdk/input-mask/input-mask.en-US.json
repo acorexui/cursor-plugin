@@ -1,0 +1,106 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Input Mask",
+  "description": "A powerful Angular directive that provides input masking functionality for various data types including Hijri dates, digits, decimal numbers, and thousands-separated numbers. Built on top of the Maska.js library for robust input validation and formatting.",
+  "imports": ["import { AXInputMaskDirective } from '@acorex/cdk/input-mask';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic usage of the input mask directive with default settings.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/usage"
+      }
+    },
+    {
+      "title": "Hijri Date Mode",
+      "description": "Input masking for Hijri calendar dates with automatic validation and formatting.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/hijri-date"
+      }
+    },
+    {
+      "title": "Digits Mode",
+      "description": "Numeric input masking with optional range validation.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/digits"
+      }
+    },
+    {
+      "title": "Decimal Mode",
+      "description": "Decimal number input masking with configurable precision.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/decimal"
+      }
+    },
+    {
+      "title": "Thousands Separator Mode",
+      "description": "Number formatting with automatic thousands separators.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/thousands-separator"
+      }
+    },
+    {
+      "title": "Min and Max Value",
+      "description": "Min and max value for numeric inputs.",
+      "content": {
+        "type": "api",
+        "data": "cdk/input-mask/min-and-max-value"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXInputMaskDirective",
+      "props": [
+        {
+          "name": "maskMode",
+          "type": [{ "name": "AXInputMaskModes", "link": "/en-US/docs/types/ax-input-mask-modes" }],
+          "default": "'digits'",
+          "description": "The mode of input masking to apply."
+        },
+        {
+          "name": "separator",
+          "type": [{ "name": "string" }],
+          "default": "'/'",
+          "description": "The separator character used in the mask (e.g., '/' for dates, ',' for thousands)."
+        },
+        {
+          "name": "eager",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether to apply the mask eagerly (as user types) or on blur."
+        },
+        {
+          "name": "minValue",
+          "type": [{ "name": "number" }, { "name": "null" }],
+          "default": "null",
+          "description": "Minimum allowed value for numeric inputs."
+        },
+        {
+          "name": "maxValue",
+          "type": [{ "name": "number" }, { "name": "null" }],
+          "default": "null",
+          "description": "Maximum allowed value for numeric inputs."
+        },
+        {
+          "name": "decimal",
+          "type": [{ "name": "number" }],
+          "default": "0",
+          "description": "Number of decimal places allowed for decimal inputs."
+        }
+      ],
+      "events": [
+        {
+          "name": "onMaskChanged",
+          "type": [{ "name": "AXInputMaskEvent", "link": "/en-US/docs/events/ax-input-mask-event" }],
+          "description": "Event emitted when the masked value changes."
+        }
+      ]
+    }
+  ]
+}

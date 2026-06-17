@@ -1,0 +1,258 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart",
+  "description": "An interactive line chart component for visualizing trends, time series data, and continuous data with smooth animations, interactive tooltips, and customizable styling.",
+  "imports": ["import { AXLineChartComponent } from '@acorex/charts/line-chart';"],
+  "showcase": {
+    "title": "Line Chart Showcase",
+    "description": "Interactive line chart demonstrating trends and data visualization",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXLineChartComponent } from '@acorex/charts/line-chart';\nimport { AXLineChartValue } from '@acorex/charts/line-chart';\nimport { AXLineChartOption } from '@acorex/charts/line-chart';\nimport { AXLineChartPointClickEvent } from '@acorex/charts/line-chart';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive Line Chart</h2>\n      <ax-line-chart \n        [data]=\"showcaseData()\" \n        [options]=\"showcaseOptions()\"\n        (pointClick)=\"onPointClick($event)\"\n      />\n      <div class=\"chart-info\">\n        <p>Click on data points to interact with the chart</p>\n      </div>\n    </div>\n  `,\n  imports: [AXLineChartComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n    }\n    .chart-info {\n      margin-top: 1rem;\n      text-align: center;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class LineChartShowcaseComponent {\n  showcaseData = signal<AXLineChartValue>([\n    {\n      id: 'revenue',\n      label: 'Revenue',\n      lineColor: '#3498db',\n      fillColor: 'rgba(52, 152, 219, 0.2)',\n      data: [\n        { x: 'Jan', y: 12000 },\n        { x: 'Feb', y: 15000 },\n        { x: 'Mar', y: 18000 },\n        { x: 'Apr', y: 16000 },\n        { x: 'May', y: 22000 },\n        { x: 'Jun', y: 25000 }\n      ]\n    },\n    {\n      id: 'expenses',\n      label: 'Expenses',\n      lineColor: '#e74c3c',\n      fillColor: 'rgba(231, 76, 60, 0.2)',\n      data: [\n        { x: 'Jan', y: 8000 },\n        { x: 'Feb', y: 9500 },\n        { x: 'Mar', y: 11000 },\n        { x: 'Apr', y: 10500 },\n        { x: 'May', y: 12000 },\n        { x: 'Jun', y: 13000 }\n      ]\n    }\n  ]);\n\n  showcaseOptions = signal<AXLineChartOption>({\n    showXAxis: true,\n    showYAxis: true,\n    showGrid: true,\n    xAxisLabel: 'Month',\n    yAxisLabel: 'Amount ($)',\n    width: 600,\n    height: 400,\n    lineWidth: 3,\n    showPoints: true,\n    pointRadius: 6,\n    smoothLine: true,\n    fillArea: true,\n    fillOpacity: 20,\n    showCrosshair: true,\n    showTooltip: true,\n    animationDuration: 1500,\n    animationEasing: 'ease-in-out'\n  });\n\n  onPointClick(event: AXLineChartPointClickEvent): void {\n    console.log('Point clicked:', event.series.label, event.point);\n  }\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple line chart with revenue and expenses data",
+      "content": { "type": "api", "data": "line-chart/usage" },
+      "height": "500px"
+    },
+    {
+      "title": "Axis Configuration",
+      "description": "Line chart with custom axis labels and grid configuration",
+      "content": { "type": "api", "data": "line-chart/axis" },
+      "height": "500px"
+    },
+    {
+      "title": "Animation Effects",
+      "description": "Line chart with custom animation duration and easing",
+      "content": { "type": "api", "data": "line-chart/animation" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Styling",
+      "description": "Line chart with custom styling options and visual appearance",
+      "content": { "type": "api", "data": "line-chart/styling" },
+      "height": "500px"
+    },
+    {
+      "title": "Interactive Features",
+      "description": "Line chart with click events, tooltips, and interactive crosshair",
+      "content": { "type": "api", "data": "line-chart/interactive" },
+      "height": "500px"
+    },
+    {
+      "title": "Size Variations",
+      "description": "Line charts in different sizes for various use cases",
+      "content": { "type": "api", "data": "line-chart/size" },
+      "height": "700px"
+    },
+    {
+      "title": "Multi-Series Data",
+      "description": "Line chart with multiple data series and different device usage patterns",
+      "content": { "type": "api", "data": "line-chart/multi-series" },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartComponent",
+      "description": "Line Chart Component - Interactive line chart for rendering data as lines with interactive hover effects and animations",
+      "props": [
+        {
+          "name": "data",
+          "type": [{ "name": "AXLineChartValue", "link": "/en-US/docs/types/line-chart-value" }],
+          "description": "Chart data input - supports both single series and array of series",
+          "default": "[]"
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXLineChartOption", "link": "/en-US/docs/types/line-chart-option" }],
+          "description": "Chart options input",
+          "default": "{}"
+        }
+      ],
+      "events": [
+        {
+          "name": "pointClick",
+          "type": [{ "name": "AXLineChartPointClickEvent", "link": "/en-US/docs/events/line-chart-point-click-event" }],
+          "description": "Emitted when a data point is clicked"
+        }
+      ],
+      "methods": [
+        {
+          "name": "createChart",
+          "content": "/**\n * Create and render the line chart\n */\ncreateChart(): void",
+          "description": "Inherited from AXChartComponentBase"
+        },
+        {
+          "name": "updateChart",
+          "content": "/**\n * Update the chart with new data\n */\nupdateChart(): void",
+          "description": "Inherited from AXChartComponentBase"
+        },
+        {
+          "name": "cleanupChart",
+          "content": "/**\n * Clean up chart resources\n */\ncleanupChart(): void",
+          "description": "Inherited from AXChartComponentBase"
+        },
+        {
+          "name": "highlightSegment",
+          "content": "/**\n * Highlights a specific segment by ID\n * @param id The segment ID to highlight, or null to clear highlight\n */\nhighlightSegment(id: string | null): void",
+          "description": "Inherited from AXChartLegendCompatible"
+        },
+        {
+          "name": "toggleSegment",
+          "content": "/**\n * Toggles visibility of a segment by ID\n * @param id Segment ID to toggle\n * @returns New visibility state (true = visible, false = hidden)\n */\ntoggleSegment(id: string): boolean",
+          "description": "Inherited from AXChartLegendCompatible"
+        },
+        {
+          "name": "getLegendItems",
+          "content": "/**\n * Returns the data items for the legend\n * @implements AXChartLegendCompatible\n */\ngetLegendItems(): AXChartLegendItem[]",
+          "description": "Inherited from AXChartLegendCompatible"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "--ax-comp-line-chart-labels-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for axis labels. Applied with 0.7 opacity where needed"
+        },
+        {
+          "name": "--ax-comp-line-chart-axis-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for X/Y axis lines. Applied with 0.2 opacity"
+        },
+        {
+          "name": "--ax-comp-line-chart-grid-lines-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for grid lines. Applied with 0.2 opacity"
+        },
+        {
+          "name": "--ax-comp-line-chart-bg-color",
+          "default": "var(--ax-sys-color-lightest-surface)",
+          "description": "Background color for the chart area"
+        },
+        {
+          "name": "--ax-comp-line-chart-text-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Color for text elements like labels and no data message"
+        }
+      ]
+    },
+    {
+      "title": "AX_LINE_CHART_CONFIG",
+      "description": "Default configuration token providing effective AXLineChartOption values",
+      "props": [
+        {
+          "name": "showXAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show X axis",
+          "default": "true"
+        },
+        {
+          "name": "showYAxis",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show Y axis",
+          "default": "true"
+        },
+        {
+          "name": "showGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show grid lines",
+          "default": "true"
+        },
+        {
+          "name": "showVerticalGrid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show vertical grid lines",
+          "default": "false"
+        },
+        {
+          "name": "yAxisStartsAtZero",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether Y axis should start at zero",
+          "default": "true"
+        },
+        {
+          "name": "axisPadding",
+          "type": [{ "name": "number" }],
+          "description": "Padding around axis",
+          "default": "5"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "lineWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of the line in pixels",
+          "default": "2"
+        },
+        {
+          "name": "showPoints",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show data points",
+          "default": "true"
+        },
+        {
+          "name": "pointRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of data points in pixels",
+          "default": "4"
+        },
+        {
+          "name": "smoothLine",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to use smooth curves for lines",
+          "default": "false"
+        },
+        {
+          "name": "fillArea",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to fill area under the line",
+          "default": "false"
+        },
+        {
+          "name": "fillOpacity",
+          "type": [{ "name": "number" }],
+          "description": "Opacity of the filled area (0-100)",
+          "default": "20"
+        },
+        {
+          "name": "showCrosshair",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show crosshair on hover",
+          "default": "false"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in ms",
+          "default": "1000"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Animation easing function",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXLineChartMessages", "link": "/en-US/docs/types/line-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

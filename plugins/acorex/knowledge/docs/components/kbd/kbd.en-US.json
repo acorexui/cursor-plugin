@@ -1,0 +1,101 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Keyboard",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/kbd--documentation"
+    }
+  ],
+  "description": "Displays keyboard keys and shortcuts. Use <code>ax-kbd</code> as a container and <code>ax-kbd-item</code> to render single keys or combinations.",
+  "imports": [
+    "import { AXKBDComponent } from '@acorex/components/kbd';",
+    "import { AXKBDItemComponent } from '@acorex/components/kbd';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-kbd</code> with basic key combinations.",
+      "content": {
+        "type": "api",
+        "data": "kbd/usage"
+      }
+    },
+    {
+      "title": "Single Keys",
+      "description": "Display individual keys using string values for the <code>keys</code> input.",
+      "content": {
+        "type": "api",
+        "data": "kbd/single-key"
+      }
+    },
+    {
+      "title": "Key Combinations",
+      "description": "Show common keyboard shortcuts using arrays for the <code>keys</code> input.",
+      "content": {
+        "type": "api",
+        "data": "kbd/key-combinations"
+      }
+    },
+    {
+      "title": "Modifier Keys",
+      "description": "Demonstrate various modifier key combinations including Alt, Meta, and complex shortcuts.",
+      "content": {
+        "type": "api",
+        "data": "kbd/modifier-keys"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKBDComponent",
+      "props": [
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent. Gets the native DOM element associated with this component."
+        }
+      ]
+    },
+    {
+      "title": "AXKBDItemComponent",
+      "props": [
+        {
+          "name": "keys",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "string[]"
+            }
+          ],
+          "description": "Keys to display. Accepts a single key or an ordered list for combinations (e.g., ['Ctrl','A'])."
+        },
+        {
+          "name": "modifierKeys",
+          "type": [
+            {
+              "name": "string[]"
+            }
+          ],
+          "description": "List of modifier keys that are handled specially in key combinations. Defaults to ['ctrl', 'shift', 'alt', 'meta', 'esc']."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent. Gets the native DOM element associated with this component."
+        }
+      ]
+    }
+  ]
+}

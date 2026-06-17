@@ -1,0 +1,609 @@
+---
+description: Generate bilingual JSON documentation for ACoreX Angular components — schema adherence, inheritance analysis, and design token verification.
+alwaysApply: false
+---
+# JSON Documentation Generation Rule for Angular Components
+
+## 0. Schema Adherence
+
+- **Crucially, all generated JSON documentation files MUST strictly adhere to the schema defined in `apps/documentation/docs/document.schema.json`.** This schema dictates the structure and valid properties for the documentation.
+
+---
+
+## 1. File Structure & Naming
+
+- Each component must have two JSON documentation files:
+  - `component-name.en-US.json`
+  - `component-name.fa-IR.json`
+- Place these files in:
+  - **Components:** `apps/documentation/docs/components/component-name/`
+  - **CDK/Directives:** `apps/documentation/docs/cdk/cdk-name/`
+  - **Core:** `apps/documentation/docs/core/core-name/`
+  - **Styles:** `apps/documentation/docs/styles/style-name/`
+  - **Charts:** `apps/documentation/docs/charts/chart-name/`
+- **Important:** Always place documentation in the correct category folder (components, cdk, core, styles, charts) based on the package structure.
+
+---
+
+## 2. Schema Reference
+
+- Use the schema reference:
+  - `"$schema": "../../document.schema.json"`
+    (This is a self-reference within the JSON to the master schema defined in `apps/documentation/docs/document.schema.json`.)
+
+---
+
+## 3. Imports
+
+- Use the standalone component import, not the module:
+  - English: `"imports": ["import { AXComponentNameComponent } from '@acorex/components/component-name';"]`
+  - Farsi: `"imports": ["import { AXComponentNameComponent } from '@acorex/components/component-name';"]`
+    (Note: Ensure `AXComponentNameComponent` accurately reflects the component's exported class name.)
+- If documenting related core files (see Section 6.1), include their import statements as well.
+- **CRITICAL:** Do NOT include imports for interfaces or types that are only used internally within the component. Only import the main component classes that users will import.
+
+---
+
+## 4. Title & Description
+
+- English: Use a clear, concise description of the component's purpose.
+- Farsi: **Translate the title and description accurately to Farsi. Do NOT use English text with placeholders like "Translate to Farsi." The content must be in Farsi.**
+- If a property or event lacks a description, generate a simple, sensible one based on its name (e.g., `"isLoading": "Indicates if the component is in a loading state."`). If generating a sensible description is not possible, use `"Description needed."` as the value.
+- Set `types[0].title` to the exact exported component class name (e.g., `AXButtonComponent`), not a human label like "Button API".
+
+---
+
+## 5. Sections
+
+- Populate the `sections` array based on the component's usage examples and demonstration cases, typically found in its corresponding `.page.html` file (e.g., `apps/showcase/src/app/cases/component-name/component-name.page.html`).
+- Each section from the case page (e.g., "Usage", "Icon button", "Loading state") should correspond to a section object in the JSON.
+- At minimum, include a "Usage" section:
+  ```json
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-component-name</code>",
+      "content": {
+        "type": "api",
+        "data": "component-name/usage"
+      }
+    }
+  ]
+  ```
+
+---
+
+## 6. Inheritance Analysis
+
+**CRITICAL REQUIREMENT (STRICT):** Before documenting a component, you MUST analyze its inheritance chain to identify all inherited properties, events, and methods, and apply overrides/defaults exactly as implemented in code.
+
+### 6.1 Inheritance Chain Investigation
+
+- **Examine the component's class declaration** to identify its parent class(es) and any interfaces it implements.
+- **Trace the inheritance hierarchy** by examining parent classes and their parent classes recursively.
+- **Identify all inherited properties, events, and methods** that are accessible to the component.
+  - Include base events from `MXBaseComponent` (e.g., `onOptionChanged`), interaction events from `MXInteractiveComponent` (e.g., `onFocus`, `onBlur`, `disabledChange`, `tabIndex`), and look/color props from `MXLookComponent`/`MXColorComponent` (e.g., `look`, `lookChange`, `color`, `colorChange`) when present in the chain.
+  - For mixin/base utility classes, include their public methods. Example: if a component extends `MXDropdownBoxBaseComponent`, document its `open()`, `close()`, and `toggle()` methods under the subclass.
+- **Document the inheritance relationship** in the component's description or add an "Inheritance" section if significant.
+
+### 6.2 Common Inheritance Patterns
+
+- **MXColorLookComponent**: Extends both `MXColorComponent` and `MXLookComponent`
+  - Inherits `color` property of type `AXStyleColorType`
+  - Inherits `look` property of type `AXStyleLookType`
+- **MXColorComponent**: Provides color theming capabilities
+- **MXLookComponent**: Provides visual appearance styling
+- **MXBaseComponent**: Common base functionality for all components
+
+### 6.3 Inheritance Documentation Requirements (STRICT)
+
+- **Property Descriptions**: For inherited properties, include "Inherited from [ParentClass]" in the description.
+- **Type Linking**: Ensure inherited property types link to their correct type definitions.
+- **Default Values**: Only document defaults that are defined in code (in the component or inherited). Do not infer defaults from demos or showcase pages. If a base sets a default and the subclass does not override it, document the base default.
+- **Method Overrides**: If the component overrides inherited methods, document both the inherited and overridden versions.
+- **Event Inheritance**: Always include inherited events when present; add "Inherited from X" notes for clarity.
+
+**Example of documenting inherited properties:**
+
+```json
+{
+  "name": "color",
+  "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+  "default": "'primary'",
+  "description": "Defines the color scheme of the component. Inherited from MXColorComponent."
+},
+{
+  "name": "look",
+  "type": [{ "name": "AXStyleLookType", "link": "/en-US/docs/types/style-look-type" }],
+  "default": "'solid'",
+  "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent."
+}
+```
+
+---
+
+## 7. Types (Properties, Events, and Methods of the Component)
+
+This section details how to document the properties, events, and methods of the component itself.
+
+The `type` for all properties is documented as an array of `DocType` objects within the JSON. Each `DocType` object has a `name: string` (the type string itself) and an optional `link: string` (uri-reference to the type's documentation if available).
+
+**Core Principle for Representing Types:**
+
+- If a TypeScript type is a union (e.g., `string | number` or `TypeA | TypeB<GenericParam>`), each member of that union is listed as a separate and distinct `DocType` object in the `type` array.
+- The `|` union symbol itself is **NOT** included as a `DocType` object.
+- Complex types, including generics (e.g., `Map<string, number>`, `Observable<T>`), are represented as a single `DocType` object with the full type string as its `name`. There is no splitting of `<`, `>`, or generic parameters into separate `DocType` objects.
+
+### 7.0 Empty States Policy (STRICT)
+
+- Do not include empty arrays in `types` entries. If `props`, `events`, or `methods` would be empty, omit that property.
+- If a `types` item would only contain a `title` and no `props`, `events`, or `methods`, omit that entire item from `types`.
+- Apply consistently in both English and Farsi docs.
+
+### 7.1 Properties (`props` array)
+
+- Document all public inputs:
+  - Classic Angular `@Input()` properties
+  - Angular signals API inputs such as `input<T>()` and `model<T>()` (treat these as Inputs that should be documented and can be set by consumers)
+- **Include inherited properties** from parent classes that are accessible to the component.
+- Each property object must include:
+  - `name: string`: The name of the property.
+  - `type?: DocType[]`: An optional array of `DocType` objects representing the property's type.
+    - **CRITICAL LINKING:** If a property's type (or a part of a union type) refers to another _documented_ interface, class, or type (including those documented by `event-docs-rules.mdc` or `shared-types-rules.mdc`), the `DocType` object for that type MUST include a `link` property.
+    - The `link` should point to its corresponding documentation JSON using the kebab-case name and the correct `docs/events/` or `docs/types/` path (e.g., `/en-US/docs/events/ax-action-sheet-event`, `/en-US/docs/types/log-level`).
+  - `description: string`: A clear explanation of the property's purpose. For inherited properties, include "Inherited from [ParentClass]."
+  - `default?: string`: Include only when a default is actually set in code (including inherited defaults). Do not copy defaults from demos.
+
+### 7.2 Events (`events` array)
+
+- Document all public events marked with `@Output()` decorators.
+- **Include inherited events** from parent classes that are accessible to the component.
+- Each event object must include:
+  - `name: string`: The name of the event.
+  - `type?: DocType[]`: An optional array of `DocType` objects representing the event's type.
+    - **CRITICAL LINKING:** If an event's type (or a part of a union type) refers to another _documented_ interface, class, or type, the `DocType` object for that type MUST include a `link` property.
+    - The `link` should point to its corresponding documentation JSON using the kebab-case name and the correct path.
+  - `description: string`: A clear explanation of when the event is emitted. For inherited events, include "Inherited from [ParentClass]."
+  - Link event types only if the target docs exist (or create them first following event rules). Never link to non-existent pages.
+
+### 7.3 Methods (`methods` array)
+
+- Document all public methods (any method that is not `private` or `protected`). If a method is accessible via Angular template references or through a `ViewChild` handle, treat it as public.
+- **Include inherited methods** from parent classes that are accessible to the component.
+- Each method object must include:
+  - `content: string`: The full JSDoc comment and method signature for code rendering.
+  - **CRITICAL REQUIREMENT:** When documenting methods, you MUST also update the actual component's JSDoc comments to match the documentation. This ensures code and documentation stay in sync.
+  - **JSDoc Standards:** Include full JSDoc comments with `@param`, `@returns`, and `@example` tags where applicable, but exclude `@example` tags from the JSON output.
+  - **Remove @ignore:** If a method was previously marked with `@ignore` but should be documented, remove that tag from the component code.
+  - **Inheritance Notes:** For inherited methods, include inheritance information in the JSDoc comment.
+- Methods intended to be internal-only should remain annotated with `@ignore`. If a method becomes public, remove `@ignore` and document it.
+
+#### 7.3.1 Accessors vs Methods (STRICT)
+
+- Do NOT include getters or setters (accessors) in the `methods` array.
+- Public getters/setters that represent component state should be documented as properties in `props` if part of the public API; otherwise omit them.
+- Only callable functions (e.g., `open(): void`, `toggle(): string`) belong in `methods`.
+
+**Example for documenting a method:**
+
+```typescript
+// In the component file, update the JSDoc:
+/**
+ * Removes the alert from the container after a transition effect.
+ *
+ * @returns void - No return value. The alert is removed from the DOM and the onClosed event is emitted.
+ */
+close(): void {
+  // method implementation
+}
+```
+
+```json
+// In the documentation JSON:
+"methods": [
+  {
+    "content": "/**\n * Removes the alert from the container after a transition effect.\n *\n * @returns void - No return value. The alert is removed from the DOM and the onClosed event is emitted.\n */\nclose(): void"
+  }
+]
+```
+
+---
+
+## 8. Design Tokens
+
+- Document all CSS custom properties (design tokens) used by the component.
+- Each token object must include:
+  - `key: string`: The CSS custom property name (e.g., `--ax-comp-button-bg-color`).
+  - `value: string`: The CSS value or CSS variable reference.
+  - `description: string`: A clear explanation of what the token controls and how it relates to the component's appearance.
+
+---
+
+## 8.1 Design Token Verification
+
+**CRITICAL REQUIREMENT:** Before writing design tokens in component documentation, you MUST verify them against the actual SCSS files to ensure accuracy.
+
+### 8.1.1 SCSS File Analysis
+
+- **Examine the component's SCSS files** to identify all actual CSS custom properties used
+- **Check the main component SCSS file** (e.g., `_base.scss`, `_index.scss`)
+- **Check color-look specific SCSS files** (e.g., `_button-default-solid.scss`, `_button-primary-outline.scss`)
+- **Check any mixin or utility SCSS files** that the component imports
+- **Verify all documented tokens exist** in the actual SCSS code (SCSS is the source of truth for tokens)
+
+### 8.1.2 Common SCSS File Locations
+
+- **Base styles:** `packages/components/component-name/src/lib/styles/_base.scss`
+- **Color-look combinations:** `packages/components/component-name/src/lib/styles/color-looks/look-name/_component-color-look.scss`
+- **Main index:** `packages/components/component-name/src/lib/styles/_index.scss`
+- **Mixins:** `packages/components/component-name/src/lib/styles/mixins/`
+
+### 8.1.3 Verification Process
+
+1. **Search for CSS custom properties** in SCSS files using patterns like:
+   - `--ax-comp-component-name-*`
+   - `--ax-sys-*` (system tokens)
+   - `--ax-*` (general tokens)
+
+2. **Cross-reference with documentation** to ensure:
+   - All documented tokens exist in SCSS
+   - No undocumented tokens are missing from documentation
+   - Token values match exactly between SCSS and documentation
+
+3. **Check for dynamic tokens** that might be generated programmatically:
+   - Color-based tokens (e.g., `--ax-comp-button-{color}-bg`)
+   - Look-based tokens (e.g., `--ax-comp-button-{look}-border`)
+
+### 8.1.4 Example Verification
+
+```scss
+// In _button-default-solid.scss
+:host {
+  --ax-comp-button-bg-color: var(--ax-sys-color-default-500);
+  --ax-comp-button-text-color: var(--ax-sys-color-default-50);
+  --ax-comp-button-border-color: var(--ax-sys-color-default-600);
+}
+```
+
+```json
+// In documentation - CORRECT tokens
+{
+  "key": "--ax-comp-button-bg-color",
+  "value": "var(--ax-sys-color-default-500)",
+  "description": "Background color for default solid button variant."
+}
+```
+
+### 8.1.5 Common Mistakes to Avoid
+
+- **DO NOT document tokens that don't exist** in the SCSS files
+- **DO NOT assume token names** without checking the actual code
+- **DO NOT copy tokens from other components** without verification
+- **DO NOT use placeholder values** - always use the exact values from SCSS
+
+---
+
+## 8.2 Design Token Documentation Strategy
+
+**CRITICAL UNDERSTANDING:** Design tokens must document the ACTUAL default values used by the component, not generic placeholders or SCSS syntax.
+
+### 8.2.1 Default State Analysis
+
+**ALWAYS start by understanding the component's default state:**
+
+1. **Check the component's inheritance chain** to determine default values:
+   - `MXColorComponent` → default `color = 'default'`
+   - `MXLookComponent` → default `look = 'solid'`
+   - Combined: component gets `ax-default` and `ax-solid` classes
+
+2. **Find the SCSS file that handles the default state:**
+   - Look for files like `_component-default-solid.scss`
+   - This file contains the actual default design token values
+
+3. **Document the actual default values**, not generic placeholders
+
+### 8.2.2 Correct vs. Incorrect Documentation
+
+**INCORRECT - Generic Placeholders:**
+
+```json
+{
+  "key": "--ax-comp-button-bg-color",
+  "value": "var(--ax-sys-color-{color}-{surface})",
+  "description": "Background color that varies based on color theme."
+}
+```
+
+**CORRECT - Actual Default Values:**
+
+```json
+{
+  "key": "--ax-comp-button-bg-color",
+  "value": "var(--ax-sys-color-lightest-surface)",
+  "description": "Background color of the button. Default value for ax-default class. Changes to var(--ax-sys-color-darkest-surface) in dark mode."
+}
+```
+
+### 8.2.3 SCSS Syntax vs. CSS Custom Properties
+
+**NEVER document SCSS syntax in design tokens:**
+
+- **WRONG**: `var(--ax-sys-color-#{$name}-lightest-surface)` ❌
+- **RIGHT**: `var(--ax-sys-color-lightest-surface)` ✅
+
+**SCSS syntax like `#{$name}` is for code generation, not for documentation.**
+
+- Do not copy token values from showcase `design-tokens.json` without verifying against SCSS.
+
+### 8.2.4 Documentation Strategy for Different Token Types
+
+1. **Default State Tokens** (most important):
+   - Document the actual values used when `ax-default` and `ax-solid` classes are applied
+   - Include both light and dark mode values in descriptions
+   - Example: `var(--ax-sys-color-lightest-surface)` with note about dark mode
+
+2. **Dynamic Tokens** (if documented):
+   - Only document if they're part of the public API
+   - Use clear descriptions explaining how they vary
+   - Example: "Varies based on color theme and look style"
+
+3. **System Tokens**:
+   - Document when they're directly used by the component
+   - Example: `var(--ax-sys-border-radius)` for border-radius
+
+### 8.2.5 Verification Checklist for Design Tokens
+
+Before finalizing design token documentation, verify:
+
+- [ ] **Default state is documented**: Tokens show actual values for `ax-default` and `ax-solid` classes
+- [ ] **No SCSS syntax**: Values are actual CSS custom properties, not SCSS variables or syntax
+- [ ] **Accurate values**: Token values match exactly what's in the SCSS files
+- [ ] **Clear descriptions**: Descriptions explain when and how tokens are used
+- [ ] **Dark mode noted**: If applicable, mention how tokens change in dark mode
+- [ ] **No generic placeholders**: Values are specific, not `{color}`, `{look}`, etc.
+
+### 8.2.6 Example of Complete Design Token Documentation
+
+```json
+"tokens": [
+  {
+    "key": "--ax-comp-badge-bg-color",
+    "value": "var(--ax-sys-color-lightest-surface)",
+    "description": "Background color of the badge. Default value for ax-default class. Changes to var(--ax-sys-color-darkest-surface) in dark mode."
+  },
+  {
+    "key": "--ax-comp-badge-border-radius",
+    "value": "9999px",
+    "description": "Border radius of the badge, creating a pill shape."
+  }
+]
+```
+
+**Key Points:**
+
+- **Value**: Actual CSS custom property or literal value
+- **Description**: Explains the default behavior and any variations
+- **No placeholders**: Values are specific and accurate
+- **Context**: Descriptions mention the classes that apply these tokens
+
+---
+
+## 9. Code-Documentation Synchronization
+
+**CRITICAL REQUIREMENT:** When updating component documentation, you MUST also update the actual component code to maintain synchronization:
+
+1. **JSDoc Comments:** Update method JSDoc comments to match the documentation
+2. **Remove @ignore Tags:** Remove `@ignore` tags from methods that should be documented
+3. **Add Missing Documentation:** Add JSDoc comments to methods that lack proper documentation
+4. **Type Consistency:** Ensure property types in the component match the documented types
+5. **Event Consistency:** Ensure event types in the component match the documented types
+6. **Inheritance Documentation:** Ensure inherited properties, events, and methods are properly documented with inheritance notes
+
+**This rule prevents documentation drift and ensures developers can rely on both the code and documentation being accurate and up-to-date.**
+
+---
+
+## 10. Link Format Specification
+
+**CRITICAL REQUIREMENT:** The `link` property in `DocType` objects MUST use URL paths, NOT file paths.
+
+### 10.1 Correct Link Format
+
+- **Use URL paths:** `/en-US/docs/events/event-name` or `/fa-IR/docs/types/type-name`
+- **Do NOT use file paths:** `../../events/event-name/event-name.en-US.json`
+- **Do NOT use relative paths:** `../events/event-name`
+
+### 10.2 Link Structure Examples
+
+```json
+// CORRECT - URL paths
+"type": [{ "name": "EventEmitter<AXOptionChangedEvent>", "link": "/en-US/docs/events/option-changed-event" }]
+"type": [{ "name": "AXFocusEvent", "link": "/en-US/docs/events/focus-event" }]
+"type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }]
+
+// INCORRECT - File paths (DO NOT USE)
+"type": [{ "name": "EventEmitter<AXOptionChangedEvent>", "link": "../../events/option-changed-event/option-changed-event.en-US.json" }]
+"type": [{ "name": "AXFocusEvent", "link": "../events/focus-event/focus-event.en-US.json" }]
+```
+
+### 10.3 Language-Specific Links
+
+- **English documentation:** Use `/en-US/docs/` prefix
+- **Farsi documentation:** Use `/fa-IR/docs/` prefix
+- **Category paths:** Follow the structure `/language/docs/category/name`
+
+### 10.4 Validation
+
+Before finalizing documentation, verify that all `link` properties:
+
+- Start with `/en-US/docs/` or `/fa-IR/docs/`
+- Use kebab-case naming for the target
+- Point to the correct category (events, types, components, etc.)
+- Do NOT contain file extensions (.json)
+
+---
+
+## 11. Type Documentation Decision Guidelines
+
+**CRITICAL REQUIREMENT:** Before creating separate type documentation files, carefully evaluate whether they are necessary.
+
+### 11.1 When to Create Separate Type Documentation
+
+- **Create separate files ONLY for:**
+  - Types that are exported and meant to be used by other components
+  - Types that are referenced by multiple components
+  - Types that have complex structures requiring detailed documentation
+  - Types that are part of the public API
+  - Types that are meant to be imported and used by developers
+
+### 11.2 When NOT to Create Separate Type Documentation
+
+- **Do NOT create separate files for:**
+  - Internal interfaces used only within a single component
+  - Simple type aliases that are self-explanatory
+  - Types that are already documented within the component documentation
+  - Types that are not exported or meant for external use
+
+### 11.3 Decision Flow
+
+1. **Check if the type is exported** from the package
+2. **Check if the type is referenced** by other components
+3. **Check if the type has complex structure** requiring detailed documentation
+4. **If NO to all above:** Document the type within the component documentation
+5. **If YES to any above:** Consider creating separate type documentation
+
+### 11.4 Example Decision
+
+```typescript
+// This interface is used only within breadcrumbs component
+interface AXBreadcrumbsItems {
+  name?: string;
+  text: string;
+  // ... other properties
+}
+
+// DECISION: Do NOT create separate documentation
+// REASON: Internal interface, not exported, used only by one component
+```
+
+---
+
+## 12. Documentation Display Logic
+
+**CRITICAL UNDERSTANDING:** In component documentation, ALL properties and events are displayed in tables. The difference is only in how the types are linked or displayed.
+
+### 12.1 Component Documentation Display
+
+In component documentation (`types` array), the renderer displays:
+
+- **Properties (`props`)**: **ALWAYS shown in tables** with type information
+- **Events (`events`)**: **ALWAYS shown in tables** with type information
+- **Methods (`methods`)**: **ALWAYS shown in code style** with JSDoc content
+
+### 12.2 Type Display Strategy in Tables
+
+**When a type is SHARED (has separate documentation):**
+
+- The type name in the table becomes a **clickable link** using the `link` property
+- Example: `"type": [{ "name": "AXActionSheetConfig", "link": "/en-US/docs/types/ax-action-sheet-config" }]`
+- Users can click the type name to navigate to detailed type documentation
+
+**When a type is NOT SHARED (no separate documentation):**
+
+- The type name is displayed as **plain text** in the table (no link)
+- Example: `"type": [{ "name": "string" }]` or `"type": [{ "name": "boolean" }]`
+- The type is shown directly in the table without additional linking
+
+### 12.3 Examples of Each Approach
+
+**Shared Type (Table with Clickable Link):**
+
+```json
+// In component documentation - types array
+{
+  "name": "config",
+  "type": [{ "name": "AXActionSheetConfig", "link": "/en-US/docs/types/ax-action-sheet-config" }],
+  "description": "Configuration object for the action sheet"
+}
+
+// Result: "AXActionSheetConfig" appears as a clickable link in the table
+// Clicking it takes users to the detailed type documentation
+```
+
+**Non-Shared Type (Table with Plain Text):**
+
+```json
+// In component documentation - types array
+{
+  "name": "disabled",
+  "type": [{ "name": "boolean" }],
+  "description": "Whether the component is disabled"
+}
+
+// Result: "boolean" appears as plain text in the table
+// No link - type is shown directly
+```
+
+### 12.4 Key Points
+
+1. **ALL properties and events go in tables** - this never changes
+2. **The difference is in the type linking:**
+   - Shared types → `link` property → clickable in table
+   - Non-shared types → no `link` property → plain text in table
+3. **Methods are always shown in code style** - this never changes
+4. **Tables are the standard display format** for all component properties and events
+
+### 12.5 Implementation Guidelines
+
+1. **Properties and Events**: Document in the `types` array (they go in tables). Omit empty `props`/`events` keys entirely.
+2. **Type Linking**: Add `link` property only for types that have separate documentation
+3. **Type Display**: Non-linked types appear as plain text in the same table
+4. **Consistency**: All properties and events use the same table format regardless of type complexity
+5. **Methods**: Always use code style display in the `methods` array. Omit the `methods` key when there are none.
+6. **Rule Reinforcement**: Component docs MUST use tables for props and events. Do not switch component docs to `sections` code style. Reserve code sections for separate type/event documents only when they are simple and non-linkable.
+
+---
+
+## 13. Cross-referencing Strategy (STRICT)
+
+- Cross-references MUST be implemented via `DocType.link` inside the `type` arrays of props/events/methods (where types are declared).
+  - Example: If an event uses `AXCalendarNavigateEvent`, set `"link": "/en-US/docs/events/ax-calendar-navigate-event"` on that type.
+  - Example: If a property refers to `AXCalendarComponent` (e.g., in an event payload), set `"link": "/en-US/docs/components/calendar"` on that type.
+- Do NOT add general cross-links via `extraLinks` for component-to-component relationships; rely on precise `DocType.link` references at the point of type declaration.
+- Ensure links follow Section 10 (URL paths, kebab-case, language-specific prefixes) and only reference existing docs.
+
+---
+
+## 14. Validation Checklist
+
+Before finalizing component documentation, verify:
+
+- [ ] **Inheritance Analysis Complete**: Component's inheritance chain has been thoroughly analyzed
+- [ ] **Inherited Properties Documented**: All inherited properties from parent classes are documented with inheritance notes
+- [ ] **Inherited Events Documented**: All inherited events from parent classes are documented with inheritance notes
+- [ ] **Inherited Methods Documented**: All inherited methods from parent classes are documented with inheritance notes
+- [ ] **All public `@Input()` properties are documented with correct types and links**
+- [ ] **All public `@Output()` events are documented with correct types and links**
+- [ ] **All public methods (without `@ignore`) are documented with complete JSDoc**
+- [ ] **`types[0].title` uses the exact exported component class name**
+- [ ] **Component code JSDoc comments match the documentation exactly**
+- [ ] **All `@ignore` tags are removed from methods that should be documented**
+- [ ] **Design tokens are documented with clear descriptions**
+- [ ] **Design tokens have been verified against actual SCSS files**
+- [ ] **Default state tokens documented**: Design tokens show actual values for `ax-default` and `ax-solid` classes
+- [ ] **No SCSS syntax in tokens**: Token values are actual CSS custom properties, not SCSS variables or syntax
+- [ ] **Accurate token values**: All documented tokens exist in SCSS files with exact value matches
+- [ ] **No generic placeholders**: Token values are specific (e.g., `var(--ax-sys-color-lightest-surface)`) not generic (e.g., `{color}`, `{look}`)
+- [ ] **Dark mode variations noted**: If applicable, descriptions mention how tokens change in dark mode
+- [ ] **Both English and Farsi versions are complete and consistent**
+- [ ] **All type references include proper links to documented types**
+- [ ] **Schema validation passes for both language versions**
+- [ ] **Inheritance relationships are clearly documented in property/event/method descriptions**
+- [ ] **All `link` properties use URL paths (not file paths)**
+- [ ] **No unnecessary separate type documentation files were created**
+- [ ] **Import statements only include necessary component classes**
+- [ ] **Accessors not in methods**: No getters/setters documented under `methods`.
+- [ ] **Type-level links used for cross-references**: Related components/events are linked via `DocType.link` where types are declared; no `extraLinks` used for this purpose.
+- [ ] **No empty structures**: No empty arrays (`props`, `events`, `methods`) or empty `types` entries
+
+---

@@ -1,0 +1,345 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSelectBoxComponent } from '@acorex/components/select-box';"],
+  "title": "Select Box",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/selectbox--documentation"
+    }
+  ],
+  "description": "A dropdown selection component with data source support, search integration, single/multiple selection, templates and look customization.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-select-box</code>",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/usage"
+      }
+    },
+    {
+      "title": "Multiple Selection",
+      "description": "Enable multiple selection using the <code>multiple</code> property.",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/multiple-selection"
+      }
+    },
+    {
+      "title": "Custom Item Template",
+      "description": "Customize item rendering with <code>itemTemplate</code>.",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/custom-item-template"
+      }
+    },
+    {
+      "title": "Custom Loading Template",
+      "description": "Provide a custom loading template while data is loading.",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/custom-loading-template"
+      }
+    },
+    {
+      "title": "Custom Empty Template",
+      "description": "Customize empty state using <code>emptyTemplate</code>.",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/custom-empty-template"
+      }
+    },
+    {
+      "title": "Api Call",
+      "description": "Load items asynchronously using <code>AXDataSource</code>.",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "select-box/api-call"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectBoxComponent",
+      "props": [
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXDataSource<any> | any[]",
+              "link": "/en-US/docs/types/data-source"
+            }
+          ],
+          "description": "Data source or array of items."
+        },
+        {
+          "name": "textField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name for display text."
+        },
+        {
+          "name": "valueField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name for value key."
+        },
+        {
+          "name": "disabledField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name for disabled state."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "any"
+            },
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Selected value(s). Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "multiple",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Allow multiple selection."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Placeholder text when no option is selected."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text displayed above items."
+        },
+        {
+          "name": "minRecordsForSearch",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Minimum items threshold to show the internal search box."
+        },
+        {
+          "name": "itemTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Custom item template."
+        },
+        {
+          "name": "selectedTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Custom selected items template."
+        },
+        {
+          "name": "emptyTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Template for empty state."
+        },
+        {
+          "name": "loadingTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Template shown while loading."
+        },
+        {
+          "name": "dropdownWidth",
+          "type": [
+            {
+              "name": "string "
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Dropdown width (px or CSS)."
+        },
+        {
+          "name": "searchBoxAutoFocus",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Auto focus the internal search box when opened."
+        },
+        {
+          "name": "isItemTruncated",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Determines if an item is truncated."
+        },
+        {
+          "name": "showItemTooltip",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Determines if a tooltip is shown for an item."
+        },
+        {
+          "name": "itemHeight",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "'auto'"
+            }
+          ],
+          "default": "40",
+          "description": "Height of each list item in pixels, or 'auto' to let list measure."
+        },
+        {
+          "name": "maxVisibleItems",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "5",
+          "description": "Maximum number of visible items before scrolling."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Visual style. Inherited from MXLookComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disable the component. Inherited."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Readonly mode. Inherited."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<any[]>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when selected value(s) change."
+        },
+        {
+          "name": "onOpened",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when dropdown opens."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when dropdown closes."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Filters the data source with the provided term and refreshes the list.\n */\nsearch(term: string): void"
+        },
+        {
+          "content": "/**\n * Resets state, clears selection cache, refreshes list items and closes the dropdown.\n */\nrefresh(): void"
+        }
+      ]
+    }
+  ]
+}

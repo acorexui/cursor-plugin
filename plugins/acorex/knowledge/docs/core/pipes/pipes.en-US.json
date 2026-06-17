@@ -1,0 +1,222 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Safe Pipe",
+  "description": "Angular pipe that wraps DomSanitizer to mark trusted HTML, styles, scripts, URLs, and resource URLs as safe for template binding — used throughout AcoreX documentation and demo components.",
+  "imports": ["import { AXSafePipe } from '@acorex/core/pipes';"],
+  "hints": [
+    {
+      "title": "Security first",
+      "content": "The <code>safe</code> pipe calls <code>bypassSecurityTrust*</code> — it <strong>disables</strong> Angular's XSS protection. Only use it for content you fully trust (your own CMS, sanitized API, static docs). Never pipe unsanitized user input.",
+      "status": "warning"
+    },
+    {
+      "title": "Import the pipe in standalone components",
+      "content": "Add <code>AXSafePipe</code> to the component <code>imports</code> array. The empty <code>PipesModule</code> is not required.",
+      "status": "primary"
+    },
+    {
+      "title": "Pipe name is safe",
+      "content": "Use in templates as <code>{{ value | safe: 'html' }}</code> — the pipe name is <code>safe</code>, not <code>axSafe</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Empty values",
+      "content": "When <code>value</code> is <code>null</code>, <code>undefined</code>, or an empty string, the pipe returns <code>''</code> without calling the sanitizer.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSafePipe",
+      "description": "Pure pipe delegating to Angular DomSanitizer bypass methods.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Marks a value as trusted for Angular binding.\n *\n * @param value - Raw string to trust.\n * @param type - One of: 'html' | 'style' | 'script' | 'url' | 'resourceUrl'\n * @returns SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl\n * @throws Error when type is not recognized\n */\ntransform(value: unknown, type: string): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl | ''"
+        }
+      ]
+    },
+    {
+      "title": "Safe type reference",
+      "description": "Which DomSanitizer method each type maps to.",
+      "props": [
+        {
+          "name": "html",
+          "type": [{ "name": "SafeHtml" }],
+          "description": "For [innerHTML] bindings. bypassSecurityTrustHtml()."
+        },
+        {
+          "name": "style",
+          "type": [{ "name": "SafeStyle" }],
+          "description": "For [style] or style.* bindings. bypassSecurityTrustStyle()."
+        },
+        {
+          "name": "script",
+          "type": [{ "name": "SafeScript" }],
+          "description": "For script src bindings (rare). bypassSecurityTrustScript()."
+        },
+        {
+          "name": "url",
+          "type": [{ "name": "SafeUrl" }],
+          "description": "For href, img src, and similar URL bindings. bypassSecurityTrustUrl()."
+        },
+        {
+          "name": "resourceUrl",
+          "type": [{ "name": "SafeResourceUrl" }],
+          "description": "For iframe src, object/embed, etc. bypassSecurityTrustResourceUrl()."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the pipes package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/pipes package currently exports AXSafePipe — a thin, reusable wrapper around Angular's DomSanitizer.\n\nAngular sanitizes bound values by default to prevent XSS. When you need to render trusted HTML from documentation JSON, embed demo iframes, or display rich hint callouts, Angular blocks the binding unless the value is explicitly marked safe.\n\nAXSafePipe centralizes that pattern so you do not repeat DomSanitizer.inject() boilerplate in every component."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Import AXSafePipe in a standalone component, then choose the safe type that matches the Angular binding target.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "trusted-content.component.ts",
+            "language": "typescript",
+            "content": "import { Component, computed, signal } from '@angular/core';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-trusted-content',\n  imports: [AXSafePipe],\n  template: `\n    <article [innerHTML]=\"html() | safe: 'html'\"></article>\n\n    <iframe\n      title=\"Trusted demo\"\n      [src]=\"demoUrl() | safe: 'resourceUrl'\"\n      loading=\"lazy\"\n    ></iframe>\n\n    <a [href]=\"docsUrl | safe: 'url'\" target=\"_blank\" rel=\"noopener\">\n      Open docs\n    </a>\n  `,\n})\nexport class TrustedContentComponent {\n  html = signal('<p>Hello <strong>world</strong></p>');\n  demoPath = signal('/demos/button');\n  demoUrl = computed(() => `${this.demoPath()}?theme=light`);\n  docsUrl = 'https://docs.acorexui.com/components/button';\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "HTML Content (innerHTML)",
+      "description": "Render trusted HTML strings in templates.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "doc-renderer.component.html",
+            "language": "html",
+            "content": "<!-- Documentation description with markup -->\n<p [innerHTML]=\"data()?.description | safe: 'html'\"></p>\n\n<!-- Hint callouts may contain <code> tags -->\n<ax-content [innerHTML]=\"hint.content | safe: 'html'\"></ax-content>\n\n<!-- Section description -->\n<p [innerHTML]=\"section.description | safe: 'html'\"></p>\n"
+          },
+          {
+            "fileName": "doc-renderer.component.ts",
+            "language": "typescript",
+            "content": "import { Component, signal } from '@angular/core';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-doc-renderer',\n  imports: [AXSafePipe],\n  templateUrl: './doc-renderer.component.html',\n})\nexport class DocRendererComponent {\n  data = signal({ description: '<p>API reference with <code>format</code> pipe.</p>' });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "iframe embeds (resourceUrl)",
+      "description": "Bind dynamic iframe src URLs.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "section-box.component.html",
+            "language": "html",
+            "content": "<iframe\n  [src]=\"iframeSrc | safe: 'resourceUrl'\"\n  loading=\"lazy\"\n></iframe>\n"
+          },
+          {
+            "fileName": "section-box.component.ts",
+            "language": "typescript",
+            "content": "import { Component, computed, inject } from '@angular/core';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-section-box',\n  imports: [AXSafePipe],\n  templateUrl: './section-box.component.html',\n})\nexport class SectionBoxComponent {\n  path = () => '/demos/button';\n  iframeSrc = computed(() => `${this.path()}?theme=light`);\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Image and Link URLs (url)",
+      "description": "Trust URLs for img src and href bindings.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "url-bindings.html",
+            "language": "html",
+            "content": "<!-- Dynamic image from a trusted CDN -->\n<img [src]=\"imageUrl | safe: 'url'\" alt=\"Preview\" />\n\n<!-- External link -->\n<a [href]=\"docLink | safe: 'url'\" target=\"_blank\" rel=\"noopener\">Open docs</a>\n"
+          },
+          {
+            "fileName": "url-bindings.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-preview',\n  imports: [AXSafePipe],\n  templateUrl: './url-bindings.html',\n})\nexport class PreviewComponent {\n  imageUrl = 'https://cdn.example.com/assets/logo.svg';\n  docLink = 'https://docs.acorexui.com/components/button';\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Style and Script bindings",
+      "description": "Less common safe types.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "style-script.html",
+            "language": "html",
+            "content": "<!-- Inline CSS from a trusted source -->\n<div [style]=\"customCss | safe: 'style'\">Styled block</div>\n\n<!-- Script src — use with extreme caution -->\n<!-- <script [src]=\"trustedScriptUrl | safe: 'script'\"></script> -->\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Usage in TypeScript",
+      "description": "Call transform() directly without the template pipe.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "programmatic-usage.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { SafeHtml } from '@angular/platform-browser';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-icon-preview',\n  template: `<span [innerHTML]=\"svg()\"></span>`,\n})\nexport class IconPreviewComponent {\n  private safePipe = inject(AXSafePipe);\n\n  svg = signal<SafeHtml | ''>('');\n\n  async ngOnInit() {\n    const svgMarkup = await this.loadTrustedSvg('home');\n    this.svg.set(this.safePipe.transform(svgMarkup, 'html') as SafeHtml);\n  }\n\n  private loadTrustedSvg(name: string): Promise<string> {\n    return Promise.resolve('<svg>...</svg>');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "HTML Tables with Markup",
+      "description": "Real usage in documentation table component.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "table.component.html",
+            "language": "html",
+            "content": "<table>\n  <thead>\n    <tr>\n      @for (col of items()?.columns; track col) {\n        <th [innerHTML]=\"col | safe: 'html'\"></th>\n      }\n    </tr>\n  </thead>\n  <tbody>\n    @for (row of items()?.rows; track row) {\n      <tr>\n        @for (item of row; track item) {\n          <td [innerHTML]=\"item | safe: 'html'\"></td>\n        }\n      </tr>\n    }\n  </tbody>\n</table>\n"
+          },
+          {
+            "fileName": "table.component.ts",
+            "language": "typescript",
+            "content": "import { Component, input } from '@angular/core';\nimport { AXSafePipe } from '@acorex/core/pipes';\n\n@Component({\n  selector: 'app-table',\n  imports: [AXSafePipe],\n  templateUrl: './table.component.html',\n})\nexport class TableComponent {\n  items = input<{ columns: string[]; rows: string[][] }>();\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Security Guidelines",
+      "description": "When to use and when to avoid.",
+      "content": {
+        "type": "text",
+        "data": "Safe to use when:\n\n• Content comes from your own documentation JSON or CMS you control\n• SVG/HTML is generated server-side with sanitization\n• iframe URLs are whitelisted demo paths on your domain\n\nAvoid when:\n\n• Rendering raw user comments, chat messages, or form input\n• Binding URLs from unvalidated query parameters\n• Trusting third-party API HTML without server-side sanitization\n\nAlternatives for untrusted HTML:\n• Sanitize on the server with a library like DOMPurify before storing\n• Use Angular's default sanitization (no bypass) for partial trust\n• Display plain text instead of innerHTML"
+      }
+    },
+    {
+      "title": "Safe Type Cheat Sheet",
+      "description": "Quick reference for choosing the right type.",
+      "content": {
+        "type": "text",
+        "data": "| Template binding | Pipe type | Example |\n|------------------|-----------|--------|\n| [innerHTML] | html | `<div [innerHTML]=\"html \\| safe: 'html'\"></div>` |\n| [style] / style.* | style | `<div [style]=\"css \\| safe: 'style'\"></div>` |\n| [src] on iframe | resourceUrl | `<iframe [src]=\"url \\| safe: 'resourceUrl'\"></iframe>` |\n| [src] on img | url | `<img [src]=\"url \\| safe: 'url'\">` |\n| [href] | url | `<a [href]=\"url \\| safe: 'url'\">` |\n| [src] on script | script | Rare — avoid if possible |\n\nInvalid type strings throw: `Error: Invalid safe type specified: ...`"
+      }
+    }
+  ]
+}

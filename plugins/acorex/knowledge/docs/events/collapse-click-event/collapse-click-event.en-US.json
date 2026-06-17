@@ -1,0 +1,63 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXCollapseClickEvent",
+  "description": "Event emitted when the collapse header is clicked. Extends AXClickEvent and adds a handled flag to optionally suppress the default toggle behavior.",
+  "imports": [],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Payload for collapse header clicks.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "collapse-click-event.ts",
+            "language": "ts",
+            "content": "export class AXCollapseClickEvent extends AXClickEvent {\n  handled = false;\n}"
+          }
+        ]
+      }
+    }
+  ],
+
+  "types": [
+    {
+      "title": "AXCollapseClickEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component. For this event it will be an AXCollapseComponent instance. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element of the collapse component. Inherited from AXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "any" }],
+          "description": "The native event that triggered the click (MouseEvent in this case). Inherited from AXHtmlEvent/AXClickEvent.",
+          "default": "null"
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "description": "Optional extra data associated with the click event. Inherited from AXClickEvent.",
+          "default": "null"
+        },
+        {
+          "name": "handled",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether the event has been handled. If false, the component will automatically toggle the collapse state."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the event was triggered by a user action. Inherited from AXEvent.",
+          "default": "false"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "NXNativeEvent",
+  "description": "Contains native event information for NX components.",
+  "imports": ["import { NXNativeEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "NX event that exposes a native Event instance.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "nx-native-event.ts",
+            "language": "ts",
+            "content": "export class NXNativeEvent {\n  nativeEvent: Event;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "NXNativeEvent",
+      "props": [{ "name": "nativeEvent", "type": [{ "name": "Event" }], "description": "The native event object." }],
+      "events": [],
+      "methods": []
+    }
+  ],
+  "tokens": []
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXRestApiGeneratorComponent } from '@acorex/components/rest-api-generator';"
+  ],
+  "title": "Rest API Generator",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/restapigenerator--documentation"
+    }
+  ],
+  "description": "A component that assembles REST request configuration (URL, method, headers, auth, query params and body) and emits a normalized output JSON.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-rest-api-generator</code>",
+      "content": {
+        "type": "api",
+        "data": "rest-api-generator/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRestApiGeneratorComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "AXRestApiOutput"
+            }
+          ],
+          "description": "Initial output JSON to load into the editor."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChange",
+          "type": [
+            {
+              "name": "AXRestApiOutput"
+            }
+          ],
+          "description": "Emitted whenever the composed REST output changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Updates the request URL in the generated REST output.\n *\n * @param e - Value changed event containing the new URL.\n * @returns void\n */\nurlHandler(e: AXValueChangedEvent<any>): void"
+        },
+        {
+          "content": "/**\n * Updates the HTTP method in the generated REST output.\n *\n * @param e - Value changed event containing the selected method.\n * @returns void\n */\nmethodHandler(e: AXValueChangedEvent<any>): void"
+        }
+      ]
+    }
+  ]
+}

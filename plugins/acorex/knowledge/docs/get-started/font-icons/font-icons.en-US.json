@@ -1,0 +1,73 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Font icons",
+  "description": "Let us first explain how icons work in ACoreX.\nIn ACoreX, instead of creating a dedicated icon font, we decided to leverage existing icon fonts. In the components section, we initially needed a set of icons, so we started by using a few fixed icons. However, since each project might require different icons, mixing a project’s own icons with the default icons used in ACoreX could create a sense of inconsistency and lack of visual harmony.\n\nTo address this, we created a map file for each available icon package. This means that if you are using Material icons in your project and load the corresponding Material map file, ACoreX will replace its fixed icons in components with Material icons.\n\nFor example, if we used the chevron-right icon in a component, under the hood it would reference the icon’s class or code point \"e5cc\". This way, you can not only use the three packages prepared by default (<a href='https://fontawesome.com/' target='_blank' rel='noopener noreferrer'>Font Awesome</a>, <a href='https://hugeicons.com/' target='_blank' rel='noopener noreferrer'>Huge Icons</a>, and <a href='https://fonts.google.com/icons' target='_blank' rel='noopener noreferrer'>Material Icons</a>), but you can also follow the same pattern to integrate any custom icon font of your choice.",
+  "sections": [
+    {
+      "title": "Font Awesome",
+      "description": "Font Awesome is a library of icons that can be used in your project. To use it, you must first load its files into your project according to the official documentation of the package.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "styles.scss",
+            "language": "scss",
+            "content": "// Load fontawesome mapped icons\n@use \"@acorex/styles/icons/fontawesome/index.scss\" as *;\n\n// Load fontawesome font\n@use \"../public/fonts/fontawesome/styles/index.scss\" as *;"
+          },
+          {
+            "fileName": "app.component.html",
+            "language": "html",
+            "content": "<i class=\"fa-solid fa-house\"></i>"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Material Icons",
+      "description": "Material Icons is a library of icons that can be used in your project. To use it, you must first load its files into your project according to the official documentation of the package.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "styles.scss",
+            "language": "scss",
+            "content": "// Load material icons mapped icons\n@use \"@acorex/styles/icons/material/index.scss\" as *;\n\n// Load material icons font\n@use \"../public/fonts/material/styles/index.scss\" as *;"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Huge Icons",
+      "description": "Huge Icons is a library of icons that can be used in your project. To use it, you must first load its files into your project according to the official documentation of the package.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "styles.scss",
+            "language": "scss",
+            "content": "// Load huge icons mapped icons based on the style you want to use\n@import \"@acorex/styles/icons/huge/huge-bulk/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-duotone/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-solid-rounded/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-solid-sharp/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-solid-standard/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-stroke-rounded/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-stroke-sharp/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-stroke-standard/index.scss\";\n// @import \"@acorex/styles/icons/huge/huge-twotone/index.scss\";\n\n// Load huge icons font\n@use \"../public/fonts/huge/styles/index.scss\" as *;"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Create custom map file",
+      "description": "The example you see below is the map we created for Font Awesome.\nUsing this same pattern, you can assign values to all the variables. Please note that all variables must be set according to your icon font; otherwise, places where these icons are used may encounter issues and fail to display the icons.\nAdditionally, complete examples are available at the path: <code>node_modules/@acorex/styles/icons/...</code>",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "_variables.scss",
+            "language": "scss",
+            "content": "$ax-icon-more-horizontal: '\\f141';\n$ax-icon-more-horizontal-after: '';\n$ax-icon-more-vertical: '\\f142';\n$ax-icon-more-vertical-after: '';\n$ax-icon-arrow-long-up: '\\f176';\n$ax-icon-arrow-long-up-after: '';\n$ax-icon-arrow-long-down: '\\f175';\n$ax-icon-arrow-long-down-after: '';\n$ax-icon-color-palette: '\\f53f';\n$ax-icon-color-palette-after: '';\n$ax-icon-arrow-left: '\\f0d9';\n$ax-icon-arrow-left-after: '';\n$ax-icon-arrow-down: '\\f0d7';\n$ax-icon-arrow-down-after: '';\n$ax-icon-arrow-up: '\\f0d8';\n$ax-icon-arrow-up-after: '';\n$ax-icon-arrow-right: '\\f0da';\n$ax-icon-arrow-right-after: '';\n$ax-icon-chevron-left: '\\f053';\n$ax-icon-chevron-left-after: '';\n$ax-icon-chevron-down: '\\f078';\n$ax-icon-chevron-down-after: '';\n$ax-icon-chevron-up: '\\f077';\n$ax-icon-chevron-up-after: '';\n$ax-icon-chevron-right: '\\f054';\n$ax-icon-chevron-right-after: '';\n$ax-icon-chevron-double-right: '\\f324';\n$ax-icon-chevron-double-right-after: '';\n$ax-icon-chevron-double-left: '\\f323';\n$ax-icon-chevron-double-left-after: '';\n$ax-icon-first-page: '\\f33e';\n$ax-icon-first-page-after: '';\n$ax-icon-last-page: '\\f340';\n$ax-icon-last-page-after: '';\n$ax-icon-calendar: '\\f133';\n$ax-icon-calendar-after: '';\n$ax-icon-info: '\\f05a';\n$ax-icon-info-after: '';\n$ax-icon-error: '\\f06a';\n$ax-icon-error-after: '';\n$ax-icon-warning: '\\f071';\n$ax-icon-warning-after: '';\n$ax-icon-check: '\\f00c';\n$ax-icon-check-after: '';\n$ax-icon-check-circle: '\\f058';\n$ax-icon-check-circle-after: '';\n$ax-icon-dobble-check: '\\f560';\n$ax-icon-dobble-check-after: '';\n$ax-icon-close: '\\f00d';\n$ax-icon-close-after: '';\n$ax-icon-clear: '\\f057';\n$ax-icon-clear-after: '';\n$ax-icon-visibility-off: '\\f070';\n$ax-icon-visibility-off-after: '';\n$ax-icon-visibility: '\\f06e';\n$ax-icon-visibility-after: '';\n$ax-icon-unfold-more: '\\f0dc';\n$ax-icon-unfold-more-after: '';\n$ax-icon-download: '\\f019';\n$ax-icon-download-after: '';\n$ax-icon-upload: '\\e09a';\n$ax-icon-upload-after: '';\n$ax-icon-search: '\\f002';\n$ax-icon-search-after: '';\n$ax-icon-copy: '\\f0c5';\n$ax-icon-copy-after: '';\n$ax-icon-refresh: '\\f021';\n$ax-icon-refresh-after: '';\n$ax-icon-inbox: '\\f01c';\n$ax-icon-inbox-after: '';\n$ax-icon-emoji: '\\f118';\n$ax-icon-emoji-after: '';\n$ax-icon-attach: '\\f0c6';\n$ax-icon-attach-after: '';\n$ax-icon-mic: '\\f130';\n$ax-icon-mic-after: '';\n$ax-icon-send: '\\f1d8';\n$ax-icon-send-after: '';\n$ax-icon-play: '\\f04b';\n$ax-icon-play-after: '';\n$ax-icon-pause: '\\f04c';\n$ax-icon-pause-after: '';\n$ax-icon-reload: '\\f2f9';\n$ax-icon-reload-after: '';\n$ax-icon-heart: '\\f004';\n$ax-icon-heart-after: '';\n$ax-icon-comment: '\\f075';\n$ax-icon-comment-after: '';\n$ax-icon-bold: '\\f032';\n$ax-icon-bold-after: '';\n$ax-icon-italic: '\\f033';\n$ax-icon-italic-after: '';\n$ax-icon-strike: '\\f0cc';\n$ax-icon-strike-after: '';\n$ax-icon-under-line: '\\f0cd';\n$ax-icon-under-line-after: '';\n$ax-icon-order-list: '\\f0cb';\n$ax-icon-order-list-after: '';\n$ax-icon-un-order-list: '\\f0ca';\n$ax-icon-un-order-list-after: '';\n$ax-icon-align-left: '\\f036';\n$ax-icon-align-left-after: '';\n$ax-icon-align-right: '\\f038';\n$ax-icon-align-right-after: '';\n$ax-icon-align-center: '\\f037';\n$ax-icon-align-center-after: '';\n$ax-icon-align-justify: '\\f039';\n$ax-icon-align-justify-after: '';\n$ax-icon-undo: '\\f0e2';\n$ax-icon-undo-after: '';\n$ax-icon-redo: '\\f01e';\n$ax-icon-redo-after: '';\n$ax-icon-highlight: '\\f591';\n$ax-icon-highlight-after: '';\n$ax-icon-link: '\\f0c1';\n$ax-icon-link-after: '';\n$ax-icon-image: '\\f03e';\n$ax-icon-image-after: '';\n$ax-icon-pen: '\\f304';\n$ax-icon-pen-after: '';\n$ax-icon-eraser: '\\f12d';\n$ax-icon-eraser-after: '';\n$ax-icon-pen-ruler: '\\f5ae';\n$ax-icon-pen-ruler-after: '';\n$ax-icon-crop: '\\f125';\n$ax-icon-crop-after: '';\n$ax-icon-full-screen: '\\f065';\n$ax-icon-full-screen-after: '';\n$ax-icon-up-folder: '\\e632';\n$ax-icon-up-folder-after: '';\n$ax-icon-sort: '\\e0ae';\n$ax-icon-sort-after: '';\n$ax-icon-menu: '\\f0c9';\n$ax-icon-menu-after: '';\n$ax-icon-plus: '\\2b';\n$ax-icon-plus-after: '';\n$ax-icon-trash: '\\f1f8';\n$ax-icon-trash-after: '';\n$ax-icon-arrow-turn-right: '\\e635';\n$ax-icon-arrow-turn-right-after: '';\n$ax-icon-arrow-turn-left: '\\e632';\n$ax-icon-arrow-turn-left-after: '';\n$ax-icon-save: '\\f0c7';\n$ax-icon-save-after: '';\n$ax-icon-minimize: '\\f068';\n$ax-icon-minimize-after: '';\n$ax-icon-maximize: '\\f31d';\n$ax-icon-maximize-after: '';"
+          },
+          {
+            "fileName": "index.scss",
+            "language": "scss",
+            "content": "@use './variables';\n\n.ax-icon-thin {\n  --ax-sys-icon-weight: 100;\n}\n.ax-icon-light {\n  --ax-sys-icon-weight: 300;\n}\n.ax-icon-regular {\n  --ax-sys-icon-weight: 400;\n}\n.ax-icon-solid {\n  --ax-sys-icon-weight: 900;\n}\n.ax-icon {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  display: inline-flex !important;\n  align-items: center;\n  justify-content: center;\n  font-style: normal;\n  font-variant: normal;\n  text-rendering: auto;\n  font-family: 'Font Awesome 6 Pro';\n  width: var(--ax-sys-icon-width, inherit);\n  height: var(--ax-sys-icon-height, inherit);\n  font-weight: var(--ax-sys-icon-weight, 400);\n  font-size: var(--ax-sys-icon-size, 100%);\n}\n.ax-icon-more-horizontal:before {\n  content: variables.$ax-icon-more-horizontal;\n}\n.ax-icon-more-horizontal:after {\n  content: variables.$ax-icon-more-horizontal-after;\n}\n.ax-icon-more-vertical:before {\n  content: variables.$ax-icon-more-vertical;\n}\n.ax-icon-more-vertical:after {\n  content: variables.$ax-icon-more-vertical-after;\n}\n..."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerSlotMouseEvent",
+  "description": "Mouse event emitted for scheduler slots.",
+  "imports": ["import { AXSchedulerSlotMouseEvent } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Shape of the scheduler slot mouse event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-slot-mouse-event.ts",
+            "content": "export interface AXSchedulerSlotMouseEvent extends NXNativeEvent<AXSchedulerComponent, MouseEvent> {\n  slot: {\n    endDate: AXDateTime;\n    startDate: AXDateTime;\n    view: AXSchedulerView;\n  };\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerSlotMouseEvent",
+      "props": [
+        { "name": "slot.startDate", "type": [{ "name": "AXDateTime" }], "description": "Slot start date." },
+        { "name": "slot.endDate", "type": [{ "name": "AXDateTime" }], "description": "Slot end date." },
+        {
+          "name": "slot.view",
+          "type": [{ "name": "AXSchedulerView", "link": "/en-US/docs/types/ax-scheduler-view" }],
+          "description": "View where the slot is located."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "Underlying native event. Inherited from NXNativeEvent."
+        },
+        {
+          "name": "sender",
+          "type": [{ "name": "AXSchedulerComponent", "link": "/en-US/docs/components/scheduler" }],
+          "description": "The component that sent the event. Inherited from NXEvent."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

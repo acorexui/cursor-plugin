@@ -1,0 +1,26 @@
+{
+  "name": "acorex",
+  "version": "0.3.0",
+  "description": "ACoreX UI development tools — 368 component blueprints, Tailwind v4 theme, Angular standards, Nx guidance, and Storybook workflows.",
+  "author": {
+    "name": "ACoreX",
+    "email": "dev@acorex.io"
+  },
+  "homepage": "https://acorex.io",
+  "repository": "https://github.com/acorex-ui/acorex-cursor-plugin",
+  "license": "MIT",
+  "keywords": [
+    "acorex",
+    "angular",
+    "design-system",
+    "components",
+    "storybook",
+    "nx",
+    "documentation",
+    "blueprints",
+    "tailwind",
+    "theming",
+    "ui-library"
+  ],
+  "logo": "assets/logo.svg"
+}

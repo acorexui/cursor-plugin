@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart Value",
+  "description": "Type definition for line chart data - supports both single series and array of series",
+  "imports": ["import { AXLineChartValue } from '@acorex/charts/line-chart';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the line chart value type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "line-chart.type.ts",
+            "content": "export type AXLineChartValue = AXLineChartData | AXLineChartData[];"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartValue",
+      "props": [
+        {
+          "name": "AXLineChartValue",
+          "type": [
+            { "name": "AXLineChartData", "link": "/en-US/docs/types/line-chart-data" },
+            { "name": "AXLineChartData[]", "link": "/en-US/docs/types/line-chart-data" }
+          ],
+          "description": "Line chart data - can be a single series or array of series"
+        }
+      ]
+    }
+  ]
+}

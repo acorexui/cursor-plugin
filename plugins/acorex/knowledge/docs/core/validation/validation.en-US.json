@@ -1,0 +1,320 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Validation System",
+  "description": "Pluggable async validation framework: register built-in and custom rules, define named aliases (email, phone), integrate translated messages, and validate programmatically or via ax-validation-rule in forms.",
+  "imports": [
+    "import { AXValidationService, AXValidationRegistryService, AXValidationModule, AX_VALIDATION_CONFIG, validationConfig, AXValidationRule, AXValidationRuleResult, AXValidationSummary, AXRequiredValidationRule, AXRegexValidationRule, AXCallbackValidationRule } from '@acorex/core/validation';"
+  ],
+  "hints": [
+    {
+      "title": "Bootstrap with forRoot",
+      "content": "Call <code>AXValidationModule.forRoot()</code> in <code>app.config.ts</code> via <code>importProvidersFrom</code>. This registers all built-in rules into <code>AXValidationRegistryService</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Translated messages",
+      "content": "Pass translation keys as <code>message</code> (e.g. <code>@acorex:validation.messages.required</code>). The service auto-translates via <code>AXTranslationService</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Named aliases",
+      "content": "Use <code>validationConfig()</code> to map short names like <code>email</code> and <code>phone</code> to underlying rules with preset options.",
+      "status": "primary"
+    },
+    {
+      "title": "Form integration",
+      "content": "In templates, attach rules with <code>&lt;ax-validation-rule rule=\"required\"&gt;</code> inside input components. Validate the whole form with <code>await form.validate()</code>.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValidationService",
+      "description": "Main validation API. providedIn: 'root'.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Validates value against a rule name or config alias.\n * Translates options.message when provided.\n */\nvalidate(ruleName: string, value: unknown, options?: AXValidationRuleOptions): Promise<AXValidationRuleResult>"
+        },
+        {
+          "content": "/**\n * Fluent chain — add multiple rules then call validate().\n */\nruleFor(value: unknown): AXValidationRuleChain"
+        }
+      ]
+    },
+    {
+      "title": "AXValidationRegistryService",
+      "description": "Rule plugin registry. providedIn: 'root'.",
+      "props": [
+        {
+          "name": "customRules",
+          "type": [{ "name": "AXValidationConfigRules" }],
+          "description": "Named aliases from AX_VALIDATION_CONFIG."
+        }
+      ],
+      "methods": [
+        {
+          "content": "register(...plugins: (new () => AXValidationRule)[]): void"
+        },
+        {
+          "content": "get(ruleName: string): AXValidationRule | undefined"
+        }
+      ]
+    },
+    {
+      "title": "AXValidationRule",
+      "description": "Abstract base class for custom rules.",
+      "props": [],
+      "methods": [
+        {
+          "content": "abstract get name(): string"
+        },
+        {
+          "content": "abstract validate(value: unknown, options?: AXValidationRuleOptions): Promise<AXValidationRuleResult>"
+        }
+      ]
+    },
+    {
+      "title": "AXValidationRuleResult",
+      "description": "Result of a single rule execution.",
+      "props": [
+        {
+          "name": "rule",
+          "type": [{ "name": "string" }],
+          "description": "Rule name."
+        },
+        {
+          "name": "result",
+          "type": [{ "name": "boolean" }],
+          "description": "true = valid."
+        },
+        {
+          "name": "message",
+          "type": [{ "name": "string | null" }],
+          "description": "Error message when invalid."
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "unknown" }],
+          "description": "Validated value."
+        }
+      ]
+    },
+    {
+      "title": "AXValidationSummary",
+      "description": "Aggregated result from a rule chain.",
+      "props": [
+        {
+          "name": "result",
+          "type": [{ "name": "boolean" }],
+          "description": "true when all rules pass."
+        },
+        {
+          "name": "rules",
+          "type": [{ "name": "AXValidationRuleResult[]" }],
+          "description": "Individual rule results."
+        }
+      ]
+    },
+    {
+      "title": "Built-in Rules",
+      "description": "Rules registered by AXValidationModule.",
+      "props": [],
+      "methods": [
+        {
+          "content": "required — non-empty string, non-null, non-empty array, valid number"
+        },
+        {
+          "content": "regex — pattern match (skips empty values)"
+        },
+        {
+          "content": "callback — custom validate function (sync, async, or boolean)"
+        },
+        {
+          "content": "minLength / maxLength / length — string length constraints"
+        },
+        {
+          "content": "equal — lodash isEqual, optional not flag"
+        },
+        {
+          "content": "greaterThan / lessThan — numeric compare, optional inclusive"
+        },
+        {
+          "content": "between — range check for number or Date"
+        }
+      ]
+    },
+    {
+      "title": "AX_VALIDATION_CONFIG",
+      "description": "InjectionToken for named rule aliases. Default includes email and phone.",
+      "props": [],
+      "methods": []
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How the validation system works.",
+      "content": {
+        "type": "text",
+        "data": "@acorex/core/validation provides a rule-based validation engine used by ACoreX form inputs and services.\n\nArchitecture:\n1. AXValidationModule.forRoot() registers built-in rule classes\n2. AXValidationRegistryService stores rule instances by name\n3. AXValidationService.validate() runs a rule (or resolves a config alias like email)\n4. AXValuableComponent (CDK) collects rules from ax-validation-rule directives and runs ruleFor().validate()\n\nAll rules return Promise<AXValidationRuleResult>. Messages support translation keys and {{param}} interpolation via AXTranslationService.\n\nDefault config aliases:\n• email → regex with email pattern\n• phone → regex with phone pattern"
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Register AXValidationModule.forRoot() once, then inject AXValidationService to validate values programmatically.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "field-validator.service.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport {\n  AXValidationRuleResult,\n  AXValidationService,\n  AXValidationSummary,\n} from '@acorex/core/validation';\n\n@Injectable({ providedIn: 'root' })\nexport class FieldValidatorService {\n  private validation = inject(AXValidationService);\n\n  // aliasهای config مثل email و phone به rule زیرین خود resolve می‌شوند.\n  validateEmail(value: string): Promise<AXValidationRuleResult> {\n    return this.validation.validate('email', value);\n  }\n\n  // rule built-in همراه با کلید ترجمه برای message.\n  validateRequired(value: unknown, title: string): Promise<AXValidationRuleResult> {\n    return this.validation.validate('required', value, {\n      title,\n      message: '@acorex:validation.messages.required',\n    });\n  }\n\n  // اجرای چند rule روی یک مقدار.\n  validatePassword(value: string): Promise<AXValidationSummary> {\n    return this.validation\n      .ruleFor(value)\n      .addRule('required', { title: 'Password' })\n      .addRule('minLength', { value: 8 })\n      .validate();\n  }\n\n  // برای منطق business اختصاصی از callback استفاده کنید.\n  validateUsername(value: string): Promise<AXValidationRuleResult> {\n    return this.validation.validate('callback', value, {\n      validate: (currentValue: string) =>\n        /^[a-zA-Z0-9_]{3,20}$/.test(currentValue)\n          ? { result: true }\n          : { result: false, message: 'Invalid username' },\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "App Setup",
+      "description": "Register the module and optional custom config.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app.config.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig, importProvidersFrom } from '@angular/core';\nimport {\n  AXValidationModule,\n  AX_VALIDATION_CONFIG,\n  validationConfig,\n} from '@acorex/core/validation';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    importProvidersFrom(AXValidationModule.forRoot()),\n    // Optional: extend named aliases\n    {\n      provide: AX_VALIDATION_CONFIG,\n      useValue: validationConfig({\n        rules: {\n          username: {\n            rule: 'regex',\n            options: {\n              pattern: /^[a-zA-Z0-9_]{3,20}$/,\n              message: '@acorex:validation.messages.username',\n            },\n          },\n        },\n      }),\n    },\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Single Rule Validation",
+      "description": "Validate programmatically from a service or component.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "validate.service.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport { AXValidationService } from '@acorex/core/validation';\n\n@Injectable({ providedIn: 'root' })\nexport class ValidateService {\n  private validation = inject(AXValidationService);\n\n  async checkEmail(email: string) {\n    // Uses email alias from AX_VALIDATION_CONFIG\n    return this.validation.validate('email', email);\n  }\n\n  async checkRequired(value: unknown, fieldTitle: string) {\n    return this.validation.validate('required', value, {\n      title: fieldTitle,\n      message: '@acorex:validation.messages.required',\n    });\n  }\n\n  async checkAge(age: number) {\n    return this.validation.validate('greaterThan', age, {\n      value: 18,\n      inclusive: true,\n      message: 'You must be at least 18 years old.',\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Fluent Rule Chain",
+      "description": "Run multiple rules against one value.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "rule-chain.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXValidationService } from '@acorex/core/validation';\n\nasync function validatePassword(password: string) {\n  const validation = inject(AXValidationService);\n\n  const summary = await validation\n    .ruleFor(password)\n    .addRule('required')\n    .addRule('minLength', { value: 8 })\n    .addRule('maxLength', { value: 64 })\n    .addRule('regex', {\n      pattern: /[A-Z]/,\n      message: 'Must contain an uppercase letter.',\n    })\n    .validate();\n\n  if (!summary.result) {\n    const firstError = summary.rules.find(r => !r.result);\n    console.error(firstError?.message);\n  }\n\n  return summary;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Related packages (not exported here)",
+      "description": "Template forms and ax-validation-rule live elsewhere.",
+      "content": {
+        "type": "text",
+        "data": "The following are **not** part of @acorex/core/validation and must not be imported from this package:\n\n• AXFormModule, AXFormComponent → @acorex/components/form\n• ax-validation-rule directive → @acorex/components/form\n• ax-form, ax-text-box, ax-number-box → @acorex/components/*\n\nThose components call AXValidationService internally (via AXValuableComponent in @acorex/cdk/common). When you need declarative rules in HTML or form.validate(), read the @acorex/components/form documentation instead.\n\nThis package only documents programmatic validation:\n\nawait validation.validate('email', value);\nawait validation.ruleFor(value).addRule('required').validate();"
+      }
+    },
+    {
+      "title": "Callback Rule",
+      "description": "Custom validation logic via AXValidationService — no form modules required.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "callback-validation.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXValidationService } from '@acorex/core/validation';\n\nfunction validateContent(val: string) {\n  if (!val?.trim()) {\n    return { result: false, message: 'Content cannot be empty' };\n  }\n  if (val.trim().length < 10) {\n    return { result: false, message: 'At least 10 characters required' };\n  }\n  return { result: true };\n}\n\nasync function validateEditorContent(content: string) {\n  const validation = inject(AXValidationService);\n\n  return validation.validate('callback', content, {\n    validate: validateContent,\n  });\n}\n\n// validate() can also return a boolean or Promise<{ result, message }>\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Custom Validation Rule",
+      "description": "Create and register a new rule class.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "national-id.rule.ts",
+            "language": "typescript",
+            "content": "import { Injectable } from '@angular/core';\nimport { AXValidationRule, AXValidationRuleOptions, AXValidationRuleResult } from '@acorex/core/validation';\n\nexport interface AXNationalIdRuleOptions extends AXValidationRuleOptions {\n  country?: string;\n}\n\ndeclare module '@acorex/core/validation' {\n  interface AXValidationRuleOptionsMap {\n    nationalId: AXNationalIdRuleOptions;\n  }\n}\n\n@Injectable()\nexport class AXNationalIdValidationRule implements AXValidationRule {\n  get name() {\n    return 'nationalId';\n  }\n\n  async validate(value: string, options?: AXNationalIdRuleOptions): Promise<AXValidationRuleResult> {\n    const isValid = /^\\d{10}$/.test(value ?? '');\n    return {\n      rule: this.name,\n      result: isValid,\n      message: isValid ? null : (options?.message ?? 'Invalid national ID'),\n      value,\n    };\n  }\n}\n"
+          },
+          {
+            "fileName": "app.config.ts",
+            "language": "typescript",
+            "content": "import { importProvidersFrom } from '@angular/core';\nimport { AXValidationModule } from '@acorex/core/validation';\nimport { AXNationalIdValidationRule } from './national-id.rule';\n\nexport const appConfig = {\n  providers: [\n    importProvidersFrom(\n      AXValidationModule.forRoot({\n        rules: [AXNationalIdValidationRule],\n      }),\n    ),\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Built-in Rules Reference",
+      "description": "Options for each rule.",
+      "content": {
+        "type": "text",
+        "data": "| Rule | Options | Notes |\n|------|---------|-------|\n| required | message?, title? | Fails on null, empty string, empty array, NaN, false boolean |\n| regex | pattern (string \\| RegExp), message?, title? | Skips empty values (passes) |\n| callback | validate (fn), message? | fn returns boolean, { result, message }, or Promise |\n| minLength | value (number), message? | Skips empty values |\n| maxLength | value (number), message? | Skips empty values |\n| length | min, max, message? | Exact range |\n| equal | value, not?, message? | Uses lodash isEqual |\n| greaterThan | value, inclusive?, message? | Skips null/undefined |\n| lessThan | value, inclusive?, message? | Skips null/undefined |\n| between | lowerValue, upperValue, inclusive?, message? | number or Date |\n| email | (alias) | Maps to regex with default email pattern |\n| phone | (alias) | Maps to regex with default phone pattern |\n\nRule names are case-sensitive: use minLength and maxLength (camelCase), not minlength."
+      }
+    },
+    {
+      "title": "Translation Messages",
+      "description": "Default i18n keys in acorex scope.",
+      "content": {
+        "type": "code",
+        "language": "json",
+        "data": [
+          {
+            "fileName": "assets/i18n/en-US/acorex.json",
+            "language": "json",
+            "content": "{\n  \"validation\": {\n    \"messages\": {\n      \"title\": \"Please fix the following error(s):\",\n      \"required\": \"{{ title }} is required\",\n      \"email\": \"Please enter a valid email address {{ title }}!\",\n      \"phone\": \"Please enter a valid phone number!\",\n      \"invalid-rull-name\": \"Invalid rule name: \\\"{{ name }}\\\"\"\n    }\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Validation Result Handling",
+      "description": "How components use results.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "handle-result.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXValidationService } from '@acorex/core/validation';\n\nasync function validateField(value: string) {\n  const validation = inject(AXValidationService);\n  const result = await validation.validate('required', value, { title: 'Email' });\n\n  // Single rule result\n  console.log(result.rule);    // 'required'\n  console.log(result.result);  // true | false\n  console.log(result.message); // null when valid\n  console.log(result.value);   // original value\n\n  // Chain summary\n  const summary = await validation.ruleFor(value)\n    .addRule('required')\n    .addRule('email')\n    .validate();\n\n  console.log(summary.result);           // false if any rule failed\n  console.log(summary.rules.length);     // all rule results collected\n  const errors = summary.rules.filter(r => !r.result);\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "How Form Components Consume Validation",
+      "description": "Cross-package flow — documented for context only.",
+      "content": {
+        "type": "text",
+        "data": "This section describes how other ACoreX packages use the validation engine. None of the items below are exported from @acorex/core/validation.\n\n1. AXValidationModule.forRoot() registers rules (this package)\n2. AXValidationService.validate() runs a rule (this package)\n3. @acorex/components/form provides ax-validation-rule directive\n4. @acorex/cdk/common AXValuableComponent calls validationService.ruleFor(value) internally\n5. @acorex/components/form AXFormComponent orchestrates field validation on submit\n\nFor template-based forms, see @acorex/components/form documentation. For programmatic checks, use AXValidationService directly as shown above."
+      }
+    },
+    {
+      "title": "API Quick Reference",
+      "description": "When to use which API.",
+      "content": {
+        "type": "text",
+        "data": "| Need | Use (this package) |\n|------|-----|\n| Bootstrap rules | AXValidationModule.forRoot() |\n| Named shortcuts (email, phone) | validationConfig() + AX_VALIDATION_CONFIG |\n| Single field check | validation.validate(rule, value, options) |\n| Multiple rules on one value | validation.ruleFor(value).addRule(...).validate() |\n| Custom business logic | callback rule or custom AXValidationRule class |\n| Register new rule class | AXValidationModule.forRoot({ rules: [MyRule] }) |\n\n| Need | Use (other packages) |\n|------|-----|\n| Template declarative rules | ax-validation-rule from @acorex/components/form |\n| Whole form validation | AXFormComponent from @acorex/components/form |"
+      }
+    }
+  ]
+}

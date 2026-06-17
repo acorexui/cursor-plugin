@@ -1,0 +1,178 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Context Menu",
+  "description": "The Context Menu component displays a customizable menu when a user interacts with a designated target element (typically via right-click). It supports configurable opening and closing triggers, horizontal or vertical orientation, and custom menu items.",
+  "imports": [
+    "import { AXContextMenuComponent } from '@acorex/components/menu';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using ax-context-menu.",
+      "content": {
+        "type": "api",
+        "data": "context-menu/usage"
+      },
+      "height": "900px"
+    },
+    {
+      "title": "Basic",
+      "description": "Right-click target with nested and disabled items; emits onItemClick.",
+      "content": {
+        "type": "api",
+        "data": "context-menu/basic"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Dynamic Items",
+      "description": "Use onOpening to mutate items based on the specific target element.",
+      "content": {
+        "type": "api",
+        "data": "context-menu/dynamic-items"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Programmatic Open",
+      "description": "Open the menu programmatically at a point using showAt without a bound target.",
+      "content": {
+        "type": "api",
+        "data": "context-menu/programmatic-open"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXContextMenuComponent",
+      "props": [
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "'vertical'"
+            },
+            {
+              "name": "'horizontal'"
+            }
+          ],
+          "default": "'vertical'",
+          "description": "Menu orientation (vertical or horizontal)."
+        },
+        {
+          "name": "openOn",
+          "type": [
+            {
+              "name": "'click'"
+            },
+            {
+              "name": "'hover'"
+            }
+          ],
+          "default": "'hover'",
+          "description": "Trigger for opening the menu."
+        },
+        {
+          "name": "closeOn",
+          "type": [
+            {
+              "name": "'leave'"
+            },
+            {
+              "name": "'click'"
+            }
+          ],
+          "default": "'click'",
+          "description": "Trigger for closing the menu."
+        },
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "AXMenuItem[]",
+              "link": "/en-US/docs/types/ax-menu-item"
+            }
+          ],
+          "description": "Array of menu items to display."
+        },
+        {
+          "name": "target",
+          "type": [
+            {
+              "name": "HTMLElement"
+            },
+            {
+              "name": "HTMLElement[]"
+            },
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Target element(s) for the context menu."
+        },
+        {
+          "name": "hasArrow",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Whether to show an arrow pointing to the target element."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "The root DOM element of the component. Inherited from NXComponent."
+        },
+        {
+          "name": "isRendered",
+          "type": [
+            {
+              "name": "Signal<boolean>"
+            }
+          ],
+          "description": "Signal indicating if the component has been rendered. Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOpening",
+          "type": [
+            {
+              "name": "AXContextMenuOpeningEvent",
+              "link": "/en-US/docs/events/ax-context-menu-opening-event"
+            }
+          ],
+          "description": "Emitted before the menu opens."
+        },
+        {
+          "name": "onItemClick",
+          "type": [
+            {
+              "name": "AXContextMenuItemsClickEvent",
+              "link": "/en-US/docs/events/ax-context-menu-items-click-event"
+            }
+          ],
+          "description": "Emitted when a menu item is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Refreshes the context menu by rebinding event listeners to target elements.\n */\n refresh(): void"
+        },
+        {
+          "content": "/**\n * Shows the context menu at a specific point.\n * @param point - The coordinates where the menu should appear\n * @param targetElement - Optional target element for the context menu\n * @param event - Optional opening event with menu items\n */\n showAt(point: AXPoint, targetElement?: HTMLElement, event?: AXContextMenuOpeningEvent): void"
+        },
+        {
+          "content": "/**\n * Closes the context menu and removes the backdrop.\n */\n close(): void"
+        }
+      ]
+    }
+  ]
+}

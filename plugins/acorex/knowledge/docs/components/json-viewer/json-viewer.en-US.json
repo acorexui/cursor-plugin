@@ -1,0 +1,62 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "JSON Viewer",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/jsonviewer--documentation"
+    }
+  ],
+  "description": "A component that provides a visual representation of JSON data with collapsible sections, syntax highlighting, and support for nested objects and arrays. It automatically formats and displays JSON data in a tree-like structure with proper indentation and color coding.",
+  "imports": [
+    "import { JsonViewerComponent } from '@acorex/components/json-viewer';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "How to use <code>ax-json-viewer</code> in your template.",
+      "content": {
+        "type": "api",
+        "data": "json-viewer/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Dynamic",
+      "description": "Bind to dynamic data and update in real-time.",
+      "content": {
+        "type": "api",
+        "data": "json-viewer/dynamic"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Nested",
+      "description": "Visualize deeply nested objects and arrays.",
+      "content": {
+        "type": "api",
+        "data": "json-viewer/nested"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "JsonViewerComponent",
+      "description": "The main component for displaying JSON data in a tree-like structure",
+      "props": [
+        {
+          "name": "json",
+          "type": [
+            {
+              "name": "object"
+            }
+          ],
+          "description": "The JSON data to be displayed",
+          "default": "undefined"
+        }
+      ]
+    }
+  ]
+}

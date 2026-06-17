@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "KeyboardEvent",
+  "description": "Standard DOM event representing keyboard input, providing information about the key pressed, modifier states, and the target element.",
+  "imports": ["// Standard DOM event, no import required for usage in TypeScript/JavaScript."],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Standard DOM KeyboardEvent type used by component handlers.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "keyboard-event.d.ts",
+            "content": "type KeyboardEvent = globalThis.KeyboardEvent;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "KeyboardEvent",
+      "props": [
+        { "name": "key", "type": [{ "name": "string" }], "description": "The value of the key pressed." },
+        {
+          "name": "code",
+          "type": [{ "name": "string" }],
+          "description": "The physical key on the keyboard (layout-independent)."
+        },
+        { "name": "altKey", "type": [{ "name": "boolean" }], "description": "Whether the Alt key was pressed." },
+        { "name": "ctrlKey", "type": [{ "name": "boolean" }], "description": "Whether the Control key was pressed." },
+        { "name": "shiftKey", "type": [{ "name": "boolean" }], "description": "Whether the Shift key was pressed." },
+        {
+          "name": "metaKey",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the Meta key (Command on Mac, Windows key on Windows) was pressed."
+        },
+        {
+          "name": "repeat",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the key is being held down for auto-repeat."
+        },
+        { "name": "target", "type": [{ "name": "EventTarget" }], "description": "The event target element." }
+      ]
+    }
+  ]
+}

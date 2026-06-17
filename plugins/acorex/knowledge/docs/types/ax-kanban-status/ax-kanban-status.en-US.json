@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Kanban Status",
+  "imports": ["import { AXKanbanStatus } from '@acorex/components/kanban';"],
+  "description": "Type defining a Kanban status (column).",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of AXKanbanStatus.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-kanban-status.ts",
+            "language": "ts",
+            "content": "export type AXKanbanStatus = {\n  key: any;\n  title: string;\n  index?: number;\n  cssClass?: string;\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKanbanStatus",
+      "props": [
+        { "name": "key", "type": [{ "name": "any" }], "description": "Unique key identifying the status (column)." },
+        { "name": "title", "type": [{ "name": "string" }], "description": "Display title of the status (column)." },
+        { "name": "index", "type": [{ "name": "number" }], "description": "Order index of the status in the board." },
+        {
+          "name": "cssClass",
+          "type": [{ "name": "string" }],
+          "description": "Optional CSS class applied to the status container."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

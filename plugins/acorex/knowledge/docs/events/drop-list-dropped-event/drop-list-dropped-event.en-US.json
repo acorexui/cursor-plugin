@@ -1,0 +1,64 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDropListDroppedEvent",
+  "description": "Event emitted when an item is dropped into a drop list, providing information about the drop operation.",
+  "imports": ["import { AXDropListDroppedEvent } from '@acorex/cdk/drag-drop';"],
+  "types": [
+    {
+      "title": "AXDropListDroppedEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXDropListDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drop list directive that emitted the event. Inherited from NXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event that triggered the drop. Inherited from NXNativeEvent."
+        },
+        {
+          "name": "item",
+          "type": [{ "name": "AXDragDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The draggable item that was dropped."
+        },
+        {
+          "name": "currentIndex",
+          "type": [{ "name": "number" }],
+          "description": "The index where the item was dropped in the target list."
+        },
+        {
+          "name": "previousIndex",
+          "type": [{ "name": "number" }],
+          "description": "The index where the item was originally located."
+        },
+        {
+          "name": "container",
+          "type": [{ "name": "AXDropListDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drop list container where the item was dropped."
+        },
+        {
+          "name": "previousContainer",
+          "type": [{ "name": "AXDropListDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drop list container where the item originated."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "drop-list.directive.ts",
+            "content": "export interface AXDropListDroppedEvent extends NXNativeEvent<AXDropListDirective, MouseEvent> {\n  item: AXDragDirective;\n  currentIndex: number;\n  previousIndex: number;\n  container: AXDropListDirective;\n  previousContainer: AXDropListDirective;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

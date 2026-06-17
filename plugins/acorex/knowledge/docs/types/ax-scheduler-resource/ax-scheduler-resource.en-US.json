@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler Resource",
+  "description": "Defines the structure of a resource in the scheduler component.",
+  "imports": ["import { AXSchedulerResource } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface defining the structure of a scheduler resource.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerResource = {\n  id: any;\n  title: string;\n  description?: string;\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerResource",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "any" }],
+          "description": "Unique identifier for the resource."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Display name or title of the resource."
+        },
+        {
+          "name": "description",
+          "type": [{ "name": "string" }],
+          "description": "Optional description or additional information about the resource."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXToastData } from '@acorex/components/toast';"],
+  "title": "AXToastData",
+  "description": "Configuration interface for toast notification display options.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete TypeScript interface definition for toast data configuration.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "toast.class.ts",
+            "content": "export interface AXToastData {\n  icon?: string;\n  title?: string;\n  content?: string;\n  location: AXLocation;\n  closeButton: boolean;\n  color: AXStyleColorType;\n  timeOut?: number;\n  timeOutProgress: boolean;\n  closeAllButton?: boolean;\n  pauseOnHover?: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXToastData",
+      "props": [
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Optional icon to display in the toast. If not provided, a default icon based on the color type will be used."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title text to display in the toast notification."
+        },
+        {
+          "name": "content",
+          "type": [{ "name": "string" }],
+          "description": "Optional content text to display in the toast notification."
+        },
+        {
+          "name": "location",
+          "type": [{ "name": "AXLocation", "link": "/en-US/docs/types/location" }],
+          "description": "Position where the toast should be displayed on the screen."
+        },
+        {
+          "name": "closeButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a close button on the toast notification."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Color scheme for the toast notification."
+        },
+        {
+          "name": "timeOut",
+          "type": [{ "name": "number" }],
+          "description": "Optional timeout duration in milliseconds before the toast auto-dismisses."
+        },
+        {
+          "name": "timeOutProgress",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a progress bar indicating the remaining time before auto-dismissal."
+        },
+        {
+          "name": "closeAllButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a button that closes all toast notifications."
+        },
+        {
+          "name": "pauseOnHover",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to pause the auto-dismissal timer when the user hovers over the toast."
+        }
+      ]
+    }
+  ]
+}

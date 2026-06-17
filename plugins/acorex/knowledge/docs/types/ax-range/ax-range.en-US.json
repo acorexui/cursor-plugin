@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRange",
+  "imports": ["import { AXRange } from '@acorex/cdk/common';"],
+  "description": "A simple generic interface representing a range with a start (from) and an end value.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Generic interface with two fields for start and end values.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-range.ts",
+            "content": "interface AXRange<T> { from: T; end: T; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRange",
+      "props": [
+        {
+          "name": "from",
+          "type": [{ "name": "T" }],
+          "description": "Range start value."
+        },
+        {
+          "name": "end",
+          "type": [{ "name": "T" }],
+          "description": "Range end value."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

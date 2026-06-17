@@ -1,0 +1,46 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerAppointmentMouseEvent",
+  "description": "Mouse event emitted for scheduler appointments.",
+  "imports": ["import { AXSchedulerAppointmentMouseEvent } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Shape of the scheduler appointment mouse event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-appointment-mouse-event.ts",
+            "content": "export interface AXSchedulerAppointmentMouseEvent extends NXNativeEvent<AXSchedulerComponent, MouseEvent> {\n  appointment: AXSchedulerAppointment;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentMouseEvent",
+      "props": [
+        {
+          "name": "appointment",
+          "type": [{ "name": "AXSchedulerAppointment", "link": "/en-US/docs/types/ax-scheduler-appointment" }],
+          "description": "The appointment associated with the event."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "Underlying native event. Inherited from NXNativeEvent."
+        },
+        {
+          "name": "sender",
+          "type": [{ "name": "AXSchedulerComponent", "link": "/en-US/docs/components/scheduler" }],
+          "description": "The component that sent the event. Inherited from NXEvent."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

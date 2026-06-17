@@ -1,0 +1,79 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapLocation",
+  "description": "Represents a location on the map with additional precision information, extending AXMapMarker.",
+  "imports": ["import { AXMapLocation } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapLocation",
+      "props": [
+        {
+          "name": "latitude",
+          "type": [{ "name": "number" }],
+          "description": "The latitude coordinate of the location."
+        },
+        {
+          "name": "longitude",
+          "type": [{ "name": "number" }],
+          "description": "The longitude coordinate of the location."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title for the location."
+        },
+        {
+          "name": "iconKey",
+          "type": [{ "name": "string" }],
+          "description": "Key for icon resolver service."
+        },
+        {
+          "name": "popup",
+          "type": [{ "name": "string" }],
+          "description": "Optional popup text content."
+        },
+        {
+          "name": "popupOpen",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should be open by default."
+        },
+        {
+          "name": "popupCloseButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the popup should have a close button."
+        },
+        {
+          "name": "isLocked",
+          "type": [{ "name": "boolean" }],
+          "description": "If true, the location cannot be deleted or moved/edited via draw interactions."
+        },
+        {
+          "name": "id",
+          "type": [{ "name": "string" }, { "name": "number" }],
+          "description": "Optional unique identifier for id-based operations."
+        },
+        {
+          "name": "precision",
+          "type": [{ "name": "number" }],
+          "description": "The precision of the location coordinates in meters."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for map locations with precision.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXMapLocation extends AXMapMarker {\n  precision?: number;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

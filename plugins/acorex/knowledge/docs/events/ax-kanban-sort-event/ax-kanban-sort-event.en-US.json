@@ -1,0 +1,67 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Kanban Sort Event",
+  "imports": ["import { AXKanbanSortEvent } from '@acorex/components/kanban';"],
+  "description": "Represents the payload emitted when an item is dropped to reorder within a status or moved across statuses in the Kanban component.",
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "AXKanbanSortEvent extends NXNativeEvent and includes indices and updated data source.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-kanban-sort-event.ts",
+            "language": "ts",
+            "content": "export interface AXKanbanSortEvent extends NXNativeEvent<AXKanbanComponent, MouseEvent> {\n  item: any;\n  allItems: any[];\n  currentIndex: number;\n  previousIndex: number;\n  currentStatusKey: any;\n  previousStatusKey: any;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKanbanSortEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXKanbanComponent", "link": "/en-US/docs/components/kanban" }],
+          "description": "The Kanban component instance that emitted the event. Inherited from NXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event associated with the drop action. Inherited from NXNativeEvent."
+        },
+        { "name": "item", "type": [{ "name": "any" }], "description": "The original data object that was moved." },
+        {
+          "name": "allItems",
+          "type": [{ "name": "any[]" }],
+          "description": "The complete data source after precise re-indexing, suitable for state updates."
+        },
+        {
+          "name": "currentIndex",
+          "type": [{ "name": "number" }],
+          "description": "The index of the item within the destination status after the drop."
+        },
+        {
+          "name": "previousIndex",
+          "type": [{ "name": "number" }],
+          "description": "The index of the item within the source status before the drop."
+        },
+        {
+          "name": "currentStatusKey",
+          "type": [{ "name": "any" }],
+          "description": "The key of the destination status (column)."
+        },
+        {
+          "name": "previousStatusKey",
+          "type": [{ "name": "any" }],
+          "description": "The key of the source status (column)."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

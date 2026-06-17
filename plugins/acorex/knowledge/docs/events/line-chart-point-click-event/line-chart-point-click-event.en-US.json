@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart Point Click Event",
+  "description": "Event interface emitted when a data point is clicked in the line chart",
+  "imports": ["import { AXLineChartPointClickEvent } from '@acorex/charts/line-chart';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the line chart point click event interface.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "line-chart.type.ts",
+            "content": "export interface AXLineChartPointClickEvent {\n  series: AXLineChartData;\n  point: { x: number | string; y: number };\n  event: NXNativeEvent;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartPointClickEvent",
+      "props": [
+        {
+          "name": "series",
+          "type": [{ "name": "AXLineChartData", "link": "/en-US/docs/types/line-chart-data" }],
+          "description": "The series that contains the clicked point"
+        },
+        {
+          "name": "point",
+          "type": [{ "name": "{ x: number | string; y: number }" }],
+          "description": "The data point that was clicked"
+        },
+        {
+          "name": "event",
+          "type": [{ "name": "NXNativeEvent" }],
+          "description": "The original DOM event"
+        }
+      ]
+    }
+  ]
+}

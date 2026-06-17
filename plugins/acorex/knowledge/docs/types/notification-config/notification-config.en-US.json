@@ -1,0 +1,78 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNotificationConfig",
+  "description": "Global configuration interface for notification service settings and defaults.",
+  "imports": ["import { AXNotificationConfig } from '@acorex/components/notification';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Complete interface definition for global notification configuration.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.config.ts",
+            "content": "export interface AXNotificationConfig {\n  gap: number;\n  timeOut: number;\n  timeOutProgress: boolean;\n  location: AXLocation;\n  closeButton: boolean;\n  limit: number;\n  pauseOnHover: boolean;\n}"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Default Configuration",
+      "description": "Default values used when no custom configuration is provided.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.config.ts",
+            "content": "export const AXNotificationDefaultConfig: AXNotificationConfig = {\n  gap: 5,\n  timeOut: 2500,\n  timeOutProgress: true,\n  closeButton: true,\n  location: 'top-end',\n  limit: 3,\n  pauseOnHover: true,\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationConfig",
+      "props": [
+        {
+          "name": "gap",
+          "type": [{ "name": "number" }],
+          "description": "Gap in pixels between multiple notifications. Default: 5"
+        },
+        {
+          "name": "timeOut",
+          "type": [{ "name": "number" }],
+          "description": "Default timeout duration in milliseconds before notifications auto-close. Default: 2500"
+        },
+        {
+          "name": "timeOutProgress",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show progress bar by default. Default: true"
+        },
+        {
+          "name": "location",
+          "type": [{ "name": "AXLocation", "link": "/en-US/docs/types/location" }],
+          "description": "Default location for notifications. Default: 'top-end'"
+        },
+        {
+          "name": "closeButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show close button by default. Default: true"
+        },
+        {
+          "name": "limit",
+          "type": [{ "name": "number" }],
+          "description": "Maximum number of notifications to display simultaneously. Default: 3"
+        },
+        {
+          "name": "pauseOnHover",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to pause timeout countdown on hover by default. Default: true"
+        }
+      ]
+    }
+  ]
+}

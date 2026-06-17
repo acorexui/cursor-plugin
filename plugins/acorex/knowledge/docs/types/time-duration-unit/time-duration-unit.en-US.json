@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXTimeDurationUnit } from '@acorex/components/time-duration';"],
+  "title": "Time Duration Unit",
+  "description": "Defines the available time units for the time duration component.",
+  "types": [
+    {
+      "title": "AXTimeDurationUnit",
+      "props": [
+        {
+          "name": "AXTimeDurationUnit",
+          "type": [
+            { "name": "'YEAR'" },
+            { "name": "'MONTH'" },
+            { "name": "'WEEK'" },
+            { "name": "'DAY'" },
+            { "name": "'HOUR'" },
+            { "name": "'MINUTE'" },
+            { "name": "'SECOND'" },
+            { "name": "'MILLISECOND'" }
+          ],
+          "description": "Available time units for duration input, ordered from largest to smallest."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete type definition for time duration units.",
+      "content": {
+        "type": "code",
+        "data": "export type AXTimeDurationUnit = 'YEAR' | 'MONTH' | 'WEEK' | 'DAY' | 'HOUR' | 'MINUTE' | 'SECOND' | 'MILLISECOND';"
+      }
+    }
+  ]
+}

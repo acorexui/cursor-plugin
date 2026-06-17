@@ -1,0 +1,79 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXClipBoardService",
+  "imports": ["import { AXClipBoardService } from '@acorex/cdk/clipboard';"],
+  "description": "Service class for clipboard operations including copy and paste functionality.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Clipboard service public API.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "clipboard-service.ts",
+            "content": "class AXClipBoardService {\n  copy(value: unknown): Promise<void>;\n  copyText(text: string): Promise<void>;\n  copyData(data: unknown): Promise<void>;\n  paste<T = unknown>(): Promise<T | null>;\n  pasteText(): Promise<string | null>;\n  clear(): Promise<void>;\n  isSupported(): boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXClipBoardService",
+      "props": [],
+      "description": "Service for managing clipboard operations with support for copying text and data to the system clipboard.",
+      "methods": [
+        {
+          "name": "copy",
+          "description": "Copies text or data to the system clipboard."
+        },
+        {
+          "name": "copyText",
+          "description": "Copies text content to the system clipboard."
+        },
+        {
+          "name": "copyData",
+          "description": "Copies data objects to the system clipboard."
+        },
+        {
+          "name": "paste",
+          "description": "Retrieves content from the system clipboard."
+        },
+        {
+          "name": "pasteText",
+          "description": "Retrieves text content from the system clipboard."
+        },
+        {
+          "name": "clear",
+          "description": "Clears the system clipboard."
+        },
+        {
+          "name": "isSupported",
+          "description": "Checks if clipboard operations are supported in the current environment."
+        },
+        {
+          "name": "onCopy",
+          "description": "Registers a callback to be called when content is copied."
+        },
+        {
+          "name": "onPaste",
+          "description": "Registers a callback to be called when content is pasted."
+        },
+        {
+          "name": "onClipboardChange",
+          "description": "Registers a callback to be called when clipboard content changes."
+        },
+        {
+          "name": "onClipboardError",
+          "description": "Registers a callback to be called when clipboard operations fail."
+        },
+        {
+          "name": "onPermissionDenied",
+          "description": "Registers a callback to be called when clipboard permission is denied."
+        }
+      ]
+    }
+  ]
+}

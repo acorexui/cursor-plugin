@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDayOfWeekName",
+  "imports": ["import { AXDayOfWeekName } from '@acorex/components/scheduler';"],
+  "description": "Represents the names of days of the week.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Type representing the names of days of the week.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-day-of-week-name.ts",
+            "content": "export type AXDayOfWeekName = 'sunday' | 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDayOfWeekName",
+      "props": [
+        {
+          "name": "AXDayOfWeekName",
+          "type": [
+            { "name": "'sunday'" },
+            { "name": "'monday'" },
+            { "name": "'tuesday'" },
+            { "name": "'wednesday'" },
+            { "name": "'thursday'" },
+            { "name": "'friday'" },
+            { "name": "'saturday'" }
+          ],
+          "description": "Day of week names."
+        }
+      ]
+    }
+  ]
+}

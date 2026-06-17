@@ -1,0 +1,295 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drag and Drop",
+  "description": "A flexible set of directives for implementing drag-and-drop functionality in your Angular applications. The drag-drop system consists of four main directives: axDrag for draggable elements, axDropList for sortable lists, axDropZone for drop areas, and axDragHandle for custom drag handles.",
+  "imports": [
+    "import { AXDragDirective } from '@acorex/cdk/drag-drop';",
+    "import { AXDropListDirective } from '@acorex/cdk/drag-drop';",
+    "import { AXDropZoneDirective } from '@acorex/cdk/drag-drop';",
+    "import { AXDragHandleDirective } from '@acorex/cdk/drag-drop';",
+    "import { moveItemInArray, transferArrayItem } from '@acorex/cdk/drag-drop';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>axDrag</code> directive to make an element draggable",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/usage"
+      }
+    },
+    {
+      "title": "Axis Lock",
+      "description": "Use the <code>dragLockAxis</code> input to constrain dragging to either the 'x' (horizontal) or 'y' (vertical) axis",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/axis-lock"
+      }
+    },
+    {
+      "title": "Boundary",
+      "description": "The <code>dragBoundary</code> input restricts movement to within a specified HTML element or a CSS selector",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/boundary"
+      }
+    },
+    {
+      "title": "Drag Handle",
+      "description": "Use the <code>axDragHandle</code> directive to specify a child element that acts as the handle for dragging the parent",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/drag-handle"
+      }
+    },
+    {
+      "title": "Drop Zone",
+      "description": "The <code>axDropZone</code> directive creates an area where draggable items can be dropped. It can emit events on hover and drop",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/drop-zone"
+      }
+    },
+    {
+      "title": "Clone Drag",
+      "description": "Set <code>dragElementClone</code> to true to drag a copy of the element, leaving the original in place. A custom <code>dragClonedTemplate</code> can also be provided",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/clone-drag"
+      }
+    },
+    {
+      "title": "Drop List",
+      "description": "The <code>axDropList</code> directive enables reordering of <code>axDrag</code> items within a container. Drag items within the list to sort them",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/drop-list"
+      }
+    },
+    {
+      "title": "Connected Lists",
+      "description": "You can connect multiple <code>axDropList</code> containers by giving them the same <code>dropListGroup</code>. This allows items to be dragged from one list to another",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "cdk/drag-drop/connected-lists"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDragDirective",
+      "props": [
+        {
+          "name": "dragData",
+          "type": [{ "name": "any" }],
+          "description": "Data to be associated with the draggable element"
+        },
+        {
+          "name": "dragDisabled",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether dragging is disabled for this element"
+        },
+        {
+          "name": "dragTransition",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Whether to apply transition animations during drag operations"
+        },
+        {
+          "name": "dragElementClone",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether to create a clone of the element during dragging"
+        },
+        {
+          "name": "dropZoneGroup",
+          "type": [{ "name": "string" }],
+          "description": "The group this draggable element belongs to for drop zone interactions"
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [{ "name": "number" }],
+          "description": "Delay in milliseconds before drag starts after pointer down"
+        },
+        {
+          "name": "dragResetOnDblClick",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Whether to reset the element position on double click"
+        },
+        {
+          "name": "dragLockAxis",
+          "type": [{ "name": "'x'" }, { "name": "'y'" }, { "name": "null" }],
+          "default": "null",
+          "description": "Axis to lock dragging to ('x' for horizontal, 'y' for vertical, null for free movement)"
+        },
+        {
+          "name": "dragClonedTemplate",
+          "type": [{ "name": "TemplateRef<unknown>" }],
+          "description": "Custom template to use for the cloned element during dragging"
+        },
+        {
+          "name": "dragCursor",
+          "type": [{ "name": "'move'" }, { "name": "'grab'" }, { "name": "'none'" }],
+          "default": "'move'",
+          "description": "Cursor style to use during dragging"
+        },
+        {
+          "name": "dragBoundary",
+          "type": [{ "name": "string" }, { "name": "ElementRef<HTMLElement>" }, { "name": "HTMLElement" }],
+          "description": "Element or selector that constrains the dragging area"
+        },
+        {
+          "name": "dragTransitionDuration",
+          "type": [{ "name": "number" }],
+          "default": "150",
+          "description": "Duration of transition animations in milliseconds"
+        }
+      ],
+      "events": [
+        {
+          "name": "dragPositionChanged",
+          "type": [{ "name": "{x: number, y: number}" }],
+          "description": "Emitted when the drag position changes during dragging"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Sets the position of the draggable element.\n* This method allows programmatic control of the element's position.\n* \n* @param x - The horizontal position in pixels\n* @param y - The vertical position in pixels\n* @returns void\n*/\nsetPosition(x: number, y: number): void"
+        },
+        {
+          "content": "/**\n* Sets the position of the cloned element during dragging.\n* This method is used internally to position the drag clone.\n* \n* @param x - The horizontal position in pixels\n* @param y - The vertical position in pixels\n* @returns void\n*/\nsetClonePosition(x: number, y: number): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDropListDirective",
+      "props": [
+        {
+          "name": "sortingDisabled",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether sorting within this list is disabled"
+        },
+        {
+          "name": "dropListGroup",
+          "type": [{ "name": "string" }],
+          "description": "The group this drop list belongs to. Dragging is only allowed between lists of the same group"
+        },
+        {
+          "name": "dropListOrientation",
+          "type": [{ "name": "'horizontal'" }, { "name": "'vertical'" }],
+          "default": "'vertical'",
+          "description": "The layout orientation of the list"
+        }
+      ],
+      "events": [
+        {
+          "name": "dropListDropped",
+          "type": [{ "name": "AXDropListDroppedEvent", "link": "/en-US/docs/events/drop-list-dropped-event" }],
+          "description": "Emitted when an item is dropped into the list, providing information about the drop operation"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Checks if the given drag item is the one currently active in this list.\n* \n* @param dragItem - The drag directive to check\n* @returns true if the item is currently being dragged in this list\n*/\nisDragActiveForThisList(dragItem: AXDragDirective): boolean"
+        },
+        {
+          "content": "/**\n* Prepares the list for sorting when a drag operation starts from within this list.\n* \n* @param dragItem - The item that is being dragged\n* @returns void\n*/\nprepareSort(dragItem: AXDragDirective): void"
+        },
+        {
+          "content": "/**\n* Prepares the list for receiving an item that started dragging from another list.\n* \n* @param dragItem - The item entering this list\n* @returns void\n*/\nenter(dragItem: AXDragDirective): void"
+        },
+        {
+          "content": "/**\n* Calculates the new placeholder index based on the pointer's position and applies visual shifts.\n* \n* @param event - The pointer move event\n* @param dragItem - The item being dragged\n* @returns void\n*/\nsort(event: PointerEvent, dragItem: AXDragDirective): void"
+        },
+        {
+          "content": "/**\n* Finalizes the drop, emits the drop event, and resets the list's state.\n* \n* @param event - The pointer up event\n* @param droppedItem - The item that was dropped\n* @param sourceList - The list where the drag originated\n* @returns void\n*/\nfinalizeSort(event: PointerEvent, droppedItem: AXDragDirective, sourceList: AXDropListDirective): void"
+        },
+        {
+          "content": "/**\n* Resets the transforms on all items and cancels the current sort operation.\n* \n* @param dragItem - Optional drag item to cancel for\n* @returns void\n*/\ncancelSort(dragItem?: AXDragDirective): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDropZoneDirective",
+      "props": [
+        {
+          "name": "dropZoneGroup",
+          "type": [{ "name": "string" }],
+          "description": "The group this drop zone belongs to. Only draggable items with matching group can be dropped here"
+        }
+      ],
+      "events": [
+        {
+          "name": "onElementDrop",
+          "type": [{ "name": "AXDropZoneDropEvent", "link": "/en-US/docs/events/drop-zone-drop-event" }],
+          "description": "Emitted when a draggable element is dropped into this drop zone"
+        },
+        {
+          "name": "onElementHover",
+          "type": [{ "name": "AXDropZoneHoverEvent", "link": "/en-US/docs/events/drop-zone-hover-event" }],
+          "description": "Emitted when a draggable element enters or leaves this drop zone"
+        }
+      ]
+    },
+    {
+      "title": "moveItemInArray",
+      "props": [
+        {
+          "name": "array",
+          "type": [{ "name": "T[]" }],
+          "description": "Array in which to move the item"
+        },
+        {
+          "name": "fromIndex",
+          "type": [{ "name": "number" }],
+          "description": "Starting index of the item"
+        },
+        {
+          "name": "toIndex",
+          "type": [{ "name": "number" }],
+          "description": "Index to which the item should be moved"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Moves an item one index in an array to another.\n* @param array Array in which to move the item.\n* @param fromIndex Starting index of the item.\n* @param toIndex Index to which the item should be moved.\n*/\nfunction moveItemInArray<T = any>(array: T[], fromIndex: number, toIndex: number): void"
+        }
+      ]
+    },
+    {
+      "title": "transferArrayItem",
+      "props": [
+        {
+          "name": "currentArray",
+          "type": [{ "name": "T[]" }],
+          "description": "Array from which to transfer the item"
+        },
+        {
+          "name": "targetArray",
+          "type": [{ "name": "T[]" }],
+          "description": "Array into which to put the item"
+        },
+        {
+          "name": "currentIndex",
+          "type": [{ "name": "number" }],
+          "description": "Index of the item in its current array"
+        },
+        {
+          "name": "targetIndex",
+          "type": [{ "name": "number" }],
+          "description": "Index at which to insert the item"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Moves an item from one array to another.\n* @param currentArray Array from which to transfer the item.\n* @param targetArray Array into which to put the item.\n* @param currentIndex Index of the item in its current array.\n* @param targetIndex Index at which to insert the item.\n*/\nfunction transferArrayItem<T = any>(currentArray: T[], targetArray: T[], currentIndex: number, targetIndex: number): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDropZoneHoverEvent",
+  "description": "Event emitted when a draggable element enters or leaves a drop zone.",
+  "imports": ["import { AXDropZoneHoverEvent } from '@acorex/cdk/drag-drop';"],
+  "types": [
+    {
+      "title": "AXDropZoneHoverEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXDropZoneDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drop zone directive that emitted the event. Inherited from NXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event that triggered the hover. Inherited from NXNativeEvent."
+        },
+        {
+          "name": "dropped",
+          "type": [{ "name": "AXDragDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The draggable element that entered or left the zone."
+        },
+        {
+          "name": "state",
+          "type": [{ "name": "'enter'" }, { "name": "'leave'" }],
+          "description": "Indicates whether the element entered ('enter') or left ('leave') the drop zone."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "drop-zone.directive.ts",
+            "content": "export type AXDropZoneHoverEvent = AXDropZoneDropEvent & { state: 'enter' | 'leave' };"
+          }
+        ]
+      }
+    }
+  ]
+}

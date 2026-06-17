@@ -1,0 +1,90 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "WYSIWYG",
+  "description": "The AXWysiwyg class is a wrapper around the Quill rich text editor, designed to simplify its usage in ACorex library. This class provides an easy way to initialize a Quill editor within a specified container and apply various formatting options such as bold, italic, underline, strike-through, font color, text alignment, and more. It also includes methods to manipulate text direction, font size, and background color. Users can insert images, and undo/redo changes using the integrated history features of Quill. The HTMLoutput getter provides access to the HTML content of the editor. The class enhances usability by offering a clean API for interacting with the Quill editor within Angular applications.",
+  "imports": ["import { AXWysiwyg } from '@acorex/cdk/wysiwyg';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>AXWysiwyg</code> class",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "example.component.ts",
+            "content": "#init = afterNextRender(() => {\n    const view = this.getHostElement().querySelector('ax-wysiwyg-view') as HTMLElement;\n\n    this.zone.runOutsideAngular(async () => {\n      if (isBrowser()) {\n        const newWysiwyg = new AXWysiwyg();\n\n        await newWysiwyg.init(view, {\n          readOnly: true,\n        });\n\n        this.wysiwyg.set(newWysiwyg);\n      }\n    });\n  });\n\n"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXWysiwyg",
+      "props": [
+        {
+          "name": "quillObj",
+          "type": [{ "name": "Signal<Wysiwyg | null>" }],
+          "description": "A signal containing the Quill editor instance or null if not initialized."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Initializes the Quill editor within the specified container.\n *\n * @param container - The HTML element or selector string where the editor should be initialized\n * @param option - Optional Quill configuration options\n * @returns Promise that resolves when the editor is initialized\n *\n * @example\n * ```typescript\n * const wysiwyg = new AXWysiwyg();\n * await wysiwyg.init('#editor', { readOnly: true });\n * ```\n */\nasync init(container: HTMLElement | string, option?: WysiwygOptions): Promise<void>"
+        },
+        {
+          "content": "/**\n * Applies or removes bold formatting to the selected text.\n *\n * @param value - True to apply bold formatting, false to remove it\n *\n * @example\n * ```typescript\n * wysiwyg.bold(true); // Apply bold\n * wysiwyg.bold(false); // Remove bold\n * ```\n */\nbold(value: boolean): void"
+        },
+        {
+          "content": "/**\n * Applies or removes italic formatting to the selected text.\n *\n * @param value - True to apply italic formatting, false to remove it\n *\n * @example\n * ```typescript\n * wysiwyg.italic(true); // Apply italic\n * wysiwyg.italic(false); // Remove italic\n * ```\n */\nitalic(value: boolean): void"
+        },
+        {
+          "content": "/**\n * Applies or removes underline formatting to the selected text.\n *\n * @param value - True to apply underline formatting, false to remove it\n *\n * @example\n * ```typescript\n * wysiwyg.underLine(true); // Apply underline\n * wysiwyg.underLine(false); // Remove underline\n * ```\n */\nunderLine(value: boolean): void"
+        },
+        {
+          "content": "/**\n * Applies or removes strikethrough formatting to the selected text.\n *\n * @param value - True to apply strikethrough formatting, false to remove it\n *\n * @example\n * ```typescript\n * wysiwyg.strike(true); // Apply strikethrough\n * wysiwyg.strike(false); // Remove strikethrough\n * ```\n */\nstrike(value: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the text color for the selected text.\n *\n * @param value - The color value (hex, rgb, or named color)\n *\n * @example\n * ```typescript\n * wysiwyg.color('#ff0000'); // Red color\n * wysiwyg.color('blue'); // Named color\n * ```\n */\ncolor(value: string): void"
+        },
+        {
+          "content": "/**\n * Sets the header level for the selected text.\n *\n * @param value - The header level (1-6, where 1 is the largest)\n *\n * @example\n * ```typescript\n * wysiwyg.header(1); // H1\n * wysiwyg.header(2); // H2\n * wysiwyg.header(0); // Remove header\n * ```\n */\nheader(value: number): void"
+        },
+        {
+          "content": "/**\n * Applies list formatting to the selected text.\n *\n * @param value - The list type: 'ordered' for numbered list, 'bullet' for bullet list, or '' to remove list formatting\n *\n * @example\n * ```typescript\n * wysiwyg.list('ordered'); // Numbered list\n * wysiwyg.list('bullet'); // Bullet list\n * wysiwyg.list(''); // Remove list\n * ```\n */\nlist(value: 'ordered' | 'bullet' | ''): void"
+        },
+        {
+          "content": "/**\n * Sets the text alignment for the selected text.\n *\n * @param value - The alignment type: 'left', 'center', 'right', or 'justify'\n *\n * @example\n * ```typescript\n * wysiwyg.align('center'); // Center align\n * wysiwyg.align('right'); // Right align\n * wysiwyg.align('left'); // Left align (default)\n * wysiwyg.align('justify'); // Justify text\n * ```\n */\nalign(value: 'center' | 'right' | 'left' | 'justify'): void"
+        },
+        {
+          "content": "/**\n * Sets the text direction for the selected text.\n *\n * @param value - The text direction: 'rtl' for right-to-left or 'ltr' for left-to-right\n *\n * @example\n * ```typescript\n * wysiwyg.direction('rtl'); // Right-to-left\n * wysiwyg.direction('ltr'); // Left-to-right\n * ```\n */\ndirection(value: 'rtl' | 'ltr'): void"
+        },
+        {
+          "content": "/**\n * Sets the font size for the selected text within a specific range.\n *\n * @param value - The font size: 'small', false (normal), 'large', or 'huge'\n * @param range - The text range object with index and length properties\n *\n * @example\n * ```typescript\n * wysiwyg.fontSize('large', { index: 0, length: 10 });\n * wysiwyg.fontSize(false, { index: 0, length: 5 }); // Normal size\n * ```\n */\nfontSize(value: 'small' | false | 'large' | 'huge', range: { index: number; length: number }): void"
+        },
+        {
+          "content": "/**\n * Gets the HTML content of the editor.\n *\n * @returns The HTML string representation of the editor content\n *\n * @example\n * ```typescript\n * const htmlContent = wysiwyg.HTMLoutput;\n * console.log(htmlContent); // <p>Formatted text content</p>\n * ```\n */\nget HTMLoutput(): string"
+        },
+        {
+          "content": "/**\n * Undoes the last change in the editor.\n *\n * @example\n * ```typescript\n * wysiwyg.undo(); // Undo last action\n * ```\n */\nundo(): void"
+        },
+        {
+          "content": "/**\n * Redoes the last undone change in the editor.\n *\n * @example\n * ```typescript\n * wysiwyg.redo(); // Redo last undone action\n * ```\n */\nredo(): void"
+        },
+        {
+          "content": "/**\n * Sets the background color for the selected text.\n *\n * @param value - The background color value (hex, rgb, or named color)\n *\n * @example\n * ```typescript\n * wysiwyg.background('#ffff00'); // Yellow background\n * wysiwyg.background('lightblue'); // Named color\n * ```\n */\nbackground(value: string): void"
+        },
+        {
+          "content": "/**\n * Inserts an image at the current cursor position.\n *\n * @param value - The image URL or data URI\n *\n * @example\n * ```typescript\n * wysiwyg.addImage('https://example.com/image.jpg');\n * wysiwyg.addImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...');\n * ```\n */\naddImage(value: string): void"
+        },
+        {
+          "content": "/**\n * Focuses the editor.\n *\n * @example\n * ```typescript\n * wysiwyg.focus(); // Focus the editor\n * ```\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the editor.\n *\n * @example\n * ```typescript\n * wysiwyg.blur(); // Remove focus from editor\n * ```\n */\nblur(): void"
+        }
+      ]
+    }
+  ]
+}

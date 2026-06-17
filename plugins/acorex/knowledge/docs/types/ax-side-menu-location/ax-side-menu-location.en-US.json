@@ -1,0 +1,23 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSideMenuLocation } from '@acorex/components/side-menu';"],
+  "title": "Side Menu Location Type",
+  "description": "Type definition for the indicator location in side menu components with line-based looks.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Available indicator locations for side menu components.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-side-menu-location.ts",
+            "content": "type AXSideMenuLocation = 'start' | 'end';"
+          }
+        ]
+      }
+    }
+  ]
+}
+

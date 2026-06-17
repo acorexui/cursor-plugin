@@ -1,0 +1,35 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHierarchyChartData",
+  "description": "Hierarchy chart data type - represents a single node in the hierarchy with all its properties and child relationships",
+  "imports": ["import { AXHierarchyChartData } from '@acorex/charts/hierarchy-chart';"],
+  "types": [
+    {
+      "title": "AXHierarchyChartData",
+      "description": "Hierarchy chart data type - represents a single node in the hierarchy",
+      "props": [
+        {
+          "name": "AXHierarchyChartData",
+          "type": [{ "name": "AXHierarchyChartNode", "link": "/en-US/docs/types/hierarchy-chart-node" }],
+          "description": "A single node in the hierarchy chart"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical type definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "hierarchy-chart.type.ts",
+            "language": "ts",
+            "content": "export type AXHierarchyChartData = AXHierarchyChartNode;"
+          }
+        ]
+      }
+    }
+  ]
+}

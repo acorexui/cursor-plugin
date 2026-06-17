@@ -1,0 +1,38 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Label Mode",
+  "description": "Type definition for the label display mode in form fields. Determines how labels are positioned and displayed relative to form inputs.",
+  "imports": ["import { AXLabelMode } from '@acorex/components/form';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXLabelMode type definition showing all available label modes",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "form.component.ts",
+            "content": "export type AXLabelMode = 'static' | 'floating' | 'over';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLabelMode",
+      "props": [
+        {
+          "name": "AXLabelMode",
+          "type": [
+            { "name": "'static'" },
+            { "name": "'floating'" },
+            { "name": "'over'" }
+          ],
+          "description": "Union type defining the available label modes for form fields. 'static' keeps the label in a fixed position, 'floating' animates the label when focused, and 'over' places the label over the input field."
+        }
+      ]
+    }
+  ]
+}

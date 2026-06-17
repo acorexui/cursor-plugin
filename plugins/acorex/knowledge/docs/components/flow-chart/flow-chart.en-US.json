@@ -1,0 +1,78 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Flow Chart",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/flowchart--documentation"
+    }
+  ],
+  "description": "The Flow Chart component provides an interactive way to create, edit and visualize flow diagrams with nodes and connections. It includes a renderer for displaying the chart and a creator panel for adding new nodes.",
+  "extraLinks": [
+    {
+      "text": "storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/flow-chart--documentation"
+    }
+  ],
+  "imports": [
+    "import { AXFlowChartModule } from '@acorex/components/flow-chart';",
+    "import { AXFlowChartService } from '@acorex/components/flow-chart';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-flow-chart</code>",
+      "content": {
+        "type": "api",
+        "data": "flow-chart/usage"
+      },
+      "height": "600px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFlowChartComponent",
+      "description": "Main component for creating and managing flow charts",
+      "props": [
+        {
+          "name": "initialFlowChartNode",
+          "type": [
+            {
+              "name": "AXFlowChartNodes[]",
+              "link": "/en-US/docs/types/ax-flow-chart-nodes"
+            }
+          ],
+          "description": "Initial nodes to be displayed in the flow chart",
+          "required": true
+        },
+        {
+          "name": "initialFlowChartEdge",
+          "type": [
+            {
+              "name": "AXFlowChartEdges[]",
+              "link": "/en-US/docs/types/ax-flow-chart-edges"
+            }
+          ],
+          "description": "Initial edges to be displayed in the flow chart",
+          "required": true
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Draws edges on the flow chart.\n *\n * @param edges Array of edges to draw.\n * @returns void\n */\ndrawEdges(edges: AXFlowChartEdges[]): void"
+        },
+        {
+          "content": "/**\n * Removes a specific edge from the flow chart.\n *\n * @param edge The edge object to remove.\n * @returns void\n */\nremoveEdge(edge: AXFlowChartEdges): void"
+        },
+        {
+          "content": "/**\n * Creates one or more nodes on the flow chart.\n *\n * @param nodes Array of node definitions to create.\n * @returns void\n */\ncreateNode(nodes: { id: string; type: string; label: string; x: number; y: number }[]): void"
+        },
+        {
+          "content": "/**\n * Removes a node by its identifier.\n *\n * @param nodeId The unique id of the node to remove.\n * @returns void\n */\nremoveNode(nodeId: string): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXScreenSizes",
+  "description": "The screen size type",
+  "imports": ["import { AXScreenSizes } from '@acorex/core/platform';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXScreenSizes type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-screen-sizes.ts",
+            "content": "export type AXScreenSizes = 'SM' | 'MD' | 'LG' | 'XL' | '2XL' | '3XL' | '4XL' | '5XL';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXScreenSizes",
+      "props": [
+        {
+          "name": "AXScreenSizes",
+          "type": [
+            { "name": "'SM'" },
+            { "name": "'MD'" },
+            { "name": "'LG'" },
+            { "name": "'XL'" },
+            { "name": "'2XL'" },
+            { "name": "'3XL'" },
+            { "name": "'4XL'" },
+            { "name": "'5XL'" }
+          ],
+          "description": "The screen size type"
+        }
+      ]
+    }
+  ]
+}

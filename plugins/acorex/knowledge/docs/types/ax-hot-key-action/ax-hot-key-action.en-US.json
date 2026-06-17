@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Hot Key Action",
+  "imports": ["import { AXHotKeyAction } from '@acorex/cdk/common';"],
+  "description": "Type definition for hotkey action configuration. This type allows mapping keyboard shortcuts to specific actions or functions, enabling keyboard-driven interactions in components.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Hot key action type structure.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-hot-key-action.ts",
+            "content": "export type AXHotKeyAction = { [key: string]: string | Function; parmas?: any };"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXHotKeyAction",
+      "props": [
+        {
+          "name": "AXHotKeyAction",
+          "type": [{ "name": "{ [key: string]: string | Function; parmas?: any }" }],
+          "description": "Object type where keys represent keyboard shortcuts and values are either string method names or functions to execute. The 'parmas' property (optional) can contain additional parameters for the action."
+        }
+      ]
+    }
+  ]
+}

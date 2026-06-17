@@ -1,0 +1,230 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "File Utilities",
+  "description": "Browser-side file utilities: programmatic file selection via a hidden input, Blob-to-Base64 conversion, base64 size calculation, and human-readable file size formatting through the format pipe.",
+  "imports": [
+    "import { AXFileService, AXFileModule, AXFileSizeFormatter } from '@acorex/core/file';"
+  ],
+  "hints": [
+    {
+      "title": "Browser only",
+      "content": "All APIs rely on browser APIs (<code>HTMLInputElement</code>, <code>FileReader</code>, <code>atob</code>). They are intended for client-side use only and are not suitable for server-side rendering logic.",
+      "status": "primary"
+    },
+    {
+      "title": "getSize limitation",
+      "content": "<code>getSize()</code> only returns a byte count for <strong>data-URL base64 strings</strong> (e.g. <code>data:image/png;base64,...</code>). For native <code>File</code> or <code>Blob</code> objects, use the <code>.size</code> property directly — <code>getSize()</code> returns <code>false</code> for those types.",
+      "status": "warning"
+    },
+    {
+      "title": "Formatter registration",
+      "content": "Import <code>AXFileModule</code> in your application or feature module to register the <code>filesize</code> formatter with <code>AXFormatPipe</code>. <code>AXFileService</code> is provided in root and needs no module import.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFileService",
+      "description": "Root singleton for file selection dialogs and binary/base64 utilities.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Opens the native file picker and resolves with selected files.\n * Resolves with an empty array when the user cancels.\n * @param options.accept - MIME types or extensions (e.g. 'image/*', '.pdf')\n * @param options.multiple - Allow multi-select (default: false)\n */\nchoose(options?: { accept?: string; multiple?: boolean }): Promise<File[]>"
+        },
+        {
+          "content": "/**\n * Reads a Blob as a data-URL base64 string.\n * Rejects if the input is not a Blob.\n */\nblobToBase64(blob: Blob): Promise<string>"
+        },
+        {
+          "content": "/**\n * Returns byte size for a data-URL base64 string, or false otherwise.\n * For File/Blob, use .size instead.\n */\ngetSize(file: File | Blob | string): number | false"
+        },
+        {
+          "content": "/**\n * Returns true when the string looks like a data-URL base64 value\n * (contains a MIME type segment such as image/png;base64).\n */\nisBase64(base64: string): boolean"
+        },
+        {
+          "content": "/**\n * Calculates decoded byte length of the payload in a data-URL base64 string.\n */\ngetBase64Size(base64: string): number"
+        }
+      ]
+    },
+    {
+      "title": "AXFileSizeFormatterOptions",
+      "description": "Type augmentation for the format pipe when using the 'filesize' formatter name.",
+      "props": [
+        {
+          "name": "format",
+          "type": [{ "name": "string" }],
+          "description": "Reserved for future format customization. The formatter currently auto-selects the best unit (Bytes, KB, MB, …)."
+        }
+      ]
+    },
+    {
+      "title": "AXFileSizeFormatter",
+      "description": "Implements AXFormatter to convert raw byte counts into human-readable strings (e.g. 1536000 → '1.46 MB').",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "'filesize'" }],
+          "description": "Formatter key used with AXFormatPipe."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Formats a numeric byte value.\n * Returns '0 Bytes' for 0, 'Unknown' for NaN.\n */\nformat(value: number): string"
+        }
+      ]
+    },
+    {
+      "title": "AXFileModule",
+      "description": "Registers AXFileSizeFormatter with AXFormatModule.forChild so the 'filesize' pipe name is available in templates.",
+      "props": [],
+      "methods": []
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the file package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/file package offers two complementary tools:\n\n• AXFileService — programmatic file picking and conversion helpers used by AXUploaderService, conversation components, and custom upload flows.\n\n• AXFileSizeFormatter — registered via AXFileModule and consumed through AXFormatPipe as format: 'filesize' to display byte values as '1.46 MB', '512 KB', etc.\n\nAXFileService is providedIn: 'root'. Import AXFileModule only when you need the filesize formatter in templates."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "AXFileService is providedIn root — inject it to pick files, convert blobs to base64, and measure data-URL payload size.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "file-usage.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { AXFileService, AXFileSizeFormatter } from '@acorex/core/file';\n\n@Component({\n  selector: 'app-file-usage',\n  template: `\n    <button type=\"button\" (click)=\"pickAndProcess()\">Pick image</button>\n    @if (preview()) {\n      <p>{{ preview()!.name }} — {{ preview()!.sizeLabel }}</p>\n    }\n  `,\n})\nexport class FileUsageComponent {\n  private fileService = inject(AXFileService);\n  private sizeFormatter = new AXFileSizeFormatter();\n\n  preview = signal<{ name: string; sizeLabel: string } | null>(null);\n\n  async pickAndProcess() {\n    const files = await this.fileService.choose({\n      accept: 'image/*',\n      multiple: false,\n    });\n    if (!files.length) return;\n\n    const file = files[0];\n\n    // Native File/Blob — use .size directly\n    const sizeLabel = this.sizeFormatter.format(file.size);\n\n    // Convert to data-URL base64 for upload or preview\n    const dataUrl = await this.fileService.blobToBase64(file);\n\n    // Base64 size helpers — only for data-URL strings\n    if (this.fileService.isBase64(dataUrl)) {\n      const bytes = this.fileService.getBase64Size(dataUrl);\n      console.log(this.fileService.getSize(dataUrl)); // same byte count\n    }\n\n    this.preview.set({ name: file.name, sizeLabel });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "File Selection (choose)",
+      "description": "Open the native file picker with accept filters and multi-select.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "choose-files.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { AXFileService } from '@acorex/core/file';\n\n@Component({\n  selector: 'app-upload-button',\n  template: `\n    <button type=\"button\" (click)=\"selectDocuments()\">Upload PDFs</button>\n    <button type=\"button\" (click)=\"selectImages()\">Upload images</button>\n    @for (file of selected(); track file.name) {\n      <p>{{ file.name }} — {{ file.size }} bytes</p>\n    }\n  `,\n})\nexport class UploadButtonComponent {\n  private fileService = inject(AXFileService);\n  protected selected = signal<File[]>([]);\n\n  async selectDocuments() {\n    const files = await this.fileService.choose({ accept: '.pdf,.doc,.docx', multiple: true });\n    this.selected.set(files);\n  }\n\n  async selectImages() {\n    const files = await this.fileService.choose({ accept: 'image/*', multiple: true });\n    this.selected.set(files);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Blob to Base64",
+      "description": "Convert recorded audio, canvas exports, or fetched blobs to data URLs.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "blob-to-base64.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXFileService } from '@acorex/core/file';\n\n@Component({\n  selector: 'app-voice-recorder',\n  template: `<button type=\"button\" (click)=\"saveRecording()\">Save</button>`,\n})\nexport class VoiceRecorderComponent {\n  private fileService = inject(AXFileService);\n  private recordedBlob: Blob | null = null;\n\n  // Called when your recorder emits a Blob\n  onRecordingComplete(blob: Blob) {\n    this.recordedBlob = blob;\n  }\n\n  async saveRecording() {\n    if (!this.recordedBlob) return;\n\n    try {\n      const dataUrl = await this.fileService.blobToBase64(this.recordedBlob);\n      // dataUrl looks like: data:audio/webm;base64,GkXf...\n      await this.sendToServer(dataUrl);\n    } catch (err) {\n      console.error('Conversion failed', err);\n    }\n  }\n\n  private sendToServer(payload: string) {\n    /* POST payload to API */\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Base64 Size Helpers",
+      "description": "Measure payload size when content is stored as a data URL string.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "base64-size.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXFileService } from '@acorex/core/file';\n\n@Component({\n  selector: 'app-file-message',\n  template: `\n    <p>{{ fileName() }}</p>\n    <p>{{ displaySize() | format: 'filesize' | async }}</p>\n  `,\n})\nexport class FileMessageComponent {\n  private fileService = inject(AXFileService);\n\n  // message.content may be a data-URL string OR a File object\n  message = { content: 'data:application/pdf;base64,JVBERi0x...', name: 'report.pdf' };\n\n  fileName = () => this.message.name;\n\n  displaySize = () => {\n    const content = this.message.content;\n    if (typeof content === 'string' && this.fileService.isBase64(content)) {\n      return this.fileService.getBase64Size(content);\n    }\n    // For native File objects, use .size directly\n    return (content as File).size ?? 0;\n  };\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Register the File Size Formatter",
+      "description": "Import AXFileModule so format: 'filesize' works in templates.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app.config.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig } from '@angular/core';\nimport { provideRouter } from '@angular/router';\nimport { importProvidersFrom } from '@angular/core';\nimport { AXFormatModule } from '@acorex/core/format';\nimport { AXFileModule } from '@acorex/core/file';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    provideRouter([]),\n    importProvidersFrom(AXFormatModule.forRoot(), AXFileModule),\n  ],\n};\n"
+          },
+          {
+            "fileName": "feature.module.ts",
+            "language": "typescript",
+            "content": "import { NgModule } from '@angular/core';\nimport { AXFormatModule } from '@acorex/core/format';\nimport { AXFileModule } from '@acorex/core/file';\n\n@NgModule({\n  imports: [AXFormatModule.forChild(), AXFileModule],\n})\nexport class FilesFeatureModule {}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Display Size in Templates",
+      "description": "Use AXFormatPipe with the filesize formatter name.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "uploader-list.component.html",
+            "language": "html",
+            "content": "<!-- Each item.size is a number in bytes -->\n<span>{{ item.size | format: 'filesize' | async }}</span>\n\n<!-- With a component signal -->\n<span>{{ fileSize() | format: 'filesize' | async }}</span>\n"
+          },
+          {
+            "fileName": "uploader-list.component.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { AsyncPipe } from '@angular/common';\nimport { AXFormatPipe } from '@acorex/core/format';\n\n@Component({\n  selector: 'app-uploader-list',\n  imports: [AsyncPipe, AXFormatPipe],\n  templateUrl: './uploader-list.component.html',\n})\nexport class UploaderListComponent {\n  items = [{ name: 'photo.jpg', size: 1536000 }];\n  fileSize = () => 1536000;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Direct Formatter Usage",
+      "description": "Call AXFileSizeFormatter.format() without the pipe when needed in TypeScript.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "format-bytes.ts",
+            "language": "typescript",
+            "content": "import { AXFileSizeFormatter } from '@acorex/core/file';\n\nconst formatter = new AXFileSizeFormatter();\n\nconsole.log(formatter.name);        // 'filesize'\nconsole.log(formatter.format(0));   // '0 Bytes'\nconsole.log(formatter.format(512)); // '512 Bytes'\nconsole.log(formatter.format(1536000)); // '1.46 MB'\nconsole.log(formatter.format(NaN)); // 'Unknown'\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Integration with AXUploaderService",
+      "description": "The CDK uploader wraps choose() in its browse() method.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "uploader-integration.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXUploaderService } from '@acorex/cdk/uploader';\n\n@Component({\n  selector: 'app-custom-uploader',\n  template: `<button type=\"button\" (click)=\"browse()\">Add files</button>`,\n})\nexport class CustomUploaderComponent {\n  private uploader = inject(AXUploaderService);\n\n  async browse() {\n    const requests = await this.uploader.browse({\n      multiple: true,\n      accept: 'image/*,.pdf',\n    });\n    // Each AXUploadRequest wraps a File and tracks upload progress\n    console.log(requests.map((r) => r.file.name));\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Accept Attribute Reference",
+      "description": "Common accept values for choose().",
+      "content": {
+        "type": "text",
+        "data": "The accept option maps directly to the HTML input accept attribute:\n\n• image/* — all image types\n• video/* — all video types\n• audio/* — all audio types\n• .pdf — PDF files only\n• .pdf,.doc,.docx — multiple extensions\n• image/png,image/jpeg — specific MIME types\n\nWhen multiple is false (default), choose() still returns File[] but with at most one item. An empty array means the user closed the dialog without selecting a file."
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+---
+description: Use ACoreX documentation JSON blueprints when implementing UI — look up imports, props, events, sections, and design tokens before writing code.
+alwaysApply: true
+---
+
+# ACoreX Component Blueprints
+
+This plugin ships **368 documentation blueprints** synced from `apps/documentation/docs` (en-US). Each JSON file is the authoritative reference for how to use an ACoreX component, CDK module, core service, chart, type, or event.
+
+## Knowledge base location
+
+| File | Purpose |
+| --- | --- |
+| `knowledge/index.json` | Searchable catalog — title, import, props, events, sections |
+| `knowledge/CATALOG.md` | Quick reference list of all components and packages |
+| `knowledge/docs/{category}/{name}/{name}.en-US.json` | Full blueprint for a single artifact |
+| `knowledge/document.schema.json` | JSON documentation schema |
+| `knowledge/theme/TAILWIND-GUIDE.md` | Tailwind theme quick reference |
+| `knowledge/theme/tailwind-theme.json` | Parsed theme tokens and utilities |
+| `knowledge/theme/default.css` | Full Tailwind v4 theme source |
+
+Categories: `components`, `cdk`, `core`, `charts`, `types`, `events`, `styles`, `tokens`, `get-started`.
+
+## Required workflow when using ACoreX
+
+1. **Search** `knowledge/index.json` for the component or package by name or title.
+2. **Read** the matching blueprint JSON before writing implementation code.
+3. **Apply** from the blueprint:
+   - `imports` — exact import statements
+   - `sections` — usage patterns (each `showcasePath` maps to a live demo at https://demo.acorex.io/)
+   - `types[].props` — inputs with types and defaults
+   - `types[].events` — outputs and event payloads
+   - `types[].methods` — public API methods
+   - `tokens` — CSS custom properties for theming (cross-ref `knowledge/theme/tailwind-theme.json`)
+4. **Style with theme tokens** — use `tailwind-theme` rule; read `knowledge/theme/TAILWIND-GUIDE.md` for layout/custom CSS.
+5. **Cross-reference** `secondary-entry-points-rules` for package-level imports.
+6. **Prefer existing components** — never reinvent what `@acorex/*` already provides.
+
+## Section showcase paths
+
+Blueprint sections with `"content": { "type": "api", "data": "button/usage" }` reference live showcase demos. When working inside the monorepo, find matching examples at:
+
+```text
+apps/showcase/src/app/cases/<showcasePath>/
+```
+
+## Online references
+
+- Documentation: https://acorex.io
+- Storybook: https://storybook.acorex.io
+- Live demos: https://demo.acorex.io
+
+## Syncing blueprints (monorepo maintainers)
+
+```bash
+node cursor-plugin/scripts/sync-all.mjs
+```

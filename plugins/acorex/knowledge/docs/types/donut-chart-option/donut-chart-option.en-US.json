@@ -1,0 +1,96 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXDonutChartOption",
+  "description": "Configuration options for the donut chart component including dimensions, styling, animations, and interactive features",
+  "imports": ["import { AXDonutChartOption } from '@acorex/charts/donut-chart';"],
+  "types": [
+    {
+      "title": "AXDonutChartOption",
+      "description": "Configuration options for the donut chart",
+      "props": [
+        {
+          "name": "width",
+          "type": [{ "name": "number" }],
+          "description": "Width of the chart in pixels. If not provided, will use container width"
+        },
+        {
+          "name": "height",
+          "type": [{ "name": "number" }],
+          "description": "Height of the chart in pixels. If not provided, will use container height"
+        },
+        {
+          "name": "totalLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label for the total value (default: 'Total')"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltips on hover",
+          "default": "true"
+        },
+        {
+          "name": "showDataLabels",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show percentage labels inside chart segments. Labels will only appear on segments large enough to fit text",
+          "default": "true"
+        },
+        {
+          "name": "donutWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of the donut ring as a percentage (10-90). Higher values create a thicker ring",
+          "default": "35"
+        },
+        {
+          "name": "cornerRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius for rounded corners on segments in pixels",
+          "default": "4"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of animations in milliseconds",
+          "default": "800"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Type of easing function for animations",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXDonutChartMessages", "link": "/en-US/docs/types/donut-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "donut-chart.type.ts",
+            "language": "ts",
+            "content": "export interface AXDonutChartOption {\n  width?: number;\n  height?: number;\n  totalLabel?: string;\n  showTooltip?: boolean;\n  showDataLabels?: boolean;\n  donutWidth?: number;\n  cornerRadius?: number;\n  animationDuration?: number;\n  animationEasing?: AXAnimationEasing;\n  messages?: AXDonutChartMessages;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

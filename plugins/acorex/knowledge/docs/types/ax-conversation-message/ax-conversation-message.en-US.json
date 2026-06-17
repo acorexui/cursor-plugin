@@ -1,0 +1,106 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Conversation Message",
+  "imports": ["import { AXConversationMessage } from '@acorex/components/conversation';"],
+  "description": "Represents a message in a conversation with properties for identification, content, timing, and user information. This interface defines the structure for individual messages within a conversation component.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Shape of a conversation message.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-conversation-message.ts",
+            "content": "interface AXConversationMessage {\n  id: string;\n  type: string;\n  sendTime: Date | null;\n  deliverTime: Date;\n  readTime: Date;\n  replyTo?: { id: string };\n  content: any;\n  fromId: string;\n  name: string;\n  onResendClick?: () => void;\n  onDeleteClick?: () => void;\n  onDownloadClick?: () => void;\n  onCancelClick?: () => void;\n  showActionButton?: boolean;\n  userName?: string;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXConversationMessage",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the message."
+        },
+        {
+          "name": "type",
+          "type": [{ "name": "string" }],
+          "description": "The type of message content (e.g., 'text', 'image', 'audio', 'video', 'file')."
+        },
+        {
+          "name": "sendTime",
+          "type": [{ "name": "Date" }, { "name": "null" }],
+          "description": "Timestamp when the message was sent, or null if not yet sent."
+        },
+        {
+          "name": "deliverTime",
+          "type": [{ "name": "Date" }],
+          "description": "Timestamp when the message was delivered to the recipient."
+        },
+        {
+          "name": "readTime",
+          "type": [{ "name": "Date" }],
+          "description": "Timestamp when the message was read by the recipient."
+        },
+        {
+          "name": "replyTo",
+          "type": [{ "name": "{ id: string }" }],
+          "description": "Reference to the message this message is replying to, if applicable."
+        },
+        {
+          "name": "content",
+          "type": [{ "name": "any" }],
+          "description": "The actual content of the message, which can vary based on the message type."
+        },
+        {
+          "name": "fromId",
+          "type": [{ "name": "string" }],
+          "description": "Identifier of the user who sent the message."
+        },
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Display name of the message sender."
+        },
+        {
+          "name": "onResendClick",
+          "type": [{ "name": "() => void" }],
+          "description": "Callback function called when the resend button is clicked for a failed message."
+        },
+        {
+          "name": "onDeleteClick",
+          "type": [{ "name": "() => void" }],
+          "description": "Callback function called when the delete button is clicked for the message."
+        },
+        {
+          "name": "onDownloadClick",
+          "type": [{ "name": "() => void" }],
+          "description": "Callback function called when the download button is clicked for file messages."
+        },
+        {
+          "name": "onCancelClick",
+          "type": [{ "name": "() => void" }],
+          "description": "Callback function called when the cancel button is clicked for ongoing operations."
+        },
+        {
+          "name": "showActionButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Controls whether action buttons (resend, delete, etc.) are shown for this message."
+        },
+        {
+          "name": "userName",
+          "type": [{ "name": "string" }],
+          "description": "Additional user name information for the message sender."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet Configuration",
+  "imports": ["import { AXActionSheetConfig } from '@acorex/components/action-sheet';"],
+  "description": "Configuration interface for action sheet appearance and behavior. This interface defines all the properties that can be used to customize the action sheet component, including title, content, items, and interaction options.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Action sheet configuration shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-action-sheet-config.ts",
+            "content": "interface AXActionSheetConfig {\n  title?: string;\n  subTitle?: string;\n  closeButton?: boolean;\n  header?: boolean;\n  data?: unknown;\n  closeOnBackdropClick?: boolean;\n  items?: AXActionSheetItem[];\n  content?: AXActionSheetContentType;\n  draggable?: boolean;\n  dragUp?: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXActionSheetConfig",
+      "props": [
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "The title displayed at the top of the action sheet (optional)."
+        },
+        {
+          "name": "subTitle",
+          "type": [{ "name": "string" }],
+          "description": "Optional subtitle displayed below the main title."
+        },
+        {
+          "name": "closeButton",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a close button in the action sheet header."
+        },
+        {
+          "name": "header",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the header section of the action sheet."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "unknown" }],
+          "description": "Additional data that can be passed to the action sheet."
+        },
+        {
+          "name": "closeOnBackdropClick",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the action sheet should close when clicking outside of it."
+        },
+        {
+          "name": "items",
+          "type": [{ "name": "AXActionSheetItem[]", "link": "/en-US/docs/types/ax-action-sheet-item" }],
+          "description": "Array of action sheet items to display in the list."
+        },
+        {
+          "name": "content",
+          "type": [{ "name": "AXActionSheetContentType", "link": "/en-US/docs/types/ax-action-sheet-content-type" }],
+          "description": "Custom content to display in the action sheet, either as a template reference or component type."
+        },
+        {
+          "name": "draggable",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the action sheet can be dragged by the user."
+        },
+        {
+          "name": "dragUp",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the action sheet can be dragged upward to expand to full screen."
+        }
+      ]
+    }
+  ]
+}

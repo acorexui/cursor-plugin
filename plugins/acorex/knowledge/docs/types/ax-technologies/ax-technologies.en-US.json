@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTechnologies",
+  "description": "The technology type",
+  "imports": ["import { AXTechnologies } from '@acorex/core/platform';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXTechnologies type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-technologies.ts",
+            "content": "export type AXTechnologies = 'PWA' | 'Hybrid' | 'Electron';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTechnologies",
+      "props": [
+        {
+          "name": "AXTechnologies",
+          "type": [{ "name": "'PWA'" }, { "name": "'Hybrid'" }, { "name": "'Electron'" }],
+          "description": "The technology type"
+        }
+      ]
+    }
+  ]
+}

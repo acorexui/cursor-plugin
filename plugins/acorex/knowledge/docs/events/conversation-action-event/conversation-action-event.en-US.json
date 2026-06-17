@@ -1,0 +1,29 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXConversationActionEvent",
+  "description": "Emitted when an action occurs in a conversation, providing the action data.",
+  "imports": ["import { AXConversationActionEvent } from '@acorex/components/conversation';"],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload for conversation actions.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "conversation-action-event.ts",
+            "language": "ts",
+            "content": "interface AXConversationActionEvent {\n  data: any;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXConversationActionEvent",
+      "props": [{ "name": "data", "type": [{ "name": "any" }], "description": "The action data." }]
+    }
+  ],
+  "tokens": []
+}

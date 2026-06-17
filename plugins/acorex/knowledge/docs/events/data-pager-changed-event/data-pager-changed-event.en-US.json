@@ -1,0 +1,61 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Pager Changed Event",
+  "imports": ["import { AXDataPagerChangedEvent } from '@acorex/components/data-pager';"],
+  "description": "Represents the event emitted when the data pager state changes, providing information about the current page, range, and pagination details.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload emitted by the data pager when paging changes.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "data-pager-changed-event.ts",
+            "content": "interface AXDataPagerChangedEvent {\n  range: { from: number; to: number };\n  page: number;\n  skip: number;\n  take: number;\n  totalPages: number;\n  totalItems: number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDataPagerChangedEvent",
+      "props": [
+        {
+          "name": "range",
+          "type": [{ "name": "{ from: number; to: number }" }],
+          "description": "The range of items currently displayed (from and to indices)."
+        },
+        {
+          "name": "page",
+          "type": [{ "name": "number" }],
+          "description": "The current page number."
+        },
+        {
+          "name": "skip",
+          "type": [{ "name": "number" }],
+          "description": "The number of items to skip (offset)."
+        },
+        {
+          "name": "take",
+          "type": [{ "name": "number" }],
+          "description": "The number of items to take (page size)."
+        },
+        {
+          "name": "totalPages",
+          "type": [{ "name": "number" }],
+          "description": "The total number of pages available."
+        },
+        {
+          "name": "totalItems",
+          "type": [{ "name": "number" }],
+          "description": "The total number of items in the dataset."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

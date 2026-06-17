@@ -1,0 +1,55 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXOtpCompletedEvent",
+  "description": "Emitted when an OTP input is completed, providing the entered value and completion status.",
+  "imports": ["import { AXOtpCompletedEvent } from '@acorex/components/otp';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the OTP completed event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "otp.class.ts",
+            "content": "export class AXEvent {\n  component: any;\n  htmlElement?: HTMLElement;\n  isUserInteraction?: boolean = false;\n}\n\nexport class AXOtpCompletedEvent extends AXEvent {\n  value: string;\n  isCompleted: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXOtpCompletedEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component instance. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element associated with the component. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates whether the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "string" }],
+          "description": "The current value entered in the OTP input fields."
+        },
+        {
+          "name": "isCompleted",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether all OTP input fields have been filled."
+        }
+      ]
+    }
+  ]
+}

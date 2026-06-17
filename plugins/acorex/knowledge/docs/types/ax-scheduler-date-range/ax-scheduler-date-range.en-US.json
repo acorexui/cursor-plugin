@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerDateRange",
+  "imports": ["import { AXSchedulerDateRange } from '@acorex/components/scheduler';"],
+  "description": "Represents a date range for scheduler operations.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing a date range with start and end dates.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-date-range.ts",
+            "content": "interface AXSchedulerDateRange { startDate: AXDateTime; endDate: AXDateTime; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerDateRange",
+      "props": [
+        {
+          "name": "startDate",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "Start date of the range."
+        },
+        {
+          "name": "endDate",
+          "type": [{ "name": "AXDateTime" }],
+          "description": "End date of the range."
+        }
+      ]
+    }
+  ]
+}

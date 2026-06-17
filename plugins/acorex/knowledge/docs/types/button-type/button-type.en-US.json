@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXButtonType",
+  "imports": ["import { AXButtonType } from '@acorex/components/button';"],
+  "description": "Type definition for button types used throughout the UI library.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that specifies the available button types for components. Used to define the semantic purpose of buttons.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "button-type.ts",
+            "content": "type AXButtonType = 'button' | 'submit' | 'reset';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXButtonType",
+      "props": [
+        {
+          "name": "AXButtonType",
+          "type": [{ "name": "'button'" }, { "name": "'submit'" }, { "name": "'reset'" }],
+          "description": "Union type defining button semantics used by components like button and dropdown-button."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXResultComponent } from '@acorex/components/result';"],
+  "title": "Result",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/result--documentation"
+    }
+  ],
+  "description": "Displays a result view with icon, title and description using content projection.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-result</code>",
+      "content": {
+        "type": "api",
+        "data": "result/usage"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXResultComponent",
+      "props": [
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text.",
+          "default": "''"
+        },
+        {
+          "name": "description",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Description text.",
+          "default": "''"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when a component option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStorage",
+  "imports": ["import { AXStorage } from '@acorex/core/storage';"],
+  "description": "Interface for storage operations providing a common API for different storage mechanisms like localStorage, sessionStorage, and cookies.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Common storage API.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "storage.ts",
+            "content": "interface AXStorage {\n  get<T = unknown>(key: string): T | null;\n  set<T = unknown>(key: string, value: T): void;\n  remove(key: string): void;\n  clear(): void;\n  has(key: string): boolean;\n  keys(): string[];\n  size(): number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXStorage",
+      "props": [],
+      "description": "Base interface that defines the contract for storage implementations, ensuring consistent API across different storage types.",
+      "methods": [
+        {
+          "name": "get",
+          "description": "Retrieves a value from storage by its key."
+        },
+        {
+          "name": "set",
+          "description": "Stores a value in storage with the specified key."
+        },
+        {
+          "name": "remove",
+          "description": "Removes a value from storage by its key."
+        },
+        {
+          "name": "clear",
+          "description": "Removes all values from storage."
+        },
+        {
+          "name": "has",
+          "description": "Checks if a key exists in storage."
+        },
+        {
+          "name": "keys",
+          "description": "Returns an array of all keys in storage."
+        },
+        {
+          "name": "size",
+          "description": "Returns the number of items in storage."
+        }
+      ]
+    }
+  ]
+}

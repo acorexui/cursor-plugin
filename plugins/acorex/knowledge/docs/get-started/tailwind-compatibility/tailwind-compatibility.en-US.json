@@ -1,0 +1,114 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Tailwind compatibility",
+  "description": "To use Tailwind with ACoreX, you need to integrate them. We’ve provided functions and classes that make development easier and faster for you.",
+  "sections": [
+    {
+      "title": "Install Tailwindcss",
+      "description": "ACoreX can work independently of TailwindCSS, but we recommend using it. To install and configure TailwindCSS, follow the steps below. Additionally, ACoreX provides custom classes tailored to the ACoreX design system through TailwindCSS.<u> ACoreX currently supports Tailwind 3, but it will soon migrate to version 4. </u>",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "NPM",
+            "icon": "npm",
+            "language": "bash",
+            "content": "npm install -D tailwindcss@3"
+          },
+          {
+            "fileName": "PNPM",
+            "icon": "pnpm",
+            "language": "bash",
+            "content": "pnpm add -D tailwindcss@3"
+          },
+          {
+            "fileName": "YARN",
+            "icon": "yarn",
+            "language": "bash",
+            "content": "yarn add tailwindcss@3 -D"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Configuration Tailwindcss",
+      "description": "To add the Tailwind config, first run the command to automatically generate the config file, then add the ACoreX preset to it.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "Terminal",
+            "language": "bash",
+            "content": "npx tailwindcss init"
+          },
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "/** @type {import('tailwindcss').Config} */\nexport default {\n  presets: [require(\"@acorex/styles/tailwind-base.js\")],\n  content: [\"./src/**/*.{html,js}\"],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n};"
+          },
+          {
+            "fileName": "tailwind.config.js (for NX)",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');\nconst { join } = require('path');\n\n/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  presets: [require('@acorex/styles/tailwind-base.js')],\n  content: [join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'), ...createGlobPatternsForDependencies(__dirname)],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n}"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Predefined classes",
+      "description": "ACoreX provides a set of predefined classes that can be used to style your components. These classes are based on the ACoreX design system and are designed to be used with TailwindCSS.",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Class", "Description"],
+          "rows": [
+            ["ax-h1", "apply h1 font size, weight and line height"],
+            ["ax-h2", "apply h2 font size, weight and line height"],
+            ["ax-h3", "apply h3 font size, weight and line height"],
+            ["ax-h4", "apply h4 font size, weight and line height"],
+            ["ax-h5", "apply h5 font size, weight and line height"],
+            ["ax-h6", "apply h6 font size, weight and line height"],
+            ["ax-heading", "apply heading border bottom, line height and margin"],
+            ["ax-heading-start", "apply heading text align start"],
+            ["ax-heading-center", "apply heading text align center"],
+            ["ax-heading-end", "apply heading text align end"],
+            ["ax-subtitle", "apply subtitle font size, weight and line height"],
+            ["ax-links", "apply links color and cursor"],
+            ["ax-headings", "apply headings font size, weight and line height"],
+            ["ax-headings-start", "apply headings text align start with border"],
+            ["ax-headings-center", "apply headings text align center with border"],
+            ["ax-headings-end", "apply headings text align end with border"],
+            ["ax-tabfit", "apply tab fit width"]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Surface classes",
+      "description": "ACoreX provides a set of surface classes that can be used to style your components. These classes are based on the ACoreX design system and are designed to be used with TailwindCSS.",
+      "content": {
+        "type": "table",
+        "data": {
+          "columns": ["Class", "Description"],
+          "rows": [
+            ["ax-surface-lightest", "apply surface lightest color"],
+            ["ax-surface-on-lightest", "apply surface on lightest color"],
+            ["ax-surface-lighter", "apply surface lighter color"],
+            ["ax-surface-on-lighter", "apply surface on lighter color"],
+            ["ax-surface-light", "apply surface light color"],
+            ["ax-surface-on-light", "apply surface on light color"],
+            ["ax-surface", "apply surface color"],
+            ["ax-surface-dark", "apply surface dark color"],
+            ["ax-surface-on-dark", "apply surface on dark color"],
+            ["ax-surface-darker", "apply surface darker color"],
+            ["ax-surface-on-darker", "apply surface on darker color"],
+            ["ax-surface-darkest", "apply surface darkest color"],
+            ["ax-surface-on-darkest", "apply surface on darkest color"]
+          ]
+        }
+      }
+    }
+  ]
+}

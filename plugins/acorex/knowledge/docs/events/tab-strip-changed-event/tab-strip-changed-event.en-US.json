@@ -1,0 +1,54 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTabStripChangedEvent",
+  "description": "Event emitted when the active tab changes in a tab component.",
+  "imports": ["import { AXTabStripChangedEvent } from '@acorex/components/tabs';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Canonical TypeScript definition of the tab strip changed event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "tabs.class.ts",
+            "content": "export class AXTabStripChangedEvent extends AXEvent {\n  tab: AXTabItemComponent;\n  index: number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTabStripChangedEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXTabsComponent", "link": "/en-US/docs/components/tabs" }],
+          "description": "The tabs component that emitted the event. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element of the tabs component. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        {
+          "name": "tab",
+          "type": [{ "name": "AXTabItemComponent", "link": "/en-US/docs/components/tabs" }],
+          "description": "The tab item that became active."
+        },
+        {
+          "name": "index",
+          "type": [{ "name": "number" }],
+          "description": "The index of the active tab."
+        }
+      ]
+    }
+  ]
+}

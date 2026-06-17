@@ -1,0 +1,230 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Constants",
+  "description": "Shared geographic constants for AcoreX. Provides a typed country dataset (names, regions, ISO codes, dialing codes, phone masks, validation regex, optional area codes, and flag sprite positions) plus a base64 flag sprite image used by phone and country pickers.",
+  "imports": [
+    "import { COUNTRIES, COUNTRIES_FLAG_BASE64, CountryItem } from '@acorex/core/constants';"
+  ],
+  "hints": [
+    {
+      "title": "Field naming",
+      "content": "In the dataset, <code>code</code> is the ISO 3166-1 alpha-2 identifier in lowercase (e.g. <code>'ir'</code>, <code>'us'</code>). The property <code>iso2code</code> stores the international dialing prefix (e.g. <code>'+98'</code>, <code>'+1'</code>).",
+      "status": "primary"
+    },
+    {
+      "title": "Built-in consumers",
+      "content": "The <code>ax-phone-box</code> component and <code>AXOverlayService</code>-based UI layers consume <code>COUNTRIES</code> and <code>COUNTRIES_FLAG_BASE64</code> internally. Import these constants directly when building custom country selectors, phone parsers, or validation logic.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "COUNTRIES",
+      "description": "Read-only array of all supported countries (version 1.2.0).",
+      "props": [
+        {
+          "name": "COUNTRIES",
+          "type": [{ "name": "CountryItem[]" }],
+          "description": "Complete country list exported from @acorex/core/constants."
+        }
+      ]
+    },
+    {
+      "title": "COUNTRIES_FLAG_BASE64",
+      "description": "Base64-encoded PNG sprite containing all country flags.",
+      "props": [
+        {
+          "name": "COUNTRIES_FLAG_BASE64",
+          "type": [{ "name": "string" }],
+          "description": "Data URL (data:image/png;base64,...) used as background-image together with bkPosition on each CountryItem."
+        }
+      ]
+    },
+    {
+      "title": "CountryItem",
+      "description": "Metadata for a single country, used for phone input, formatting, validation, and flag rendering.",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Official country name (e.g. 'Iran', 'Argentina')."
+        },
+        {
+          "name": "regions",
+          "type": [{ "name": "string[]" }],
+          "description": "Region labels such as 'europe', 'middle-east', 'south-america', 'asia', 'africa'."
+        },
+        {
+          "name": "code",
+          "type": [{ "name": "string" }],
+          "description": "ISO 3166-1 alpha-2 code in lowercase (e.g. 'ir', 'us', 'ar'). Used for filtering and lookup."
+        },
+        {
+          "name": "iso2code",
+          "type": [{ "name": "string" }],
+          "description": "International dialing prefix (e.g. '+98', '+54', '+1')."
+        },
+        {
+          "name": "format",
+          "type": [{ "name": "string" }],
+          "description": "National number display pattern where '0' represents a digit placeholder (e.g. '000 000 0000')."
+        },
+        {
+          "name": "mask",
+          "type": [{ "name": "string" }],
+          "description": "Input mask pattern where '#' represents a digit placeholder (e.g. '### ### ####')."
+        },
+        {
+          "name": "regex",
+          "type": [{ "name": "string" }],
+          "description": "Regular expression (as string) for validating the formatted national number."
+        },
+        {
+          "name": "orderPriority?",
+          "type": [{ "name": "number" }],
+          "description": "Optional sort priority. Lower values appear higher in sorted lists."
+        },
+        {
+          "name": "areaCodes?",
+          "type": [{ "name": "string[]" }],
+          "description": "Optional list of national area codes (e.g. ['11', '221'] for Argentina)."
+        },
+        {
+          "name": "bkPosition?",
+          "type": [{ "name": "{ x: string; y: string }" }],
+          "description": "CSS background-position coordinates for this country's flag inside COUNTRIES_FLAG_BASE64."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the constants package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/constants entry point exports a single curated dataset for countries worldwide. Each CountryItem includes everything needed to build phone inputs, country dropdowns, and flag icons without maintaining your own country list.\n\nCOUNTRIES is a static array — import it and filter or search at runtime. COUNTRIES_FLAG_BASE64 is a single sprite image; each country's bkPosition tells you where to clip the flag inside that sprite."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Import the static dataset and use CountryItem fields for lookup, phone input, validation, and flag rendering.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "constants-usage.ts",
+            "language": "typescript",
+            "content": "import {\n  COUNTRIES,\n  COUNTRIES_FLAG_BASE64,\n  CountryItem,\n} from '@acorex/core/constants';\n\n// Lookup by ISO alpha-2 code (lowercase)\nconst iran = COUNTRIES.find((c) => c.code === 'ir')!;\n\n// Phone input metadata\nconst dialCode = iran.iso2code;   // '+98'\nconst inputMask = iran.mask;      // '### ### ####'\nconst displayFormat = iran.format; // '000 000 0000'\n\n// Validate a formatted national number\nfunction isValidNumber(country: CountryItem, formatted: string): boolean {\n  return new RegExp(country.regex).test(formatted);\n}\n\nconst valid = isValidNumber(iran, '912 123 4567');\n\n// Filter countries for a dropdown\nconst favorites = COUNTRIES.filter((c) =>\n  ['ir', 'us', 'de'].includes(c.code),\n);\n\n// Flag sprite styling for custom UI\nconst flagStyle = {\n  backgroundImage: `url(${COUNTRIES_FLAG_BASE64})`,\n  backgroundPosition: `${iran.bkPosition!.x} ${iran.bkPosition!.y}`,\n  width: '25px',\n  height: '20px',\n  backgroundRepeat: 'no-repeat',\n};\n\nexport { iran, dialCode, inputMask, valid, favorites, flagStyle };\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Lookup and Filter",
+      "description": "Find countries by ISO code, region, or dialing prefix.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "lookup.ts",
+            "language": "typescript",
+            "content": "import { COUNTRIES, CountryItem } from '@acorex/core/constants';\n\n// Find by ISO alpha-2 code\nconst iran = COUNTRIES.find((c) => c.code === 'ir');\n\n// Filter by region\nconst europe = COUNTRIES.filter((c) => c.regions.includes('europe'));\nconst middleEast = COUNTRIES.filter((c) => c.regions.includes('middle-east'));\n\n// Build a map keyed by dialing code\nconst byDialCode = new Map<string, CountryItem[]>();\nfor (const country of COUNTRIES) {\n  const list = byDialCode.get(country.iso2code) ?? [];\n  list.push(country);\n  byDialCode.set(country.iso2code, list);\n}\n\n// Include / exclude specific countries (pattern used by ax-phone-box)\nconst included = ['ir', 'us', 'de'];\nconst allowed = COUNTRIES.filter((c) => included.includes(c.code));\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Sorting by Priority",
+      "description": "Sort countries for dropdowns using orderPriority.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "sort.ts",
+            "language": "typescript",
+            "content": "import { COUNTRIES, CountryItem } from '@acorex/core/constants';\n\nfunction sortCountries(list: CountryItem[]): CountryItem[] {\n  return [...list].sort((a, b) => {\n    const priorityA = a.orderPriority ?? Number.MAX_SAFE_INTEGER;\n    const priorityB = b.orderPriority ?? Number.MAX_SAFE_INTEGER;\n\n    if (priorityA !== priorityB) {\n      return priorityA - priorityB;\n    }\n\n    return a.name.localeCompare(b.name);\n  });\n}\n\nconst sorted = sortCountries(COUNTRIES);\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Phone Number Parsing",
+      "description": "Detect country from a full international number — the same approach used by AXPhoneBoxComponent.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "parse-phone.ts",
+            "language": "typescript",
+            "content": "import { COUNTRIES, CountryItem } from '@acorex/core/constants';\n\ninterface ParsedPhone {\n  country: CountryItem | null;\n  countryCode: string | null;\n  nationalNumber: string;\n}\n\nfunction parsePhoneNumber(fullNumber: string): ParsedPhone {\n  let normalized = fullNumber.replace(/[^0-9+]/g, '');\n\n  if (normalized.startsWith('00')) {\n    normalized = '+' + normalized.slice(2);\n  }\n\n  // Match longest dialing prefix first (+1268 before +1)\n  const sorted = [...COUNTRIES].sort(\n    (a, b) => b.iso2code.length - a.iso2code.length,\n  );\n\n  for (const country of sorted) {\n    if (normalized.startsWith(country.iso2code)) {\n      return {\n        country,\n        countryCode: country.iso2code,\n        nationalNumber: normalized.slice(country.iso2code.length),\n      };\n    }\n  }\n\n  return { country: null, countryCode: null, nationalNumber: normalized };\n}\n\n// Example\nparsePhoneNumber('+989121234567');\n// => { country: Iran, countryCode: '+98', nationalNumber: '9121234567' }\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Validation with regex",
+      "description": "Validate a formatted national number using the country regex pattern.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "validate.ts",
+            "language": "typescript",
+            "content": "import { COUNTRIES, CountryItem } from '@acorex/core/constants';\n\nfunction isValidNationalNumber(\n  country: CountryItem,\n  formattedNumber: string,\n): boolean {\n  if (!country.regex) return true;\n  return new RegExp(country.regex).test(formattedNumber);\n}\n\nconst iran = COUNTRIES.find((c) => c.code === 'ir')!;\n\nisValidNationalNumber(iran, '912 123 4567'); // depends on iran.regex\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Rendering Flags",
+      "description": "Display country flags using the sprite image and bkPosition.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "country-list.component.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { NgStyle } from '@angular/common';\nimport { COUNTRIES, COUNTRIES_FLAG_BASE64, CountryItem } from '@acorex/core/constants';\n\n@Component({\n  selector: 'app-country-list',\n  imports: [NgStyle],\n  template: `\n    @for (country of countries; track country.code) {\n      <div class=\"country-item\">\n        @if (country.bkPosition) {\n          <div\n            class=\"country-flag\"\n            [style.background-image]=\"'url(' + flagSprite + ')'\"\n            [style.background-position]=\"\n              country.bkPosition!.x + ' ' + country.bkPosition!.y\n            \"\n          ></div>\n        }\n        <span>{{ country.name }}</span>\n        <span>{{ country.iso2code }}</span>\n      </div>\n    }\n  `,\n  styles: `\n    .country-flag {\n      width: 25px;\n      height: 20px;\n      background-repeat: no-repeat;\n    }\n    .country-item {\n      display: flex;\n      align-items: center;\n      gap: 0.5rem;\n    }\n  `,\n})\nexport class CountryListComponent {\n  countries: CountryItem[] = COUNTRIES;\n  flagSprite = COUNTRIES_FLAG_BASE64;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Using with Select Box",
+      "description": "Map COUNTRIES to a data source for ax-select-box or similar components.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "select-box-data.ts",
+            "language": "typescript",
+            "content": "import { COUNTRIES } from '@acorex/core/constants';\n\ninterface SelectOption {\n  id: string;\n  text: string;\n}\n\nconst countryOptions: SelectOption[] = COUNTRIES.map((c) => ({\n  id: c.code,\n  text: `${c.name} (${c.iso2code})`,\n}));\n\n// Resolve selection back to CountryItem\nfunction getCountryByCode(code: string) {\n  return COUNTRIES.find((c) => c.code === code) ?? null;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Custom CountryItem",
+      "description": "Shape of a single country entry for reference or extension.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "country-item.ts",
+            "language": "typescript",
+            "content": "import { CountryItem } from '@acorex/core/constants';\n\nconst argentina: CountryItem = {\n  name: 'Argentina',\n  regions: ['america', 'south-america'],\n  code: 'ar',\n  iso2code: '+54',\n  format: '00 00000000',\n  mask: '## ########',\n  regex: '^\\\\d{2}\\\\s\\\\d{8}$',\n  orderPriority: 0,\n  areaCodes: ['11', '221', '223', '261'],\n  bkPosition: { x: '-288px', y: '-26px' },\n};\n\nconst iran: CountryItem = {\n  name: 'Iran',\n  regions: ['middle-east'],\n  code: 'ir',\n  iso2code: '+98',\n  format: '000 000 0000',\n  mask: '### ### ####',\n  regex: '^\\\\d{3}\\\\s\\\\d{3}\\\\s\\\\d{4}$',\n  bkPosition: { x: '-96px', y: '-170px' },\n};\n"
+          }
+        ]
+      }
+    }
+  ]
+}

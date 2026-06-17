@@ -1,0 +1,275 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Form",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/form--documentation"
+    }
+  ],
+  "description": "Form component serves as a powerful tool for creating dynamic and responsive forms in Angular applications. With support for reactive forms, customizable message styles, events like onValidate, dynamic updates with updateOnChange, and functions for form submission and clearing, it empowers developers to create user-friendly and interactive forms that meet diverse application requirements.",
+  "imports": ["import { AXFormModule } from '@acorex/components/form';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-form</code>",
+      "content": {
+        "type": "api",
+        "data": "form/usage"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Look",
+      "description": "A simple example of using <code>look</code> property",
+      "content": {
+        "type": "api",
+        "data": "form/look"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Label",
+      "description": "A simple example of using <code>labelMode</code> property",
+      "content": {
+        "type": "api",
+        "data": "form/label"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Message Style",
+      "description": "A simple example of using <code>messageStyle</code> property",
+      "content": {
+        "type": "api",
+        "data": "form/messageStyle"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Update On",
+      "description": "A simple example of using <code>updateOn</code> property",
+      "content": {
+        "type": "api",
+        "data": "form/updateOn"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Show Summary",
+      "description": "You can use <code>ax-validation-summary</code> to show summary of errors",
+      "content": {
+        "type": "api",
+        "data": "form/summary"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Validate",
+      "description": "You can access to rules and result of them with <code>validate</code> method",
+      "content": {
+        "type": "api",
+        "data": "form/validate"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormComponent",
+      "description": "Main form component for creating and managing forms",
+      "props": [
+        {
+          "name": "labelMode",
+          "type": [
+            {
+              "name": "AXLabelMode",
+              "link": "/en-US/docs/types/ax-label-mode"
+            }
+          ],
+          "description": "Specifies the mode of the label in the form field",
+          "default": "'static'"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Specifies the visual style of the form",
+          "default": "'none'"
+        },
+        {
+          "name": "messageStyle",
+          "type": [
+            {
+              "name": "AXFormMessageStyle",
+              "link": "/en-US/docs/types/ax-form-message-style"
+            }
+          ],
+          "description": "Determines the style of the message in the form field",
+          "default": "'bottom'"
+        },
+        {
+          "name": "updateOn",
+          "type": [
+            {
+              "name": "AXFormUpdateOn",
+              "link": "/en-US/docs/types/ax-form-update-on"
+            }
+          ],
+          "description": "Determines when the form should be updated",
+          "default": "'blur'"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValidate",
+          "description": "Emitted when the form is validated",
+          "type": [
+            {
+              "name": "AXFormValidationEvent",
+              "link": "/en-US/docs/events/ax-form-validation-event"
+            }
+          ]
+        },
+        {
+          "name": "updateOnChange",
+          "description": "Emitted when the form's update mode changes",
+          "type": [
+            {
+              "name": "AXFormUpdateOn",
+              "link": "/en-US/docs/types/ax-form-update-on"
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Validates the form fields.\n *\n * @param names - Optional array of field names to validate.\n * @returns Promise<AXValidationSummary> - Promise that resolves with validation results.\n */\nvalidate(names?: string[]): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Resets all form fields without clearing errors.\n *\n * @returns void - No return value. Form fields are reset to their initial values.\n */\nreset(): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors for all form fields.\n *\n * @returns void - No return value. All validation errors are cleared.\n */\nresetErrors(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXFormFieldComponent",
+      "description": "A container component for form fields that provides styling and structure",
+      "props": [
+        {
+          "name": "labelMode",
+          "type": [
+            {
+              "name": "AXLabelMode",
+              "link": "/en-US/docs/types/ax-label-mode"
+            }
+          ],
+          "description": "Specifies the mode of the label in the form field",
+          "default": "'static'"
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "EventEmitter<AXOptionChangedEvent>",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "EventEmitter<AXFocusEvent>",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "EventEmitter<AXFocusEvent>",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "EventEmitter<boolean>"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n * @returns void - No return value.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n *\n * @returns void - No return value.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n *\n * @returns void - No return value.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n * @returns void - No return value.\n */\nsetDisabledState(isDisabled: boolean): void"
+        }
+      ]
+    }
+  ]
+}

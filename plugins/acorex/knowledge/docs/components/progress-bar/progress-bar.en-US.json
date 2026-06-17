@@ -1,0 +1,163 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Progress Bar",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/progressbar--documentation"
+    }
+  ],
+  "description": "A component that displays the progress of a task or operation. It supports different types (determinate/indeterminate), colors, and can be used to show loading states or completion percentages.",
+  "imports": ["import { AXProgressBarComponent } from '@acorex/components/progress-bar';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-progress-bar</code>",
+      "content": {
+        "type": "api",
+        "data": "progress-bar/usage"
+      }
+    },
+    {
+      "title": "Using Decorators",
+      "description": "Use <code>ax-prefix</code> and <code>ax-suffix</code> to add content before/after the bar.",
+      "content": {
+        "type": "api",
+        "data": "progress-bar/using-decorators"
+      }
+    },
+    {
+      "title": "Mode",
+      "description": "Choose how the progress is displayed using the <code>mode</code> property.",
+      "content": {
+        "type": "api",
+        "data": "progress-bar/mode"
+      }
+    },
+    {
+      "title": "Custom height",
+      "description": "Set a custom height (in pixels) using the <code>height</code> property.",
+      "content": {
+        "type": "api",
+        "data": "progress-bar/custom-height"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXProgressBarComponent",
+      "description": "The main component for displaying progress.",
+      "props": [
+        {
+          "name": "progress",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The current progress value (0-100).",
+          "default": "0"
+        },
+        {
+          "name": "mode",
+          "type": [
+            {
+              "name": "'determinate'"
+            },
+            {
+              "name": "'indeterminate'"
+            },
+            {
+              "name": "'buffer'"
+            },
+            {
+              "name": "'query'"
+            }
+          ],
+          "description": "Specifies the progress display mode.",
+          "default": "'determinate'"
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Defines the color. Inherited from MXColorComponent.",
+          "default": "'default'"
+        },
+        {
+          "name": "height",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Height of the bar in pixels.",
+          "default": "8"
+        }
+      ],
+      "events": [
+        {
+          "name": "ValueChange",
+          "description": "Emitted when the progress value changes.",
+          "type": [
+            {
+              "name": "number"
+            }
+          ]
+        },
+        {
+          "name": "sizeChange",
+          "description": "Emitted when the size (height) changes.",
+          "type": [
+            {
+              "name": "number"
+            }
+          ]
+        },
+        {
+          "name": "colorChange",
+          "description": "Emitted when the color changes. Inherited from MXColorComponent.",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ]
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        }
+      ]
+    }
+  ]
+}

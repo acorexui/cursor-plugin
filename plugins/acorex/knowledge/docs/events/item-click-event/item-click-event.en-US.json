@@ -1,0 +1,31 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXItemClickEvent",
+  "description": "Emitted when an item is clicked, providing the item and its name.",
+  "imports": ["import { AXItemClickEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "The event class definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXItemClickEvent<T = any> extends AXClickEvent {\n  name?: string;\n  item: T;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXItemClickEvent",
+      "props": [
+        { "name": "name", "type": [{ "name": "string" }], "description": "The name of the clicked item." },
+        { "name": "item", "type": [{ "name": "any" }], "description": "The item that was clicked." }
+      ]
+    }
+  ]
+}

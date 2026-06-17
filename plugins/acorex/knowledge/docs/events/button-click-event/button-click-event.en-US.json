@@ -1,0 +1,28 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXButtonClickEvent",
+  "description": "Fires each time the user clicks the button element.",
+  "imports": ["import { AXButtonClickEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "The event class definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXButtonClickEvent extends AXClickEvent {\n  name: string;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXButtonClickEvent",
+      "props": [{ "name": "name", "type": [{ "name": "string" }], "description": "The name of the button." }]
+    }
+  ]
+}

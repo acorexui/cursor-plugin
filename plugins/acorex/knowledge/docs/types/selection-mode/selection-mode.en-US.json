@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Selection Mode",
+  "imports": ["import { AXSelectionMode } from '@acorex/cdk/common';"],
+  "description": "Type that defines how items can be selected within a component: single, multiple, or none.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Selection strategies supported by list-like components.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "selection-mode.ts",
+            "content": "type AXSelectionMode = 'single' | 'multiple' | 'none';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionMode",
+      "props": [
+        {
+          "name": "AXSelectionMode",
+          "type": [{ "name": "'single'" }, { "name": "'multiple'" }, { "name": "'none'" }],
+          "description": "Union type describing allowed selection strategies."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

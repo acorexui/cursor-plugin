@@ -1,0 +1,59 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXLengthValidationRule",
+  "imports": ["import { AXLengthValidationRule } from '@acorex/core/validation';"],
+  "description": "Validation rule class that validates the length of string values.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Length validation rule shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "length-validation-rule.ts",
+            "content": "class AXLengthValidationRule {\n  options: AXLengthValidationRuleOptions;\n  validate(value: string): AXValidationRuleResult<string>;\n  validateAsync(value: string): Promise<AXValidationRuleResult<string>>;\n  setMinLength(min: number): void;\n  setMaxLength(max: number): void;\n  setExactLength(len: number): void;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLengthValidationRule",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            { "name": "AXLengthValidationRuleOptions", "link": "/en-US/docs/types/length-validation-rule-options" }
+          ],
+          "description": "Configuration options for the length validation rule."
+        }
+      ],
+      "description": "Validation rule that checks if a string value has a specific length or falls within a length range.",
+      "methods": [
+        {
+          "name": "validate",
+          "description": "Validates that the string length matches the specified criteria."
+        },
+        {
+          "name": "validateAsync",
+          "description": "Asynchronously validates that the string length matches the specified criteria."
+        },
+        {
+          "name": "setMinLength",
+          "description": "Sets the minimum allowed length for validation."
+        },
+        {
+          "name": "setMaxLength",
+          "description": "Sets the maximum allowed length for validation."
+        },
+        {
+          "name": "setExactLength",
+          "description": "Sets the exact required length for validation."
+        }
+      ]
+    }
+  ]
+}

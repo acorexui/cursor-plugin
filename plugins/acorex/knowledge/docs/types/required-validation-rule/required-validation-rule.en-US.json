@@ -1,0 +1,47 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRequiredValidationRule",
+  "imports": ["import { AXRequiredValidationRule } from '@acorex/core/validation';"],
+  "description": "Validation rule class that ensures a field is not empty or null.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Required validation rule shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "required-validation-rule.ts",
+            "content": "class AXRequiredValidationRule {\n  options: AXRequiredValidationRuleOptions;\n  validate<T = unknown>(value: T): AXValidationRuleResult<T>;\n  validateAsync<T = unknown>(value: T): Promise<AXValidationRuleResult<T>>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRequiredValidationRule",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            { "name": "AXRequiredValidationRuleOptions", "link": "/en-US/docs/types/required-validation-rule-options" }
+          ],
+          "description": "Configuration options for the required validation rule."
+        }
+      ],
+      "description": "Validation rule that checks if a value is present and not empty, commonly used for required form fields.",
+      "methods": [
+        {
+          "name": "validate",
+          "description": "Validates that the value is not empty, null, or undefined."
+        },
+        {
+          "name": "validateAsync",
+          "description": "Asynchronously validates that the value is not empty, null, or undefined."
+        }
+      ]
+    }
+  ]
+}

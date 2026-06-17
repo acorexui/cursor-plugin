@@ -1,0 +1,96 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "List Navigation",
+  "description": "A directive that facilitates keyboard navigation within lists. The parent element uses the axListNavigation directive, and each child element uses the axListNavigationItem directive. Supports navigation through list items using Tab, Arrow Down, and Arrow Up keys, with both horizontal and vertical orientations. Features keyboard event handling and focus management for efficient list navigation.",
+  "imports": ["import { AXListNavigationModule } from '@acorex/cdk/list-navigation';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic usage of the list navigation directive with default settings.",
+      "content": {
+        "type": "api",
+        "data": "cdk/list-navigation/usage"
+      }
+    },
+    {
+      "title": "Orientation",
+      "description": "Change the navigation direction using the <code>orientation</code> property.",
+      "content": {
+        "type": "api",
+        "data": "cdk/list-navigation/orientation"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXListNavigationDirective",
+      "props": [
+        {
+          "name": "orientation",
+          "type": [{ "name": "'horizontal'" }, { "name": "'vertical'" }],
+          "default": "'vertical'",
+          "description": "Determines the navigation direction. In vertical mode, Arrow Up/Down navigate between items and Arrow Left navigates to parent. In horizontal mode, Arrow Left/Right navigate between items and Arrow Up navigates to parent."
+        },
+        {
+          "name": "activeIndex",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "Signal containing the index of the currently active navigation item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onNavigationChanged",
+          "type": [{ "name": "EventEmitter<{ sender: AXListNavigationDirective }>" }],
+          "description": "Emitted when navigation occurs using arrow keys or Tab."
+        },
+        {
+          "name": "onKeypress",
+          "type": [{ "name": "EventEmitter<AXHtmlEvent>", "link": "/en-US/docs/events/ax-html-event" }],
+          "description": "Emitted when any key is pressed on the navigation container."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Navigates to a specific navigation item and sets it as active.\n *\n * @param e - The navigation item directive to navigate to\n */\nnavigateTo(e: AXListNavigationItemDirective): void"
+        }
+      ]
+    },
+    {
+      "title": "AXListNavigationItemDirective",
+      "props": [
+        {
+          "name": "itemElem",
+          "type": [{ "name": "ElementRef" }],
+          "description": "Reference to the DOM element of this navigation item."
+        },
+        {
+          "name": "isActive",
+          "type": [{ "name": "Signal<boolean>" }],
+          "description": "Signal indicating whether this item is currently active/focused."
+        },
+        {
+          "name": "navigationItemKey",
+          "type": [{ "name": "number" }],
+          "description": "Unique identifier for this navigation item, automatically generated."
+        },
+        {
+          "name": "navigationParentItemKey",
+          "type": [{ "name": "Signal<number | null>" }],
+          "description": "Signal containing the key of the parent navigation item, if any."
+        },
+        {
+          "name": "index",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "Signal containing the index position of this item within the navigation list."
+        }
+      ],
+      "events": [
+        {
+          "name": "onKeypress",
+          "type": [{ "name": "EventEmitter<AXHtmlEvent>", "link": "/en-US/docs/events/ax-html-event" }],
+          "description": "Emitted when any key is pressed on this navigation item."
+        }
+      ]
+    }
+  ]
+}

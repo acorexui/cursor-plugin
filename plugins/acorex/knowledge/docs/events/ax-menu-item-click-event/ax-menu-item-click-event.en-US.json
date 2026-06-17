@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Menu Item Click Event",
+  "description": "Payload emitted when a menu item component is clicked.",
+  "imports": ["import { AXMenuItemClickEvent } from '@acorex/components/menu';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Type alias based on AXMenuItemClickBaseEvent.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "menu-item.component.ts",
+            "content": "export type AXMenuItemClickEvent = AXMenuItemClickBaseEvent<AXMenuItemComponent>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMenuItemClickEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXMenuItemComponent", "link": "/en-US/docs/components/menu" }],
+          "description": "The menu item component that emitted the event."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The underlying native mouse event. Inherited from NXClickEvent."
+        },
+        {
+          "name": "item",
+          "type": [{ "name": "{ name?: string; text: string; data?: any }" }],
+          "description": "The clicked item's payload (name, text, and optional data)."
+        },
+        {
+          "name": "canceled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the click action was canceled by a handler.",
+          "default": "false"
+        }
+      ]
+    }
+  ]
+}

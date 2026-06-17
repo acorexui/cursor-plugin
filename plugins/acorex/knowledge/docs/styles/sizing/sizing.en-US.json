@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Sizing",
+  "description": "Components and elements in ACoreX support sizing options, with size values including <code>ax-xs</code>, <code>ax-sm</code>, <code>ax-md</code>, <code>ax-lg</code>, and <code>ax-xl</code>.These values are defined as CSS variables and applied through a simple formula that affects the height or dimensions of a component or element.",
+  "sections": [
+    {
+      "title": "How it works",
+      "description": "When you add the theme to your project, a variable called --ax-sys-size-base is created at the root level of your application. You can set its default value yourself, but in the default ACoreX theme, it is set to <code>2.5rem</code>.When we developed the components and elements, we used this variable along with the default body font size to define dimensions. This allows you to easily adjust sizes across your application by changing a single variable.",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "default.scss",
+            "language": "scss",
+            "content": ":root,\n.ax-light{\n\t--ax-sys-body-font-size:1rem;\n\t--ax-sys-size-base:2.5rem;\n\t--ax-sys-border-radius:0.5rem;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Implementation example",
+      "description": "For example, if you want to change the size of a button or the overall size of a section, you can use the following approaches.Both of these methods will adjust the button size to <code>sm</code>.",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "app.component.html",
+            "language": "html",
+            "content": "<ax-button text='Click Me!' class='ax-sm'></ax-button>\n<!-- or -->\n<div class='ax-sm'>\n<ax-button text='Get Started'></ax-button>\n<ax-button text='Components'></ax-button>\n</div>"
+          }
+        ]
+      }
+    }
+  ]
+}

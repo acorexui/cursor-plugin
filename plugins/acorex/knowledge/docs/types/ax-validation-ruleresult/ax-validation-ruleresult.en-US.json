@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXValidationRuleResult",
+  "imports": ["import { AXValidationRuleResult } from '@acorex/core/validation';"],
+  "description": "The AXValidationRuleResult type",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXValidationRuleResult type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-validation-ruleresult.ts",
+            "content": "export interface AXValidationRuleResult { rule: string; value?: unknown; message?: string | null; result: boolean; [key: string]: unknown; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValidationRuleResult",
+      "props": [
+        { "name": "rule", "type": [{ "name": "string" }], "description": "Rule name that produced this result." },
+        { "name": "value", "type": [{ "name": "unknown" }], "description": "Original validated value." },
+        {
+          "name": "message",
+          "type": [{ "name": "string" }],
+          "description": "Localized error message or null when valid."
+        },
+        { "name": "result", "type": [{ "name": "boolean" }], "description": "True when value passed the rule." }
+      ]
+    }
+  ]
+}

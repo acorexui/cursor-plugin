@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTreeViewLook",
+  "description": "Defines the visual appearance style for tree view components.",
+  "imports": ["import { AXTreeViewLook } from '@acorex/components/tree-view';"],
+  "types": [
+    {
+      "title": "AXTreeViewLook",
+      "props": [
+        {
+          "name": "AXTreeViewLook",
+          "type": [{ "name": "'with-line'" }, { "name": "'defult'" }],
+          "description": "Visual appearance options for tree view components."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript definition of the tree view look type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "tree-view.class.ts",
+            "content": "export type AXTreeViewLook = 'with-line' | 'defult';"
+          }
+        ]
+      }
+    }
+  ]
+}

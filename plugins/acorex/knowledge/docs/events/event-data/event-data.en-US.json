@@ -1,0 +1,31 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXEventData",
+  "description": "Data structure for AX events, containing type and optional payload.",
+  "imports": ["import { AXEventData } from '@acorex/core/events';"],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface for event data payloads.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "event-data.ts",
+            "language": "ts",
+            "content": "interface AXEventData<T = any> {\n  type: string;\n  payload?: T;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXEventData",
+      "props": [
+        { "name": "type", "type": [{ "name": "string" }], "description": "The type of the event." },
+        { "name": "payload", "type": [{ "name": "any" }], "description": "Optional payload for the event." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet Event",
+  "imports": ["import { AXActionSheetEvent } from '@acorex/components/action-sheet';"],
+  "description": "Represents the event payload when an action sheet is interacted with or closed. This interface defines the structure for action sheet lifecycle events such as open, close, drag start, drag end, and full screen transitions.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Shape of the action sheet event payload.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-action-sheet-event.ts",
+            "content": "interface AXActionSheetEvent {\n  dialogRef: any;\n  nativeEvent?: Event;\n  isUserInteraction: boolean;\n  data: {\n    state: 'open' | 'close' | 'dragStart' | 'dragEnd' | 'fullScreen' | 'normalSize';\n  };\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXActionSheetEvent",
+      "props": [
+        { "name": "dialogRef", "type": [{ "name": "any" }], "description": "Reference to the dialog instance." },
+        { "name": "nativeEvent", "type": [{ "name": "Event" }], "description": "Underlying native event (optional)." },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "True if triggered by user interaction."
+        },
+        {
+          "name": "data.state",
+          "type": [
+            { "name": "'open'" },
+            { "name": "'close'" },
+            { "name": "'dragStart'" },
+            { "name": "'dragEnd'" },
+            { "name": "'fullScreen'" },
+            { "name": "'normalSize'" }
+          ],
+          "description": "Action sheet lifecycle state."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

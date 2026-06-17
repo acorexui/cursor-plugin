@@ -1,0 +1,608 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Date & Time Picker",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/datetimepicker--documentation"
+    }
+  ],
+  "description": "Date & Time Picker allows users to select date and time through an intuitive input field and visual calendar. It supports disabled and readonly states and works with different calendar types, including gregorian and solar-hijri, offering a flexible and user-friendly selection experience.",
+  "imports": [
+    "import { AXDateTimePickerComponent } from '@acorex/components/datetime-picker';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple usage of <code>ax-datetime-picker</code>",
+      "content": {
+        "type": "api",
+        "data": "date-time-picker/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Picker",
+      "description": "Demonstrates picker modes: 'date', 'time', and 'datetime'.",
+      "content": {
+        "type": "api",
+        "data": "date-time-picker/picker"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Calendar Type",
+      "description": "Demonstrates switching calendar system between 'gregorian' and 'solar-hijri'.",
+      "content": {
+        "type": "api",
+        "data": "date-time-picker/type"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "States",
+      "description": "Demonstrates disabled, readonly, and validation states of the component.",
+      "content": {
+        "type": "api",
+        "data": "date-time-picker/states"
+      },
+      "height": "700px"
+    },
+    {
+      "title": "Constraints",
+      "description": "Demonstrates date range constraints, disabled dates, and holiday dates.",
+      "content": {
+        "type": "api",
+        "data": "date-time-picker/constraints"
+      },
+      "height": "700px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDateTimePickerComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "ID attribute for the component host. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Sets the component to readonly mode. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the input field."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Current value of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Visual state of the component (e.g., error, success). Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name attribute for the input element. Inherited from MXValueComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component value has been modified. Inherited from MXValueComponent."
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has required validation rules. Inherited from MXValueComponent."
+        },
+        {
+          "name": "depth",
+          "type": [
+            {
+              "name": "AXCalendarViewDepth",
+              "link": "/en-US/docs/types/ax-calendar-view-depth"
+            }
+          ],
+          "default": "'day'",
+          "description": "Depth of the calendar view. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "interface",
+          "type": [
+            {
+              "name": "'calendar'"
+            },
+            {
+              "name": "'picker'"
+            }
+          ],
+          "default": "'calendar'",
+          "description": "Interface type for the component. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "activeView",
+          "type": [
+            {
+              "name": "AXCalendarViewType",
+              "link": "/en-US/docs/types/ax-calendar-view-depth"
+            }
+          ],
+          "default": "'day'",
+          "description": "Active view of the calendar. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "count",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "1",
+          "description": "Number of calendar views to display. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "minValue",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Minimum selectable date/time value. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "maxValue",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Maximum selectable date/time value. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "disabledDates",
+          "type": [
+            {
+              "name": "AXCalendarDisabledDates",
+              "link": "/en-US/docs/types/ax-calendar-disabled-dates"
+            }
+          ],
+          "description": "Dates to disable in the calendar. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "holidayDates",
+          "type": [
+            {
+              "name": "AXCalendarHolidayDates",
+              "link": "/en-US/docs/types/ax-calendar-holiday-dates"
+            }
+          ],
+          "description": "Holiday dates to highlight in the calendar. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "cellClass",
+          "type": [
+            {
+              "name": "AXCalendarCellCssClass",
+              "link": "/en-US/docs/types/ax-calendar-cell-css-class"
+            }
+          ],
+          "description": "Custom CSS class or resolver for calendar cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "cellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Deprecated. Use day/month/year cell templates on the calendar instead. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "dayCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering day cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "monthCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering month cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "yearCellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering year cells. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "showNavigation",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Show navigation controls in the calendar. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Deprecated: use 'calendar' input instead. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar system to use for parsing/formatting (e.g., 'gregorian', 'solar-hijri')."
+        },
+        {
+          "name": "picker",
+          "type": [
+            {
+              "name": "'date'"
+            },
+            {
+              "name": "'time'"
+            },
+            {
+              "name": "'datetime'"
+            }
+          ],
+          "default": "'datetime'",
+          "description": "Picker mode controlling available parts."
+        },
+        {
+          "name": "format",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Deprecated: prefer configuring locale profile formats. Used to override display format."
+        },
+        {
+          "name": "currentTimeButton",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows a button to quickly set to the current time (configurable via AXDateTimePickerConfig)."
+        },
+        {
+          "name": "weekend",
+          "type": [
+            {
+              "name": "number[]"
+            }
+          ],
+          "default": "[]",
+          "description": "Array of weekend day numbers (0-6, where 0 is Sunday). Used to determine which days are considered weekends for styling and behavior."
+        },
+        {
+          "name": "weekdays",
+          "type": [
+            {
+              "name": "number[]"
+            }
+          ],
+          "default": "[]",
+          "description": "Array of working day numbers (0-6, where 0 is Sunday). If not provided, uses the calendar system's default weekdays."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the input gains focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the input loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "Date | null"
+            }
+          ],
+          "description": "Emitted when the value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<Date>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Detailed value change event. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]"
+            }
+          ],
+          "description": "Emitted when validation rules change. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the component is clicked."
+        },
+        {
+          "name": "depthChange",
+          "type": [
+            {
+              "name": "AXCalendarViewDepth",
+              "link": "/en-US/docs/types/ax-calendar-view-depth"
+            }
+          ],
+          "description": "Emitted when the calendar depth changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "typeChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the calendar system changes. Inherited from MXCalendarBaseComponent. Deprecated."
+        },
+        {
+          "name": "activeViewChange",
+          "type": [
+            {
+              "name": "AXCalendarViewType",
+              "link": "/en-US/docs/types/ax-calendar-view-type"
+            }
+          ],
+          "description": "Emitted when the active view changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "minValueChange",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Emitted when the minimum value changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "maxValueChange",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Emitted when the maximum value changes. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "disabledDatesChange",
+          "type": [
+            {
+              "name": "AXCalendarDisabledDates",
+              "link": "/en-US/docs/types/ax-calendar-disabled-dates"
+            }
+          ],
+          "description": "Emitted when the disabled dates change. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "holidayDatesChange",
+          "type": [
+            {
+              "name": "AXCalendarHolidayDates",
+              "link": "/en-US/docs/types/ax-calendar-holiday-dates"
+            }
+          ],
+          "description": "Emitted when the holiday dates change. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "onNavigate",
+          "type": [
+            {
+              "name": "AXCalendarNavigateEvent",
+              "link": "/en-US/docs/events/ax-calendar-navigate-event"
+            }
+          ],
+          "description": "Emitted when the calendar is navigated. Inherited from MXCalendarBaseComponent."
+        },
+        {
+          "name": "onSlotClick",
+          "type": [
+            {
+              "name": "AXCalendarSlotClick",
+              "link": "/en-US/docs/events/ax-calendar-slot-click"
+            }
+          ],
+          "description": "Emitted when a calendar slot is clicked. Inherited from MXCalendarBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * Inherited from MXBaseComponent.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * Inherited from MXBaseComponent.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n *\n * Inherited from MXInteractiveComponent.\n *\n * @returns void - Component receives focus.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n *\n * Inherited from MXInteractiveComponent.\n *\n * @returns void - Component loses focus.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * Inherited from MXInteractiveComponent.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * Inherited from MXInteractiveComponent.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * Inherited from MXValueComponent.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: Date, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n *\n * Inherited from MXValueComponent.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n *\n * Inherited from MXValueComponent.\n *\n * @returns void - Validation errors are cleared.\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * Inherited from MXValueComponent.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nvalidate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * Inherited from MXValueComponent.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * Inherited from MXValueComponent.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Renders the calendar view.\n *\n * Inherited from MXCalendarBaseComponent.\n *\n * @returns void - Calendar view is rendered.\n */\nrender(): void"
+        }
+      ]
+    }
+  ]
+}

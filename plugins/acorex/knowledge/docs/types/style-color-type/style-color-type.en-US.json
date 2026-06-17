@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStyleColorType",
+  "description": "Predefined color schemes available for styling components.",
+  "imports": ["import { AXStyleColorType } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the color type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "styles.class.ts",
+            "content": "export type AXStyleColorType = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'default';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXStyleColorType",
+      "props": [
+        {
+          "name": "AXStyleColorType",
+          "type": [
+            { "name": "'primary'" },
+            { "name": "'secondary'" },
+            { "name": "'success'" },
+            { "name": "'warning'" },
+            { "name": "'danger'" },
+            { "name": "'default'" }
+          ],
+          "description": "Color options for components."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSideMenuItemClickEvent",
+  "description": "Click event emitted by a side menu item.",
+  "imports": ["import { AXSideMenuItemClickEvent } from '@acorex/components/side-menu';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Shape of side menu item click event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-side-menu-item-click-event.ts",
+            "language": "ts",
+            "content": "export class AXSideMenuItemClickEvent extends AXClickEvent {\n  handled = false;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSideMenuItemClickEvent",
+      "props": [
+        { "name": "handled", "type": [{ "name": "boolean" }], "description": "Mark as true to prevent default toggle behavior.", "default": "false" },
+        { "name": "nativeEvent", "type": [{ "name": "MouseEvent" }], "description": "Underlying native event. Inherited from NXNativeEvent." },
+        { "name": "sender", "type": [{ "name": "AXSideMenuItemComponent" }], "description": "Component that emitted the event. Inherited from NXEvent." }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

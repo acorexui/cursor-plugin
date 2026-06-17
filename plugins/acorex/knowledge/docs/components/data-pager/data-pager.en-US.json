@@ -1,0 +1,298 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Pager",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/datapager--documentation"
+    }
+  ],
+  "description": "The Data Pager component provides a flexible and customizable pagination UI for navigating large datasets. It supports full, compact, and custom display modes, and offers numeric selectors, page size dropdowns, navigation buttons, and info display.",
+  "imports": ["import { AXDataPagerModule } from '@acorex/components/data-pager';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-data-pager</code> to paginate data.",
+      "height": "480px",
+      "content": {
+        "type": "api",
+        "data": "data-pager/usage"
+      }
+    },
+    {
+      "title": "Compact Interaction",
+      "description": "Demonstrates the compact display mode with interactive controls.",
+      "content": {
+        "type": "api",
+        "data": "data-pager/compact-interaction"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDataPagerComponent",
+      "props": [
+        {
+          "name": "total",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Total number of items."
+        },
+        {
+          "name": "displayMode",
+          "type": [
+            {
+              "name": "AXDataPagerMode",
+              "link": "/en-US/docs/types/ax-data-pager-mode"
+            }
+          ],
+          "description": "Display mode: 'full', 'compact', or 'custom'."
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Show loading state."
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "10",
+          "description": "Number of items per page."
+        },
+        {
+          "name": "totalPages",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Total number of pages (read-only)."
+        },
+        {
+          "name": "displayInfo",
+          "type": [
+            {
+              "name": "AXDataPagerData",
+              "link": "/en-US/docs/types/ax-data-pager-data"
+            }
+          ],
+          "description": "Current display information including page, range, and pagination details (read-only)."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Current page number. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name attribute for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component is disabled. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component is readonly. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/ax-component-state"
+            }
+          ],
+          "description": "Current state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component has been touched by the user. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onChanged",
+          "type": [
+            {
+              "name": "AXDataPagerChangedEvent",
+              "link": "/en-US/docs/events/data-pager-changed-event"
+            }
+          ],
+          "description": "Emitted when the pager state changes."
+        },
+        {
+          "name": "displayModeChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the display mode changes."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent",
+              "link": "/en-US/docs/events/ax-value-changed-event"
+            }
+          ],
+          "description": "Emitted when the component value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emitted when the component value changes (deprecated, use onValueChanged instead). Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/ax-component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/ax-focus-event"
+            }
+          ],
+          "description": "Emitted when the component receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/ax-focus-event"
+            }
+          ],
+          "description": "Emitted when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/ax-option-changed-event"
+            }
+          ],
+          "description": "Emitted when a component option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Navigates to the next page, or to the last page if on the final page.\n *\n * @returns void - No return value. The component navigates to the next available page.\n */\ngoNextPage(): void"
+        },
+        {
+          "content": "/**\n * Navigates to the previous page, or to the first page if on the initial page.\n *\n * @returns void - No return value. The component navigates to the previous available page.\n */\ngoPrevPage(): void"
+        },
+        {
+          "content": "/**\n * Navigates to the first page.\n *\n * @returns void - No return value. The component navigates to the first page.\n */\ngoFirstPage(): void"
+        },
+        {
+          "content": "/**\n * Navigates to the last page.\n *\n * @returns void - No return value. The component navigates to the final page.\n */\ngoLastPage(): void"
+        },
+        {
+          "content": "/**\n * Navigates to a specified page.\n *\n * @param page - The page number to navigate to.\n * @returns void - No return value. The component navigates to the specified page.\n */\ngoToPage(page: number): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDataPagerInfoComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The text to be displayed in the data pager info component."
+        }
+      ]
+    },
+    {
+      "title": "AXDataPagerPageSizesComponent",
+      "props": [
+        {
+          "name": "sizes",
+          "type": [
+            {
+              "name": "number[]"
+            }
+          ],
+          "default": "[5, 10, 20, 50, 100]",
+          "description": "Gets the list of page sizes available for selection."
+        }
+      ]
+    }
+  ]
+}

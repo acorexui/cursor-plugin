@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXValidationService } from '@acorex/core/validation';"],
+  "title": "AXValidationService",
+  "description": "Service class for managing validation rules, executing validations, and providing validation results.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Actual public API from source (trimmed).",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "validation-service.ts",
+            "content": "export class AXValidationService {\n  validate(ruleName: string, value: unknown, options?: AXValidationRuleOptions): Promise<AXValidationRuleResult>;\n  ruleFor(value: unknown): AXValidationRuleChain;\n}\nexport class AXValidationRuleChain {\n  addRule(name: string, options?: AXValidationRuleOptions): AXValidationRuleChain;\n  validate(): Promise<AXValidationSummary>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValidationService",
+      "props": [],
+      "description": "Service to execute validation by rule name and to build validation chains.",
+      "methods": [
+        {
+          "name": "validate(ruleName: string, value: unknown, options?: AXValidationRuleOptions)",
+          "description": "Validates a value using the specified rule. Returns an AXValidationRuleResult.",
+          "returnType": [
+            { "name": "Promise<AXValidationRuleResult>", "link": "/en-US/docs/types/validation-rule-result" }
+          ]
+        },
+        {
+          "name": "ruleFor(value: unknown)",
+          "description": "Starts a rule chain for the given value. Returns AXValidationRuleChain.",
+          "returnType": [{ "name": "AXValidationRuleChain" }]
+        }
+      ]
+    }
+  ]
+}

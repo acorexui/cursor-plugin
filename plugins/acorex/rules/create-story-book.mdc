@@ -1,0 +1,355 @@
+---
+description: Create Storybook stories for ACoreX Angular components — argTypes, imports, showcase templates, and validation checklist.
+alwaysApply: false
+---
+---
+alwaysApply: true
+---
+
+## 📝 دستورالعمل تولید مستندات JSON برای کامپوننت‌های ACoreX
+
+این یک نمونه **قانون (Rule)** است که جزئیات کامل و سخت‌گیرانه‌ای را برای تولید فایل‌های مستندات JSON برای کامپوننت‌های Angular در فضای کاری ACoreX فراهم می‌کند. این دستورالعمل‌ها برای اطمینان از سازگاری، کامل بودن، و پشتیبانی دوزبانه (فارسی و انگلیسی) از مستندات کامپوننت‌ها تدوین شده‌اند.
+
+---
+
+### Rule Name: `component-docs-rules`
+
+### Description:
+
+This rule describes how to generate JSON documentation files for Angular components in this workspace. It ensures consistency, completeness, and bilingual support (English and Farsi) for all component documentation by strictly analyzing the code, including Mixin inheritance, and verifying design tokens against SCSS source files.
+
+---
+
+## 0\. 🏛️ Schema Adherence (پایبندی به ساختار)
+
+- **Crucially, all generated JSON documentation files MUST strictly adhere to the schema defined in `apps/documentation/docs/document.schema.json`.** This schema dictates the structure and valid properties for the documentation.
+- **Reference:** `"$schema": "../../document.schema.json"` (Must be included in both JSON files).
+
+---
+
+## 1\. 📂 File Structure & Naming (ساختار فایل و نام‌گذاری)
+
+- Each component must have two JSON documentation files:
+  - `component-name.en-US.json`
+  - `component-name.fa-IR.json`
+- **Location:** Place these files in the correct category folder based on the package structure:
+  - **Components:** `apps/documentation/docs/components/component-name/`
+  - **CDK/Directives:** `apps/documentation/docs/cdk/cdk-name/`
+  - **Core:** `apps/documentation/docs/core/core-name/`
+  - **Styles:** `apps/documentation/docs/styles/style-name/`
+  - **Charts:** `apps/documentation/docs/charts/chart-name/`
+
+---
+
+## 2\. 📝 Title & Description (عنوان و توضیحات)
+
+- **Farsi Translation (CRITICAL):** **Translate the title and description accurately to Farsi. Do NOT use English text or placeholders like "Translate to Farsi." The content must be in Farsi.**
+- **Missing Descriptions:** If a property or event lacks a description, generate a simple, sensible one based on its name (e.g., `"isLoading": "Indicates if the component is in a loading state."`). If generating a sensible description is not possible, use `"Description needed."` as the value.
+- **`types[0].title`:** Set this to the **exact exported component class name** (e.g., `AXButtonComponent`), not a human label like "Button API".
+
+---
+
+## 3\. 📦 Imports (واردات)
+
+- **Use the standalone component import, not the module:**
+  - Example: `"imports": ["import { AXComponentNameComponent } from '@acorex/components/component-name';"]`
+  - **CRITICAL:** Do NOT include imports for interfaces or types that are only used internally within the component. Only import the main component classes that users will import.
+
+---
+
+## 4\. 🗂️ Sections (بخش‌ها)
+
+- Populate the `sections` array based on the component's usage examples and demonstration cases, typically found in its corresponding `.page.html` file (e.g., `apps/showcase/src/app/cases/component-name/component-name.page.html`).
+- **Minimum Requirement:** Include a "Usage" section:
+  ```json
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-component-name</code>",
+      "content": {
+        "type": "api",
+        "data": "component-name/usage"
+      }
+    }
+  ]
+  ```
+
+---
+
+## 5\. 🧬 Inheritance Analysis (تحلیل وراثت) - CRITICAL
+
+**STRICT REQUIREMENT:** You MUST analyze the component's inheritance chain, including Mixins (Polytype `extends classes(...)`), to identify all inherited properties, events, and methods, and apply overrides/defaults exactly as implemented in code.
+
+### 5.1 Investigation and Extraction
+
+- **Examine `extends classes(...)`:** Trace the inheritance hierarchy recursively through all listed Mixin and Base Classes (e.g., `MXInputBaseValueComponent`, `MXLookComponent`).
+- **Identify All Members:** Include base events (e.g., `onOptionChanged`), interaction events (e.g., `onFocus`), and look/color props (`look`, `color`) when present in the chain.
+- **Document Inheritance:** Add "Inherited from [ParentClass]" to the `description` of all inherited members.
+- **Default Values:** Only document defaults that are defined in code (in the component or inherited). Do not infer defaults from demos.
+
+### 5.2 Documentation Requirements
+
+| Member Type    | Requirement                                                                                                                                           |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Properties** | Must include "Inherited from [ParentClass]" in description.                                                                                           |
+| **Events**     | Must include "Inherited from [ParentClass]" in description.                                                                                           |
+| **Methods**    | Must include inheritance information in the JSDoc `content`.                                                                                          |
+| **Accessors**  | **STRICTLY DO NOT** include public getters/setters in the `methods` array. Document them as properties in `props` if they are part of the public API. |
+
+---
+
+## 6\. 🛠️ Types (Properties, Events, Methods)
+
+### 6.1 Type Representation Principle
+
+- **Union Types:** If a type is a union (e.g., `string | number`), each member is a **separate `DocType` object** in the `type` array. The `|` symbol is NOT included as a `DocType` object.
+  - Example: `[{ "name": "string" }, { "name": "number" }]`
+- **Complex Types/Generics:** Represented as a **single `DocType` object** with the full type string as its `name`.
+  - Example: `[{ "name": "Map<string, number>" }]`
+
+### 6.2 Property (`props`) and Event (`events`) Guidelines
+
+- **Inclusions:** Document all `@Input()` properties, Angular Signals Inputs/Models, `@Output()` events, and **ALL inherited public properties/events**.
+- **Critical Linking:** If a type refers to another **documented** interface, class, or type (from other component, event, or shared types docs), the `DocType` object for that type **MUST** include a `link` property.
+  - **Link Format (STRICT):** Use URL paths, NOT file paths.
+  - **Example:** `"link": "/en-US/docs/events/ax-action-sheet-event"`
+- **Default Values:** Include `default: string` only when actually set in code (including inherited defaults).
+
+### 6.3 Methods (`methods`) Guidelines
+
+- **Inclusions:** Document all public methods (not `private` or `protected`).
+- **Content:** The `content: string` property must contain the **full JSDoc comment and method signature** for code rendering.
+- **JSDoc Standards:** Include `@param` and `@returns` tags. **Exclude `@example` tags** from the JSON output.
+
+### 6.4 Empty States Policy (STRICT)
+
+- Do not include empty arrays in `types` entries. If `props`, `events`, or `methods` would be empty, **omit that property entirely** from the JSON.
+- If a `types` item would only contain a `title` and no `props`, `events`, or `methods`, **omit that entire item** from `types`.
+
+---
+
+## 7\. 🎨 Design Tokens (CSS Variables) - CRITICAL VERIFICATION
+
+You MUST document all CSS custom properties used by the component and **verify them against the actual SCSS source files**.
+
+### 7.1 SCSS Verification (Source of Truth)
+
+- **Verification:** Examine the component's SCSS files (`_base.scss`, `color-looks/`, `_index.scss`) to confirm the existence and exact values of all tokens.
+- **Accuracy Check:** Cross-reference documented tokens with the SCSS code to ensure:
+  - All documented tokens exist in SCSS.
+  - Token values match exactly (e.g., `var(--ax-sys-color-default-500)`).
+
+### 7.2 Documentation Strategy (STRICT)
+
+- **Default State Analysis:** **ALWAYS** document the **actual default values** used when the component is rendered with its default state (typically `color='default'` and `look='solid'`).
+- **No SCSS Syntax:** **NEVER** document SCSS syntax like `#{$name}` or SCSS variables. Use the final CSS Custom Property syntax.
+  - **WRONG:** `"value": "var(--ax-sys-color-#{$name}-lightest-surface)"` ❌
+  - **RIGHT:** `"value": "var(--ax-sys-color-lightest-surface)"` ✅
+- **No Generic Placeholders:** Values must be specific, not `{color}`, `{look}`, etc.
+- **Dark Mode Note:** Include a note in the `description` if the token value changes in dark mode.
+
+| Key                   | Value                                                                                                                                                                                        | Description |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------- |
+| `key: string`         | The CSS Custom Property name (e.g., `--ax-comp-button-bg-color`).                                                                                                                            |
+| `value: string`       | The **actual CSS value** from the default SCSS file (e.g., `var(--ax-sys-color-lightest-surface)`).                                                                                          |
+| `description: string` | Clear explanation, including its default context (e.g., "Background color of the button. Default value for ax-default class. Changes to var(--ax-sys-color-darkest-surface) in dark mode."). |
+
+---
+
+## 8\. 🔄 Code-Documentation Synchronization (CRITICAL)
+
+When updating documentation, you MUST also update the actual component code to maintain synchronization:
+
+1.  **JSDoc Comments:** Update method JSDoc comments to match the documentation.
+2.  **Remove `@ignore` Tags:** Remove `@ignore` tags from methods that should be documented.
+3.  **Type Consistency:** Ensure property and event types in the component match the documented types.
+4.  **Inheritance Documentation:** Ensure inheritance notes are added to inherited members.
+
+---
+
+## 9\. 🔗 Link Format Specification (URL Paths)
+
+The `link` property in `DocType` objects MUST use URL paths, NOT file paths.
+
+- **Correct Format:** `/en-US/docs/events/event-name` or `/fa-IR/docs/types/type-name`
+- **Do NOT Use:** `../../events/event-name/event-name.en-US.json`
+- **Language-Specific:** Use `/en-US/docs/` for English and `/fa-IR/docs/` for Farsi documents.
+
+---
+
+## ✅ 10. Validation Checklist (Before Finalizing)
+
+- [ ] **Inheritance Analysis Complete**: All inherited members are documented with inheritance notes.
+- [ ] **Inputs/Outputs/Methods Documented**: All public members are documented completely and correctly.
+- [ ] **Synchronization**: Component code JSDoc comments match the documentation exactly.
+- [ ] **Design Tokens Verified**: Tokens are verified against SCSS, show actual default values, and contain no SCSS syntax.
+- [ ] **Bilingual Consistency**: Both English and Farsi versions are complete, consistent, and correctly translated.
+- [ ] **Link Format Correct**: All `link` properties use URL paths (`/en-US/docs/...`).
+- [ ] **No Empty Structures**: No empty `props`, `events`, or `methods` arrays exist.
+- [ ] **Accessors Omitted**: No getters/setters are documented under `methods`.
+
+---
+
+## 11. 📚 Storybook Stories Generation (تولید Storybook Stories)
+
+This section provides guidelines for creating Storybook stories for Angular components in the ACoreX workspace.
+
+### 11.1 File Structure & Naming
+
+- Each component should have a `.stories.ts` file in the same directory as the component:
+  - Location: `packages/components/component-name/src/lib/component-name.component.stories.ts`
+- **Title Format:** Use a human-readable title (e.g., `'TagBox'` instead of `'AXTagBoxComponent'`)
+- **Tags:** Always include `tags: ['autodocs']` in the meta configuration
+
+### 11.2 Import Guidelines (CRITICAL)
+
+- **Decorator Components:** When importing decorator components (like clear button), use the correct class name:
+  - ✅ **CORRECT:** `import { AXDecoratorClearButtonComponent } from '@acorex/components/decorators';`
+  - ❌ **WRONG:** `import { AXClearButtonComponent } from '@acorex/components/decorators';`
+- **Always verify exports:** Check the actual export name in the package's `index.ts` or component file before importing.
+
+#### 11.2.1 Child Components Import (CRITICAL)
+
+- **Child components must be imported from their own files, NOT from the parent component file:**
+  - ✅ **CORRECT:** Import child components from their individual files:
+    ```typescript
+    import { AXColorPaletteComponent } from './color-palette.component';
+    import { AXColorPaletteInputComponent } from './color-palette-input.component';
+    import { AXColorPalettePickerComponent } from './color-palette-picker.component';
+    import { AXColorPalettePreviewComponent } from './color-palette-preview.component';
+    import { AXColorPaletteSwatchesComponent } from './color-palette-swatches.component';
+    ```
+  - ❌ **WRONG:** Trying to import child components from the parent component file:
+    ```typescript
+    import {
+      AXColorPaletteComponent,
+      AXColorPaletteInputComponent, // ❌ This will cause an error
+      AXColorPalettePickerComponent, // ❌ This will cause an error
+    } from './color-palette.component';
+    ```
+- **Why:** Child components are typically not exported from the parent component file. They are separate standalone components that should be imported individually.
+- **Verification:** If you get an error like `'./component-name.component' has no exported member 'ChildComponentName'`, import the child component from its own file instead.
+
+### 11.3 ArgTypes Configuration
+
+#### 11.3.1 Component Properties Only
+
+- **STRICT RULE:** Only include properties that exist in the component's TypeScript type definition.
+- **Verification:** Check the component class and its inheritance chain to ensure properties are actually defined.
+- **Common Mistakes to Avoid:**
+  - ❌ **WRONG:** Including `allowNull` if it's only in the `inputs` array but not defined as a property/getter/setter
+  - ❌ **WRONG:** Including `type` if it's not a defined property in the component class
+  - ✅ **CORRECT:** Only include properties that are actually accessible via TypeScript types
+
+#### 11.3.2 Template-Level Properties
+
+- **Definition:** Properties used in templates but not part of the component's TypeScript interface (e.g., `allowClear`, `size` for CSS classes).
+- **Handling:** Use `as any` type assertion for `argTypes` and `args` when including template-level properties:
+  ```typescript
+  argTypes: {
+    // ... component properties
+    allowClear: {
+      control: 'boolean',
+      description: 'Whether to show the clear button.',
+    },
+    size: {
+      control: 'select',
+      options: ['ax-xs', 'ax-sm', 'ax-md', 'ax-lg', 'ax-xl'],
+      description: 'The size class of the component.',
+    },
+  } as any,
+  ```
+
+#### 11.3.3 Value Binding
+
+- **Use `value` instead of template-specific names:**
+  - ✅ **CORRECT:** `value: ['Horror', 'Action']` in args, then `[ngModel]="value"` in template
+  - ❌ **WRONG:** `tags: ['Horror', 'Action']` in args (unless `tags` is an actual component property)
+
+### 11.4 Story Configuration
+
+#### 11.4.1 Required Imports
+
+- **FormsModule:** Always import `FormsModule` from `@angular/forms` when using `ngModel`:
+  ```typescript
+  import { FormsModule } from '@angular/forms';
+  ```
+
+#### 11.4.2 Render Function
+
+- **Use `props: args` pattern:**
+  ```typescript
+  render: (args) => ({
+    props: args,
+    imports: [FormsModule, ComponentName, DecoratorComponent],
+    template: `...`,
+  }),
+  ```
+
+#### 11.4.3 Template Structure
+
+- **Match showcase structure:** Base the template on the component's showcase page (`.page.html` file)
+- **Conditional rendering:** Use Angular control flow syntax:
+  ```typescript
+  @if (allowClear) {
+    <ax-clear-button></ax-clear-button>
+  }
+  ```
+
+### 11.5 Common TypeScript Errors & Solutions
+
+#### Error: `Module has no exported member 'ComponentName'`
+
+- **Solution:** Verify the actual export name in the package's index file or component file
+- **Example:** Use `AXDecoratorClearButtonComponent` not `AXClearButtonComponent`
+
+#### Error: `'./component-name.component' has no exported member 'ChildComponentName'`
+
+- **Solution:** Child components must be imported from their own files, not from the parent component file:
+  - ✅ **CORRECT:** `import { ChildComponent } from './child-component.component';`
+  - ❌ **WRONG:** `import { ChildComponent } from './parent-component.component';`
+- **Why:** Child components are standalone components that are not exported from the parent component file. They should be imported individually from their own files.
+
+#### Error: `Property 'X' does not exist in type 'Partial<ArgTypes<...>>'`
+
+- **Solution 1:** Remove the property from `argTypes` if it's not a real component property
+- **Solution 2:** Use `as any` type assertion if it's a template-level property:
+  ```typescript
+  argTypes: {
+    // ... properties
+  } as any,
+  ```
+
+#### Error: `Property 'X' does not exist in type 'Partial<...>'` in args
+
+- **Solution:** Use `as any` type assertion for args containing template-level properties:
+  ```typescript
+  args: {
+    value: ['Item1', 'Item2'],
+    allowClear: true,
+    size: 'ax-md',
+  } as any,
+  ```
+
+### 11.6 Best Practices
+
+1. **Verify Component Type:** Always check the actual component class definition to see what properties are available
+2. **Check Inheritance:** Review base classes and mixins to understand inherited properties
+3. **Match Showcase:** Use the showcase page (`.page.html` and `.page.ts`) as a reference for:
+   - Available options/properties
+   - Default values
+   - Template structure
+4. **Type Safety:** Use `as any` only for template-level properties, not for actual component properties
+5. **Event Handlers:** Include all relevant events in `argTypes` with `action` type for Storybook actions panel
+
+### 11.7 Validation Checklist for Stories
+
+- [ ] **Correct Imports:** All imports use correct class names (verify exports)
+- [ ] **Child Components:** Child components are imported from their own files, not from parent component file
+- [ ] **Type Safety:** No TypeScript errors in argTypes or args
+- [ ] **FormsModule:** Imported when using `ngModel`
+- [ ] **Template Structure:** Matches showcase page structure
+- [ ] **Default Values:** Match showcase defaults
+- [ ] **Events:** All component events included in argTypes with `action` type
+- [ ] **Template-Level Properties:** Use `as any` when necessary
+- [ ] **No Linter Errors:** All TypeScript and linting errors resolved

@@ -1,0 +1,24 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXCarouselOptions",
+  "description": "Type alias for Swiper configuration options used by the carousel directive.",
+  "imports": [
+    "import { AXCarouselOptions } from '@acorex/cdk/carousel';"
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXCarouselOptions type represents Swiper configuration options",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "carousel.directive.ts",
+            "content": "export type AXCarouselOptions = SwiperOptions;"
+          }
+        ]
+      }
+    }
+  ]
+}

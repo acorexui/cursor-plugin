@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerAppointmentMouseEvent",
+  "imports": ["import { AXSchedulerAppointmentMouseEvent } from '@acorex/components/scheduler';"],
+  "description": "Event data for appointment mouse interactions in the scheduler.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing appointment mouse event with event data and appointment reference.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-appointment-mouse-event.ts",
+            "content": "interface AXSchedulerAppointmentMouseEvent { event: MouseEvent; appointment: AXSchedulerAppointment; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentMouseEvent",
+      "props": [
+        {
+          "name": "event",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The mouse event."
+        },
+        {
+          "name": "appointment",
+          "type": [{ "name": "AXSchedulerAppointment" }],
+          "description": "The clicked appointment."
+        }
+      ]
+    }
+  ]
+}

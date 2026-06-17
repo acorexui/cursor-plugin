@@ -1,0 +1,87 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Grid Layout Node",
+  "description": "Represents a complete grid layout node that extends the widget interface with additional element reference. This interface combines position, widget properties, and DOM element reference for comprehensive grid item management.",
+  "imports": [
+    "import { AXGridLayoutNode } from '@acorex/components/grid-layout-builder';"
+  ],
+  "types": [
+    {
+      "title": "AXGridLayoutNode",
+      "props": [
+        {
+          "name": "x",
+          "type": [{ "name": "number" }],
+          "description": "X position of the widget in the grid.",
+          "default": "0"
+        },
+        {
+          "name": "y",
+          "type": [{ "name": "number" }],
+          "description": "Y position of the widget in the grid.",
+          "default": "0"
+        },
+        {
+          "name": "width",
+          "type": [{ "name": "number" }],
+          "description": "Width of the widget in columns.",
+          "default": "1"
+        },
+        {
+          "name": "height",
+          "type": [{ "name": "number" }],
+          "description": "Height of the widget in rows.",
+          "default": "1"
+        },
+        {
+          "name": "maxWidth",
+          "type": [{ "name": "number" }],
+          "description": "Maximum width of the widget in columns.",
+          "default": "undefined"
+        },
+        {
+          "name": "maxHeight",
+          "type": [{ "name": "number" }],
+          "description": "Maximum height of the widget in rows.",
+          "default": "undefined"
+        },
+        {
+          "name": "minWidth",
+          "type": [{ "name": "number" }],
+          "description": "Minimum width of the widget in columns.",
+          "default": "undefined"
+        },
+        {
+          "name": "minHeight",
+          "type": [{ "name": "number" }],
+          "description": "Minimum height of the widget in rows.",
+          "default": "undefined"
+        },
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the widget.",
+          "default": "undefined"
+        },
+        {
+          "name": "disableResize",
+          "type": [{ "name": "boolean" }],
+          "description": "Prevents direct resizing by the user.",
+          "default": "undefined"
+        },
+        {
+          "name": "disableDrag",
+          "type": [{ "name": "boolean" }],
+          "description": "Prevents direct moving by the user.",
+          "default": "undefined"
+        },
+        {
+          "name": "element",
+          "type": [{ "name": "AXGridLayoutWidgetElement" }],
+          "description": "Reference to the DOM element associated with this grid node.",
+          "default": "undefined"
+        }
+      ]
+    }
+  ]
+}

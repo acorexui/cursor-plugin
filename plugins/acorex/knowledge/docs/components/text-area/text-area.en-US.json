@@ -1,0 +1,377 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXTextAreaComponent } from '@acorex/components/text-area';"
+  ],
+  "title": "Text Area",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/textarea--documentation"
+    }
+  ],
+  "description": "A component that provides a multi-line text input field with support for resizing, validation, and custom styling.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-text-area</code>",
+      "content": {
+        "type": "api",
+        "data": "text-area/usage"
+      }
+    },
+    {
+      "title": "Counter",
+      "description": "Example of text area with character counter",
+      "content": {
+        "type": "api",
+        "data": "text-area/counter"
+      }
+    },
+    {
+      "title": "Counter with Max Length",
+      "description": "Example of text area with character counter and maximum length",
+      "content": {
+        "type": "api",
+        "data": "text-area/counter-max-length"
+      }
+    },
+    {
+      "title": "Rows",
+      "description": "Example of text area with different row configurations",
+      "content": {
+        "type": "api",
+        "data": "text-area/rows"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTextAreaComponent",
+      "props": [
+        {
+          "name": "rows",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the number of rows for the component, typically used for configuring the size of a text area or similar input field."
+        },
+        {
+          "name": "allowResize",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Indicates whether the component allows resizing."
+        },
+        {
+          "name": "showCounter",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Determines whether a counter is displayed in the component."
+        },
+        {
+          "name": "maxLength",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the maximum number of characters allowed in the input field."
+        },
+        {
+          "name": "classNames",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "CSS classes to apply to the component."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The current value of the text area. Inherited from MXValueComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text shown when the input is empty. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the input element. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "The validation state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Predefined look schemes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the user change the text. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the user change the value. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The event should not be used, use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emits an event when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emits an event when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Registers a touched callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnChange(fn: (value: string) => void): void"
+        },
+        {
+          "content": "/**\n * Writes a value to the component (ControlValueAccessor method).\n *\n * @param value - The value to write.\n */\nwriteValue(value: string): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: string, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nvalidate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXValueChangedEvent<T>",
+  "description": "Emitted when a value changes, providing the new and old values as well as the name of the value.",
+  "imports": ["import { AXValueChangedEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Canonical event class for value changes.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXValueChangedEvent<T = any> extends AXEvent {\n  name?: string;\n  value?: T;\n  oldValue?: T;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValueChangedEvent<T>",
+      "props": [
+        { "name": "component", "type": [{ "name": "any" }], "description": "The sender component." },
+        { "name": "htmlElement", "type": [{ "name": "HTMLElement" }], "description": "The root native element." },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates if the event was triggered by user interaction.",
+          "default": "false"
+        },
+        { "name": "name", "type": [{ "name": "string" }], "description": "Associated option name, if any." },
+        { "name": "value", "type": [{ "name": "T" }], "description": "New value." },
+        { "name": "oldValue", "type": [{ "name": "T" }], "description": "Previous value." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Picker",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/picker--documentation"
+    }
+  ],
+  "description": "A component that provides a customizable picker interface for selecting values from a predefined range. It provides an intuitive interface for adjusting values through a carousel-style selection, making it ideal for applications that require numeric input within specific limits.",
+  "imports": ["import { AXPickerModule } from '@acorex/components/picker';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-picker-items</code> within a picker container",
+      "content": {
+        "type": "api",
+        "data": "picker/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPickerItemsComponent",
+      "description": "The main picker component that displays selectable items in a carousel format. Extends MXValueComponent to provide value management and form integration.",
+      "props": [
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "The list of items to display in the picker. Each item should have an id and text property.",
+          "default": "[]"
+        },
+        {
+          "name": "valueField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The field name to use for the item value. Defaults to 'id'.",
+          "default": "'id'"
+        },
+        {
+          "name": "textField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The field name to use for displaying item text. Defaults to 'text'.",
+          "default": "'text'"
+        },
+        {
+          "name": "slidesPerGroup",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Number of slides to move when navigating. If not set, defaults to 1.",
+          "default": "undefined"
+        },
+        {
+          "name": "loop",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to enable infinite loop scrolling.",
+          "default": "false"
+        },
+        {
+          "name": "minValue",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Minimum allowed value. Items below this value will be disabled.",
+          "default": "null"
+        },
+        {
+          "name": "maxValue",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Maximum allowed value. Items above this value will be disabled.",
+          "default": "null"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the picker is disabled. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the picker is readonly. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "The currently selected value. Inherited from MXValueComponent.",
+          "default": "undefined"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "The current state of the component. Inherited from MXValueComponent.",
+          "default": "'clear'"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name of the component. Inherited from MXValueComponent.",
+          "default": "undefined"
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<any>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the selected value changes. This event provides detailed information about the change including the old and new values, and whether it was triggered by user interaction. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "Emitted when the selected value changes. This is the legacy event for backward compatibility. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        }
+      ]
+    },
+    {
+      "title": "AXPickerContainerComponent",
+      "description": "A container component that wraps the picker title and items. Provides structural layout and styling.",
+      "props": [
+        {
+          "name": "customClass",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Custom CSS class to apply to the container.",
+          "default": "''"
+        }
+      ]
+    }
+  ]
+}

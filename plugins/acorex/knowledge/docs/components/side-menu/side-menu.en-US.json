@@ -1,0 +1,228 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSideMenuComponent } from '@acorex/components/side-menu';"],
+  "title": "Side Menu",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/sidemenu--documentation"
+    }
+  ],
+  "description": "A sidebar navigation menu with nested items, configurable looks and indicator location, decorators support, and item click handling.",
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "550px",
+      "description": "A simple example of using <code>ax-side-menu</code>",
+      "content": {
+        "type": "api",
+        "data": "side-menu/usage"
+      }
+    },
+    {
+      "title": "Customize font",
+      "description": "Change the font style of side menu content.",
+      "content": {
+        "type": "api",
+        "data": "side-menu/customize-font"
+      }
+    },
+    {
+      "title": "Use decorator",
+      "description": "Use decorators inside <code>ax-side-menu-item</code>.",
+      "content": {
+        "type": "api",
+        "data": "side-menu/use-decorator"
+      }
+    },
+    {
+      "title": "Group Title",
+      "description": "Use <code>ax-title</code> to show group titles.",
+      "content": {
+        "type": "api",
+        "data": "side-menu/group-title"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSideMenuComponent",
+      "props": [
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "AXSideMenuItem[]",
+              "link": "/en-US/docs/types/ax-side-menu-item"
+            }
+          ],
+          "description": "Menu items to render, including nested children."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXSideMenuLook",
+              "link": "/en-US/docs/types/ax-side-menu-look"
+            }
+          ],
+          "description": "Look style: 'default' | 'pills' | 'with-line' | 'with-line-color'.",
+          "default": "'default'"
+        },
+        {
+          "name": "location",
+          "type": [
+            {
+              "name": "AXSideMenuLocation",
+              "link": "/en-US/docs/types/ax-side-menu-location"
+            }
+          ],
+          "description": "Indicator location for 'with-line' looks: 'start' | 'end'.",
+          "default": "'start'"
+        }
+      ],
+      "events": [],
+      "methods": []
+    },
+    {
+      "title": "AXSideMenuItemComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item text."
+        },
+        {
+          "name": "active",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Active state.",
+          "default": "false"
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show loading indicator.",
+          "default": "false"
+        },
+        {
+          "name": "isCollapsed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Collapse children state.",
+          "default": "true"
+        },
+        {
+          "name": "href",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "External link href."
+        },
+        {
+          "name": "routerLink",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "any[]"
+            },
+            {
+              "name": "UrlTree"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Angular router link."
+        },
+        {
+          "name": "routerLinkActive",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "string[]"
+            }
+          ],
+          "description": "Active class for router link.",
+          "default": "'ax-state-active'"
+        },
+        {
+          "name": "routerLinkActiveOptions",
+          "type": [
+            {
+              "name": "{ exact: boolean } | IsActiveMatchOptions"
+            }
+          ],
+          "description": "RouterLinkActive options.",
+          "default": "{ exact: false }"
+        },
+        {
+          "name": "target",
+          "type": [
+            {
+              "name": "'_blank'"
+            },
+            {
+              "name": "'_self'"
+            },
+            {
+              "name": "'_parent'"
+            },
+            {
+              "name": "'_top'"
+            }
+          ],
+          "description": "Link target.",
+          "default": "'_self'"
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXSideMenuItemClickEvent",
+              "link": "/en-US/docs/events/ax-side-menu-item-click-event"
+            }
+          ],
+          "description": "Fired when an item is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Toggles the collapsed state of the item.\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Expands the item (shows children).\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Collapses the item (hides children).\n */\nclose(): void"
+        }
+      ]
+    }
+  ]
+}

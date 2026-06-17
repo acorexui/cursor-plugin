@@ -1,0 +1,480 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Button Group",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/buttongroup--documentation"
+    }
+  ],
+  "description": "Groups multiple buttons together with consistent styling and optional selection behavior. Supports color/look theming, disabled state, and click/selection events.",
+  
+  "imports": [
+    "import { AXButtonGroupComponent } from '@acorex/components/button-group';",
+    "import { AXButtonGroupItemComponent } from '@acorex/components/button-group';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-button-group</code>",
+      "content": {
+        "type": "api",
+        "data": "button-group/usage"
+      }
+    },
+    {
+      "title": "Color",
+      "height": "400px",
+      "description": "Explore color variants using the <code>color</code> property.",
+      "content": {
+        "type": "api",
+        "data": "button-group/color"
+      }
+    },
+    {
+      "title": "Look",
+      "height": "400px",
+      "description": "Explore look variants using the <code>look</code> property.",
+      "content": {
+        "type": "api",
+        "data": "button-group/look"
+      }
+    },
+    {
+      "title": "Size",
+      "height": "400px",
+      "description": "Explore size options using utility classes like <code>ax-sm</code>, <code>ax-md</code>, <code>ax-lg</code>.",
+      "content": {
+        "type": "api",
+        "data": "button-group/size"
+      }
+    },
+    {
+      "title": "Dropdown Items",
+      "description": "Show a button group with dropdown content inside group items.",
+      "content": {
+        "type": "api",
+        "data": "button-group/dropdown-items"
+      }
+    },
+    {
+      "title": "Splitted Buttons",
+      "description": "Display split-style buttons inside the group.",
+      "content": {
+        "type": "api",
+        "data": "button-group/splitted-button"
+      }
+    },
+    {
+      "title": "Icon-only",
+      "description": "Showcase icon-only group items using ax-prefix and ax-icon.",
+      "content": {
+        "type": "api",
+        "data": "button-group/icon-only"
+      }
+    },
+    {
+      "title": "Selection Modes",
+      "height": "400px",
+      "description": "Demonstrate different selection behaviors: none, single, and multiple with pre-selected items and event handling.",
+      "content": {
+        "type": "api",
+        "data": "button-group/selection-modes"
+      }
+    },
+    {
+      "title": "Per-item Overrides",
+      "height": "400px",
+      "description": "Show how individual items can override color while group look is enforced, demonstrating the inheritance hierarchy.",
+      "content": {
+        "type": "api",
+        "data": "button-group/per-item-overrides"
+      }
+    },
+    {
+      "title": "Dividers",
+      "description": "Use the divided property to visually separate logical groups within the button group.",
+      "content": {
+        "type": "api",
+        "data": "button-group/dividers"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXButtonGroupComponent",
+      "props": [
+        {
+          "name": "selection",
+          "type": [
+            {
+              "name": "AXSelectionMode",
+              "link": "/en-US/docs/types/selection-mode"
+            }
+          ],
+          "description": "Defines the selection mode for the group: 'single', 'multiple', or 'none'."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the component is disabled. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the component. Inherited from MXColorComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when any button in the group is clicked."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color property changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "selectionChange",
+          "type": [
+            {
+              "name": "AXSelectionMode",
+              "link": "/en-US/docs/types/selection-mode"
+            }
+          ],
+          "description": "Emitted when the selection mode changes."
+        },
+        {
+          "name": "selectedButtonChange",
+          "type": [
+            {
+              "name": "AXButtonGroupItemComponent"
+            }
+          ],
+          "description": "Emitted with the button item component instance when the selected button changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        }
+      ]
+    },
+    {
+      "title": "AXButtonGroupItemComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Text displayed on the button item."
+        },
+        {
+          "name": "selected",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the item is selected."
+        },
+        {
+          "name": "divided",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Visually separates the item from adjacent items."
+        },
+        {
+          "name": "data",
+          "type": [
+            {
+              "name": "unknown"
+            }
+          ],
+          "description": "Arbitrary data associated with the item."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name identifier of the item."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the item. Inherited from MXColorComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the item is disabled. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the item is clicked."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the item receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the item loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "selectedChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the selected state changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        }
+      ]
+    }
+  ]
+}

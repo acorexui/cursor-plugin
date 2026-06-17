@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXChipsSizeType",
+  "description": "Defines the size options available for chips components. This type is a subset of AXStyleSizeType, specifically excluding 'ax-xs' and 'ax-xl' sizes that are not applicable to chips.",
+  "imports": ["import { AXChipsSizeType } from '@acorex/components/chips';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Union type of supported size values for chips.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-chips-size-type.ts",
+            "content": "export type AXChipsSizeType = Exclude<AXStyleSizeType, 'ax-xs' | 'ax-xl'>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXChipsSizeType",
+      "props": [
+        {
+          "name": "AXChipsSizeType",
+          "type": [{ "name": "'ax-sm'" }, { "name": "'ax-md'" }, { "name": "'ax-lg'" }],
+          "description": "Size values supported by chips (subset of AXStyleSizeType)."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

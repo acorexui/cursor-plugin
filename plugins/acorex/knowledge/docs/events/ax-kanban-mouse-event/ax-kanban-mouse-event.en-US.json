@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Kanban Mouse Event",
+  "imports": ["import { AXKanbanMouseEvent } from '@acorex/components/kanban';"],
+  "description": "Represents the payload for Kanban item mouse interactions (click, double-click, right-click, action click).",
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "AXKanbanMouseEvent extends NXNativeEvent and carries the original item data and native event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "ax-kanban-mouse-event.ts",
+            "language": "ts",
+            "content": "export interface AXKanbanMouseEvent extends NXNativeEvent<AXKanbanComponent, MouseEvent> {\n  item: any;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXKanbanMouseEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXKanbanComponent", "link": "/en-US/docs/components/kanban" }],
+          "description": "The Kanban component instance that emitted the event. Inherited from NXEvent."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event that triggered the interaction. Inherited from NXNativeEvent."
+        },
+        { "name": "item", "type": [{ "name": "any" }], "description": "The original data object for the clicked item." }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

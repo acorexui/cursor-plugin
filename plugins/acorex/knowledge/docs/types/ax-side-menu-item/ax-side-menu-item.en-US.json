@@ -1,0 +1,94 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSideMenuItem } from '@acorex/components/side-menu';"],
+  "title": "Side Menu Item",
+  "description": "Interface defining the structure of a side menu item with support for nested children, routing, and various states.",
+  "types": [
+    {
+      "title": "AXSideMenuItem",
+      "props": [
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Optional title for the menu item."
+        },
+        {
+          "name": "routerLink",
+          "type": [{ "name": "string" }, { "name": "any[]" }, { "name": "UrlTree" }],
+          "description": "Angular router link for navigation."
+        },
+        {
+          "name": "routerLinkActive",
+          "type": [{ "name": "string" }, { "name": "string[]" }],
+          "description": "CSS class(es) to apply when the router link is active."
+        },
+        {
+          "name": "routerLinkActiveOptions",
+          "type": [{ "name": "{ exact: boolean }" }, { "name": "IsActiveMatchOptions" }],
+          "description": "Options for router link active matching."
+        },
+        {
+          "name": "href",
+          "type": [{ "name": "string" }],
+          "description": "External link URL."
+        },
+        {
+          "name": "target",
+          "type": [{ "name": "'_blank'" }, { "name": "'_self'" }, { "name": "'_parent'" }, { "name": "'_top'" }],
+          "description": "Link target attribute for external links."
+        },
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "Display text for the menu item."
+        },
+        {
+          "name": "active",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the menu item is in active state."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the menu item is disabled."
+        },
+        {
+          "name": "isLoading",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the menu item is in loading state."
+        },
+        {
+          "name": "isCollapsed",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether child items are collapsed."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Icon identifier for the menu item."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "unknown" }],
+          "description": "Custom data associated with the menu item."
+        },
+        {
+          "name": "suffixText",
+          "type": [{ "name": "string" }],
+          "description": "Additional text to display after the main text."
+        },
+        {
+          "name": "toggleOnClick",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether clicking the item should toggle its collapsed state."
+        },
+        {
+          "name": "items",
+          "type": [{ "name": "AXSideMenuItem[]" }],
+          "description": "Nested child menu items."
+        }
+      ]
+    }
+  ]
+}
+

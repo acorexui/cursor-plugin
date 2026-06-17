@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXValidationRuleOptions",
+  "imports": ["import { AXValidationRuleOptions } from '@acorex/core/validation';"],
+  "description": "Base interface for validation rule options that provides common configuration properties for all validation rules.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Common options for validation rules.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "validation-rule-options.ts",
+            "content": "interface AXValidationRuleOptions {\n  message?: string;\n  enabled?: boolean;\n  async?: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValidationRuleOptions",
+      "props": [
+        {
+          "name": "message",
+          "type": [{ "name": "string" }],
+          "description": "Custom error message to display when validation fails."
+        },
+        {
+          "name": "enabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the validation rule is enabled.",
+          "default": "true"
+        },
+        {
+          "name": "async",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the validation rule should be executed asynchronously.",
+          "default": "false"
+        }
+      ],
+      "description": "Base interface that all validation rule options must extend, providing common configuration properties.",
+      "methods": []
+    }
+  ]
+}

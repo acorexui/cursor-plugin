@@ -1,0 +1,83 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Floating Action Button (FAB)",
+  "description": "The Floating Action Button (FAB) highlights the primary action of a screen. It appears as a circular, elevated button that floats above content, providing quick and consistent access to key actions. FABs support icon-only and extended (labeled) variants and are typically positioned in a fixed corner. Only one FAB should be used per view to maintain a clear user experience.",
+  "imports": [
+    "import { AXFabComponent } from '@acorex/components/fab';",
+    "import { AXFabItemComponent } from '@acorex/components/fab';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-fab</code> with child <code>ax-fab-item</code> elements to create an expandable floating action button.",
+      "content": {
+        "type": "api",
+        "data": "fab/usage"
+      }
+    },
+    {
+      "title": "Tooltip",
+      "description": "Demonstrates adding tooltips to the FAB and its items using the <code>axTooltip</code> directive from <code>@acorex/components/tooltip</code>. Tooltips provide contextual labels on hover without occupying extra space.",
+      "content": {
+        "type": "api",
+        "data": "fab/tooltip"
+      }
+    },
+    {
+      "title": "Label",
+      "description": "Shows how to use the <code>label</code> input to display text alongside the icon in both <code>ax-fab</code> and <code>ax-fab-item</code>, creating an extended FAB variant.",
+      "content": {
+        "type": "api",
+        "data": "fab/label"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFabComponent",
+      "props": [
+        {
+          "name": "label",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "default": "null",
+          "description": "Defines the text label displayed alongside the icon, creating an extended FAB variant."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Fires each time the user clicks the FAB button."
+        }
+      ]
+    },
+    {
+      "title": "AXFabItemComponent",
+      "props": [
+        {
+          "name": "label",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "default": "null",
+          "description": "Defines the text label displayed alongside the icon for this FAB menu item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Fires each time the user clicks this FAB item."
+        }
+      ]
+    }
+  ]
+}

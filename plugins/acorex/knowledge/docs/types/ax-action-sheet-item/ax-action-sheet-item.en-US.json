@@ -1,0 +1,74 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet Item",
+  "imports": ["import { AXActionSheetItem } from '@acorex/components/action-sheet';"],
+  "description": "Represents an individual item in an action sheet. This interface defines the structure for action sheet items, including text, icons, colors, and interaction callbacks.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Structure of an action sheet item.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-action-sheet-item.ts",
+            "content": "interface AXActionSheetItem {\n  name?: string;\n  text: string;\n  icon?: string;\n  disabled?: boolean;\n  color?: AXStyleColorType;\n  onClick?: () => void;\n  suffix?: { text: string };\n  break?: boolean;\n  group?: { name?: string; title?: string };\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXActionSheetItem",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Optional name identifier for the action sheet item."
+        },
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "The text content to display for this action sheet item."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Optional icon to display alongside the text content."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this action sheet item is disabled and cannot be interacted with."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Optional color styling for the action sheet item."
+        },
+        {
+          "name": "onClick",
+          "type": [{ "name": "() => void" }],
+          "description": "Optional callback function to execute when this item is clicked."
+        },
+        {
+          "name": "suffix",
+          "type": [{ "name": "{ text: string }" }],
+          "description": "Optional suffix object containing additional text to display after the main text."
+        },
+        {
+          "name": "break",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to add a visual break or separator after this item."
+        },
+        {
+          "name": "group",
+          "type": [{ "name": "{ name?: string; title?: string }" }],
+          "description": "Optional group information for organizing items into sections."
+        }
+      ]
+    }
+  ]
+}

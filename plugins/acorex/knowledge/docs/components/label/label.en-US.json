@@ -1,0 +1,119 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Label",
+  "description": "A label component that provides accessible text labels for form controls and other UI elements. Labels can be associated with form controls for proper accessibility and can indicate required fields with an asterisk. When used within a form field, labels are automatically associated with their corresponding inputs for enhanced accessibility.",
+  "imports": [
+    "import { AXLabelComponent } from '@acorex/components/label';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic usage of the label component with form controls.",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "label/usage"
+      }
+    },
+    {
+      "title": "Required",
+      "description": "Labels with required indicators showing asterisk for mandatory fields.",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "label/required"
+      }
+    },
+    {
+      "title": "Form Association",
+      "description": "Labels properly associated with form controls using the for property for accessibility.",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "label/form-association"
+      }
+    },
+    {
+      "title": "Error State",
+      "description": "Labels that adapt to form validation states and show error styling.",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "label/error-state"
+      }
+    },
+    {
+      "title": "Accessibility",
+      "description": "Labels with proper accessibility features including ARIA attributes and help text.",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "label/accessibility"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLabelComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "required",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Determines if the field is required. When true, displays an asterisk (*) indicator.",
+          "default": "false"
+        },
+        {
+          "name": "for",
+          "type": [
+            {
+              "name": "MXValueComponent"
+            }
+          ],
+          "description": "Gets or sets the form control or component associated with the label. This creates a programmatic association for accessibility."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "requiredChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the required property changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

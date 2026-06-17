@@ -1,0 +1,237 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Modal",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/modal--documentation"
+    }
+  ],
+  "description": "A comprehensive modal dialog system that provides programmatic and declarative ways to display content in overlay dialogs. Supports draggable windows, minimize/maximize functionality, custom headers/footers, and various sizing options.",
+  "imports": [
+    "import { AXModalComponent } from '@acorex/components/modal';",
+    "import { AXModalFooterComponent } from '@acorex/components/modal';",
+    "import { AXModalService } from '@acorex/components/modal';",
+    "import { AXModalStateService } from '@acorex/components/modal';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "400px",
+      "description": "Basic usage of the <code>ax-modal</code> component with template content",
+      "content": {
+        "type": "api",
+        "data": "modal/usage"
+      }
+    },
+    {
+      "title": "Service",
+      "height": "400px",
+      "description": "Use the modal service to programmatically create and manage modals",
+      "content": {
+        "type": "api",
+        "data": "modal/service"
+      }
+    },
+    {
+      "title": "Template",
+      "height": "400px",
+      "description": "Customize modal content using templates with header, body, and footer sections",
+      "content": {
+        "type": "api",
+        "data": "modal/template"
+      }
+    },
+    {
+      "title": "Sizes",
+      "height": "400px",
+      "description": "Different modal sizes: small, medium, large, full screen, and fit content",
+      "content": {
+        "type": "api",
+        "data": "modal/sizes"
+      }
+    },
+    {
+      "title": "Draggable",
+      "height": "400px",
+      "description": "Draggable modals that can be moved around the screen",
+      "content": {
+        "type": "api",
+        "data": "modal/draggable"
+      }
+    },
+    {
+      "title": "Minimize/Maximize",
+      "height": "400px",
+      "description": "Modal controls for minimizing to bottom bar and maximizing to fullscreen",
+      "content": {
+        "type": "api",
+        "data": "modal/minimize-maximize"
+      }
+    },
+    {
+      "title": "Backdrop Options",
+      "height": "400px",
+      "description": "Customize backdrop behavior including click-to-close and custom styling",
+      "content": {
+        "type": "api",
+        "data": "modal/backdrop-options"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXModalComponent",
+      "description": "The main modal component that provides declarative modal functionality",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from NXComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Opens the modal with the specified options.\n * @param options - Configuration options for the modal\n * @returns Promise<AXModalRef> - Reference to the opened modal\n */\nasync open(options?: AXModalOptions): Promise<AXModalRef>"
+        },
+        {
+          "content": "/**\n * Closes the currently open modal.\n */\nasync close(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Sets input values for the modal content component.\n * @param values - Object containing input values to set\n */\nasync setInputs(values: AXComponentInputs): Promise<void>"
+        },
+        {
+          "content": "/**\n * Minimizes the modal to the bottom bar.\n */\nasync minimize(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Maximizes the modal to fullscreen.\n */\nasync maximize(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Restores the modal from minimized or maximized state.\n */\nasync restore(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXModalFooterComponent",
+      "description": "Footer component for modal dialogs that provides content projection slots",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from NXComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXModalService",
+      "description": "Service for programmatically creating and managing modal dialogs",
+      "methods": [
+        {
+          "content": "/**\n * Opens a modal with the specified content and options.\n * @param content - Component, template, or HTML element to display\n * @param options - Configuration options for the modal\n * @returns Promise<AXModalRef> - Reference to the opened modal\n */\nasync open(content: AXComponentContent | HTMLElement, options?: AXModalOptions): Promise<AXModalRef>"
+        },
+        {
+          "content": "/**\n * Closes the currently open modal.\n */\nasync close(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Sets input values for the modal content component.\n * @param values - Object containing input values to set\n */\nasync setInputs(values: AXComponentInputs): Promise<void>"
+        },
+        {
+          "content": "/**\n * Minimizes the modal to the bottom bar.\n */\nasync minimize(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Maximizes the modal to fullscreen.\n */\nasync maximize(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Restores the modal from minimized or maximized state.\n */\nasync restore(): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXModalStateService",
+      "description": "Internal service that manages modal state and overlay lifecycle",
+      "props": [
+        {
+          "name": "modalOption",
+          "type": [
+            {
+              "name": "AXModalOptions",
+              "link": "/en-US/docs/types/modal-options"
+            }
+          ],
+          "description": "Current modal options configuration.",
+          "default": "null"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Opens a modal with the specified content and options.\n * @param content - Component, template, or HTML element to display\n * @param options - Configuration options for the modal\n * @returns Promise<AXModalRef> - Reference to the opened modal\n */\nasync open<TResult = any>(content: AXComponentContent | HTMLElement, options?: AXModalOptions): Promise<AXModalRef<TResult>>"
+        },
+        {
+          "content": "/**\n * Closes a modal by its ID.\n * @param id - The modal ID to close\n * @param data - Optional data to pass to the close event\n */\nasync close<TResult = any>(id: number, data?: TResult): Promise<void>"
+        },
+        {
+          "content": "/**\n * Sets input values for a modal by its ID.\n * @param id - The modal ID\n * @param values - Object containing input values to set\n */\nasync setInputs(id: number, values: AXComponentInputs): Promise<void>"
+        },
+        {
+          "content": "/**\n * Minimizes a modal by its ID.\n * @param id - The modal ID to minimize\n */\nasync minimize(id: number): Promise<void>"
+        },
+        {
+          "content": "/**\n * Maximizes a modal by its ID.\n * @param id - The modal ID to maximize\n */\nasync maximize(id: number): Promise<void>"
+        },
+        {
+          "content": "/**\n * Restores a modal by its ID.\n * @param id - The modal ID to restore\n */\nasync restore(id: number): Promise<void>"
+        },
+        {
+          "content": "/**\n * Gets the index of a modal in the minimized stack.\n * @param targetKey - The modal ID to find\n * @returns number - The index position in the stack\n */\ngetMapIndexOf(targetKey: any): number"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Circular Progress",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/circularprogress--documentation"
+    }
+  ],
+  "description": "Circular progress visually represents the percentage of an operation's progress within a circular format. It features customizable colors and stroke styles, providing a clear and dynamic way to indicate the status of ongoing tasks.",
+  "imports": [
+    "import { AXCircularProgressComponent } from '@acorex/components/circular-progress';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-circular-progress</code>",
+      "content": {
+        "type": "api",
+        "data": "circular-progress/usage"
+      }
+    },
+    {
+      "title": "Using content inside",
+      "description": "Circular progress can display specific contents or percentages inside",
+      "content": {
+        "type": "api",
+        "data": "circular-progress/using-content-inside"
+      }
+    },
+    {
+      "title": "Customization",
+      "description": "Circular progress has the ability to adjust the size and stroke along with the color",
+      "content": {
+        "type": "api",
+        "data": "circular-progress/customization"
+      }
+    },
+    {
+      "title": "Indeterminate",
+      "description": "Make it spin!",
+      "content": {
+        "type": "api",
+        "data": "circular-progress/indeterminate"
+      }
+    },
+    {
+      "title": "Async progress",
+      "description": "Simulate asynchronous progress with a restart button.",
+      "content": {
+        "type": "api",
+        "data": "circular-progress/async-progress"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCircularProgressComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier of the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Specifies the color of the circular progress indicator. Inherited from MXColorComponent."
+        },
+        {
+          "name": "mode",
+          "type": [
+            {
+              "name": "'determinate'"
+            },
+            {
+              "name": "'indeterminate'"
+            }
+          ],
+          "default": "'determinate'",
+          "description": "Defines the current progress mode of the circular progress component."
+        },
+        {
+          "name": "progress",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the progress value of the circular progress indicator."
+        },
+        {
+          "name": "stroke",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Determines the stroke width of the circular progress indicator."
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the size of the circular progress indicator."
+        }
+      ],
+      "events": [
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when any option of the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "progressChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the function to be called when the progress value of the circular progress indicator changes."
+        },
+        {
+          "name": "strokeChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the function to be called when the stroke width of the circular progress indicator changes."
+        },
+        {
+          "name": "sizeChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the function to be called when the size of the circular progress indicator changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets the CSS custom properties to reflect the current `size` and `stroke` values.\n *\n * Updates `--ax-comp-circular-progress-circle-size` and `--ax-comp-circular-progress-stroke-size` on the circle.\n *\n * @returns void - Styles are applied to the circle element when available.\n */\nsetCircularSize(): void"
+        },
+        {
+          "content": "/**\n * Recalculates and applies the progress arc background based on the current `progress` value.\n *\n * Uses a conic-gradient with `--ax-comp-progress-circular-color` and `--ax-comp-progress-circular-line-color`.\n * The expected range for `progress` is 0–100.\n *\n * @returns void - Styles are applied to the circle element when available.\n */\nupdateProgress(): void"
+        },
+        {
+          "content": "/**\n * Applies a default visual state for the indeterminate mode when no explicit `progress` is set.\n *\n * If `mode` is 'indeterminate' and `progress` is not set, it sets `progress` to 65 to render a visible arc.\n *\n * @returns void\n */\nsetIndeterminateMode(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

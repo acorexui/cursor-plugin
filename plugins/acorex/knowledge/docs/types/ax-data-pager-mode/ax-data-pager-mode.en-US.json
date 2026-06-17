@@ -1,0 +1,29 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Pager Mode",
+  "description": "Defines the display mode options for the data pager component, controlling how pagination controls are presented to the user.",
+  "types": [
+    {
+      "title": "AXDataPagerMode",
+      "props": [
+        {
+          "name": "full",
+          "type": [{ "name": "'full'" }],
+          "description": "Full display mode showing all pagination controls including page numbers, navigation buttons, page size selector, and info display."
+        },
+        {
+          "name": "compact",
+          "type": [{ "name": "'compact'" }],
+          "description": "Compact display mode showing minimal pagination controls, typically just navigation buttons and basic info."
+        },
+        {
+          "name": "custom",
+          "type": [{ "name": "'custom'" }],
+          "description": "Custom display mode allowing developers to define their own pagination layout and controls."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

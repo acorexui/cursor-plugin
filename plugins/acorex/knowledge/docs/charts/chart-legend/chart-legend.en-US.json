@@ -1,0 +1,91 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Chart Legend",
+  "description": "An interactive legend component that connects to charts for enhanced user experience, supporting both vertical and horizontal layouts with customizable styling and interactive features.",
+  "imports": ["import { AXChartLegendComponent } from '@acorex/charts/chart-legend';"],
+  "showcase": {
+    "title": "Chart Legend Showcase",
+    "description": "Interactive chart legend demonstrating various features and configurations",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXChartLegendComponent } from '@acorex/charts/chart-legend';\nimport { AXChartLegendOptions } from '@acorex/charts/chart-legend';\nimport { AXChartLegendItem } from '@acorex/charts/chart-legend';\nimport { AXDonutChartComponent } from '@acorex/charts/donut-chart';\nimport { AXDonutChartData } from '@acorex/charts/donut-chart';\nimport { AXDonutChartOption } from '@acorex/charts/donut-chart';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive Chart Legend</h2>\n      <div class=\"chart-legend-demo\">\n        <ax-donut-chart \n          [data]=\"showcaseData()\" \n          [options]=\"showcaseChartOptions()\"\n          #chartRef\n        />\n        <ax-chart-legend \n          [chart]=\"chartRef\" \n          [options]=\"showcaseLegendOptions()\"\n          (itemClick)=\"onLegendItemClick($event)\"\n          (itemMouseEnter)=\"onLegendItemMouseEnter($event)\"\n          (itemMouseLeave)=\"onLegendItemMouseLeave($event)\"\n        />\n      </div>\n      <div class=\"legend-info\">\n        <p>Click on legend items to interact with the chart</p>\n      </div>\n    </div>\n  `,\n  imports: [AXChartLegendComponent, AXDonutChartComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n    }\n    .chart-legend-demo {\n      display: flex;\n      gap: 2rem;\n      align-items: center;\n      justify-content: center;\n    }\n    .legend-info {\n      margin-top: 1rem;\n      text-align: center;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class ChartLegendShowcaseComponent {\n  showcaseData = signal<AXDonutChartData[]>([\n    { id: 'sales', label: 'Sales', value: 40, color: '#3498db' },\n    { id: 'marketing', label: 'Marketing', value: 25, color: '#e74c3c' },\n    { id: 'development', label: 'Development', value: 20, color: '#2ecc71' },\n    { id: 'support', label: 'Support', value: 15, color: '#f39c12' }\n  ]);\n\n  showcaseChartOptions = signal<AXDonutChartOption>({\n    width: 300,\n    height: 300,\n    showTooltip: true,\n    donutWidth: 30,\n    cornerRadius: 6,\n    animationDuration: 1000,\n    animationEasing: 'ease-in-out'\n  });\n\n  showcaseLegendOptions = signal<AXChartLegendOptions>({\n    mode: 'vertical',\n    showValues: true,\n    showPercentage: true,\n    interactive: true\n  });\n\n  onLegendItemClick(item: AXChartLegendItem): void {\n    console.log('Legend item clicked:', item);\n  }\n\n  onLegendItemMouseEnter(item: AXChartLegendItem): void {\n    console.log('Legend item mouse enter:', item);\n  }\n\n  onLegendItemMouseLeave(item: AXChartLegendItem): void {\n    console.log('Legend item mouse leave:', item);\n  }\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple chart legend with basic configuration",
+      "content": { "type": "api", "data": "chart-legend/usage" },
+      "height": "500px"
+    },
+    {
+      "title": "Display Modes",
+      "description": "Chart legend in vertical and horizontal display modes",
+      "content": { "type": "api", "data": "chart-legend/modes" },
+      "height": "500px"
+    },
+    {
+      "title": "Interactive Features",
+      "description": "Chart legend with interactive click and hover events",
+      "content": { "type": "api", "data": "chart-legend/interactive" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Styling",
+      "description": "Chart legend with different styling options and configurations",
+      "content": { "type": "api", "data": "chart-legend/styling" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Configurations",
+      "description": "Chart legend with various custom configurations and settings",
+      "content": { "type": "api", "data": "chart-legend/custom" },
+      "height": "600px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXChartLegendComponent",
+      "description": "Chart Legend Component - Interactive legend that connects to charts for enhanced user experience",
+      "props": [
+        {
+          "name": "chart",
+          "type": [{ "name": "AXChartLegendCompatible", "link": "/en-US/docs/types/chart-legend-compatible" }],
+          "description": "Chart component instance that must implement AXChartLegendCompatible interface"
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXChartLegendOptions", "link": "/en-US/docs/types/chart-legend-options" }],
+          "description": "Configuration options for the legend",
+          "default": "{}"
+        },
+        {
+          "name": "legendContainer",
+          "type": [{ "name": "ElementRef<HTMLDivElement>" }],
+          "description": "Reference to legend container for measuring dimensions"
+        }
+      ],
+      "events": [
+        {
+          "name": "itemClick",
+          "type": [{ "name": "AXChartLegendItem", "link": "/en-US/docs/types/chart-legend-item" }],
+          "description": "Event emitted when a legend item is clicked. Returns the item that was clicked."
+        },
+        {
+          "name": "itemMouseEnter",
+          "type": [{ "name": "AXChartLegendItem", "link": "/en-US/docs/types/chart-legend-item" }],
+          "description": "Event emitted when the mouse enters a legend item"
+        },
+        {
+          "name": "itemMouseLeave",
+          "type": [{ "name": "AXChartLegendItem", "link": "/en-US/docs/types/chart-legend-item" }],
+          "description": "Event emitted when the mouse leaves a legend item"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getDimensions",
+          "content": "/**\n * Get legend container dimensions\n */\ngetDimensions(): { width: number; height: number }",
+          "description": "Get legend container dimensions"
+        }
+      ]
+    }
+  ]
+}

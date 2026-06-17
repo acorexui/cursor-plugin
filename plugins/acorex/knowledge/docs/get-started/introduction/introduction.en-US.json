@@ -1,0 +1,32 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Introduction",
+  "description": "ACoreX is a modern, and fully responsive UI library designed to help developers build beautiful and functional web applications quickly and efficiently. It is built with Tailwind CSS and TypeScript, and provides a comprehensive set of components and utilities that can be easily customized to fit your project's needs. <img src='images/acorex-thumbnail.jpg' class='ax-w-full ax-block ax-mt-4 ax-mx-auto' />",
+  "sections": [
+    {
+      "title": "Why was ACoreX created?",
+      "description": "Since our team was responsible for providing development tools for other frontend teams within the company, we often faced challenges with existing UI libraries. We wanted complete control over the source code and structure of the UI library, which led us to develop ACoreX.<br><br>We started by building a form builder using version 1 of ACoreX. After seeing satisfying results, we expanded the team and added more features.<br><br>Starting from version 7, we decided that the main version of ACoreX would align with the compatible Angular version. For example, ACoreX version 17 is compatible with Angular 17, and version 20 with Angular 20.<br><br>After the form builder, most of our projects were B2B, so we didn’t focus much on specialized features or compatibility with B2C applications. For this reason, we paused development at version 16 and completely rewrote and refactored all components in version 17, incorporating modern capabilities such as design tokens, customization, theming, and more, while reserving version 16 for long-term support.<br><br>Currently, version 16 is only maintained internally within our organization.<br><br>After implementing version 17 and evaluating the feedback, we decided to offer it as a public product. From version 17 onward, anyone can use ACoreX.",
+      "content": {}
+    },
+    {
+      "title": "ACoreX Design System",
+      "description": "When we decided to release version 17, we first created a comprehensive design system and used it as the foundation for designing and developing the components. This design system is also publicly available as documentation and Figma files.",
+      "content": {}
+    },
+    {
+      "title": "The role of TailwindCSS",
+      "description": "TailwindCSS is a utility library that you can integrate with ACoreX.<br>For example, by adding the ready-made ACoreX preset, you can take advantage of colors, utility classes, and more.<br>Additionally, for tasks like creating custom colors, we provide a set of functions that make it easier for you to generate the necessary classes.",
+      "content": {}
+    },
+    {
+      "title": "Integrating with other libraries",
+      "description": "For certain features, we’ve chosen to use existing libraries, as building them from scratch would currently require significant time and resources.<br /> For example, we use D3.js for charts, but we’ve carefully considered performance by, for instance, lazy loading these libraries to ensure optimal performance.",
+      "content": {}
+    },
+    {
+      "title": "Contributing",
+      "description": "At the moment, we do not plan to release the source code or open contributions to the project, due to our current roadmap and plans. However, we may open source ACoreX in the future.<br /> Until then, you can use the repository provided on our website to submit your issues and requests on <a href='https://github.com/acorexui/acorex-demo' target='_blank' rel='noopener noreferrer'>GitHub</a>.",
+      "content": {}
+    }
+  ]
+}

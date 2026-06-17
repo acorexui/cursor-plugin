@@ -1,0 +1,77 @@
+---
+description: Add Storybook extraLinks to component documentation JSON files (en-US and fa-IR).
+alwaysApply: false
+---
+---
+alwaysApply: true
+---
+
+Add Storybook extraLinks to all component documentation JSON files
+
+Add or update the `extraLinks` section in all component documentation JSON files located in `apps/documentation/docs/components/**/*.json` (both `.en-US.json` and `.fa-IR.json` files).
+
+Requirements:
+
+1. Target Files: Process all JSON files in `apps/documentation/docs/components/**/` that match the pattern `*.en-US.json` and `*.fa-IR.json`.
+
+2. Action: For each file:
+   - If the file does not have an `extraLinks` property, add it.
+   - If the file has `extraLinks` as an empty array (`[]`), replace it with the Storybook link.
+   - If the file already has non-empty `extraLinks`, do not modify it.
+
+3. Insertion Location: Place the `extraLinks` section after the `description` property and before the `imports` property (or before `sections` if `imports` is not present).
+
+4. Content Structure: Add the following JSON structure:
+
+   ```json
+   "extraLinks": [
+     {
+       "text": "storybook",
+       "icon": "icon-storybook",
+       "href": "https://storybook.acorex.io/?path=/docs/{component-name}--documentation"
+     }
+   ],
+   ```
+
+5. Component Name Extraction: Extract the component name from the folder name (not the file name). Examples:
+   - `accordion/accordion.en-US.json` → component name: `accordion`
+   - `button/button.en-US.json` → component name: `button`
+   - `tag-box/tag-box.en-US.json` → component name: `tag-box`
+   - `data-table/data-table.en-US.json` → component name: `data-table`
+
+6. URL Format: The `href` value must follow this pattern:
+
+   ```
+   https://storybook.acorex.io/?path=/docs/{component-name}--documentation
+   ```
+
+   Where `{component-name}` is the folder name extracted in step 5.
+
+7. Validation: Ensure:
+   - JSON syntax remains valid after modification
+   - Proper comma placement (trailing comma after `extraLinks` if followed by another property)
+   - No duplicate `extraLinks` entries
+   - The structure matches the schema defined in `document.schema.json`
+
+Example Output:
+
+For `apps/documentation/docs/components/button/button.en-US.json`:
+
+```json
+{
+  "$schema": "../../document.schema.json",
+  "title": "Button",
+  "description": "The Button is a component which detects user interaction...",
+  "extraLinks": [
+    {
+      "text": "storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/button--documentation"
+    }
+  ],
+  "imports": ["import { AXButtonComponent } from '@acorex/components/button';"],
+  ...
+}
+```
+
+Reference: Use `apps/documentation/docs/components/accordion/accordion.en-US.json` and `accordion.fa-IR.json` as the reference implementation for the correct structure and format.

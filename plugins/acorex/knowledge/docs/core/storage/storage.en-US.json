@@ -1,0 +1,295 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Browser Storage Services",
+  "description": "SSR-safe wrappers for localStorage, sessionStorage, and cookies: JSON persistence, optional AES encryption for localStorage, and cookie management with SameSite and secure flags.",
+  "imports": [
+    "import { AXLocalStorageService, AXSessionStorageService, AXCookieStorageService, AX_LOCALSTORAGE_SECRET_KEY, AXStorage, AXCookieOptions } from '@acorex/core/storage';"
+  ],
+  "hints": [
+    {
+      "title": "Provide services explicitly",
+      "content": "Storage services are <strong>not</strong> <code>providedIn: 'root'</code>. Register <code>AXLocalStorageService</code>, <code>AXSessionStorageService</code>, and/or <code>AXCookieStorageService</code> in <code>app.config.ts</code> or component <code>providers</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "LocalStorage secret provider",
+      "content": "<code>AXLocalStorageService</code> injects <code>AX_LOCALSTORAGE_SECRET_KEY</code> when the service is created. Provide it whenever you register the local storage service, especially before calling <code>setWithEncryption()</code> / <code>getWithEncription()</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Browser only",
+      "content": "All methods no-op or return <code>null</code> during SSR. Values are automatically JSON-serialized for local/session storage.",
+      "status": "warning"
+    },
+    {
+      "title": "Method name typo",
+      "content": "The decrypt method is spelled <code>getWithEncription</code> (missing 'y') in the source — use this exact name when calling the API.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXStorage",
+      "description": "Common interface implemented by local and session storage services.",
+      "props": [],
+      "methods": [
+        {
+          "content": "get<T>(key: string): T | null"
+        },
+        {
+          "content": "set<T>(key: string, value: T): void"
+        },
+        {
+          "content": "removeItem(key: string): void"
+        },
+        {
+          "content": "clear(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXLocalStorageService",
+      "description": "Persistent key-value storage with JSON and optional AES encryption.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Reads and JSON.parses a value. Returns null if missing or on server.\n */\nget<T>(key: string): T | null"
+        },
+        {
+          "content": "/**\n * JSON.stringify + localStorage.setItem.\n */\nset<T>(key: string, value: T): void"
+        },
+        {
+          "content": "removeItem(key: string): void"
+        },
+        {
+          "content": "clear(): void"
+        },
+        {
+          "content": "/**\n * AES-encrypt JSON value before storing.\n * Requires AX_LOCALSTORAGE_SECRET_KEY.\n */\nsetWithEncryption<T>(key: string, value: T): void"
+        },
+        {
+          "content": "/**\n * Decrypt and JSON.parse stored value.\n * Note: method name is getWithEncription in source.\n */\ngetWithEncription<T>(key: string): T | null"
+        }
+      ]
+    },
+    {
+      "title": "AXSessionStorageService",
+      "description": "Tab-scoped storage with the same JSON API as localStorage.",
+      "props": [],
+      "methods": [
+        {
+          "content": "get<T>(key: string): T | null"
+        },
+        {
+          "content": "set<T>(key: string, value: T): void"
+        },
+        {
+          "content": "removeItem(key: string): void"
+        },
+        {
+          "content": "clear(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXCookieStorageService",
+      "description": "Document.cookie wrapper with encode/decode and SameSite support.",
+      "props": [],
+      "methods": [
+        {
+          "content": "check(name: string): boolean"
+        },
+        {
+          "content": "get(name: string): string"
+        },
+        {
+          "content": "getAll(): { [key: string]: string }"
+        },
+        {
+          "content": "set(name: string, value: string, options?: AXCookieOptions): void"
+        },
+        {
+          "content": "delete(name: string, path?, domain?, secure?, sameSite?): void"
+        },
+        {
+          "content": "deleteAll(path?, domain?, secure?, sameSite?): void"
+        }
+      ]
+    },
+    {
+      "title": "AXCookieOptions",
+      "description": "Cookie set/delete options.",
+      "props": [
+        {
+          "name": "expires?",
+          "type": [{ "name": "number | Date" }],
+          "description": "Number = days from now, or an absolute Date."
+        },
+        {
+          "name": "path?",
+          "type": [{ "name": "string" }],
+          "description": "Cookie path (e.g. '/')."
+        },
+        {
+          "name": "domain?",
+          "type": [{ "name": "string" }],
+          "description": "Cookie domain."
+        },
+        {
+          "name": "secure?",
+          "type": [{ "name": "boolean" }],
+          "description": "Secure flag. Forced true when sameSite is 'None'."
+        },
+        {
+          "name": "sameSite?",
+          "type": [{ "name": "'Lax' | 'None' | 'Strict'" }],
+          "description": "Defaults to 'Lax'."
+        }
+      ]
+    },
+    {
+      "title": "AX_LOCALSTORAGE_SECRET_KEY",
+      "description": "InjectionToken<string> — AES passphrase for encrypted localStorage entries.",
+      "props": [],
+      "methods": []
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the storage package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/storage package offers three browser storage adapters:\n\n• AXLocalStorageService — survives browser restarts, JSON values, optional AES encryption\n• AXSessionStorageService — cleared when the tab closes, same JSON API\n• AXCookieStorageService — string cookies with path, domain, expiry, secure, and SameSite\n\nAll services guard against SSR using isBrowser() or isPlatformBrowser(). They do not auto-register — you must add them to your app providers."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Register the services once, then inject the storage adapters to persist JSON values, tab state, and cookies.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "storage-basic-usage.component.ts",
+            "language": "typescript",
+            "content": "import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';\nimport {\n  AXCookieStorageService,\n  AXLocalStorageService,\n  AXSessionStorageService,\n} from '@acorex/core/storage';\n\ninterface UserPrefs {\n  theme: 'light' | 'dark';\n  locale: 'en-US' | 'fa-IR';\n}\n\n@Component({\n  selector: 'app-storage-basic-usage',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @if (prefs(); as currentPrefs) {\n      <p>Theme: {{ currentPrefs.theme }}</p>\n      <p>Locale: {{ currentPrefs.locale }}</p>\n    } @else {\n      <p>No preferences saved yet.</p>\n    }\n\n    <p>Wizard step: {{ draft().step }}</p>\n    <p>Cookie consent: {{ cookieConsent() ? 'accepted' : 'pending' }}</p>\n\n    <button type=\"button\" (click)=\"savePreferences()\">Save preferences</button>\n    <button type=\"button\" (click)=\"saveDraft()\">Save draft</button>\n    <button type=\"button\" (click)=\"acceptCookies()\">Accept cookies</button>\n    <button type=\"button\" (click)=\"clear()\">Clear</button>\n  `,\n})\nexport class StorageBasicUsageComponent {\n  private readonly localStorage = inject(AXLocalStorageService);\n  private readonly sessionStorage = inject(AXSessionStorageService);\n  private readonly cookieStorage = inject(AXCookieStorageService);\n\n  protected readonly prefs = signal<UserPrefs | null>(this.localStorage.get<UserPrefs>('APP_PREFS'));\n  protected readonly draft = signal(this.sessionStorage.get<{ step: number }>('CHECKOUT_DRAFT') || { step: 1 });\n  protected readonly cookieConsent = signal(this.cookieStorage.check('cookie_consent'));\n\n  savePreferences() {\n    const nextPrefs: UserPrefs = { theme: 'dark', locale: 'en-US' };\n    this.localStorage.set('APP_PREFS', nextPrefs);\n    this.prefs.set(nextPrefs);\n  }\n\n  saveDraft() {\n    const nextDraft = { step: this.draft().step + 1 };\n    this.sessionStorage.set('CHECKOUT_DRAFT', nextDraft);\n    this.draft.set(nextDraft);\n  }\n\n  acceptCookies() {\n    this.cookieStorage.set('cookie_consent', 'accepted', {\n      path: '/',\n      expires: 365,\n      sameSite: 'Lax',\n      secure: true,\n    });\n    this.cookieConsent.set(true);\n  }\n\n  clear() {\n    this.localStorage.removeItem('APP_PREFS');\n    this.sessionStorage.removeItem('CHECKOUT_DRAFT');\n    this.cookieStorage.delete('cookie_consent', '/');\n    this.prefs.set(null);\n    this.draft.set({ step: 1 });\n    this.cookieConsent.set(false);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "LocalStorage — JSON Persistence",
+      "description": "Store and retrieve typed objects.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "preferences.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { AXLocalStorageService } from '@acorex/core/storage';\n\ninterface UserPrefs {\n  sidebarCollapsed: boolean;\n  lastVisited: string;\n}\n\n@Component({\n  selector: 'app-preferences',\n  providers: [AXLocalStorageService],\n  template: `\n    <button type=\"button\" (click)=\"save()\">Save</button>\n    <button type=\"button\" (click)=\"load()\">Load</button>\n  `,\n})\nexport class PreferencesComponent {\n  private storage = inject(AXLocalStorageService);\n  private readonly KEY = 'USER_PREFS';\n\n  prefs = signal<UserPrefs | null>(null);\n\n  save() {\n    this.storage.set<UserPrefs>(this.KEY, {\n      sidebarCollapsed: true,\n      lastVisited: '/dashboard',\n    });\n  }\n\n  load() {\n    const saved = this.storage.get<UserPrefs>(this.KEY);\n    this.prefs.set(saved);\n  }\n\n  clear() {\n    this.storage.removeItem(this.KEY);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Encrypted LocalStorage",
+      "description": "Store sensitive data with AES encryption.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "encrypted-storage.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXLocalStorageService } from '@acorex/core/storage';\n\ninterface AuthTokens {\n  accessToken: string;\n  refreshToken: string;\n}\n\nfunction saveTokens(tokens: AuthTokens) {\n  const storage = inject(AXLocalStorageService);\n  storage.setWithEncryption('AUTH_TOKENS', tokens);\n}\n\nfunction loadTokens(): AuthTokens | null {\n  const storage = inject(AXLocalStorageService);\n  return storage.getWithEncription<AuthTokens>('AUTH_TOKENS');\n}\n\n// Requires AX_LOCALSTORAGE_SECRET_KEY in app config.\n// Note: client-side encryption obfuscates values but is not a substitute\n// for secure httpOnly cookies for highly sensitive tokens.\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "SessionStorage",
+      "description": "Tab-scoped temporary data.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "wizard.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXSessionStorageService } from '@acorex/core/storage';\n\n@Component({\n  selector: 'app-wizard',\n  providers: [AXSessionStorageService],\n  template: `<p>Step {{ step }}</p>`,\n})\nexport class WizardComponent {\n  private session = inject(AXSessionStorageService);\n  step = 1;\n\n  ngOnInit() {\n    const saved = this.session.get<{ step: number }>('WIZARD_STATE');\n    if (saved) this.step = saved.step;\n  }\n\n  nextStep() {\n    this.step++;\n    this.session.set('WIZARD_STATE', { step: this.step });\n  }\n\n  ngOnDestroy() {\n    // Optional: clear when wizard completes\n    // this.session.removeItem('WIZARD_STATE');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Cookie Management",
+      "description": "Set, read, and delete cookies with security options.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "cookie-usage.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXCookieStorageService } from '@acorex/core/storage';\n\nfunction manageCookies() {\n  const cookies = inject(AXCookieStorageService);\n\n  // Set with options object\n  cookies.set('session_id', 'abc123', {\n    path: '/',\n    expires: 7,        // 7 days\n    secure: true,\n    sameSite: 'Lax',\n  });\n\n  // Check existence\n  if (cookies.check('session_id')) {\n    console.log(cookies.get('session_id'));\n  }\n\n  // Read all cookies\n  console.log(cookies.getAll());\n\n  // Delete one\n  cookies.delete('session_id', '/');\n\n  // Delete all (optionally scoped by path/domain)\n  // cookies.deleteAll('/');\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Real-World: Layout Preferences",
+      "description": "How LayoutService persists locale and theme.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "layout.service.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport { AXPlatform } from '@acorex/core/platform';\nimport { AXLocalStorageService } from '@acorex/core/storage';\n\ntype AXLangLocale = 'en-US' | 'fa-IR';\n\n@Injectable({ providedIn: 'root' })\nexport class LayoutService {\n  private localStorage = inject(AXLocalStorageService);\n  private platform = inject(AXPlatform);\n\n  init() {\n    const locale = this.localStorage.get<AXLangLocale>('AX_LANG');\n    if (locale) {\n      this.applyLocale(locale);\n    }\n    this.platform.autoDetectThemeMode();\n  }\n\n  toggleTheme() {\n    const theme = this.platform.autoDetectThemeMode();\n    this.localStorage.set('AX_THEME_MODE', theme);\n  }\n\n  switchLang(locale: AXLangLocale) {\n    this.localStorage.set('AX_LANG', locale);\n    this.applyLocale(locale);\n  }\n\n  private applyLocale(locale: AXLangLocale) {\n    // e.g. localeService.setProfile(locale)\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Choosing a Storage Backend",
+      "description": "When to use which service.",
+      "content": {
+        "type": "text",
+        "data": "| Service | Scope | Data type | Best for |\n|---------|-------|-----------|----------|\n| AXLocalStorageService | Persistent across sessions | JSON objects | User prefs, locale, theme, cached settings |\n| AXSessionStorageService | Current tab only | JSON objects | Multi-step forms, temporary wizard state |\n| AXCookieStorageService | Configurable expiry | Plain strings | Server-readable tokens, analytics IDs, SSR-friendly flags |\n\nUse setWithEncryption for obfuscating local values (not for high-security secrets — prefer httpOnly cookies from the server).\n\nAll JSON storage methods return null on the server — always handle null when restoring state on init."
+      }
+    },
+    {
+      "title": "SSR and Error Handling",
+      "description": "Safe patterns during server rendering.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "ssr-safe-restore.ts",
+            "language": "typescript",
+            "content": "import { afterNextRender, inject } from '@angular/core';\nimport { AXLocalStorageService } from '@acorex/core/storage';\n\nfunction restoreUserState() {\n  const storage = inject(AXLocalStorageService);\n\n  // get() returns null during SSR — defer restore to browser\n  afterNextRender(() => {\n    const user = storage.get<{ name: string }>('CURRENT_USER');\n    if (user) {\n      console.log('Welcome back', user.name);\n    }\n  });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXStorage Interface",
+      "description": "Polymorphic usage for swappable backends.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "storage-abstraction.ts",
+            "language": "typescript",
+            "content": "import { AXStorage, AXLocalStorageService, AXSessionStorageService } from '@acorex/core/storage';\n\nfunction persistDraft(storage: AXStorage, key: string, data: unknown) {\n  storage.set(key, data);\n}\n\n// Use local for long-lived drafts\npersistDraft(localStorageService, 'DRAFT', { title: 'Hello' });\n\n// Use session for tab-only drafts\npersistDraft(sessionStorageService, 'DRAFT', { title: 'Hello' });\n"
+          }
+        ]
+      }
+    }
+  ]
+}

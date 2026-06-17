@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHolidayDate",
+  "imports": ["import { AXHolidayDate } from '@acorex/core/date-time';"],
+  "description": "Represents a holiday date in the scheduler.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing a holiday date with date and name properties.",
+             "content": {
+         "type": "code",
+         "data": [
+           {
+             "language": "typescript",
+             "fileName": "ax-holiday-date.ts",
+             "content": "interface AXHolidayDate {\n  date: Date;\n  title: string;\n  cssClass?: string;\n  description?: string;\n  [key: string]: unknown;\n}"
+           }
+         ]
+       }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXHolidayDate",
+             "props": [
+         {
+           "name": "date",
+           "type": [{ "name": "Date" }],
+           "description": "The holiday date."
+         },
+         {
+           "name": "title",
+           "type": [{ "name": "string" }],
+           "description": "Title of the holiday."
+         },
+         {
+           "name": "cssClass",
+           "type": [{ "name": "string" }],
+           "description": "Optional CSS class for styling the holiday."
+         },
+         {
+           "name": "description",
+           "type": [{ "name": "string" }],
+           "description": "Optional description of the holiday."
+         }
+       ]
+    }
+  ]
+}

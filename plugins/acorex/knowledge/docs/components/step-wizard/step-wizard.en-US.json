@@ -1,0 +1,424 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXStepWizardComponent } from '@acorex/components/step-wizard';",
+    "import { AXStepWizardItemComponent } from '@acorex/components/step-wizard';",
+    "import { AXStepWizardContentDirective } from '@acorex/components/step-wizard';"
+  ],
+  "title": "Step Wizard",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/stepwizard--documentation"
+    }
+  ],
+  "description": "A step-by-step wizard component for guiding users through multi-step processes",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "Basic step wizard with default circular-icon look and connector lines",
+      "height": "550px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/usage"
+      }
+    },
+    {
+      "title": "Navigation Methods",
+      "description": "Demonstrates programmatic navigation methods like next(), previous(), goStep(), and reset()",
+      "height": "700px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/methods"
+      }
+    },
+    {
+      "title": "Navigation States",
+      "description": "Shows different step states (pending, success, error, warning) and navigation between steps",
+      "height": "700px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/navigation-state"
+      }
+    },
+    {
+      "title": "Different Looks",
+      "description": "Explore various visual styles and appearances of the step wizard",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/different-looks"
+      }
+    },
+    {
+      "title": "Different Sizes",
+      "description": "Compare how the step wizard looks in different sizes: small, medium, and large",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/different-sizes"
+      }
+    },
+    {
+      "title": "Orientation",
+      "description": "Compare horizontal and vertical layouts of the step wizard",
+      "height": "700px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/orientation"
+      }
+    },
+    {
+      "title": "Connector Options",
+      "description": "Explore how connectors affect the visual flow and appearance of the step wizard",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "step-wizard/connector-options"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXStepWizardComponent",
+      "props": [
+        {
+          "name": "connector",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show connector lines between steps",
+          "default": "true"
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "AXStepWizardSize",
+              "link": "/en-US/docs/types/step-wizard-size"
+            }
+          ],
+          "description": "Size of the step wizard",
+          "default": "'ax-md'"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStepWizardLook",
+              "link": "/en-US/docs/types/step-wizard-look"
+            }
+          ],
+          "description": "Visual style of the step wizard",
+          "default": "'circular-icon'"
+        },
+        {
+          "name": "changeStep",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether steps are clickable for navigation",
+          "default": "false"
+        },
+        {
+          "name": "scrollToStep",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to automatically scroll to the active step when it changes",
+          "default": "true"
+        },
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "AXOrientation",
+              "link": "/en-US/docs/types/ax-orientation"
+            }
+          ],
+          "description": "Orientation of the step wizard"
+        },
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "AXStepWizardContentDirective"
+            }
+          ],
+          "description": "Template reference for the step wizard content"
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent"
+        },
+        {
+          "name": "isFirst",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Computed property that returns true if the current step is the first step"
+        },
+        {
+          "name": "isLast",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Computed property that returns true if the current step is the last step"
+        },
+        {
+          "name": "activeStepIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Current active step index (0-based)",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "stepChanged",
+          "type": [
+            {
+              "name": "AXStepWizardItemComponent"
+            }
+          ],
+          "description": "Emitted when the active step changes"
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when component options change. Inherited from MXBaseComponent"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Navigate to the next step\n */\nnext(): void"
+        },
+        {
+          "content": "/**\n * Navigate to the previous step\n */\nprevious(): void"
+        },
+        {
+          "content": "/**\n * Navigate to a specific step by index\n * @param stepIndex - The step index to navigate to\n */\ngoStep(stepIndex: number): void"
+        },
+        {
+          "content": "/**\n * Reset the wizard to the first step\n */\nreset(): void"
+        },
+        {
+          "content": "/**\n * Get the host element of the component\n * @returns T - The host element\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Set a component option with lifecycle callbacks\n * @param option - The option configuration\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXStepWizardItemComponent",
+      "props": [
+        {
+          "name": "step",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Step number for the wizard item",
+          "default": "1"
+        },
+        {
+          "name": "label",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Label text for the step"
+        },
+        {
+          "name": "description",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Description text for the step"
+        },
+        {
+          "name": "customTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Custom template for the step content"
+        },
+        {
+          "name": "active",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the step is currently active",
+          "default": "false"
+        },
+        {
+          "name": "passed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the step has been completed/passed",
+          "default": "false"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStepWizardLook",
+              "link": "/en-US/docs/types/step-wizard-look"
+            }
+          ],
+          "description": "Visual style of the step item"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXStepWizardState",
+              "link": "/en-US/docs/types/step-wizard-state"
+            }
+          ],
+          "description": "Current state of the step",
+          "default": "'clear'"
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the step. Inherited from MXBaseComponent"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the step is disabled. Inherited from MXInteractiveComponent",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Color theme of the component. Inherited from MXColorComponent",
+          "default": "'default'"
+        }
+      ],
+      "events": [
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when disabled state changes. Inherited from MXInteractiveComponent"
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the step receives focus. Inherited from MXInteractiveComponent"
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the step loses focus. Inherited from MXInteractiveComponent"
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when color changes. Inherited from MXColorComponent"
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when component options change. Inherited from MXBaseComponent"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Get the host element of the component\n * @returns T - The host element\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Set a component option with lifecycle callbacks\n * @param option - The option configuration\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXStepWizardContentDirective",
+      "props": [
+        {
+          "name": "portal",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Template reference for the content to be displayed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXOverlayService",
+  "imports": ["import { AXOverlayService } from '@acorex/cdk/overlay';"],
+  "description": "Service class for managing overlay components and modal dialogs.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Overlay service API shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "overlay-service.ts",
+            "content": "class AXOverlayService {\n  open(config: unknown): Promise<unknown>;\n  close(id: string): Promise<void>;\n  closeAll(): Promise<void>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXOverlayService",
+      "props": [
+        {
+          "name": "activeOverlays",
+          "type": [{ "name": "AXOverlayRef[]", "link": "/en-US/docs/types/overlay-ref" }],
+          "description": "Array of currently active overlay references."
+        },
+        {
+          "name": "defaultOptions",
+          "type": [{ "name": "AXOverlayOptions", "link": "/en-US/docs/types/overlay-options" }],
+          "description": "Default configuration options for overlays."
+        }
+      ],
+      "description": "Service for creating, managing, and controlling overlay components such as modals, tooltips, and popovers.",
+      "methods": [
+        {
+          "name": "create",
+          "description": "Creates a new overlay with the specified component and options."
+        },
+        {
+          "name": "open",
+          "description": "Opens an overlay component with the specified configuration."
+        },
+        {
+          "name": "close",
+          "description": "Closes a specific overlay by its reference."
+        },
+        {
+          "name": "closeAll",
+          "description": "Closes all active overlays."
+        },
+        {
+          "name": "getActiveOverlays",
+          "description": "Returns all currently active overlay references."
+        },
+        {
+          "name": "hasActiveOverlays",
+          "description": "Checks if there are any active overlays."
+        },
+        {
+          "name": "setDefaultOptions",
+          "description": "Sets default options for all overlays created by this service."
+        },
+        {
+          "name": "onOverlayOpen",
+          "description": "Registers a callback to be called when an overlay is opened."
+        },
+        {
+          "name": "onOverlayClose",
+          "description": "Registers a callback to be called when an overlay is closed."
+        },
+        {
+          "name": "onOverlayError",
+          "description": "Registers a callback to be called when overlay operations fail."
+        },
+        {
+          "name": "onOverlayPositionChange",
+          "description": "Registers a callback to be called when overlay position changes."
+        }
+      ]
+    }
+  ]
+}

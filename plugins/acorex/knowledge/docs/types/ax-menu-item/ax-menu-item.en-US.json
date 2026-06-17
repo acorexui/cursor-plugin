@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMenuItem",
+  "description": "Type describing a menu item object used by AXMenuComponent for declarative item rendering.",
+  "imports": ["import { AXMenuItem } from '@acorex/components/menu';"],
+  "types": [
+    {
+      "title": "AXMenuItem",
+      "props": [
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Color theme for the item."
+        },
+        { "name": "name", "type": [{ "name": "string" }], "description": "Optional unique name identifier." },
+        { "name": "text", "type": [{ "name": "string" }], "description": "Display text for the item." },
+        { "name": "data", "type": [{ "name": "any" }], "description": "Custom data associated with the item." },
+        { "name": "icon", "type": [{ "name": "string" }], "description": "Icon name shown as a prefix." },
+        { "name": "disabled", "type": [{ "name": "boolean" }], "description": "Whether the item is disabled." },
+        {
+          "name": "items",
+          "type": [{ "name": "AXMenuItem[]", "link": "/en-US/docs/types/ax-menu-item" }],
+          "description": "Nested submenu items."
+        },
+        {
+          "name": "suffix",
+          "type": [{ "name": "{ text: string }" }],
+          "description": "Suffix content configuration (e.g., shortcut text)."
+        },
+        { "name": "break", "type": [{ "name": "boolean" }], "description": "Whether a divider follows the item." },
+        {
+          "name": "group",
+          "type": [{ "name": "{ name?: string; title?: string }" }],
+          "description": "Group metadata for items."
+        }
+      ]
+    }
+  ]
+}

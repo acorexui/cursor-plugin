@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXHtmlEvent",
+  "description": "Event that includes a native DOM event.",
+  "imports": ["import { AXHtmlEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "The event class definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "events.class.ts",
+            "content": "export class AXHtmlEvent<E extends Event = Event> extends AXEvent {\n  nativeEvent?: E;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXHtmlEvent<T = any>",
+      "props": [
+        { "name": "component", "type": [{ "name": "any" }], "description": "The sender component." },
+        { "name": "htmlElement", "type": [{ "name": "HTMLElement" }], "description": "The root native element." },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates if the event was triggered by user interaction.",
+          "default": "false"
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "Event" }],
+          "description": "The original native HTML event object."
+        }
+      ]
+    }
+  ]
+}

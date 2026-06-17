@@ -1,0 +1,23 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Command Component Event",
+  "description": "Represents the event payload when a command component item is selected or submitted.",
+  "imports": ["import { AXCommandComponentEvent } from '@acorex/components/command';"],
+  "types": [
+    {
+      "title": "AXCommandComponentEvent",
+      "props": [
+        {
+          "name": "data",
+          "type": [{ "name": "CommandMenuItem", "link": "/en-US/docs/types/command-menu-item" }],
+          "description": "The selected menu item data."
+        },
+        {
+          "name": "component",
+          "type": [{ "name": "AXCommandComponent" }],
+          "description": "The command component instance that emitted the event."
+        }
+      ]
+    }
+  ]
+}

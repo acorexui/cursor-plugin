@@ -1,0 +1,365 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Tree View",
+  "description": "The Tree View component displays hierarchical data in a tree structure with support for selection, expansion, and custom templates.",
+  "imports": ["import { AXTreeViewComponent } from '@acorex/components/tree-view';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-tree-view</code> to display a tree structure with selectable nodes.",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "tree-view/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTreeViewComponent",
+      "props": [
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "unknown[] "
+            },
+            {
+              "name": "((selectedItemId?: string | number) => unknown[]"
+            },
+            {
+              "name": "Promise<unknown[]>"
+            }
+          ],
+          "description": "The data items to display in the tree."
+        },
+        {
+          "name": "showCheckbox",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Show checkboxes for selection."
+        },
+        {
+          "name": "hasCheckboxField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'hasCheckbox'",
+          "description": "Field name for checkbox visibility."
+        },
+        {
+          "name": "selectionMode",
+          "type": [
+            {
+              "name": "'single'"
+            },
+            {
+              "name": "'multiple'"
+            }
+          ],
+          "default": "'single'",
+          "description": "Selection mode for nodes."
+        },
+        {
+          "name": "selectionBehavior",
+          "type": [
+            {
+              "name": "AXTreeViewSelectionBehavior",
+              "link": "/en-US/docs/types/tree-view-selection-behavior"
+            }
+          ],
+          "description": "Selection behavior (autoExpand, cascade, indeterminate)."
+        },
+        {
+          "name": "selectionScope",
+          "type": [
+            {
+              "name": "AXTreeViewSelectionScope",
+              "link": "/en-US/docs/types/tree-view-selection-scope"
+            }
+          ],
+          "default": "'all'",
+          "description": "Scope of selection (all, children, etc.)."
+        },
+        {
+          "name": "focusNodeEnabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable focus on nodes."
+        },
+        {
+          "name": "valueField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'id'",
+          "description": "Field name for node value."
+        },
+        {
+          "name": "textField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'text'",
+          "description": "Field name for node text."
+        },
+        {
+          "name": "visibleField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'visible'",
+          "description": "Field name for node visibility."
+        },
+        {
+          "name": "disableField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'disabled'",
+          "description": "Field name for node disabled state."
+        },
+        {
+          "name": "hasChildField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'hasChild'",
+          "description": "Field name for child existence."
+        },
+        {
+          "name": "selectedField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'selected'",
+          "description": "Field name for node selection."
+        },
+        {
+          "name": "expandedField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'expanded'",
+          "description": "Field name for node expansion."
+        },
+        {
+          "name": "tooltipField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'tooltip'",
+          "description": "Field name for node tooltip."
+        },
+        {
+          "name": "childrenField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'children'",
+          "description": "Field name for node children."
+        },
+        {
+          "name": "activeField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'active'",
+          "description": "Field name for node active state."
+        },
+        {
+          "name": "indeterminateField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'indeterminate'",
+          "description": "Field name for indeterminate state."
+        },
+        {
+          "name": "parentField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'parentId'",
+          "description": "Field name for parent node."
+        },
+        {
+          "name": "iconField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'icon'",
+          "description": "Field name for node icon."
+        },
+        {
+          "name": "toggleIcons",
+          "type": [
+            {
+              "name": "AXExpandToggleIcons",
+              "link": "/en-US/docs/types/expand-toggle-icons"
+            }
+          ],
+          "description": "Custom icons for expand/collapse toggles."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXTreeViewLook",
+              "link": "/en-US/docs/types/tree-view-look"
+            }
+          ],
+          "default": "'defult'",
+          "description": "Visual style of the tree view."
+        },
+        {
+          "name": "expandOn",
+          "type": [
+            {
+              "name": "AXTreeViewExpandBehavior",
+              "link": "/en-US/docs/types/tree-view-expand-behavior"
+            }
+          ],
+          "default": "'defult'",
+          "description": "Expand behavior (click, dbClick, etc.)."
+        },
+        {
+          "name": "showEmptyNodeMassage",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Show empty node message."
+        },
+        {
+          "name": "itemTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Custom template for tree items."
+        },
+        {
+          "name": "emptyTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for empty state."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "The native DOM element. Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onSelectionChanged",
+          "type": [
+            {
+              "name": "AXTreeItemClickBaseEvent",
+              "link": "/en-US/docs/events/tree-item-click-base-event"
+            }
+          ],
+          "description": "Emitted when selection changes."
+        },
+        {
+          "name": "onItemSelectedChanged",
+          "type": [
+            {
+              "name": "AXTreeItemClickBaseEvent",
+              "link": "/en-US/docs/events/tree-item-click-base-event"
+            }
+          ],
+          "description": "Emitted when an item is selected."
+        },
+        {
+          "name": "onNodeClick",
+          "type": [
+            {
+              "name": "AXTreeItemClickBaseEvent",
+              "link": "/en-US/docs/events/tree-item-click-base-event"
+            }
+          ],
+          "description": "Emitted when a node is clicked."
+        },
+        {
+          "name": "onCollapsedChanged",
+          "type": [
+            {
+              "name": "AXTreeItemClickBaseEvent",
+              "link": "/en-US/docs/events/tree-item-click-base-event"
+            }
+          ],
+          "description": "Emitted when a node is collapsed or expanded."
+        },
+        {
+          "name": "onNodedbClick",
+          "type": [
+            {
+              "name": "AXTreeItemClickBaseEvent",
+              "link": "/en-US/docs/events/tree-item-click-base-event"
+            }
+          ],
+          "description": "Emitted when a node is double-clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Execute an operation on a tree node.\n * @param node - The tree node to operate on\n * @param operation - The operation to perform\n * @param value - The value to set\n */\nexecuteOnTreeNode(node: unknown, operation: AXTreeViewOperationMethod, value: boolean): void"
+        },
+        {
+          "content": "/**\n * Refresh the tree view data.\n */\nrefresh(): void"
+        },
+        {
+          "content": "/**\n * Set expansion state for multiple nodes and their children.\n * @param valueFields - Array of node value fields to expand/collapse\n * @param value - Whether to expand (true) or collapse (false)\n */\nasync setNodeExpandAndChildren(valueFields: (number | string)[], value: boolean): Promise<void>"
+        }
+      ]
+    }
+  ]
+}

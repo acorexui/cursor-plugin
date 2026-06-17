@@ -1,0 +1,277 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Component Documentation Schema",
+  "description": "Schema for defining the documentation structure of a UI component, based on libs/types/src/context-doc.ts.",
+  "type": "object",
+  
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema reference for this file."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["deprecated", "new", "beta"]
+    },
+    "title": {
+      "description": "The main title of the component documentation (e.g., 'Button'). Corresponds to ContextDoc.title.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A detailed description of the component, its purpose, and key features. Corresponds to ContextDoc.description.",
+      "type": "string"
+    },
+    "imports": {
+      "description": "An array of import statements required to use the component. Corresponds to ContextDoc.imports.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "An import statement string.",
+        "pattern": "^import\\s+\\{.*\\}\\s+from\\s+['\"].*['\"];?$"
+      },
+      "minItems": 0
+    },
+    "extraLinks": {
+      "description": "An array of external links related to the component. Corresponds to ContextDoc.extraLinks.",
+      "type": "array",
+      "items": { "$ref": "#/definitions/docExtraLinkItem" },
+      "minItems": 0
+    },
+    "hints": {
+      "description": "An array of informational hints or alerts. Corresponds to ContextDoc.hints.",
+      "type": "array",
+      "items": { "$ref": "#/definitions/docHintItem" },
+      "minItems": 0
+    },
+    "sections": {
+      "description": "An array of content sections for the component documentation. Corresponds to ContextDoc.sections.",
+      "type": "array",
+      "items": { "$ref": "#/definitions/docSectionItem" },
+      "minItems": 0
+    },
+    "types": {
+      "description": "An array defining the TypeScript types, props, events, and methods associated with the component. Corresponds to ContextDoc.types (optional array of DocApi).",
+      "type": "array",
+      "items": { "$ref": "#/definitions/docApiItem" },
+      "minItems": 0
+    },
+    "tokens": {
+      "description": "An array of CSS custom properties (tokens) used by the component. Corresponds to ContextDoc.tokens (optional array of DocToken).",
+      "type": "array",
+      "items": { "$ref": "#/definitions/docTokenItem" },
+      "minItems": 0
+    }
+  },
+  "required": ["title", "description"],
+  "additionalProperties": false,
+
+  "definitions": {
+    "docExtraLinkItem": {
+      "type": "object",
+      "description": "Defines an external link item. Corresponds to DocExtraLink interface.",
+      "properties": {
+        "text": { "type": "string" },
+        "icon": { "type": "string" },
+        "href": { "type": "string", "format": "uri-reference" }
+      },
+      "required": ["text", "icon", "href"],
+      "additionalProperties": false
+    },
+    "docHintItem": {
+      "type": "object",
+      "description": "Defines an informational hint or alert item. Corresponds to an item in ContextDoc.hints.",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["warning", "primary", "success", "danger"]
+        }
+      },
+      "required": ["title", "content", "status"],
+      "additionalProperties": false
+    },
+    "docCodeFileItem": {
+      "type": "object",
+      "description": "Defines the data structure for 'code' type content when data is DocCodeFile.",
+      "properties": {
+        "fileName": { "type": "string" },
+        "language": { "type": "string" },
+        "content": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["fileName", "language", "content"],
+      "additionalProperties": false
+    },
+    "docSectionContentItem": {
+      "type": "object",
+      "description": "Defines the content of a documentation section. Corresponds to DocSection.content.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["code", "api", "table"]
+        },
+        "data": {
+          "description": "Data for the content. If type='code', this is DocCodeFile or DocCodeFile[]. If type='api', this is a string.",
+          "oneOf": [
+            { "$ref": "#/definitions/docCodeFileItem" },
+            { "type": "array", "items": { "$ref": "#/definitions/docCodeFileItem" } },
+            { "type": "object", "items": { "$ref": "#/definitions/docTableItem" } },
+            { "type": "string" }
+          ]
+        }
+      },
+      "required": ["type", "data"],
+      "additionalProperties": false
+    },
+    "docSectionItem": {
+      "type": "object",
+      "description": "Defines a documentation section. Corresponds to DocSection interface.",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "content": { "$ref": "#/definitions/docSectionContentItem" },
+        "height": { "type": "string", "description": "The height of the section in pixels." },
+        "date": {
+          "type": "object",
+          "description": "Optional dates to indicate the status of the menu item.",
+          "properties": {
+            "createdAt": {
+              "type": "string",
+              "format": "date",
+              "description": "The creation date of the menu item."
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "The last update date of the menu item."
+            },
+            "betaAt": {
+              "type": "string",
+              "format": "date",
+              "description": "The date the menu item was marked as beta."
+            },
+            "deprecatedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "The date the menu item was deprecated."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": ["title", "description", "content"],
+      "additionalProperties": false
+    },
+    "docTypeItem": {
+      "type": "object",
+      "description": "Defines an individual segment of a type declaration. Corresponds to DocType interface.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The textual representation of this type segment."
+        },
+        "link": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "An optional URL to the detailed documentation of this type segment."
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "docPropertyItem": {
+      "type": "object",
+      "description": "Defines a property, event, or method item. Corresponds to DocProperty interface.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the property/event/method."
+        },
+        "type": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/docTypeItem" },
+          "description": "An array of type segments. This property itself is optional."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the item does."
+        },
+        "default": {
+          "type": "string",
+          "description": "The default value (for props) or general information (for events/methods). This property is optional."
+        }
+      },
+      "required": ["name", "description"],
+      "additionalProperties": false
+    },
+    "syntaxHighlighterItem": {
+      "type": "object",
+      "description": "Defines a syntax highlighter item for methods. Corresponds to SyntaxHighlighterItem interface.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the method with JSDoc comments and signature."
+        }
+      },
+      "required": ["content"],
+      "additionalProperties": false
+    },
+    "docApiItem": {
+      "type": "object",
+      "description": "Defines a TypeScript API block (interface, class, etc.). Corresponds to DocApi interface.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name of the type or interface (e.g., 'Button', 'ButtonProps')."
+        },
+        "props": {
+          "type": "array",
+          "description": "An array of properties. Optional.",
+          "items": { "$ref": "#/definitions/docPropertyItem" },
+          "minItems": 0
+        },
+        "events": {
+          "type": "array",
+          "description": "An array of events. Optional.",
+          "items": [{ "$ref": "#/definitions/docPropertyItem" }],
+          "minItems": 0
+        },
+        "methods": {
+          "type": "array",
+          "description": "An array of methods as SyntaxHighlighterItem[]. Optional.",
+          "items": { "$ref": "#/definitions/syntaxHighlighterItem" },
+          "minItems": 0
+        }
+      },
+      "required": ["title"],
+      "additionalProperties": false
+    },
+    "docTokenItem": {
+      "type": "object",
+      "description": "Defines a CSS custom property (token). Corresponds to DocToken interface.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The CSS custom property name.",
+          "pattern": "^--[a-zA-Z0-9-]+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the token."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the token's purpose."
+        },
+        "tokenLink": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A link to more detailed documentation for the token. This property is optional."
+        }
+      },
+      "required": ["key", "value", "description"],
+      "additionalProperties": false
+    }
+  }
+}

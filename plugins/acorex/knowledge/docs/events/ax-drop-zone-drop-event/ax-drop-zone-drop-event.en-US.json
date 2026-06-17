@@ -1,0 +1,46 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drop Zone Drop Event",
+  "description": "Event emitted when an element is dropped onto a drop zone.",
+  "imports": ["import { AXDropZoneDropEvent } from '@acorex/cdk/drag-drop';"],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "Shape of the drop zone drop event.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "drop-zone.directive.ts",
+            "content": "export interface AXDropZoneDropEvent extends NXNativeEvent<AXDropZoneDirective, MouseEvent> {\n  dropped: AXDragDirective;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDropZoneDropEvent",
+      "props": [
+        {
+          "name": "dropped",
+          "type": [{ "name": "AXDragDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drag directive instance that was dropped."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "Underlying native event. Inherited from NXNativeEvent."
+        },
+        {
+          "name": "sender",
+          "type": [{ "name": "AXDropZoneDirective", "link": "/en-US/docs/cdk/drag-drop" }],
+          "description": "The drop zone directive that sent the event. Inherited from NXEvent."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

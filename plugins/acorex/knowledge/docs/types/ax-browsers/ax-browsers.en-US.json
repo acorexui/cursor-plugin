@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXBrowsers",
+  "description": "The browser type",
+  "imports": ["import { AXBrowsers } from '@acorex/core/platform';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXBrowsers type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-browsers.ts",
+            "content": "export type AXBrowsers = 'Chrome' | 'Safari' | 'Edge' | 'Firefox' | 'Opera' | 'MSIE';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBrowsers",
+      "props": [
+        {
+          "name": "AXBrowsers",
+          "type": [
+            { "name": "'Chrome'" },
+            { "name": "'Safari'" },
+            { "name": "'Edge'" },
+            { "name": "'Firefox'" },
+            { "name": "'Opera'" },
+            { "name": "'MSIE'" }
+          ],
+          "description": "The browser type"
+        }
+      ]
+    }
+  ]
+}

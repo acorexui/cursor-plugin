@@ -1,0 +1,190 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Image Service",
+  "description": "Browser-side image resizing via canvas: scale images from File or HTMLImageElement sources down to a max dimension while preserving aspect ratio, with configurable output format and quality.",
+  "imports": ["import { AXImageService } from '@acorex/core/image';"],
+  "hints": [
+    {
+      "title": "Provide the service",
+      "content": "<code>AXImageService</code> is <strong>not</strong> <code>providedIn: 'root'</code>. Add <code>providers: [AXImageService]</code> to your component, route, or <code>app.config.ts</code> before injecting it.",
+      "status": "primary"
+    },
+    {
+      "title": "Browser only",
+      "content": "Resize uses <code>canvas</code>, <code>Image</code>, and <code>URL.createObjectURL</code>. It runs on the client only — do not call during SSR.",
+      "status": "primary"
+    },
+    {
+      "title": "Scale-down only",
+      "content": "<code>maxSize</code> limits the longest side. Images already smaller than <code>maxSize</code> are not enlarged — original dimensions are kept.",
+      "status": "warning"
+    },
+    {
+      "title": "Not the UI component",
+      "content": "<code>@acorex/core/image</code> is a processing service. For displaying images in templates use <code>@acorex/components/image</code> (<code>ax-image</code>).",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXImageResizeOptions",
+      "description": "Options passed to AXImageService.resize().",
+      "props": [
+        {
+          "name": "maxSize",
+          "type": [{ "name": "number" }],
+          "description": "Maximum width or height in pixels. The longest side is capped at this value; aspect ratio is preserved."
+        },
+        {
+          "name": "source",
+          "type": [{ "name": "HTMLImageElement | File" }],
+          "description": "Input image. File sources are loaded via a temporary object URL."
+        },
+        {
+          "name": "type?",
+          "type": [{ "name": "'image/png' | 'image/jpeg' | 'image/webp'" }],
+          "description": "Output MIME type. Default: 'image/png'."
+        },
+        {
+          "name": "quality?",
+          "type": [{ "name": "number" }],
+          "description": "Encoder quality from 0 to 1. Applies to jpeg/webp. Default: 1."
+        }
+      ]
+    },
+    {
+      "title": "AXImageService",
+      "description": "Injectable service for canvas-based image resizing.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Draws the source onto a canvas scaled to fit within maxSize\n * and returns the result as a Blob.\n *\n * @param options - Resize configuration.\n * @returns Promise<Blob> — resized image bytes.\n */\nresize(options: {\n  maxSize: number;\n  source: HTMLImageElement | File;\n  type?: 'image/png' | 'image/jpeg' | 'image/webp';\n  quality?: number;\n}): Promise<Blob>"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the image package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/image package exposes AXImageService — a lightweight utility for client-side image compression before upload or storage.\n\nTypical use cases:\n• Shrink large photos from a file picker before sending to an API\n• Generate thumbnail-sized blobs for avatars or chat attachments\n• Convert PNG uploads to JPEG/WebP with reduced quality\n\nThe service draws the source image onto an HTML canvas, scales it so the longest side does not exceed maxSize, and exports a Blob via canvas.toBlob()."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Register AXImageService before injecting.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "upload.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXImageService } from '@acorex/core/image';\n\n@Component({\n  selector: 'app-upload',\n  providers: [AXImageService], // or rely on app-level provider\n  template: `<button type=\"button\" (click)=\"fileInput.click()\">Pick photo</button>\n           <input #fileInput type=\"file\" accept=\"image/*\" hidden (change)=\"onFile($event)\" />`,\n})\nexport class UploadComponent {\n  private imageService = inject(AXImageService);\n\n  async onFile(event: Event) {\n    const file = (event.target as HTMLInputElement).files?.[0];\n    if (!file) return;\n\n    const blob = await this.imageService.resize({\n      source: file,\n      maxSize: 1024,\n      type: 'image/jpeg',\n      quality: 0.85,\n    });\n\n    console.log('Original:', file.size, 'bytes → Resized:', blob.size, 'bytes');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Resize Options",
+      "description": "Understanding maxSize, type, and quality.",
+      "content": {
+        "type": "text",
+        "data": "maxSize — caps the longest dimension (width or height) in pixels:\n\n• Landscape 4000×2000 with maxSize 800 → 800×400\n• Portrait 1080×1920 with maxSize 800 → 450×800\n• Square 200×200 with maxSize 800 → stays 200×200 (no upscale)\n\ntype — output MIME type:\n\n• image/png — lossless, larger files (default)\n• image/jpeg — good for photos, supports quality\n• image/webp — modern format, supports quality\n\nquality — 0..1 encoder setting for jpeg/webp. Use 0.7–0.9 for uploads to balance size and visual fidelity."
+      }
+    },
+    {
+      "title": "Resize a File",
+      "description": "Most common path — user selects an image file.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "resize-file.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXImageService } from '@acorex/core/image';\n\nconst imageService = inject(AXImageService);\n\nasync function compressPhoto(file: File): Promise<Blob> {\n  return imageService.resize({\n    source: file,\n    maxSize: 800,\n    type: 'image/jpeg',\n    quality: 0.8,\n  });\n}\n\n// With AXFileService from @acorex/core/file:\n// const files = await fileService.choose({ accept: 'image/*' });\n// const blob = await compressPhoto(files[0]);\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Resize HTMLImageElement",
+      "description": "Resize an already-loaded image element.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "resize-element.ts",
+            "language": "typescript",
+            "content": "import { Component, ElementRef, inject, viewChild } from '@angular/core';\nimport { AXImageService } from '@acorex/core/image';\n\n@Component({\n  selector: 'app-crop-preview',\n  providers: [AXImageService],\n  template: `\n    <img #preview src=\"/assets/photo.jpg\" alt=\"Source\" />\n    <button type=\"button\" (click)=\"exportThumbnail()\">Export thumbnail</button>\n  `,\n})\nexport class CropPreviewComponent {\n  private imageService = inject(AXImageService);\n  private preview = viewChild<ElementRef<HTMLImageElement>>('preview');\n\n  async exportThumbnail() {\n    const img = this.preview()?.nativeElement;\n    if (!img?.complete) return;\n\n    const blob = await this.imageService.resize({\n      source: img,\n      maxSize: 256,\n      type: 'image/webp',\n      quality: 0.9,\n    });\n\n    return blob;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Upload Workflow",
+      "description": "Resize then POST to an API.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "upload-workflow.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { AXImageService } from '@acorex/core/image';\nimport { AXFileService } from '@acorex/core/file';\n\nasync function uploadCompressedImage() {\n  const imageService = inject(AXImageService);\n  const fileService = inject(AXFileService);\n  const http = inject(HttpClient);\n\n  const [file] = await fileService.choose({ accept: 'image/*', multiple: false });\n  if (!file) return;\n\n  const blob = await imageService.resize({\n    source: file,\n    maxSize: 1200,\n    type: 'image/webp',\n    quality: 0.9,\n  });\n\n  const formData = new FormData();\n  formData.append('file', blob, 'photo.webp');\n\n  return http.post('/api/upload', formData).toPromise();\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Preview and Convert Blob",
+      "description": "Show the resized image or wrap as File.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "preview-blob.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { AXImageService } from '@acorex/core/image';\n\n@Component({\n  selector: 'app-avatar-upload',\n  providers: [AXImageService],\n  template: `\n    @if (previewUrl()) {\n      <img [src]=\"previewUrl()\" alt=\"Preview\" width=\"200\" />\n    }\n  `,\n})\nexport class AvatarUploadComponent {\n  private imageService = inject(AXImageService);\n  previewUrl = signal<string | null>(null);\n\n  async handleFile(file: File) {\n    const blob = await this.imageService.resize({\n      source: file,\n      maxSize: 256,\n      type: 'image/jpeg',\n      quality: 0.85,\n    });\n\n    // Preview in template\n    const url = URL.createObjectURL(blob);\n    this.previewUrl.set(url);\n\n    // Convert Blob → File when you need a File object\n    const resizedFile = new File([blob], 'avatar.jpg', { type: blob.type });\n    return resizedFile;\n  }\n\n  ngOnDestroy() {\n    const url = this.previewUrl();\n    if (url) URL.revokeObjectURL(url);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Avatar Thumbnail Pattern",
+      "description": "Typical avatar upload with size limit.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "avatar-pattern.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXImageService } from '@acorex/core/image';\n\nconst MAX_AVATAR_PX = 256;\nconst MAX_FILE_BYTES = 100_000; // 100 KB target\n\nasync function prepareAvatar(file: File): Promise<File> {\n  const imageService = inject(AXImageService);\n\n  let quality = 0.9;\n  let blob = await imageService.resize({\n    source: file,\n    maxSize: MAX_AVATAR_PX,\n    type: 'image/jpeg',\n    quality,\n  });\n\n  // Simple quality stepping until under size target\n  while (blob.size > MAX_FILE_BYTES && quality > 0.3) {\n    quality -= 0.1;\n    blob = await imageService.resize({\n      source: file,\n      maxSize: MAX_AVATAR_PX,\n      type: 'image/jpeg',\n      quality,\n    });\n  }\n\n  return new File([blob], file.name, { type: 'image/jpeg' });\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Output Format Guide",
+      "description": "When to use png, jpeg, or webp.",
+      "content": {
+        "type": "text",
+        "data": "Choose the output type based on content and compatibility:\n\n• image/jpeg — best default for photos and avatars; smallest size with quality control\n• image/webp — smaller than jpeg at same quality; check browser/API support on server\n• image/png — use when transparency is required or for screenshots/diagrams; no quality option (always lossless)\n\nquality only affects jpeg and webp. For png, quality is ignored by the browser encoder."
+      }
+    },
+    {
+      "title": "Related Packages",
+      "description": "Companion utilities in AcoreX.",
+      "content": {
+        "type": "text",
+        "data": "• @acorex/core/file — AXFileService.choose() to open the file picker programmatically\n• @acorex/core/file — AXFileService.blobToBase64() to encode the resized Blob as a data URL\n• @acorex/cdk/uploader — AXUploaderService for full upload queue management\n• @acorex/components/image — ax-image UI component for rendering images (separate from this service)"
+      }
+    }
+  ]
+}

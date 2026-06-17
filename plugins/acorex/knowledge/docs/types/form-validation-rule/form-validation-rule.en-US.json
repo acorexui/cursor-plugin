@@ -1,0 +1,45 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Form Validation Rule",
+  "imports": ["import { AXFormValidationRule } from '@acorex/cdk/common';"],
+  "description": "Represents a validation rule applied to a form field, including its type, status, and options.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Form validation rule model.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "form-validation-rule.ts",
+            "content": "interface AXFormValidationRule {\n  rule: string;\n  disabled?: boolean;\n  options?: AXValidationRuleOptions;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormValidationRule",
+      "props": [
+        {
+          "name": "rule",
+          "type": [{ "name": "string" }],
+          "description": "The name or identifier of the validation rule."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates whether the validation rule is disabled."
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXValidationRuleOptions", "link": "/en-US/docs/types/validation-rule-options" }],
+          "description": "Additional options for configuring the validation rule."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

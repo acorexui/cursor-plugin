@@ -1,0 +1,920 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Table",
+  "description": "Data Table component is a key UI element for displaying tabular data in a clear, organized format. It allows users to efficiently view, search, sort, and interact with large datasets. With customizable features like column sorting, filtering, pagination, and row selection, the Data Table provides a powerful solution for presenting and managing data in applications.",
+  "imports": [
+    "import { AXDataTableModule } from '@acorex/components/data-table';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-data-table</code> to display tabular data.",
+      "content": {
+        "type": "api",
+        "data": "data-table/usage"
+      },
+      "height": "1000px"
+    },
+    {
+      "title": "Cell Template",
+      "description": "You can pass element ref to <code>cellTemplate</code> attribute for rendering your desired content.",
+      "content": {
+        "type": "api",
+        "data": "data-table/cell-template"
+      },
+      "height": "650px"
+    },
+    {
+      "title": "Empty Template",
+      "description": "You can pass a element ref to <code>emptyTemplate</code> property for rendering you custom empty state.",
+      "content": {
+        "type": "api",
+        "data": "data-table/empty-template"
+      }
+    },
+    {
+      "title": "Allow Resize And Reorder",
+      "description": "You can pass <code>allowResizing</code> boolean attribute to <code>ax-text-columns</code> for enable or disable columns resize and also pass <code>allowReordering</code> boolean attribute to <code>ax-data-table</code> for enable or disable columns reorder.",
+      "content": {
+        "type": "api",
+        "data": "data-table/allow-resize-and-reorder"
+      },
+      "height": "650px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBaseDataTable",
+      "description": "Abstract base class for data table components providing common functionality for data management, row selection, and hierarchical data handling.",
+      "props": [
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXDataSource<unknown>",
+              "link": "/en-US/docs/types/data-source"
+            }
+          ],
+          "default": "convertArrayToDataSource([])",
+          "description": "The data source for the table."
+        },
+        {
+          "name": "parentField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'parentId'",
+          "description": "Field name for handling nested rows."
+        },
+        {
+          "name": "selectedRows",
+          "type": [
+            {
+              "name": "unknown[]"
+            }
+          ],
+          "description": "Array of selected rows."
+        }
+      ],
+      "events": [
+        {
+          "name": "selectedRowsChange",
+          "type": [
+            {
+              "name": "unknown[]"
+            }
+          ],
+          "description": "Emitted when the selected rows change."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the data source key field name.\n *\n * @returns string - The key field name for the data source.\n */\ngetDataSourceKey(): string"
+        },
+        {
+          "content": "/**\n * Expands a row to show its children.\n *\n * @param row - The row data to expand.\n * @returns Promise<void> - Promise that resolves when expansion is complete.\n */\nexpandRow(row: any): Promise<void>"
+        },
+        {
+          "content": "/**\n * Refreshes the children of a specific item.\n *\n * @param id - The ID of the item whose children should be refreshed.\n * @returns Promise<void> - Promise that resolves when refresh is complete.\n */\nrefreshItemChildren(id: string): Promise<void>"
+        },
+        {
+          "content": "/**\n * Selects one or more rows.\n *\n * @param rows - The rows to select.\n * @returns void - No return value.\n */\nselectRows(...rows: unknown[]): void"
+        },
+        {
+          "content": "/**\n * Unselects one or more rows.\n *\n * @param rows - The rows to unselect.\n * @returns void - No return value.\n */\nunSelectRows(...rows: unknown[]): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDataTableComponent",
+      "props": [
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXDataSource<unknown>",
+              "link": "/en-US/docs/types/data-source"
+            }
+          ],
+          "default": "convertArrayToDataSource([])",
+          "description": "The data source for the table. Inherited from AXBaseDataTable."
+        },
+        {
+          "name": "rowTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Custom template for table rows."
+        },
+        {
+          "name": "emptyTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template to display when the table is empty."
+        },
+        {
+          "name": "noDataTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template to display when no data is loaded yet."
+        },
+        {
+          "name": "alternative",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable alternative row styling."
+        },
+        {
+          "name": "showHeader",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Show the table header."
+        },
+        {
+          "name": "fixedHeader",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable sticky header."
+        },
+        {
+          "name": "showFooter",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Show the table footer."
+        },
+        {
+          "name": "fixedFooter",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable sticky footer."
+        },
+        {
+          "name": "itemHeight",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "'auto'"
+            }
+          ],
+          "default": "40",
+          "description": "Height of each row."
+        },
+        {
+          "name": "allowReordering",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Enable column reordering."
+        },
+        {
+          "name": "paging",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable paging."
+        },
+        {
+          "name": "fetchDataMode",
+          "type": [
+            {
+              "name": "'auto'"
+            },
+            {
+              "name": "'manual'"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Data fetching mode."
+        },
+        {
+          "name": "loading",
+          "type": [
+            {
+              "name": "{ enabled: boolean; animation: boolean; loadingTemplate?: TemplateRef<unknown> }"
+            }
+          ],
+          "default": "{ enabled: true, animation: true }",
+          "description": "Loading state configuration."
+        },
+        {
+          "name": "focusedRow",
+          "type": [
+            {
+              "name": "unknown"
+            }
+          ],
+          "description": "The currently focused row."
+        },
+        {
+          "name": "selectedRows",
+          "type": [
+            {
+              "name": "unknown[]"
+            }
+          ],
+          "description": "Array of selected rows. Inherited from AXBaseDataTable."
+        },
+        {
+          "name": "parentField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'parentId'",
+          "description": "Field name for handling nested rows. Inherited from AXBaseDataTable."
+        }
+      ],
+      "events": [
+        {
+          "name": "focusedRowChange",
+          "type": [
+            {
+              "name": "unknown"
+            }
+          ],
+          "description": "Emitted when the focused row changes."
+        },
+        {
+          "name": "onRowClick",
+          "type": [
+            {
+              "name": "AXDataTableRowClick",
+              "link": "/en-US/docs/events/ax-data-table-row-click"
+            }
+          ],
+          "description": "Emitted when a row is clicked."
+        },
+        {
+          "name": "onRowDbClick",
+          "type": [
+            {
+              "name": "AXDataTableRowDbClick",
+              "link": "/en-US/docs/events/ax-data-table-row-db-click"
+            }
+          ],
+          "description": "Emitted when a row is double-clicked."
+        },
+        {
+          "name": "onColumnsOrderChanged",
+          "type": [
+            {
+              "name": "AXColumnsOrderChangedEvent",
+              "link": "/en-US/docs/events/ax-columns-order-changed-event"
+            }
+          ],
+          "description": "Emitted when the order of columns changes."
+        },
+        {
+          "name": "onColumnSizeChanged",
+          "type": [
+            {
+              "name": "onColumnSizeChangedEvent",
+              "link": "/en-US/docs/events/on-column-size-changed-event"
+            }
+          ],
+          "description": "Emitted when the size of columns changes."
+        },
+        {
+          "name": "onPageChanged",
+          "type": [
+            {
+              "name": "AXDataPagerChangedEvent",
+              "link": "/en-US/docs/events/data-pager-changed-event"
+            }
+          ],
+          "description": "Emitted when the page changes."
+        },
+        {
+          "name": "selectedRowsChange",
+          "type": [
+            {
+              "name": "unknown[]"
+            }
+          ],
+          "description": "Emitted when the selected rows change. Inherited from AXBaseDataTable."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Refreshes the data table with optional reset options.\n *\n * @param options - Configuration options for refresh operation.\n * @param options.reset - Whether to reset pagination state.\n * @returns void - No return value.\n */\nrefresh(options: { reset?: boolean } = { reset: true }): void"
+        },
+        {
+          "content": "/**\n * Gets the data source key field name.\n *\n * @returns string - The key field name for the data source.\n */\ngetDataSourceKey(): string"
+        },
+        {
+          "content": "/**\n * Expands a row to show its children.\n *\n * @param row - The row data to expand.\n * @returns Promise<void> - Promise that resolves when expansion is complete.\n */\nexpandRow(row: any): Promise<void>"
+        },
+        {
+          "content": "/**\n * Refreshes the children of a specific item.\n *\n * @param id - The ID of the item whose children should be refreshed.\n * @returns Promise<void> - Promise that resolves when refresh is complete.\n */\nrefreshItemChildren(id: string): Promise<void>"
+        },
+        {
+          "content": "/**\n * Selects one or more rows.\n *\n * @param rows - The rows to select.\n * @returns void - No return value.\n */\nselectRows(...rows: unknown[]): void"
+        },
+        {
+          "content": "/**\n * Unselects one or more rows.\n *\n * @param rows - The rows to unselect.\n * @returns void - No return value.\n */\nunSelectRows(...rows: unknown[]): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDataTableColumnResizableDirective",
+      "props": [
+        {
+          "name": "column",
+          "type": [
+            {
+              "name": "AXDataTableColumnComponent"
+            }
+          ],
+          "description": "The column component to make resizable."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Handles mouse down events to initiate column resizing.\n *\n * @param event - The mouse down event.\n * @returns void - No return value.\n */\nonMouseDown(event: MouseEvent): void"
+        },
+        {
+          "content": "/**\n * Handles mouse move events during column resizing.\n *\n * @param event - The mouse move event.\n * @returns void - No return value.\n */\nonMouseMove(event: MouseEvent): void"
+        },
+        {
+          "content": "/**\n * Handles raw mouse move events and forwards them to the debounced resize stream.\n * This method acts as a bridge between the raw DOM event and the debounced onMouseMove method.\n *\n * @param event - The raw mouse move event.\n * @returns void - No return value.\n */\nonMouseMoveRaw(event: MouseEvent): void"
+        },
+        {
+          "content": "/**\n * Handles mouse up events to complete column resizing.\n *\n * @returns void - No return value.\n */\nonMouseUp(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDataTableTextColumnComponent",
+      "props": [
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Width of the column. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text for the column header. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowSorting",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be sorted. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowResizing",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be resized. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "fixed",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "description": "Whether the column is fixed to start or end. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "dataField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Defines the data field to display in the column."
+        },
+        {
+          "name": "expandHandler",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Controls the display of an expandable arrow icon beside the cell text."
+        },
+        {
+          "name": "wrapText",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Toggles text wrapping in the cell."
+        },
+        {
+          "name": "cellTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Provides a custom template for rendering cells within the column."
+        },
+        {
+          "name": "footerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template used for rendering the footer of the column."
+        },
+        {
+          "name": "headerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Defines the template for rendering the column header."
+        },
+        {
+          "name": "format",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Defines the format string for displaying values in the component."
+        },
+        {
+          "name": "formatOptions",
+          "type": [
+            {
+              "name": "AXFormatOptions"
+            }
+          ],
+          "description": "Provides additional options for formatting values."
+        },
+        {
+          "name": "customExpandIcon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Custom icon class for expand state."
+        },
+        {
+          "name": "customCollapseIcon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Custom icon class for collapse state."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Returns the template used for rendering cells.\n * Falls back to a default template if no custom template is provided.\n *\n * @returns TemplateRef<unknown> - The cell template.\n */\n renderCellTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Returns the template used for rendering the column footer.\n * Falls back to a default template if not provided.\n *\n * @returns TemplateRef<unknown> - The footer template.\n */\n renderFooterTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Retrieves the template used for rendering the column header.\n * Falls back to a default template if none is provided.\n *\n * @returns TemplateRef<unknown> - The header template.\n */\n renderHeaderTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Indicates whether loading functionality is enabled.\n *\n * @returns boolean - Always returns true for text columns.\n */\n loadingEnabled(): boolean"
+        },
+        {
+          "content": "/**\n * Generates a unique name based on the dataField value.\n *\n * @returns string - The unique column name.\n */\n name(): string"
+        }
+      ]
+    },
+    {
+      "title": "AXBaseRowCommandColumnComponent",
+      "props": [
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Width of the column. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text for the column header. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowSorting",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be sorted. Overridden to false for command columns."
+        },
+        {
+          "name": "allowResizing",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be resized. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "fixed",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "description": "Whether the column is fixed to start or end. Inherited from AXDataTableColumnComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onItemClick",
+          "type": [
+            {
+              "name": "EventEmitter<AXRowCommandItemClickEvent>"
+            }
+          ],
+          "description": "Emitted when a command item is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Indicates whether loading functionality is enabled.\n *\n * @returns boolean - Always returns false for command columns.\n */\n loadingEnabled(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the CSS class applied to the component.\n *\n * @returns string - Returns 'ax-command-column'.\n */\n cssClass(): string"
+        }
+      ]
+    },
+    {
+      "title": "AXRowExpandColumnComponent",
+      "props": [
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Width of the column. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text for the column header. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowSorting",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be sorted. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowResizing",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be resized. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "fixed",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "description": "Whether the column is fixed to start or end. Inherited from AXDataTableColumnComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the template used to render cells in the column.\n *\n * @returns TemplateRef<unknown> - The cell template.\n */\n renderCellTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the template used to render the column header.\n *\n * @returns TemplateRef<unknown> - The header template.\n */\n renderHeaderTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the template used to render the column footer.\n *\n * @returns TemplateRef<unknown> - The footer template.\n */\n renderFooterTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the unique identifier for the column.\n *\n * @returns string - Returns 'cl-expand'.\n */\n name(): string"
+        },
+        {
+          "content": "/**\n * Indicates whether loading is enabled for the column.\n *\n * @returns boolean - Always returns false for expand columns.\n */\n loadingEnabled(): boolean"
+        }
+      ]
+    },
+    {
+      "title": "AXRowIndexColumnComponent",
+      "props": [
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Width of the column. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text for the column header. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowSorting",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be sorted. Overridden to false for index columns."
+        },
+        {
+          "name": "allowResizing",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be resized. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "fixed",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "description": "Whether the column is fixed to start or end. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "padZero",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Determines whether the index should be zero-padded."
+        },
+        {
+          "name": "footerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template used for rendering the footer content of the column."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Provides the cell template for custom rendering if defined.\n *\n * @returns TemplateRef<unknown> - The cell template.\n */\n renderCellTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Provides the header template for custom rendering if defined.\n *\n * @returns TemplateRef<unknown> - The header template.\n */\n renderHeaderTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Returns the template used for rendering the footer of the column.\n * This method returns the footerTemplate if it is provided; otherwise, it defaults to the _contentFooterTemplate.\n *\n * @returns TemplateRef<unknown> - The footer template.\n */\n renderFooterTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the unique identifier name for the column.\n *\n * @returns string - Returns 'cl-inx'.\n */\n name(): string"
+        },
+        {
+          "content": "/**\n * Indicates whether loading is enabled for this component.\n *\n * @returns boolean - Always returns false for index columns.\n */\n loadingEnabled(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the CSS class applied to the component.\n *\n * @returns string - Returns 'ax-index-column'.\n */\n cssClass(): string"
+        }
+      ]
+    },
+    {
+      "title": "AXRowSelectColumnComponent",
+      "props": [
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ],
+          "default": "'auto'",
+          "description": "Width of the column. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text for the column header. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowSorting",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be sorted. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "allowResizing",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the column can be resized. Inherited from AXDataTableColumnComponent."
+        },
+        {
+          "name": "fixed",
+          "type": [
+            {
+              "name": "'start'"
+            },
+            {
+              "name": "'end'"
+            },
+            {
+              "name": "undefined"
+            }
+          ],
+          "description": "Whether the column is fixed to start or end. Inherited from AXDataTableColumnComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the template used to render cells in the column.\n *\n * @returns TemplateRef<unknown> - The cell template.\n */\n renderCellTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the template used to render the column header.\n *\n * @returns TemplateRef<unknown> - The header template.\n */\n renderHeaderTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the template used to render the column footer.\n *\n * @returns TemplateRef<unknown> - The footer template.\n */\n renderFooterTemplate(): TemplateRef<unknown>"
+        },
+        {
+          "content": "/**\n * Gets the unique identifier for the column.\n *\n * @returns string - Returns 'cl-select'.\n */\n name(): string"
+        },
+        {
+          "content": "/**\n * Indicates whether loading is enabled for the column.\n *\n * @returns boolean - Always returns false for select columns.\n */\n loadingEnabled(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the CSS class applied to the component.\n *\n * @returns string - Returns 'ax-select-column'.\n */\n cssClass(): string"
+        }
+      ]
+    }
+  ]
+}

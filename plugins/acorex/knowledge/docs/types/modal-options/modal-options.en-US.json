@@ -1,0 +1,111 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXModalOptions",
+  "description": "Configuration options for modal dialogs that extend overlay options with modal-specific features.",
+  "imports": ["import { AXModalOptions } from '@acorex/components/modal';"],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Modal options interface extending overlay options.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "modal-options.ts",
+            "language": "ts",
+            "content": "export interface AXModalOptions extends AXOverlayOptions {\n  title?: string;\n  buttons?: {\n    minimize?: {\n      enable: boolean;\n      position: 'bottom-right' | 'bottom-left';\n    };\n    maximize?: boolean;\n    close?: boolean;\n  };\n  draggable?: boolean;\n  size?: 'sm' | 'md' | 'lg' | 'full' | 'fit';\n  header?: boolean;\n  footer?: boolean;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXModalOptions",
+      "description": "Configuration options for modal dialogs",
+      "props": [
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Title displayed in the modal header."
+        },
+        {
+          "name": "buttons",
+          "type": [{ "name": "object" }],
+          "description": "Configuration for modal control buttons."
+        },
+        {
+          "name": "buttons.minimize",
+          "type": [{ "name": "object" }],
+          "description": "Minimize button configuration."
+        },
+        {
+          "name": "buttons.minimize.enable",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the minimize button."
+        },
+        {
+          "name": "buttons.minimize.position",
+          "type": [{ "name": "'bottom-right'" }, { "name": "'bottom-left'" }],
+          "description": "Position of minimized modal in the bottom bar."
+        },
+        {
+          "name": "buttons.maximize",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the maximize button."
+        },
+        {
+          "name": "buttons.close",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the close button in header.",
+          "default": "true"
+        },
+        {
+          "name": "draggable",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the modal can be dragged around the screen.",
+          "default": "true"
+        },
+        {
+          "name": "size",
+          "type": [
+            { "name": "'sm'" },
+            { "name": "'md'" },
+            { "name": "'lg'" },
+            { "name": "'full'" },
+            { "name": "'fit'" }
+          ],
+          "description": "Size of the modal dialog.",
+          "default": "'lg'"
+        },
+        {
+          "name": "header",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the modal header.",
+          "default": "false"
+        },
+        {
+          "name": "footer",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the modal footer.",
+          "default": "false"
+        },
+        {
+          "name": "backdrop",
+          "type": [{ "name": "object" }],
+          "description": "Backdrop configuration inherited from AXOverlayOptions."
+        },
+        {
+          "name": "position",
+          "type": [{ "name": "AXPlacement", "link": "/en-US/docs/types/placement" }],
+          "description": "Position configuration inherited from AXOverlayOptions."
+        },
+        {
+          "name": "inputs",
+          "type": [{ "name": "AXComponentInputs" }],
+          "description": "Input values for the modal content component inherited from AXOverlayOptions."
+        }
+      ]
+    }
+  ]
+}

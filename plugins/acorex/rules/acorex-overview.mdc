@@ -1,0 +1,48 @@
+---
+description: ACoreX UI workspace overview — monorepo layout, package structure, and where to find components, docs, showcase, and Storybook.
+alwaysApply: true
+---
+
+# ACoreX UI Workspace
+
+[ACoreX](https://acorex.io) is an Angular component library distributed as `@acorex/*` packages.
+
+## Monorepo layout
+
+| Path | Purpose |
+| --- | --- |
+| `packages/components/` | UI components (`@acorex/components/<name>`) |
+| `packages/core/` | Core services and utilities (`@acorex/core`) |
+| `packages/cdk/` | Component dev kit (`@acorex/cdk`) |
+| `packages/charts/` | Chart components (`@acorex/charts`) |
+| `apps/showcase/` | Interactive component demos |
+| `apps/documentation/` | Bilingual docs site (en-US / fa-IR) |
+
+## Development servers
+
+```bash
+npm run start:showcase   # port 4400
+npm run start:doc        # port 5000
+npm run storybook        # components Storybook
+```
+
+## Build commands
+
+```bash
+npm run build:packages   # core + cdk + charts + components
+nx build components
+nx affected -t build
+```
+
+## Before building new functionality
+
+1. Check **secondary-entry-points-rules** for existing `@acorex/*` exports.
+2. Follow **angular-rule** for component implementation.
+3. Use **nx-rules** — run tasks through `nx`, not raw CLI.
+4. Add docs via **component-docs-rules** and Storybook via **create-story-book**.
+
+## Links
+
+- Docs: https://acorex.io
+- Storybook: https://storybook.acorex.io
+- npm registry: https://npm.acorex.io

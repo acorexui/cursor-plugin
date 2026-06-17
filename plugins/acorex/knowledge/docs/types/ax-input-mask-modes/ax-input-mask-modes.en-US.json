@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Input Mask Modes",
+  "description": "Defines the available input mask modes for different types of data formatting and validation.",
+  "imports": [
+    "import { AXInputMaskModes } from '@acorex/cdk/input-mask';"
+  ],
+  "types": [
+    {
+      "title": "AXInputMaskModes",
+      "props": [
+        {
+          "name": "AXInputMaskModes",
+          "type": [
+            { "name": "'hijriDate'" },
+            { "name": "'digits'" },
+            { "name": "'thousandsSeparator'" },
+            { "name": "'decimal'" }
+          ],
+          "description": "Union type defining the available input mask modes for different data types and formatting requirements."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete TypeScript definition for the input mask modes union type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-input-mask-modes.ts",
+            "content": "export type AXInputMaskModes = 'hijriDate' | 'digits' | 'thousandsSeparator' | 'decimal';"
+          }
+        ]
+      }
+    }
+  ]
+}

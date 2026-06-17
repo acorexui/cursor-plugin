@@ -1,0 +1,129 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/actionsheet--documentation"
+    }
+  ],
+  "description": "Action sheet is a type of alert offering two or more options relevant to the context. It includes a title, an optional message, and a list of actions, with the title above and the actions below. The action sheet slides up from the bottom of the screen and can be draggable for better user experience.",
+  "imports": [
+    "import { AXActionSheetComponent } from '@acorex/components/action-sheet';",
+    "import { AXActionSheetService } from '@acorex/components/action-sheet';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-action-sheet</code>",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "action-sheet/usage"
+      }
+    },
+    {
+      "title": "Custom content",
+      "description": "You can use the action sheet to display your desired content. It is enough to set the <code>content</code> value equal to a component or <code>template ref</code>",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "action-sheet/custom-content"
+      }
+    },
+    {
+      "title": "List item and custom content together",
+      "description": "You can have both <code>items</code> and use <code>content</code> mode in an action sheet",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "action-sheet/both-mode"
+      }
+    },
+    {
+      "title": "Draggable",
+      "description": "The action sheet is draggable and expands to full screen when pulled upward.",
+      "height": "350px",
+      "date": {
+        "createdAt": "2025-08-09"
+      },
+      "content": {
+        "type": "api",
+        "data": "action-sheet/draggable"
+      }
+    },
+    {
+      "title": "Drag up full screen",
+      "description": "Draggable sheet that expands to full screen when pulled upward (dragUp).",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "action-sheet/drag-up-fullscreen"
+      }
+    },
+    {
+      "title": "Lifecycle events",
+      "description": "Subscribes to actionSheetEvent$ to show open/close/drag transitions.",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "action-sheet/lifecycle-events"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXActionSheetComponent",
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Closes the action sheet with optional result data.\n* This method initiates the closing animation of the action sheet and eventually closes the dialog.\n* The closing process includes a height animation and cleanup of event listeners.\n* \n* @param e - The result data to pass when closing the action sheet. Can be any value including null.\n*            If an AXActionSheetItem is passed, it represents the selected item.\n* @param isUserInteraction - Whether the close action was triggered by user interaction (default: true).\n*                           This affects how the action sheet handles accessibility and event tracking.\n* @returns void\n*/\nclose(e = null, isUserInteraction = true): void"
+        },
+        {
+          "content": "/**\n* Handles click events on action sheet items.\n* This method is called when a user clicks on an action sheet item. It closes the action sheet\n* with the clicked item as the result data and executes the item's onClick callback if provided.\n* \n* @param item - The action sheet item that was clicked. Contains the item's data and optional onClick callback.\n* @returns void\n*/\nonItemClick(item: AXActionSheetItem): void"
+        },
+        {
+          "content": "/**\n* Gets the host HTML element of the component.\n* Inherited from MXBaseComponent.\n*\n* @returns T - The native DOM element associated with this component.\n*/\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n* Sets a component option with optional lifecycle callbacks.\n* Inherited from MXBaseComponent.\n*\n* @param option - The option configuration containing the name, value and optional before/after callbacks.\n*/\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    },
+    {
+      "title": "AXActionSheetService",
+      "props": [
+        {
+          "name": "actionSheetEvent$",
+          "type": [
+            {
+              "name": "Observable<AXActionSheetEvent>",
+              "link": "/en-US/docs/events/ax-action-sheet-event"
+            }
+          ],
+          "description": "Observable that emits action sheet events such as open, close, drag start, and drag end"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Opens an action sheet with the specified configuration.\n* This method creates and displays an action sheet component with the provided options.\n* The action sheet will slide up from the bottom of the screen and can be dismissed\n* by tapping outside, pressing escape, or calling the close method.\n* \n* @param config - The configuration object that defines the action sheet's appearance and behavior.\n*                 Must include at least a title or content property. Will be merged with default config.\n* @param isUserInteraction - Whether the action sheet is opened by user interaction (default: true).\n*                           This affects how the action sheet handles accessibility and focus management.\n* @returns A promise that resolves to a dialog reference containing methods to control the action sheet.\n*          The reference includes methods like close() and a closed observable for tracking dialog state.\n*/\nopen(config: AXActionSheetConfig, isUserInteraction = true): Promise<AXActionSheetDialogRef>"
+        },
+        {
+          "content": "/**\n* Sets the current state of action sheet events.\n* This method is used internally to track action sheet lifecycle events such as open, close,\n* drag start, drag end, and full screen transitions. It emits events through the actionSheetEvent$\n* observable for external subscribers to monitor action sheet state changes.\n* \n* @param event - The action sheet event to emit. Contains information about the event type,\n*               associated data, user interaction status, and dialog reference.\n* @returns void\n*/\nsetActionSheetEventState(event: AXActionSheetEvent): void"
+        }
+      ]
+    }
+  ]
+}

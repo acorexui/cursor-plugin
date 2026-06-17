@@ -1,0 +1,42 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStepWizardLook",
+  "description": "Defines the available visual appearance options for step wizard components",
+  "imports": ["import { AXStepWizardLook } from '@acorex/components/step-wizard';"],
+  "types": [
+    {
+      "title": "AXStepWizardLook",
+      "props": [
+        {
+          "name": "AXStepWizardLook",
+          "type": [
+            { "name": "'rounded-icon'" },
+            { "name": "'circular-icon'" },
+            { "name": "'circular'" },
+            { "name": "'text-line'" },
+            { "name": "'rounded-arrow-minimal'" },
+            { "name": "'rectangular-arrow-minimal'" },
+            { "name": "'custom'" }
+          ],
+          "description": "Visual appearance options for step wizard components"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The complete type definition for AXStepWizardLook",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "step-wizard-look.ts",
+            "content": "export type AXStepWizardLook = 'rounded-icon' | 'circular-icon' | 'circular' | 'text-line' | 'rounded-arrow-minimal' | 'rectangular-arrow-minimal' | 'custom';"
+          }
+        ]
+      }
+    }
+  ]
+}

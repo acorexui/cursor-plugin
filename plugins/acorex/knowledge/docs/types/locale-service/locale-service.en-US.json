@@ -1,0 +1,116 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXLocaleService",
+  "imports": ["import { AXLocaleService } from '@acorex/core/locale';"],
+  "description": "Service class for managing locale-specific formatting, date/time, and number formatting.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Locale service public API shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "locale-service.ts",
+            "content": "class AXLocaleService {\n  currentLocale: string;\n  defaultLocale: string;\n  supportedLocales: string[];\n  localeProfile: AXLocaleProfile;\n  setLocale(locale: string): Promise<void>;\n  getLocale(): string;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLocaleService",
+      "props": [
+        {
+          "name": "currentLocale",
+          "type": [{ "name": "string" }],
+          "description": "Current locale identifier (e.g., 'en-US', 'fa-IR')."
+        },
+        {
+          "name": "defaultLocale",
+          "type": [{ "name": "string" }],
+          "description": "Default locale identifier to use when current locale is not available."
+        },
+        {
+          "name": "supportedLocales",
+          "type": [{ "name": "string[]" }],
+          "description": "Array of supported locale identifiers."
+        },
+        {
+          "name": "localeProfile",
+          "type": [{ "name": "AXLocaleProfile", "link": "/en-US/docs/types/locale-profile" }],
+          "description": "Current locale profile containing formatting options and settings."
+        }
+      ],
+      "description": "Service for managing locale-specific formatting including dates, times, numbers, and currencies with support for multiple locales.",
+      "methods": [
+        {
+          "name": "setLocale",
+          "description": "Sets the current locale and loads corresponding locale profile."
+        },
+        {
+          "name": "getLocale",
+          "description": "Returns the current locale identifier."
+        },
+        {
+          "name": "formatDate",
+          "description": "Formats a date according to the current locale settings."
+        },
+        {
+          "name": "formatTime",
+          "description": "Formats a time according to the current locale settings."
+        },
+        {
+          "name": "formatDateTime",
+          "description": "Formats a date and time according to the current locale settings."
+        },
+        {
+          "name": "formatNumber",
+          "description": "Formats a number according to the current locale settings."
+        },
+        {
+          "name": "formatCurrency",
+          "description": "Formats a currency value according to the current locale settings."
+        },
+        {
+          "name": "parseDate",
+          "description": "Parses a date string according to the current locale settings."
+        },
+        {
+          "name": "parseNumber",
+          "description": "Parses a number string according to the current locale settings."
+        },
+        {
+          "name": "getDateFormat",
+          "description": "Returns the date format for the current locale."
+        },
+        {
+          "name": "getTimeFormat",
+          "description": "Returns the time format for the current locale."
+        },
+        {
+          "name": "getNumberFormat",
+          "description": "Returns the number format for the current locale."
+        },
+        {
+          "name": "onLocaleChange",
+          "description": "Registers a callback to be called when the locale changes."
+        },
+        {
+          "name": "onFormatChange",
+          "description": "Registers a callback to be called when formatting options change."
+        },
+        {
+          "name": "onProfileLoad",
+          "description": "Registers a callback to be called when locale profile is loaded."
+        },
+        {
+          "name": "onLocaleError",
+          "description": "Registers a callback to be called when locale operations fail."
+        }
+      ]
+    }
+  ]
+}

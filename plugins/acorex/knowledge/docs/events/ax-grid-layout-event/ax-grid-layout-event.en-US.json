@@ -1,0 +1,25 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Grid Layout Event",
+  "description": "Event payload emitted by the grid layout container when widgets are added, removed, or changed. This event provides information about the affected grid nodes and the component that triggered the event.",
+  "imports": [
+    "import { AXGridLayoutEvent } from '@acorex/components/grid-layout-builder';"
+  ],
+  "types": [
+    {
+      "title": "AXGridLayoutEvent",
+      "props": [
+        {
+          "name": "sender",
+          "type": [{ "name": "AXGridLayoutContainerComponent", "link": "/en-US/docs/components/grid-layout-builder" }],
+          "description": "The grid layout container component that triggered the event."
+        },
+        {
+          "name": "nodes",
+          "type": [{ "name": "AXGridLayoutNode[]" }],
+          "description": "Array of grid layout nodes that were affected by the event (added, removed, or changed)."
+        }
+      ]
+    }
+  ]
+}

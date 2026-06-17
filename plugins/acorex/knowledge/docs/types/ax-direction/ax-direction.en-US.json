@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXDirection } from '@acorex/cdk/common';"],
+  "title": "Direction Type",
+  "description": "A type that specifies the direction of component layout.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXDirection type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "direction.ts",
+            "content": "export type AXDirection = 'vertical' | 'horizontal';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDirection",
+      "props": [
+        {
+          "name": "AXDirection",
+          "type": [{ "name": "'vertical'" }, { "name": "'horizontal'" }],
+          "description": "Union type that specifies the direction of component layout. 'vertical' arranges items vertically, 'horizontal' arranges items horizontally."
+        }
+      ]
+    }
+  ]
+}

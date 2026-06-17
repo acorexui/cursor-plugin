@@ -1,0 +1,83 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXLocaleProfile",
+  "imports": ["import { AXLocaleProfile } from '@acorex/core/locale';"],
+  "description": "The locale profile type",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXLocaleProfile type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-localeprofile.ts",
+            "content": "export interface AXLocaleProfile { localeInfo: { code: string; language: string; region: string; timezone: string; }; calendar: { system: string; week: { startsOn: number; weekends: number[] }; clock: { format24Hour: boolean } }; formats: { date: FormatPattern; time: FormatPattern; datetime: FormatPattern; numbers: { decimalPattern: string; currency: { code: string } }; contacts: { phone: string; postalCode: string } }; units: { temperature: string; distance: string; weight: string; volume: string; speed: string; area: string; custom?: Record<string, string> }; i18nMeta: { fallbackLocales?: string[]; supportedLanguages?: string[]; rtl: boolean } }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLocaleProfile",
+      "props": [
+        {
+          "name": "localeInfo",
+          "type": [{ "name": "{ code: string; language: string; region: string; timezone: string; }" }],
+          "description": "The locale info type"
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "{ system: string; week: { startsOn: number; weekends: number[] }; clock: { format24Hour: boolean } }"
+            }
+          ],
+          "description": "The calendar type"
+        },
+        {
+          "name": "formats",
+          "type": [
+            {
+              "name": "{ date: FormatPattern; time: FormatPattern; datetime: FormatPattern; numbers: { decimalPattern: string; currency: { code: string } }; contacts: { phone: string; postalCode: string } }"
+            }
+          ],
+          "description": "The formats type"
+        },
+        {
+          "name": "units",
+          "type": [
+            {
+              "name": "{ temperature: string; distance: string; weight: string; volume: string; speed: string; area: string; custom?: Record<string, string> }"
+            }
+          ],
+          "description": "The units type"
+        },
+        {
+          "name": "i18nMeta",
+          "type": [{ "name": "{ fallbackLocales?: string[]; supportedLanguages?: string[]; rtl: boolean }" }],
+          "description": "The i18n meta type"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Returns the locale info.\n * @returns The locale info.\n */\ngetLocaleInfo(): { code: string; language: string; region: string; timezone: string; }"
+        },
+        {
+          "content": "/**\n * Returns the calendar.\n * @returns The calendar.\n */\ngetCalendar(): { system: string; week: { startsOn: number; weekends: number[] }; clock: { format24Hour: boolean } }"
+        },
+        {
+          "content": "/**\n * Returns the formats.\n * @returns The formats.\n */\ngetFormats(): { date: FormatPattern; time: FormatPattern; datetime: FormatPattern; numbers: { decimalPattern: string; currency: { code: string } }; contacts: { phone: string; postalCode: string } }"
+        },
+        {
+          "content": "/**\n * Returns the units.\n * @returns The units.\n */\ngetUnits(): { temperature: string; distance: string; weight: string; volume: string; speed: string; area: string; custom?: Record<string, string> }"
+        },
+        {
+          "content": "/**\n * Returns the i18n meta.\n * @returns The i18n meta.\n */\ni18nMeta(): { fallbackLocales?: string[]; supportedLanguages?: string[]; rtl: boolean }"
+        }
+      ]
+    }
+  ]
+}

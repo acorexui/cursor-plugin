@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapControlPlace",
+  "description": "Defines the possible positions for map controls on the map interface.",
+  "imports": ["import { AXMapControlPlace } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapControlPlace",
+      "props": [
+        {
+          "name": "AXMapControlPlace",
+          "type": [
+            { "name": "'topleft'" },
+            { "name": "'topright'" },
+            { "name": "'bottomleft'" },
+            { "name": "'bottomright'" }
+          ],
+          "description": "Union type defining the four corner positions where map controls can be placed."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript union type definition for map control positions.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export type AXMapControlPlace = 'topleft' | 'topright' | 'bottomleft' | 'bottomright';"
+          }
+        ]
+      }
+    }
+  ]
+}

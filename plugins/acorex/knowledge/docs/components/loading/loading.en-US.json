@@ -1,0 +1,314 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Loading",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/loading--documentation"
+    }
+  ],
+  "description": "Displays a loading indicator. Supports embedding a spinner inline or showing a modal overlay via service. Inherits core behavior from MXBaseComponent.",
+  "imports": [
+    "import { AXLoadingComponent } from '@acorex/components/loading';",
+    "import { AXLoadingSpinnerComponent } from '@acorex/components/loading';",
+    "import { AXLoadingDirective } from '@acorex/components/loading';",
+    "import { AXLoadingService } from '@acorex/components/loading';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "350px",
+      "description": "A simple example of using <code>ax-loading</code>",
+      "content": {
+        "type": "api",
+        "data": "loading/usage"
+      }
+    },
+    {
+      "title": "Region",
+      "height": "350px",
+      "description": "Show loading on screen, within a container, or inside a button.",
+      "content": {
+        "type": "api",
+        "data": "loading/region"
+      }
+    },
+    {
+      "title": "Loading spinner",
+      "height": "350px",
+      "description": "Use standalone <code>ax-loading-spinner</code> or inside <code>ax-loading</code>.",
+      "content": {
+        "type": "api",
+        "data": "loading/loading-spinner"
+      }
+    },
+    {
+      "title": "Spinner size",
+      "height": "350px",
+      "description": "Control spinner size via the <code>size</code> input.",
+      "content": {
+        "type": "api",
+        "data": "loading/spinner-size"
+      }
+    },
+    {
+      "title": "Spinner stroke size",
+      "height": "350px",
+      "description": "Control spinner border thickness via the <code>stroke</code> input.",
+      "content": {
+        "type": "api",
+        "data": "loading/spinner-stroke-size"
+      }
+    },
+    {
+      "title": "Spinner color",
+      "height": "350px",
+      "description": "Use theme colors or 'white'/'black' for the spinner.",
+      "content": {
+        "type": "api",
+        "data": "loading/spinner-color"
+      }
+    },
+    {
+      "title": "Directive",
+      "height": "350px",
+      "description": "Use the <code>[axIsLoading]</code> directive to overlay a spinner on a container.",
+      "content": {
+        "type": "api",
+        "data": "loading/directive"
+      }
+    },
+    {
+      "title": "Service overlay",
+      "height": "350px",
+      "description": "Programmatically show and hide a modal overlay on screen or within a container.",
+      "content": {
+        "type": "api",
+        "data": "loading/service-overlay"
+      }
+    },
+    {
+      "title": "Service doLoading",
+      "height": "350px",
+      "description": "Recommended pattern: wrap an Observable using <code>doLoading(...)</code>.",
+      "content": {
+        "type": "api",
+        "data": "loading/service-doloading"
+      }
+    },
+    {
+      "title": "Multi loader state",
+      "height": "350px",
+      "description": "Manage separate loader states using <code>loaderId</code> in the same context.",
+      "content": {
+        "type": "api",
+        "data": "loading/multi-loader-state"
+      }
+    },
+    {
+      "title": "Context",
+      "height": "350px",
+      "description": "Pass <code>[context]</code> to configure the internal spinner (text, color, size, stroke).",
+      "content": {
+        "type": "api",
+        "data": "loading/context"
+      }
+    },
+    {
+      "title": "Custom spinner",
+      "height": "350px",
+      "description": "Override the default spinner using <code>AX_LOADING_CONFIG</code>.",
+      "content": {
+        "type": "api",
+        "data": "loading/custom-spinner"
+      }
+    },
+    {
+      "title": "Spinner text",
+      "height": "350px",
+      "description": "Display text next to the spinner using the <code>text</code> input.",
+      "content": {
+        "type": "api",
+        "data": "loading/spinner-text"
+      }
+    },
+    {
+      "title": "Spinner contrast",
+      "height": "350px",
+      "description": "Use <code>color=\"white\"</code> or <code>color=\"black\"</code> for contrast over backgrounds.",
+      "content": {
+        "type": "api",
+        "data": "loading/spinner-contrast"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLoadingComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "visible",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Controls component visibility.",
+          "default": "false"
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Specifies the loading indicator type. Current value: 'spinner'.",
+          "default": "'spinner'"
+        },
+        {
+          "name": "context",
+          "type": [
+            {
+              "name": "unknown"
+            }
+          ],
+          "description": "Assigns fields to the spinner instance (via portal attach)."
+        }
+      ],
+      "events": [
+        {
+          "name": "visibleChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when visibility changes."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXLoadingSpinnerComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The text to display alongside the spinner."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            },
+            {
+              "name": "'white'"
+            },
+            {
+              "name": "'black'"
+            }
+          ],
+          "default": "'default'",
+          "description": "Spinner color: theme color or 'white'/'black'."
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "16",
+          "description": "Spinner size in pixels (width/height)."
+        },
+        {
+          "name": "stroke",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "3",
+          "description": "Spinner border thickness in pixels."
+        }
+      ]
+    },
+    {
+      "title": "AXLoadingDirective",
+      "props": [
+        {
+          "name": "axIsLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Places an overlay with a spinner over the host element when true."
+        }
+      ]
+    },
+    {
+      "title": "AXLoadingService",
+      "methods": [
+        {
+          "content": "/**\n * Shows a modal loading overlay.\n *\n * If a host element is provided via `config.location`, the overlay is attached to that\n * element; otherwise it is attached to `document.body`.\n *\n * @param config Optional configuration: host `location`, `type`, and `context` passed to the spinner instance.\n * @returns number Unique loading reference id to be used with {@link hide}.\n */\nshow(config?: { location?: Element; type?: string; context?: unknown }): number"
+        },
+        {
+          "content": "/**\n * Hides a previously shown modal loading overlay.\n *\n * @param id Loading reference id returned by {@link show}.\n */\nhide(id: number): void"
+        },
+        {
+          "content": "/**\n * Wraps an Observable and toggles loading for its duration.\n *\n * Starts loading before subscription settles and ends loading on finalize.\n *\n * @param source$ Source observable.\n * @param context Loading context key.\n * @param loaderId Optional id to scope multiple loaders per context.\n * @returns Observable<V> The original stream with loading side effects.\n */\ndoLoading<V>(source$: Observable<V>, context: object, loaderId?: string | number): Observable<V>"
+        },
+        {
+          "content": "/**\n * Returns current loading state for the given context and optional loader id.\n *\n * @param context Loading context key.\n * @param loaderId Optional loader id.\n * @returns boolean True if any matching loader is active.\n */\nisLoading(context: object, loaderId?: string | number): boolean"
+        },
+        {
+          "content": "/**\n * Observable loading state for the given context and optional loader id.\n * Initializes the state if it does not exist yet.\n *\n * @param context Loading context key.\n * @param loaderId Optional loader id.\n * @returns Observable<boolean>\n */\nisLoading$(context: object, loaderId?: string | number): Observable<boolean>"
+        },
+        {
+          "content": "/**\n * Sets loading state to true for the given context/loader id.\n *\n * @param context Loading context key.\n * @param loaderId Optional loader id.\n * @returns void\n */\nstartLoading(context: object, loaderId?: string | number): void"
+        },
+        {
+          "content": "/**\n * Sets loading state to false for the given context/loader id.\n *\n * @param context Loading context key.\n * @param loaderId Optional loader id.\n * @returns void\n */\nendLoading(context: object, loaderId?: string | number): void"
+        },
+        {
+          "content": "/**\n * Clears all tracked loading states across all contexts.\n *\n * @returns void\n */\nclearLoadings(): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet Content Type",
+  "imports": ["import { AXActionSheetContentType } from '@acorex/components/action-sheet';"],
+  "description": "Type definition for custom content that can be displayed in an action sheet. This type allows for either a template reference or a component type to be used as custom content.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that can be either a TemplateRef for custom templates or a ComponentType for custom components.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-action-sheet-content-type.ts",
+            "content": "type AXActionSheetContentType = TemplateRef<unknown> | ComponentType<unknown>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXActionSheetContentType",
+      "props": [
+        {
+          "name": "AXActionSheetContentType",
+          "type": [{ "name": "TemplateRef<unknown>" }, { "name": "ComponentType<unknown>" }],
+          "description": "Union type allowing a TemplateRef or a ComponentType for custom action sheet content."
+        }
+      ]
+    }
+  ]
+}

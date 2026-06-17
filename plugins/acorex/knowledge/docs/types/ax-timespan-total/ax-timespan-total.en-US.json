@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTimeSpanTotal",
+  "imports": ["import { AXTimeSpanTotal } from '@acorex/core/date-time';"],
+  "description": "The AXTimeSpanTotal type",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXTimeSpanTotal type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-timespan-total.ts",
+            "content": "export interface AXTimeSpanTotal { miliseconds: number; seconds: number; minutes: number; hours: number; days: number; weeks: number; months: number; years: number; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTimeSpanTotal",
+      "props": [
+        { "name": "miliseconds", "type": [{ "name": "number" }], "description": "The total milliseconds" },
+        { "name": "seconds", "type": [{ "name": "number" }], "description": "The total seconds" },
+        { "name": "minutes", "type": [{ "name": "number" }], "description": "The total minutes" },
+        { "name": "hours", "type": [{ "name": "number" }], "description": "The total hours" },
+        { "name": "days", "type": [{ "name": "number" }], "description": "The total days" },
+        { "name": "weeks", "type": [{ "name": "number" }], "description": "The total weeks" },
+        { "name": "months", "type": [{ "name": "number" }], "description": "The total months" },
+        { "name": "years", "type": [{ "name": "number" }], "description": "The total years" }
+      ]
+    }
+  ]
+}

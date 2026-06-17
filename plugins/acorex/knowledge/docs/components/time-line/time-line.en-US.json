@@ -1,0 +1,136 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXTimeLineComponent } from '@acorex/components/time-line';",
+    "import { AXTimeLineItemComponent } from '@acorex/components/time-line';"
+  ],
+  "title": "Time Line",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/timeline--documentation"
+    }
+  ],
+  "description": "A component that displays a sequence of events or steps in chronological order, with support for custom icons, status indicators, and collapsible content.",
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "500px",
+      "description": "A simple example of using <code>ax-time-line</code> with <code>ax-time-line-item</code>",
+      "content": {
+        "type": "api",
+        "data": "time-line/usage"
+      }
+    },
+    {
+      "title": "With Icon",
+      "height": "500px",
+      "description": "Example of time line with custom icons in each item",
+      "content": {
+        "type": "api",
+        "data": "time-line/with-icon"
+      }
+    },
+    {
+      "title": "No Icon",
+      "height": "500px",
+      "description": "Example of time line with bullet points instead of icons",
+      "content": {
+        "type": "api",
+        "data": "time-line/no-icon"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTimeLineComponent",
+      "props": [
+        {
+          "name": "mode",
+          "type": [
+            {
+              "name": "AXTimeLineMode",
+              "link": "/en-US/docs/types/time-line-mode"
+            }
+          ],
+          "default": "'bullet'",
+          "description": "Display mode of the time line items ('bullet' or 'icon')"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from AXComponent."
+        }
+      ]
+    },
+    {
+      "title": "AXTimeLineItemComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "The text content displayed in the time line item header"
+        },
+        {
+          "name": "isActive",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the time line item is in active state"
+        },
+        {
+          "name": "isCollapsed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the time line item content is collapsed"
+        }
+      ],
+      "events": [
+        {
+          "name": "isCollapsedChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event when the collapsed state changes as part of two-way binding for the model()."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from AXComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Handles the click event on the time line item header to toggle collapsed state.\n */\nhandleClick(): void"
+        }
+      ]
+    }
+  ]
+}

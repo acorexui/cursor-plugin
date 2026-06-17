@@ -1,0 +1,204 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Decorators",
+  "description": "A collection of utility components that provide visual enhancements and functional decorations for other UI components. These components include clear buttons, close buttons, color indicators, full-screen toggles, generic content containers, headings, and icons.",
+  "imports": [
+    "import { AXDecoratorModule } from '@acorex/components/decorators';",
+    "import { AXDecoratorClearButtonComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorCloseButtonComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorColorIndicatorComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorFullScreenButtonComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorGenericComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorHeadingComponent } from '@acorex/components/decorators';",
+    "import { AXDecoratorIconComponent } from '@acorex/components/decorators';"
+  ],
+  "sections": [
+    {
+      "title": "Clear Button",
+      "description": "A button component that allows users to clear or reset a value. Automatically integrates with clearable parent components.",
+      "content": {
+        "type": "api",
+        "data": "decorators/clear-button"
+      }
+    },
+    {
+      "title": "Close Button",
+      "description": "A button component that displays a close icon and triggers an action when clicked. Integrates with closable parent components.",
+      "content": {
+        "type": "api",
+        "data": "decorators/close-button"
+      }
+    },
+    {
+      "title": "Color Indicator",
+      "description": "A visual indicator that displays a color preview. Useful for color pickers and color selection interfaces.",
+      "content": {
+        "type": "api",
+        "data": "decorators/color-indicator"
+      }
+    },
+    {
+      "title": "Full Screen Button",
+      "description": "A toggle button that switches between full-screen and normal view modes.",
+      "content": {
+        "type": "api",
+        "data": "decorators/full-screen-button"
+      }
+    },
+    {
+      "title": "Generic Content",
+      "description": "A flexible component for various UI elements like footer, header, content, divider, form hints, prefix, suffix, text, title, subtitle, placeholder, and overlay.",
+      "content": {
+        "type": "api",
+        "data": "decorators/generic-content"
+      }
+    },
+    {
+      "title": "Heading",
+      "description": "A styled heading component with customizable color, weight, and dark mode support.",
+      "content": {
+        "type": "api",
+        "data": "decorators/heading"
+      }
+    },
+    {
+      "title": "Icon",
+      "description": "A component for displaying various types of icons.",
+      "content": {
+        "type": "api",
+        "data": "decorators/icon"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDecoratorClearButtonComponent",
+      "props": [
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'ax-icon-close'",
+          "description": "The icon displayed on the clear button."
+        }
+      ]
+    },
+    {
+      "title": "AXDecoratorCloseButtonComponent",
+      "props": [
+        {
+          "name": "closeAll",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Determines whether the button should close all items or just the current one."
+        },
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'ax-icon-close'",
+          "description": "The icon class to be applied to the button."
+        }
+      ]
+    },
+    {
+      "title": "AXDecoratorColorIndicatorComponent",
+      "props": [
+        {
+          "name": "previewColor",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The color value to display in the indicator."
+        }
+      ]
+    },
+    {
+      "title": "AXDecoratorFullScreenButtonComponent",
+      "props": [
+        {
+          "name": "isActive",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the full-screen mode is currently active."
+        }
+      ]
+    },
+    {
+      "title": "AXDecoratorHeadingComponent",
+      "props": [
+        {
+          "name": "darkMode",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enables or disables dark mode styling for the heading."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXSurfaceType",
+              "link": "/en-US/docs/types/surface-type"
+            }
+          ],
+          "default": "'lightest'",
+          "description": "The surface color type for the heading."
+        },
+        {
+          "name": "weight",
+          "type": [
+            {
+              "name": "'regular'"
+            },
+            {
+              "name": "'medium'"
+            },
+            {
+              "name": "'semibold'"
+            },
+            {
+              "name": "'bold'"
+            }
+          ],
+          "default": "'semibold'",
+          "description": "The font weight of the heading."
+        }
+      ]
+    },
+    {
+      "title": "AXDecoratorIconComponent",
+      "props": [
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Specifies the icon to be displayed."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Alert",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/alert--documentation"
+    }
+  ],
+  "description": "The Alert component displays important messages to users. It supports different types (primary, success, warning, danger, secondary), can be closed manually or automatically, and allows for custom content, icons, and actions.",
+  "imports": ["import { AXAlertComponent } from '@acorex/components/alert';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-alert</code>.",
+      "content": {
+        "type": "api",
+        "data": "alert/usage"
+      }
+    },
+    {
+      "title": "Inline",
+      "description": "In inline mode, you can only use <code>ax-title</code>, <code>ax-icon</code>, <code>ax-button</code>, and <code>ax-close-button</code> tags.",
+      "content": {
+        "type": "api",
+        "data": "alert/inline"
+      }
+    },
+    {
+      "title": "Auto timeout",
+      "description": "Auto-close the alert after a duration; shows progress bar and emits onClosed.",
+      "content": {
+        "type": "api",
+        "data": "alert/auto-timeout"
+      }
+    },
+    {
+      "title": "Programmatic close",
+      "description": "Call close() via a template reference to remove the alert.",
+      "content": {
+        "type": "api",
+        "data": "alert/programmatic-close"
+      }
+    },
+    {
+      "title": "Color variants",
+      "height": "400px",
+      "description": "Demonstrates default and themed colors and their icons.",
+      "content": {
+        "type": "api",
+        "data": "alert/color-variants"
+      }
+    },
+    {
+      "title": "Custom icon",
+      "description": "Provide custom icon content to override the default icon logic.",
+      "content": {
+        "type": "api",
+        "data": "alert/custom-icon"
+      }
+    },
+    {
+      "title": "Block layout",
+      "description": "Using content and footer switches the layout from inline to block.",
+      "content": {
+        "type": "api",
+        "data": "alert/block-layout"
+      }
+    },
+    {
+      "title": "Events",
+      "description": "Shows colorChange and inherited onOptionChanged in action.",
+      "content": {
+        "type": "api",
+        "data": "alert/events"
+      }
+    },
+    {
+      "title": "Long content & overflow",
+      "height": "500px",
+      "description": "Demonstrates wrapping and layout with long paragraphs and single-line overflow.",
+      "content": {
+        "type": "api",
+        "data": "alert/long-content"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAlertComponent",
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "The color type of the alert (primary, success, warning, danger, secondary, default). Inherited from MXColorComponent."
+        },
+        {
+          "name": "timeOut",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Duration in milliseconds after which the alert will automatically close."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Component id. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color of the alert changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "timeOutChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emitted when the timeOut value changes."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the alert is closed."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Removes the alert from the container after a transition effect.\n *\n * @returns void - No return value. The alert is removed from the DOM and the onClosed event is emitted.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

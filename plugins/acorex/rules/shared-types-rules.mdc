@@ -1,0 +1,432 @@
+---
+description: Generate bilingual JSON documentation for ACoreX shared interfaces and type aliases under the types category.
+alwaysApply: false
+---
+# JSON Documentation Generation Rule for Shared Interfaces and Types
+
+## 0. Schema Adherence
+
+- **Crucially, all generated JSON documentation files MUST strictly adhere to the schema defined in `apps/documentation/docs/document.schema.json`.** This schema dictates the structure and valid properties for the documentation.
+
+---
+
+## 1. File Structure & Naming
+
+- Each shared interface or type alias must have two JSON documentation files:
+  - `type-name.en-US.json`
+  - `type-name.fa-IR.json`
+- **Place these files directly in:** `apps/documentation/docs/types/type-name/`
+- The `type-name` should be the kebab-case version of the interface or type alias name (e.g., `MyUtilityConfig` becomes `my-utility-config`, `AXGridColumn` becomes `ax-grid-column`).
+
+---
+
+## 2. Schema Reference
+
+- Use the schema reference:
+  - `"$schema": "../../document.schema.json"`
+    (This is a self-reference within the JSON to the master schema defined in `apps/documentation/docs/document.schema.json`.)
+
+---
+
+## 2.5 Imports
+
+- Always include an `imports` array showing how to import the documented type from the public API.
+- Use top-level package entry points (no deep or relative paths):
+  - Correct: `"import { AXChipsLookType } from '@acorex/components/chips';"`
+  - Correct: `"import { AXDataSource } from '@acorex/cdk/common';"`
+  - Correct: `"import { AXValidationService } from '@acorex/core/validation';"`
+  - Incorrect: `"import { AXDataSource } from '../../src/lib/classes/datasource.class';"`
+- For built-in/DOM/global types that are not imported (e.g., `MouseEvent`, `HTMLElement`), omit an import or use a clarifying comment entry if needed.
+
+---
+
+## 3. Title & Description
+
+- English: Provide a clear, concise description of the interface or type alias's purpose and its role in the system.
+- Farsi: **Translate the title and description accurately to Farsi. Do NOT use English text with placeholders like "Translate to Farsi." The content must be in Farsi.**
+- If a property lacks a description, generate a simple, sensible one based on its name (e.g., `"maxItems": "The maximum number of items allowed."`). If generating a sensible description is not possible, use `"Description needed."` as the value.
+
+---
+
+## 4. Types (Properties of the Interface/Type)
+
+This section details how to document the properties of the shared interface or type alias. Classes that are primarily utility or data structures should also follow this, documenting their public properties and methods.
+
+The `type` for all properties is documented as an array of `DocType` objects within the JSON. Each `DocType` object has a `name: string` (the type string itself) and an optional `link: string` (uri-reference to the type's documentation if available).
+
+**Core Principle for Representing Types (STRICT):**
+
+- If a TypeScript type is a union (e.g., `string | number` or `TypeA | TypeB<GenericParam>`), each member of that union is listed as a separate and distinct `DocType` object in the `type` array.
+- The `|` union symbol itself is **NOT** included as a `DocType` object.
+- Complex types, including generics (e.g., `Map<string, number>`, `Observable<T>`), are represented as a single `DocType` object with the full type string as its `name`. There is no splitting of `<`, `>`, or generic parameters into separate `DocType` objects.
+
+**Defaults Policy (STRICT):**
+
+- Only include defaults that are explicitly assigned in code (`= value`).
+- Do not infer defaults from demos, examples, or typical usage.
+- For optional properties without assignment, omit defaults.
+
+**Inheritance in Types:**
+
+- When documenting classes or interfaces that extend others, collect public fields from the full chain and apply subclass overrides for types/defaults.
+- Note inheritance in descriptions when helpful (e.g., "Inherited from BaseType").
+
+### 4.1 Special Handling for Union Types and Type Aliases
+
+**For Union Types (e.g., `type MyType = TypeA | TypeB`):**
+
+- Create a `DocApi` object with the union type name as the title
+- Add a single property with the same name as the type alias
+- Document the union type as separate `DocType` objects in the `type` array
+- Provide a clear description explaining what the union type represents
+
+**Example for Union Type:**
+
+```json
+{
+  "$schema": "../../document.schema.json",
+  "title": "Action Sheet Content Type",
+  "description": "Type definition for custom content that can be displayed in an action sheet. This type allows for either a template reference or a component type to be used as custom content.",
+  "types": [
+    {
+      "title": "AXActionSheetContentType",
+      "props": [
+        {
+          "name": "AXActionSheetContentType",
+          "type": [{ "name": "TemplateRef<unknown>" }, { "name": "ComponentType<unknown>" }],
+          "description": "Union type that can be either a TemplateRef for custom templates or a ComponentType for custom components."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}
+```
+
+**For Type Aliases with Complex Types:**
+
+- If the type alias is a simple alias (e.g., `type MyType = string`), document it as a regular property
+- If the type alias is a union type, follow the union type documentation pattern above
+- If the type alias references other documented types, include proper links
+
+**IMPORTANT: Never leave type documentation empty**
+
+- If a type alias or interface has no properties but represents a union type or complex type, document the type itself as a property
+- For union types, always document each member of the union as separate `DocType` objects
+- For type aliases that reference other types, include the actual type definition in the documentation
+- If a type has no properties and is not a union type, still document it with at least one property showing the type definition
+
+### Empty States Policy (STRICT)
+
+- Do not include empty arrays for `props` or `methods`. Omit these keys entirely when they would be empty.
+- If a `types` entry would only contain a `title` and no `props`, `events`, or `methods`, omit the entire entry from `types`.
+
+**Example of documenting a union type alias:**
+
+```typescript
+// TypeScript definition
+export type AXActionSheetContentType = TemplateRef<unknown> | ComponentType<unknown>;
+```
+
+Should be documented as:
+
+```json
+{
+  "title": "AXActionSheetContentType",
+  "props": [
+    {
+      "name": "AXActionSheetContentType",
+      "type": [{ "name": "TemplateRef<unknown>" }, { "name": "ComponentType<unknown>" }],
+      "description": "Union type that can be either a TemplateRef for custom templates or a ComponentType for custom components."
+    }
+  ],
+  "events": [],
+  "methods": []
+}
+```
+
+### Main API (`types` array)
+
+- For each exported `interface`, `type alias`, or relevant `class` found by the glob, create a new `DocApi` object within the `types` array.
+- The `title` of this `DocApi` object should be the original TypeScript name (e.g., `"MyUtilityConfig"`).
+- Document all public properties under the `props` array (an array of `DocProperty` items).
+- Each property object must include:
+  - `name: string`: The name of the property.
+  - `type?: DocType[]`: An optional array of `DocType` objects representing the property's type.
+    - **CRITICAL LINKING:** If a property's type (or a part of a union type) refers to another _documented_ interface, class, or type (including those documented by `event-docs-rules.mdc` or this `shared-types-rules.mdc`), the `DocType` object for that type MUST include a `link` property.
+    - The `link` should point to its corresponding documentation JSON using the kebab-case name and the correct `docs/events/` or `docs/types/` path (e.g., `/en-US/docs/events/ax-action-sheet-event`, `/en-US/docs/types/log-level`).
+  - `description: string`: A clear explanation of the property's purpose.
+  - `default?: string`: The default value, if applicable, represented as a string.
+- Document all public methods of classes under the `methods` array (an array of `SyntaxHighlighterItem` items), following the same TypeDoc generation guidelines as in `component-docs-rules.mdc` (Section 6 - Methods).
+  - Include full JSDoc comments for code rendering, but exclude `@example` tags from the JSON output.
+- If the interface/type/class has no public properties or methods, omit the `props` and `methods` keys entirely.
+
+- Example for `MyUtilityConfig` interface:
+  ```json
+  {
+    "$schema": "../../document.schema.json",
+    "title": "Utility Configuration",
+    "description": "Configuration options for the utility service.",
+    "types": [
+      {
+        "title": "MyUtilityConfig",
+        "props": [
+          {
+            "name": "appName",
+            "type": [{ "name": "string" }],
+            "default": "\"MyApplication\"",
+            "description": "The name of the application."
+          },
+          {
+            "name": "logLevel",
+            "type": [{ "name": "LogLevel", "link": "/en-US/docs/types/log-level" }],
+            "default": "\"info\"",
+            "description": "The logging level for the application."
+          },
+          {
+            "name": "enableTelemetry",
+            "type": [{ "name": "boolean" }],
+            "default": "false",
+            "description": "Enables or disables telemetry data collection."
+          },
+          {
+            "name": "eventHandler",
+            "type": [
+              { "name": "(event: AXActionSheetEvent) => void", "link": "/en-US/docs/events/ax-action-sheet-event" }
+            ],
+            "description": "A callback function for handling action sheet events."
+          }
+        ],
+        "methods": []
+      }
+    ]
+  }
+  ```
+
+---
+
+## 5. Link Format Specification
+
+**CRITICAL REQUIREMENT:** The `link` property in `DocType` objects MUST use URL paths, NOT file paths.
+
+### 5.1 Correct Link Format
+
+- **Use URL paths:** `/en-US/docs/events/event-name` or `/fa-IR/docs/types/type-name`
+- **Do NOT use file paths:** `../../events/event-name/event-name.en-US.json`
+- **Do NOT use relative paths:** `../events/event-name`
+
+### 5.2 Link Structure Examples
+
+```json
+// CORRECT - URL paths
+"type": [{ "name": "LogLevel", "link": "/en-US/docs/types/log-level" }]
+"type": [{ "name": "AXActionSheetEvent", "link": "/en-US/docs/events/ax-action-sheet-event" }]
+"type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }]
+
+// INCORRECT - File paths (DO NOT USE)
+"type": [{ "name": "LogLevel", "link": "../../types/log-level/log-level.en-US.json" }]
+"type": [{ "name": "AXActionSheetEvent", "link": "../events/ax-action-sheet-event/ax-action-sheet-event.en-US.json" }]
+```
+
+### 5.3 Language-Specific Links
+
+- **English documentation:** Use `/en-US/docs/` prefix
+- **Farsi documentation:** Use `/fa-IR/docs/` prefix
+- **Category paths:** Follow the structure `/language/docs/category/name`
+
+### 5.4 Validation
+
+Before finalizing shared type documentation, verify that all `link` properties:
+
+- Start with `/en-US/docs/` or `/fa-IR/docs/`
+- Use kebab-case naming for the target
+- Point to the correct category (events, types, components, etc.)
+- Do NOT contain file extensions (.json)
+
+---
+
+## 6. Type Documentation Decision Guidelines
+
+**CRITICAL REQUIREMENT:** Before creating separate type documentation files, carefully evaluate whether they are necessary.
+
+### 6.1 When to Create Separate Type Documentation
+
+- **Create separate files ONLY for:**
+  - Types that are exported and meant to be used by other components
+  - Types that are referenced by multiple components
+  - Types that have complex structures requiring detailed documentation
+  - Types that are part of the public API
+  - Types that are meant to be imported and used by developers
+
+### 6.2 When NOT to Create Separate Type Documentation
+
+- **Do NOT create separate files for:**
+  - Internal interfaces used only within a single component
+  - Simple type aliases that are self-explanatory
+  - Types that are already documented within the component documentation
+  - Types that are not exported or meant for external use
+  - Types that are only used internally within a package
+
+### 6.3 Decision Flow
+
+1. **Check if the type is exported** from the package
+2. **Check if the type is referenced** by other components
+3. **Check if the type has complex structure** requiring detailed documentation
+4. **Check if the type is part of the public API** meant for developers
+5. **If NO to all above:** Document the type within the component documentation or skip separate documentation
+6. **If YES to any above:** Consider creating separate type documentation
+
+### 6.4 Example Decision
+
+```typescript
+// This interface is used only within breadcrumbs component
+interface AXBreadcrumbsItems {
+  name?: string;
+  text: string;
+  // ... other properties
+}
+
+// DECISION: Do NOT create separate documentation
+// REASON: Internal interface, not exported, used only by one component
+```
+
+---
+
+## 7. Documentation Structure Decision
+
+**CRITICAL UNDERSTANDING:** There are two different approaches for documenting types, and you must choose the correct one based on the type's purpose.
+
+**DEFAULT POLICY (Read First):** If a type is used by component inputs/outputs and must be linkable from component tables, ensure it has documentation. For simple unions (e.g., `'determinate' | 'indeterminate'`), document using a code section (`sections` with `type: "code"`). Use the `types` array for complex or multi-property types.
+
+### 7.1.1 Dual-format guidance (Recommended for shared/linkable types)
+
+- For shared, linkable types, include BOTH:
+  - A `types` block with a single property row representing the alias/union members for table linking
+  - A `sections` entry with `type: "code"` showing the canonical TypeScript definition for quick scanning
+- To avoid duplicate headings in the rendered page:
+  - Keep `types[0].title` set to the exact TypeScript name
+  - Set the code section title to a descriptive label like "Type Definition" (not the type name)
+
+### 7.1 Approach 1: Detailed Type Documentation (`types` array)
+
+**Use this approach for:**
+
+- Types that are exported and meant to be used by other components
+- Types that have multiple properties that need detailed documentation
+- Types that will be linked FROM component documentation
+
+**Structure:**
+
+```json
+{
+  "types": [
+    {
+      "title": "MyType",
+      "props": [
+        {
+          "name": "property1",
+          "type": [{ "name": "string" }],
+          "description": "Description of property1"
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}
+```
+
+**Example:** `ax-action-sheet-config` - This type has multiple properties and is used by the action sheet component, so it gets detailed documentation with a `types` array.
+
+### 7.2 Approach 2: Simple Code Display (`sections` array)
+
+**Use this approach for:**
+
+- Simple union types that are self-explanatory
+- Types that don't have multiple properties to document
+- Types that are primarily for internal use but need to be shown
+- Simple plain interfaces with trivial fields that do not reference or link to other documented types (no nested or linkable members). Example: `AXRange<T>`
+
+**Structure:**
+
+```json
+{
+  "sections": [
+    {
+      "title": "MyType",
+      "description": "Description of the type",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "my-type.ts",
+            "content": "type MyType = 'option1' | 'option2';"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+**Examples:**
+
+- `ax-action-sheet-content-type` — simple union type; use the dual-format with a single-row table (union members) and a code block
+- `ax-range` — simple generic interface with trivial fields; prefer dual-format for consistency
+- `ax-chips-look-type`, `ax-chips-size-type` — union types whose canonical TS uses `Extract`/`Exclude`; document in dual-format with:
+  - Table: union members only (e.g., `'solid' | 'outline' | 'twotone'`, `'ax-sm' | 'ax-md' | 'ax-lg'`)
+  - Code: the actual alias using `Extract<...>`/`Exclude<...>` from the source
+
+### 7.3 Decision Matrix
+
+| Type Characteristic                                   | Documentation Approach             | Example                       |
+| ----------------------------------------------------- | ---------------------------------- | ----------------------------- |
+| **Multiple properties** + **Exported**                | `types` array with detailed props  | `AXActionSheetConfig`         |
+| **Simple union type** + **Exported**                  | `sections` array with code display | `AXActionSheetContentType`    |
+| **Simple plain interface (no nested/linkable types)** | `sections` array with code display | `AXRange`                     |
+| **Complex interface** + **Internal**                  | `sections` array with code display | Internal component interfaces |
+| **Simple type alias** + **Internal**                  | `sections` array with code display | Component-specific types      |
+
+### 7.4 Implementation Guidelines
+
+1. **For Complex Types**: Use `types` array when you have multiple properties to document
+2. **For Simple Types**: Use `sections` array when the type is self-explanatory or a plain interface with trivial fields and no links to other documented types
+3. **Consistency**: Choose one approach per type and stick with it
+4. **Linking**: Types documented with `types` array can be linked FROM component documentation
+5. **Code Display**: Types documented with `sections` array are shown as inline code examples
+6. **No Tokens in Type Docs**: Never include a `tokens` array in type documentation files. Design tokens belong only to component documentation.
+
+---
+
+## 8. Cross-referencing Strategy (STRICT)
+
+- Cross-references MUST be implemented via `DocType.link` inside the `type` arrays of props/events/methods (where types are declared).
+  - Example: If an event uses `AXCalendarNavigateEvent`, set `"link": "/en-US/docs/events/ax-calendar-navigate-event"` on that type.
+  - Example: If a property refers to `AXCalendarComponent` (e.g., in an event payload), set `"link": "/en-US/docs/components/calendar"` on that type.
+- Do NOT add general cross-links via `extraLinks` for component-to-component relationships; rely on precise `DocType.link` references at the point of type declaration.
+- Ensure links follow Section 10 (URL paths, kebab-case, language-specific prefixes) and only reference existing docs.
+
+---
+
+## 9. Validation Checklist
+
+Before finalizing shared type/interface documentation, verify:
+
+- [ ] All public properties are documented with correct types and links
+- [ ] All public methods are documented with complete JSDoc
+- [ ] Both English and Farsi versions are complete and consistent
+- [ ] The `imports` array is present and uses the correct public import path
+- [ ] All type references include proper links to documented types
+- [ ] Schema validation passes for both language versions
+- [ ] Union types are properly documented as separate DocType objects
+- [ ] Complex types and generics are documented as single DocType objects
+- [ ] All `link` properties use URL paths (not file paths)
+- [ ] No file extensions (.json) appear in link properties
+- [ ] Separate type documentation is only created when necessary
+- [ ] Types are properly evaluated for public API status before documentation
+- [ ] Simple, non-linkable types are documented using code sections (not tables)
+- [ ] Type documentation files contain no `tokens` section
+- [ ] **Type-level links used for cross-references**: Related components/events are linked via `DocType.link` where types are declared; no `extraLinks` used for this purpose.
+- [ ] **No empty structures**: No empty arrays (`props`, `events`, `methods`) or empty `types` entries present

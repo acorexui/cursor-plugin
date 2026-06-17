@@ -1,0 +1,59 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNotificationButtonItem",
+  "description": "Configuration interface for action buttons displayed in notifications.",
+  "imports": ["import { AXNotificationButtonItem } from '@acorex/components/notification';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Complete interface definition for notification button configuration.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.class.ts",
+            "content": "export interface AXNotificationButtonItem {\n  color?: AXStyleColorType;\n  look?: AXStyleLookType;\n  text: string;\n  disabled?: boolean;\n  loading?: boolean;\n  onClick?: (e?: { source: AXNotificationButtonItem; handled?: boolean }) => void;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationButtonItem",
+      "props": [
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "Optional color theme for the button (primary, secondary, success, warning, danger, default)."
+        },
+        {
+          "name": "look",
+          "type": [{ "name": "AXStyleLookType", "link": "/en-US/docs/types/style-look-type" }],
+          "description": "Optional visual appearance style for the button (solid, outline, flat, etc.)."
+        },
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "Text label to display on the button."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button is disabled and non-interactive."
+        },
+        {
+          "name": "loading",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show a loading spinner on the button."
+        },
+        {
+          "name": "onClick",
+          "type": [{ "name": "(e?: { source: AXNotificationButtonItem; handled?: boolean }) => void" }],
+          "description": "Callback function called when the button is clicked. Receives an event object with the button source and handled flag."
+        }
+      ]
+    }
+  ]
+}

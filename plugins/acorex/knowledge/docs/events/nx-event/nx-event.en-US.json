@@ -1,0 +1,33 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "NXEvent",
+  "description": "Base event class for NX components.",
+  "imports": ["import { NXEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Base NX event class.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "nx-event.ts",
+            "language": "ts",
+            "content": "export class NXEvent {\n  sender: NXComponent;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "NXEvent",
+      "props": [
+        { "name": "sender", "type": [{ "name": "NXComponent" }], "description": "The component that sent the event." }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ],
+  "tokens": []
+}

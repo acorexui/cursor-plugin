@@ -1,0 +1,100 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Accordion CDK",
+  "description": "The Accordion CDK provides a set of directives for creating collapsible content sections with smooth animations. It consists of several directives that work together to create expandable/collapsible content areas, supporting both individual collapsible sections and accordion-style behavior where only one section can be open at a time.",
+  "imports": ["import { AXAccordionCdkModule } from '@acorex/cdk/accordion';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using the axCarousel directive",
+      "content": {
+        "type": "api",
+        "data": "cdk/accordion/usage"
+      }
+    },
+    {
+      "title": "Accordion mode",
+      "description": "With accordion, you can only have one section open at a time.",
+      "content": {
+        "type": "api",
+        "data": "cdk/accordion/accordion-mode"
+      }
+    },
+    {
+      "title": "Without toggle button",
+      "description": "Without axAccordionCloseButton, you can click on the header to control the collapse state.",
+      "content": {
+        "type": "api",
+        "data": "cdk/accordion/without-toggle-button"
+      }
+    },
+    {
+      "title": "Features",
+      "description": "The accordion CDK provides several key features for creating collapsible content sections:",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "Features",
+            "language": "typescript",
+            "content": "// Key Features of Accordion CDK:\n// • Create collapsible content sections with smooth animations\n// • Support for accordion mode (only one section open at a time)\n// • Customizable headers and content areas\n// • Built-in toggle buttons with click events\n// • Programmatic control over collapse state\n// • Smooth height and opacity transitions\n// • Unique identifier generation for each item\n// • Configurable transition duration"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAccordionGroupDirective",
+      "props": [
+        {
+          "name": "accordion",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Enable accordion mode where only one section can be open at a time. When true, opening one section will automatically close others."
+        },
+        {
+          "name": "activeIndex",
+          "type": [{ "name": "number" }, { "name": "number[]" }, { "name": "null" }],
+          "default": "null",
+          "description": "The index or array of indices of active accordion items. Can be a single number, array of numbers, or null for no active items."
+        }
+      ]
+    },
+    {
+      "title": "AXAccordionItemDirective",
+      "props": [
+        {
+          "name": "isCollapsed",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Controls the collapsed state of the accordion item. When true, the content is hidden; when false, the content is visible."
+        },
+        {
+          "name": "collapsedOnItemClick",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Whether to automatically toggle the collapse state when the item header or close button is clicked."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [{ "name": "AXClickEvent", "link": "/en-US/docs/events/click-event" }],
+          "description": "Emitted when the accordion item header or close button is clicked. Provides the component instance in the event payload."
+        }
+      ]
+    },
+    {
+      "title": "AXAccordionItemContentDirective",
+      "props": [
+        {
+          "name": "transition",
+          "type": [{ "name": "number" }],
+          "default": "150",
+          "description": "Duration of the transition animation in milliseconds. Controls both height and opacity transitions."
+        }
+      ]
+    }
+  ]
+}

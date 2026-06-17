@@ -1,0 +1,227 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Event Service",
+  "description": "A root-level service for application-wide communication using two complementary patterns: an RxJS Observable stream (emitEvent / onEvent) and a lightweight callback-based event bus (on / broadcast). Includes predefined AXSystemEvents for locale, language, and calendar changes.",
+  "imports": ["import { AXEventService, AXSystemEvents, AXEventData } from '@acorex/core/events';"],
+  "hints": [
+    {
+      "title": "Two APIs",
+      "content": "Use <code>emitEvent()</code> + <code>onEvent</code> when you need reactive RxJS pipelines (filter, merge, async pipe). Use <code>on()</code> + <code>broadcast()</code> for simple imperative callbacks — ideal for UI actions like opening a drawer.",
+      "status": "primary"
+    },
+    {
+      "title": "System events",
+      "content": "Prefer the <code>AXSystemEvents</code> enum for built-in global events (language, locale, calendar). Custom app events can use any string key in the callback bus.",
+      "status": "primary"
+    },
+    {
+      "title": "Cleanup",
+      "content": "Call <code>destroy(key)</code> to remove all callbacks registered for a given key. When subscribing to <code>onEvent</code>, unsubscribe on component destroy using <code>takeUntilDestroyed()</code> or similar.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSystemEvents",
+      "description": "Predefined system-wide event type identifiers.",
+      "props": [
+        {
+          "name": "AXLocaleChanged",
+          "type": [{ "name": "'AX_LOCALE_CHANGED'" }],
+          "description": "Emitted when the active locale profile changes."
+        },
+        {
+          "name": "AXLocaleLoaded",
+          "type": [{ "name": "'AX_LOCALE_LOADED'" }],
+          "description": "Emitted when a locale profile is loaded."
+        },
+        {
+          "name": "AXCalendarChanged",
+          "type": [{ "name": "'AX_CALENDAR_CHANGED'" }],
+          "description": "Emitted when the active calendar system changes."
+        },
+        {
+          "name": "AXLanguageChanged",
+          "type": [{ "name": "'AX_LANGUAGE_CHANGED'" }],
+          "description": "Emitted when the active translation language changes."
+        },
+        {
+          "name": "AXLanguageLoaded",
+          "type": [{ "name": "'AX_LANGUAGE_LOADED'" }],
+          "description": "Emitted when translation data for a language is loaded."
+        }
+      ]
+    },
+    {
+      "title": "AXEventData",
+      "description": "Payload structure for events emitted through the Observable stream.",
+      "props": [
+        {
+          "name": "type",
+          "type": [{ "name": "string" }],
+          "description": "Event type identifier (usually an AXSystemEvents value)."
+        },
+        {
+          "name": "payload?",
+          "type": [{ "name": "unknown" }],
+          "description": "Optional data attached to the event."
+        }
+      ]
+    },
+    {
+      "title": "AXEventService",
+      "description": "Singleton service provided in root for global event dispatch.",
+      "props": [
+        {
+          "name": "onEvent",
+          "type": [{ "name": "Observable<AXEventData>" }],
+          "description": "Hot Observable stream of all events emitted via emitEvent()."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Pushes an event into the onEvent Observable stream.\n */\nemitEvent(event: AXEventData): void"
+        },
+        {
+          "content": "/**\n * Registers a callback for a string event key.\n * Multiple callbacks can be registered for the same key.\n */\non(key: string, callback: (options?: unknown) => void): void"
+        },
+        {
+          "content": "/**\n * Invokes all callbacks registered for the given key.\n */\nbroadcast(key: string, options?: unknown): void"
+        },
+        {
+          "content": "/**\n * Removes all callbacks registered for the given key.\n */\ndestroy(key: string, callback?: (options?: unknown) => void): void"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How AXEventService fits into AcoreX.",
+      "content": {
+        "type": "text",
+        "data": "AXEventService decouples parts of the application that need to react to global state changes without tight coupling. Core services such as AXTranslationService, AXCalendarService, and AXFormatPipe rely on it internally.\n\nThe Observable API (emitEvent / onEvent) is used for reactive updates — for example, re-formatting displayed values when the language changes. The callback API (on / broadcast) is a simpler pub/sub registry for imperative actions like toggling UI elements."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "AXEventService is providedIn root — inject it and use either the Observable stream or the callback bus.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "events-usage.ts",
+            "language": "typescript",
+            "content": "import { DestroyRef, inject, Injectable } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { filter } from 'rxjs';\nimport {\n  AXEventData,\n  AXEventService,\n  AXSystemEvents,\n} from '@acorex/core/events';\n\n@Injectable({ providedIn: 'root' })\nexport class AppEventsDemo {\n  private events = inject(AXEventService);\n  private destroyRef = inject(DestroyRef);\n\n  constructor() {\n    // Observable API — listen to typed system events via onEvent\n    this.events.onEvent\n      .pipe(\n        filter(\n          (event: AXEventData) =>\n            event.type === AXSystemEvents.AXLanguageChanged,\n        ),\n        takeUntilDestroyed(this.destroyRef),\n      )\n      .subscribe((event) => {\n        console.log('Active language:', event.payload);\n      });\n\n    // Callback API — register handlers with on(), trigger with broadcast()\n    this.events.on('APP_CART_UPDATED', (payload: { itemCount: number }) => {\n      console.log('Cart badge:', payload.itemCount);\n    });\n  }\n\n  /** Emit into the onEvent Observable stream */\n  changeLanguage(lang: string) {\n    this.events.emitEvent({\n      type: AXSystemEvents.AXLanguageChanged,\n      payload: lang,\n    });\n  }\n\n  /** Notify all callbacks registered for a string key */\n  updateCart(itemCount: number) {\n    this.events.broadcast('APP_CART_UPDATED', { itemCount });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Observable Pattern",
+      "description": "Emit and listen with RxJS — the pattern used by format pipe and translation services.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "observable-events.ts",
+            "language": "typescript",
+            "content": "import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { filter } from 'rxjs/operators';\nimport {\n  AXEventData,\n  AXEventService,\n  AXSystemEvents,\n} from '@acorex/core/events';\n\n@Component({\n  selector: 'app-language-watcher',\n  template: `<p>Active language: {{ activeLang() }}</p>`,\n})\nexport class LanguageWatcherComponent implements OnInit {\n  private eventService = inject(AXEventService);\n  private destroyRef = inject(DestroyRef);\n\n  activeLang = signal('en-US');\n\n  ngOnInit() {\n    this.eventService.onEvent\n      .pipe(\n        filter(\n          (event: AXEventData) =>\n            event.type === AXSystemEvents.AXLanguageChanged,\n        ),\n        takeUntilDestroyed(this.destroyRef),\n      )\n      .subscribe((event) => {\n        this.activeLang.set(event.payload as string);\n      });\n  }\n\n  changeLanguage(lang: string) {\n    this.eventService.emitEvent({\n      type: AXSystemEvents.AXLanguageChanged,\n      payload: lang,\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Callback Event Bus",
+      "description": "Register handlers with on() and trigger them with broadcast().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "callback-bus.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, viewChild } from '@angular/core';\nimport { AXDrawerComponent } from '@acorex/components/drawer';\nimport { AXEventService } from '@acorex/core/events';\n\nconst OPEN_DRAWER = 'OPEN-DRAWER';\n\n@Component({\n  selector: 'app-layout',\n  template: `\n    <button (click)=\"openDrawer()\">Menu</button>\n    <ax-drawer #drawer>Side menu content</ax-drawer>\n  `,\n})\nexport class LayoutComponent {\n  private eventService = inject(AXEventService);\n  drawer = viewChild.required<AXDrawerComponent>('drawer');\n\n  constructor() {\n    // Listen from anywhere in the app\n    this.eventService.on(OPEN_DRAWER, () => {\n      this.drawer().open();\n    });\n  }\n\n  openDrawer() {\n    // Trigger from any component via broadcast\n    this.eventService.broadcast(OPEN_DRAWER);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "System Events Reference",
+      "description": "Built-in events emitted by core services.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "system-events.ts",
+            "language": "typescript",
+            "content": "import { AXSystemEvents } from '@acorex/core/events';\n\n// Emitted by AXTranslationService.setActiveLang()\nAXSystemEvents.AXLanguageChanged; // 'AX_LANGUAGE_CHANGED'\n\n// Emitted by AXTranslationLoaderService after loading translations\nAXSystemEvents.AXLanguageLoaded;  // 'AX_LANGUAGE_LOADED'\n\n// Emitted by AXCalendarService.setActiveCalendar()\nAXSystemEvents.AXCalendarChanged; // 'AX_CALENDAR_CHANGED'\n\n// Locale events (reserved for locale module)\nAXSystemEvents.AXLocaleChanged;   // 'AX_LOCALE_CHANGED'\nAXSystemEvents.AXLocaleLoaded;    // 'AX_LOCALE_LOADED'\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Listening to Multiple Events",
+      "description": "Filter onEvent for several system events at once — pattern from AXFormatPipe.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "multi-event-filter.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { filter, map, merge, startWith } from 'rxjs';\nimport {\n  AXEventData,\n  AXEventService,\n  AXSystemEvents,\n} from '@acorex/core/events';\n\nexport class RefreshOnSystemChange {\n  private eventService = inject(AXEventService);\n\n  private triggers = Object.values(AXSystemEvents) as string[];\n\n  /** Re-runs whenever language, locale, or calendar changes */\n  refresh$ = this.eventService.onEvent.pipe(\n    filter((event: AXEventData) => this.triggers.includes(event.type)),\n    startWith(null),\n    map(() => this.loadData()),\n  );\n\n  private loadData() {\n    return { updatedAt: Date.now() };\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Custom Application Events",
+      "description": "Define your own event keys for feature-level communication.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "custom-events.ts",
+            "language": "typescript",
+            "content": "import { inject, Injectable } from '@angular/core';\nimport { AXEventService } from '@acorex/core/events';\n\nexport const AppEvents = {\n  CartUpdated: 'APP_CART_UPDATED',\n  UserLoggedIn: 'APP_USER_LOGGED_IN',\n} as const;\n\nexport interface CartUpdatedPayload {\n  itemCount: number;\n}\n\n@Injectable({ providedIn: 'root' })\nexport class CartService {\n  private eventService = inject(AXEventService);\n\n  addItem() {\n    // Update cart...\n    this.eventService.broadcast(AppEvents.CartUpdated, {\n      itemCount: 3,\n    } satisfies CartUpdatedPayload);\n  }\n}\n\n@Injectable({ providedIn: 'root' })\nexport class CartBadgeService {\n  private eventService = inject(AXEventService);\n\n  constructor() {\n    this.eventService.on(AppEvents.CartUpdated, (payload: CartUpdatedPayload) => {\n      console.log('Cart badge:', payload.itemCount);\n    });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Cleanup",
+      "description": "Remove callback handlers and unsubscribe from Observables.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "cleanup.ts",
+            "language": "typescript",
+            "content": "import { Component, DestroyRef, inject, OnDestroy } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXEventService } from '@acorex/core/events';\n\nconst MY_EVENT = 'MY-FEATURE-EVENT';\n\n@Component({ selector: 'app-feature', template: '' })\nexport class FeatureComponent implements OnDestroy {\n  private eventService = inject(AXEventService);\n  private destroyRef = inject(DestroyRef);\n\n  constructor() {\n    // Callback bus\n    this.eventService.on(MY_EVENT, this.handleEvent);\n\n    // Observable stream — auto-unsubscribes on destroy\n    this.eventService.onEvent\n      .pipe(takeUntilDestroyed(this.destroyRef))\n      .subscribe((event) => console.log(event));\n  }\n\n  private handleEvent = () => {\n    console.log('Event received');\n  };\n\n  ngOnDestroy() {\n    // Removes ALL callbacks for this key\n    this.eventService.destroy(MY_EVENT, this.handleEvent);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Real-world Integration",
+      "description": "How core modules emit events you can listen to.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "integration.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { filter } from 'rxjs/operators';\nimport { AXCalendarService } from '@acorex/core/date-time';\nimport { AXEventService, AXSystemEvents } from '@acorex/core/events';\nimport { AXTranslationService } from '@acorex/core/translation';\n\nexport class AppBootstrap {\n  private translation = inject(AXTranslationService);\n  private calendar = inject(AXCalendarService);\n  private events = inject(AXEventService);\n\n  init() {\n    // Changing language emits AXLanguageChanged automatically\n    this.translation.setActiveLang('fa-IR');\n\n    // Changing calendar emits AXCalendarChanged automatically\n    this.calendar.setActiveCalendar('solar-hijri');\n\n    // React to those events anywhere in the app\n    this.events.onEvent\n      .pipe(filter((e) => e.type === AXSystemEvents.AXCalendarChanged))\n      .subscribe((e) => {\n        console.log('Calendar switched:', e.payload);\n      });\n  }\n}\n"
+          }
+        ]
+      }
+    }
+  ]
+}

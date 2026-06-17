@@ -1,0 +1,277 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Platform Service",
+  "description": "Runtime environment detection and application chrome utilities: device/browser/screen checks, dark/light theme management with persistence, global resize/click/scroll/direction events, and SSR-safe isBrowser() helpers.",
+  "imports": [
+    "import { AXPlatform, AXThemeMode, AXPlatformEvent, isBrowser, isServer, PLATFORMS_MAP } from '@acorex/core/platform';"
+  ],
+  "hints": [
+    {
+      "title": "Bootstrap theme on startup",
+      "content": "Call <code>autoDetectThemeMode()</code> once after the app renders (e.g. in <code>afterNextRender</code>) to restore the user's saved preference from <code>localStorage</code> key <code>AX_THEME_MODE</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "SM breakpoint = mobile UI",
+      "content": "Throughout AcoreX, <code>platform.is('SM')</code> is used as the mobile breakpoint (max-width 640px) for full-screen popups, action sheets, and responsive layouts.",
+      "status": "primary"
+    },
+    {
+      "title": "SSR-safe guards",
+      "content": "Use <code>isBrowser()</code> before accessing <code>window</code>, <code>localStorage</code>, or DOM APIs. <code>platform.is()</code> returns <code>false</code> on the server.",
+      "status": "warning"
+    },
+    {
+      "title": "Dark mode CSS class",
+      "content": "Theme switching toggles the <code>ax-dark</code> class on the <code>&lt;html&gt;</code> element. Ensure your design tokens respond to this class.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPlatform",
+      "description": "Root injectable for platform detection, theme mode, and global DOM events.",
+      "props": [
+        {
+          "name": "themeMode",
+          "type": [{ "name": "Signal<AXThemeMode>" }],
+          "description": "Current theme mode as an Angular signal."
+        },
+        {
+          "name": "themeMode$",
+          "type": [{ "name": "BehaviorSubject<AXThemeMode>" }],
+          "description": "RxJS stream of theme mode changes."
+        },
+        {
+          "name": "resize",
+          "type": [{ "name": "Subject<AXPlatformEvent>" }],
+          "description": "Debounced window resize events (100ms)."
+        },
+        {
+          "name": "click",
+          "type": [{ "name": "Subject<AXPlatformEvent>" }],
+          "description": "Document-level click events (capture phase)."
+        },
+        {
+          "name": "scroll",
+          "type": [{ "name": "Subject<AXPlatformEvent>" }],
+          "description": "Document-level scroll events (capture phase)."
+        },
+        {
+          "name": "directionChange",
+          "type": [{ "name": "Subject<AXPlatformEvent>" }],
+          "description": "Fires when html dir attribute changes (RTL/LTR)."
+        },
+        {
+          "name": "screenSize",
+          "type": [{ "name": "AXScreenSizes" }],
+          "description": "Current breakpoint keyword: SM | MD | LG | XL | 2XL | 3XL | 4XL | 5XL."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * True when html has ax-dark class.\n */\nisDark(): boolean"
+        },
+        {
+          "content": "/**\n * True when document direction is RTL.\n */\nisRtl(): boolean"
+        },
+        {
+          "content": "/**\n * True when innerHeight < innerWidth.\n */\nisLandscape(): boolean"
+        },
+        {
+          "content": "/**\n * Opposite of isLandscape(). Note: method name is isPortrate in source.\n */\nisPortrate(): boolean"
+        },
+        {
+          "content": "/**\n * Detect platform, browser, technology, or screen breakpoint.\n * Returns false on server.\n */\nis(name: AXPlatforms | AXBrowsers | AXTechnologies | AXScreenSizes): boolean"
+        },
+        {
+          "content": "/**\n * Apply light theme, remove ax-dark, persist to localStorage.\n */\nswitchLightMode(): 'light'"
+        },
+        {
+          "content": "/**\n * Apply dark theme, add ax-dark, persist to localStorage.\n */\nswitchDarkMode(): 'dark'"
+        },
+        {
+          "content": "/**\n * Follow OS prefers-color-scheme setting.\n */\nswitchSystemMode(): void"
+        },
+        {
+          "content": "/**\n * Set theme explicitly: 'light' | 'dark' | 'system'.\n */\nsetThemeMode(mode: AXThemeMode): void"
+        },
+        {
+          "content": "/**\n * Read AX_THEME_MODE from localStorage and apply.\n */\nautoDetectThemeMode(): AXThemeMode"
+        }
+      ]
+    },
+    {
+      "title": "AXThemeMode",
+      "description": "Theme preference values.",
+      "props": [
+        { "name": "light", "type": [{ "name": "'light'" }] },
+        { "name": "dark", "type": [{ "name": "'dark'" }] },
+        { "name": "system", "type": [{ "name": "'system'" }] },
+        { "name": "system-dark", "type": [{ "name": "'system-dark'" }] },
+        { "name": "system-light", "type": [{ "name": "'system-light'" }] }
+      ]
+    },
+    {
+      "title": "isBrowser / isServer",
+      "description": "Standalone runtime environment checks (no injection required).",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Returns true when code runs in a browser window context.\n * Use before window, document, localStorage access.\n */\nisBrowser(): boolean"
+        },
+        {
+          "content": "/**\n * Returns true when code runs in a Node/server context.\n */\nisServer(): boolean"
+        }
+      ]
+    },
+    {
+      "title": "AXPlatformEvent",
+      "description": "Event wrapper for platform subjects.",
+      "props": [
+        { "name": "nativeEvent", "type": [{ "name": "Event" }] },
+        { "name": "source", "type": [{ "name": "AXPlatform" }] },
+        { "name": "data?", "type": [{ "name": "unknown" }] }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the platform package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/platform package centralizes environment detection and global UI behavior:\n\n• AXPlatform — injectable service for theme mode, breakpoints, RTL/dark checks, and DOM event buses\n• isBrowser() / isServer() — lightweight guards used across storage, network, and component code\n• Standalone detector functions — isMobile, isIOS, isChrome, isPWA, etc. (also reachable via platform.is())\n\nComponents like overlays, popups, dropdowns, and the documentation layout use AXPlatform to adapt UI for mobile screens and theme changes."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "AXPlatform is providedIn root — inject it to restore theme mode, read responsive state, and react to global platform events.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "platform-status.component.ts",
+            "language": "typescript",
+            "content": "import { Component, afterNextRender, computed, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXPlatform, AXThemeMode } from '@acorex/core/platform';\n\n@Component({\n  selector: 'app-platform-status',\n  template: `\n    <section>\n      <p>Screen: {{ screenSize() }}</p>\n      <p>Mobile layout: {{ isMobileLayout() ? 'yes' : 'no' }}</p>\n      <p>Direction: {{ direction() }}</p>\n      <p>Theme: {{ themeMode() }}</p>\n\n      <button type=\"button\" (click)=\"setTheme('light')\">Light</button>\n      <button type=\"button\" (click)=\"setTheme('dark')\">Dark</button>\n      <button type=\"button\" (click)=\"setTheme('system')\">System</button>\n    </section>\n  `,\n})\nexport class PlatformStatusComponent {\n  private platform = inject(AXPlatform);\n\n  protected themeMode = this.platform.themeMode;\n  protected direction = signal(this.platform.isRtl() ? 'rtl' : 'ltr');\n  protected screenSize = signal('5XL');\n  protected isMobileLayout = computed(() => this.screenSize() === 'SM');\n\n  constructor() {\n    afterNextRender(() => {\n      this.platform.autoDetectThemeMode();\n      this.syncScreenSize();\n    });\n\n    this.platform.resize\n      .pipe(takeUntilDestroyed())\n      .subscribe(() => this.syncScreenSize());\n\n    this.platform.directionChange\n      .pipe(takeUntilDestroyed())\n      .subscribe((event) => this.direction.set(event.data ?? 'ltr'));\n  }\n\n  protected setTheme(mode: AXThemeMode) {\n    this.platform.setThemeMode(mode);\n  }\n\n  private syncScreenSize() {\n    this.screenSize.set(this.platform.screenSize);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Theme Mode Switching",
+      "description": "Light, dark, and system themes with persistence.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "theme-toggle.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXPlatform, AXThemeMode } from '@acorex/core/platform';\n\n@Component({\n  selector: 'app-theme-toggle',\n  template: `\n    <button type=\"button\" (click)=\"cycleTheme()\">\n      Theme: {{ currentTheme }}\n    </button>\n  `,\n})\nexport class ThemeToggleComponent {\n  private platform = inject(AXPlatform);\n  currentTheme: AXThemeMode = 'system';\n\n  constructor() {\n    this.platform.themeMode$.subscribe((mode) => {\n      this.currentTheme = mode;\n    });\n  }\n\n  cycleTheme() {\n    const mode = this.platform.themeMode();\n    if (mode.includes('dark')) {\n      this.platform.setThemeMode('light');\n    } else if (mode.includes('light')) {\n      this.platform.setThemeMode('dark');\n    } else {\n      this.platform.setThemeMode('system');\n    }\n  }\n\n  setLight() { this.platform.switchLightMode(); }\n  setDark() { this.platform.switchDarkMode(); }\n  setSystem() { this.platform.switchSystemMode(); }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Detecting Devices and Browsers",
+      "description": "Use platform.is() with keyword names.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "detection.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXPlatform } from '@acorex/core/platform';\n\nconst platform = inject(AXPlatform);\n\n// Platforms\nplatform.is('Mobile');   // coarse pointer (touch device)\nplatform.is('Desktop');  // not mobile\nplatform.is('Android');\nplatform.is('iOS');\n\n// Browsers\nplatform.is('Chrome');\nplatform.is('Safari');\nplatform.is('Firefox');\nplatform.is('Edge');\n\n// Technologies\nplatform.is('PWA');      // standalone display mode\nplatform.is('Hybrid');   // Cordova / Capacitor\nplatform.is('Electron');\n\n// Screen breakpoints (max-width media queries)\nplatform.is('SM');  // <= 640px  — used as \"mobile\" across AcoreX\nplatform.is('MD');  // <= 768px\nplatform.is('LG');  // <= 1024px\n\nconsole.log(platform.screenSize); // e.g. 'MD', 'XL', '5XL'\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Responsive UI Pattern",
+      "description": "Real usage for mobile-full popups.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "responsive-popup.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXPopupService } from '@acorex/components/popup';\nimport { AXPlatform } from '@acorex/core/platform';\n\nasync function openSettingsPopup(component: unknown) {\n  const popup = inject(AXPopupService);\n  const platform = inject(AXPlatform);\n\n  await popup.open(component, {\n    title: 'Settings',\n    size: platform.is('SM') ? 'full' : 'md',\n  });\n}\n\n// Overlay action-sheet style on mobile:\n// overlay.create(content, { actionSheetStyle: true })\n// → adds ax-overlay-actionsheet class when platform.is('SM')\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Global Event Subjects",
+      "description": "Subscribe to resize, click, scroll, and direction changes.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "platform-events.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXPlatform } from '@acorex/core/platform';\n\n@Component({\n  selector: 'app-layout',\n  template: `<p>Direction: {{ direction() }}</p>`,\n})\nexport class LayoutComponent {\n  private platform = inject(AXPlatform);\n  direction = signal('ltr');\n\n  constructor() {\n    this.platform.resize\n      .pipe(takeUntilDestroyed())\n      .subscribe(() => this.onWindowResize());\n\n    this.platform.directionChange\n      .pipe(takeUntilDestroyed())\n      .subscribe((e) => this.direction.set(e.data ?? 'ltr'));\n\n    this.platform.click\n      .pipe(takeUntilDestroyed())\n      .subscribe((e) => {\n        // Global click handling (capture phase)\n      });\n  }\n\n  private onWindowResize() {\n    // --ax-vh CSS variable is updated automatically by AXPlatform\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "isBrowser() Guard",
+      "description": "SSR-safe checks without injecting AXPlatform.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "ssr-safe.ts",
+            "language": "typescript",
+            "content": "import { isBrowser, isServer } from '@acorex/core/platform';\n\nfunction getLanguage(): string {\n  return isBrowser() ? navigator.language : 'en-US';\n}\n\nfunction saveToStorage(key: string, value: string) {\n  if (!isBrowser()) return;\n  localStorage.setItem(key, value);\n}\n\n// Used internally by:\n// - AXLocalStorageService\n// - AXNetworkService (online/offline events)\n// - Alert, dropdown, drawer components\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Layout Helpers",
+      "description": "Orientation, RTL, and dark checks.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "layout-helpers.ts",
+            "language": "typescript",
+            "content": "import { computed, inject } from '@angular/core';\nimport { AXPlatform } from '@acorex/core/platform';\n\nconst platform = inject(AXPlatform);\n\nconst isRtl = computed(() => platform.isRtl());\nconst isDark = computed(() => platform.isDark());\nconst isLandscape = computed(() => platform.isLandscape());\n\n// Flip drawer side based on RTL + locale changes\nplatform.directionChange.subscribe((e) => {\n  console.log('Document dir changed to:', e.data);\n});\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Screen Size Breakpoints",
+      "description": "Reference for is() and screenSize.",
+      "content": {
+        "type": "text",
+        "data": "Breakpoint keywords use max-width media queries:\n\n| Keyword | Media query | Typical use |\n|---------|-------------|-------------|\n| SM | max-width: 640px | Mobile layouts, full-screen dialogs |\n| MD | max-width: 768px | Tablet portrait |\n| LG | max-width: 1024px | Tablet / small laptop |\n| XL | max-width: 1280px | Desktop |\n| 2XL | max-width: 1536px | Large desktop |\n| 3XL | max-width: 1920px | Full HD+ |\n| 4XL | max-width: 2560px | Ultra-wide |\n| 5XL | (fallback) | Larger than 4XL |\n\nplatform.screenSize returns the first matching keyword from SM upward, or '5XL' if none match.\n\nNote: is('SM') being true means the viewport is at most 640px wide — the common \"mobile\" check in AcoreX."
+      }
+    },
+    {
+      "title": "CSS Integration",
+      "description": "How theme and viewport integrate with styles.",
+      "content": {
+        "type": "text",
+        "data": "Theme:\n• switchDarkMode() adds class ax-dark to <html>\n• switchLightMode() removes ax-dark\n• switchSystemMode() follows prefers-color-scheme: dark\n• Preference stored in localStorage as AX_THEME_MODE\n\nViewport height:\n• On resize, AXPlatform sets CSS variable --ax-vh to window.innerHeight / 100 + 'px'\n• Use calc(var(--ax-vh) * 100) for full-height mobile layouts that avoid 100vh browser chrome issues\n\nDesign your SCSS/Tailwind dark tokens to respond to html.ax-dark."
+      }
+    },
+    {
+      "title": "Standalone Detector Functions",
+      "description": "Low-level utilities exported alongside AXPlatform.",
+      "content": {
+        "type": "text",
+        "data": "You can import detectors directly when you have a Window reference:\n\nimport { isMobile, isIOS, isAndroid, isChrome, isSafari, isPWA, isElectron, isTablet, matchMedia, PLATFORMS_MAP } from '@acorex/core/platform';\n\nconst mobile = isMobile(window);\nconst tablet = isTablet(window);\n\nPLATFORMS_MAP mirrors the keywords accepted by platform.is(). Prefer platform.is() in Angular code for automatic SSR handling."
+      }
+    }
+  ]
+}

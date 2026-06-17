@@ -1,0 +1,72 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXCalendar",
+  "imports": ["import { AXCalendar } from '@acorex/core/date-time';"],
+  "description": "The calendar type",
+  "types": [
+    {
+      "title": "AXCalendar",
+      "props": [
+        { "name": "weekend", "type": [{ "name": "number[]" }], "description": "The weekend days" },
+        { "name": "weekdays", "type": [{ "name": "number[]" }], "description": "The weekdays" }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Returns the name of the calendar system.\n * @returns The calendar system name (e.g., 'gregorian', 'persian', 'islamic').\n */\nname(): string"
+        },
+        {
+          "content": "/**\n * Returns the day of the month for the given date.\n * @param date - The date to get the day of month from.\n * @returns The day of the month (1-31).\n */\ndayOfMonth(date: Date): number"
+        },
+        {
+          "content": "/**\n * Returns the day of the year for the given date.\n * @param date - The date to get the day of year from.\n * @returns The day of the year (1-365/366).\n */\ndayOfYear(date: Date): number"
+        },
+        {
+          "content": "/**\n * Returns the day of the week for the given date.\n * @param date - The date to get the day of week from.\n * @returns The day of the week (1-7).\n */\ndayOfWeek(date: Date): number"
+        },
+        {
+          "content": "/**\n * Returns the month of the year for the given date.\n * @param date - The date to get the month from.\n * @returns The month of the year (1-12).\n */\nmonthOfYear(date: Date): number"
+        },
+        {
+          "content": "/**\n * Returns the week of the year for the given date.\n * @param date - The date to get the week from.\n * @returns The week of the year (1-52/53).\n */\nweekOfYear(date: Date): number"
+        },
+        {
+          "content": "/**\n * Returns the year for the given date.\n * @param date - The date to get the year from.\n * @returns The year.\n */\nyear(date: Date): number"
+        },
+        {
+          "content": "/**\n * Adds a specified amount of time units to the given date.\n * @param date - The base date.\n * @param unit - The time unit to add (day, month, year, etc.).\n * @param amount - The amount to add.\n * @returns A new AXDateTime instance with the added time.\n */\nadd(date: Date, unit: TimeUnit, amount: number): AXDateTime"
+        },
+        {
+          "content": "/**\n * Sets a specific time unit to a given value.\n * @param date - The base date.\n * @param unit - The time unit to set (day, month, year, etc.).\n * @param value - The new value for the time unit.\n * @returns A new AXDateTime instance with the set time unit.\n */\nset(date: Date, unit: TimeUnit, value: number): AXDateTime"
+        },
+        {
+          "content": "/**\n * Returns the start of the specified time unit for the given date.\n * @param date - The base date.\n * @param unit - The time unit to get the start of (day, month, year, etc.).\n * @returns A new AXDateTime instance representing the start of the time unit.\n */\nstartOf(date: Date, unit: TimeUnit): AXDateTime"
+        },
+        {
+          "content": "/**\n * Returns the end of the specified time unit for the given date.\n * @param date - The base date.\n * @param unit - The time unit to get the end of (day, month, year, etc.).\n * @returns A new AXDateTime instance representing the end of the time unit.\n */\nendOf(date: Date, unit: TimeUnit): AXDateTime"
+        },
+        {
+          "content": "/**\n * Creates a new AXDateTime instance from an AXDateValue object.\n * @param value - The date value object containing date information.\n * @returns A new AXDateTime instance.\n */\ncreate(value: AXDateValue): AXDateTime"
+        },
+        {
+          "content": "/**\n * Parses a date string and returns a new AXDateTime instance.\n * @param value - The date string to parse.\n * @returns A new AXDateTime instance.\n */\nparse(value: string): AXDateTime"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXCalendar type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-calendar.ts",
+            "content": "export abstract class AXCalendar {\n  private _config: AXCalendarConfig;\n\n  constructor(config: AXCalendarConfig) {\n    this._config = config;\n  }\n\n  public get weekend(): number[]\n  public get weekdays(): number[]\n  \n  abstract name(): string;\n  abstract dayOfMonth(date: Date): number;\n  abstract dayOfYear(date: Date): number;\n  abstract dayOfWeek(date: Date): number;\n  abstract monthOfYear(date: Date): number;\n  abstract weekOfYear(date: Date): number;\n  abstract year(date: Date): number;\n  abstract add(date: Date, unit: TimeUnit, amount: number): AXDateTime;\n  abstract set(date: Date, unit: TimeUnit, value: number): AXDateTime;\n  abstract startOf(date: Date, unit: TimeUnit): AXDateTime;\n  abstract endOf(date: Date, unit: TimeUnit): AXDateTime;\n  abstract create(value: AXDateValue): AXDateTime;\n  abstract parse(value: string): AXDateTime;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

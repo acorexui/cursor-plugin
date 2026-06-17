@@ -1,0 +1,511 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXAutocompleteComponent } from '@acorex/components/autocomplete';"
+  ],
+  "title": "Autocomplete",
+  "description": "A dropdown suggestion component that filters items as the user types. Supports data sources, templates, single/multiple selection, and dropdown look styling.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-autocomplete</code> with a local array data source.",
+      "content": {
+        "type": "api",
+        "data": "autocomplete/usage"
+      }
+    },
+    {
+      "title": "Inside Tag Box",
+      "description": "Using <code>ax-autocomplete</code> as the source for <code>ax-tag-box</code>.",
+      "content": {
+        "type": "api",
+        "data": "tag-box/auto-complete"
+      }
+    },
+    {
+      "height": "500px",
+      "title": "Header and Footer Templates",
+      "description": "Demonstrates using <code>listHeaderTemplate</code> and <code>listFooterTemplate</code> to add custom content above and below the suggestion list when used inside <code>ax-tag-box</code>.",
+      "content": {
+        "type": "api",
+        "data": "tag-box/header-footer-templates"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAutocompleteComponent",
+      "props": [
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXDataSource<any>",
+              "link": "/en-US/docs/types/data-source"
+            },
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Data source or array of items displayed in the suggestion list."
+        },
+        {
+          "name": "textField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name for display text. Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "valueField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name for value key. Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "disabledField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Field name indicating disabled items. Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "multiple",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Allow multiple selection. Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "any"
+            },
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Selected value(s). Inherited from MXValueComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text when no value is selected."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Caption text shown in action sheet style header (when applicable)."
+        },
+        {
+          "name": "delayTime",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "300",
+          "description": "Delay in milliseconds before filtering while typing."
+        },
+        {
+          "name": "itemHeight",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "'auto'"
+            }
+          ],
+          "default": "40",
+          "description": "Height of each list item in pixels, or 'auto' to let the list measure."
+        },
+        {
+          "name": "maxVisibleItems",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "5",
+          "description": "Maximum number of list items visible before scrolling."
+        },
+        {
+          "name": "itemTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Custom item template for list rendering."
+        },
+        {
+          "name": "selectedTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Custom template for selected items display."
+        },
+        {
+          "name": "emptyTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Template to show when there are no results."
+        },
+        {
+          "name": "loadingTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "description": "Template to show while items are loading."
+        },
+        {
+          "name": "listHeaderTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template used to display the header of the list."
+        },
+        {
+          "name": "listFooterTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template used to display the footer of the list."
+        },
+        {
+          "name": "dropdownWidth",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "260",
+          "description": "Dropdown width in pixels."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Visual style of the dropdown. Inherited from MXLookComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disable the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Readonly mode. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Tab index of the host. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique component id. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Component name. Inherited from MXValueComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates if the component is dirty. Inherited from MXValueComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates if the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates if the component is required. Inherited from MXValueComponent."
+        },
+        {
+          "name": "selectedItems",
+          "type": [
+            {
+              "name": "unknown[]"
+            }
+          ],
+          "description": "Currently selected items. Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "disabledCallback",
+          "type": [
+            {
+              "name": "DisabledCallback<T>"
+            }
+          ],
+          "description": "Callback function to determine if an item should be disabled. Inherited from MXSelectionValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<any>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "any"
+            }
+          ],
+          "description": "Deprecated two-way binding change. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when readonly changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when disabled changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted on focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted on blur. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onOpened",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the dropdown opens. Inherited from MXDropdownBoxBaseComponent."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the dropdown closes. Inherited from MXDropdownBoxBaseComponent."
+        },
+        {
+          "name": "validationRulesChange",
+          "type": [
+            {
+              "name": "AXFormValidationRule[]"
+            }
+          ],
+          "description": "Emitted when validation rules change. Inherited from MXValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Retrieves an item by its key.\n * @param {any} key\n */\ngetItemByKey(key: any): Promise<any> | any"
+        },
+        {
+          "content": "/**\n * Filters the data source based on the provided search term.\n * @param {string} term\n */\nsearch(term: string): void"
+        },
+        {
+          "content": "/**\n * Refreshes the component by resetting state, clearing selection cache, refreshing the list, and closing the component.\n */\nrefresh(): void"
+        },
+        {
+          "content": "/**\n * Opens the dropdown if it is not already open and the component is not disabled, then focuses the dropdown.\n *\n * @returns void - No return value. Dropdown becomes open and receives focus.\n * Inherited from MXDropdownBoxBaseComponent.\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Closes the dropdown if it is open and the component is not disabled, then focuses the host.\n *\n * @returns void - No return value. Dropdown is closed and focus returns to the host.\n * Inherited from MXDropdownBoxBaseComponent.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Toggles the dropdown if the component is not disabled.\n *\n * @returns void - No return value. Switches between open and closed states.\n * Inherited from MXDropdownBoxBaseComponent.\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n *\n * @param e - Optional flag indicating if this is a user interaction.\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n *\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n */\ncommitValue(value: T, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nvalidate(): Promise<AXValidationSummary>"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param rule - The validation rule to remove.\n */\nremoveValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Writes a value to the component (ControlValueAccessor method).\n *\n * @param value - The value to write.\n */\nwriteValue(value: T): void"
+        },
+        {
+          "content": "/**\n * Registers a change callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnChange(fn: (value: T) => void): void"
+        },
+        {
+          "content": "/**\n * Registers a touched callback function (ControlValueAccessor method).\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Selects the specified items.\n *\n * @param items - Items to select.\n */\nselectItems(...items: T[]): void"
+        },
+        {
+          "content": "/**\n * Unselects the specified items.\n *\n * @param items - Items to unselect.\n */\nunselectItems(...items: T[]): void"
+        },
+        {
+          "content": "/**\n * Toggles the selection state of the specified items.\n *\n * @param items - Items to toggle.\n */\ntoggleSelect(...items: T[]): void"
+        },
+        {
+          "content": "/**\n * Checks if an item is currently selected.\n *\n * @param item - Item to check.\n * @returns boolean - True if the item is selected.\n */\nisItemSelected(item: T): boolean"
+        },
+        {
+          "content": "/**\n * Checks if an item is disabled.\n *\n * @param item - Item to check.\n * @returns boolean - True if the item is disabled.\n */\nisItemDisabled(item: T): boolean"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Phone Box",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/phonebox--documentation"
+    }
+  ],
+  "description": "A component that provides a phone number input field with support for country selection, formatting, and validation. This component is commonly used for phone number collection and verification.",
+  "imports": ["import { AXPhoneBoxComponent } from '@acorex/components/phone-box';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-phone-box</code>",
+      "height": "560px",
+      "content": {
+        "type": "api",
+        "data": "phone-box/usage"
+      }
+    },
+    {
+      "title": "Validation",
+      "description": "You can specify which countries you want <strong>not</strong> to be in the list",
+      "height": "560px",
+      "content": {
+        "type": "api",
+        "data": "phone-box/validation"
+      }
+    },
+    {
+      "title": "Only Countries",
+      "description": "You can specify which countries you want to be in the list. Included only Iran and United State",
+      "height": "330px",
+      "content": {
+        "type": "api",
+        "data": "phone-box/only-countries"
+      }
+    },
+    {
+      "title": "Exclude Countries",
+      "description": "You can specify which countries you want <strong>not</strong> to be in the list. Excluded Iran and United State",
+      "height": "330px",
+      "content": {
+        "type": "api",
+        "data": "phone-box/exclude"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPhoneBoxComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The current phone number value. Inherited from MXInputBaseValueComponent.",
+          "default": "undefined"
+        },
+        {
+          "name": "country",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The default country value for the component.",
+          "default": "''"
+        },
+        {
+          "name": "included",
+          "type": [
+            {
+              "name": "string[]"
+            }
+          ],
+          "description": "List of included values for the component.",
+          "default": "[]"
+        },
+        {
+          "name": "excluded",
+          "type": [
+            {
+              "name": "string[]"
+            }
+          ],
+          "description": "List of excluded values for the component.",
+          "default": "[]"
+        },
+        {
+          "name": "precode",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Static precode to display instead of country selector."
+        },
+        {
+          "name": "classNames",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "CSS classes to apply to the component."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "The validation state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The unique identifier of the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The placeholder text for the input field. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "maxLength",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The maximum length of the input value. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "allowNull",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component allows null values. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The type attribute of the input field. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "autoComplete",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The autocomplete attribute of the input field. Inherited from MXInputBaseValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the phone number value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the value changes with additional context. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user presses a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user releases a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user presses a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look style changes. Inherited from MXLookComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Determines if the keyboard event is a valid action based on allowed keys and key codes.\n *\n * @param event - The keyboard event to validate\n * @returns boolean - True if the key action is valid, false otherwise\n */\nisValidKeyboardAction(event: KeyboardEvent): boolean"
+        },
+        {
+          "content": "/**\n * Updates the list of countries based on included or excluded codes.\n *\n * @returns void - No return value. Updates the internal countries list.\n */\nsetCountries(): void"
+        },
+        {
+          "content": "/**\n * Sets the default selected country based on the provided country code or the first country in the list.\n *\n * @returns void - No return value. Updates the selected country.\n */\nsetDefaultValue(): void"
+        }
+      ]
+    }
+  ]
+}

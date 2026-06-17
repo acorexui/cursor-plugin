@@ -1,0 +1,45 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRailClickEvent",
+  "description": "Event emitted when a rail navigation item is clicked.",
+  "imports": ["import { AXRailClickEvent } from '@acorex/components/rail-navigation';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The event type definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "rail-navigation.class.ts",
+            "language": "ts",
+            "content": "export type AXRailClickEvent = {\n  component: AXRailNavigationItemComponent;\n  htmlElement: HTMLElement;\n  nativeEvent: MouseEvent;\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRailClickEvent",
+      "description": "Event data for rail navigation item clicks.",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXRailNavigationItemComponent", "link": "/en-US/docs/components/rail-navigation" }],
+          "description": "The rail navigation item component that was clicked."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element of the clicked item."
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "MouseEvent" }],
+          "description": "The native mouse event that triggered the click."
+        }
+      ]
+    }
+  ]
+}

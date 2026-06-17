@@ -1,0 +1,85 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler Appointment",
+  "description": "Defines the structure of an appointment in the scheduler component.",
+  "imports": ["import { AXSchedulerAppointment } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface defining the structure of a scheduler appointment.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerAppointment = {\n  id: any;\n  endDate: Date;\n  title?: string;\n  startDate: Date;\n  resourceId?: any;\n  allDay?: boolean;\n  cssClass?: string;\n  readonly?: boolean;\n  description?: string;\n  priority?: 'highest' | 'high' | 'medium' | 'low' | 'lowest';\n};"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointment",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "any" }],
+          "description": "Unique identifier for the appointment."
+        },
+        {
+          "name": "endDate",
+          "type": [{ "name": "Date" }],
+          "description": "End date and time of the appointment."
+        },
+        {
+          "name": "title",
+          "type": [{ "name": "string" }],
+          "description": "Title or name of the appointment."
+        },
+        {
+          "name": "startDate",
+          "type": [{ "name": "Date" }],
+          "description": "Start date and time of the appointment."
+        },
+        {
+          "name": "resourceId",
+          "type": [{ "name": "any" }],
+          "description": "Optional resource identifier for timeline views."
+        },
+        {
+          "name": "allDay",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the appointment spans the entire day."
+        },
+        {
+          "name": "cssClass",
+          "type": [{ "name": "string" }],
+          "description": "Custom CSS class for styling the appointment."
+        },
+        {
+          "name": "readonly",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the appointment is read-only and cannot be modified."
+        },
+        {
+          "name": "description",
+          "type": [{ "name": "string" }],
+          "description": "Additional description or notes for the appointment."
+        },
+        {
+          "name": "priority",
+          "type": [
+            { "name": "'highest'" },
+            { "name": "'high'" },
+            { "name": "'medium'" },
+            { "name": "'low'" },
+            { "name": "'lowest'" }
+          ],
+          "description": "Priority level of the appointment, used for visual styling."
+        }
+      ]
+    }
+  ]
+}

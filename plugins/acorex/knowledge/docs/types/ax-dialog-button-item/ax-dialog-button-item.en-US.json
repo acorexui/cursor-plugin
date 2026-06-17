@@ -1,0 +1,74 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Dialog Button Item",
+  "imports": ["import { AXDialogButtonItem } from '@acorex/components/dialog';"],
+  "description": "Interface defining the properties of a button item within a dialog. This interface allows customization of button appearance, behavior, and interaction handling.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Dialog button item shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-dialog-button-item.ts",
+            "content": "interface AXDialogButtonItem {\n  text: string;\n  color?: AXStyleColorType;\n  look?: AXStyleLookType;\n  name?: string;\n  disabled?: boolean;\n  loading?: boolean;\n  hotkey?: string | AXHotKeyAction;\n  autofocus?: boolean;\n  onClick?: (e?: { source: AXDialogButtonItem; handled?: boolean }) => void;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDialogButtonItem",
+      "props": [
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "The text label displayed on the button."
+        },
+        {
+          "name": "color",
+          "type": [{ "name": "AXStyleColorType", "link": "/en-US/docs/types/style-color-type" }],
+          "description": "The color theme of the button (primary, success, warning, danger, etc.)."
+        },
+        {
+          "name": "look",
+          "type": [{ "name": "AXStyleLookType", "link": "/en-US/docs/types/style-look-type" }],
+          "description": "The visual appearance style of the button (solid, outline, twotone, etc.)."
+        },
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Optional name identifier for the button, used for identification when clicked."
+        },
+        {
+          "name": "disabled",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button is disabled and cannot be clicked."
+        },
+        {
+          "name": "loading",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button is in a loading state, typically showing a spinner."
+        },
+        {
+          "name": "hotkey",
+          "type": [{ "name": "string" }, { "name": "AXHotKeyAction", "link": "/en-US/docs/types/ax-hot-key-action" }],
+          "description": "Keyboard shortcut or hotkey action that triggers the button click."
+        },
+        {
+          "name": "autofocus",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the button should automatically receive focus when the dialog opens."
+        },
+        {
+          "name": "onClick",
+          "type": [{ "name": "(e?: { source: AXDialogButtonItem; handled?: boolean }) => void" }],
+          "description": "Callback function executed when the button is clicked. The event object contains the button source and a handled flag."
+        }
+      ]
+    }
+  ]
+}

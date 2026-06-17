@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXOptionChangedEvent<T>",
+  "description": "Event emitted when a component option changes.",
+  "imports": ["import { AXOptionChangedEvent } from '@acorex/cdk/common';"],
+  "types": [
+    {
+      "title": "AXOptionChangedEvent<T>",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component instance. Inherited from AXEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element associated with the component. Inherited from AXEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates whether the event was triggered by user interaction. Inherited from AXEvent."
+        },
+        { "name": "name", "type": [{ "name": "string" }], "description": "Name of the changed option." },
+        { "name": "newValue", "type": [{ "name": "T" }], "description": "New value of the option." },
+        { "name": "oldValue", "type": [{ "name": "T" }], "description": "Previous value of the option." }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "events.class.ts",
+            "content": "export class AXOptionChangedEvent<T = any> extends AXEvent {\n  name?: string;\n  newValue?: T;\n  oldValue?: T;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

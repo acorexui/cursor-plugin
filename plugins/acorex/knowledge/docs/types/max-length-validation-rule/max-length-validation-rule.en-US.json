@@ -1,0 +1,58 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMaxLengthValidationRule",
+  "imports": ["import { AXMaxLengthValidationRule } from '@acorex/core/validation';"],
+  "description": "Validation rule class that ensures a string value does not exceed a maximum length requirement.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Max length validation rule shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "max-length-validation-rule.ts",
+            "content": "class AXMaxLengthValidationRule {\n  options: AXMaxLengthValidationRuleOptions;\n  validate(value: string): AXValidationRuleResult<string>;\n  validateAsync(value: string): Promise<AXValidationRuleResult<string>>;\n  setMaxLength(max: number): void;\n  getMaxLength(): number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXMaxLengthValidationRule",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            {
+              "name": "AXMaxLengthValidationRuleOptions",
+              "link": "/en-US/docs/types/max-length-validation-rule-options"
+            }
+          ],
+          "description": "Configuration options for the maximum length validation rule."
+        }
+      ],
+      "description": "Validation rule that checks if a string value does not exceed the specified maximum length.",
+      "methods": [
+        {
+          "name": "validate",
+          "description": "Validates that the string length is less than or equal to the maximum length."
+        },
+        {
+          "name": "validateAsync",
+          "description": "Asynchronously validates that the string length is less than or equal to the maximum length."
+        },
+        {
+          "name": "setMaxLength",
+          "description": "Sets the maximum allowed length for validation."
+        },
+        {
+          "name": "getMaxLength",
+          "description": "Returns the current maximum length limit."
+        }
+      ]
+    }
+  ]
+}

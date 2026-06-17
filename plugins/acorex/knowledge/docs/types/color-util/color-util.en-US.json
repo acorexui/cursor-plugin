@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXColorUtil",
+  "imports": ["import { AXColorUtil } from '@acorex/core/utils';"],
+  "description": "Utility class for color manipulation, conversion, and formatting operations.",
+  "sections": [
+    {
+      "title": "Color Utility Class",
+      "description": "Comprehensive color utility class that provides methods for color conversion, manipulation, and formatting across different color formats.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "color-util.ts",
+            "content": "class AXColorUtil {\n  parse(color: string): ColorObject;\n  format(color: ColorObject, format: 'rgba' | 'hex' | 'hsla' | 'hsva'): string;\n  toRgba(color: string): string;\n  toHex(color: string): string;\n  toHsla(color: string): string;\n  toHsva(color: string): string;\n  lighten(color: string, amount: number): string;\n  darken(color: string, amount: number): string;\n  saturate(color: string, amount: number): string;\n  desaturate(color: string, amount: number): string;\n  mix(color1: string, color2: string, ratio: number): string;\n  isValid(color: string): boolean;\n  getContrast(color1: string, color2: string): number;\n  getLuminance(color: string): number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXColorUtil",
+      "props": [],
+      "methods": [
+        { "name": "parse", "description": "Parses a color string into a structured object." },
+        { "name": "format", "description": "Formats a color object into the specified string format." },
+        { "name": "toRgba", "description": "Converts a color string to RGBA format." },
+        { "name": "toHex", "description": "Converts a color string to HEX format." },
+        { "name": "toHsla", "description": "Converts a color string to HSLA format." },
+        { "name": "toHsva", "description": "Converts a color string to HSVA format." },
+        { "name": "lighten", "description": "Lightens the provided color by a given amount." },
+        { "name": "darken", "description": "Darkens the provided color by a given amount." },
+        { "name": "saturate", "description": "Increases color saturation by a given amount." },
+        { "name": "desaturate", "description": "Decreases color saturation by a given amount." },
+        { "name": "mix", "description": "Mixes two colors by a specified ratio." },
+        { "name": "isValid", "description": "Checks whether a color string is valid." },
+        { "name": "getContrast", "description": "Calculates contrast ratio between two colors." },
+        { "name": "getLuminance", "description": "Calculates luminance of a color." }
+      ]
+    }
+  ]
+}

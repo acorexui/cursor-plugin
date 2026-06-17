@@ -1,0 +1,220 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Avatar",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/avatar--documentation"
+    }
+  ],
+  "description": "The Avatar component displays a user's profile image or initials, typically used for user identification. It supports multiple content types including text, icons, images, and badges.",
+
+  "imports": [
+    "import { AXAvatarComponent } from '@acorex/components/avatar';",
+    "import { AXAvatarGroupComponent } from '@acorex/components/avatar';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-avatar</code>.",
+      "content": {
+        "type": "api",
+        "data": "avatar/usage"
+      }
+    },
+    {
+      "title": "Defaults",
+      "description": "Shows default inputs (color='default', look='solid', shape='rounded', size=48) and the built-in SVG fallback when no content is projected.",
+      "content": {
+        "type": "api",
+        "data": "avatar/defaults"
+      }
+    },
+    {
+      "title": "Size",
+      "description": "You can customize the size of the avatar in pixels.",
+      "content": {
+        "type": "api",
+        "data": "avatar/size"
+      }
+    },
+    {
+      "title": "Look",
+      "description": "Different visual styles for the avatar appearance.",
+      "content": {
+        "type": "api",
+        "data": "avatar/look"
+      }
+    },
+    {
+      "title": "Shape",
+      "description": "Different visual styles for the avatar's corners.",
+      "content": {
+        "type": "api",
+        "data": "avatar/shape"
+      }
+    },
+    {
+      "title": "Content",
+      "description": "Text, icon, and image projection using <code>ax-text</code>, <code>ax-icon</code>, and <code>ax-image</code> slots.",
+      "content": {
+        "type": "api",
+        "data": "avatar/content"
+      }
+    },
+    {
+      "title": "Text Mode",
+      "description": "You can set text as an avatar.",
+      "content": {
+        "type": "api",
+        "data": "avatar/text-mode"
+      }
+    },
+    {
+      "title": "Icon Mode",
+      "description": "You can set an icon as an avatar.",
+      "content": {
+        "type": "api",
+        "data": "avatar/icon-mode"
+      }
+    },
+    {
+      "title": "Image Mode",
+      "description": "You can display a photo as an avatar.",
+      "content": {
+        "type": "api",
+        "data": "avatar/image-mode"
+      }
+    },
+    {
+      "title": "Group",
+      "description": "Group multiple avatars together with overlapping display.",
+      "content": {
+        "type": "api",
+        "data": "avatar/group"
+      }
+    },
+    {
+      "title": "Badge / Status",
+      "description": "Project an ax-badge into the avatar to indicate status (e.g., online/offline).",
+      "content": {
+        "type": "api",
+        "data": "avatar/badge"
+      }
+    },
+    {
+      "title": "Events",
+      "description": "Demonstrates colorChange, sizeChange and onOptionChanged when changing inputs at runtime.",
+      "content": {
+        "type": "api",
+        "data": "avatar/events"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAvatarComponent",
+      "props": [
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "The color theme of the avatar. Inherited from MXColorComponent."
+        },
+        {
+          "name": "size",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "48",
+          "description": "Defines the size of the avatar in pixels."
+        },
+        {
+          "name": "shape",
+          "type": [
+            {
+              "name": "'sharp'"
+            },
+            {
+              "name": "'soft'"
+            },
+            {
+              "name": "'rounded'"
+            }
+          ],
+          "default": "'rounded'",
+          "description": "The visual style of the avatar's corners."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "'solid'"
+            },
+            {
+              "name": "'twotone'"
+            }
+          ],
+          "default": "'solid'",
+          "description": "The visual style of the avatar appearance."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Component id. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "sizeChange",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Emitted when the size value changes."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

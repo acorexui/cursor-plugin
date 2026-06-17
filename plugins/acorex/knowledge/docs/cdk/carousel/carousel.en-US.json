@@ -1,0 +1,58 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Carousel Directive",
+  "description": "Integrates Swiper.js into ACoreX applications to create highly customizable and responsive carousels/sliders. The directive handles the initialization and configuration of the Swiper instance, automatically applying necessary CSS classes to your HTML structure.",
+  "imports": ["import { AXCarouselDirective } from '@acorex/cdk/carousel';"],
+  "extraLinks": [
+    {
+      "text": "Swiper API Documentation",
+      "icon": "external-link",
+      "href": "https://swiperjs.com/swiper-api"
+    }
+  ],
+  "hints": [
+    {
+      "title": "CSS Import Required",
+      "content": "Imports the Swiper CSS into your styles: @use 'swiper/swiper-bundle.css' as *;",
+      "status": "primary"
+    },
+    {
+      "title": "HTML Structure",
+      "content": "Ensure your HTML structure matches the expected structure. The directive adds classes but does not create elements.",
+      "status": "warning"
+    },
+    {
+      "title": "Bundle Size",
+      "content": "The directive imports all Swiper modules. Be mindful of bundle size if you only use a subset of modules.",
+      "status": "warning"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using the axCarousel directive",
+      "content": {
+        "type": "api",
+        "data": "cdk/carousel/usage"
+      },
+      "height": "800px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCarouselDirective",
+      "props": [
+        {
+          "name": "carousel",
+          "type": [{ "name": "Signal<AXCarousel | null>", "link": "/en-US/docs/types/ax-carousel" }],
+          "description": "Signal holding the Swiper instance. Returns null when not initialized."
+        },
+        {
+          "name": "carouselOptions",
+          "type": [{ "name": "AXCarouselOptions", "link": "/en-US/docs/types/ax-carousel-options" }],
+          "description": "Input for Swiper configuration options. Accepts any valid Swiper.js options."
+        }
+      ]
+    }
+  ]
+}

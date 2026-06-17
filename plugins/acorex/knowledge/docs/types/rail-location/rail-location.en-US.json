@@ -1,0 +1,38 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRailLocation",
+  "description": "Location options for rail navigation component placement.",
+  "imports": ["import { AXRailLocation } from '@acorex/components/rail-navigation';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The type definition for rail navigation location options.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "rail-navigation.class.ts",
+            "language": "ts",
+            "content": "export type AXRailLocation = 'start' | 'end';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRailLocation",
+      "description": "Location options for rail navigation component placement.",
+      "props": [
+        {
+          "name": "AXRailLocation",
+          "type": [
+            { "name": "'start'" },
+            { "name": "'end'" }
+          ],
+          "description": "Defines the side of the container where the rail navigation is placed."
+        }
+      ]
+    }
+  ]
+}

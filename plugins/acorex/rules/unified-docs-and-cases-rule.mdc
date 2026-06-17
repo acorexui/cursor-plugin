@@ -1,0 +1,411 @@
+---
+description: Verify and review unified documentation and demo cases for ACoreX Angular artifacts (components, directives, services, pipes).
+alwaysApply: false
+---
+---
+alwaysApply: false
+---
+
+## Unified Documentation and Demo Cases Rule
+
+Use this single rule to verify, validate, and review documentation and demo cases for any Angular artifact (component, directive, service, pipe), given:
+
+- Source folder path: the artifact root (for example, `@button/` → `packages/components/button`)
+- Cases folder path: the demo pages root (for example, `C:\Users\...\acorex-demo\src\app\cases\button`)
+
+This rule consolidates and extends existing rules and enforces schema, inheritance, tokens, linking, and demo quality.
+
+### 0.5) The Golden Rule: The Source Code is the Source of Truth
+
+**This is the most important principle.** The documentation must reflect the reality of the code, not an idealized version.
+
+- **For API (`props`, `events`, `methods`):** The TypeScript source files are the source of truth.
+- **For Design Tokens:** The component's SCSS files are the source of truth.
+- **For Demo Sections:** The `cases` folder is the source of truth.
+  When in doubt, always defer to what is implemented in the source code.
+
+### 0) Scope and Inputs
+
+- Inputs:
+  - Source folder of the target artifact
+  - Cases folder path
+- Outputs:
+  - English and Farsi documentation JSON files adhering to `apps/documentation/docs/document.schema.json`
+  - Updated or new demo cases (standalone Angular 20)
+  - Documentation sections referencing the cases
+  - **CRITICAL:** Code-doc sync updates in source (JSDoc, removing @ignore tags) where needed.
+  - Event/type docs only when required by cross-links.
+
+### 1) File Structure and Naming
+
+- Documentation root: `apps/documentation/docs/`
+- Categories and paths:
+  - Components: `components/<name>/`
+  - CDK/Directives: `cdk/<name>/`
+  - Core: `core/<name>/`
+  - Styles: `styles/<name>/`
+  - Charts: `charts/<name>/`
+  - Events: `events/<event-name>/`
+  - Shared types: `types/<type-name>/`
+- Each doc must have two files:
+  - `<name>.en-US.json`
+  - `<name>.fa-IR.json`
+- Folder/file names use kebab-case. In JSON, `types[0].title` is the exact exported TS name.
+
+### 2) Schema Adherence (STRICT)
+
+- Set `"$schema": "../../document.schema.json"` in every JSON doc.
+- Validate strictly against the schema; no additional properties.
+- Omit empty arrays/keys. Do not include empty `props`, `events`, `methods`, or empty `types` entries.
+- `DocType.link` must be a URL path beginning with `/en-US/docs/` or `/fa-IR/docs/`.
+
+### 2.5) Core Principles for Representing Types in JSON
+
+- **Principle 1: Union Types**: If a TypeScript type is a union (e.g., `string | number`), each member of the union MUST be a separate `DocType` object in the `type` array. The `|` symbol itself is NEVER included.
+  - Correct: `"type": [{ "name": "string" }, { "name": "number" }]`
+  - Incorrect: `"type": [{ "name": "string | number" }]`
+- **Principle 2: Complex & Generic Types**: Complex types, including generics (e.g., `Map<string, number>`, `Observable<T>`), are represented as a single `DocType` object with the full type string as its `name`. Do not split generic parameters.
+  - Correct: `"type": [{ "name": "EventEmitter<AXOptionChangedEvent>" }]`
+  - Incorrect: `"type": [{ "name": "EventEmitter<" }, ...]`
+
+### 2.6) Event/Type Docs Precision (STRICT)
+
+- Do NOT add empty arrays. Omit `events`, `methods`, and `props` if they would be empty. Do not include empty `types` entries.
+- For code sections, include ONLY the canonical definition of the documented symbol. Do not inline base class definitions in the same code block.
+- Ensure each file documents a single symbol (one `types` entry) unless multiple are explicitly required. Avoid duplicate/stacked doc blocks within the same JSON file.
+- If a documentation file already exists, NEVER overwrite its established structure. Apply minimal, non-breaking fixes only (e.g., import path corrections, link fixes). Otherwise, create a new doc only when missing and required.
+
+### 3) Imports in Docs (SEPARATE ENTRIES)
+
+- Use top-level public entry points only (no deep/relative imports):
+  - Example (component): `"import { AXButtonComponent } from '@acorex/components/button';"`
+  - Example (event/type): `"import { AXFocusEvent } from '@acorex/cdk/common';"`
+- Each import in the `imports` array MUST reference exactly one symbol (separate entries per symbol), even if from the same package.
+  - **Correct:**
+    ```json
+    "imports": [
+      "import { AXBreadCrumbsComponent } from '@acorex/components/breadcrumbs';",
+      "import { AXBreadCrumbsItemComponent } from '@acorex/components/breadcrumbs';"
+    ]
+    ```
+  - **Incorrect:**
+    ```json
+    "imports": [
+      "import { AXBreadCrumbsComponent, AXBreadCrumbsItemComponent } from '@acorex/components/breadcrumbs';"
+    ]
+    ```
+- Do not import internal-only types or private files.
+
+### 4) Titles and Descriptions
+
+- English: clear, concise purpose of the artifact.
+- Farsi: accurate translation; no placeholders.
+- If a description is trivial and missing, generate a sensible one; otherwise use "Description needed."
+
+### 5) Sections (Showcase Linkage)
+
+- Derive sections from the cases folder; each case becomes a section.
+- Section format:
+  - Title: descriptive scenario name
+  - Description: what the case demonstrates
+  - Content: `{ "type": "api", "data": "<artifact-name>/<case-folder>" }`
+- Always include a "Usage" section if present.
+  **Fallback:** If no demo cases exist for a component, create a minimal "Usage" section as a placeholder.
+- Optional: For tall or scrolling demos, set a reasonable `height` on the section (e.g., `"height": "700px"`).
+
+- Reconcile sections with routes:
+  - Ensure a one-to-one match between docs `sections` and the cases `*.routes.ts` entries for the artifact. If a route exists (e.g., `button/loading-state`) and no section exists, add the section. If a section exists without a corresponding route, add the case or remove the section.
+- Import guidance in sections:
+  - When section descriptions mention imports, prefer standalone component imports (e.g., `AXDecoratorGenericComponent`, `AXDecoratorIconComponent`) over Angular modules.
+
+### 6) Inheritance and API Surfacing (STRICT)
+
+- Walk the full inheritance chain recursively to discover all public members.
+  **Helpful Starting Points:** Common base classes to look for in the `extends` chain include: `MXBaseComponent`, `MXInteractiveComponent`, `MXColorComponent`, `MXLookComponent`, `MXColorLookComponent`, `MXFormComponent`. This list is not exhaustive.
+- Document all public API:
+  - Inputs: classic `@Input()` and signals (`input<T>()`, `model<T>()`).
+  - Outputs/events: `@Output()` and inherited events like `onOptionChanged`, `onFocus`, `onBlur`, `disabledChange`, `tabIndex`.
+  - Public methods: include inherited public methods; exclude accessors and Angular lifecycle hooks.
+  - Common inherited API to explicitly check and document when present (always double check if anything new is added):
+    - From `MXBaseComponent`:
+      - `id: string` (prop)
+      - `onOptionChanged: EventEmitter<AXOptionChangedEvent>` (event)
+      - `getHostElement<T = HTMLElement>(): T` (method)
+      - `setOption<T = any>(option: MXComponentSetOption<T>): void` (method)
+    - From `MXColorComponent`:
+      - `color: AXStyleColorType` (prop) and `colorChange` (event)
+    - From `MXInteractiveComponent` (if in chain):
+      - `disabled: boolean`, `disabledChange`, `tabIndex: number`, `onFocus`, `onBlur`
+- For inherited items:
+  - Add "Inherited from <ParentClass>" to the description.
+  - Document defaults defined in code (including inherited defaults) unless overridden.
+  - If overridden, document the effective type/default.
+- Link referenced types/events using `DocType.link` URL paths.
+- **CRITICAL:** Update source code JSDoc to match the `content` of JSON method docs. Remove `@ignore` tags where the API is public to ensure code and documentation remain synchronized.
+
+### 7) API Documentation Structure (Props, Events, Methods)
+
+- **Display Logic**: Within an artifact's documentation (component, directive, etc.), public properties (`props`) and events (`events`) are **ALWAYS rendered in tables**. Public methods (`methods`) are **ALWAYS rendered as code blocks**. Do not use `sections` with code to document a component's own properties.
+  - **Simple vs. Linked Types**: The only difference in the table display is linking. If a type has its own documentation page, its `DocType` object includes a `link`. If not, it is rendered as plain text.
+- In the artifact docs, populate the `types` array with a `DocApi` block:
+  - title: exact exported TS name (e.g., `AXButtonComponent`).
+  - props: public inputs/state (including inherited ones).
+  - events: public outputs/events (including inherited ones).
+  - methods: public callable methods. `content` contains the full JSDoc and signature.
+
+  ### 7.1 Accessors (Getters/Setters)
+  - Do NOT include accessors in the `methods` array.
+  - If a public `get`/`set` pair represents a logical property that is part of the public API (i.e., it behaves like state), document it as a single entry in the `props` array.
+  - If an accessor is purely for internal logic and not meant for consumers, omit it from the documentation entirely.
+
+  ### 7.2 Signals: `model()` change events
+  - When a state is declared via `model<T>()` (e.g., `timeOut = model<number>(0)`), document BOTH:
+    - the state property in `props` (with its default), and
+    - the corresponding change event in `events` named `<propName>Change` with the same type (e.g., `timeOutChange: number`).
+  - This mirrors the framework behavior where `setOption` emits `<name>Change` for state updates.
+
+  ### 7.3 Events and linkable types (additions)
+  - Link referable types only: add `DocType.link` for types that have their own docs (e.g., `AXFocusEvent`, `AXClickEvent`, `AXOptionChangedEvent`). Do not link primitives (`string`, `number`, `boolean`, `any`).
+  - If a referable event/type is used and its docs are missing, create the EN/FA docs first (see Section 8), then add the link in the component docs.
+  - Preserve generics from source: do not coerce generic parameters to `any`. For example, `AXOptionChangedEvent<T>` must be documented with `newValue: T` and `oldValue: T`.
+  - Defaults policy for events: include defaults only when explicitly assigned in code (e.g., `AXClickEvent.nativeEvent?: any = null`, `AXClickEvent.data?: any = null`). Do not add `null` or other defaults if not present in source.
+
+  ### 7.4 Angular Lifecycle Hooks (DO NOT DOCUMENT)
+  - Do not include Angular lifecycle hooks in `methods`, `props`, or `events`.
+  - Excluded hooks include (but are not limited to): `ngOnInit`, `ngOnDestroy`, `ngAfterViewInit`, `ngAfterViewChecked`, `ngAfterContentInit`, `ngAfterContentChecked`, `ngOnChanges`, `ngDoCheck`.
+  - If these appear in source, they are considered internal framework hooks and must not be surfaced in docs. Remove any occurrences from documentation JSON.
+
+### 8) Event and Shared Type Documentation (WHEN NEEDED)
+
+- **Decision Guidelines**: Create separate event/type docs ONLY IF the type/event meets these criteria:
+  1. It is **exported** from a public API entry point.
+  2. It is **referenced** by other components/types/events.
+  3. It is complex enough that its structure needs detailed explanation.
+  - If a type is internal to a single component, do NOT create a separate doc file.
+- **Events**:
+  - Prefer dual-format: a `types` table detailing properties (for linking) and a single "Event Definition" code section mirroring the source (for readability).
+  - Resolve inheritance fully (e.g., `AXEvent` → `AXHtmlEvent` → `AXFocusEvent`).
+  - Include inherited base members in the table (e.g., for `AXEvent`: `component`, `htmlElement`, `isUserInteraction` with default when present). Mark descriptions as "Inherited from …".
+  - The code section must ONLY include the documented event's own class/interface definition. Do NOT duplicate base class code; represent inheritance via the table instead.
+  - Preserve generics exactly (e.g., `AXValueChangedEvent<T>`, `AXHtmlEvent<E>`). Use the generic type parameter name (T/E), not `any`.
+  - If an event doc already exists, do not regenerate; adjust links/imports only if needed.
+- **Shared Types**:
+  - **Union Type Alias Pattern**: For a simple union alias like `type MyType = 'a' | 'b'`, document it using a single property row where the `name` is the same as the type alias itself. List the union members in the `type` array. Also include a "Type Definition" code section mirroring the source.
+    - **Example JSON for `type AXAlign = 'start' | 'end' | 'center';`**
+      ```json
+      "props": [
+        {
+          "name": "AXAlign",
+          "type": [{ "name": "'start'" }, { "name": "'end'" }, { "name": "'center'" }],
+          "description": "Defines alignment options."
+        }
+      ]
+      ```
+  - **Complex Interfaces**: Use a full `types` table with all properties; link any nested documented types.
+  - Do not include `tokens` in event/type docs.
+
+Creation/overwrite safeguards:
+
+- Only create event/type docs when they are missing and a component doc references them. If a target doc exists or has been curated, respect its format and do not overwrite.
+
+- Additional requirements for shared/linkable events and types:
+  - Mandatory docs: When a component references a base/shared event or type intended to be linked (e.g., `AXFocusEvent`, `AXOptionChangedEvent`, `AXClickEvent`), ensure the event/type docs exist in both EN and FA. Create them if missing, then link from the component docs.
+  - Fidelity to source generics and inheritance: reflect generic parameters and inherited members/defaults exactly as implemented in code.
+  - Prefer dual-format for linkable events/types: include a `types` table (for linking) and a single code section mirroring the canonical TypeScript definition.
+
+### 9) Design Tokens (STRICT Verification)
+
+### 9.1 Verification Process
+
+1.  **Identify Default State:** First, check the component's TypeScript file to determine its default `color` and `look` (e.g., `'default'`, `'solid'`). This tells you which theme-specific SCSS files (e.g., `_component-default-solid.scss`) are the primary source for default token values.
+2.  **Discover All Referenced Tokens:** Search the artifact folder (SCSS, TS, HTML) for any CSS custom property that starts with `--ax-`. This includes both component tokens (`--ax-comp-*`) and system tokens (`--ax-sys-*`) that are referenced by the component.
+3.  **Document Component-Defined Tokens:** List all tokens that are _set_ by the component's styles (e.g., `--ax-comp-button-bg-color`). Their values must be the exact CSS values from the default state SCSS file.
+4.  **Document Component-Consumed Tokens (even if defined elsewhere):** If the component _consumes_ a token via `var(--token)` or `var(--token, fallback)`, include that token in the docs. Resolve its default value as follows:
+    - 4.1 If the token is set under the component's styles tree (including `styles/colors/**`), use that value.
+    - 4.2 Otherwise, trace upstream definitions in shared styles (e.g., `packages/styles/components/*.scss`, `packages/styles/base/index.scss`, `packages/styles/themes/*.scss`) and record the concrete default (e.g., `--ax-sys-border-radius: 0.5rem;`).
+    - 4.3 If the token's only occurrence is `var(--token, literalFallback)`, and no upstream definition is found, use the literal fallback value as the default.
+    - 4.4 When a token is overridden in dark mode or via look/color variants, note the override in the description but keep the documented default from the base (light/default) state.
+5.  **Cross-Check:** Ensure every `--ax-` token referenced by the component is documented, and all values match the actual source (no placeholders, no SCSS interpolation).
+
+- ### 9.2 Clarifications (apply to avoid false removals)
+  - Tokens defined anywhere under the component SCSS tree (including nested files like `styles/colors/**`) are valid and MUST be documented.
+  - Defaults provided via theme/look maps (e.g., values generated for `.ax-default`, `.ax-primary`, etc.) COUNT as explicit defaults.
+  - Always include any `--ax-` token referenced in the component (SCSS, TS, HTML), even if it is not set locally by the component. Resolve its default by tracing upstream definitions.
+  - When a token is consumed with a fallback in CSS (e.g., `rgba(var(--token, var(--fallback)))`), document `--token` and resolve its value from upstream. Only use the literal fallback if no definition exists anywhere.
+  - RGBA tuple pattern is acceptable for token values when defined in SCSS for colors (e.g., `--token: var(--ax-sys-color-default-surface), 0.1;`). Preserve the comma-separated tuple exactly.
+  - System tokens directly consumed by the component (e.g., `--ax-sys-transition-duration`, `--ax-sys-transition-timing-function`) SHOULD be documented with their concrete defaults for discoverability.
+  - If a token is referenced but neither an upstream definition nor a literal fallback exists, omit it from documentation (and optionally create a follow-up task). For system tokens, use concrete defaults from `packages/styles/base/index.scss` (or equivalent upstream source).
+
+- ### 9.3 CRITICAL - Common Mistakes to Avoid
+  - **NO SCSS SYNTAX:** Do not document values containing SCSS variables or interpolation.
+    - **Wrong:** `var(--ax-sys-color-#{$name}-lightest-surface)` ❌
+    - **Right:** `var(--ax-sys-color-lightest-surface)` ✅
+  - **NO PLACEHOLDERS:** Do not use generic placeholders in token values.
+    - **Wrong:** `var(--ax-sys-color-{color}-{surface})` ❌
+    - **Right:** `var(--ax-sys-color-default-500)` ✅
+
+### 10) Demo Cases (Angular 20, Real-World, Standalone)
+
+- Components are standalone; import only components/directives/pipes (no Angular modules). Do not include `standalone: true` in Angular 20 case components unless the workspace explicitly requires it.
+- Use Angular 20 APIs: signals (`signal`, `computed`, `input`, `model`) and `inject`.
+  **Use Acorex UI Library:** Always use Acorex UI components (e.g., `ax-button`, `ax-input`, `ax-checkbox`) over native HTML elements (`<button>`, `<input>`) for interactive controls to ensure consistent styling and behavior.
+- Account for master layout (flex row): wrap each case with a vertical container so items stack:
+  - `class="ax-flex ax-flex-col ax-items-center ax-justify-center ax-gap-2"`
+- Prioritize scenarios that apply to the artifact:
+  - Usage/basic
+  - States (active/disabled/loading/selected)
+  - Icon/template prefix/suffix (CRITICAL: import `AXDecoratorGenericComponent` when using `ax-prefix`/`ax-suffix` slots)
+  - Dynamic/async behaviors with a restart using `ax-button` to re-trigger visibility
+  - Overflow/long lists and accessibility
+  - Theming/look/color/size variants
+  - Keyboard/mouse focus where relevant
+  - Error/validation interactions
+- Use realistic, meaningful names and texts (e.g., Orders, Order #3521); avoid lorem/typos.
+- Ensure routes are added for each case in `*.routes.ts` (lazy `loadComponent`).
+
+- Recommended patterns for overflow/long-content demos:
+  - Include both multi-paragraph content and a single very long line to exercise wrapping.
+  - Add horizontal padding on the container if the layout hugs the edges (e.g., `ax-px-4`).
+  - Consider setting a section `height` in docs for readability (e.g., `700px`).
+
+### 10.1) Enhanced Demo Case Quality Standards
+
+**Content Quality:**
+
+- Use meaningful, descriptive content with `ax-title` and `ax-subtitle` components instead of generic text.
+- Provide educational content that explains the feature being demonstrated.
+- Use realistic scenarios and examples that developers would encounter in real applications.
+
+**Import Strategy:**
+
+- Be flexible with import patterns: use standalone components (e.g., `AXModalComponent`) for specific cases as needed.
+- Import `AXDecoratorGenericComponent` when using `ax-prefix`/`ax-suffix` slots.
+- Use `inject()` for service injection in Angular 20 components.
+
+**Configuration Examples:**
+
+- Provide comprehensive configuration objects that demonstrate all relevant options.
+- Show different variations of the same feature (e.g., draggable vs non-draggable, different sizes).
+- Include realistic default values that match common usage patterns.
+
+**Layout and Structure:**
+
+- Use `ax-flex` containers with proper spacing (`ax-gap-4`) and organization.
+- Group related buttons or controls logically.
+- Use `ax-flex-wrap` for responsive button layouts when multiple options are shown.
+
+**Service Integration:**
+
+- Demonstrate service usage with `inject()` and programmatic component creation.
+- Show how to create components, templates, or HTML content dynamically.
+- Include proper error handling and lifecycle management examples.
+
+### 11) Linking Strategy (STRICT)
+
+- All `DocType.link` entries must be URL paths with kebab-case names and language prefixes:
+  - Example: `/en-US/docs/events/focus-event`
+- Do not use file paths or relative paths.
+- Cross-component relationships are represented via type links in tables, not `extraLinks`.
+
+- Enforce existence of link targets:
+  - For every `DocType.link`, verify the target docs exist (correct language prefix, kebab-case). If missing, create them per Section 8, then add the link.
+- Never link primitives; link only referable types/events. Preserve generic names in type strings when linking (e.g., do not display `any` where the source declares `T`).
+
+### 12) Validation Workflow (Must Pass Before Done)
+
+- JSON schema validation for EN and FA docs.
+- Lint on changed docs and touched code.
+- Verify all `DocType.link` targets exist (or create them first).
+- Inheritance coverage checks:
+  - Inherited props/events/methods included with correct types/defaults and "Inherited from …" text.
+- Token verification checks:
+  - Tokens exist in SCSS, values match exactly, no placeholders or SCSS syntax.
+- Ensure no empty arrays or empty `types` entries.
+- No unused imports or internal-only APIs documented.
+- **CRITICAL:** JSDoc in source code matches JSON method contents; ensure `@ignore` tags are removed where API is public.
+- Angular lifecycle hooks are NOT present in docs (`methods`, `props`, `events`).
+
+- Additional validation steps:
+  - Reconcile docs `sections` with `*.routes.ts` in the cases folder and fix any mismatches.
+  - Validate referable event/type links: for each non-primitive `DocType`, ensure its docs exist. If missing, create EN/FA docs and then link.
+  - Confirm generics and defaults match source exactly; do not infer defaults or widen generics.
+  - Tokens completeness: include only tokens with resolvable defaults; do not include tokens with no upstream definition and no literal fallback; no SCSS placeholders.
+  - Section import guidance uses standalone component imports (not Angular modules) when imports are mentioned.
+
+### 13) Quality Gates for Demos
+
+- Cases compile with Angular 20 and standalone components.
+- Only Acorex UI components used for interactive UI (e.g., `ax-button`).
+- Imports include all used components (e.g., `AXDecoratorGenericComponent` when using prefix/suffix slots).
+- Dynamic demos expose a restart via `ax-button` to re-run async.
+- Vertical container layout used where needed (skip if host layout already provides it).
+- Case routes exist; docs sections reference them in both languages.
+- **Content Quality:** Meaningful, educational content with proper `ax-title`/`ax-subtitle`, comprehensive configuration examples, proper service integration.
+
+### 14) Services, Pipes, Directives
+
+- Services:
+  - Document public methods as `methods`; include any public observables/events if part of the API.
+  - Provide a small component demo that injects and uses the service.
+- Pipes:
+  - Document `transform` signature and options as `props` where appropriate.
+  - Demo realistic inputs and edge cases.
+- Directives:
+  - Document inputs/outputs and notable host bindings.
+  - **CRITICAL:** Always document the directive's CSS `selector` in the main description to clarify how and where it can be applied.
+  - Demo on realistic host elements/components.
+
+### 15) Final Delivery Checklist
+
+- [ ] EN and FA JSON present, schema-valid, links valid
+- [ ] Inheritance documented with correct defaults and "Inherited from …"
+- [ ] All public inputs/outputs/methods/accessors captured
+- [ ] **CRITICAL: Method JSDoc in source code is synchronized with documentation**
+- [ ] Tokens: Searched for all `--ax-` references in SCSS/TS/HTML and documented them with resolved defaults. Values match source exactly (no SCSS syntax or placeholders)
+- [ ] Cases created/reviewed; imports correct; vertical container used
+- [ ] Async demos include `ax-button` to restart
+- [ ] Routes updated; docs sections updated for new cases
+- [ ] No typos; consistent naming (EN/FA) and readable content
+- [ ] Lints clean; no empty arrays or empty `types` entries
+
+- [ ] All linked types/events are referable and have EN/FA docs (no broken links); primitives are not linked
+- [ ] Generic parameters preserved in documented types/events (e.g., `T` remains `T`)
+- [ ] Defaults documented only where explicitly set in source (no assumed `null`)
+- [ ] Docs `sections` reconcile with available demo routes (`*.routes.ts`)
+- [ ] Tokens included only when defaults are resolvable; system tokens use concrete defaults from upstream styles
+- [ ] **Demo Quality:** Meaningful content with `ax-title`/`ax-subtitle`, comprehensive configuration examples, proper service integration
+
+### 16) Prescriptive Execution Workflow
+
+Follow these steps in order to ensure all rules are met.
+
+1.  **Setup and Discovery:**
+    - Identify the source folder for the artifact and the `cases` folder.
+2.  **Source Code Analysis (The Source of Truth):**
+    - **API:** Read the primary TypeScript file. List all public `@Input`s, `input()`s, `model()`s, `@Output`s, and public methods.
+    - **Inheritance:** Walk the `extends` chain recursively. Add all inherited public members to your list. Note the parent class for each.
+    - **SCSS:** Analyze the entire `styles` directory. Identify the default `color`/`look` and list all CSS Custom Properties that are **set** by the component for that default state.
+3.  **Demo Case Analysis:**
+    - Review the `cases` folder. List all existing demo scenarios. Identify gaps based on the component's API (e.g., a missing demo for the `loading` state).
+4.  **Documentation Generation (EN and FA JSON):**
+    - Create/update the two JSON files.
+    - Populate `imports` (one symbol per entry).
+    - Populate `sections` based on the demo cases.
+    - Create the `types` block with the component's class name.
+    - Fill `props`, `events`, and `methods` from your analysis in step 2. Add "Inherited from..." notes.
+    - Fill `tokens` from your SCSS analysis in step 2.
+    - Add links (`DocType.link`) for all referenced shared types/events. If a linked doc doesn't exist, you must create it.
+5.  **CRITICAL - Code Synchronization:**
+    - For every method added to the documentation, go back to the source TypeScript file.
+    - Update its JSDoc to **exactly match** the `content` in the JSON.
+    - If a method was previously ignored, **remove the `@ignore` tag**.
+6.  **Demo Case Enhancement:**
+    - Implement any missing demo cases identified in step 3.
+    - Review all cases against the quality gates (Section 13): standalone, Acorex UI components, vertical layout, restart buttons, etc.
+    - Update the `*.routes.ts` file to add routes for any new cases.
+7.  **Final Validation:**
+    - Run the final checklist (Section 15).
+    - Validate both JSON files against the schema.
+    - Verify all links point to existing documentation pages.
+    - Lint all changed files.
+    - Verify no Angular lifecycle hooks are documented.

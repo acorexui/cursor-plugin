@@ -1,0 +1,64 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "RRule Service",
+  "description": "Service for working with RRule recurrence patterns. Provides methods to create RRule instances from options or strings, convert between formats, and query occurrences.",
+  "imports": ["import { AXRruleService } from '@acorex/components/rrule';"],
+  "types": [
+    {
+      "title": "AXRruleService",
+      "description": "Service for managing RRule recurrence patterns and generating date sequences.",
+      "methods": [
+        {
+          "name": "rruleFromOptions",
+          "content": "/**\n * Creates an RRule instance from options object.\n */\nasync rruleFromOptions(options: Partial<AXROptionsType>): Promise<AXRRuleType>",
+          "description": "Creates an RRule instance from options object"
+        },
+        {
+          "name": "rruleFromString",
+          "content": "/**\n * Creates an RRule instance from a RRULE string.\n */\nasync rruleFromString(ruleString: string): Promise<AXRRuleType>",
+          "description": "Creates an RRule instance from a RRULE string"
+        },
+        {
+          "name": "rruleFromText",
+          "content": "/**\n * Creates an RRule instance from human-readable text.\n */\nasync rruleFromText(ruleText: string): Promise<AXRRuleType>",
+          "description": "Creates an RRule instance from human-readable text"
+        },
+        {
+          "name": "rruleToOptions",
+          "content": "/**\n * Extracts options from an RRule instance.\n */\nrruleToOptions(rule: AXRRuleType): AXParsedOptionsType",
+          "description": "Extracts options from an RRule instance"
+        },
+        {
+          "name": "rruleToString",
+          "content": "/**\n * Converts an RRule instance to RRULE string format.\n */\nrruleToString(rule: AXRRuleType): string",
+          "description": "Converts an RRule instance to RRULE string format"
+        },
+        {
+          "name": "rruleToText",
+          "content": "/**\n * Converts an RRule instance to human-readable text.\n */\nrruleToText(rule: AXRRuleType): string",
+          "description": "Converts an RRule instance to human-readable text"
+        },
+        {
+          "name": "rruleGetAll",
+          "content": "/**\n * Gets all occurrences of the rule up to a limit.\n */\nrruleGetAll(rule: AXRRuleType, limit?: number): Date[]",
+          "description": "Gets all occurrences of the rule up to a limit"
+        },
+        {
+          "name": "rruleGetBetween",
+          "content": "/**\n * Gets occurrences between two dates.\n */\nrruleGetBetween(rule: AXRRuleType, after: Date, before: Date, inclusive?: boolean): Date[]",
+          "description": "Gets occurrences between two dates"
+        },
+        {
+          "name": "rruleGetBefore",
+          "content": "/**\n * Gets the last occurrence before the specified date.\n */\nrruleGetBefore(rule: AXRRuleType, date: Date, inclusive?: boolean): Date | null",
+          "description": "Gets the last occurrence before the specified date"
+        },
+        {
+          "name": "rruleGetAfter",
+          "content": "/**\n * Gets the first occurrence after the specified date.\n */\nrruleGetAfter(rule: AXRRuleType, date: Date, inclusive?: boolean): Date | null",
+          "description": "Gets the first occurrence after the specified date"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "RRule",
+  "description": "A powerful recurrence rule component for creating and managing complex scheduling patterns with support for various frequencies, intervals, and date constraints.",
+  "imports": [
+    "import { AXRruleComponent } from '@acorex/components/rrule';",
+    "import { AXRruleService } from '@acorex/components/rrule';",
+    "import { AXRrulePreviewComponent } from '@acorex/components/rrule';"
+  ],
+  "showcase": {
+    "title": "RRule Showcase",
+    "description": "Interactive recurrence rule builder demonstrating various scheduling patterns",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXRruleComponent } from '@acorex/components/rrule';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive RRule Builder</h2>\n      <ax-rrule \n        [value]=\"rruleValue()\"\n        (valueChange)=\"onValueChange($event)\"\n        (rruleChange)=\"onRruleChange($event)\"\n        (stringChange)=\"onStringChange($event)\"\n        (textChange)=\"onTextChange($event)\"\n      />\n      <div class=\"rrule-info\">\n        <p><strong>Generated Dates:</strong> {{ generatedDates().length }} occurrences</p>\n        <p><strong>Human Readable:</strong> {{ humanReadableText() }}</p>\n      </div>\n    </div>\n  `,\n  imports: [AXRruleComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n    }\n    .rrule-info {\n      margin-top: 1rem;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class RRuleShowcaseComponent {\n  rruleValue = signal<string>('RRULE:FREQ=WEEKLY;INTERVAL=1;WKST=MO;COUNT=5');\n  generatedDates = signal<Date[]>([]);\n  humanReadableText = signal<string>('');\n\n  onValueChange(value: any): void {\n    console.log('Value changed:', value);\n  }\n\n  onRruleChange(rrule: any): void {\n    if (rrule) {\n      try {\n        const dates = rrule.all();\n        this.generatedDates.set(dates);\n      } catch (error) {\n        console.error('Error generating dates:', error);\n        this.generatedDates.set([]);\n      }\n    }\n  }\n\n  onStringChange(value: string | null): void {\n    console.log('RRULE string:', value);\n  }\n\n  onTextChange(value: string | null): void {\n    this.humanReadableText.set(value || '');\n  }\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple RRule component with basic weekly recurrence",
+      "content": {
+        "type": "api",
+        "data": "rrule/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Frequency Options",
+      "description": "RRule with different frequency options (daily, weekly, monthly, yearly)",
+      "content": {
+        "type": "api",
+        "data": "rrule/frequency-options"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Interval and Count",
+      "description": "RRule with custom interval and occurrence count settings",
+      "content": {
+        "type": "api",
+        "data": "rrule/interval-count"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "By Weekday",
+      "description": "RRule with specific weekday selections (Monday, Wednesday, Friday)",
+      "content": {
+        "type": "api",
+        "data": "rrule/byweekday"
+      },
+      "height": "550px"
+    },
+    {
+      "title": "By Month Day",
+      "description": "RRule with specific days of the month (1st, 15th, 30th)",
+      "content": {
+        "type": "api",
+        "data": "rrule/bymonthday"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Until Date",
+      "description": "RRule with end date constraints and count limitations",
+      "content": {
+        "type": "api",
+        "data": "rrule/until-date"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Complex Rules",
+      "description": "Advanced RRule patterns including business days, weekends, and seasonal rules",
+      "content": {
+        "type": "api",
+        "data": "rrule/complex-rules"
+      },
+      "height": "550px"
+    },
+    {
+      "title": "RRule Picker",
+      "description": "Interactive RRule builder with real-time preview and generated results",
+      "content": {
+        "type": "api",
+        "data": "rrule/rrule-picker"
+      },
+      "height": "1550px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRruleComponent",
+      "description": "RRule component provides a user-friendly interface for creating and managing recurrence rules.",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "AXROptionsType",
+              "link": "/en-US/docs/types/rrule-options"
+            },
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Current recurrence rule model value (options object or RRULE string).",
+          "default": "null"
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "AXROptionsType",
+              "link": "/en-US/docs/types/rrule-options"
+            },
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Emitted when the model value changes."
+        },
+        {
+          "name": "rruleChange",
+          "type": [
+            {
+              "name": "AXRRuleType",
+              "link": "/en-US/docs/types/rrule"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Emitted with the computed RRule instance when updated."
+        },
+        {
+          "name": "optionsChange",
+          "type": [
+            {
+              "name": "AXROptionsType",
+              "link": "/en-US/docs/types/rrule-options"
+            }
+          ],
+          "description": "Emitted with the normalized options whenever they change."
+        },
+        {
+          "name": "stringChange",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Emitted with the RRULE string representation."
+        },
+        {
+          "name": "textChange",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Emitted with the human-readable text of the rule."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Updates a single option and recomputes the rule.\n * @param key The option key to update\n * @param value The new value for the option\n */\nasync updateOption<K extends keyof AXROptionsType>(key: K, value: AXROptionsType[K]): Promise<void>"
+        },
+        {
+          "content": "/**\n * Resets options to defaults and recomputes the rule.\n */\nasync resetOptions(): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXRruleService",
+      "description": "Service for working with RRule recurrence patterns. Provides methods to create RRule instances from options or strings, convert between formats, and query occurrences.",
+      "methods": [
+        {
+          "content": "/**\n * Creates an RRule instance from options object.\n * @param options Partial RRule options to create the rule from\n * @returns Promise resolving to the RRule instance\n */\nasync rruleFromOptions(options: Partial<AXROptionsType>): Promise<AXRRuleType>"
+        },
+        {
+          "content": "/**\n * Creates an RRule instance from a RRULE string.\n * @param ruleString Valid RRULE string (e.g., \"RRULE:FREQ=WEEKLY;COUNT=5\")\n * @returns Promise resolving to the RRule instance\n */\nasync rruleFromString(ruleString: string): Promise<AXRRuleType>"
+        },
+        {
+          "content": "/**\n * Creates an RRule instance from human-readable text.\n * @param ruleText Human-readable text describing the recurrence (e.g., \"every Monday for 5 weeks\")\n * @returns Promise resolving to the RRule instance\n */\nasync rruleFromText(ruleText: string): Promise<AXRRuleType>"
+        },
+        {
+          "content": "/**\n * Extracts options from an RRule instance.\n * @param rule RRule instance to extract options from\n * @returns Parsed options with all required fields\n */\nrruleToOptions(rule: AXRRuleType): AXParsedOptionsType"
+        },
+        {
+          "content": "/**\n * Converts an RRule instance to RRULE string format.\n * @param rule RRule instance to convert\n * @returns RRULE string representation\n */\nrruleToString(rule: AXRRuleType): string"
+        },
+        {
+          "content": "/**\n * Converts an RRule instance to human-readable text.\n * @param rule RRule instance to convert\n * @returns Human-readable text description\n */\nrruleToText(rule: AXRRuleType): string"
+        },
+        {
+          "content": "/**\n * Gets all occurrences of the rule up to a limit.\n * @param rule RRule instance to query\n * @param limit Maximum number of occurrences to return (default: 500)\n * @returns Array of occurrence dates\n */\nrruleGetAll(rule: AXRRuleType, limit?: number): Date[]"
+        },
+        {
+          "content": "/**\n * Gets occurrences between two dates.\n * @param rule RRule instance to query\n * @param after Start date (exclusive by default)\n * @param before End date (exclusive by default)\n * @param inclusive Whether to include the boundary dates\n * @returns Array of occurrence dates between the specified dates\n */\nrruleGetBetween(rule: AXRRuleType, after: Date, before: Date, inclusive?: boolean): Date[]"
+        },
+        {
+          "content": "/**\n * Gets the last occurrence before the specified date.\n * @param rule RRule instance to query\n * @param date Date to search before\n * @param inclusive Whether to include the specified date\n * @returns Last occurrence before the date, or null if none found\n */\nrruleGetBefore(rule: AXRRuleType, date: Date, inclusive?: boolean): Date | null"
+        },
+        {
+          "content": "/**\n * Gets the first occurrence after the specified date.\n * @param rule RRule instance to query\n * @param date Date to search after\n * @param inclusive Whether to include the specified date\n * @returns First occurrence after the date, or null if none found\n */\nrruleGetAfter(rule: AXRRuleType, date: Date, inclusive?: boolean): Date | null"
+        }
+      ]
+    },
+    {
+      "title": "AXRrulePreviewComponent",
+      "description": "Preview component that displays RRule information including human-readable text, RRULE string, and generated occurrences.",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "RRULE string to preview."
+        },
+        {
+          "name": "repeat",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Maximum number of occurrences to display.",
+          "default": "100"
+        },
+        {
+          "name": "format",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Date format for displaying occurrences.",
+          "default": "'yyyy-MM-dd HH:mm:ss'"
+        }
+      ]
+    }
+  ]
+}

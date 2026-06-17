@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Circular Progress Mode",
+  "imports": ["import { AXCircularProgressMode } from '@acorex/components/circular-progress';"],
+  "description": "Type definition for the circular progress mode.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Allowed modes for circular progress.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "circular-progress-mode.ts",
+            "content": "export type AXCircularProgressMode = 'determinate' | 'indeterminate';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCircularProgressMode",
+      "props": [
+        {
+          "name": "AXCircularProgressMode",
+          "type": [{ "name": "'determinate'" }, { "name": "'indeterminate'" }],
+          "description": "Union type defining allowed modes for circular progress."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

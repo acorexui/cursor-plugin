@@ -1,0 +1,67 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Theming",
+  "description": "Using the SCSS structure below, you can customize your application’s theme or generate its output into CSS files, allowing you to create multiple themes for your application.",
+  "sections": [
+    {
+      "title": "Theme colors",
+      "description": "The <code>$theme-colors</code> variable is an array of colors, where each color can have a range — specifying a start color and an end color.It also supports different color formats such as oklch, rgb, and hex.The color names are reserved and include the following:",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "default.scss",
+            "language": "scss",
+            "content": "$theme-colors:(\n\t'primary':oklch(0.623 0.214 259.815),\n\t'secondary':(\n\t\toklch(24.65% 0.0531 250.05),\n\t\toklch(47.03% 0.0531 250.05),\n\t),\n\t'success':oklch(0.696 0.17 162.48),\n\t'warning':(\n\t\toklch(81.17% 0.188 70.08),\n\t\toklch(86.5% 0.188 70.08),\n\t),\n\t'danger':(\n\t\toklch(0.645 0.246 16.439),\n\t\toklch(0.712 0.194 13.428),\n\t),\n\t'accent1':oklch(0.628 0.1579 104.82),\n\t'accent2':oklch(0.628 0.1534 140.47),\n\t'accent3':oklch(0.628 0.1727 31.76),\n\t'accent4':oklch(0.5475 0.2056 258.35),\n\t'accent5':oklch(0.5475 0.2467 1.06),\n\t'accent6':oklch(0.5475 0.2565 338.82),\n\t'accent7':oklch(0.5475 0.1554 46.59),\n);"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Theme surfaces",
+      "description": "The <code>$theme-surfaces</code> variable is an array of colors, where each color can have a range — specifying a start color and an end color.It also supports different color formats such as oklch, rgb, and hex.The color names are reserved and include the following:",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "default.scss",
+            "language": "scss",
+            "content": "$theme-surfaces:(\n\t'light-start':#ffffff,\n\t'light-end':#d4d4d4,\n\t'dark-start':#27272a,\n\t'dark-end':#09090b,\n);"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Theme options",
+      "description": "The <code>$options</code> variable is an object that contains the options for the theme.The <code>color-range</code> option specifies whether a 50 to 950 color palette (as CSS variables) should be generated for each color defined in the <code>$theme-colors</code> variable.If set to false, you won’t be able to use the color ranges and will only have access to the surface variables for each color.The <code>light</code> and <code>dark</code> values are also fixed colors, used specifically for white and black.",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "default.scss",
+            "language": "scss",
+            "content": "$options:(\n\t'color-range':true,\n\t'light':#ffffff,\n\t'dark':#09090b,\n);"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Full theme structure",
+      "description": "In the code below, you can see a complete example of a theme structure, which is included in the ACoreX style package.The different sections have already been explained separately, but we’ll go through each part for you below.",
+      "content": {
+        "type": "code",
+        "language": "scss",
+        "data": [
+          {
+            "fileName": "default.scss",
+            "language": "scss",
+            "content": "/* \nimport ACoreX utilities for using generate-pallete-variables function\n*/\n@use '@acorex/styles/utils/index.scss' as utils;\n\n/*\nColor themes that have multiple fixed primary colors, etc.\nthat can range from 50 to 950, also generate 7 surfaces of these colors by default that are used to color components.\nIf these colors have the same value, they are used for light mode and dark mode, but if you give the color key two colors,\nit uses the first color for light mode and the second color for dark mode. For example, you can see the color Danger\n*/\n$theme-colors:(\n\t'primary':oklch(0.623 0.214 259.815),\n\t'secondary':(\n\t\toklch(24.65% 0.0531 250.05),\n\t\toklch(47.03% 0.0531 250.05),\n\t),\n\t'success':oklch(0.696 0.17 162.48),\n\t'warning':(\n\t\toklch(81.17% 0.188 70.08),\n\t\toklch(86.5% 0.188 70.08),\n\t),\n\t'danger':(\n\t\toklch(0.645 0.246 16.439),\n\t\toklch(0.712 0.194 13.428),\n\t),\n\t'accent1':oklch(0.628 0.1579 104.82),\n\t'accent2':oklch(0.628 0.1534 140.47),\n\t'accent3':oklch(0.628 0.1727 31.76),\n\t'accent4':oklch(0.5475 0.2056 258.35),\n\t'accent5':oklch(0.5475 0.2467 1.06),\n\t'accent6':oklch(0.5475 0.2565 338.82),\n\t'accent7':oklch(0.5475 0.1554 46.59),\n);\n\n/*\nSurface colors for creating layouts, each color has a start and an end,\nwhich we use to create the color spectrum of surfaces.\nThe colors are different for dark and light mode.\n*/\n$theme-surfaces:(\n\t'light-start':#ffffff,\n\t'light-end':#d4d4d4,\n\t'dark-start':#27272a,\n\t'dark-end':#09090b,\n);\n\n$options:(\n\t'color-range':true,\n\t'light':#ffffff,\n\t'dark':#09090b,\n);\n\n/*\nImporting default variables and overriding them with higher values\n*/\n@forward '../variables/index.scss';\n\n:root,\n.ax-light{\n\t--ax-sys-body-font-size:1rem;\n\t--ax-sys-size-base:2.5rem;\n\t--ax-sys-border-radius:0.5rem;\n}\n\n@include utils.generate-pallete-variables($theme-colors,$theme-surfaces,$options);"
+          }
+        ]
+      }
+    }
+  ]
+}

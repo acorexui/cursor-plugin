@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXEvent",
+  "description": "Base event containing component context and optional DOM element.",
+  "imports": ["import { AXEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Base event class used for extension.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "events.class.ts",
+            "content": "export class AXEvent {\n  component: any;\n  htmlElement?: HTMLElement;\n  isUserInteraction?: boolean = false;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXEvent",
+      "props": [
+        { "name": "component", "type": [{ "name": "any" }], "description": "The sender component." },
+        { "name": "htmlElement", "type": [{ "name": "HTMLElement" }], "description": "The root native element." },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates if the event was triggered by user interaction.",
+          "default": "false"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXMapData",
+  "description": "Represents a collection of map data including markers, polygons, and POI markers.",
+  "imports": ["import { AXMapData } from '@acorex/components/map';"],
+  "types": [
+    {
+      "title": "AXMapData",
+      "props": [
+        {
+          "name": "markers",
+          "type": [{ "name": "AXMapMarker[]" }],
+          "description": "Array of markers to be displayed on the map."
+        },
+        {
+          "name": "polygons",
+          "type": [{ "name": "AXMapPolygon[]" }],
+          "description": "Array of polygons to be displayed on the map."
+        },
+        {
+          "name": "pois",
+          "type": [{ "name": "AXPoiMarker[]" }],
+          "description": "Array of POI markers to be displayed on the map."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript interface definition for map data collection.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "map.type.ts",
+            "content": "export interface AXMapData {\n  markers: AXMapMarker[];\n  polygons: AXMapPolygon[];\n  pois: AXPoiMarker[];\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

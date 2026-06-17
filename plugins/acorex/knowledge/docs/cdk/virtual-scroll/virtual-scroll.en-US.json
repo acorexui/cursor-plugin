@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Virtual Scroll",
+  "description": "Virtual scrolling directive efficiently renders large datasets by only displaying items visible in the viewport. It requires a height input from the user, defining the scrollable area. As the user scrolls, content is dynamically loaded and unloaded to optimize performance. The directive includes a ScrollEnd event for triggering actions when reaching the end of the list.",
+  "imports": ["import { AXVirtualScrollModule } from '@acorex/cdk/virtual-scroll';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A basic example of using virtual scroll with large datasets",
+      "content": {
+        "type": "api",
+        "data": "cdk/virtual-scroll/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXVirtualScrollingContainerDirective",
+      "props": [
+        {
+          "name": "height",
+          "type": [{ "name": "string" }],
+          "description": "Required. Defines the height of the scrollable container area. This determines how much content is visible at once.",
+          "default": null
+        }
+      ],
+      "events": [
+        {
+          "name": "ScrollEnd",
+          "type": [{ "name": "void" }],
+          "description": "Emitted when the user scrolls to the end of the list. This can be used to implement infinite scrolling or load more data functionality."
+        }
+      ]
+    }
+  ]
+}

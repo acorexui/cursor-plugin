@@ -1,0 +1,27 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Upload Response",
+  "description": "Represents the payload emitted during an upload operation, including progress state, byte counts, status, and optional result and message.",
+  "imports": ["import { AXUploadResponse } from '@acorex/core/network';"],
+  "types": [
+    {
+      "title": "AXUploadResponse<T>",
+      "props": [
+        { "name": "progress", "type": [{ "name": "number" }], "description": "Progress percentage (0-100)." },
+        { "name": "bytesTransferred", "type": [{ "name": "number" }], "description": "Number of bytes sent so far." },
+        { "name": "totalBytes", "type": [{ "name": "number" }], "description": "Total number of bytes to upload." },
+        {
+          "name": "status",
+          "type": [{ "name": "AXUploadStatus"}],
+          "description": "Current upload status value."
+        },
+        {
+          "name": "result",
+          "type": [{ "name": "T" }],
+          "description": "Response body when the upload completes successfully."
+        },
+        { "name": "message", "type": [{ "name": "string" }], "description": "Optional error or informational message." }
+      ]
+    }
+  ]
+}

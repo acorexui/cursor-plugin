@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSelectionListLook } from '@acorex/components/selection-list';"],
+  "title": "Selection List Look Type",
+  "description": "A type that specifies the visual appearance style of the selection list component.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXSelectionListLook type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "selection-list.component.ts",
+            "content": "export type AXSelectionListLook = 'solid' | 'divided' | 'card';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionListLook",
+      "props": [
+        {
+          "name": "AXSelectionListLook",
+          "type": [{ "name": "'solid'" }, { "name": "'divided'" }, { "name": "'card'" }],
+          "description": "Union type that specifies the visual appearance style of the selection list. 'solid' provides a solid background, 'divided' shows dividers between items, and 'card' displays items as individual cards."
+        }
+      ]
+    }
+  ]
+}

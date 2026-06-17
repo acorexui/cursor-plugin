@@ -1,0 +1,16 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Focus Trap",
+  "description": "A directive that traps keyboard focus within a specific DOM element, ensuring that Tab and Shift+Tab navigation remains within the boundaries of the element. This is particularly useful for modal dialogs, drawers, and other UI components that need to maintain focus within their boundaries.",
+  "imports": ["import { AXFocusTrapDirective } from '@acorex/cdk/focus-trap';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>axFocusTrap</code> directive",
+      "content": {
+        "type": "api",
+        "data": "cdk/focus-trap/usage"
+      }
+    }
+  ]
+}

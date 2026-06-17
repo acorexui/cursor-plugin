@@ -1,0 +1,54 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerAppointmentSegment",
+  "imports": ["import { AXSchedulerAppointmentSegment } from '@acorex/components/scheduler';"],
+  "description": "Represents a segment of an appointment that spans multiple days.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing an appointment segment with original appointment reference and segment dates.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-appointment-segment.ts",
+            "content": "interface AXSchedulerAppointmentSegment extends AXSchedulerAppointment { isContinuationFromPreviousDay: boolean; isContinuationToNextDay: boolean; originalStartDate: Date; originalEndDate: Date; originalAppointmentRef?: AXSchedulerAppointment; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentSegment",
+      "props": [
+        {
+          "name": "isContinuationFromPreviousDay",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this segment continues from the previous day."
+        },
+        {
+          "name": "isContinuationToNextDay",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether this segment continues to the next day."
+        },
+        {
+          "name": "originalStartDate",
+          "type": [{ "name": "Date" }],
+          "description": "Original start date of the appointment."
+        },
+        {
+          "name": "originalEndDate",
+          "type": [{ "name": "Date" }],
+          "description": "Original end date of the appointment."
+        },
+        {
+          "name": "originalAppointmentRef",
+          "type": [{ "name": "AXSchedulerAppointment" }],
+          "description": "Reference to the original appointment."
+        }
+      ]
+    }
+  ]
+}

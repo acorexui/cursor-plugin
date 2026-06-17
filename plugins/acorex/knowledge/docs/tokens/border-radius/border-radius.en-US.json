@@ -1,0 +1,12 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Default Border Radius",
+  "description": "The default border radius of the component",
+  "tokens": [
+    {
+      "key": "--ax-sys-border-radius",
+      "value": "0.5rem",
+      "description": "Default roundness value for corners"
+    }
+  ]
+}

@@ -1,0 +1,372 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Button",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/button--documentation"
+    }
+  ],
+  "description": "The Button is a component which detects user interaction and triggers a corresponding event. It provides a clickable interface element with customizable appearance, loading states, and various interaction modes including toggleable selection.",
+  "imports": ["import { AXButtonComponent } from '@acorex/components/button';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-button</code>",
+      "content": {
+        "type": "api",
+        "data": "button/usage"
+      }
+    },
+    {
+      "title": "Color",
+      "description": "Explore color variants using the <code>color</code> property.",
+      "height": "350px",
+      "content": {
+        "type": "api",
+        "data": "button/color"
+      }
+    },
+    {
+      "title": "Look",
+      "description": "Explore look variants using the <code>look</code> property.",
+      "content": {
+        "type": "api",
+        "data": "button/look"
+      }
+    },
+    {
+      "title": "Size",
+      "description": "Explore size options using utility classes like <code>ax-sm</code>, <code>ax-md</code>, <code>ax-lg</code>.",
+      "height": "300px",
+      "content": {
+        "type": "api",
+        "data": "button/size"
+      }
+    },
+    {
+      "title": "Use decorators",
+      "description": "You can use ax-prefix and ax-suffix to add elements to the beginning and end of a button. Import <code>AXDecoratorGenericComponent</code> and <code>AXDecoratorIconComponent</code> from <code>@acorex/components/decorators</code>.",
+      "content": {
+        "type": "api",
+        "data": "button/decorators"
+      }
+    },
+    {
+      "title": "Using the badge in the button",
+      "description": "You can use the <code>ax-badge</code> tag to display the badge on the button and use CSS classes to determine its location.",
+      "content": {
+        "type": "api",
+        "data": "button/badge-in-button"
+      }
+    },
+    {
+      "title": "Icon button",
+      "description": "Instead of text, you can use the icon alone For this, leave the <code>text</code> value in the button empty and add a single <code>ax-icon</code> with the desired icon.",
+      "content": {
+        "type": "api",
+        "data": "button/icon-button"
+      }
+    },
+    {
+      "title": "Loading state",
+      "description": "Show the loading state using <code>ax-loading</code> content and how it affects visuals and interactions.",
+      "content": {
+        "type": "api",
+        "data": "button/loading-state"
+      }
+    },
+    {
+      "title": "Toggleable and Selected",
+      "description": "Demonstrate toggleable buttons with initial selected state and reacting to selectedChange.",
+      "content": {
+        "type": "api",
+        "data": "button/toggleable-selected"
+      }
+    },
+    {
+      "title": "Form submit and reset",
+      "description": "Demonstrate button type 'submit' and 'reset' inside a form.",
+      "content": {
+        "type": "api",
+        "data": "button/form-submit-reset"
+      }
+    },
+    {
+      "title": "Loading (async)",
+      "description": "Async loading with loadingText and a restart control.",
+      "content": {
+        "type": "api",
+        "data": "button/loading-text-async"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXButtonComponent",
+      "props": [
+        {
+          "name": "iconOnly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "When true, the button displays only an icon without text content."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "AXButtonType",
+              "link": "/en-US/docs/types/button-type"
+            }
+          ],
+          "default": "'button'",
+          "description": "Specifies the HTML button type to use (e.g., 'button', 'submit')."
+        },
+        {
+          "name": "loadingText",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Defines the text displayed while the button is in a loading state."
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Defines the primary text to show inside the button. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "toggleable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Provides visual styling that indicates if the Button is active. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "selected",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates if the Button is selected or not. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether the component is disabled. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the component. Inherited from MXColorComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Fires each time the user clicks the button."
+        },
+        {
+          "name": "textChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emits an event when the text associated with the button changes. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "toggleableChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event when the toggleable state of the button changes. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "selectedChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the selection state of the component changes. Inherited from MXButtonBaseComponent."
+        },
+        {
+          "name": "loadingTextChange",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "Emits an event when the loadingText value changes as part of two-way binding for the model()."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color property changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Triggers a click event on the button element.\n */\nclick(): void"
+        },
+        {
+          "content": "/**\n * Sets focus on the button element and adds a focus style class.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes the focus style class from the button element\n * when the button loses focus.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        }
+      ]
+    }
+  ]
+}

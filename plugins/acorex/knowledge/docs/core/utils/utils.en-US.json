@@ -1,0 +1,412 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Utility Library",
+  "description": "Stateless helper functions and static utility classes for async control, DOM/focus management, RxJS subscription cleanup, geometry hit-testing, color manipulation, and text parsing — used throughout ACoreX components.",
+  "imports": [
+    "import { waitFor, delay, retryUntil, pollUntil, pollUntilAbortable, throttleAsync, debounceAsync, fallbackChain, AXHtmlUtil, AXDrawingUtil, AXColorUtil, AXUnsubscriber, AXAutoUnsubscriber, getWordBoundsAtPosition, AXPoint, AXBoundingClientRect } from '@acorex/core/utils';"
+  ],
+  "hints": [
+    {
+      "title": "No module registration",
+      "content": "Import utilities directly from <code>@acorex/core/utils</code>. No providers or NgModule setup is required (except <code>AXUnsubscriber</code> in component <code>providers</code>).",
+      "status": "primary"
+    },
+    {
+      "title": "AXUnsubscriber per component",
+      "content": "<code>AXUnsubscriber</code> is not <code>providedIn: 'root'</code>. Add it to the component <code>providers</code> array, then <code>inject(AXUnsubscriber)</code> and pipe streams with <code>takeUntilDestroy</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Browser-only DOM helpers",
+      "content": "<code>AXHtmlUtil</code> and <code>AXDrawingUtil</code> access <code>window</code>, <code>document</code>, and element geometry. Guard with <code>isBrowser()</code> during SSR when calling outside components.",
+      "status": "warning"
+    },
+    {
+      "title": "waitFor in translation",
+      "content": "<code>waitFor()</code> is used internally by <code>AXTranslationService.translateSync()</code> to poll the translation cache while a scope loads.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "waitFor",
+      "description": "Synchronously polls peekFn until a value appears or timeoutMs elapses. Calls loadFn once when the first peek returns falsy.",
+      "props": [],
+      "methods": [
+        {
+          "content": "waitFor<T>(peekFn: () => T | null | undefined, loadFn: () => void, timeoutMs?: number): T | null"
+        }
+      ]
+    },
+    {
+      "title": "delay",
+      "description": "Promise-based sleep.",
+      "props": [],
+      "methods": [
+        {
+          "content": "delay(ms: number): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "retryUntil",
+      "description": "Retries an async function until success or max attempts.",
+      "props": [],
+      "methods": [
+        {
+          "content": "retryUntil<T>(fn: () => Promise<T>, attempts?: number, delayMs?: number): Promise<T>"
+        }
+      ]
+    },
+    {
+      "title": "pollUntil",
+      "description": "Polls a boolean condition at intervalMs until true or timeout.",
+      "props": [],
+      "methods": [
+        {
+          "content": "pollUntil(condition: () => boolean, intervalMs?: number, timeoutMs?: number): Promise<boolean>"
+        }
+      ]
+    },
+    {
+      "title": "pollUntilAbortable",
+      "description": "Like pollUntil but rejects when AbortSignal is aborted.",
+      "props": [],
+      "methods": [
+        {
+          "content": "pollUntilAbortable(condition, intervalMs?, timeoutMs?, signal?): Promise<boolean>"
+        }
+      ]
+    },
+    {
+      "title": "throttleAsync",
+      "description": "Ensures only one in-flight call of an async function at a time.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "debounceAsync",
+      "description": "Debounces async function calls by waitMs.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "fallbackChain",
+      "description": "Runs async tasks in order until one succeeds.",
+      "props": [],
+      "methods": [
+        {
+          "content": "fallbackChain<T>(tasks: Array<() => Promise<T>>): Promise<T>"
+        }
+      ]
+    },
+    {
+      "title": "AXHtmlUtil",
+      "description": "Static DOM helpers for focus, RTL, scroll detection.",
+      "props": [],
+      "methods": [
+        {
+          "content": "static focusElement(element: HTMLElement): HTMLElement | null"
+        },
+        {
+          "content": "static blurElement(element: HTMLElement): HTMLElement | null"
+        },
+        {
+          "content": "static hasFocus(element: HTMLElement): boolean"
+        },
+        {
+          "content": "static isRtl(element?: HTMLElement): boolean"
+        },
+        {
+          "content": "static hasDark(element: HTMLElement): boolean"
+        },
+        {
+          "content": "static isScrollable(element: HTMLElement): boolean"
+        },
+        {
+          "content": "static getScrollableParents(element: HTMLElement): HTMLElement[]"
+        }
+      ]
+    },
+    {
+      "title": "AXDrawingUtil",
+      "description": "Geometry helpers for collision and point-in-rect tests.",
+      "props": [],
+      "methods": [
+        {
+          "content": "static collision(a: HTMLElement, b: HTMLElement): boolean"
+        },
+        {
+          "content": "static isInElementBound(pos: AXPoint, element: HTMLElement): boolean"
+        },
+        {
+          "content": "static isInRecPoint(pos: AXPoint, rect: AXBoundingClientRect): boolean"
+        },
+        {
+          "content": "static convertRemToPixels(rem: number): number"
+        }
+      ]
+    },
+    {
+      "title": "AXColorUtil",
+      "description": "Color conversion and manipulation via tinycolor2 and tinygradient-es.",
+      "props": [],
+      "methods": [
+        {
+          "content": "static to(color, mode: 'rgba' | 'hex' | 'hsla' | 'hsva' | null): ColorInput"
+        },
+        {
+          "content": "static toString(color, mode?): string"
+        },
+        {
+          "content": "static isValid(color): boolean"
+        },
+        {
+          "content": "static mix(baseColor, color, percentage): string"
+        },
+        {
+          "content": "static lighten / darken / brighten / saturate(hex, percentage?)"
+        },
+        {
+          "content": "static equal(color1, color2): boolean"
+        },
+        {
+          "content": "static getLuminance(hex): number"
+        },
+        {
+          "content": "static contrastToWhite(color): number"
+        },
+        {
+          "content": "static gradient(values): Instance"
+        },
+        {
+          "content": "static colorStringToHex(color): string"
+        },
+        {
+          "content": "static getRandomColor(): string"
+        }
+      ]
+    },
+    {
+      "title": "AXUnsubscriber",
+      "description": "Injectable helper that completes observables on component destroy.",
+      "props": [],
+      "methods": [
+        {
+          "content": "takeUntilDestroy<T>(origin: Observable<T>): Observable<T>"
+        },
+        {
+          "content": "unsubscribe(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXAutoUnsubscriber",
+      "description": "Class decorator that auto-unsubscribes any property with a subscribe() method in ngOnDestroy.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "getWordBoundsAtPosition",
+      "description": "Finds start/end indices of the alphanumeric word at a cursor position.",
+      "props": [],
+      "methods": [
+        {
+          "content": "getWordBoundsAtPosition(str: string, position: number): { start: number; end: number }"
+        }
+      ]
+    },
+    {
+      "title": "AXPoint",
+      "description": "2D point { x, y } used by drawing utils and context menus.",
+      "props": [
+        {
+          "name": "x",
+          "type": [{ "name": "number" }],
+          "description": "Horizontal coordinate."
+        },
+        {
+          "name": "y",
+          "type": [{ "name": "number" }],
+          "description": "Vertical coordinate."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the utils package provides.",
+      "content": {
+        "type": "text",
+        "data": "@acorex/core/utils is a tree-shakeable collection of pure functions and static classes — not Angular services. Import only what you need.\n\nCategories:\n• Execution — waitFor, delay, retryUntil, pollUntil, throttleAsync, debounceAsync, fallbackChain\n• DOM — AXHtmlUtil (focus, RTL, scroll parents)\n• Geometry — AXDrawingUtil, AXPoint\n• Colors — AXColorUtil (tinycolor2 wrapper)\n• RxJS lifecycle — AXUnsubscriber, AXAutoUnsubscriber\n• Text — getWordBoundsAtPosition\n\nACoreX components use these utilities extensively: select-box and data-pager for subscriptions, menu for RTL/scroll, color-palette for color math, datetime-input for word selection."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Import the helpers you need and use them directly in component logic.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "utils-basic-usage.component.ts",
+            "language": "typescript",
+            "content": "import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';\nimport { interval } from 'rxjs';\nimport { AXColorUtil, AXHtmlUtil, AXUnsubscriber, delay, retryUntil } from '@acorex/core/utils';\n\n@Component({\n  selector: 'app-utils-basic-usage',\n  providers: [AXUnsubscriber],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <section #panel>\n      <button type=\"button\" (click)=\"load()\">Load</button>\n      <p>Status: {{ status() }}</p>\n      <p>Accent: {{ accentHex() }}</p>\n    </section>\n  `,\n})\nexport class UtilsBasicUsageComponent {\n  private readonly unsubscriber = inject(AXUnsubscriber);\n  private readonly panel = viewChild<ElementRef<HTMLElement>>('panel');\n\n  protected readonly status = signal('Idle');\n  protected readonly accent = signal('rgba(51, 102, 153, 0.8)');\n  protected readonly accentHex = computed(() => AXColorUtil.colorStringToHex(this.accent()));\n\n  constructor() {\n    afterNextRender(() => {\n      const panel = this.panel()?.nativeElement;\n      if (panel) {\n        AXHtmlUtil.focusElement(panel);\n      }\n    });\n\n    interval(1000)\n      .pipe(this.unsubscriber.takeUntilDestroy)\n      .subscribe(() => this.status.set('Watching...'));\n  }\n\n  protected async load() {\n    this.status.set('Loading...');\n    await delay(300);\n\n    const result = await retryUntil(() => this.fetchData(), 3, 250);\n    this.status.set(result.message);\n  }\n\n  private async fetchData(): Promise<{ message: string }> {\n    const response = await fetch('/api/data');\n    if (!response.ok) {\n      throw new Error('Request failed');\n    }\n    return response.json();\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Async Execution Helpers",
+      "description": "Control timing, retries, and concurrency.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "execution-helpers.ts",
+            "language": "typescript",
+            "content": "import { delay, retryUntil, pollUntil, pollUntilAbortable, fallbackChain } from '@acorex/core/utils';\n\n// Simple sleep\nawait delay(500);\n\n// Retry API call up to 5 times with 300ms between attempts\nconst data = await retryUntil(() => fetch('/api/data').then(r => r.json()), 5, 300);\n\n// Wait until a condition becomes true\nawait pollUntil(() => document.querySelector('.ready') !== null, 100, 5000);\n\n// Cancellable poll\nconst controller = new AbortController();\ntry {\n  await pollUntilAbortable(() => isLoaded(), 50, 3000, controller.signal);\n} catch {\n  console.log('Polling cancelled or timed out');\n}\n\n// Try primary source, fall back to secondary\nconst config = await fallbackChain([\n  () => fetch('/config.json').then(r => r.json()),\n  () => fetch('/config.fallback.json').then(r => r.json()),\n]);\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "waitFor — Sync Polling",
+      "description": "Block until a cached value is available.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "wait-for-cache.ts",
+            "language": "typescript",
+            "content": "import { waitFor } from '@acorex/core/utils';\n\nconst cache = new Map<string, string>();\n\nfunction loadIntoCache(key: string) {\n  setTimeout(() => cache.set(key, 'loaded-value'), 50);\n}\n\nfunction getSync(key: string): string | null {\n  return waitFor(\n    () => cache.get(key) ?? null,   // peek\n    () => loadIntoCache(key),        // trigger load once\n    200,                             // timeout ms\n  );\n}\n\n// Used by AXTranslationService.translateSync with waitForLoad: true\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "throttleAsync and debounceAsync",
+      "description": "Limit concurrent or rapid async calls.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "async-control.ts",
+            "language": "typescript",
+            "content": "import { throttleAsync, debounceAsync } from '@acorex/core/utils';\n\n// Only one save operation at a time\nconst save = throttleAsync(async (payload: unknown) => {\n  await fetch('/api/save', { method: 'POST', body: JSON.stringify(payload) });\n});\n\n// Search after user stops typing for 300ms\nconst search = debounceAsync(async (query: string) => {\n  return fetch(`/api/search?q=${query}`).then(r => r.json());\n}, 300);\n\nawait search('angular');\nawait search('angular material'); // only last call runs after 300ms\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXHtmlUtil — DOM Helpers",
+      "description": "Focus management, RTL detection, scrollable parents.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "html-util.ts",
+            "language": "typescript",
+            "content": "import { AXHtmlUtil } from '@acorex/core/utils';\nimport { ElementRef, inject } from '@angular/core';\n\nfunction setupDialog(container: HTMLElement) {\n  // Focus first focusable child (used by MXInteractiveComponent.focus)\n  AXHtmlUtil.focusElement(container);\n\n  // Check RTL for layout (menu, data-pager, editor)\n  const rtl = AXHtmlUtil.isRtl(container);\n  if (rtl) container.classList.add('ax-rtl');\n\n  // Find scroll containers for overlay positioning (menu)\n  const scrollParents = AXHtmlUtil.getScrollableParents(container);\n\n  // Check focus state\n  if (AXHtmlUtil.hasFocus(container)) {\n    console.log('Container is focused');\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXDrawingUtil — Geometry",
+      "description": "Collision detection and hit testing.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "drawing-util.ts",
+            "language": "typescript",
+            "content": "import { AXDrawingUtil, AXPoint } from '@acorex/core/utils';\n\nfunction handleClick(event: MouseEvent, target: HTMLElement) {\n  const point: AXPoint = { x: event.clientX, y: event.clientY };\n\n  if (AXDrawingUtil.isInElementBound(point, target)) {\n    console.log('Click inside element');\n  }\n\n  // Check overlap between two elements\n  const other = document.querySelector('.overlay') as HTMLElement;\n  if (other && AXDrawingUtil.collision(target, other)) {\n    console.log('Elements overlap');\n  }\n\n  // Convert rem to px for canvas/layout math\n  const px = AXDrawingUtil.convertRemToPixels(1.5);\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXColorUtil — Color Manipulation",
+      "description": "Convert, validate, mix, and generate colors.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "color-util.ts",
+            "language": "typescript",
+            "content": "import { AXColorUtil } from '@acorex/core/utils';\n\n// Validate and convert (theme-builder, color-palette)\nconst rgba = AXColorUtil.to('#336699', 'rgba');\nconst hex = AXColorUtil.toString({ r: 51, g: 102, b: 153, a: 1 }, 'hex');\n\nif (AXColorUtil.isValid(userInput)) {\n  const lighter = AXColorUtil.lighten(userInput, 10).toString();\n  const darker = AXColorUtil.darken(userInput, 10).toString();\n  const mixed = AXColorUtil.mix(userInput, '#ffffff', 30);\n}\n\n// Contrast check for accessible text\nconst readability = AXColorUtil.contrastToWhite('#336699');\n\n// Parse rgb/rgba string to hex\nconst hexFromRgb = AXColorUtil.colorStringToHex('rgba(51, 102, 153, 0.8)');\n\n// Generate palette gradient\nconst grad = AXColorUtil.gradient(['#ff0000', '#0000ff']);\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXUnsubscriber — RxJS Cleanup",
+      "description": "The standard ACoreX pattern for automatic unsubscription.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "select-box.component.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, OnDestroy } from '@angular/core';\nimport { AXUnsubscriber } from '@acorex/core/utils';\nimport { DataService } from './data.service';\n\n@Component({\n  selector: 'app-select-box',\n  providers: [AXUnsubscriber],\n  template: `...`,\n})\nexport class SelectBoxComponent implements OnDestroy {\n  private unsubscriber = inject(AXUnsubscriber);\n  private dataService = inject(DataService);\n\n  ngOnInit() {\n    this.dataService.items$\n      .pipe(this.unsubscriber.takeUntilDestroy)\n      .subscribe(items => this.render(items));\n\n    this.dataService.loading$\n      .pipe(this.unsubscriber.takeUntilDestroy)\n      .subscribe(loading => this.isLoading = loading);\n  }\n\n  ngOnDestroy() {\n    this.unsubscriber.unsubscribe();\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXAutoUnsubscriber Decorator",
+      "description": "Legacy auto-cleanup for class properties with subscribe().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "auto-unsubscriber.ts",
+            "language": "typescript",
+            "content": "import { Component, OnDestroy } from '@angular/core';\nimport { AXAutoUnsubscriber } from '@acorex/core/utils';\nimport { interval } from 'rxjs';\n\n@AXAutoUnsubscriber()\n@Component({\n  template: `<p>Tick: {{ tick }}</p>`,\n})\nexport class TickComponent implements OnDestroy {\n  tick = 0;\n\n  // Any property with .subscribe() is auto-unsubscribed in ngOnDestroy\n  private sub = interval(1000).subscribe(n => (this.tick = n));\n\n  ngOnDestroy() {\n    // Your own cleanup + decorator runs property unsubscribe\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "getWordBoundsAtPosition",
+      "description": "Word selection for datetime-input and text editors.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "word-bounds.ts",
+            "language": "typescript",
+            "content": "import { getWordBoundsAtPosition } from '@acorex/core/utils';\n\nfunction selectWordAtCursor(input: HTMLInputElement) {\n  const text = input.value;\n  const pos = input.selectionStart ?? 0;\n  const { start, end } = getWordBoundsAtPosition(text, pos);\n\n  input.setSelectionRange(start, end);\n  return text.slice(start, end);\n}\n\n// 'hello world' at position 2 → { start: 0, end: 5 } → 'hello'\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Real-World Usage in ACoreX",
+      "description": "Where utilities appear in the codebase.",
+      "content": {
+        "type": "text",
+        "data": "| Utility | Used in |\n|---------|----------|\n| AXUnsubscriber | select-box, autocomplete, data-table, calendar, form-field, scheduler |\n| AXHtmlUtil.isRtl | menu, data-pager, editor, hero-section |\n| AXHtmlUtil.getScrollableParents | menu-item (overlay positioning) |\n| AXHtmlUtil.focusElement | MXInteractiveComponent, dialog |\n| AXColorUtil | color-palette, theme-builder, qrcode |\n| AXPoint | menu.service (context menu coordinates) |\n| getWordBoundsAtPosition | datetime-input (segment editing) |\n| waitFor | AXTranslationService.translateSync |\n\nFor new components, prefer inject(AXUnsubscriber) + takeUntilDestroy over manual Subscription arrays. Angular's takeUntilDestroyed() is also valid, but ACoreX components consistently use AXUnsubscriber."
+      }
+    },
+    {
+      "title": "API Quick Reference",
+      "description": "When to use which utility.",
+      "content": {
+        "type": "text",
+        "data": "| Need | Use |\n|------|-----|\n| Auto-unsubscribe RxJS in components | AXUnsubscriber + providers |\n| Focus first input in dialog/panel | AXHtmlUtil.focusElement |\n| RTL-aware layout | AXHtmlUtil.isRtl(element?) |\n| Overlay scroll containment | AXHtmlUtil.getScrollableParents |\n| Click/hit testing | AXDrawingUtil.isInElementBound |\n| Element overlap | AXDrawingUtil.collision |\n| Color picker / theme tokens | AXColorUtil.to, toString, mix |\n| Retry flaky API | retryUntil |\n| Wait for DOM/state | pollUntil |\n| Debounced search | debounceAsync |\n| Prevent duplicate saves | throttleAsync |\n| Sync read from async cache | waitFor |\n| Word-at-cursor selection | getWordBoundsAtPosition |"
+      }
+    }
+  ]
+}

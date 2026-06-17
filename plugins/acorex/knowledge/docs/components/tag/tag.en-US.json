@@ -1,0 +1,172 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Tag",
+  "description": "Tag component is a UI element used to represent labels or categories, displayed as small, styled text or icons. It helps categorize, filter, or highlight specific content, and users can interact with tags for sorting, searching, or organizing information.",
+  "imports": ["import { AXTagComponent } from '@acorex/components/tag';"],
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/tag--documentation"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-tag</code>.",
+      "content": {
+        "type": "api",
+        "data": "tag/usage"
+      }
+    },
+    {
+      "title": "Colors",
+      "description": "You can change tag colors.",
+      "content": {
+        "type": "api",
+        "data": "tag/colors"
+      }
+    },
+    {
+      "title": "Look",
+      "description": "You can change tag looks.",
+      "content": {
+        "type": "api",
+        "data": "tag/look"
+      }
+    },
+    {
+      "title": "Size",
+      "description": "Explore size options using utility classes like <code>ax-xs</code>, <code>ax-sm</code>, <code>ax-md</code>, <code>ax-lg</code>, <code>ax-xl</code>.",
+      "content": {
+        "type": "api",
+        "data": "tag/size"
+      }
+    },
+    {
+      "title": "Use decorators",
+      "description": "You can use <code>ax-prefix</code> and <code>ax-suffix</code> to add elements to the beginning and end of a tag. Import <code>AXDecoratorGenericComponent</code> from <code>@acorex/components/decorators</code>.",
+      "content": {
+        "type": "api",
+        "data": "tag/decorators"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTagComponent",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Represents the text content to be displayed or used within the component."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme of the tag. Inherited from MXColorComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style of the tag. Inherited from MXLookComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the tag is clicked."
+        },
+        {
+          "name": "onDblClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the tag is double-clicked."
+        },
+        {
+          "name": "onContextMenu",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the tag is right-clicked (context menu)."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when the color property changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look property changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

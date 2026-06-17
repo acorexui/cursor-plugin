@@ -1,0 +1,124 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXPlatform",
+  "imports": ["import { AXPlatform } from '@acorex/core/platform';"],
+  "description": "Service class for detecting and managing platform-specific information including browser, device, and technology detection.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Platform detection service shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "platform.ts",
+            "content": "class AXPlatform {\n  platform: AXPlatforms;\n  browser: AXBrowsers;\n  technology: AXTechnologies;\n  screenSize: AXScreenSizes;\n  themeMode: AXThemeMode;\n  isMobile: boolean;\n  isDesktop: boolean;\n  isTablet: boolean;\n  // methods omitted for brevity\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPlatform",
+      "props": [
+        {
+          "name": "platform",
+          "type": [{ "name": "AXPlatforms", "link": "/en-US/docs/types/platforms" }],
+          "description": "Current platform type (Android, Desktop, iOS, Mobile)."
+        },
+        {
+          "name": "browser",
+          "type": [{ "name": "AXBrowsers", "link": "/en-US/docs/types/browsers" }],
+          "description": "Current browser type (Chrome, Safari, Edge, Firefox, Opera, MSIE)."
+        },
+        {
+          "name": "technology",
+          "type": [{ "name": "AXTechnologies", "link": "/en-US/docs/types/technologies" }],
+          "description": "Current technology type (PWA, Hybrid, Electron)."
+        },
+        {
+          "name": "screenSize",
+          "type": [{ "name": "AXScreenSizes", "link": "/en-US/docs/types/screen-sizes" }],
+          "description": "Current screen size category (SM, MD, LG, XL, 2XL, 3XL, 4XL, 5XL)."
+        },
+        {
+          "name": "themeMode",
+          "type": [{ "name": "AXThemeMode", "link": "/en-US/docs/types/theme-mode" }],
+          "description": "Current theme mode (light, dark, system, system-dark, system-light)."
+        },
+        {
+          "name": "isMobile",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the current platform is mobile."
+        },
+        {
+          "name": "isDesktop",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the current platform is desktop."
+        },
+        {
+          "name": "isTablet",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the current platform is tablet."
+        }
+      ],
+      "description": "Comprehensive platform detection and management service that provides information about the current environment.",
+      "methods": [
+        {
+          "name": "detect",
+          "description": "Detects the current platform and updates all platform properties."
+        },
+        {
+          "name": "isPlatform",
+          "description": "Checks if the current platform matches the specified platform type."
+        },
+        {
+          "name": "isBrowser",
+          "description": "Checks if the current browser matches the specified browser type."
+        },
+        {
+          "name": "isTechnology",
+          "description": "Checks if the current technology matches the specified technology type."
+        },
+        {
+          "name": "getScreenSize",
+          "description": "Returns the current screen size category based on viewport dimensions."
+        },
+        {
+          "name": "setThemeMode",
+          "description": "Sets the current theme mode and applies it to the document."
+        },
+        {
+          "name": "getThemeMode",
+          "description": "Returns the current theme mode."
+        },
+        {
+          "name": "onResize",
+          "description": "Registers a callback to be called when the screen size changes."
+        },
+        {
+          "name": "onThemeChange",
+          "description": "Registers a callback to be called when the theme mode changes."
+        },
+        {
+          "name": "onOrientationChange",
+          "description": "Registers a callback to be called when device orientation changes."
+        },
+        {
+          "name": "onPlatformChange",
+          "description": "Registers a callback to be called when platform detection changes."
+        },
+        {
+          "name": "onBrowserChange",
+          "description": "Registers a callback to be called when browser detection changes."
+        },
+        {
+          "name": "onOnlineStatusChange",
+          "description": "Registers a callback to be called when online/offline status changes."
+        }
+      ]
+    }
+  ]
+}

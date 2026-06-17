@@ -1,0 +1,2416 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler",
+  "description": "A full-featured scheduler/calendar component supporting multiple views, drag & drop, data loading, holidays, and localization.",
+  "imports": [
+    "import { AXSchedulerComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerService } from '@acorex/components/scheduler';",
+    "import { AXSchedulerDayViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerWeekViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerMonthViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerAgendaViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerTimelineDayViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerTimelineMonthViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerTimelineWeeklyViewComponent } from '@acorex/components/scheduler';",
+    "import { AXSchedulerTimelineYearViewComponent } from '@acorex/components/scheduler';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "700px",
+      "description": "A simple example of using <code>ax-scheduler</code>",
+      "content": {
+        "type": "api",
+        "data": "scheduler/usage"
+      }
+    },
+    {
+      "title": "Views",
+      "height": "700px",
+      "description": "Switch between different scheduler view types (day, week, month, timeline, agenda)",
+      "content": {
+        "type": "api",
+        "data": "scheduler/views"
+      }
+    },
+    {
+      "title": "Calendar Types",
+      "height": "700px",
+      "description": "Switch between different calendar systems (Gregorian, Solar Hijri)",
+      "content": {
+        "type": "api",
+        "data": "scheduler/calendar-types"
+      }
+    },
+    {
+      "title": "Working Hours",
+      "height": "700px",
+      "description": "Configure business hours vs full day scheduling",
+      "content": {
+        "type": "api",
+        "data": "scheduler/working-hours"
+      }
+    },
+    {
+      "title": "Drag & Drop",
+      "height": "700px",
+      "description": "Configure appointment dragging behavior with configurable delays",
+      "content": {
+        "type": "api",
+        "data": "scheduler/drag-drop"
+      }
+    },
+    {
+      "title": "Readonly Mode",
+      "height": "700px",
+      "description": "Switch between read-only and editable modes",
+      "content": {
+        "type": "api",
+        "data": "scheduler/readonly"
+      }
+    },
+    {
+      "title": "Custom Templates",
+      "height": "700px",
+      "description": "Switch between default and custom tooltip templates",
+      "content": {
+        "type": "api",
+        "data": "scheduler/custom-templates"
+      }
+    },
+    {
+      "title": "Data Loading",
+      "height": "700px",
+      "description": "Simulate async data loading and error scenarios",
+      "content": {
+        "type": "api",
+        "data": "scheduler/data-loading"
+      }
+    },
+    {
+      "title": "Holidays",
+      "height": "700px",
+      "description": "Show/hide weekend indicators and holiday data",
+      "content": {
+        "type": "api",
+        "data": "scheduler/holidays"
+      }
+    },
+    {
+      "title": "Custom Header",
+      "height": "700px",
+      "description": "Manage scheduler navigation and views with custom header",
+      "content": {
+        "type": "api",
+        "data": "scheduler/custom-header"
+      }
+    },
+    {
+      "title": "Actions",
+      "height": "700px",
+      "description": "Click on appointment action buttons to see context menu",
+      "content": {
+        "type": "api",
+        "data": "scheduler/actions"
+      }
+    },
+    {
+      "title": "Current Time Indicator",
+      "height": "550px",
+      "description": "Toggle the current time indicator line that shows the current time position",
+      "content": {
+        "type": "api",
+        "data": "scheduler/current-time-indicator"
+      }
+    },
+    {
+      "title": "Resources",
+      "height": "500px",
+      "description": "Manage multiple resources with timeline views, resource headers, and unassigned appointments",
+      "content": {
+        "type": "api",
+        "data": "scheduler/resources"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerComponent",
+      "props": [
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "'gregorian'"
+            },
+            {
+              "name": "'solar-hijri'"
+            },
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use for date calculations and display."
+        },
+        {
+          "name": "startingDate",
+          "type": [
+            {
+              "name": "Date"
+            }
+          ],
+          "description": "Initial date for the scheduler view."
+        },
+        {
+          "name": "dataSource",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentDataSource",
+              "link": "/en-US/docs/types/ax-scheduler-appointment-data-source"
+            }
+          ],
+          "description": "Data source for appointments (array, function, or async function)."
+        },
+        {
+          "name": "holidays",
+          "type": [
+            {
+              "name": "(range: AXSchedulerDateRange) => Promise<AXHolidayDate[]>"
+            }
+          ],
+          "description": "Function to load holiday data for a given date range."
+        },
+        {
+          "name": "views",
+          "type": [
+            {
+              "name": "AXSchedulerView[]",
+              "link": "/en-US/docs/types/ax-scheduler-view"
+            }
+          ],
+          "description": "Available view types for the scheduler."
+        },
+        {
+          "name": "selectedView",
+          "type": [
+            {
+              "name": "AXSchedulerView",
+              "link": "/en-US/docs/types/ax-scheduler-view"
+            }
+          ],
+          "description": "Current view type of the scheduler."
+        },
+        {
+          "name": "currentDate",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Current date for the scheduler view."
+        },
+        {
+          "name": "viewAppointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments filtered for the current view."
+        },
+        {
+          "name": "range",
+          "type": [
+            {
+              "name": "AXSchedulerDateRange",
+              "link": "/en-US/docs/types/ax-scheduler-date-range"
+            }
+          ],
+          "description": "Current date range for the scheduler view."
+        },
+        {
+          "name": "currentDateText",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Formatted text representation of the current date range."
+        },
+        {
+          "name": "calendarDepth",
+          "type": [
+            {
+              "name": "'day'"
+            },
+            {
+              "name": "'month'"
+            }
+          ],
+          "description": "Calendar depth for date picker based on current view."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the scheduler is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged and dropped."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "hasHeader",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the scheduler header."
+        },
+        {
+          "name": "allowFullScreen",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to allow fullscreen mode."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "weekend",
+          "type": [
+            {
+              "name": "number[]"
+            }
+          ],
+          "description": "Custom weekend days configuration. Array of day numbers (0-6, where 0 is Sunday). If empty, uses calendar system defaults."
+        },
+        {
+          "name": "startDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Start hour for day/week views (0-23)."
+        },
+        {
+          "name": "endDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "End hour for day/week views (0-23)."
+        },
+        {
+          "name": "multiDayViewDaysCount",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Number of days to display in the timeline weekly view."
+        },
+        {
+          "name": "firstDayOfWeek",
+          "type": [
+            {
+              "name": "AXDayOfWeekName",
+              "link": "/en-US/docs/types/ax-day-of-week-name"
+            }
+          ],
+          "description": "First day of the week for week views."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showResourceHeaders",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show resource headers in timeline views."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "showUnassignedAppointments",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show appointments without assigned resources."
+        },
+        {
+          "name": "resources",
+          "type": [
+            {
+              "name": "AXSchedulerResource[]",
+              "link": "/en-US/docs/types/ax-scheduler-resource"
+            }
+          ],
+          "description": "Array of resources for timeline views."
+        },
+        {
+          "name": "resourceTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering resource headers."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "Signal<AXSchedulerAppointment[]>",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Readonly signal containing all appointments."
+        },
+        {
+          "name": "calendarType",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The type of calendar being used."
+        },
+        {
+          "name": "rtl",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component is in right-to-left mode."
+        },
+        {
+          "name": "isFullScreen",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the component is in full screen mode."
+        },
+        {
+          "name": "viewsDataSource",
+          "type": [
+            {
+              "name": "Signal<AXSchedulerView[]>"
+            }
+          ],
+          "description": "Signal containing the available views."
+        },
+        {
+          "name": "prevDate",
+          "type": [
+            {
+              "name": "Signal<Date>"
+            }
+          ],
+          "description": "Signal containing the previous date."
+        },
+        {
+          "name": "prevView",
+          "type": [
+            {
+              "name": "Signal<AXSchedulerView>",
+              "link": "/en-US/docs/types/ax-scheduler-view"
+            }
+          ],
+          "description": "Signal containing the previous view."
+        },
+        {
+          "name": "mappedAppointments",
+          "type": [
+            {
+              "name": "Signal<AXSchedulerAppointment[]>",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Signal containing mapped appointments with validated dates."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onAppointmentClicked",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked."
+        },
+        {
+          "name": "onAppointmentDblClicked",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked."
+        },
+        {
+          "name": "onAppointmentRightClick",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked."
+        },
+        {
+          "name": "onSlotClicked",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked."
+        },
+        {
+          "name": "onSlotDblClicked",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked."
+        },
+        {
+          "name": "onSlotRightClick",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked."
+        },
+        {
+          "name": "onAppointmentDrop",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped on a time slot."
+        },
+        {
+          "name": "onActionClick",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button on an appointment is clicked."
+        },
+        {
+          "name": "onDataLoaded",
+          "type": [
+            {
+              "name": "void"
+            }
+          ],
+          "description": "Fired when appointment data is loaded."
+        },
+        {
+          "name": "onRangeChanged",
+          "type": [
+            {
+              "name": "AXSchedulerDateRange",
+              "link": "/en-US/docs/types/ax-scheduler-date-range"
+            }
+          ],
+          "description": "Fired when the date range changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Handles view change events.\n*\n* @param e - The value changed event containing old and new view values.\n*/\nviewChanged(e: AXValueChangedEvent<AXSchedulerView>): void"
+        },
+        {
+          "content": "/**\n* Navigates to the next time period based on current view.\n*/\nnextClick(): void"
+        },
+        {
+          "content": "/**\n* Navigates to the previous time period based on current view.\n*/\nprevClick(): void"
+        },
+        {
+          "content": "/**\n* Handles calendar date change events.\n*\n* @param e - The value changed event containing the new date.\n*/\ncalendarDateChanged(e: AXValueChangedEvent<Date>): void"
+        },
+        {
+          "content": "/**\n* Toggles fullscreen mode for the scheduler.\n*/\nhandleFullScreen(): void"
+        },
+        {
+          "content": "/**\n* Refreshes the scheduler data.\n*\n* @param appointments - Optional array of appointments to refresh with.\n*/\nrefresh(appointments?: AXSchedulerAppointment[]): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerService",
+      "props": [
+        {
+          "name": "HOURS_PER_DAY",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Constant for hours per day (24)."
+        },
+        {
+          "name": "MINUTES_PER_HOUR",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Constant for minutes per hour (60)."
+        },
+        {
+          "name": "BLOCK_DURATION_MINUTES",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Duration of each time block in minutes (30)."
+        },
+        {
+          "name": "MILLISECONDS_PER_MINUTE",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Milliseconds per minute constant."
+        },
+        {
+          "name": "MILLISECONDS_PER_DAY",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Milliseconds per day constant."
+        },
+        {
+          "name": "internalHoliday",
+          "type": [
+            {
+              "name": "Signal<AXHolidayDate[]>",
+              "link": "/en-US/docs/types/ax-holiday-date"
+            }
+          ],
+          "description": "Signal containing internal holiday dates."
+        },
+        {
+          "name": "internalWeekend",
+          "type": [
+            {
+              "name": "Signal<number[]>"
+            }
+          ],
+          "description": "Signal containing custom weekend day configuration. Array of day numbers (0-6, where 0 is Sunday)."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n* Checks if two appointments overlap in time.\n* \n* @param appointmentA - First appointment to check.\n* @param appointmentB - Second appointment to check.\n* @returns boolean - True if appointments overlap, false otherwise.\n*/\ndoAppointmentsOverlap(appointmentA: AXSchedulerAppointment, appointmentB: AXSchedulerAppointment): boolean"
+        },
+        {
+          "content": "/**\n* Calculates appointment duration in minutes.\n* \n* @param Appointment - The appointment to calculate duration for.\n* @returns number - Duration in minutes.\n*/\ncalculateDurationInMinutes(Appointment: AXSchedulerAppointment): number"
+        },
+        {
+          "content": "/**\n* Gets the day index and block index for a given date time within the view context.\n* \n* @param dateTime - The date time to get block identifier for.\n* @param viewStartDate - Start date of the view.\n* @param startHour - Start hour of the view.\n* @param endHour - End hour of the view (exclusive).\n* @param viewTotalDays - Total days in the view (default: 1).\n* @returns AXSchedulerBlockIdentifier | null - Block identifier or null if outside view.\n*/\ngetBlockIdentifier(dateTime: AXDateTime, viewStartDate: AXDateTime, startHour: number, endHour: number, viewTotalDays?: number): AXSchedulerBlockIdentifier | null"
+        },
+        {
+          "content": "/**\n* Calculates day view concurrency information for appointments.\n* \n* @param singleDayAppointments - Array of appointment segments.\n* @param viewStartDate - Start date of the view.\n* @param startHour - Start hour of the view.\n* @param endHour - End hour of the view.\n* @returns Map<any, { maxConcurrency: number; effectiveTotalColumns: number }> - Concurrency information map.\n*/\ncalculateDayViewConcurrencyInfo(singleDayAppointments: AXSchedulerAppointmentSegment[], viewStartDate: AXDateTime, startHour: number, endHour: number): Map<any, { maxConcurrency: number; effectiveTotalColumns: number }>"
+        },
+        {
+          "content": "/**\n* Groups appointments by day within a date range.\n* \n* @param appointments - Array of appointments.\n* @param viewStartDate - Start date of the view.\n* @param viewEndDate - End date of the view.\n* @returns Map<string, AXSchedulerAppointment[]> - Appointments grouped by day.\n*/\ngroupAppointmentsByDay(appointments: AXSchedulerAppointment[], viewStartDate: AXDateTime, viewEndDate: AXDateTime): Map<string, AXSchedulerAppointment[]>"
+        },
+        {
+          "content": "/**\n* Gets the day of week number for a given day name.\n* \n* @param dayName - The day name to get number for.\n* @returns number - Day number (1-7, where 1 is Sunday).\n*/\ngetDayOfWeekNumber(dayName: AXDayOfWeekName): number"
+        },
+        {
+          "content": "/**\n* Gets slot data for a given start date and view.\n* \n* @param startDate - Start date for the slot.\n* @param view - View type.\n* @returns { startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView } - Slot data.\n*/\ngetSlotData(startDate: AXDateTime, view: AXSchedulerView): { startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView }"
+        },
+        {
+          "content": "/**\n* Handles events for appointments and slots.\n* \n* @param event - The event to handle.\n* @param eventOutputMap - Map of event outputs.\n* @param eventType - Type of event ('appointment' or 'slot').\n*/\nhandleEvent(event: AXSchedulerSlotMouseEvent | AXSchedulerAppointmentMouseEvent, eventOutputMap: any, eventType: 'appointment' | 'slot'): void"
+        },
+        {
+          "content": "/**\n* Calculates timeline layout for appointments.\n* \n* @param appt - The appointment to calculate layout for.\n* @param viewStartHour - Start hour of the view.\n* @param viewEndHour - End hour of the view.\n* @returns { left: string; width: string } | null - Layout information or null.\n*/\ncalculateTimelineLayout(appt: AXSchedulerAppointment, viewStartHour: number, viewEndHour: number): { left: string; width: string } | null"
+        },
+        {
+          "content": "/**\n* Gets cloned appointment segment for a specific day.\n* \n* @param appointment - The appointment to clone.\n* @param day - The day to get segment for.\n* @param viewStartHour - Start hour of the view.\n* @param viewEndHour - End hour of the view.\n* @param isFullDayCellContext - Whether this is for full day cell context.\n* @returns AXSchedulerAppointmentSegment | null - Cloned segment or null.\n*/\ngetClonedAppointmentSegmentOnDay(appointment: AXSchedulerAppointment, day: AXDateTime, viewStartHour: number, viewEndHour: number, isFullDayCellContext?: boolean): AXSchedulerAppointmentSegment | null"
+        },
+        {
+          "content": "/**\n* Gets the original appointment from a segment.\n* \n* @param item - Appointment or appointment segment.\n* @returns AXSchedulerAppointment - The original appointment.\n*/\ngetOriginalAppointment(item: AXSchedulerAppointment | AXSchedulerAppointmentSegment): AXSchedulerAppointment"
+        },
+        {
+          "content": "/**\n* Checks if a date is a holiday.\n* \n* @param date - The date to check.\n* @returns boolean - True if the date is a holiday.\n*/\nisHoliday(date: AXDateTime): boolean"
+        },
+        {
+          "content": "/**\n* Checks if a date is a weekend.\n* \n* @param date - The date to check.\n* @param calendar - The calendar type to use.\n* @returns boolean - True if the date is a weekend.\n*/\nisWeekend(date: AXDateTime, calendar: string): boolean"
+        },
+        {
+          "content": "/**\n* Filters appointments by resources.\n* \n* @param appointments - Array of appointments to filter.\n* @param resources - Array of resources to filter by.\n* @param showUnassignedAppointments - Whether to include unassigned appointments.\n* @returns Map<any, AXSchedulerAppointment[]> - Appointments grouped by resource.\n*/\nfilterAppointmentsByResources(appointments: AXSchedulerAppointment[], resources: AXSchedulerResource[], showUnassignedAppointments: boolean): Map<any, AXSchedulerAppointment[]>"
+        },
+        {
+          "content": "/**\n* Gets appointments for a specific resource.\n* \n* @param appointments - Array of appointments to filter.\n* @param resourceId - The resource ID to filter by.\n* @returns AXSchedulerAppointment[] - Filtered appointments for the resource.\n*/\ngetAppointmentsForResource(appointments: AXSchedulerAppointment[], resourceId: any): AXSchedulerAppointment[]"
+        },
+        {
+          "content": "/**\n* Gets all resource IDs from the resources array.\n* \n* @param resources - Array of resources.\n* @param showUnassignedAppointments - Whether to include 'unassigned' in the result.\n* @returns any[] - Array of resource IDs.\n*/\ngetAllResourceIds(resources: AXSchedulerResource[], showUnassignedAppointments?: boolean): any[]"
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerDayViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the day view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the day view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Date to display in the day view."
+        },
+        {
+          "name": "endDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "End hour for the day view (0-23)."
+        },
+        {
+          "name": "startDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Start hour for the day view (0-23)."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the day view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the day view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the day view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the day view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the day view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the day view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the day view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerWeekViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the week view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the week view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Start date of the week to display."
+        },
+        {
+          "name": "endDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "End hour for the week view (0-23)."
+        },
+        {
+          "name": "startDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Start hour for the week view (0-23)."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the week view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the week view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the week view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the week view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the week view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the week view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the week view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerMonthViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the month view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the month view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Date within the month to display."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "firstDayOfWeek",
+          "type": [
+            {
+              "name": "AXDayOfWeekName",
+              "link": "/en-US/docs/types/ax-day-of-week-name"
+            }
+          ],
+          "description": "First day of the week for the month view."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the month view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the month view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the month view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the month view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the month view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the month view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the month view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerAgendaViewComponent",
+      "props": [
+        {
+          "name": "daysCount",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Number of days to display in the agenda view."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the agenda view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the agenda view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Start date for the agenda view."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the agenda view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the agenda view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the agenda view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the agenda view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the agenda view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the agenda view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the agenda view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerTimelineDayViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the timeline day view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the timeline day view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Date to display in the timeline day view."
+        },
+        {
+          "name": "endDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "End hour for the timeline day view (0-23)."
+        },
+        {
+          "name": "startDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Start hour for the timeline day view (0-23)."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showResourceHeaders",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show resource headers in timeline views."
+        },
+        {
+          "name": "showUnassignedAppointments",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show appointments without assigned resources."
+        },
+        {
+          "name": "resources",
+          "type": [
+            {
+              "name": "AXSchedulerResource[]",
+              "link": "/en-US/docs/types/ax-scheduler-resource"
+            }
+          ],
+          "description": "Array of resources for timeline views."
+        },
+        {
+          "name": "resourceTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering resource headers."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the timeline day view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the timeline day view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the timeline day view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the timeline day view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the timeline day view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the timeline day view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the timeline day view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerTimelineMonthViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the timeline month view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the timeline month view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Date within the month to display."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showResourceHeaders",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show resource headers in timeline views."
+        },
+        {
+          "name": "showUnassignedAppointments",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show appointments without assigned resources."
+        },
+        {
+          "name": "resources",
+          "type": [
+            {
+              "name": "AXSchedulerResource[]",
+              "link": "/en-US/docs/types/ax-scheduler-resource"
+            }
+          ],
+          "description": "Array of resources for timeline views."
+        },
+        {
+          "name": "resourceTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering resource headers."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the timeline month view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the timeline month view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the timeline month view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the timeline month view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the timeline month view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the timeline month view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the timeline month view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerTimelineWeeklyViewComponent",
+      "props": [
+        {
+          "name": "daysCount",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Number of days to display in the timeline weekly view."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the timeline weekly view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the timeline weekly view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Start date for the timeline weekly view."
+        },
+        {
+          "name": "endDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "End hour of the day for the timeline view."
+        },
+        {
+          "name": "startDayHour",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Start hour of the day for the timeline view."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showResourceHeaders",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show resource headers in timeline views."
+        },
+        {
+          "name": "showUnassignedAppointments",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show appointments without assigned resources."
+        },
+        {
+          "name": "resources",
+          "type": [
+            {
+              "name": "AXSchedulerResource[]",
+              "link": "/en-US/docs/types/ax-scheduler-resource"
+            }
+          ],
+          "description": "Array of resources for timeline views."
+        },
+        {
+          "name": "resourceTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering resource headers."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the timeline weekly view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the timeline weekly view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the timeline weekly view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the timeline weekly view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the timeline weekly view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the timeline weekly view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the timeline weekly view."
+        }
+      ]
+    },
+    {
+      "title": "AXSchedulerTimelineYearViewComponent",
+      "props": [
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the timeline year view is in read-only mode."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether appointments can be dragged in the timeline year view."
+        },
+        {
+          "name": "hasActions",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show action buttons on appointments."
+        },
+        {
+          "name": "dragStartDelay",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before drag starts."
+        },
+        {
+          "name": "calendar",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Calendar type to use."
+        },
+        {
+          "name": "date",
+          "type": [
+            {
+              "name": "AXDateTime"
+            }
+          ],
+          "description": "Date in the year to display."
+        },
+        {
+          "name": "appointments",
+          "type": [
+            {
+              "name": "AXSchedulerAppointment[]",
+              "link": "/en-US/docs/types/ax-scheduler-appointment"
+            }
+          ],
+          "description": "Array of appointments to display."
+        },
+        {
+          "name": "tooltipTemplate",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for appointment tooltips."
+        },
+        {
+          "name": "showResourceHeaders",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show resource headers in timeline views."
+        },
+        {
+          "name": "showUnassignedAppointments",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show appointments without assigned resources."
+        },
+        {
+          "name": "resources",
+          "type": [
+            {
+              "name": "AXSchedulerResource[]",
+              "link": "/en-US/docs/types/ax-scheduler-resource"
+            }
+          ],
+          "description": "Array of resources for timeline views."
+        },
+        {
+          "name": "resourceTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Template for rendering resource headers."
+        },
+        {
+          "name": "showCurrentTimeIndicator",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show the current time indicator line."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "slotClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is clicked in the timeline year view."
+        },
+        {
+          "name": "slotDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is double-clicked in the timeline year view."
+        },
+        {
+          "name": "slotRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-mouse-event"
+            }
+          ],
+          "description": "Fired when a time slot is right-clicked in the timeline year view."
+        },
+        {
+          "name": "appointmentClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is clicked in the timeline year view."
+        },
+        {
+          "name": "appointmentDblClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is double-clicked in the timeline year view."
+        },
+        {
+          "name": "appointmentRightClickedInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an appointment is right-clicked in the timeline year view."
+        },
+        {
+          "name": "onActionClickInternal",
+          "type": [
+            {
+              "name": "AXSchedulerAppointmentMouseEvent",
+              "link": "/en-US/docs/events/ax-scheduler-appointment-mouse-event"
+            }
+          ],
+          "description": "Fired when an action button is clicked on an appointment."
+        },
+        {
+          "name": "onAppointmentDropInternal",
+          "type": [
+            {
+              "name": "AXSchedulerSlotDropEvent",
+              "link": "/en-US/docs/events/ax-scheduler-slot-drop-event"
+            }
+          ],
+          "description": "Fired when an appointment is dropped in the timeline year view."
+        }
+      ]
+    }
+  ]
+}

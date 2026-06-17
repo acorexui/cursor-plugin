@@ -1,0 +1,366 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Color Palette",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/colorpalette--documentation"
+    }
+  ],
+  "description": "The Color Palette component enables selecting colors using preview, picker, swatches, and input sub-components. Supports two-way binding, readonly/disabled states, and keyboard/mouse interactions.",
+  
+  "imports": [
+    "import { AXColorPaletteComponent } from '@acorex/components/color-palette';",
+    "import { AXColorPalettePreviewComponent } from '@acorex/components/color-palette';",
+    "import { AXColorPalettePickerComponent } from '@acorex/components/color-palette';",
+    "import { AXColorPaletteInputComponent } from '@acorex/components/color-palette';",
+    "import { AXColorPaletteSwatchesComponent } from '@acorex/components/color-palette';",
+    "import { AXColorPaletteService } from '@acorex/components/color-palette';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-color-palette</code>.",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "color-palette/usage"
+      }
+    },
+    {
+      "title": "Swatches",
+      "description": "Display predefined swatches with <code>ax-color-palette-swatches</code>.",
+      "content": {
+        "type": "api",
+        "data": "color-palette/swatches"
+      }
+    },
+    {
+      "title": "Inputs",
+      "description": "Show color inputs with <code>ax-color-palette-input</code>.",
+      "content": {
+        "type": "api",
+        "data": "color-palette/inputs"
+      }
+    },
+    {
+      "title": "Preview",
+      "description": "Show a live color preview using <code>ax-color-palette-preview</code>.",
+      "content": {
+        "type": "api",
+        "data": "color-palette/preview"
+      }
+    },
+    {
+      "title": "Full options",
+      "description": "An example using all sub-components inside <code>ax-color-palette</code>.",
+      "height": "575px",
+      "content": {
+        "type": "api",
+        "data": "color-palette/full-options"
+      }
+    },
+    {
+      "title": "Custom swatches and favorites",
+      "description": "Provide custom swatch colors and a favorites list using <code>ax-color-palette-swatches</code> and <code>ax-color-palette-favorite</code>.",
+      "content": {
+        "type": "api",
+        "data": "color-palette/custom-swatches-favorites"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXColorPaletteComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Selected color value (two-way bindable). Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disables user interaction. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Prevents changing value while allowing focus. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the component's tabindex. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "Visual validation state. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name associated with the value. Inherited from MXValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Deprecated: use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Detailed value change event (with old/new values). Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when readonly changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when disabled changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component gains focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXColorPalettePreviewComponent",
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXColorPalettePickerComponent",
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Synchronizes internal RGBA and UI state with the parent palette value.\n *\n * Called when the parent emits onValueChanged. Updates local RGBA from the parent\n * value, recalculates gradient and pointer when the user is not actively changing\n * the color, and requests change detection.\n *\n * @returns void\n */\nparentColorChanged(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXColorPaletteInputComponent",
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXColorPaletteSwatchesComponent",
+      "props": [
+        {
+          "name": "colors",
+          "type": [
+            {
+              "name": "{ code: string }[]"
+            }
+          ],
+          "default": "[]",
+          "description": "List of color objects; each item has a 'code' string."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an internal option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXColorPaletteService",
+      "props": [
+        {
+          "name": "colorMode",
+          "type": [
+            {
+              "name": "'hex'"
+            },
+            {
+              "name": "'rgba'"
+            }
+          ],
+          "default": "'hex'",
+          "description": "Specifies the color format used by the palette service."
+        }
+      ]
+    }
+  ]
+}

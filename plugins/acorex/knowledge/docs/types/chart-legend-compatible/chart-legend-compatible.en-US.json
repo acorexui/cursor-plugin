@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXChartLegendCompatible",
+  "description": "Interface that chart components should implement to work with the legend",
+  "imports": [
+    "import { AXChartLegendCompatible } from '@acorex/charts/chart-legend';",
+    "import { AXChartLegendItem } from '@acorex/charts/chart-legend';"
+  ],
+  "types": [
+    {
+      "title": "AXChartLegendCompatible",
+      "description": "Interface that chart components should implement to work with the legend",
+      "props": [
+        {
+          "name": "getLegendItems",
+          "type": [{ "name": "() => AXChartLegendItem[]" }],
+          "description": "Returns the data items for the legend"
+        },
+        {
+          "name": "highlightSegment",
+          "type": [{ "name": "(id: string | null) => void" }],
+          "description": "Highlights a specific segment by ID"
+        },
+        {
+          "name": "toggleSegment",
+          "type": [{ "name": "(id: string) => boolean" }],
+          "description": "Toggles visibility of a segment by ID. Returns new visibility state (true = visible, false = hidden)"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Canonical interface definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "chart-legend.type.ts",
+            "language": "ts",
+            "content": "export interface AXChartLegendCompatible {\n  /**\n   * Returns the data items for the legend\n   */\n  getLegendItems(): AXChartLegendItem[];\n\n  /**\n   * Highlights a specific segment by ID\n   */\n  highlightSegment(id: string | null): void;\n\n  /**\n   * Toggles visibility of a segment by ID\n   * @returns New visibility state (true = visible, false = hidden)\n   */\n  toggleSegment(id: string): boolean;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

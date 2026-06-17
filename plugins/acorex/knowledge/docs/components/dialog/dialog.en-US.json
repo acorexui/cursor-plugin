@@ -1,0 +1,399 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Dialog",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/dialog--documentation"
+    }
+  ],
+  "description": "Dialog component is a flexible UI element for displaying information, prompts, or actions to users in a focused way. It offers various types, colors, and orientations for customization, and can be configured as draggable or fixed. With features like overlay control, action buttons, and adaptive sizing, the Dialog provides a seamless, accessible experience for user interactions in different contexts.",
+  "imports": [
+    "import { AXDialogComponent } from '@acorex/components/dialog';",
+    "import { AXDialogService } from '@acorex/components/dialog';"
+  ],
+  "sections": [
+    {
+      "title": "Asynchronous Process",
+      "description": "Description of <code>AXDialogComponent's</code> feature.",
+      "content": {
+        "type": "api",
+        "data": "dialog/asynchronous-process"
+      }
+    },
+    {
+      "title": "Confirm Default Action",
+      "description": "Demonstrates setting the default focused action for confirm dialogs (confirm or cancel).",
+      "content": {
+        "type": "api",
+        "data": "dialog/confirm-default-action"
+      }
+    },
+    {
+      "title": "Custom Buttons",
+      "description": "Shows how to define custom buttons with names, looks, colors, loading and click handlers.",
+      "height": "300px",
+      "content": {
+        "type": "api",
+        "data": "dialog/custom-buttons"
+      }
+    },
+    {
+      "title": "Programmatic Open",
+      "description": "Open and control dialogs programmatically using the service and AXDialogRef.",
+      "content": {
+        "type": "api",
+        "data": "dialog/programmatic-open"
+      }
+    },
+    {
+      "title": "Usage",
+      "description": "A simple example of using Dialog",
+      "content": {
+        "type": "api",
+        "data": "dialog/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDialogComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Closes the dialog.\n *\n * @returns void - No return value. The dialog is closed and removed from the DOM.\n */\nclose(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDialogService",
+      "methods": [
+        {
+          "content": "/**\n * Show an alert box with 'Okay' button.\n *\n * @param title - The title of the alert dialog.\n * @param content - The content message of the alert dialog.\n * @param type - The type/color of the alert (primary, success, warning, danger).\n * @param orientation - The orientation of the dialog (horizontal or vertical).\n * @param draggable - Whether the dialog can be dragged.\n * @returns Promise<void> - Promise that resolves when the dialog is closed.\n */\nalert(title: string, content: string, type: AXStyleColorType = 'primary', orientation: 'horizontal' | 'vertical' = 'horizontal', draggable?: boolean): Promise<void>"
+        },
+        {
+          "content": "/**\n * Show a confirm box with 'Okay' & 'Cancel' buttons.\n *\n * @param title - The title of the confirm dialog.\n * @param content - The content message of the confirm dialog.\n * @param type - The type/color of the confirm dialog (primary, success, warning, danger).\n * @param orientation - The orientation of the dialog (horizontal or vertical).\n * @param draggable - Whether the dialog can be dragged.\n * @param defaultAction - The default action to focus (confirm or cancel).\n * @returns Promise<{ result: boolean }> - Promise that resolves with the user's choice.\n */\nconfirm(title: string, content: string, type: AXStyleColorType = 'primary', orientation: 'horizontal' | 'vertical' = 'horizontal', draggable?: boolean, defaultAction?: 'confirm' | 'cancel'): Promise<{ result: boolean }>"
+        },
+        {
+          "content": "/**\n * Show a custom dialog box.\n *\n * @param options - Configuration options for the custom dialog.\n * @returns Promise<{ name: string }> - Promise that resolves with the button name that was clicked.\n */\nshow(options: AXDialogConfig): Promise<{ name: string }>"
+        },
+        {
+          "content": "/**\n * Open a dialog with custom configuration.\n *\n * @param config - Configuration options for the dialog.\n * @returns AXDialogRef - Reference to the opened dialog for programmatic control.\n */\nopen(config: AXDialogConfig): AXDialogRef"
+        }
+      ]
+    },
+    {
+      "title": "AXDialogConfig interface",
+      "props": [
+        {
+          "name": "title",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The title displayed at the top of the dialog."
+        },
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The main content message displayed in the dialog body."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "The color theme type of the dialog (primary, success, warning, danger, etc.)."
+        },
+        {
+          "name": "buttons",
+          "type": [
+            {
+              "name": "AXDialogButtonItem[]",
+              "link": "/en-US/docs/types/ax-dialog-button-item"
+            }
+          ],
+          "description": "Array of button items to display in the dialog footer."
+        },
+        {
+          "name": "closeButton",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show a close button in the dialog header."
+        },
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "'horizontal'"
+            },
+            {
+              "name": "'vertical'"
+            }
+          ],
+          "description": "The orientation of the dialog content and buttons layout."
+        },
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "'none'"
+            }
+          ],
+          "description": "The icon to display in the dialog header, or 'none' to hide the icon."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the dialog can be dragged by the user."
+        },
+        {
+          "name": "direction",
+          "type": [
+            {
+              "name": "'rtl'"
+            },
+            {
+              "name": "'ltr'"
+            }
+          ],
+          "description": "The text direction of the dialog content (right-to-left or left-to-right)."
+        }
+      ]
+    },
+    {
+      "title": "AXDialogButtonItem interface",
+      "props": [
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The text label displayed on the button."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "The color theme of the button (primary, success, warning, danger, etc.)."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "The visual appearance style of the button (solid, outline, twotone, etc.)."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Optional name identifier for the button, used for identification when clicked."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the button is disabled and cannot be clicked."
+        },
+        {
+          "name": "loading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the button is in a loading state, typically showing a spinner."
+        },
+        {
+          "name": "hotkey",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "AXHotKeyAction",
+              "link": "/en-US/docs/types/ax-hot-key-action"
+            }
+          ],
+          "description": "Keyboard shortcut or hotkey action that triggers the button click."
+        },
+        {
+          "name": "autofocus",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the button should automatically receive focus when the dialog opens."
+        },
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "(e?: { source: AXDialogButtonItem; handled?: boolean }) => void"
+            }
+          ],
+          "description": "Callback function executed when the button is clicked. The event object contains the button source and a handled flag."
+        }
+      ]
+    },
+    {
+      "title": "AXDialogRef",
+      "props": [],
+      "events": [],
+      "methods": [
+        {
+          "content": "/**\n * Closes the dialog programmatically.\n *\n * @returns void - No return value. The dialog is closed and removed from the DOM.\n */\nclose(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXDialogData",
+      "props": [
+        {
+          "name": "title",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The title displayed at the top of the dialog."
+        },
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The main content message displayed in the dialog body."
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "The color theme type of the dialog (primary, success, warning, danger, etc.)."
+        },
+        {
+          "name": "buttons",
+          "type": [
+            {
+              "name": "AXDialogButtonItem[]",
+              "link": "/en-US/docs/types/ax-dialog-button-item"
+            }
+          ],
+          "description": "Array of button items to display in the dialog footer."
+        },
+        {
+          "name": "closeButton",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show a close button in the dialog header."
+        },
+        {
+          "name": "orientation",
+          "type": [
+            {
+              "name": "'horizontal'"
+            },
+            {
+              "name": "'vertical'"
+            }
+          ],
+          "description": "The orientation of the dialog content and buttons layout."
+        },
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "'none'"
+            }
+          ],
+          "description": "The icon to display in the dialog header, or 'none' to hide the icon."
+        },
+        {
+          "name": "draggable",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the dialog can be dragged by the user."
+        }
+      ]
+    }
+  ]
+}

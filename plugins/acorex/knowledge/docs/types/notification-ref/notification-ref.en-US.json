@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNotificationRef",
+  "description": "Reference interface for programmatically controlling created notifications.",
+  "imports": ["import { AXNotificationRef } from '@acorex/components/notification';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface definition for notification reference with control methods.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "notification.class.ts",
+            "content": "export interface AXNotificationRef {\n  close(): void;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNotificationRef",
+      "props": [
+        {
+          "name": "close",
+          "type": [{ "name": "() => void" }],
+          "description": "Method to programmatically close the notification."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Form Message Style",
+  "description": "Type definition for the message display style in form fields. Determines how validation and error messages are positioned relative to form inputs.",
+  "imports": ["import { AXFormMessageStyle } from '@acorex/components/form';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXFormMessageStyle type definition showing all available message styles",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "form.component.ts",
+            "content": "export type AXFormMessageStyle = 'bottom' | 'float';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormMessageStyle",
+      "props": [
+        {
+          "name": "AXFormMessageStyle",
+          "type": [
+            { "name": "'bottom'" },
+            { "name": "'float'" }
+          ],
+          "description": "Union type defining the available message styles for form fields. 'bottom' displays messages below the input field, while 'float' displays messages in a floating position."
+        }
+      ]
+    }
+  ]
+}

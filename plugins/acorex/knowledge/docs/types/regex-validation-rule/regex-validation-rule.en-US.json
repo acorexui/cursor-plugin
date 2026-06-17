@@ -1,0 +1,55 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXRegexValidationRule",
+  "imports": ["import { AXRegexValidationRule } from '@acorex/core/validation';"],
+  "description": "Validation rule class that validates values against regular expressions.",
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Regex validation rule shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "regex-validation-rule.ts",
+            "content": "class AXRegexValidationRule {\n  options: AXRegexValidationRuleOptions;\n  validate(value: string): AXValidationRuleResult<string>;\n  validateAsync(value: string): Promise<AXValidationRuleResult<string>>;\n  setPattern(pattern: RegExp): void;\n  getPattern(): RegExp;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRegexValidationRule",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            { "name": "AXRegexValidationRuleOptions", "link": "/en-US/docs/types/regex-validation-rule-options" }
+          ],
+          "description": "Configuration options for the regex validation rule."
+        }
+      ],
+      "description": "Validation rule that uses regular expressions to validate string values against specific patterns.",
+      "methods": [
+        {
+          "name": "validate",
+          "description": "Validates that the value matches the specified regular expression pattern."
+        },
+        {
+          "name": "validateAsync",
+          "description": "Asynchronously validates that the value matches the specified regular expression pattern."
+        },
+        {
+          "name": "setPattern",
+          "description": "Sets a new regular expression pattern for validation."
+        },
+        {
+          "name": "getPattern",
+          "description": "Returns the current regular expression pattern."
+        }
+      ]
+    }
+  ]
+}

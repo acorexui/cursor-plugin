@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Component State",
+  "imports": ["import { AXComponentState } from '@acorex/cdk/common';"],
+  "description": "Defines the possible states for AX components, indicating their current validation or status condition.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition (in base component).",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "component-state.ts",
+            "content": "type AXComponentState = 'clear' | 'success' | 'error';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXComponentState",
+      "props": [
+        {
+          "name": "AXComponentState",
+          "type": [{ "name": "'clear'" }, { "name": "'success'" }, { "name": "'error'" }],
+          "description": "Possible visual states."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Gauge Chart",
+  "description": "A gauge chart component for visualizing progress, metrics, and KPIs with customizable thresholds, animations, and responsive design.",
+  "imports": ["import { AXGaugeChartComponent } from '@acorex/charts/gauge-chart';"],
+  "showcase": {
+    "title": "Gauge Chart Showcase",
+    "description": "Gauge chart demonstrating various features and configurations",
+    "code": "import { Component, signal } from '@angular/core';\nimport { AXGaugeChartComponent } from '@acorex/charts/gauge-chart';\nimport { AXGaugeChartOption } from '@acorex/charts/gauge-chart';\nimport { AXGaugeChartValue } from '@acorex/charts/gauge-chart';\n\n@Component({\n  template: `\n    <div class=\"showcase-container\">\n      <h2>Interactive Gauge Chart</h2>\n      <ax-gauge-chart \n        [value]=\"showcaseValue()\" \n        [options]=\"showcaseOptions()\"\n      />\n      <div class=\"gauge-info\">\n        <p>Performance metrics with threshold indicators</p>\n      </div>\n    </div>\n  `,\n  imports: [AXGaugeChartComponent],\n  styles: [`\n    .showcase-container {\n      padding: 2rem;\n      background: var(--ax-sys-color-lightest-surface);\n      border-radius: 8px;\n      text-align: center;\n    }\n    .gauge-info {\n      margin-top: 1rem;\n      color: var(--ax-sys-color-on-lightest-surface);\n    }\n  `]\n})\nexport class GaugeChartShowcaseComponent {\n  showcaseValue = signal<AXGaugeChartValue>(78);\n\n  showcaseOptions = signal<AXGaugeChartOption>({\n    minValue: 0,\n    maxValue: 100,\n    width: 400,\n    height: 200,\n    gaugeWidth: 30,\n    cornerRadius: 8,\n    showValue: true,\n    label: 'Performance Score',\n    animationDuration: 1500,\n    animationEasing: 'ease-in-out',\n    thresholds: [\n      { value: 30, color: '#ef4444', label: 'Low' },\n      { value: 60, color: '#f59e0b', label: 'Medium' },\n      { value: 85, color: '#10b981', label: 'High' }\n    ]\n  });\n}"
+  },
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "Simple gauge chart with basic configuration and thresholds",
+      "content": { "type": "api", "data": "gauge-chart/usage" },
+      "height": "500px"
+    },
+    {
+      "title": "Threshold Configuration",
+      "description": "Gauge chart with custom threshold ranges and color indicators",
+      "content": { "type": "api", "data": "gauge-chart/thresholds" },
+      "height": "500px"
+    },
+    {
+      "title": "Animation Effects",
+      "description": "Gauge chart with custom animation duration and easing",
+      "content": { "type": "api", "data": "gauge-chart/animation" },
+      "height": "500px"
+    },
+    {
+      "title": "Custom Styling",
+      "description": "Gauge chart with custom styling options and visual appearance",
+      "content": { "type": "api", "data": "gauge-chart/styling" },
+      "height": "500px"
+    },
+    {
+      "title": "Size Variations",
+      "description": "Gauge charts in different sizes for various use cases",
+      "content": { "type": "api", "data": "gauge-chart/size" },
+      "height": "700px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXGaugeChartComponent",
+      "description": "Gauge Chart Component - Gauge chart for visualizing progress, metrics, or KPIs with threshold ranges",
+      "props": [
+        {
+          "name": "value",
+          "type": [{ "name": "AXGaugeChartValue", "link": "/en-US/docs/types/gauge-chart-value" }],
+          "description": "Chart value input",
+          "default": "0"
+        },
+        {
+          "name": "options",
+          "type": [{ "name": "AXGaugeChartOption", "link": "/en-US/docs/types/gauge-chart-option" }],
+          "description": "Chart options input",
+          "default": "{}"
+        }
+      ],
+      "events": [],
+      "methods": [
+        {
+          "name": "createChart",
+          "content": "/**\n * Creates the gauge chart with all elements\n */\ncreateChart(): void"
+        },
+        {
+          "name": "updateChart",
+          "content": "/**\n * Updates the chart when options change\n */\nupdateChart(): void"
+        },
+        {
+          "name": "updateValueAndDial",
+          "content": "/**\n * Updates only the value display and dial position without recreating the chart\n */\nupdateValueAndDial(value: number): void"
+        },
+        {
+          "name": "cleanupChart",
+          "content": "/**\n * Cleans up chart resources\n */\ncleanupChart(): void"
+        }
+      ],
+      "tokens": [
+        {
+          "name": "--ax-comp-gauge-chart-bg-color",
+          "default": "var(--ax-sys-color-lightest-surface)",
+          "description": "Background color for the chart area"
+        },
+        {
+          "name": "--ax-comp-gauge-chart-text-color",
+          "default": "var(--ax-sys-color-on-lightest-surface)",
+          "description": "Text color for all labels, values, and indicators"
+        },
+        {
+          "name": "--ax-comp-gauge-chart-track-color",
+          "default": "var(--ax-sys-color-dark-surface)",
+          "description": "Color for the gauge track (background arc)"
+        },
+        {
+          "name": "--ax-comp-gauge-chart-needle-color",
+          "default": "var(--ax-sys-color-primary-500)",
+          "description": "Color for the gauge needle indicator"
+        }
+      ]
+    },
+    {
+      "title": "AX_GAUGE_CHART_CONFIG",
+      "description": "Default configuration token providing effective AXGaugeChartOption values",
+      "props": [
+        {
+          "name": "minValue",
+          "type": [{ "name": "number" }],
+          "description": "Minimum value for the gauge",
+          "default": "0"
+        },
+        {
+          "name": "maxValue",
+          "type": [{ "name": "number" }],
+          "description": "Maximum value for the gauge",
+          "default": "100"
+        },
+        {
+          "name": "gaugeWidth",
+          "type": [{ "name": "number" }],
+          "description": "Width of the gauge arc in pixels",
+          "default": "22"
+        },
+        {
+          "name": "cornerRadius",
+          "type": [{ "name": "number" }],
+          "description": "Radius of gauge arc corners in pixels",
+          "default": "5"
+        },
+        {
+          "name": "showValue",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show the current value",
+          "default": "true"
+        },
+        {
+          "name": "showTooltip",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether to show tooltip on hover",
+          "default": "true"
+        },
+        {
+          "name": "animationDuration",
+          "type": [{ "name": "number" }],
+          "description": "Duration of the animation in ms",
+          "default": "750"
+        },
+        {
+          "name": "animationEasing",
+          "type": [
+            { "name": "'linear'" },
+            { "name": "'ease'" },
+            { "name": "'ease-in'" },
+            { "name": "'ease-out'" },
+            { "name": "'ease-in-out'" },
+            { "name": "'cubic'" },
+            { "name": "'cubic-in'" },
+            { "name": "'cubic-out'" },
+            { "name": "'cubic-in-out'" }
+          ],
+          "description": "Animation easing function",
+          "default": "'cubic-out'"
+        },
+        {
+          "name": "messages",
+          "type": [{ "name": "AXGaugeChartMessages", "link": "/en-US/docs/types/gauge-chart-messages" }],
+          "description": "Customizable messages for empty states"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler Appointment Loader",
+  "description": "Defines the synchronous loader function type for scheduler appointments.",
+  "imports": ["import { AXSchedulerAppointmentLoader } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Function type for synchronously loading appointments based on a date range.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerAppointmentLoader = (\n  range: AXSchedulerDateRange\n) => AXSchedulerAppointment[];"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentLoader",
+      "props": [
+        {
+          "name": "AXSchedulerAppointmentLoader",
+          "type": [{ "name": "(range: AXSchedulerDateRange) => AXSchedulerAppointment[]" }],
+          "description": "Synchronous function that takes a date range and returns an array of appointments for that period."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "range",
+          "type": [{ "name": "AXSchedulerDateRange", "link": "/en-US/docs/types/ax-range" }],
+          "description": "The date range for which to load appointments."
+        }
+      ],
+      "returns": [
+        {
+          "type": [{ "name": "AXSchedulerAppointment[]", "link": "/en-US/docs/types/ax-scheduler-appointment" }],
+          "description": "Array of appointments for the specified date range."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Columns Order Changed Event",
+  "description": "Represents the event payload when the order of columns in a data table changes.",
+  "types": [
+    {
+      "title": "AXColumnsOrderChangedEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "AXDataTableComponent" }],
+          "description": "The data table component that emitted the event."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element associated with the event."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "description": "Additional data about the column order change."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXPlatformEvent",
+  "description": "Event for platform-specific actions, containing the native event, source, and optional data.",
+  "imports": ["import { AXPlatformEvent } from '@acorex/core/platform';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Platform event with native event and source.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "platform-event.ts",
+            "language": "ts",
+            "content": "export class AXPlatformEvent {\n  nativeEvent: Event;\n  source: AXPlatform;\n  data?: any;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPlatformEvent",
+      "props": [
+        { "name": "nativeEvent", "type": [{ "name": "Event" }], "description": "The native event object." },
+        { "name": "source", "type": [{ "name": "AXPlatform" }], "description": "The platform source of the event." },
+        { "name": "data", "type": [{ "name": "any" }], "description": "Optional data associated with the event." }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ],
+  "tokens": []
+}

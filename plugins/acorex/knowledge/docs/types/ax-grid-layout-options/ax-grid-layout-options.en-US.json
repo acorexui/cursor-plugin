@@ -1,0 +1,105 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Grid Layout Options",
+  "description": "Configuration options for the grid layout system. This interface defines all the customizable properties that control the behavior, appearance, and functionality of the grid layout container.",
+  "imports": [
+    "import { AXGridLayoutOptions } from '@acorex/components/grid-layout-builder';"
+  ],
+  "types": [
+    {
+      "title": "AXGridLayoutOptions",
+      "props": [
+        {
+          "name": "column",
+          "type": [{ "name": "number" }, { "name": "'auto'" }],
+          "description": "Number of columns in the grid. For nested grids, use 'auto' to match the container grid-item current width. Default is 12.",
+          "default": "12"
+        },
+        {
+          "name": "disableDrag",
+          "type": [{ "name": "boolean" }],
+          "description": "Disallows dragging of widgets. When true, users cannot drag widgets to new positions.",
+          "default": "false"
+        },
+        {
+          "name": "disableResize",
+          "type": [{ "name": "boolean" }],
+          "description": "Disallows resizing of widgets. When true, users cannot resize widgets by dragging their edges.",
+          "default": "false"
+        },
+        {
+          "name": "gap",
+          "type": [{ "name": "number" }, { "name": "string" }],
+          "description": "Gap between grid item and content. Can be an integer (px), string with units (ex: '2em', '20px'), or space-separated values for all 4 sides (ex: '5px 10px 0 20px').",
+          "default": "10"
+        },
+        {
+          "name": "cellHeight",
+          "type": [{ "name": "number" }, { "name": "string" }],
+          "description": "Height of one cell. Can be an integer (px), string with units, 0 (no styles generated), 'auto' (calculated square cells), or 'initial' (square cells that don't resize).",
+          "default": "'auto'"
+        },
+        {
+          "name": "rtl",
+          "type": [{ "name": "boolean" }, { "name": "'auto'" }],
+          "description": "Enables right-to-left layout. Can be true, false, or 'auto' for automatic detection.",
+          "default": "'auto'"
+        },
+        {
+          "name": "maxRow",
+          "type": [{ "name": "number" }],
+          "description": "Maximum number of rows allowed in the grid. 0 means no maximum limit.",
+          "default": "0"
+        },
+        {
+          "name": "minRow",
+          "type": [{ "name": "number" }],
+          "description": "Minimum number of rows in the grid. Can also be set using min-height CSS attribute on the grid div.",
+          "default": "0"
+        },
+        {
+          "name": "row",
+          "type": [{ "name": "number" }],
+          "description": "Fixed number of rows. This is a shortcut for setting both minRow and maxRow to the same value. 0 means no constraint.",
+          "default": "0"
+        },
+        {
+          "name": "removableSelector",
+          "type": [{ "name": "string" }],
+          "description": "CSS selector string (ex: '.trash') where widgets can be dropped to remove them. When set, widgets will be removed by dropping them on this element.",
+          "default": "undefined"
+        },
+        {
+          "name": "removable",
+          "type": [{ "name": "boolean" }],
+          "description": "Enables the option to remove widgets from the grid.",
+          "default": "false"
+        },
+        {
+          "name": "acceptWidgets",
+          "type": [{ "name": "boolean" }],
+          "description": "Allows widgets to be dragged from other grids or from outside sources into this grid.",
+          "default": "false"
+        },
+        {
+          "name": "float",
+          "type": [{ "name": "boolean" }],
+          "description": "Enables floating widgets that can overlap and move freely without snapping to grid positions.",
+          "default": "false"
+        },
+        {
+          "name": "dragHandlerSelector",
+          "type": [{ "name": "string" }],
+          "description": "CSS selector for the draggable handle element. Only this element will be draggable, not the entire widget.",
+          "default": "'.grid-stack-item-content'"
+        },
+        {
+          "name": "responsiveLayout",
+          "type": [{ "name": "{ width?: number; column: number; }[]" }],
+          "description": "Array of responsive breakpoints defining column layout behavior at different screen widths. Each object specifies a width threshold and corresponding column count.",
+          "default": "undefined"
+        }
+      ]
+    }
+  ]
+}

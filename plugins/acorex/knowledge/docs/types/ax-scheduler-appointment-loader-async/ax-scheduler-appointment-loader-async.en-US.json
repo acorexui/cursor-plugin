@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler Appointment Loader Async",
+  "description": "Defines the asynchronous loader function type for scheduler appointments.",
+  "imports": ["import { AXSchedulerAppointmentLoaderAsync } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Function type for asynchronously loading appointments based on a date range.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerAppointmentLoaderAsync = (\n  range: AXSchedulerDateRange\n) => Promise<AXSchedulerAppointment[]>;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentLoaderAsync",
+      "props": [
+        {
+          "name": "AXSchedulerAppointmentLoaderAsync",
+          "type": [{ "name": "(range: AXSchedulerDateRange) => Promise<AXSchedulerAppointment[]>" }],
+          "description": "Asynchronous function that takes a date range and returns a promise resolving to an array of appointments for that period."
+        }
+      ],
+      "parameters": [
+        {
+          "name": "range",
+          "type": [{ "name": "AXSchedulerDateRange", "link": "/en-US/docs/types/ax-range" }],
+          "description": "The date range for which to load appointments."
+        }
+      ],
+      "returns": [
+        {
+          "type": [
+            { "name": "Promise<AXSchedulerAppointment[]>", "link": "/en-US/docs/types/ax-scheduler-appointment" }
+          ],
+          "description": "Promise that resolves to an array of appointments for the specified date range."
+        }
+      ]
+    }
+  ]
+}

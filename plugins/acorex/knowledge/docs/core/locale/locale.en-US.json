@@ -1,0 +1,306 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Locale System",
+  "description": "Locale profile management for AcoreX: lazy-loaded regional settings (date/time formats, calendar, units, RTL), reactive switching via signals, provider-based extensibility, and deep integration with translation and date-time formatting.",
+  "imports": [
+    "import { AXLocaleService, AXLocaleProfileProviderService, AX_LOCALE_CONFIG, AX_LOCALE_PROFILE_PROVIDERS, AXLocaleProfile, AXLocaleProfileProvider, AXUSLocaleProfile, AXIRLocaleProfile, AXAULocaleProfile } from '@acorex/core/locale';"
+  ],
+  "hints": [
+    {
+      "title": "Profile vs translation language",
+      "content": "A locale <strong>profile</strong> (AXLocaleService) controls regional formatting, calendar, units, and RTL. <strong>Translation</strong> strings come from AXTranslationService. Switching profile via <code>setProfile()</code> automatically syncs the active translation language through <code>profileChanged$</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Set default locale",
+      "content": "Override <code>AX_LOCALE_CONFIG</code> in <code>app.config.ts</code> to change the startup locale (default: <code>en-US</code>).",
+      "status": "primary"
+    },
+    {
+      "title": "Built-in profiles",
+      "content": "Shipped locales: <code>en-US</code>, <code>en-AU</code>, <code>fa-IR</code>. Each is lazy-loaded on first use and cached.",
+      "status": "primary"
+    },
+    {
+      "title": "Update document dir for RTL",
+      "content": "When switching to an RTL profile (e.g. <code>fa-IR</code>), set <code>document.documentElement.dir = 'rtl'</code> alongside <code>setProfile()</code> — the service does not modify the DOM automatically.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLocaleProfile",
+      "description": "Complete regional configuration for a locale.",
+      "props": [
+        {
+          "name": "localeInfo",
+          "type": [{ "name": "{ code, language, region, timezone }" }],
+          "description": "BCP 47 code and metadata. code e.g. 'en-US', timezone e.g. 'America/New_York'."
+        },
+        {
+          "name": "calendar",
+          "type": [{ "name": "{ system, week, clock }" }],
+          "description": "Calendar system ('gregorian' | 'solar-hijri'), week start/weekends, 12h vs 24h clock."
+        },
+        {
+          "name": "formats",
+          "type": [{ "name": "{ date, time, datetime, numbers, contacts }" }],
+          "description": "Pattern presets (short/medium/long/full) used by date-time formatters."
+        },
+        {
+          "name": "units",
+          "type": [{ "name": "{ temperature, distance, weight, volume, speed, area, custom? }" }],
+          "description": "Measurement preferences (celsius/fahrenheit, km/miles, etc.)."
+        },
+        {
+          "name": "i18nMeta",
+          "type": [{ "name": "{ rtl, fallbackLocales?, supportedLanguages? }" }],
+          "description": "RTL flag and language fallback lists."
+        }
+      ]
+    },
+    {
+      "title": "AXLocaleConfig",
+      "description": "Startup configuration token.",
+      "props": [
+        {
+          "name": "default",
+          "type": [{ "name": "string" }],
+          "description": "Locale code loaded on app init. Factory default: 'en-US'."
+        }
+      ]
+    },
+    {
+      "title": "AX_LOCALE_CONFIG",
+      "description": "InjectionToken<AXLocaleConfig> — provide in app.config to set the default locale.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "AXLocaleProfileProvider",
+      "description": "Plugin interface for registering locale profile loaders.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Returns a map of locale code → loader function.\n * Loaders may be sync or async (dynamic import).\n */\nprovide(): Promise<Record<string, () => Promise<AXLocaleProfile> | AXLocaleProfile>>"
+        }
+      ]
+    },
+    {
+      "title": "AX_LOCALE_PROFILE_PROVIDERS",
+      "description": "InjectionToken for custom profile providers. Default factory includes AXLocaleProfileProviderDefault.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "AXLocaleProfileProviderService",
+      "description": "Registry that lazy-loads and caches locale profiles from all providers.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Loads all registered locale profiles.\n */\ngetList(): Promise<AXLocaleProfile[]>"
+        },
+        {
+          "content": "/**\n * Loads or returns cached profile for a locale code.\n */\ngetByLocale(localeCode: string): Promise<AXLocaleProfile | undefined>"
+        },
+        {
+          "content": "/**\n * Returns true if a loader is registered for the code.\n * Note: call after init (e.g. via getByLocale) for accurate results.\n */\nhas(localeCode: string): boolean"
+        },
+        {
+          "content": "/**\n * Clears registry and resolved caches, re-initializes providers.\n */\nreload(): Promise<void>"
+        }
+      ]
+    },
+    {
+      "title": "AXLocaleService",
+      "description": "Root singleton managing the active locale profile as a signal.",
+      "props": [
+        {
+          "name": "activeProfile",
+          "type": [{ "name": "Signal<AXLocaleProfile>" }],
+          "description": "Readonly signal of the currently active profile."
+        },
+        {
+          "name": "profileChanged$",
+          "type": [{ "name": "Observable<AXLocaleProfile>" }],
+          "description": "Observable mirror of activeProfile for RxJS pipelines."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Loads and activates a locale profile by code.\n * Warns to console if the locale is not registered.\n */\nsetProfile(localeCode: string): Promise<void>"
+        },
+        {
+          "content": "/**\n * Deep-merge a partial profile into the active profile.\n * Overload: apply('formats.date.short', 'YYYY/MM/DD') for dot-path updates.\n */\napply(profile: Partial<AXLocaleProfile>): void"
+        },
+        {
+          "content": "/**\n * Restores the active profile to the state from the last setProfile() call.\n */\nreset(): void"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What the locale package provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/locale package centralizes regional settings that go beyond simple string translation:\n\n• Date, time, and datetime display patterns\n• Calendar system (Gregorian vs solar-hijri) and week layout\n• Number/currency/contact format hints\n• Measurement units and RTL direction\n\nAXLocaleService holds the active profile as an Angular signal. Built-in profiles (en-US, en-AU, fa-IR) load lazily. Date-time formatters, calendar components, translation service, and layout code read from activeProfile() to stay in sync."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Read the active locale profile and switch it at runtime.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "locale-basic-usage.component.ts",
+            "language": "typescript",
+            "content": "import { DOCUMENT } from '@angular/common';\nimport { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';\nimport { AXLocaleService } from '@acorex/core/locale';\n\n@Component({\n  selector: 'app-locale-basic-usage',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    <button type=\"button\" (click)=\"useLocale('en-US')\">English</button>\n    <button type=\"button\" (click)=\"useLocale('fa-IR')\">فارسی</button>\n\n    <section>\n      <p>Active locale: {{ localeCode() }}</p>\n      <p>Calendar: {{ calendarSystem() }}</p>\n      <p>Date format: {{ dateFormat() }}</p>\n      <p>Currency: {{ currencyCode() }}</p>\n      <p>Direction: {{ direction() }}</p>\n    </section>\n  `,\n})\nexport class LocaleBasicUsageComponent {\n  private readonly localeService = inject(AXLocaleService);\n  private readonly document = inject(DOCUMENT);\n\n  protected readonly profile = this.localeService.activeProfile;\n  protected readonly localeCode = computed(() => this.profile().localeInfo.code);\n  protected readonly calendarSystem = computed(() => this.profile().calendar.system);\n  protected readonly dateFormat = computed(() => this.profile().formats.date.medium);\n  protected readonly currencyCode = computed(() => this.profile().formats.numbers.currency.code);\n  protected readonly direction = computed(() => (this.profile().i18nMeta.rtl ? 'RTL' : 'LTR'));\n\n  protected async useLocale(localeCode: 'en-US' | 'fa-IR') {\n    await this.localeService.setProfile(localeCode);\n\n    const profile = this.profile();\n    const dir = profile.i18nMeta.rtl ? 'rtl' : 'ltr';\n\n    this.document.documentElement.setAttribute('dir', dir);\n    this.document.documentElement.setAttribute('lang', profile.localeInfo.language);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+
+    {
+      "title": "Switching Locale",
+      "description": "Change the active profile at runtime.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "locale-switcher.component.ts",
+            "language": "typescript",
+            "content": "import { DOCUMENT } from '@angular/common';\nimport { Component, inject, signal } from '@angular/core';\nimport { AXLocaleService } from '@acorex/core/locale';\n\n@Component({\n  selector: 'app-locale-switcher',\n  template: `\n    <button type=\"button\" (click)=\"switchTo('en-US')\">English</button>\n    <button type=\"button\" (click)=\"switchTo('fa-IR')\">فارسی</button>\n    <p>Active: {{ activeCode() }}</p>\n  `,\n})\nexport class LocaleSwitcherComponent {\n  private localeService = inject(AXLocaleService);\n  private document = inject(DOCUMENT);\n\n  activeCode = signal(this.localeService.activeProfile().localeInfo.code);\n\n  async switchTo(code: 'en-US' | 'fa-IR') {\n    await this.localeService.setProfile(code);\n\n    const profile = this.localeService.activeProfile();\n    this.activeCode.set(profile.localeInfo.code);\n\n    // Apply RTL/LTR to the document\n    const isRtl = profile.i18nMeta.rtl;\n    this.document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');\n    this.document.documentElement.setAttribute('lang', profile.localeInfo.language);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Reading the Active Profile",
+      "description": "Use signals and computed values in components.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "profile-reader.component.ts",
+            "language": "typescript",
+            "content": "import { Component, computed, inject } from '@angular/core';\nimport { AXLocaleService } from '@acorex/core/locale';\n\n@Component({\n  selector: 'app-settings-summary',\n  template: `\n    <dl>\n      <dt>Locale</dt><dd>{{ localeCode() }}</dd>\n      <dt>Calendar</dt><dd>{{ calendarSystem() }}</dd>\n      <dt>Date format</dt><dd>{{ dateFormat() }}</dd>\n      <dt>Currency</dt><dd>{{ currency() }}</dd>\n      <dt>Direction</dt><dd>{{ direction() }}</dd>\n    </dl>\n  `,\n})\nexport class SettingsSummaryComponent {\n  private localeService = inject(AXLocaleService);\n\n  localeCode = computed(() => this.localeService.activeProfile().localeInfo.code);\n  calendarSystem = computed(() => this.localeService.activeProfile().calendar.system);\n  dateFormat = computed(() => this.localeService.activeProfile().formats.date.medium);\n  currency = computed(() => this.localeService.activeProfile().formats.numbers.currency.code);\n  direction = computed(() => (this.localeService.activeProfile().i18nMeta.rtl ? 'RTL' : 'LTR'));\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Reactive Subscriptions",
+      "description": "React to profile changes with profileChanged$.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "reactive-locale.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { takeUntilDestroyed } from '@angular/core/rxjs-interop';\nimport { AXLocaleService } from '@acorex/core/locale';\n\n@Component({\n  selector: 'app-header',\n  template: `<span>{{ weekStartsOn() }}</span>`,\n})\nexport class HeaderComponent {\n  private localeService = inject(AXLocaleService);\n  weekStartsOn = signal(0);\n\n  constructor() {\n    this.localeService.profileChanged$\n      .pipe(takeUntilDestroyed())\n      .subscribe((profile) => {\n        this.weekStartsOn.set(profile.calendar.week.startsOn);\n      });\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Listing Available Locales",
+      "description": "Use AXLocaleProfileProviderService to build a picker.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "locale-picker.ts",
+            "language": "typescript",
+            "content": "import { Component, inject, signal } from '@angular/core';\nimport { AXLocaleProfile, AXLocaleProfileProviderService, AXLocaleService } from '@acorex/core/locale';\n\n@Component({\n  selector: 'app-locale-picker',\n  template: `\n    @for (item of locales(); track item.localeInfo.code) {\n      <button type=\"button\" (click)=\"select(item)\">\n        {{ item.localeInfo.code }}\n      </button>\n    }\n  `,\n})\nexport class LocalePickerComponent {\n  private providerService = inject(AXLocaleProfileProviderService);\n  private localeService = inject(AXLocaleService);\n\n  locales = signal<AXLocaleProfile[]>([]);\n\n  async ngOnInit() {\n    this.locales.set(await this.providerService.getList());\n  }\n\n  async select(profile: AXLocaleProfile) {\n    await this.localeService.setProfile(profile.localeInfo.code);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Custom Profile Provider",
+      "description": "Register additional locales via AX_LOCALE_PROFILE_PROVIDERS.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "custom-provider.ts",
+            "language": "typescript",
+            "content": "import { AXLocaleProfile, AXLocaleProfileProvider, AX_LOCALE_PROFILE_PROVIDERS, AXUSLocaleProfile } from '@acorex/core/locale';\n\nexport class MyLocaleProfileProvider implements AXLocaleProfileProvider {\n  async provide() {\n    return {\n      'de-DE': () => import('./profiles/de-DE.profile').then((m) => m.AXDELocaleProfile),\n      // Inline profile\n      'en-GB': (): AXLocaleProfile => ({\n        ...AXUSLocaleProfile,\n        localeInfo: { code: 'en-GB', language: 'en', region: 'GB', timezone: 'Europe/London' },\n        formats: {\n          ...AXUSLocaleProfile.formats,\n          date: { short: 'DD/MM/YY', medium: 'DD/MM/YYYY', long: 'D MMMM YYYY', full: 'dddd, D MMMM YYYY' },\n          numbers: { decimalPattern: '1,000.00', currency: { code: 'GBP' } },\n        },\n      }),\n    };\n  }\n}\n"
+          },
+          {
+            "fileName": "app.config-providers.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig } from '@angular/core';\nimport { AX_LOCALE_PROFILE_PROVIDERS, AXLocaleProfileProviderDefault } from '@acorex/core/locale';\nimport { MyLocaleProfileProvider } from './custom-provider';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    {\n      provide: AX_LOCALE_PROFILE_PROVIDERS,\n      useValue: [new AXLocaleProfileProviderDefault(), new MyLocaleProfileProvider()],\n    },\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Runtime Overrides",
+      "description": "Temporarily customize the active profile with apply() and reset().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "overrides.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXLocaleService } from '@acorex/core/locale';\n\nconst localeService = inject(AXLocaleService);\n\n// Dot-path override\nlocaleService.apply('formats.date.short', 'YYYY/MM/DD');\n\n// Object merge override\nlocaleService.apply({\n  calendar: { clock: { format24Hour: true } },\n  formats: {\n    time: { short: 'HH:mm' },\n  },\n});\n\n// Restore profile from last setProfile() call\nlocaleService.reset();\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Integration with Date-Time Formatters",
+      "description": "How format pipe uses locale profile patterns.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "formatted-dates.html",
+            "language": "html",
+            "content": "<!-- Preset names map to activeProfile().formats.date -->\n<p>{{ today | format: 'date': 'short' | async }}</p>\n<p>{{ today | format: 'date': 'long' | async }}</p>\n\n<!-- Explicit pattern still respects locale calendar -->\n<p>{{ today | format: 'date': { format: 'yyyy/MM/dd' } | async }}</p>\n"
+          },
+          {
+            "fileName": "formatter-internals.ts",
+            "language": "typescript",
+            "content": "// AXDateFormatter reads active profile internally:\n// const formats = localeService.activeProfile().formats;\n// 'short' → formats.date.short (e.g. 'MM/DD/YY' for en-US, 'YY/MM/DD' for fa-IR)\n\n// After setProfile('fa-IR'), format pipe re-evaluates via AXSystemEvents\n// triggered by AXTranslationService when profileChanged$ fires.\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Integration with Translation",
+      "description": "Profile changes sync translation language.",
+      "content": {
+        "type": "text",
+        "data": "AXTranslationService subscribes to AXLocaleService.profileChanged$. When the profile code changes, it calls setActiveLang(profile.localeInfo.code) and emits AXSystemEvents.AXLanguageChanged.\n\nThis keeps translated strings and formatted dates/numbers aligned. Typical flow:\n\n1. User selects a locale in your switcher\n2. await localeService.setProfile('fa-IR')\n3. profileChanged$ fires → translation loads fa-IR strings\n4. format pipe and calendar components refresh automatically\n\nEnsure translation JSON files exist for profile codes you support (e.g. assets/i18n/fa-IR/...)."
+      }
+    },
+    {
+      "title": "RTL in Components",
+      "description": "Derive layout direction from i18nMeta.rtl.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "rtl-drawer.ts",
+            "language": "typescript",
+            "content": "import { computed, inject } from '@angular/core';\nimport { AXLocaleService } from '@acorex/core/locale';\n\n// Pattern used in AXDrawerItemDirective:\nconst localeService = inject(AXLocaleService);\nconst isRtl = computed(() => !!localeService.activeProfile()?.i18nMeta?.rtl);\n\n// Use isRtl() to flip drawer location, margins, or animation direction\n"
+          }
+        ]
+      }
+    }
+  ]
+}

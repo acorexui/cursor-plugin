@@ -1,0 +1,77 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Popup",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/popup--documentation"
+    }
+  ],
+  "description": "A dialog-like component that renders provided content in an overlay window. Opened via service with configurable size, header, backdrop and behavior.",
+  "imports": ["import { AXPopupComponent ,AXPopupService } from '@acorex/components/popup';"],
+  "status": "deprecated",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using popup.",
+      "content": {
+        "type": "api",
+        "data": "popup/usage"
+      }
+    },
+    {
+      "title": "Size",
+      "description": "Adjust popup size using the 'size' option when opening.",
+      "content": {
+        "type": "api",
+        "data": "popup/size"
+      }
+    },
+    {
+      "title": "Size In Screens",
+      "description": "Popup size table on different screens.",
+      "content": {
+        "type": "api",
+        "data": "popup/size-in-screens"
+      },
+      "height": "800px"
+    },
+    {
+      "title": "Show Header",
+      "description": "Create a custom header or hide it with the 'header: false' option.",
+      "content": {
+        "type": "api",
+        "data": "popup/header"
+      }
+    },
+    {
+      "title": "Using Popup Service",
+      "description": "Open a popup via AXPopupService; method overloads only.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "popup.service.methods.ts",
+            "content": "// AXPopupService methods and argument types\n// Argument types\ntype AXPopupContentType = TemplateRef<unknown> | ComponentType<unknown>;\ntype AXPopupSizeType = 'sm' | 'md' | 'lg' | 'full' | 'fit';\ninterface AXPopupConfig {\n  title?: string;\n  closeButton?: boolean;\n  header?: boolean;\n  maximizable?: boolean;\n  size?: AXPopupSizeType;\n  data?: unknown;\n  draggable?: boolean;\n  hasBackdrop?: boolean;\n  backdropClass?: string;\n  closeOnBackdropClick?: boolean;\n  viewContainerRef?: ViewContainerRef;\n  providers?: StaticProvider[];\n  panelClass?: string[];\n  direction?: 'rtl' | 'ltr';\n}\n\n// Method overloads\nopen(content: AXPopupContentType, title: string): AXComponentClosedPromise;\nopen(content: AXPopupContentType, config?: AXPopupConfig): AXComponentClosedPromise;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPopupComponent",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Sets focus on the .ax-popup element within the host element after a short delay.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Closes the dialog, emitting component reference, host element, and optional data.\n * @param {unknown} [data]\n */\nclose(data?: unknown): void"
+        }
+      ]
+    }
+  ]
+}

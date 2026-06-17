@@ -1,0 +1,327 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Rate Picker",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/ratepicker--documentation"
+    }
+  ],
+  "description": "An interactive rating component with customizable icon, max value, step precision and smooth transitions. Extends MXValueComponent, MXInteractiveComponent and MXBaseComponent.",
+  "imports": [
+    "import { AXRatePickerComponent } from '@acorex/components/rate-picker';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-rate-picker</code>",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/usage"
+      }
+    },
+    {
+      "title": "Custom Icon",
+      "description": "ax-rate-picker with custom icon.",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/custom-icon"
+      }
+    },
+    {
+      "title": "Max Values",
+      "description": "Different maximum rating values (3, 5, 10 stars).",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/max-values"
+      }
+    },
+    {
+      "title": "Step Precision",
+      "description": "Different step precision for rating values (0.5, 1.0, 0.25).",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/step-precision"
+      }
+    },
+    {
+      "title": "Transitions",
+      "description": "With and without transition animations.",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/transitions"
+      }
+    },
+    {
+      "title": "States",
+      "description": "Normal, readonly, and disabled states.",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/states"
+      }
+    },
+    {
+      "title": "Icons",
+      "description": "Different Font Awesome icons (heart, thumbs-up, smile, fire).",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/icons"
+      }
+    },
+    {
+      "title": "Sizes",
+      "description": "Different size variations (xs, sm, md, lg, xl).",
+      "content": {
+        "type": "api",
+        "data": "rate-picker/sizes"
+      },
+      "height": "350px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXRatePickerComponent",
+      "props": [
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, disables the component. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name identifier for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "dirty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component value has been modified. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "isRequired",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has required validation rules. Inherited from MXValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Current state of the component (clear, success, error). Inherited from MXValueComponent."
+        },
+        {
+          "name": "iconName",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Font Awesome icon class (without 'fa-').",
+          "default": "'fa-star'"
+        },
+        {
+          "name": "max",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Maximum rating value.",
+          "default": "5"
+        },
+        {
+          "name": "step",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Step precision for rating (rounding granularity).",
+          "default": "0.01"
+        },
+        {
+          "name": "hasTransition",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Enable transition animation on value change.",
+          "default": "true"
+        }
+      ],
+      "events": [
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<number>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when rating value changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n * @returns T - The native DOM element associated with this component.\n * @method getHostElement\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n * @method setOption\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n * @method focus\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n * @method blur\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n * @returns boolean - True if the component has focus.\n * @method hasFocus\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component (ControlValueAccessor method).\n * @param isDisabled - Whether the component should be disabled.\n * @method setDisabledState\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Commits a value with optional user interaction flag.\n * @param value - The value to commit.\n * @param u - Optional flag indicating if this is a user interaction.\n * @method commitValue\n */\ncommitValue(value: number, u?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets the component value.\n * @param e - Optional flag indicating if this is a user interaction.\n * @method reset\n */\nreset(e?: boolean): void"
+        },
+        {
+          "content": "/**\n * Resets validation errors.\n * @method resetErrors\n */\nresetErrors(): void"
+        },
+        {
+          "content": "/**\n * Marks the component as dirty.\n * @method markAsDirty\n */\nmarkAsDirty(): void"
+        }
+      ]
+    },
+    {
+      "title": "getPointerPercentage",
+      "props": [
+        {
+          "name": "getPointerPercentage",
+          "type": [
+            {
+              "name": "(event: MouseEvent | TouchEvent) => number"
+            }
+          ],
+          "description": "Calculates the horizontal position of a pointer event as a percentage of the target element's width."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Calculates the horizontal position of a pointer event (mouse or touch) as a percentage\n * of the target element's width.\n *\n * @param event - The mouse or touch event to get the pointer position from.\n * @returns The percentage of the event's position relative to the target element's width,\n *          or -1 if the event is invalid.\n *\n * @example\n * ```typescript\n * document.addEventListener('click', function(event) {\n *   const percentage = getPointerPercentage(event);\n *   console.log(`Click position: ${percentage.toFixed(2)}% of the element's width`);\n * });\n * ```\n */\nexport function getPointerPercentage(event: MouseEvent | TouchEvent): number"
+        }
+      ]
+    }
+  ]
+}

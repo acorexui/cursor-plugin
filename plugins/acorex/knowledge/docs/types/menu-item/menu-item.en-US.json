@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Command Menu Item",
+  "description": "Interface defining the structure of a command menu item used in command components and other menu-related components.",
+  "imports": ["import { CommandMenuItem } from '@acorex/components/command';"],
+  "types": [
+    {
+      "title": "CommandMenuItem",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the command menu item."
+        },
+        {
+          "name": "text",
+          "type": [{ "name": "string" }],
+          "description": "Display text for the command menu item."
+        },
+        {
+          "name": "icon",
+          "type": [{ "name": "string" }],
+          "description": "Optional icon class for the command menu item."
+        },
+        {
+          "name": "href",
+          "type": [{ "name": "string" }],
+          "description": "Optional URL or route for the command menu item."
+        },
+        {
+          "name": "children",
+          "type": [{ "name": "CommandMenuItem[]" }],
+          "description": "Optional array of child command menu items for hierarchical menus."
+        },
+        {
+          "name": "index",
+          "type": [{ "name": "number" }],
+          "description": "Optional index for ordering command menu items."
+        }
+      ]
+    }
+  ]
+}

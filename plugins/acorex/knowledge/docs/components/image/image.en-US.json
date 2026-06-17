@@ -1,0 +1,185 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Image",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/image--documentation"
+    }
+  ],
+  "description": "Image component blends efficiency and aesthetics, offering lazy and priority loading for optimized performance. It features an overlay mode for visual enhancement, coupled with disabled state management for user interaction control. Advanced error handling and an empty state feature ensure seamless display and user experience, even when images are not available.",
+  "imports": ["import { AXImageComponent } from '@acorex/components/image';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-image</code>",
+      "content": {
+        "type": "api",
+        "data": "image/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Overlay",
+      "description": "The <code>ax-overlay</code> property in the Image component provides a color overlay, enhancing image aesthetics and text readability, perfect for diverse design needs.",
+      "content": {
+        "type": "api",
+        "data": "image/overlay"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Loading and Placeholder",
+      "description": "You can utilize the Image component's <code>lazy</code> and <code>priority</code> loading for efficient image rendering with <code>ax-loading</code>, along with a placeholder feature that displays temporary visuals or text with <code>ax-placeholder</code> to ensuring a seamless user experience.",
+      "content": {
+        "type": "api",
+        "data": "image/loading-placeholder"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXImageComponent",
+      "description": "Main image component for displaying images with customizable settings and overlay options",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent.",
+          "default": "auto-generated"
+        },
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Width of the image in pixels",
+          "default": "null"
+        },
+        {
+          "name": "height",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Height of the image in pixels",
+          "default": "null"
+        },
+        {
+          "name": "overlayMode",
+          "type": [
+            {
+              "name": "'hover'"
+            },
+            {
+              "name": "'always'"
+            }
+          ],
+          "description": "Specifies when the image overlay should be shown",
+          "default": "'hover'"
+        },
+        {
+          "name": "src",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "The URL of the image to be displayed",
+          "default": "null"
+        },
+        {
+          "name": "alt",
+          "type": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "The alternative text for the image, for accessibility purposes",
+          "default": "null"
+        },
+        {
+          "name": "priority",
+          "type": [
+            {
+              "name": "'low'"
+            },
+            {
+              "name": "'auto'"
+            },
+            {
+              "name": "'high'"
+            }
+          ],
+          "description": "Priority for image loading",
+          "default": "'auto'"
+        },
+        {
+          "name": "lazy",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates if the image should be loaded lazily",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onLoad",
+          "type": [
+            {
+              "name": "AXHtmlEvent",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when the image has successfully loaded"
+        },
+        {
+          "name": "onError",
+          "type": [
+            {
+              "name": "AXHtmlEvent<ErrorEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when there is an error loading the image"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    }
+  ]
+}

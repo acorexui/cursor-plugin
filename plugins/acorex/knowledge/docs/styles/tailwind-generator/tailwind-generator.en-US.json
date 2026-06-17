@@ -1,0 +1,67 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Tailwind Generator",
+  "description": "If you are using Tailwind, you need to generate Tailwind classes for the colors you add. By default, we generate primary, secondary, success, warning, danger and surface colors. for example, you added a color to the theme called Accent 1 and needed it in Tailwind, you can generate classes with the functions provided to you. ",
+  "sections": [
+    {
+      "title": "Create palette",
+      "description": "Using this function, you can give it the variable name you added in the theme file as input and generate color range classes from 50 to 950. ",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createPalette } = require('@acorex/styles/generators/index.js');\nmodule.exports = {\n\ttheme: {\n\t\textend: {\n\t\t\tcolors: {\n\t\t\t\taccent1: createPalette('accent1'),\n\t\t\t}\n\t\t}\n\t}\n};"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Create surfaces",
+      "description": "To be able to create additional color classes you need to use the createSurface. This function generates seven surface colors. Also, if you want to have surfaces in all Tailwind properties, you can put them in colors. ",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createSurfaces } = require('@acorex/styles/generators/index.js');\n\nmodule.exports = {\n\ttheme: {\n\t\textend: {\n\t\t\tcolors: {\n\t\t\t\taccent1: createSurfaces('accent1'),\n\t\t\t},\n\t\t\tbackgroundColor: {\n\t\t\t\taccent1: createSurfaces('accent1'),\n\t\t\t}\n\t\t}\n\t}\n};"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Create on surfaces",
+      "description": "The on surface color is based on the surface color of the same name, so you can generate it with <code>createOnSurfaces</code> for both text and other colors.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createOnSurfaces } = require('@acorex/styles/generators/index.js');\n\nmodule.exports = {\n\ttheme: {\n\t\textend: {\n\t\t\tbackgroundColor: {\n\t\t\t\taccent1: createOnSurfaces('accent1'),\n\t\t\t},\n\t\t\ttextColor: {\n\t\t\t\taccent1: createOnSurfaces('accent1'),\n\t\t\t}\n\t\t}\n\t}\n};"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Create border surfaces",
+      "description": "The board color is only used for border colors, which you can generate with the <code>createBorderSurfaces</code> function.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "tailwind.config.js",
+            "language": "js",
+            "icon": "tailwindcss",
+            "content": "const { createBorderSurfaces } = require('@acorex/styles/generators/index.js');\n\nmodule.exports = {\n\ttheme: {\n\t\textend: {\n\t\t\tborderColor: {\n\t\t\t\taccent1: createBorderSurfaces('accent1'),\n\t\t\t}\n\t\t}\n\t}\n};"
+          }
+        ]
+      }
+    }
+  ]
+}

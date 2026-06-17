@@ -1,0 +1,49 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSchedulerSlotDropEvent",
+  "imports": ["import { AXSchedulerSlotDropEvent } from '@acorex/components/scheduler';"],
+  "description": "Event data for appointment drop operations in the scheduler.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Interface representing slot drop event with drag event data, slot information, and dropped appointment.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-scheduler-slot-drop-event.ts",
+            "content": "interface AXSchedulerSlotDropEvent { dropEvent: AXDropZoneDropEvent; appointment: AXSchedulerAppointment; slot: { startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView }; isSameSlotDrop: boolean; }"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerSlotDropEvent",
+      "props": [
+        {
+          "name": "dropEvent",
+          "type": [{ "name": "AXDropZoneDropEvent" }],
+          "description": "The drop event."
+        },
+        {
+          "name": "appointment",
+          "type": [{ "name": "AXSchedulerAppointment" }],
+          "description": "The dropped appointment."
+        },
+        {
+          "name": "slot",
+          "type": [{ "name": "{ startDate: AXDateTime; endDate: AXDateTime; view: AXSchedulerView }" }],
+          "description": "Data about the drop slot."
+        },
+        {
+          "name": "isSameSlotDrop",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the drop is in the same slot."
+        }
+      ]
+    }
+  ]
+}

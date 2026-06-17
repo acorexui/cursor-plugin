@@ -1,0 +1,252 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "WYSIWYG",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/wysiwyg--documentation"
+    }
+  ],
+  "description": "WYSIWYG component is a rich text editor that enables users to create and format content with a user-friendly interface. It supports text styling, image insertion, hyperlinks, and real-time formatting, giving a \"what you see is what you get\" experience for editing.",
+  "imports": [
+    "import { AXWysiwygModule } from '@acorex/components/wysiwyg';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-wysiwyg-container</code> for rich text editing.",
+      "content": {
+        "type": "api",
+        "data": "wysiwyg/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXWysiwygContainerComponent",
+      "props": [
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Visual look of the editor. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name attribute for the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "placeHolder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the editor."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Visual state of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "HTML value of the editor (two-way binding). Inherited from MXValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires each time the user press a key. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Fires each time the user change the text. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the editor value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Emitted when the value changes. Inherited from MXValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Removes focus from the component.\n *\n * @returns void - No return value. The component loses focus.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n *\n * @returns void - No return value. The component gains focus.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n * @returns void - No return value.\n */\nsetDisabledState(isDisabled: boolean): void"
+        }
+      ]
+    }
+  ]
+}

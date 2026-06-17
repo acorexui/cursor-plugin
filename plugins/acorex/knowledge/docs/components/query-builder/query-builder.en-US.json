@@ -1,0 +1,89 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Query Builder",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/querybuilder--documentation"
+    }
+  ],
+  "description": "A component that provides a visual interface for building structured filters using groups and rules, emitting normalized JSON query data.",
+  "imports": ["import { AXQueryBuilderComponent } from '@acorex/components/query-builder';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-query-builder</code>",
+      "height": "600px",
+      "content": {
+        "type": "api",
+        "data": "query-builder/usage"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXQueryBuilderComponent",
+      "description": "The main component for building queries.",
+      "props": [
+        {
+          "name": "columnData",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Available columns: array of { field, label, type, values? }.",
+          "default": "(required)"
+        },
+        {
+          "name": "queryData",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Two-way model of rules/groups with ids, condition, field, operator, value.",
+          "default": "(required)"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "description": "Emitted when query data changes.",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ]
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Updates the condition (AND/OR) of a target query group.\n *\n * @param e - Selected condition item.\n * @param i - Target group/rule item.\n * @returns void\n */\nconditionHandler(e: AXButtonGroupItemComponent, i: any): void"
+        },
+        {
+          "content": "/**\n * Updates a rule when a column is selected.\n *\n * @param e - Column selection change event.\n * @param i - Target rule item.\n * @returns void\n */\ncolumnDataHandler(e: AXValueChangedEvent<any>, i: any): void"
+        },
+        {
+          "content": "/**\n * Updates the selected operator for a rule.\n *\n * @param e - Operator selection event.\n * @param i - Target rule item.\n * @returns void\n */\noperatorDataHandler(e: any, i: any): void"
+        },
+        {
+          "content": "/**\n * Adds a new rule to the target group.\n *\n * @param i - Target group item.\n * @returns void\n */\naddRulesHandler(i: any): void"
+        },
+        {
+          "content": "/**\n * Adds a nested group with a default rule to the target group.\n *\n * @param i - Target group item.\n * @returns void\n */\naddGroupHandler(i: any): void"
+        },
+        {
+          "content": "/**\n * Removes a group from query data by id.\n *\n * @param i - Target group item.\n * @returns void\n */\nremoveGroupHandler(i: any): void"
+        },
+        {
+          "content": "/**\n * Removes a rule from query data by id.\n *\n * @param i - Target rule item.\n * @returns void\n */\nremoveRulesHandler(i: any): void"
+        },
+        {
+          "content": "/**\n * TrackBy function used for rendering rule/group lists.\n *\n * @param _ - Item index.\n * @param item - Current rule/group item.\n * @returns number - Stable item id.\n */\ntrackById(_: number, item: any): number"
+        }
+      ]
+    }
+  ]
+}

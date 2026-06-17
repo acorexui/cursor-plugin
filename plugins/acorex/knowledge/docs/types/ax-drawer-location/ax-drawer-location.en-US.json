@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drawer Location",
+  "description": "Type definition for the location where a drawer appears on the screen. Supports RTL-aware positioning.",
+  "imports": ["import { AXDrawerLocation } from '@acorex/cdk/drawer';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXDrawerLocation type definition",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "drawer-item.directive.ts",
+            "content": "export type AXDrawerLocation = 'start' | 'end' | 'top' | 'bottom';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDrawerLocation",
+      "props": [
+        {
+          "name": "AXDrawerLocation",
+          "type": [{ "name": "'start'" }, { "name": "'end'" }, { "name": "'top'" }, { "name": "'bottom'" }],
+          "description": "Union type that defines the location where a drawer appears. 'start' and 'end' are RTL-aware (start is left in LTR, right in RTL; end is right in LTR, left in RTL). 'top' and 'bottom' are always at the top and bottom respectively."
+        }
+      ]
+    }
+  ]
+}

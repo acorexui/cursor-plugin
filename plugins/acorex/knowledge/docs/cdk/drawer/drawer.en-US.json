@@ -1,0 +1,106 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drawer",
+  "description": "Drawer directive provides a simple way to integrate an off-canvas panel. To use it, apply axDrawerContainer to the parent and axDrawerItem to the drawer element. It supports properties like mode (overlay or push), transition (animation duration), backdropClass, drawerLocation (start, end, top, or bottom), backDrop (boolean for enabling/disabling the backdrop), and collapsed (boolean for initial state). The directive also includes three methods show(), hide(), and toggle() for programmatic control, making it easy to manage the drawer's behavior dynamically.",
+  "imports": ["import { AXDrawerDirectiveModule } from '@acorex/cdk/drawer';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>axDrawerContainer</code> and <code>axDrawerItem</code>",
+      "content": {
+        "type": "api",
+        "data": "cdk/drawer/usage"
+      }
+    },
+    {
+      "title": "Modes",
+      "description": "Drawer in overlay and push mode",
+      "content": {
+        "type": "api",
+        "data": "cdk/drawer/mode"
+      },
+      "height": "400px"
+    },
+    {
+      "title": "Location",
+      "description": "Drawer in start, end, top, or bottom location",
+      "content": {
+        "type": "api",
+        "data": "cdk/drawer/location"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDrawerItemDirective",
+      "props": [
+        {
+          "name": "location",
+          "type": [{ "name": "AXDrawerLocation", "link": "/en-US/docs/types/ax-drawer-location" }],
+          "default": "'start'",
+          "description": "The location where the drawer will appear: 'start' (left in LTR, right in RTL), 'end' (right in LTR, left in RTL), 'top', or 'bottom'."
+        },
+        {
+          "name": "collapsed",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Controls the collapsed state of the drawer. When true, the drawer is hidden; when false, it is visible."
+        },
+        {
+          "name": "backDrop",
+          "type": [{ "name": "boolean" }],
+          "default": "true",
+          "description": "Whether to show a backdrop behind the drawer when in overlay mode."
+        },
+        {
+          "name": "mode",
+          "type": [{ "name": "AXDrawerMode", "link": "/en-US/docs/types/ax-drawer-mode" }],
+          "default": "'overlay'",
+          "description": "The display mode of the drawer. 'overlay' positions the drawer over the content, while 'push' moves the content aside."
+        },
+        {
+          "name": "transition",
+          "type": [{ "name": "number" }],
+          "default": "100",
+          "description": "The duration of the transition animation in milliseconds."
+        },
+        {
+          "name": "closeOnBackdropClick",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Whether to close the drawer when the backdrop is clicked."
+        },
+        {
+          "name": "backdropClass",
+          "type": [{ "name": "string" }],
+          "default": "'ax-bg-black/45'",
+          "description": "CSS class applied to the backdrop element for styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "collapseStateChanged",
+          "type": [{ "name": "boolean" }],
+          "description": "Emitted when the collapsed state of the drawer changes."
+        },
+        {
+          "name": "onBackdropClick",
+          "type": [{ "name": "AXClickEvent", "link": "/en-US/docs/events/click-event" }],
+          "description": "Emitted when the backdrop is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Shows the drawer by animating it into view.\n *\n * @returns void - No return value. The drawer becomes visible.\n */\nshow(): void"
+        },
+        {
+          "content": "/**\n * Hides the drawer by animating it out of view.\n *\n * @returns void - No return value. The drawer becomes hidden.\n */\nhide(): void"
+        },
+        {
+          "content": "/**\n * Toggles the drawer state between visible and hidden.\n *\n * @returns void - No return value. The drawer state is toggled.\n */\ntoggle(): void"
+        }
+      ]
+    }
+  ]
+}

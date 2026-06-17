@@ -1,0 +1,236 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Cron Job",
+  "description": "The Cron Job component provides a user interface for building and editing cron expressions, allowing users to schedule recurring tasks with fine-grained control over seconds, minutes, hours, days, months, and years. It features a tabbed interface for each time unit and outputs a valid cron expression.",
+  "imports": [
+    "import { AXCronJobContainerComponent } from '@acorex/components/cron-job';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-cron-job-container</code> to build a cron expression.",
+      "content": {
+        "type": "api",
+        "data": "cron-job/usage"
+      },
+      "height": "650px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXCronJobContainerComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The cron expression value (two-way binding)."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, user cannot change the value of component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute of the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the input. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "The visual state of the component. Inherited from MXValueComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "EventEmitter<AXValueChangedEvent<string>>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the cron expression changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "EventEmitter<string>"
+            }
+          ],
+          "description": "Deprecated event. Use ngModelChange instead. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "EventEmitter<boolean>"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "EventEmitter<AXComponentState>",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the component state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "EventEmitter<boolean>"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "EventEmitter<AXFocusEvent>",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "EventEmitter<AXFocusEvent>",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "EventEmitter<AXHtmlEvent<KeyboardEvent>>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is pressed down. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "EventEmitter<AXHtmlEvent<KeyboardEvent>>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is released. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "EventEmitter<AXHtmlEvent<KeyboardEvent>>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is pressed. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "EventEmitter<AXValueChangedEvent<string>>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the text content changes. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "EventEmitter<AXOptionChangedEvent>",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Emitted when a component option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Focuses the component.\n *\n * @returns void - No return value.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n *\n * @returns void - No return value.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n * @returns void - No return value.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Adds a validation rule.\n *\n * @param rule - The validation rule to add.\n * @returns void - No return value.\n */\naddValidationRule(rule: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Removes a validation rule.\n *\n * @param ruleToRemove - The validation rule to remove.\n * @returns void - No return value.\n */\nremoveValidationRule(ruleToRemove: AXFormValidationRule): void"
+        },
+        {
+          "content": "/**\n * Validates the component.\n *\n * @returns Promise<AXValidationSummary> - Validation result.\n */\nvalidate(): Promise<AXValidationSummary>"
+        }
+      ]
+    }
+  ]
+}

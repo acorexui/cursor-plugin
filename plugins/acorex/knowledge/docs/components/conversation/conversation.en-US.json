@@ -1,0 +1,396 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Conversation",
+  "description": "Conversation component enables chat-like interactions, providing an input area for users to type messages and a view section to display the conversation. It's ideal for real-time messaging in chat-based applications.",
+  "imports": [
+    "import { AXChatModule } from '@acorex/components/chat';",
+    "import { AXRecordingService } from '@acorex/components/conversation';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using conversation.",
+      "content": {
+        "type": "api",
+        "data": "conversation/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Custom Component",
+      "description": "Using your custom component in conversation.",
+      "content": {
+        "type": "api",
+        "data": "conversation/custom"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "Infinite Scroll",
+      "description": "Load older messages when reaching the end of the list.",
+      "content": {
+        "type": "api",
+        "data": "conversation/infinite-scroll"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXConversationContainerComponent",
+      "props": [
+        {
+          "name": "chatData",
+          "type": [
+            {
+              "name": "AXConversationMessage[]",
+              "link": "/en-US/docs/types/ax-conversation-message"
+            }
+          ],
+          "description": "Array of chat messages to display in the conversation."
+        }
+      ],
+      "events": [],
+      "methods": []
+    },
+    {
+      "title": "AXConversationViewComponent",
+      "props": [
+        {
+          "name": "chatBoxHeight",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'30vh'",
+          "description": "Height of the chat box view."
+        },
+        {
+          "name": "isReplyArrowShown",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Controls whether the reply arrow is shown."
+        },
+        {
+          "name": "avatar",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Template reference for custom avatar display."
+        }
+      ],
+      "events": [
+        {
+          "name": "onScrollEnd",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the user scrolls to the end of the conversation view."
+        },
+        {
+          "name": "onActionMenuOpening",
+          "type": [
+            {
+              "name": "AXConversationMenuOpeningEvent",
+              "link": "/en-US/docs/events/conversation-menu-opening-event"
+            }
+          ],
+          "description": "Emitted when the action menu is about to open."
+        },
+        {
+          "name": "onAction",
+          "type": [
+            {
+              "name": "AXConversationActionEvent",
+              "link": "/en-US/docs/events/conversation-action-event"
+            }
+          ],
+          "description": "Emitted when an action is performed within the conversation view."
+        },
+        {
+          "name": "onReplyClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the reply button is clicked."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Updates the previous items in the conversation by prepending new items to the beginning of the chat list.\n *\n * @param item - Array of items to prepend to the conversation.\n */\nupdatePrevItems(item: any[]): void"
+        },
+        {
+          "content": "/**\n * Calls for an update by emitting the onScrollEnd event.\n */\ncallForUpdate(): void"
+        },
+        {
+          "content": "/**\n * Adds a new item to the end of the conversation chat list.\n *\n * @param item - The item to add to the conversation.\n */\naddNewItem(item: any): void"
+        }
+      ]
+    },
+    {
+      "title": "AXConversationMessageComponent",
+      "props": [
+        {
+          "name": "isReplyArrowShown",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Controls whether the reply arrow is shown."
+        },
+        {
+          "name": "chatMessage",
+          "type": [
+            {
+              "name": "AXConversationMessage",
+              "link": "/en-US/docs/types/ax-conversation-message"
+            }
+          ],
+          "description": "The conversation message data to display."
+        },
+        {
+          "name": "avatar",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "default": "null",
+          "description": "Template reference for custom avatar display."
+        }
+      ],
+      "events": [
+        {
+          "name": "onActionMenuOpening",
+          "type": [
+            {
+              "name": "AXConversationMenuOpeningEvent",
+              "link": "/en-US/docs/events/conversation-menu-opening-event"
+            }
+          ],
+          "description": "Emitted when the action menu is about to open."
+        },
+        {
+          "name": "onReplyClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the reply button is clicked."
+        }
+      ]
+    },
+    {
+      "title": "AXConversationInputComponent",
+      "props": [
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Appearance of the input box."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text for the input box."
+        },
+        {
+          "name": "maxLength",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Maximum length of input text."
+        },
+        {
+          "name": "hasAttachment",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Indicates if an attachment is present."
+        },
+        {
+          "name": "hasVoice",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Indicates if voice recording is enabled."
+        },
+        {
+          "name": "hasEmoji",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Indicates if emoji picker is enabled."
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates if the component is in a loading state."
+        },
+        {
+          "name": "acceptFileType",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'*'",
+          "description": "Acceptable file types for attachment."
+        }
+      ],
+      "events": [
+        {
+          "name": "onSendClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the send button is clicked."
+        },
+        {
+          "name": "onStartRecording",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when recording starts."
+        },
+        {
+          "name": "onCancelRecording",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when audio recording is canceled."
+        },
+        {
+          "name": "onEnterPressed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the Enter key is pressed in the input box."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "title": "AXRecordingService",
+      "props": [
+        {
+          "name": "audioBlobs",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ],
+          "default": "[]",
+          "description": "Array of audio blob data collected during recording."
+        },
+        {
+          "name": "mediaRecorder",
+          "type": [
+            {
+              "name": "MediaRecorder"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "The MediaRecorder instance used for audio recording."
+        },
+        {
+          "name": "streamBeingCaptured",
+          "type": [
+            {
+              "name": "any"
+            },
+            {
+              "name": "null"
+            }
+          ],
+          "description": "The media stream being captured for recording."
+        },
+        {
+          "name": "timer",
+          "type": [
+            {
+              "name": "WritableSignal<string>"
+            }
+          ],
+          "description": "Signal containing the formatted recording time string."
+        }
+      ],
+      "events": [],
+      "methods": [
+        {
+          "content": "/**\n * Starts audio recording using the browser's MediaRecorder API.\n *\n * @returns Promise<void> - Resolves when recording starts successfully, rejects if not supported.\n */\nstartRecording(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Ends the current recording session and returns the recorded audio blob.\n *\n * @returns Promise<Blob> - Resolves with the recorded audio blob.\n */\nendRecording(): Promise<Blob>"
+        },
+        {
+          "content": "/**\n * Calculates and updates the recording time, incrementing seconds, minutes, and hours as needed.\n */\ncalculateTime(): void"
+        },
+        {
+          "content": "/**\n * Resets the recording timer to zero and clears the timer interval.\n */\nresetTimer(): void"
+        }
+      ]
+    }
+  ]
+}

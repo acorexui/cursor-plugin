@@ -1,0 +1,94 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Selection",
+  "description": "The selection CDK provides directives for creating interactive selection functionality in lists and collections. It supports both single and multiple selection modes, with built-in state management and two-way data binding. The selection system consists of two main directives: axSelectionGroup for the container and axSelectionItem for individual selectable items.",
+  "imports": ["import { AXSelectionCdkModule } from '@acorex/cdk/selection';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A basic example of using the selection directives.",
+      "content": {
+        "type": "api",
+        "data": "cdk/selection/usage"
+      }
+    },
+    {
+      "title": "Multiple",
+      "description": "Enable multiple selection using the <code>multiple</code> property.",
+      "content": {
+        "type": "api",
+        "data": "cdk/selection/multiple"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionGroupDirective",
+      "props": [
+        {
+          "name": "multiple",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Enables multiple selection mode. When true, multiple items can be selected simultaneously."
+        },
+        {
+          "name": "disable",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Disables all selection functionality within the group."
+        },
+        {
+          "name": "selectedKeys",
+          "type": [
+            { "name": "AXSelectionGroupSelectedKeys", "link": "/en-US/docs/types/ax-selection-group-selected-keys" }
+          ],
+          "description": "Two-way binding for the currently selected keys. Returns a single key for single selection mode or an array of keys for multiple selection mode."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets the active item(s) by their index position in the selection group.\n *\n * @param restParams - Variable number of index parameters to activate\n * @returns void - No return value. Updates the active state of items at the specified indices.\n */\nactiveItemByIndex(...restParams: number[]): void"
+        }
+      ]
+    },
+    {
+      "title": "AXSelectionItemDirective",
+      "props": [
+        {
+          "name": "key",
+          "type": [{ "name": "string" }, { "name": "number" }],
+          "description": "Required unique identifier for the selection item. Used to track selection state and emit selection events."
+        },
+        {
+          "name": "disable",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Disables selection for this specific item."
+        },
+        {
+          "name": "isActive",
+          "type": [{ "name": "Signal<boolean>" }],
+          "description": "Signal indicating whether this item is currently selected. Can be used in templates for conditional styling."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [{ "name": "{ sender: AXSelectionItemDirective }" }],
+          "description": "Emitted when the selection item is clicked. Provides a reference to the clicked item directive."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Toggles the selection state of the item.\n *\n * @returns void - No return value. Updates the isActive signal state.\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Selects the item, setting its active state to true.\n *\n * @returns void - No return value. Sets the isActive signal to true.\n */\nselect(): void"
+        },
+        {
+          "content": "/**\n * Unselects the item, setting its active state to false.\n *\n * @returns void - No return value. Sets the isActive signal to false.\n */\nunselect(): void"
+        }
+      ]
+    }
+  ]
+}

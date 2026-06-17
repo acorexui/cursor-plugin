@@ -1,0 +1,104 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXROptionsType",
+  "description": "Type alias for RRule options interface that provides comprehensive recurrence rule configuration options aligned with the rrule.js library",
+  "imports": ["import { AXROptionsType } from '@acorex/components/rrule';"],
+  "types": [
+    {
+      "title": "AXROptionsType",
+      "description": "Options used by the RRule component (aligned with rrule.Options).",
+      "props": [
+        { "name": "freq", "type": [{ "name": "number" }], "description": "Frequency (see rrule frequency enum)." },
+        {
+          "name": "dtstart",
+          "type": [{ "name": "Date" }, { "name": "null" }],
+          "description": "Start date of the recurrence.",
+          "default": "null"
+        },
+        {
+          "name": "interval",
+          "type": [{ "name": "number" }],
+          "description": "Step between occurrences.",
+          "default": "1"
+        },
+        {
+          "name": "wkst",
+          "type": [{ "name": "number" }, { "name": "null" }],
+          "description": "Week start day index.",
+          "default": "null"
+        },
+        {
+          "name": "count",
+          "type": [{ "name": "number" }],
+          "description": "Total number of occurrences (when set).",
+          "default": "5"
+        },
+        {
+          "name": "until",
+          "type": [{ "name": "Date" }, { "name": "null" }],
+          "description": "Limit date for the recurrence.",
+          "default": "null"
+        },
+        {
+          "name": "tzid",
+          "type": [{ "name": "string" }, { "name": "null" }],
+          "description": "Time zone identifier.",
+          "default": "null"
+        },
+        { "name": "bysetpos", "type": [{ "name": "number[]" }], "description": "BYSETPOS values.", "default": "[]" },
+        { "name": "bymonth", "type": [{ "name": "number[]" }], "description": "BYMONTH values.", "default": "[]" },
+        {
+          "name": "bymonthday",
+          "type": [{ "name": "number[]" }],
+          "description": "BYMONTHDAY values.",
+          "default": "[]"
+        },
+        { "name": "byyearday", "type": [{ "name": "number[]" }], "description": "BYYEARDAY values.", "default": "[]" },
+        { "name": "byweekno", "type": [{ "name": "number[]" }], "description": "BYWEEKNO values.", "default": "[]" },
+        {
+          "name": "byweekday",
+          "type": [{ "name": "number[]" }],
+          "description": "BYWEEKDAY values (numeric form).",
+          "default": "[]"
+        },
+        { "name": "byhour", "type": [{ "name": "number[]" }], "description": "BYHOUR values.", "default": "[]" },
+        { "name": "byminute", "type": [{ "name": "number[]" }], "description": "BYMINUTE values.", "default": "[]" },
+        { "name": "bysecond", "type": [{ "name": "number[]" }], "description": "BYSECOND values.", "default": "[]" },
+        {
+          "name": "byeaster",
+          "type": [{ "name": "number" }, { "name": "null" }],
+          "description": "Offset from Easter.",
+          "default": "null"
+        },
+        {
+          "name": "bynmonthday",
+          "type": [{ "name": "number[]" }],
+          "description": "Negative BYMONTHDAY values.",
+          "default": "[]"
+        },
+        {
+          "name": "bynweekday",
+          "type": [{ "name": "number[][]" }],
+          "description": "Pairs of [weekday, nth] for negative weekday rules.",
+          "default": "[]"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical type definition from source code",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "rrule-options.type.ts",
+            "language": "ts",
+            "content": "export type AXROptionsType = {\n  freq?: number;\n  dtstart?: Date | null;\n  interval?: number;\n  wkst?: number | null;\n  count?: number;\n  until?: Date | null;\n  tzid?: string | null;\n  bysetpos?: number[];\n  bymonth?: number[];\n  bymonthday?: number[];\n  byyearday?: number[];\n  byweekno?: number[];\n  byweekday?: number[];\n  byhour?: number[];\n  byminute?: number[];\n  bysecond?: number[];\n  byeaster?: number | null;\n  bynmonthday?: number[];\n  bynweekday?: number[][];\n};"
+          }
+        ]
+      }
+    }
+  ]
+}

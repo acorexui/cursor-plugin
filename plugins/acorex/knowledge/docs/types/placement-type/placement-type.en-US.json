@@ -1,0 +1,39 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXPlacementType } from '@acorex/cdk/common';"],
+  "title": "AXPlacementType",
+  "description": "A flexible type that accepts various placement configurations including simple strings, connected positions, or arrays of either.",
+  "types": [
+    {
+      "title": "AXPlacementType",
+      "props": [
+        {
+          "name": "AXPlacementType",
+          "type": [
+            { "name": "AXConnectedPosition", "link": "/en-US/docs/types/connected-position" },
+            { "name": "AXConnectedPosition[]", "link": "/en-US/docs/types/connected-position" },
+            { "name": "AXPlacement", "link": "/en-US/docs/types/placement" },
+            { "name": "AXPlacement[]", "link": "/en-US/docs/types/placement" }
+          ],
+          "description": "Union type that accepts a single connected position, array of connected positions, single placement string, or array of placement strings."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "TypeScript definition of the placement type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "placement.ts",
+            "content": "export type AXPlacementType = AXConnectedPosition | AXConnectedPosition[] | AXPlacement | AXPlacement[];"
+          }
+        ]
+      }
+    }
+  ]
+}

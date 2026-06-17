@@ -1,0 +1,5749 @@
+{
+  "generatedAt": "2026-06-17T10:29:24.368Z",
+  "source": "packages/styles/themes/default.css",
+  "tailwindVersion": 4,
+  "setup": {
+    "cssImport": "@import '@acorex/styles/themes/default.css';",
+    "tailwindV3Preset": "presets: [require('@acorex/styles/tailwind-base.js')]",
+    "darkMode": "Add class `ax-dark` on <html> (custom variant: @custom-variant dark (&:where(.ax-dark, .ax-dark *)))",
+    "docs": "knowledge/docs/get-started/tailwind-compatibility/tailwind-compatibility.en-US.json"
+  },
+  "sizes": [
+    "ax-xs",
+    "ax-sm",
+    "ax-md",
+    "ax-lg",
+    "ax-xl"
+  ],
+  "colorContexts": [
+    "ax-default",
+    "ax-primary",
+    "ax-secondary",
+    "ax-success",
+    "ax-warning",
+    "ax-danger",
+    "ax-surface",
+    "ax-accent",
+    "ax-accent1",
+    "ax-accent2",
+    "ax-accent3",
+    "ax-accent4",
+    "ax-accent5",
+    "ax-accent6"
+  ],
+  "looks": [
+    "ax-solid",
+    "ax-solid-interactive",
+    "ax-outline",
+    "ax-outline-interactive",
+    "ax-twotone",
+    "ax-twotone-interactive",
+    "ax-flat",
+    "ax-fill",
+    "ax-blank",
+    "ax-blank-interactive"
+  ],
+  "states": [
+    "ax-state-disabled",
+    "ax-state-readonly",
+    "ax-state-selected",
+    "ax-state-loading"
+  ],
+  "typography": [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "heading",
+    "heading-start",
+    "heading-center",
+    "heading-end",
+    "subtitle",
+    "links"
+  ],
+  "layout": [
+    "tabs-fit",
+    "max-w-8xl",
+    "card",
+    "surface",
+    "lightest-surface",
+    "lighter-surface",
+    "light-surface",
+    "dark-surface",
+    "darker-surface",
+    "darkest-surface"
+  ],
+  "systemVariables": {
+    "system": {
+      "--ax-sys-theme-isDark": "0",
+      "--ax-sys-icon-size": "100%",
+      "--ax-sys-icon-weight": "400",
+      "--ax-sys-size-base": "2.5rem",
+      "--ax-sys-icon-width": "inherit",
+      "--ax-sys-icon-height": "inherit",
+      "--ax-sys-body-font-size": "1rem",
+      "--ax-sys-border-radius": "0.5rem",
+      "--ax-sys-transition-duration": "150ms",
+      "--ax-sys-transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "--ax-sys-scroller-size": "5px",
+      "--ax-sys-scroller-size-radius": "3px",
+      "--ax-sys-scroller-track-color": "rgba(var(--ax-sys-color-light-surface))",
+      "--ax-sys-scroller-thumb-color": "rgba(var(--ax-sys-color-darkest-surface))",
+      "--ax-sys-color-bg-default": "var(--ax-sys-color-lightest-surface)",
+      "--ax-sys-color-text-default": "var(--ax-sys-color-on-lightest-surface)",
+      "--ax-sys-color-border-default": "var(--ax-sys-color-border-lightest-surface)"
+    },
+    "surfaces": {
+      "--ax-sys-color-lightest-surface": "255, 255, 255",
+      "--ax-sys-color-on-lightest-surface": "10, 10, 10",
+      "--ax-sys-color-border-lightest-surface": "233, 233, 233",
+      "--ax-sys-color-lighter-surface": "250, 250, 250",
+      "--ax-sys-color-on-lighter-surface": "10, 10, 10",
+      "--ax-sys-color-border-lighter-surface": "228, 228, 228",
+      "--ax-sys-color-light-surface": "245, 245, 245",
+      "--ax-sys-color-on-light-surface": "10, 10, 10",
+      "--ax-sys-color-border-light-surface": "223, 223, 223",
+      "--ax-sys-color-surface": "240, 240, 241",
+      "--ax-sys-color-on-surface": "10, 10, 10",
+      "--ax-sys-color-border-surface": "218, 218, 218",
+      "--ax-sys-color-dark-surface": "235, 235, 236",
+      "--ax-sys-color-on-dark-surface": "10, 10, 10",
+      "--ax-sys-color-border-dark-surface": "213, 213, 213",
+      "--ax-sys-color-darker-surface": "230, 230, 231",
+      "--ax-sys-color-on-darker-surface": "10, 10, 10",
+      "--ax-sys-color-border-darker-surface": "208, 208, 208",
+      "--ax-sys-color-darkest-surface": "224, 224, 225",
+      "--ax-sys-color-on-darkest-surface": "10, 10, 10",
+      "--ax-sys-color-border-darkest-surface": "202, 202, 202"
+    },
+    "palettes": {
+      "primary": {
+        "--ax-sys-color-primary-50": "231, 246, 255",
+        "--ax-sys-color-primary-100": "211, 234, 255",
+        "--ax-sys-color-primary-200": "183, 217, 255",
+        "--ax-sys-color-primary-300": "138, 189, 255",
+        "--ax-sys-color-primary-400": "77, 151, 255",
+        "--ax-sys-color-primary-500": "43, 127, 255",
+        "--ax-sys-color-primary-600": "20, 108, 235",
+        "--ax-sys-color-primary-700": "0, 86, 210",
+        "--ax-sys-color-primary-800": "12, 70, 182",
+        "--ax-sys-color-primary-900": "29, 64, 142",
+        "--ax-sys-color-primary-950": "14, 34, 84"
+      },
+      "secondary": {
+        "--ax-sys-color-secondary-50": "234, 243, 255",
+        "--ax-sys-color-secondary-100": "219, 229, 247",
+        "--ax-sys-color-secondary-200": "199, 208, 226",
+        "--ax-sys-color-secondary-300": "168, 177, 194",
+        "--ax-sys-color-secondary-400": "130, 138, 154",
+        "--ax-sys-color-secondary-500": "106, 114, 130",
+        "--ax-sys-color-secondary-600": "93, 101, 117",
+        "--ax-sys-color-secondary-700": "78, 86, 101",
+        "--ax-sys-color-secondary-800": "66, 73, 87",
+        "--ax-sys-color-secondary-900": "59, 64, 74",
+        "--ax-sys-color-secondary-950": "35, 38, 45"
+      },
+      "success": {
+        "--ax-sys-color-success-50": "207, 255, 232",
+        "--ax-sys-color-success-100": "162, 255, 211",
+        "--ax-sys-color-success-200": "111, 255, 188",
+        "--ax-sys-color-success-300": "86, 233, 167",
+        "--ax-sys-color-success-400": "48, 206, 141",
+        "--ax-sys-color-success-500": "1, 188, 125",
+        "--ax-sys-color-success-600": "0, 165, 104",
+        "--ax-sys-color-success-700": "0, 136, 81",
+        "--ax-sys-color-success-800": "22, 110, 67",
+        "--ax-sys-color-success-900": "43, 89, 61",
+        "--ax-sys-color-success-950": "23, 41, 28"
+      },
+      "warning": {
+        "--ax-sys-color-warning-50": "255, 244, 220",
+        "--ax-sys-color-warning-100": "255, 234, 201",
+        "--ax-sys-color-warning-200": "255, 221, 174",
+        "--ax-sys-color-warning-300": "255, 198, 128",
+        "--ax-sys-color-warning-400": "255, 168, 40",
+        "--ax-sys-color-warning-500": "253, 154, 1",
+        "--ax-sys-color-warning-600": "224, 127, 0",
+        "--ax-sys-color-warning-700": "181, 100, 0",
+        "--ax-sys-color-warning-800": "144, 81, 20",
+        "--ax-sys-color-warning-900": "110, 71, 40",
+        "--ax-sys-color-warning-950": "44, 28, 18"
+      },
+      "danger": {
+        "--ax-sys-color-danger-50": "255, 236, 237",
+        "--ax-sys-color-danger-100": "255, 220, 221",
+        "--ax-sys-color-danger-200": "255, 196, 198",
+        "--ax-sys-color-danger-300": "255, 155, 162",
+        "--ax-sys-color-danger-400": "255, 89, 113",
+        "--ax-sys-color-danger-500": "255, 32, 86",
+        "--ax-sys-color-danger-600": "232, 0, 68",
+        "--ax-sys-color-danger-700": "195, 0, 53",
+        "--ax-sys-color-danger-800": "159, 23, 47",
+        "--ax-sys-color-danger-900": "122, 44, 49",
+        "--ax-sys-color-danger-950": "61, 27, 27"
+      },
+      "surface": {
+        "--ax-sys-color-surface-50": "250, 250, 250",
+        "--ax-sys-color-surface-100": "244, 244, 244",
+        "--ax-sys-color-surface-200": "235, 235, 235",
+        "--ax-sys-color-surface-300": "222, 222, 222",
+        "--ax-sys-color-surface-400": "205, 205, 205",
+        "--ax-sys-color-surface-500": "194, 194, 194",
+        "--ax-sys-color-surface-600": "165, 165, 165",
+        "--ax-sys-color-surface-700": "131, 131, 131",
+        "--ax-sys-color-surface-800": "104, 104, 104",
+        "--ax-sys-color-surface-900": "83, 83, 83",
+        "--ax-sys-color-surface-950": "31, 31, 31"
+      },
+      "accent": {
+        "--ax-sys-color-accent-50": "208, 255, 255",
+        "--ax-sys-color-accent-100": "181, 251, 255",
+        "--ax-sys-color-accent-200": "135, 243, 255",
+        "--ax-sys-color-accent-300": "85, 225, 255",
+        "--ax-sys-color-accent-400": "48, 199, 229",
+        "--ax-sys-color-accent-500": "6, 182, 212",
+        "--ax-sys-color-accent-600": "0, 158, 188",
+        "--ax-sys-color-accent-700": "0, 129, 156",
+        "--ax-sys-color-accent-800": "22, 105, 126",
+        "--ax-sys-color-accent-900": "43, 85, 98",
+        "--ax-sys-color-accent-950": "22, 38, 44"
+      },
+      "accent1": {
+        "--ax-sys-color-accent1-50": "255, 236, 255",
+        "--ax-sys-color-accent1-100": "255, 218, 255",
+        "--ax-sys-color-accent1-200": "255, 192, 255",
+        "--ax-sys-color-accent1-300": "253, 149, 255",
+        "--ax-sys-color-accent1-400": "238, 92, 255",
+        "--ax-sys-color-accent1-500": "217, 70, 239",
+        "--ax-sys-color-accent1-600": "195, 42, 216",
+        "--ax-sys-color-accent1-700": "167, 0, 189",
+        "--ax-sys-color-accent1-800": "138, 24, 155",
+        "--ax-sys-color-accent1-900": "107, 45, 118",
+        "--ax-sys-color-accent1-950": "52, 26, 56"
+      },
+      "accent2": {
+        "--ax-sys-color-accent2-50": "255, 240, 226",
+        "--ax-sys-color-accent2-100": "255, 228, 207",
+        "--ax-sys-color-accent2-200": "255, 209, 179",
+        "--ax-sys-color-accent2-300": "255, 178, 132",
+        "--ax-sys-color-accent2-400": "255, 134, 54",
+        "--ax-sys-color-accent2-500": "249, 115, 22",
+        "--ax-sys-color-accent2-600": "223, 91, 0",
+        "--ax-sys-color-accent2-700": "187, 68, 0",
+        "--ax-sys-color-accent2-800": "151, 58, 18",
+        "--ax-sys-color-accent2-900": "115, 57, 37",
+        "--ax-sys-color-accent2-950": "52, 26, 19"
+      },
+      "accent3": {
+        "--ax-sys-color-accent3-50": "198, 255, 251",
+        "--ax-sys-color-accent3-100": "143, 255, 244",
+        "--ax-sys-color-accent3-200": "114, 250, 231",
+        "--ax-sys-color-accent3-300": "90, 229, 209",
+        "--ax-sys-color-accent3-400": "54, 201, 183",
+        "--ax-sys-color-accent3-500": "20, 184, 166",
+        "--ax-sys-color-accent3-600": "0, 161, 144",
+        "--ax-sys-color-accent3-700": "0, 132, 117",
+        "--ax-sys-color-accent3-800": "23, 108, 95",
+        "--ax-sys-color-accent3-900": "43, 87, 79",
+        "--ax-sys-color-accent3-950": "23, 40, 36"
+      },
+      "accent4": {
+        "--ax-sys-color-accent4-50": "237, 242, 255",
+        "--ax-sys-color-accent4-100": "220, 228, 255",
+        "--ax-sys-color-accent4-200": "196, 207, 255",
+        "--ax-sys-color-accent4-300": "161, 173, 255",
+        "--ax-sys-color-accent4-400": "119, 126, 255",
+        "--ax-sys-color-accent4-500": "99, 102, 241",
+        "--ax-sys-color-accent4-600": "86, 85, 223",
+        "--ax-sys-color-accent4-700": "71, 64, 201",
+        "--ax-sys-color-accent4-800": "59, 52, 175",
+        "--ax-sys-color-accent4-900": "52, 53, 137",
+        "--ax-sys-color-accent4-950": "31, 35, 83"
+      },
+      "accent5": {
+        "--ax-sys-color-accent5-50": "255, 235, 248",
+        "--ax-sys-color-accent5-100": "255, 219, 237",
+        "--ax-sys-color-accent5-200": "255, 194, 222",
+        "--ax-sys-color-accent5-300": "255, 152, 200",
+        "--ax-sys-color-accent5-400": "255, 94, 172",
+        "--ax-sys-color-accent5-500": "236, 72, 153",
+        "--ax-sys-color-accent5-600": "213, 48, 134",
+        "--ax-sys-color-accent5-700": "185, 0, 111",
+        "--ax-sys-color-accent5-800": "156, 23, 92",
+        "--ax-sys-color-accent5-900": "119, 43, 77",
+        "--ax-sys-color-accent5-950": "59, 26, 39"
+      },
+      "accent6": {
+        "--ax-sys-color-accent6-50": "250, 241, 236",
+        "--ax-sys-color-accent6-100": "235, 227, 221",
+        "--ax-sys-color-accent6-200": "214, 206, 201",
+        "--ax-sys-color-accent6-300": "183, 175, 170",
+        "--ax-sys-color-accent6-400": "144, 137, 132",
+        "--ax-sys-color-accent6-500": "120, 113, 108",
+        "--ax-sys-color-accent6-600": "107, 100, 95",
+        "--ax-sys-color-accent6-700": "91, 84, 80",
+        "--ax-sys-color-accent6-800": "78, 72, 68",
+        "--ax-sys-color-accent6-900": "67, 63, 60",
+        "--ax-sys-color-accent6-950": "41, 38, 36"
+      }
+    },
+    "coloredSurfaces": {
+      "--ax-sys-color-primary-lightest-surface": "211, 234, 255",
+      "--ax-sys-color-on-primary-lightest-surface": "29, 48, 64",
+      "--ax-sys-color-border-primary-lightest-surface": "175, 217, 255",
+      "--ax-sys-color-primary-lighter-surface": "183, 217, 255",
+      "--ax-sys-color-on-primary-lighter-surface": "18, 47, 77",
+      "--ax-sys-color-border-primary-lighter-surface": "147, 198, 255",
+      "--ax-sys-color-primary-light-surface": "138, 189, 255",
+      "--ax-sys-color-on-primary-light-surface": "0, 44, 98",
+      "--ax-sys-color-border-primary-light-surface": "102, 169, 255",
+      "--ax-sys-color-primary-surface": "43, 127, 255",
+      "--ax-sys-color-on-primary-surface": "244, 254, 255",
+      "--ax-sys-color-border-primary-surface": "7, 105, 255",
+      "--ax-sys-color-primary-dark-surface": "20, 108, 235",
+      "--ax-sys-color-on-primary-dark-surface": "244, 254, 255",
+      "--ax-sys-color-border-primary-dark-surface": "17, 93, 202",
+      "--ax-sys-color-primary-darker-surface": "0, 86, 210",
+      "--ax-sys-color-on-primary-darker-surface": "245, 254, 255",
+      "--ax-sys-color-border-primary-darker-surface": "0, 71, 174",
+      "--ax-sys-color-primary-darkest-surface": "12, 70, 182",
+      "--ax-sys-color-on-primary-darkest-surface": "245, 254, 255",
+      "--ax-sys-color-border-primary-darkest-surface": "10, 57, 149",
+      "--ax-sys-color-secondary-lightest-surface": "219, 229, 247",
+      "--ax-sys-color-on-secondary-lightest-surface": "39, 46, 60",
+      "--ax-sys-color-border-secondary-lightest-surface": "190, 208, 241",
+      "--ax-sys-color-secondary-lighter-surface": "199, 208, 226",
+      "--ax-sys-color-on-secondary-lighter-surface": "39, 46, 60",
+      "--ax-sys-color-border-secondary-lighter-surface": "175, 188, 214",
+      "--ax-sys-color-secondary-light-surface": "168, 177, 194",
+      "--ax-sys-color-on-secondary-light-surface": "39, 46, 59",
+      "--ax-sys-color-border-secondary-light-surface": "147, 158, 179",
+      "--ax-sys-color-secondary-surface": "106, 114, 130",
+      "--ax-sys-color-on-secondary-surface": "246, 254, 255",
+      "--ax-sys-color-border-secondary-surface": "90, 97, 110",
+      "--ax-sys-color-secondary-dark-surface": "93, 101, 117",
+      "--ax-sys-color-on-secondary-dark-surface": "246, 254, 255",
+      "--ax-sys-color-border-secondary-dark-surface": "77, 84, 97",
+      "--ax-sys-color-secondary-darker-surface": "78, 86, 101",
+      "--ax-sys-color-on-secondary-darker-surface": "245, 254, 255",
+      "--ax-sys-color-border-secondary-darker-surface": "62, 69, 81",
+      "--ax-sys-color-secondary-darkest-surface": "66, 73, 87",
+      "--ax-sys-color-on-secondary-darkest-surface": "246, 254, 255",
+      "--ax-sys-color-border-secondary-darkest-surface": "51, 56, 67",
+      "--ax-sys-color-success-lightest-surface": "162, 255, 211",
+      "--ax-sys-color-on-success-lightest-surface": "0, 59, 32",
+      "--ax-sys-color-border-success-lightest-surface": "126, 255, 194",
+      "--ax-sys-color-success-lighter-surface": "111, 255, 188",
+      "--ax-sys-color-on-success-lighter-surface": "0, 59, 29",
+      "--ax-sys-color-border-success-lighter-surface": "75, 255, 171",
+      "--ax-sys-color-success-light-surface": "86, 233, 167",
+      "--ax-sys-color-on-success-light-surface": "0, 59, 29",
+      "--ax-sys-color-border-success-light-surface": "54, 229, 151",
+      "--ax-sys-color-success-surface": "1, 188, 125",
+      "--ax-sys-color-on-success-surface": "231, 255, 244",
+      "--ax-sys-color-border-success-surface": "1, 152, 101",
+      "--ax-sys-color-success-dark-surface": "0, 165, 104",
+      "--ax-sys-color-on-success-dark-surface": "231, 255, 243",
+      "--ax-sys-color-border-success-dark-surface": "0, 129, 81",
+      "--ax-sys-color-success-darker-surface": "0, 136, 81",
+      "--ax-sys-color-on-success-darker-surface": "232, 255, 242",
+      "--ax-sys-color-border-success-darker-surface": "0, 100, 60",
+      "--ax-sys-color-success-darkest-surface": "22, 110, 67",
+      "--ax-sys-color-on-success-darkest-surface": "232, 255, 242",
+      "--ax-sys-color-border-success-darkest-surface": "16, 80, 49",
+      "--ax-sys-color-warning-lightest-surface": "255, 234, 201",
+      "--ax-sys-color-on-warning-lightest-surface": "59, 43, 14",
+      "--ax-sys-color-border-warning-lightest-surface": "255, 220, 165",
+      "--ax-sys-color-warning-lighter-surface": "255, 221, 174",
+      "--ax-sys-color-on-warning-lighter-surface": "66, 39, 0",
+      "--ax-sys-color-border-warning-lighter-surface": "255, 206, 138",
+      "--ax-sys-color-warning-light-surface": "255, 198, 128",
+      "--ax-sys-color-on-warning-light-surface": "71, 36, 0",
+      "--ax-sys-color-border-warning-light-surface": "255, 182, 92",
+      "--ax-sys-color-warning-surface": "253, 154, 1",
+      "--ax-sys-color-on-warning-surface": "255, 250, 231",
+      "--ax-sys-color-border-warning-surface": "217, 132, 1",
+      "--ax-sys-color-warning-dark-surface": "224, 127, 0",
+      "--ax-sys-color-on-warning-dark-surface": "255, 249, 233",
+      "--ax-sys-color-border-warning-dark-surface": "188, 107, 0",
+      "--ax-sys-color-warning-darker-surface": "181, 100, 0",
+      "--ax-sys-color-on-warning-darker-surface": "255, 249, 234",
+      "--ax-sys-color-border-warning-darker-surface": "145, 80, 0",
+      "--ax-sys-color-warning-darkest-surface": "144, 81, 20",
+      "--ax-sys-color-on-warning-darkest-surface": "255, 249, 234",
+      "--ax-sys-color-border-warning-darkest-surface": "113, 63, 16",
+      "--ax-sys-color-danger-lightest-surface": "255, 220, 221",
+      "--ax-sys-color-on-danger-lightest-surface": "63, 38, 39",
+      "--ax-sys-color-border-danger-lightest-surface": "255, 184, 186",
+      "--ax-sys-color-danger-lighter-surface": "255, 196, 198",
+      "--ax-sys-color-on-danger-lighter-surface": "74, 30, 34",
+      "--ax-sys-color-border-danger-lighter-surface": "255, 160, 164",
+      "--ax-sys-color-danger-light-surface": "255, 155, 162",
+      "--ax-sys-color-on-danger-light-surface": "91, 0, 25",
+      "--ax-sys-color-border-danger-light-surface": "255, 119, 129",
+      "--ax-sys-color-danger-surface": "255, 32, 86",
+      "--ax-sys-color-on-danger-surface": "255, 247, 248",
+      "--ax-sys-color-border-danger-surface": "251, 0, 61",
+      "--ax-sys-color-danger-dark-surface": "232, 0, 68",
+      "--ax-sys-color-on-danger-dark-surface": "255, 247, 247",
+      "--ax-sys-color-border-danger-dark-surface": "196, 0, 58",
+      "--ax-sys-color-danger-darker-surface": "195, 0, 53",
+      "--ax-sys-color-on-danger-darker-surface": "255, 247, 247",
+      "--ax-sys-color-border-danger-darker-surface": "159, 0, 43",
+      "--ax-sys-color-danger-darkest-surface": "159, 23, 47",
+      "--ax-sys-color-on-danger-darkest-surface": "255, 247, 247",
+      "--ax-sys-color-border-danger-darkest-surface": "128, 18, 38",
+      "--ax-sys-color-accent-lightest-surface": "181, 251, 255",
+      "--ax-sys-color-on-accent-lightest-surface": "0, 55, 60",
+      "--ax-sys-color-border-accent-lightest-surface": "145, 249, 255",
+      "--ax-sys-color-accent-lighter-surface": "135, 243, 255",
+      "--ax-sys-color-on-accent-lighter-surface": "0, 55, 62",
+      "--ax-sys-color-border-accent-lighter-surface": "99, 239, 255",
+      "--ax-sys-color-accent-light-surface": "85, 225, 255",
+      "--ax-sys-color-on-accent-light-surface": "0, 54, 68",
+      "--ax-sys-color-border-accent-light-surface": "49, 219, 255",
+      "--ax-sys-color-accent-surface": "6, 182, 212",
+      "--ax-sys-color-on-accent-surface": "0, 54, 69",
+      "--ax-sys-color-border-accent-surface": "5, 152, 177",
+      "--ax-sys-color-accent-dark-surface": "0, 158, 188",
+      "--ax-sys-color-on-accent-dark-surface": "228, 255, 255",
+      "--ax-sys-color-border-accent-dark-surface": "0, 128, 152",
+      "--ax-sys-color-accent-darker-surface": "0, 129, 156",
+      "--ax-sys-color-on-accent-darker-surface": "229, 255, 255",
+      "--ax-sys-color-border-accent-darker-surface": "0, 99, 120",
+      "--ax-sys-color-accent-darkest-surface": "22, 105, 126",
+      "--ax-sys-color-on-accent-darkest-surface": "229, 255, 255",
+      "--ax-sys-color-border-accent-darkest-surface": "17, 80, 96",
+      "--ax-sys-color-accent1-lightest-surface": "255, 218, 255",
+      "--ax-sys-color-on-accent1-lightest-surface": "62, 34, 63",
+      "--ax-sys-color-border-accent1-lightest-surface": "255, 182, 255",
+      "--ax-sys-color-accent1-lighter-surface": "255, 192, 255",
+      "--ax-sys-color-on-accent1-lighter-surface": "72, 19, 74",
+      "--ax-sys-color-border-accent1-lighter-surface": "255, 156, 255",
+      "--ax-sys-color-accent1-light-surface": "253, 149, 255",
+      "--ax-sys-color-on-accent1-light-surface": "82, 0, 87",
+      "--ax-sys-color-border-accent1-light-surface": "252, 113, 255",
+      "--ax-sys-color-accent1-surface": "217, 70, 239",
+      "--ax-sys-color-on-accent1-surface": "255, 247, 255",
+      "--ax-sys-color-border-accent1-surface": "210, 37, 236",
+      "--ax-sys-color-accent1-dark-surface": "195, 42, 216",
+      "--ax-sys-color-on-accent1-dark-surface": "255, 247, 255",
+      "--ax-sys-color-border-accent1-dark-surface": "169, 34, 188",
+      "--ax-sys-color-accent1-darker-surface": "167, 0, 189",
+      "--ax-sys-color-on-accent1-darker-surface": "255, 247, 255",
+      "--ax-sys-color-border-accent1-darker-surface": "135, 0, 153",
+      "--ax-sys-color-accent1-darkest-surface": "138, 24, 155",
+      "--ax-sys-color-on-accent1-darkest-surface": "255, 247, 255",
+      "--ax-sys-color-border-accent1-darkest-surface": "110, 19, 124",
+      "--ax-sys-color-accent2-lightest-surface": "255, 228, 207",
+      "--ax-sys-color-on-accent2-lightest-surface": "61, 41, 24",
+      "--ax-sys-color-border-accent2-lightest-surface": "255, 208, 171",
+      "--ax-sys-color-accent2-lighter-surface": "255, 209, 179",
+      "--ax-sys-color-on-accent2-lighter-surface": "70, 35, 8",
+      "--ax-sys-color-border-accent2-lighter-surface": "255, 187, 143",
+      "--ax-sys-color-accent2-light-surface": "255, 178, 132",
+      "--ax-sys-color-on-accent2-light-surface": "83, 24, 0",
+      "--ax-sys-color-border-accent2-light-surface": "255, 156, 96",
+      "--ax-sys-color-accent2-surface": "249, 115, 22",
+      "--ax-sys-color-on-accent2-surface": "255, 249, 238",
+      "--ax-sys-color-border-accent2-surface": "229, 97, 6",
+      "--ax-sys-color-accent2-dark-surface": "223, 91, 0",
+      "--ax-sys-color-on-accent2-dark-surface": "255, 248, 239",
+      "--ax-sys-color-border-accent2-dark-surface": "187, 76, 0",
+      "--ax-sys-color-accent2-darker-surface": "187, 68, 0",
+      "--ax-sys-color-on-accent2-darker-surface": "255, 248, 240",
+      "--ax-sys-color-border-accent2-darker-surface": "151, 55, 0",
+      "--ax-sys-color-accent2-darkest-surface": "151, 58, 18",
+      "--ax-sys-color-on-accent2-darkest-surface": "255, 248, 241",
+      "--ax-sys-color-border-accent2-darkest-surface": "119, 46, 14",
+      "--ax-sys-color-accent3-lightest-surface": "143, 255, 244",
+      "--ax-sys-color-on-accent3-lightest-surface": "0, 57, 52",
+      "--ax-sys-color-border-accent3-lightest-surface": "107, 255, 240",
+      "--ax-sys-color-accent3-lighter-surface": "114, 250, 231",
+      "--ax-sys-color-on-accent3-lighter-surface": "0, 57, 49",
+      "--ax-sys-color-border-accent3-lighter-surface": "80, 249, 225",
+      "--ax-sys-color-accent3-light-surface": "90, 229, 209",
+      "--ax-sys-color-on-accent3-light-surface": "0, 57, 49",
+      "--ax-sys-color-border-accent3-light-surface": "59, 224, 200",
+      "--ax-sys-color-accent3-surface": "20, 184, 166",
+      "--ax-sys-color-on-accent3-surface": "226, 255, 255",
+      "--ax-sys-color-border-accent3-surface": "17, 152, 137",
+      "--ax-sys-color-accent3-dark-surface": "0, 161, 144",
+      "--ax-sys-color-on-accent3-dark-surface": "226, 255, 255",
+      "--ax-sys-color-border-accent3-dark-surface": "0, 125, 112",
+      "--ax-sys-color-accent3-darker-surface": "0, 132, 117",
+      "--ax-sys-color-on-accent3-darker-surface": "226, 255, 255",
+      "--ax-sys-color-border-accent3-darker-surface": "0, 96, 85",
+      "--ax-sys-color-accent3-darkest-surface": "23, 108, 95",
+      "--ax-sys-color-on-accent3-darkest-surface": "227, 255, 254",
+      "--ax-sys-color-border-accent3-darkest-surface": "17, 79, 69",
+      "--ax-sys-color-accent4-lightest-surface": "220, 228, 255",
+      "--ax-sys-color-on-accent4-lightest-surface": "39, 45, 65",
+      "--ax-sys-color-border-accent4-lightest-surface": "184, 200, 255",
+      "--ax-sys-color-accent4-lighter-surface": "196, 207, 255",
+      "--ax-sys-color-on-accent4-lighter-surface": "36, 42, 79",
+      "--ax-sys-color-border-accent4-lighter-surface": "160, 178, 255",
+      "--ax-sys-color-accent4-light-surface": "161, 173, 255",
+      "--ax-sys-color-on-accent4-light-surface": "34, 34, 103",
+      "--ax-sys-color-border-accent4-light-surface": "125, 142, 255",
+      "--ax-sys-color-accent4-surface": "99, 102, 241",
+      "--ax-sys-color-on-accent4-surface": "249, 252, 255",
+      "--ax-sys-color-border-accent4-surface": "66, 70, 238",
+      "--ax-sys-color-accent4-dark-surface": "86, 85, 223",
+      "--ax-sys-color-on-accent4-dark-surface": "249, 252, 255",
+      "--ax-sys-color-border-accent4-dark-surface": "56, 55, 217",
+      "--ax-sys-color-accent4-darker-surface": "71, 64, 201",
+      "--ax-sys-color-on-accent4-darker-surface": "249, 252, 255",
+      "--ax-sys-color-border-accent4-darker-surface": "57, 51, 179",
+      "--ax-sys-color-accent4-darkest-surface": "59, 52, 175",
+      "--ax-sys-color-on-accent4-darkest-surface": "249, 252, 255",
+      "--ax-sys-color-border-accent4-darkest-surface": "50, 44, 147",
+      "--ax-sys-color-accent5-lightest-surface": "255, 219, 237",
+      "--ax-sys-color-on-accent5-lightest-surface": "63, 36, 50",
+      "--ax-sys-color-border-accent5-lightest-surface": "255, 183, 219",
+      "--ax-sys-color-accent5-lighter-surface": "255, 194, 222",
+      "--ax-sys-color-on-accent5-lighter-surface": "73, 27, 51",
+      "--ax-sys-color-border-accent5-lighter-surface": "255, 158, 203",
+      "--ax-sys-color-accent5-light-surface": "255, 152, 200",
+      "--ax-sys-color-on-accent5-light-surface": "90, 0, 54",
+      "--ax-sys-color-border-accent5-light-surface": "255, 116, 181",
+      "--ax-sys-color-accent5-surface": "236, 72, 153",
+      "--ax-sys-color-on-accent5-surface": "255, 246, 255",
+      "--ax-sys-color-border-accent5-surface": "233, 40, 135",
+      "--ax-sys-color-accent5-dark-surface": "213, 48, 134",
+      "--ax-sys-color-on-accent5-dark-surface": "255, 246, 255",
+      "--ax-sys-color-border-accent5-dark-surface": "187, 38, 116",
+      "--ax-sys-color-accent5-darker-surface": "185, 0, 111",
+      "--ax-sys-color-on-accent5-darker-surface": "255, 246, 255",
+      "--ax-sys-color-border-accent5-darker-surface": "149, 0, 90",
+      "--ax-sys-color-accent5-darkest-surface": "156, 23, 92",
+      "--ax-sys-color-on-accent5-darkest-surface": "255, 246, 254",
+      "--ax-sys-color-border-accent5-darkest-surface": "125, 18, 74",
+      "--ax-sys-color-accent6-lightest-surface": "235, 227, 221",
+      "--ax-sys-color-on-accent6-lightest-surface": "50, 44, 40",
+      "--ax-sys-color-border-accent6-lightest-surface": "222, 208, 199",
+      "--ax-sys-color-accent6-lighter-surface": "214, 206, 201",
+      "--ax-sys-color-on-accent6-lighter-surface": "51, 44, 41",
+      "--ax-sys-color-border-accent6-lighter-surface": "199, 188, 181",
+      "--ax-sys-color-accent6-light-surface": "183, 175, 170",
+      "--ax-sys-color-on-accent6-light-surface": "255, 252, 246",
+      "--ax-sys-color-border-accent6-light-surface": "167, 157, 151",
+      "--ax-sys-color-accent6-surface": "120, 113, 108",
+      "--ax-sys-color-on-accent6-surface": "255, 252, 246",
+      "--ax-sys-color-border-accent6-surface": "101, 95, 91",
+      "--ax-sys-color-accent6-dark-surface": "107, 100, 95",
+      "--ax-sys-color-on-accent6-dark-surface": "255, 252, 246",
+      "--ax-sys-color-border-accent6-dark-surface": "88, 82, 78",
+      "--ax-sys-color-accent6-darker-surface": "91, 84, 80",
+      "--ax-sys-color-on-accent6-darker-surface": "255, 252, 247",
+      "--ax-sys-color-border-accent6-darker-surface": "72, 66, 63",
+      "--ax-sys-color-accent6-darkest-surface": "78, 72, 68",
+      "--ax-sys-color-on-accent6-darkest-surface": "255, 252, 247",
+      "--ax-sys-color-border-accent6-darkest-surface": "59, 54, 51"
+    },
+    "accents": {},
+    "other": {
+      "--ax-overlay-full-width": "93"
+    }
+  },
+  "darkModeOverrides": {},
+  "themeColorTokens": [
+    {
+      "token": "--color-bg-default",
+      "name": "bg-default",
+      "value": "rgba(var(--ax-sys-color-bg-default))",
+      "tailwind": [
+        "bg-bg-default",
+        "text-bg-default",
+        "border-bg-default",
+        "bg-bg-default/<opacity>",
+        "text-bg-default/<opacity>",
+        "border-bg-default/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-text-default",
+      "name": "text-default",
+      "value": "rgba(var(--ax-sys-color-text-default))",
+      "tailwind": [
+        "bg-text-default",
+        "text-text-default",
+        "border-text-default",
+        "bg-text-default/<opacity>",
+        "text-text-default/<opacity>",
+        "border-text-default/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-default",
+      "name": "border-default",
+      "value": "rgba(var(--ax-sys-color-border-default))",
+      "tailwind": [
+        "border-default",
+        "border-border-default"
+      ]
+    },
+    {
+      "token": "--color-surface",
+      "name": "surface",
+      "value": "rgba(var(--ax-sys-color-surface))",
+      "tailwind": [
+        "bg-surface",
+        "text-surface",
+        "border-surface",
+        "bg-surface/<opacity>",
+        "text-surface/<opacity>",
+        "border-surface/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-50",
+      "name": "surface-50",
+      "value": "rgba(var(--ax-sys-color-surface-50))",
+      "tailwind": [
+        "bg-surface-50",
+        "text-surface-50",
+        "border-surface-50",
+        "bg-surface-50/<opacity>",
+        "text-surface-50/<opacity>",
+        "border-surface-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-100",
+      "name": "surface-100",
+      "value": "rgba(var(--ax-sys-color-surface-100))",
+      "tailwind": [
+        "bg-surface-100",
+        "text-surface-100",
+        "border-surface-100",
+        "bg-surface-100/<opacity>",
+        "text-surface-100/<opacity>",
+        "border-surface-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-200",
+      "name": "surface-200",
+      "value": "rgba(var(--ax-sys-color-surface-200))",
+      "tailwind": [
+        "bg-surface-200",
+        "text-surface-200",
+        "border-surface-200",
+        "bg-surface-200/<opacity>",
+        "text-surface-200/<opacity>",
+        "border-surface-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-300",
+      "name": "surface-300",
+      "value": "rgba(var(--ax-sys-color-surface-300))",
+      "tailwind": [
+        "bg-surface-300",
+        "text-surface-300",
+        "border-surface-300",
+        "bg-surface-300/<opacity>",
+        "text-surface-300/<opacity>",
+        "border-surface-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-400",
+      "name": "surface-400",
+      "value": "rgba(var(--ax-sys-color-surface-400))",
+      "tailwind": [
+        "bg-surface-400",
+        "text-surface-400",
+        "border-surface-400",
+        "bg-surface-400/<opacity>",
+        "text-surface-400/<opacity>",
+        "border-surface-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-500",
+      "name": "surface-500",
+      "value": "rgba(var(--ax-sys-color-surface-500))",
+      "tailwind": [
+        "bg-surface-500",
+        "text-surface-500",
+        "border-surface-500",
+        "bg-surface-500/<opacity>",
+        "text-surface-500/<opacity>",
+        "border-surface-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-600",
+      "name": "surface-600",
+      "value": "rgba(var(--ax-sys-color-surface-600))",
+      "tailwind": [
+        "bg-surface-600",
+        "text-surface-600",
+        "border-surface-600",
+        "bg-surface-600/<opacity>",
+        "text-surface-600/<opacity>",
+        "border-surface-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-700",
+      "name": "surface-700",
+      "value": "rgba(var(--ax-sys-color-surface-700))",
+      "tailwind": [
+        "bg-surface-700",
+        "text-surface-700",
+        "border-surface-700",
+        "bg-surface-700/<opacity>",
+        "text-surface-700/<opacity>",
+        "border-surface-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-800",
+      "name": "surface-800",
+      "value": "rgba(var(--ax-sys-color-surface-800))",
+      "tailwind": [
+        "bg-surface-800",
+        "text-surface-800",
+        "border-surface-800",
+        "bg-surface-800/<opacity>",
+        "text-surface-800/<opacity>",
+        "border-surface-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-900",
+      "name": "surface-900",
+      "value": "rgba(var(--ax-sys-color-surface-900))",
+      "tailwind": [
+        "bg-surface-900",
+        "text-surface-900",
+        "border-surface-900",
+        "bg-surface-900/<opacity>",
+        "text-surface-900/<opacity>",
+        "border-surface-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-surface-950",
+      "name": "surface-950",
+      "value": "rgba(var(--ax-sys-color-surface-950))",
+      "tailwind": [
+        "bg-surface-950",
+        "text-surface-950",
+        "border-surface-950",
+        "bg-surface-950/<opacity>",
+        "text-surface-950/<opacity>",
+        "border-surface-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-lightest",
+      "name": "lightest",
+      "value": "rgba(var(--ax-sys-color-lightest-surface))",
+      "tailwind": [
+        "bg-lightest",
+        "text-lightest",
+        "border-lightest",
+        "bg-lightest/<opacity>",
+        "text-lightest/<opacity>",
+        "border-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-lightest",
+      "name": "on-lightest",
+      "value": "rgba(var(--ax-sys-color-on-lightest-surface))",
+      "tailwind": [
+        "text-on-lightest",
+        "text-on-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-lightest",
+      "name": "border-lightest",
+      "value": "rgba(var(--ax-sys-color-border-lightest-surface))",
+      "tailwind": [
+        "border-lightest",
+        "border-border-lightest"
+      ]
+    },
+    {
+      "token": "--color-lighter",
+      "name": "lighter",
+      "value": "rgba(var(--ax-sys-color-lighter-surface))",
+      "tailwind": [
+        "bg-lighter",
+        "text-lighter",
+        "border-lighter",
+        "bg-lighter/<opacity>",
+        "text-lighter/<opacity>",
+        "border-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-lighter",
+      "name": "on-lighter",
+      "value": "rgba(var(--ax-sys-color-on-lighter-surface))",
+      "tailwind": [
+        "text-on-lighter",
+        "text-on-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-lighter",
+      "name": "border-lighter",
+      "value": "rgba(var(--ax-sys-color-border-lighter-surface))",
+      "tailwind": [
+        "border-lighter",
+        "border-border-lighter"
+      ]
+    },
+    {
+      "token": "--color-light",
+      "name": "light",
+      "value": "rgba(var(--ax-sys-color-light-surface))",
+      "tailwind": [
+        "bg-light",
+        "text-light",
+        "border-light",
+        "bg-light/<opacity>",
+        "text-light/<opacity>",
+        "border-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-light",
+      "name": "on-light",
+      "value": "rgba(var(--ax-sys-color-on-light-surface))",
+      "tailwind": [
+        "text-on-light",
+        "text-on-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-light",
+      "name": "border-light",
+      "value": "rgba(var(--ax-sys-color-border-light-surface))",
+      "tailwind": [
+        "border-light",
+        "border-border-light"
+      ]
+    },
+    {
+      "token": "--color-surface",
+      "name": "surface",
+      "value": "rgba(var(--ax-sys-color-surface))",
+      "tailwind": [
+        "bg-surface",
+        "text-surface",
+        "border-surface",
+        "bg-surface/<opacity>",
+        "text-surface/<opacity>",
+        "border-surface/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-surface",
+      "name": "on-surface",
+      "value": "rgba(var(--ax-sys-color-on-surface))",
+      "tailwind": [
+        "text-on-surface",
+        "text-on-surface/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-surface",
+      "name": "border-surface",
+      "value": "rgba(var(--ax-sys-color-border-surface))",
+      "tailwind": [
+        "border-surface",
+        "border-border-surface"
+      ]
+    },
+    {
+      "token": "--color-dark",
+      "name": "dark",
+      "value": "rgba(var(--ax-sys-color-dark-surface))",
+      "tailwind": [
+        "bg-dark",
+        "text-dark",
+        "border-dark",
+        "bg-dark/<opacity>",
+        "text-dark/<opacity>",
+        "border-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-dark",
+      "name": "on-dark",
+      "value": "rgba(var(--ax-sys-color-on-dark-surface))",
+      "tailwind": [
+        "text-on-dark",
+        "text-on-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-dark",
+      "name": "border-dark",
+      "value": "rgba(var(--ax-sys-color-border-dark-surface))",
+      "tailwind": [
+        "border-dark",
+        "border-border-dark"
+      ]
+    },
+    {
+      "token": "--color-darker",
+      "name": "darker",
+      "value": "rgba(var(--ax-sys-color-darker-surface))",
+      "tailwind": [
+        "bg-darker",
+        "text-darker",
+        "border-darker",
+        "bg-darker/<opacity>",
+        "text-darker/<opacity>",
+        "border-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-darker",
+      "name": "on-darker",
+      "value": "rgba(var(--ax-sys-color-on-darker-surface))",
+      "tailwind": [
+        "text-on-darker",
+        "text-on-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-darker",
+      "name": "border-darker",
+      "value": "rgba(var(--ax-sys-color-border-darker-surface))",
+      "tailwind": [
+        "border-darker",
+        "border-border-darker"
+      ]
+    },
+    {
+      "token": "--color-darkest",
+      "name": "darkest",
+      "value": "rgba(var(--ax-sys-color-darkest-surface))",
+      "tailwind": [
+        "bg-darkest",
+        "text-darkest",
+        "border-darkest",
+        "bg-darkest/<opacity>",
+        "text-darkest/<opacity>",
+        "border-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-darkest",
+      "name": "on-darkest",
+      "value": "rgba(var(--ax-sys-color-on-darkest-surface))",
+      "tailwind": [
+        "text-on-darkest",
+        "text-on-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-darkest",
+      "name": "border-darkest",
+      "value": "rgba(var(--ax-sys-color-border-darkest-surface))",
+      "tailwind": [
+        "border-darkest",
+        "border-border-darkest"
+      ]
+    },
+    {
+      "token": "--color-primary",
+      "name": "primary",
+      "value": "rgba(var(--ax-sys-color-primary-surface))",
+      "tailwind": [
+        "bg-primary",
+        "text-primary",
+        "border-primary",
+        "bg-primary/<opacity>",
+        "text-primary/<opacity>",
+        "border-primary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-50",
+      "name": "primary-50",
+      "value": "rgba(var(--ax-sys-color-primary-50))",
+      "tailwind": [
+        "bg-primary-50",
+        "text-primary-50",
+        "border-primary-50",
+        "bg-primary-50/<opacity>",
+        "text-primary-50/<opacity>",
+        "border-primary-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-100",
+      "name": "primary-100",
+      "value": "rgba(var(--ax-sys-color-primary-100))",
+      "tailwind": [
+        "bg-primary-100",
+        "text-primary-100",
+        "border-primary-100",
+        "bg-primary-100/<opacity>",
+        "text-primary-100/<opacity>",
+        "border-primary-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-200",
+      "name": "primary-200",
+      "value": "rgba(var(--ax-sys-color-primary-200))",
+      "tailwind": [
+        "bg-primary-200",
+        "text-primary-200",
+        "border-primary-200",
+        "bg-primary-200/<opacity>",
+        "text-primary-200/<opacity>",
+        "border-primary-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-300",
+      "name": "primary-300",
+      "value": "rgba(var(--ax-sys-color-primary-300))",
+      "tailwind": [
+        "bg-primary-300",
+        "text-primary-300",
+        "border-primary-300",
+        "bg-primary-300/<opacity>",
+        "text-primary-300/<opacity>",
+        "border-primary-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-400",
+      "name": "primary-400",
+      "value": "rgba(var(--ax-sys-color-primary-400))",
+      "tailwind": [
+        "bg-primary-400",
+        "text-primary-400",
+        "border-primary-400",
+        "bg-primary-400/<opacity>",
+        "text-primary-400/<opacity>",
+        "border-primary-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-500",
+      "name": "primary-500",
+      "value": "rgba(var(--ax-sys-color-primary-500))",
+      "tailwind": [
+        "bg-primary-500",
+        "text-primary-500",
+        "border-primary-500",
+        "bg-primary-500/<opacity>",
+        "text-primary-500/<opacity>",
+        "border-primary-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-600",
+      "name": "primary-600",
+      "value": "rgba(var(--ax-sys-color-primary-600))",
+      "tailwind": [
+        "bg-primary-600",
+        "text-primary-600",
+        "border-primary-600",
+        "bg-primary-600/<opacity>",
+        "text-primary-600/<opacity>",
+        "border-primary-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-700",
+      "name": "primary-700",
+      "value": "rgba(var(--ax-sys-color-primary-700))",
+      "tailwind": [
+        "bg-primary-700",
+        "text-primary-700",
+        "border-primary-700",
+        "bg-primary-700/<opacity>",
+        "text-primary-700/<opacity>",
+        "border-primary-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-800",
+      "name": "primary-800",
+      "value": "rgba(var(--ax-sys-color-primary-800))",
+      "tailwind": [
+        "bg-primary-800",
+        "text-primary-800",
+        "border-primary-800",
+        "bg-primary-800/<opacity>",
+        "text-primary-800/<opacity>",
+        "border-primary-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-900",
+      "name": "primary-900",
+      "value": "rgba(var(--ax-sys-color-primary-900))",
+      "tailwind": [
+        "bg-primary-900",
+        "text-primary-900",
+        "border-primary-900",
+        "bg-primary-900/<opacity>",
+        "text-primary-900/<opacity>",
+        "border-primary-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-950",
+      "name": "primary-950",
+      "value": "rgba(var(--ax-sys-color-primary-950))",
+      "tailwind": [
+        "bg-primary-950",
+        "text-primary-950",
+        "border-primary-950",
+        "bg-primary-950/<opacity>",
+        "text-primary-950/<opacity>",
+        "border-primary-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-primary-lightest",
+      "name": "primary-lightest",
+      "value": "rgba(var(--ax-sys-color-primary-lightest-surface))",
+      "tailwind": [
+        "bg-primary-lightest",
+        "text-primary-lightest",
+        "border-primary-lightest",
+        "bg-primary-lightest/<opacity>",
+        "text-primary-lightest/<opacity>",
+        "border-primary-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-lightest",
+      "name": "on-primary-lightest",
+      "value": "rgba(var(--ax-sys-color-on-primary-lightest-surface))",
+      "tailwind": [
+        "text-on-primary-lightest",
+        "text-on-primary-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-lightest",
+      "name": "border-primary-lightest",
+      "value": "rgba(var(--ax-sys-color-border-primary-lightest-surface))",
+      "tailwind": [
+        "border-primary-lightest",
+        "border-border-primary-lightest"
+      ]
+    },
+    {
+      "token": "--color-primary-lighter",
+      "name": "primary-lighter",
+      "value": "rgba(var(--ax-sys-color-primary-lighter-surface))",
+      "tailwind": [
+        "bg-primary-lighter",
+        "text-primary-lighter",
+        "border-primary-lighter",
+        "bg-primary-lighter/<opacity>",
+        "text-primary-lighter/<opacity>",
+        "border-primary-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-lighter",
+      "name": "on-primary-lighter",
+      "value": "rgba(var(--ax-sys-color-on-primary-lighter-surface))",
+      "tailwind": [
+        "text-on-primary-lighter",
+        "text-on-primary-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-lighter",
+      "name": "border-primary-lighter",
+      "value": "rgba(var(--ax-sys-color-border-primary-lighter-surface))",
+      "tailwind": [
+        "border-primary-lighter",
+        "border-border-primary-lighter"
+      ]
+    },
+    {
+      "token": "--color-primary-light",
+      "name": "primary-light",
+      "value": "rgba(var(--ax-sys-color-primary-light-surface))",
+      "tailwind": [
+        "bg-primary-light",
+        "text-primary-light",
+        "border-primary-light",
+        "bg-primary-light/<opacity>",
+        "text-primary-light/<opacity>",
+        "border-primary-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-light",
+      "name": "on-primary-light",
+      "value": "rgba(var(--ax-sys-color-on-primary-light-surface))",
+      "tailwind": [
+        "text-on-primary-light",
+        "text-on-primary-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-light",
+      "name": "border-primary-light",
+      "value": "rgba(var(--ax-sys-color-border-primary-light-surface))",
+      "tailwind": [
+        "border-primary-light",
+        "border-border-primary-light"
+      ]
+    },
+    {
+      "token": "--color-primary",
+      "name": "primary",
+      "value": "rgba(var(--ax-sys-color-primary-surface))",
+      "tailwind": [
+        "bg-primary",
+        "text-primary",
+        "border-primary",
+        "bg-primary/<opacity>",
+        "text-primary/<opacity>",
+        "border-primary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary",
+      "name": "on-primary",
+      "value": "rgba(var(--ax-sys-color-on-primary-surface))",
+      "tailwind": [
+        "text-on-primary",
+        "text-on-primary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary",
+      "name": "border-primary",
+      "value": "rgba(var(--ax-sys-color-border-primary-surface))",
+      "tailwind": [
+        "border-primary",
+        "border-border-primary"
+      ]
+    },
+    {
+      "token": "--color-primary-dark",
+      "name": "primary-dark",
+      "value": "rgba(var(--ax-sys-color-primary-dark-surface))",
+      "tailwind": [
+        "bg-primary-dark",
+        "text-primary-dark",
+        "border-primary-dark",
+        "bg-primary-dark/<opacity>",
+        "text-primary-dark/<opacity>",
+        "border-primary-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-dark",
+      "name": "on-primary-dark",
+      "value": "rgba(var(--ax-sys-color-on-primary-dark-surface))",
+      "tailwind": [
+        "text-on-primary-dark",
+        "text-on-primary-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-dark",
+      "name": "border-primary-dark",
+      "value": "rgba(var(--ax-sys-color-border-primary-dark-surface))",
+      "tailwind": [
+        "border-primary-dark",
+        "border-border-primary-dark"
+      ]
+    },
+    {
+      "token": "--color-primary-darker",
+      "name": "primary-darker",
+      "value": "rgba(var(--ax-sys-color-primary-darker-surface))",
+      "tailwind": [
+        "bg-primary-darker",
+        "text-primary-darker",
+        "border-primary-darker",
+        "bg-primary-darker/<opacity>",
+        "text-primary-darker/<opacity>",
+        "border-primary-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-darker",
+      "name": "on-primary-darker",
+      "value": "rgba(var(--ax-sys-color-on-primary-darker-surface))",
+      "tailwind": [
+        "text-on-primary-darker",
+        "text-on-primary-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-darker",
+      "name": "border-primary-darker",
+      "value": "rgba(var(--ax-sys-color-border-primary-darker-surface))",
+      "tailwind": [
+        "border-primary-darker",
+        "border-border-primary-darker"
+      ]
+    },
+    {
+      "token": "--color-primary-darkest",
+      "name": "primary-darkest",
+      "value": "rgba(var(--ax-sys-color-primary-darkest-surface))",
+      "tailwind": [
+        "bg-primary-darkest",
+        "text-primary-darkest",
+        "border-primary-darkest",
+        "bg-primary-darkest/<opacity>",
+        "text-primary-darkest/<opacity>",
+        "border-primary-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-primary-darkest",
+      "name": "on-primary-darkest",
+      "value": "rgba(var(--ax-sys-color-on-primary-darkest-surface))",
+      "tailwind": [
+        "text-on-primary-darkest",
+        "text-on-primary-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-primary-darkest",
+      "name": "border-primary-darkest",
+      "value": "rgba(var(--ax-sys-color-border-primary-darkest-surface))",
+      "tailwind": [
+        "border-primary-darkest",
+        "border-border-primary-darkest"
+      ]
+    },
+    {
+      "token": "--color-secondary",
+      "name": "secondary",
+      "value": "rgba(var(--ax-sys-color-secondary-surface))",
+      "tailwind": [
+        "bg-secondary",
+        "text-secondary",
+        "border-secondary",
+        "bg-secondary/<opacity>",
+        "text-secondary/<opacity>",
+        "border-secondary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-50",
+      "name": "secondary-50",
+      "value": "rgba(var(--ax-sys-color-secondary-50))",
+      "tailwind": [
+        "bg-secondary-50",
+        "text-secondary-50",
+        "border-secondary-50",
+        "bg-secondary-50/<opacity>",
+        "text-secondary-50/<opacity>",
+        "border-secondary-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-100",
+      "name": "secondary-100",
+      "value": "rgba(var(--ax-sys-color-secondary-100))",
+      "tailwind": [
+        "bg-secondary-100",
+        "text-secondary-100",
+        "border-secondary-100",
+        "bg-secondary-100/<opacity>",
+        "text-secondary-100/<opacity>",
+        "border-secondary-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-200",
+      "name": "secondary-200",
+      "value": "rgba(var(--ax-sys-color-secondary-200))",
+      "tailwind": [
+        "bg-secondary-200",
+        "text-secondary-200",
+        "border-secondary-200",
+        "bg-secondary-200/<opacity>",
+        "text-secondary-200/<opacity>",
+        "border-secondary-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-300",
+      "name": "secondary-300",
+      "value": "rgba(var(--ax-sys-color-secondary-300))",
+      "tailwind": [
+        "bg-secondary-300",
+        "text-secondary-300",
+        "border-secondary-300",
+        "bg-secondary-300/<opacity>",
+        "text-secondary-300/<opacity>",
+        "border-secondary-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-400",
+      "name": "secondary-400",
+      "value": "rgba(var(--ax-sys-color-secondary-400))",
+      "tailwind": [
+        "bg-secondary-400",
+        "text-secondary-400",
+        "border-secondary-400",
+        "bg-secondary-400/<opacity>",
+        "text-secondary-400/<opacity>",
+        "border-secondary-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-500",
+      "name": "secondary-500",
+      "value": "rgba(var(--ax-sys-color-secondary-500))",
+      "tailwind": [
+        "bg-secondary-500",
+        "text-secondary-500",
+        "border-secondary-500",
+        "bg-secondary-500/<opacity>",
+        "text-secondary-500/<opacity>",
+        "border-secondary-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-600",
+      "name": "secondary-600",
+      "value": "rgba(var(--ax-sys-color-secondary-600))",
+      "tailwind": [
+        "bg-secondary-600",
+        "text-secondary-600",
+        "border-secondary-600",
+        "bg-secondary-600/<opacity>",
+        "text-secondary-600/<opacity>",
+        "border-secondary-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-700",
+      "name": "secondary-700",
+      "value": "rgba(var(--ax-sys-color-secondary-700))",
+      "tailwind": [
+        "bg-secondary-700",
+        "text-secondary-700",
+        "border-secondary-700",
+        "bg-secondary-700/<opacity>",
+        "text-secondary-700/<opacity>",
+        "border-secondary-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-800",
+      "name": "secondary-800",
+      "value": "rgba(var(--ax-sys-color-secondary-800))",
+      "tailwind": [
+        "bg-secondary-800",
+        "text-secondary-800",
+        "border-secondary-800",
+        "bg-secondary-800/<opacity>",
+        "text-secondary-800/<opacity>",
+        "border-secondary-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-900",
+      "name": "secondary-900",
+      "value": "rgba(var(--ax-sys-color-secondary-900))",
+      "tailwind": [
+        "bg-secondary-900",
+        "text-secondary-900",
+        "border-secondary-900",
+        "bg-secondary-900/<opacity>",
+        "text-secondary-900/<opacity>",
+        "border-secondary-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-950",
+      "name": "secondary-950",
+      "value": "rgba(var(--ax-sys-color-secondary-950))",
+      "tailwind": [
+        "bg-secondary-950",
+        "text-secondary-950",
+        "border-secondary-950",
+        "bg-secondary-950/<opacity>",
+        "text-secondary-950/<opacity>",
+        "border-secondary-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-secondary-lightest",
+      "name": "secondary-lightest",
+      "value": "rgba(var(--ax-sys-color-secondary-lightest-surface))",
+      "tailwind": [
+        "bg-secondary-lightest",
+        "text-secondary-lightest",
+        "border-secondary-lightest",
+        "bg-secondary-lightest/<opacity>",
+        "text-secondary-lightest/<opacity>",
+        "border-secondary-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-lightest",
+      "name": "on-secondary-lightest",
+      "value": "rgba(var(--ax-sys-color-on-secondary-lightest-surface))",
+      "tailwind": [
+        "text-on-secondary-lightest",
+        "text-on-secondary-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-lightest",
+      "name": "border-secondary-lightest",
+      "value": "rgba(var(--ax-sys-color-border-secondary-lightest-surface))",
+      "tailwind": [
+        "border-secondary-lightest",
+        "border-border-secondary-lightest"
+      ]
+    },
+    {
+      "token": "--color-secondary-lighter",
+      "name": "secondary-lighter",
+      "value": "rgba(var(--ax-sys-color-secondary-lighter-surface))",
+      "tailwind": [
+        "bg-secondary-lighter",
+        "text-secondary-lighter",
+        "border-secondary-lighter",
+        "bg-secondary-lighter/<opacity>",
+        "text-secondary-lighter/<opacity>",
+        "border-secondary-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-lighter",
+      "name": "on-secondary-lighter",
+      "value": "rgba(var(--ax-sys-color-on-secondary-lighter-surface))",
+      "tailwind": [
+        "text-on-secondary-lighter",
+        "text-on-secondary-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-lighter",
+      "name": "border-secondary-lighter",
+      "value": "rgba(var(--ax-sys-color-border-secondary-lighter-surface))",
+      "tailwind": [
+        "border-secondary-lighter",
+        "border-border-secondary-lighter"
+      ]
+    },
+    {
+      "token": "--color-secondary-light",
+      "name": "secondary-light",
+      "value": "rgba(var(--ax-sys-color-secondary-light-surface))",
+      "tailwind": [
+        "bg-secondary-light",
+        "text-secondary-light",
+        "border-secondary-light",
+        "bg-secondary-light/<opacity>",
+        "text-secondary-light/<opacity>",
+        "border-secondary-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-light",
+      "name": "on-secondary-light",
+      "value": "rgba(var(--ax-sys-color-on-secondary-light-surface))",
+      "tailwind": [
+        "text-on-secondary-light",
+        "text-on-secondary-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-light",
+      "name": "border-secondary-light",
+      "value": "rgba(var(--ax-sys-color-border-secondary-light-surface))",
+      "tailwind": [
+        "border-secondary-light",
+        "border-border-secondary-light"
+      ]
+    },
+    {
+      "token": "--color-secondary",
+      "name": "secondary",
+      "value": "rgba(var(--ax-sys-color-secondary-surface))",
+      "tailwind": [
+        "bg-secondary",
+        "text-secondary",
+        "border-secondary",
+        "bg-secondary/<opacity>",
+        "text-secondary/<opacity>",
+        "border-secondary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary",
+      "name": "on-secondary",
+      "value": "rgba(var(--ax-sys-color-on-secondary-surface))",
+      "tailwind": [
+        "text-on-secondary",
+        "text-on-secondary/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary",
+      "name": "border-secondary",
+      "value": "rgba(var(--ax-sys-color-border-secondary-surface))",
+      "tailwind": [
+        "border-secondary",
+        "border-border-secondary"
+      ]
+    },
+    {
+      "token": "--color-secondary-dark",
+      "name": "secondary-dark",
+      "value": "rgba(var(--ax-sys-color-secondary-dark-surface))",
+      "tailwind": [
+        "bg-secondary-dark",
+        "text-secondary-dark",
+        "border-secondary-dark",
+        "bg-secondary-dark/<opacity>",
+        "text-secondary-dark/<opacity>",
+        "border-secondary-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-dark",
+      "name": "on-secondary-dark",
+      "value": "rgba(var(--ax-sys-color-on-secondary-dark-surface))",
+      "tailwind": [
+        "text-on-secondary-dark",
+        "text-on-secondary-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-dark",
+      "name": "border-secondary-dark",
+      "value": "rgba(var(--ax-sys-color-border-secondary-dark-surface))",
+      "tailwind": [
+        "border-secondary-dark",
+        "border-border-secondary-dark"
+      ]
+    },
+    {
+      "token": "--color-secondary-darker",
+      "name": "secondary-darker",
+      "value": "rgba(var(--ax-sys-color-secondary-darker-surface))",
+      "tailwind": [
+        "bg-secondary-darker",
+        "text-secondary-darker",
+        "border-secondary-darker",
+        "bg-secondary-darker/<opacity>",
+        "text-secondary-darker/<opacity>",
+        "border-secondary-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-darker",
+      "name": "on-secondary-darker",
+      "value": "rgba(var(--ax-sys-color-on-secondary-darker-surface))",
+      "tailwind": [
+        "text-on-secondary-darker",
+        "text-on-secondary-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-darker",
+      "name": "border-secondary-darker",
+      "value": "rgba(var(--ax-sys-color-border-secondary-darker-surface))",
+      "tailwind": [
+        "border-secondary-darker",
+        "border-border-secondary-darker"
+      ]
+    },
+    {
+      "token": "--color-secondary-darkest",
+      "name": "secondary-darkest",
+      "value": "rgba(var(--ax-sys-color-secondary-darkest-surface))",
+      "tailwind": [
+        "bg-secondary-darkest",
+        "text-secondary-darkest",
+        "border-secondary-darkest",
+        "bg-secondary-darkest/<opacity>",
+        "text-secondary-darkest/<opacity>",
+        "border-secondary-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-secondary-darkest",
+      "name": "on-secondary-darkest",
+      "value": "rgba(var(--ax-sys-color-on-secondary-darkest-surface))",
+      "tailwind": [
+        "text-on-secondary-darkest",
+        "text-on-secondary-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-secondary-darkest",
+      "name": "border-secondary-darkest",
+      "value": "rgba(var(--ax-sys-color-border-secondary-darkest-surface))",
+      "tailwind": [
+        "border-secondary-darkest",
+        "border-border-secondary-darkest"
+      ]
+    },
+    {
+      "token": "--color-success",
+      "name": "success",
+      "value": "rgba(var(--ax-sys-color-success-surface))",
+      "tailwind": [
+        "bg-success",
+        "text-success",
+        "border-success",
+        "bg-success/<opacity>",
+        "text-success/<opacity>",
+        "border-success/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-50",
+      "name": "success-50",
+      "value": "rgba(var(--ax-sys-color-success-50))",
+      "tailwind": [
+        "bg-success-50",
+        "text-success-50",
+        "border-success-50",
+        "bg-success-50/<opacity>",
+        "text-success-50/<opacity>",
+        "border-success-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-100",
+      "name": "success-100",
+      "value": "rgba(var(--ax-sys-color-success-100))",
+      "tailwind": [
+        "bg-success-100",
+        "text-success-100",
+        "border-success-100",
+        "bg-success-100/<opacity>",
+        "text-success-100/<opacity>",
+        "border-success-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-200",
+      "name": "success-200",
+      "value": "rgba(var(--ax-sys-color-success-200))",
+      "tailwind": [
+        "bg-success-200",
+        "text-success-200",
+        "border-success-200",
+        "bg-success-200/<opacity>",
+        "text-success-200/<opacity>",
+        "border-success-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-300",
+      "name": "success-300",
+      "value": "rgba(var(--ax-sys-color-success-300))",
+      "tailwind": [
+        "bg-success-300",
+        "text-success-300",
+        "border-success-300",
+        "bg-success-300/<opacity>",
+        "text-success-300/<opacity>",
+        "border-success-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-400",
+      "name": "success-400",
+      "value": "rgba(var(--ax-sys-color-success-400))",
+      "tailwind": [
+        "bg-success-400",
+        "text-success-400",
+        "border-success-400",
+        "bg-success-400/<opacity>",
+        "text-success-400/<opacity>",
+        "border-success-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-500",
+      "name": "success-500",
+      "value": "rgba(var(--ax-sys-color-success-500))",
+      "tailwind": [
+        "bg-success-500",
+        "text-success-500",
+        "border-success-500",
+        "bg-success-500/<opacity>",
+        "text-success-500/<opacity>",
+        "border-success-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-600",
+      "name": "success-600",
+      "value": "rgba(var(--ax-sys-color-success-600))",
+      "tailwind": [
+        "bg-success-600",
+        "text-success-600",
+        "border-success-600",
+        "bg-success-600/<opacity>",
+        "text-success-600/<opacity>",
+        "border-success-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-700",
+      "name": "success-700",
+      "value": "rgba(var(--ax-sys-color-success-700))",
+      "tailwind": [
+        "bg-success-700",
+        "text-success-700",
+        "border-success-700",
+        "bg-success-700/<opacity>",
+        "text-success-700/<opacity>",
+        "border-success-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-800",
+      "name": "success-800",
+      "value": "rgba(var(--ax-sys-color-success-800))",
+      "tailwind": [
+        "bg-success-800",
+        "text-success-800",
+        "border-success-800",
+        "bg-success-800/<opacity>",
+        "text-success-800/<opacity>",
+        "border-success-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-900",
+      "name": "success-900",
+      "value": "rgba(var(--ax-sys-color-success-900))",
+      "tailwind": [
+        "bg-success-900",
+        "text-success-900",
+        "border-success-900",
+        "bg-success-900/<opacity>",
+        "text-success-900/<opacity>",
+        "border-success-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-950",
+      "name": "success-950",
+      "value": "rgba(var(--ax-sys-color-success-950))",
+      "tailwind": [
+        "bg-success-950",
+        "text-success-950",
+        "border-success-950",
+        "bg-success-950/<opacity>",
+        "text-success-950/<opacity>",
+        "border-success-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-success-lightest",
+      "name": "success-lightest",
+      "value": "rgba(var(--ax-sys-color-success-lightest-surface))",
+      "tailwind": [
+        "bg-success-lightest",
+        "text-success-lightest",
+        "border-success-lightest",
+        "bg-success-lightest/<opacity>",
+        "text-success-lightest/<opacity>",
+        "border-success-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-lightest",
+      "name": "on-success-lightest",
+      "value": "rgba(var(--ax-sys-color-on-success-lightest-surface))",
+      "tailwind": [
+        "text-on-success-lightest",
+        "text-on-success-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-lightest",
+      "name": "border-success-lightest",
+      "value": "rgba(var(--ax-sys-color-border-success-lightest-surface))",
+      "tailwind": [
+        "border-success-lightest",
+        "border-border-success-lightest"
+      ]
+    },
+    {
+      "token": "--color-success-lighter",
+      "name": "success-lighter",
+      "value": "rgba(var(--ax-sys-color-success-lighter-surface))",
+      "tailwind": [
+        "bg-success-lighter",
+        "text-success-lighter",
+        "border-success-lighter",
+        "bg-success-lighter/<opacity>",
+        "text-success-lighter/<opacity>",
+        "border-success-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-lighter",
+      "name": "on-success-lighter",
+      "value": "rgba(var(--ax-sys-color-on-success-lighter-surface))",
+      "tailwind": [
+        "text-on-success-lighter",
+        "text-on-success-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-lighter",
+      "name": "border-success-lighter",
+      "value": "rgba(var(--ax-sys-color-border-success-lighter-surface))",
+      "tailwind": [
+        "border-success-lighter",
+        "border-border-success-lighter"
+      ]
+    },
+    {
+      "token": "--color-success-light",
+      "name": "success-light",
+      "value": "rgba(var(--ax-sys-color-success-light-surface))",
+      "tailwind": [
+        "bg-success-light",
+        "text-success-light",
+        "border-success-light",
+        "bg-success-light/<opacity>",
+        "text-success-light/<opacity>",
+        "border-success-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-light",
+      "name": "on-success-light",
+      "value": "rgba(var(--ax-sys-color-on-success-light-surface))",
+      "tailwind": [
+        "text-on-success-light",
+        "text-on-success-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-light",
+      "name": "border-success-light",
+      "value": "rgba(var(--ax-sys-color-border-success-light-surface))",
+      "tailwind": [
+        "border-success-light",
+        "border-border-success-light"
+      ]
+    },
+    {
+      "token": "--color-success",
+      "name": "success",
+      "value": "rgba(var(--ax-sys-color-success-surface))",
+      "tailwind": [
+        "bg-success",
+        "text-success",
+        "border-success",
+        "bg-success/<opacity>",
+        "text-success/<opacity>",
+        "border-success/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success",
+      "name": "on-success",
+      "value": "rgba(var(--ax-sys-color-on-success-surface))",
+      "tailwind": [
+        "text-on-success",
+        "text-on-success/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success",
+      "name": "border-success",
+      "value": "rgba(var(--ax-sys-color-border-success-surface))",
+      "tailwind": [
+        "border-success",
+        "border-border-success"
+      ]
+    },
+    {
+      "token": "--color-success-dark",
+      "name": "success-dark",
+      "value": "rgba(var(--ax-sys-color-success-dark-surface))",
+      "tailwind": [
+        "bg-success-dark",
+        "text-success-dark",
+        "border-success-dark",
+        "bg-success-dark/<opacity>",
+        "text-success-dark/<opacity>",
+        "border-success-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-dark",
+      "name": "on-success-dark",
+      "value": "rgba(var(--ax-sys-color-on-success-dark-surface))",
+      "tailwind": [
+        "text-on-success-dark",
+        "text-on-success-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-dark",
+      "name": "border-success-dark",
+      "value": "rgba(var(--ax-sys-color-border-success-dark-surface))",
+      "tailwind": [
+        "border-success-dark",
+        "border-border-success-dark"
+      ]
+    },
+    {
+      "token": "--color-success-darker",
+      "name": "success-darker",
+      "value": "rgba(var(--ax-sys-color-success-darker-surface))",
+      "tailwind": [
+        "bg-success-darker",
+        "text-success-darker",
+        "border-success-darker",
+        "bg-success-darker/<opacity>",
+        "text-success-darker/<opacity>",
+        "border-success-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-darker",
+      "name": "on-success-darker",
+      "value": "rgba(var(--ax-sys-color-on-success-darker-surface))",
+      "tailwind": [
+        "text-on-success-darker",
+        "text-on-success-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-darker",
+      "name": "border-success-darker",
+      "value": "rgba(var(--ax-sys-color-border-success-darker-surface))",
+      "tailwind": [
+        "border-success-darker",
+        "border-border-success-darker"
+      ]
+    },
+    {
+      "token": "--color-success-darkest",
+      "name": "success-darkest",
+      "value": "rgba(var(--ax-sys-color-success-darkest-surface))",
+      "tailwind": [
+        "bg-success-darkest",
+        "text-success-darkest",
+        "border-success-darkest",
+        "bg-success-darkest/<opacity>",
+        "text-success-darkest/<opacity>",
+        "border-success-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-success-darkest",
+      "name": "on-success-darkest",
+      "value": "rgba(var(--ax-sys-color-on-success-darkest-surface))",
+      "tailwind": [
+        "text-on-success-darkest",
+        "text-on-success-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-success-darkest",
+      "name": "border-success-darkest",
+      "value": "rgba(var(--ax-sys-color-border-success-darkest-surface))",
+      "tailwind": [
+        "border-success-darkest",
+        "border-border-success-darkest"
+      ]
+    },
+    {
+      "token": "--color-warning",
+      "name": "warning",
+      "value": "rgba(var(--ax-sys-color-warning-surface))",
+      "tailwind": [
+        "bg-warning",
+        "text-warning",
+        "border-warning",
+        "bg-warning/<opacity>",
+        "text-warning/<opacity>",
+        "border-warning/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-50",
+      "name": "warning-50",
+      "value": "rgba(var(--ax-sys-color-warning-50))",
+      "tailwind": [
+        "bg-warning-50",
+        "text-warning-50",
+        "border-warning-50",
+        "bg-warning-50/<opacity>",
+        "text-warning-50/<opacity>",
+        "border-warning-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-100",
+      "name": "warning-100",
+      "value": "rgba(var(--ax-sys-color-warning-100))",
+      "tailwind": [
+        "bg-warning-100",
+        "text-warning-100",
+        "border-warning-100",
+        "bg-warning-100/<opacity>",
+        "text-warning-100/<opacity>",
+        "border-warning-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-200",
+      "name": "warning-200",
+      "value": "rgba(var(--ax-sys-color-warning-200))",
+      "tailwind": [
+        "bg-warning-200",
+        "text-warning-200",
+        "border-warning-200",
+        "bg-warning-200/<opacity>",
+        "text-warning-200/<opacity>",
+        "border-warning-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-300",
+      "name": "warning-300",
+      "value": "rgba(var(--ax-sys-color-warning-300))",
+      "tailwind": [
+        "bg-warning-300",
+        "text-warning-300",
+        "border-warning-300",
+        "bg-warning-300/<opacity>",
+        "text-warning-300/<opacity>",
+        "border-warning-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-400",
+      "name": "warning-400",
+      "value": "rgba(var(--ax-sys-color-warning-400))",
+      "tailwind": [
+        "bg-warning-400",
+        "text-warning-400",
+        "border-warning-400",
+        "bg-warning-400/<opacity>",
+        "text-warning-400/<opacity>",
+        "border-warning-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-500",
+      "name": "warning-500",
+      "value": "rgba(var(--ax-sys-color-warning-500))",
+      "tailwind": [
+        "bg-warning-500",
+        "text-warning-500",
+        "border-warning-500",
+        "bg-warning-500/<opacity>",
+        "text-warning-500/<opacity>",
+        "border-warning-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-600",
+      "name": "warning-600",
+      "value": "rgba(var(--ax-sys-color-warning-600))",
+      "tailwind": [
+        "bg-warning-600",
+        "text-warning-600",
+        "border-warning-600",
+        "bg-warning-600/<opacity>",
+        "text-warning-600/<opacity>",
+        "border-warning-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-700",
+      "name": "warning-700",
+      "value": "rgba(var(--ax-sys-color-warning-700))",
+      "tailwind": [
+        "bg-warning-700",
+        "text-warning-700",
+        "border-warning-700",
+        "bg-warning-700/<opacity>",
+        "text-warning-700/<opacity>",
+        "border-warning-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-800",
+      "name": "warning-800",
+      "value": "rgba(var(--ax-sys-color-warning-800))",
+      "tailwind": [
+        "bg-warning-800",
+        "text-warning-800",
+        "border-warning-800",
+        "bg-warning-800/<opacity>",
+        "text-warning-800/<opacity>",
+        "border-warning-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-900",
+      "name": "warning-900",
+      "value": "rgba(var(--ax-sys-color-warning-900))",
+      "tailwind": [
+        "bg-warning-900",
+        "text-warning-900",
+        "border-warning-900",
+        "bg-warning-900/<opacity>",
+        "text-warning-900/<opacity>",
+        "border-warning-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-950",
+      "name": "warning-950",
+      "value": "rgba(var(--ax-sys-color-warning-950))",
+      "tailwind": [
+        "bg-warning-950",
+        "text-warning-950",
+        "border-warning-950",
+        "bg-warning-950/<opacity>",
+        "text-warning-950/<opacity>",
+        "border-warning-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-warning-lightest",
+      "name": "warning-lightest",
+      "value": "rgba(var(--ax-sys-color-warning-lightest-surface))",
+      "tailwind": [
+        "bg-warning-lightest",
+        "text-warning-lightest",
+        "border-warning-lightest",
+        "bg-warning-lightest/<opacity>",
+        "text-warning-lightest/<opacity>",
+        "border-warning-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-lightest",
+      "name": "on-warning-lightest",
+      "value": "rgba(var(--ax-sys-color-on-warning-lightest-surface))",
+      "tailwind": [
+        "text-on-warning-lightest",
+        "text-on-warning-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-lightest",
+      "name": "border-warning-lightest",
+      "value": "rgba(var(--ax-sys-color-border-warning-lightest-surface))",
+      "tailwind": [
+        "border-warning-lightest",
+        "border-border-warning-lightest"
+      ]
+    },
+    {
+      "token": "--color-warning-lighter",
+      "name": "warning-lighter",
+      "value": "rgba(var(--ax-sys-color-warning-lighter-surface))",
+      "tailwind": [
+        "bg-warning-lighter",
+        "text-warning-lighter",
+        "border-warning-lighter",
+        "bg-warning-lighter/<opacity>",
+        "text-warning-lighter/<opacity>",
+        "border-warning-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-lighter",
+      "name": "on-warning-lighter",
+      "value": "rgba(var(--ax-sys-color-on-warning-lighter-surface))",
+      "tailwind": [
+        "text-on-warning-lighter",
+        "text-on-warning-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-lighter",
+      "name": "border-warning-lighter",
+      "value": "rgba(var(--ax-sys-color-border-warning-lighter-surface))",
+      "tailwind": [
+        "border-warning-lighter",
+        "border-border-warning-lighter"
+      ]
+    },
+    {
+      "token": "--color-warning-light",
+      "name": "warning-light",
+      "value": "rgba(var(--ax-sys-color-warning-light-surface))",
+      "tailwind": [
+        "bg-warning-light",
+        "text-warning-light",
+        "border-warning-light",
+        "bg-warning-light/<opacity>",
+        "text-warning-light/<opacity>",
+        "border-warning-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-light",
+      "name": "on-warning-light",
+      "value": "rgba(var(--ax-sys-color-on-warning-light-surface))",
+      "tailwind": [
+        "text-on-warning-light",
+        "text-on-warning-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-light",
+      "name": "border-warning-light",
+      "value": "rgba(var(--ax-sys-color-border-warning-light-surface))",
+      "tailwind": [
+        "border-warning-light",
+        "border-border-warning-light"
+      ]
+    },
+    {
+      "token": "--color-warning",
+      "name": "warning",
+      "value": "rgba(var(--ax-sys-color-warning-surface))",
+      "tailwind": [
+        "bg-warning",
+        "text-warning",
+        "border-warning",
+        "bg-warning/<opacity>",
+        "text-warning/<opacity>",
+        "border-warning/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning",
+      "name": "on-warning",
+      "value": "rgba(var(--ax-sys-color-on-warning-surface))",
+      "tailwind": [
+        "text-on-warning",
+        "text-on-warning/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning",
+      "name": "border-warning",
+      "value": "rgba(var(--ax-sys-color-border-warning-surface))",
+      "tailwind": [
+        "border-warning",
+        "border-border-warning"
+      ]
+    },
+    {
+      "token": "--color-warning-dark",
+      "name": "warning-dark",
+      "value": "rgba(var(--ax-sys-color-warning-dark-surface))",
+      "tailwind": [
+        "bg-warning-dark",
+        "text-warning-dark",
+        "border-warning-dark",
+        "bg-warning-dark/<opacity>",
+        "text-warning-dark/<opacity>",
+        "border-warning-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-dark",
+      "name": "on-warning-dark",
+      "value": "rgba(var(--ax-sys-color-on-warning-dark-surface))",
+      "tailwind": [
+        "text-on-warning-dark",
+        "text-on-warning-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-dark",
+      "name": "border-warning-dark",
+      "value": "rgba(var(--ax-sys-color-border-warning-dark-surface))",
+      "tailwind": [
+        "border-warning-dark",
+        "border-border-warning-dark"
+      ]
+    },
+    {
+      "token": "--color-warning-darker",
+      "name": "warning-darker",
+      "value": "rgba(var(--ax-sys-color-warning-darker-surface))",
+      "tailwind": [
+        "bg-warning-darker",
+        "text-warning-darker",
+        "border-warning-darker",
+        "bg-warning-darker/<opacity>",
+        "text-warning-darker/<opacity>",
+        "border-warning-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-darker",
+      "name": "on-warning-darker",
+      "value": "rgba(var(--ax-sys-color-on-warning-darker-surface))",
+      "tailwind": [
+        "text-on-warning-darker",
+        "text-on-warning-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-darker",
+      "name": "border-warning-darker",
+      "value": "rgba(var(--ax-sys-color-border-warning-darker-surface))",
+      "tailwind": [
+        "border-warning-darker",
+        "border-border-warning-darker"
+      ]
+    },
+    {
+      "token": "--color-warning-darkest",
+      "name": "warning-darkest",
+      "value": "rgba(var(--ax-sys-color-warning-darkest-surface))",
+      "tailwind": [
+        "bg-warning-darkest",
+        "text-warning-darkest",
+        "border-warning-darkest",
+        "bg-warning-darkest/<opacity>",
+        "text-warning-darkest/<opacity>",
+        "border-warning-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-warning-darkest",
+      "name": "on-warning-darkest",
+      "value": "rgba(var(--ax-sys-color-on-warning-darkest-surface))",
+      "tailwind": [
+        "text-on-warning-darkest",
+        "text-on-warning-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-warning-darkest",
+      "name": "border-warning-darkest",
+      "value": "rgba(var(--ax-sys-color-border-warning-darkest-surface))",
+      "tailwind": [
+        "border-warning-darkest",
+        "border-border-warning-darkest"
+      ]
+    },
+    {
+      "token": "--color-danger",
+      "name": "danger",
+      "value": "rgba(var(--ax-sys-color-danger-surface))",
+      "tailwind": [
+        "bg-danger",
+        "text-danger",
+        "border-danger",
+        "bg-danger/<opacity>",
+        "text-danger/<opacity>",
+        "border-danger/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-50",
+      "name": "danger-50",
+      "value": "rgba(var(--ax-sys-color-danger-50))",
+      "tailwind": [
+        "bg-danger-50",
+        "text-danger-50",
+        "border-danger-50",
+        "bg-danger-50/<opacity>",
+        "text-danger-50/<opacity>",
+        "border-danger-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-100",
+      "name": "danger-100",
+      "value": "rgba(var(--ax-sys-color-danger-100))",
+      "tailwind": [
+        "bg-danger-100",
+        "text-danger-100",
+        "border-danger-100",
+        "bg-danger-100/<opacity>",
+        "text-danger-100/<opacity>",
+        "border-danger-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-200",
+      "name": "danger-200",
+      "value": "rgba(var(--ax-sys-color-danger-200))",
+      "tailwind": [
+        "bg-danger-200",
+        "text-danger-200",
+        "border-danger-200",
+        "bg-danger-200/<opacity>",
+        "text-danger-200/<opacity>",
+        "border-danger-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-300",
+      "name": "danger-300",
+      "value": "rgba(var(--ax-sys-color-danger-300))",
+      "tailwind": [
+        "bg-danger-300",
+        "text-danger-300",
+        "border-danger-300",
+        "bg-danger-300/<opacity>",
+        "text-danger-300/<opacity>",
+        "border-danger-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-400",
+      "name": "danger-400",
+      "value": "rgba(var(--ax-sys-color-danger-400))",
+      "tailwind": [
+        "bg-danger-400",
+        "text-danger-400",
+        "border-danger-400",
+        "bg-danger-400/<opacity>",
+        "text-danger-400/<opacity>",
+        "border-danger-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-500",
+      "name": "danger-500",
+      "value": "rgba(var(--ax-sys-color-danger-500))",
+      "tailwind": [
+        "bg-danger-500",
+        "text-danger-500",
+        "border-danger-500",
+        "bg-danger-500/<opacity>",
+        "text-danger-500/<opacity>",
+        "border-danger-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-600",
+      "name": "danger-600",
+      "value": "rgba(var(--ax-sys-color-danger-600))",
+      "tailwind": [
+        "bg-danger-600",
+        "text-danger-600",
+        "border-danger-600",
+        "bg-danger-600/<opacity>",
+        "text-danger-600/<opacity>",
+        "border-danger-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-700",
+      "name": "danger-700",
+      "value": "rgba(var(--ax-sys-color-danger-700))",
+      "tailwind": [
+        "bg-danger-700",
+        "text-danger-700",
+        "border-danger-700",
+        "bg-danger-700/<opacity>",
+        "text-danger-700/<opacity>",
+        "border-danger-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-800",
+      "name": "danger-800",
+      "value": "rgba(var(--ax-sys-color-danger-800))",
+      "tailwind": [
+        "bg-danger-800",
+        "text-danger-800",
+        "border-danger-800",
+        "bg-danger-800/<opacity>",
+        "text-danger-800/<opacity>",
+        "border-danger-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-900",
+      "name": "danger-900",
+      "value": "rgba(var(--ax-sys-color-danger-900))",
+      "tailwind": [
+        "bg-danger-900",
+        "text-danger-900",
+        "border-danger-900",
+        "bg-danger-900/<opacity>",
+        "text-danger-900/<opacity>",
+        "border-danger-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-950",
+      "name": "danger-950",
+      "value": "rgba(var(--ax-sys-color-danger-950))",
+      "tailwind": [
+        "bg-danger-950",
+        "text-danger-950",
+        "border-danger-950",
+        "bg-danger-950/<opacity>",
+        "text-danger-950/<opacity>",
+        "border-danger-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-danger-lightest",
+      "name": "danger-lightest",
+      "value": "rgba(var(--ax-sys-color-danger-lightest-surface))",
+      "tailwind": [
+        "bg-danger-lightest",
+        "text-danger-lightest",
+        "border-danger-lightest",
+        "bg-danger-lightest/<opacity>",
+        "text-danger-lightest/<opacity>",
+        "border-danger-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-lightest",
+      "name": "on-danger-lightest",
+      "value": "rgba(var(--ax-sys-color-on-danger-lightest-surface))",
+      "tailwind": [
+        "text-on-danger-lightest",
+        "text-on-danger-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-lightest",
+      "name": "border-danger-lightest",
+      "value": "rgba(var(--ax-sys-color-border-danger-lightest-surface))",
+      "tailwind": [
+        "border-danger-lightest",
+        "border-border-danger-lightest"
+      ]
+    },
+    {
+      "token": "--color-danger-lighter",
+      "name": "danger-lighter",
+      "value": "rgba(var(--ax-sys-color-danger-lighter-surface))",
+      "tailwind": [
+        "bg-danger-lighter",
+        "text-danger-lighter",
+        "border-danger-lighter",
+        "bg-danger-lighter/<opacity>",
+        "text-danger-lighter/<opacity>",
+        "border-danger-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-lighter",
+      "name": "on-danger-lighter",
+      "value": "rgba(var(--ax-sys-color-on-danger-lighter-surface))",
+      "tailwind": [
+        "text-on-danger-lighter",
+        "text-on-danger-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-lighter",
+      "name": "border-danger-lighter",
+      "value": "rgba(var(--ax-sys-color-border-danger-lighter-surface))",
+      "tailwind": [
+        "border-danger-lighter",
+        "border-border-danger-lighter"
+      ]
+    },
+    {
+      "token": "--color-danger-light",
+      "name": "danger-light",
+      "value": "rgba(var(--ax-sys-color-danger-light-surface))",
+      "tailwind": [
+        "bg-danger-light",
+        "text-danger-light",
+        "border-danger-light",
+        "bg-danger-light/<opacity>",
+        "text-danger-light/<opacity>",
+        "border-danger-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-light",
+      "name": "on-danger-light",
+      "value": "rgba(var(--ax-sys-color-on-danger-light-surface))",
+      "tailwind": [
+        "text-on-danger-light",
+        "text-on-danger-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-light",
+      "name": "border-danger-light",
+      "value": "rgba(var(--ax-sys-color-border-danger-light-surface))",
+      "tailwind": [
+        "border-danger-light",
+        "border-border-danger-light"
+      ]
+    },
+    {
+      "token": "--color-danger",
+      "name": "danger",
+      "value": "rgba(var(--ax-sys-color-danger-surface))",
+      "tailwind": [
+        "bg-danger",
+        "text-danger",
+        "border-danger",
+        "bg-danger/<opacity>",
+        "text-danger/<opacity>",
+        "border-danger/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger",
+      "name": "on-danger",
+      "value": "rgba(var(--ax-sys-color-on-danger-surface))",
+      "tailwind": [
+        "text-on-danger",
+        "text-on-danger/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger",
+      "name": "border-danger",
+      "value": "rgba(var(--ax-sys-color-border-danger-surface))",
+      "tailwind": [
+        "border-danger",
+        "border-border-danger"
+      ]
+    },
+    {
+      "token": "--color-danger-dark",
+      "name": "danger-dark",
+      "value": "rgba(var(--ax-sys-color-danger-dark-surface))",
+      "tailwind": [
+        "bg-danger-dark",
+        "text-danger-dark",
+        "border-danger-dark",
+        "bg-danger-dark/<opacity>",
+        "text-danger-dark/<opacity>",
+        "border-danger-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-dark",
+      "name": "on-danger-dark",
+      "value": "rgba(var(--ax-sys-color-on-danger-dark-surface))",
+      "tailwind": [
+        "text-on-danger-dark",
+        "text-on-danger-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-dark",
+      "name": "border-danger-dark",
+      "value": "rgba(var(--ax-sys-color-border-danger-dark-surface))",
+      "tailwind": [
+        "border-danger-dark",
+        "border-border-danger-dark"
+      ]
+    },
+    {
+      "token": "--color-danger-darker",
+      "name": "danger-darker",
+      "value": "rgba(var(--ax-sys-color-danger-darker-surface))",
+      "tailwind": [
+        "bg-danger-darker",
+        "text-danger-darker",
+        "border-danger-darker",
+        "bg-danger-darker/<opacity>",
+        "text-danger-darker/<opacity>",
+        "border-danger-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-darker",
+      "name": "on-danger-darker",
+      "value": "rgba(var(--ax-sys-color-on-danger-darker-surface))",
+      "tailwind": [
+        "text-on-danger-darker",
+        "text-on-danger-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-darker",
+      "name": "border-danger-darker",
+      "value": "rgba(var(--ax-sys-color-border-danger-darker-surface))",
+      "tailwind": [
+        "border-danger-darker",
+        "border-border-danger-darker"
+      ]
+    },
+    {
+      "token": "--color-danger-darkest",
+      "name": "danger-darkest",
+      "value": "rgba(var(--ax-sys-color-danger-darkest-surface))",
+      "tailwind": [
+        "bg-danger-darkest",
+        "text-danger-darkest",
+        "border-danger-darkest",
+        "bg-danger-darkest/<opacity>",
+        "text-danger-darkest/<opacity>",
+        "border-danger-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-danger-darkest",
+      "name": "on-danger-darkest",
+      "value": "rgba(var(--ax-sys-color-on-danger-darkest-surface))",
+      "tailwind": [
+        "text-on-danger-darkest",
+        "text-on-danger-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-danger-darkest",
+      "name": "border-danger-darkest",
+      "value": "rgba(var(--ax-sys-color-border-danger-darkest-surface))",
+      "tailwind": [
+        "border-danger-darkest",
+        "border-border-danger-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent",
+      "name": "accent",
+      "value": "rgba(var(--ax-sys-color-accent-surface))",
+      "tailwind": [
+        "bg-accent",
+        "text-accent",
+        "border-accent",
+        "bg-accent/<opacity>",
+        "text-accent/<opacity>",
+        "border-accent/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-50",
+      "name": "accent-50",
+      "value": "rgba(var(--ax-sys-color-accent-50))",
+      "tailwind": [
+        "bg-accent-50",
+        "text-accent-50",
+        "border-accent-50",
+        "bg-accent-50/<opacity>",
+        "text-accent-50/<opacity>",
+        "border-accent-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-100",
+      "name": "accent-100",
+      "value": "rgba(var(--ax-sys-color-accent-100))",
+      "tailwind": [
+        "bg-accent-100",
+        "text-accent-100",
+        "border-accent-100",
+        "bg-accent-100/<opacity>",
+        "text-accent-100/<opacity>",
+        "border-accent-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-200",
+      "name": "accent-200",
+      "value": "rgba(var(--ax-sys-color-accent-200))",
+      "tailwind": [
+        "bg-accent-200",
+        "text-accent-200",
+        "border-accent-200",
+        "bg-accent-200/<opacity>",
+        "text-accent-200/<opacity>",
+        "border-accent-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-300",
+      "name": "accent-300",
+      "value": "rgba(var(--ax-sys-color-accent-300))",
+      "tailwind": [
+        "bg-accent-300",
+        "text-accent-300",
+        "border-accent-300",
+        "bg-accent-300/<opacity>",
+        "text-accent-300/<opacity>",
+        "border-accent-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-400",
+      "name": "accent-400",
+      "value": "rgba(var(--ax-sys-color-accent-400))",
+      "tailwind": [
+        "bg-accent-400",
+        "text-accent-400",
+        "border-accent-400",
+        "bg-accent-400/<opacity>",
+        "text-accent-400/<opacity>",
+        "border-accent-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-500",
+      "name": "accent-500",
+      "value": "rgba(var(--ax-sys-color-accent-500))",
+      "tailwind": [
+        "bg-accent-500",
+        "text-accent-500",
+        "border-accent-500",
+        "bg-accent-500/<opacity>",
+        "text-accent-500/<opacity>",
+        "border-accent-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-600",
+      "name": "accent-600",
+      "value": "rgba(var(--ax-sys-color-accent-600))",
+      "tailwind": [
+        "bg-accent-600",
+        "text-accent-600",
+        "border-accent-600",
+        "bg-accent-600/<opacity>",
+        "text-accent-600/<opacity>",
+        "border-accent-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-700",
+      "name": "accent-700",
+      "value": "rgba(var(--ax-sys-color-accent-700))",
+      "tailwind": [
+        "bg-accent-700",
+        "text-accent-700",
+        "border-accent-700",
+        "bg-accent-700/<opacity>",
+        "text-accent-700/<opacity>",
+        "border-accent-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-800",
+      "name": "accent-800",
+      "value": "rgba(var(--ax-sys-color-accent-800))",
+      "tailwind": [
+        "bg-accent-800",
+        "text-accent-800",
+        "border-accent-800",
+        "bg-accent-800/<opacity>",
+        "text-accent-800/<opacity>",
+        "border-accent-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-900",
+      "name": "accent-900",
+      "value": "rgba(var(--ax-sys-color-accent-900))",
+      "tailwind": [
+        "bg-accent-900",
+        "text-accent-900",
+        "border-accent-900",
+        "bg-accent-900/<opacity>",
+        "text-accent-900/<opacity>",
+        "border-accent-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-950",
+      "name": "accent-950",
+      "value": "rgba(var(--ax-sys-color-accent-950))",
+      "tailwind": [
+        "bg-accent-950",
+        "text-accent-950",
+        "border-accent-950",
+        "bg-accent-950/<opacity>",
+        "text-accent-950/<opacity>",
+        "border-accent-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent-lightest",
+      "name": "accent-lightest",
+      "value": "rgba(var(--ax-sys-color-accent-lightest-surface))",
+      "tailwind": [
+        "bg-accent-lightest",
+        "text-accent-lightest",
+        "border-accent-lightest",
+        "bg-accent-lightest/<opacity>",
+        "text-accent-lightest/<opacity>",
+        "border-accent-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-lightest",
+      "name": "on-accent-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent-lightest-surface))",
+      "tailwind": [
+        "text-on-accent-lightest",
+        "text-on-accent-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-lightest",
+      "name": "border-accent-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent-lightest-surface))",
+      "tailwind": [
+        "border-accent-lightest",
+        "border-border-accent-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent-lighter",
+      "name": "accent-lighter",
+      "value": "rgba(var(--ax-sys-color-accent-lighter-surface))",
+      "tailwind": [
+        "bg-accent-lighter",
+        "text-accent-lighter",
+        "border-accent-lighter",
+        "bg-accent-lighter/<opacity>",
+        "text-accent-lighter/<opacity>",
+        "border-accent-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-lighter",
+      "name": "on-accent-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent-lighter-surface))",
+      "tailwind": [
+        "text-on-accent-lighter",
+        "text-on-accent-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-lighter",
+      "name": "border-accent-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent-lighter-surface))",
+      "tailwind": [
+        "border-accent-lighter",
+        "border-border-accent-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent-light",
+      "name": "accent-light",
+      "value": "rgba(var(--ax-sys-color-accent-light-surface))",
+      "tailwind": [
+        "bg-accent-light",
+        "text-accent-light",
+        "border-accent-light",
+        "bg-accent-light/<opacity>",
+        "text-accent-light/<opacity>",
+        "border-accent-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-light",
+      "name": "on-accent-light",
+      "value": "rgba(var(--ax-sys-color-on-accent-light-surface))",
+      "tailwind": [
+        "text-on-accent-light",
+        "text-on-accent-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-light",
+      "name": "border-accent-light",
+      "value": "rgba(var(--ax-sys-color-border-accent-light-surface))",
+      "tailwind": [
+        "border-accent-light",
+        "border-border-accent-light"
+      ]
+    },
+    {
+      "token": "--color-accent",
+      "name": "accent",
+      "value": "rgba(var(--ax-sys-color-accent-surface))",
+      "tailwind": [
+        "bg-accent",
+        "text-accent",
+        "border-accent",
+        "bg-accent/<opacity>",
+        "text-accent/<opacity>",
+        "border-accent/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent",
+      "name": "on-accent",
+      "value": "rgba(var(--ax-sys-color-on-accent-surface))",
+      "tailwind": [
+        "text-on-accent",
+        "text-on-accent/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent",
+      "name": "border-accent",
+      "value": "rgba(var(--ax-sys-color-border-accent-surface))",
+      "tailwind": [
+        "border-accent",
+        "border-border-accent"
+      ]
+    },
+    {
+      "token": "--color-accent-dark",
+      "name": "accent-dark",
+      "value": "rgba(var(--ax-sys-color-accent-dark-surface))",
+      "tailwind": [
+        "bg-accent-dark",
+        "text-accent-dark",
+        "border-accent-dark",
+        "bg-accent-dark/<opacity>",
+        "text-accent-dark/<opacity>",
+        "border-accent-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-dark",
+      "name": "on-accent-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent-dark-surface))",
+      "tailwind": [
+        "text-on-accent-dark",
+        "text-on-accent-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-dark",
+      "name": "border-accent-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent-dark-surface))",
+      "tailwind": [
+        "border-accent-dark",
+        "border-border-accent-dark"
+      ]
+    },
+    {
+      "token": "--color-accent-darker",
+      "name": "accent-darker",
+      "value": "rgba(var(--ax-sys-color-accent-darker-surface))",
+      "tailwind": [
+        "bg-accent-darker",
+        "text-accent-darker",
+        "border-accent-darker",
+        "bg-accent-darker/<opacity>",
+        "text-accent-darker/<opacity>",
+        "border-accent-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-darker",
+      "name": "on-accent-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent-darker-surface))",
+      "tailwind": [
+        "text-on-accent-darker",
+        "text-on-accent-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-darker",
+      "name": "border-accent-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent-darker-surface))",
+      "tailwind": [
+        "border-accent-darker",
+        "border-border-accent-darker"
+      ]
+    },
+    {
+      "token": "--color-accent-darkest",
+      "name": "accent-darkest",
+      "value": "rgba(var(--ax-sys-color-accent-darkest-surface))",
+      "tailwind": [
+        "bg-accent-darkest",
+        "text-accent-darkest",
+        "border-accent-darkest",
+        "bg-accent-darkest/<opacity>",
+        "text-accent-darkest/<opacity>",
+        "border-accent-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent-darkest",
+      "name": "on-accent-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent-darkest-surface))",
+      "tailwind": [
+        "text-on-accent-darkest",
+        "text-on-accent-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent-darkest",
+      "name": "border-accent-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent-darkest-surface))",
+      "tailwind": [
+        "border-accent-darkest",
+        "border-border-accent-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent1",
+      "name": "accent1",
+      "value": "rgba(var(--ax-sys-color-accent1-surface))",
+      "tailwind": [
+        "bg-accent1",
+        "text-accent1",
+        "border-accent1",
+        "bg-accent1/<opacity>",
+        "text-accent1/<opacity>",
+        "border-accent1/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-50",
+      "name": "accent1-50",
+      "value": "rgba(var(--ax-sys-color-accent1-50))",
+      "tailwind": [
+        "bg-accent1-50",
+        "text-accent1-50",
+        "border-accent1-50",
+        "bg-accent1-50/<opacity>",
+        "text-accent1-50/<opacity>",
+        "border-accent1-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-100",
+      "name": "accent1-100",
+      "value": "rgba(var(--ax-sys-color-accent1-100))",
+      "tailwind": [
+        "bg-accent1-100",
+        "text-accent1-100",
+        "border-accent1-100",
+        "bg-accent1-100/<opacity>",
+        "text-accent1-100/<opacity>",
+        "border-accent1-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-200",
+      "name": "accent1-200",
+      "value": "rgba(var(--ax-sys-color-accent1-200))",
+      "tailwind": [
+        "bg-accent1-200",
+        "text-accent1-200",
+        "border-accent1-200",
+        "bg-accent1-200/<opacity>",
+        "text-accent1-200/<opacity>",
+        "border-accent1-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-300",
+      "name": "accent1-300",
+      "value": "rgba(var(--ax-sys-color-accent1-300))",
+      "tailwind": [
+        "bg-accent1-300",
+        "text-accent1-300",
+        "border-accent1-300",
+        "bg-accent1-300/<opacity>",
+        "text-accent1-300/<opacity>",
+        "border-accent1-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-400",
+      "name": "accent1-400",
+      "value": "rgba(var(--ax-sys-color-accent1-400))",
+      "tailwind": [
+        "bg-accent1-400",
+        "text-accent1-400",
+        "border-accent1-400",
+        "bg-accent1-400/<opacity>",
+        "text-accent1-400/<opacity>",
+        "border-accent1-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-500",
+      "name": "accent1-500",
+      "value": "rgba(var(--ax-sys-color-accent1-500))",
+      "tailwind": [
+        "bg-accent1-500",
+        "text-accent1-500",
+        "border-accent1-500",
+        "bg-accent1-500/<opacity>",
+        "text-accent1-500/<opacity>",
+        "border-accent1-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-600",
+      "name": "accent1-600",
+      "value": "rgba(var(--ax-sys-color-accent1-600))",
+      "tailwind": [
+        "bg-accent1-600",
+        "text-accent1-600",
+        "border-accent1-600",
+        "bg-accent1-600/<opacity>",
+        "text-accent1-600/<opacity>",
+        "border-accent1-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-700",
+      "name": "accent1-700",
+      "value": "rgba(var(--ax-sys-color-accent1-700))",
+      "tailwind": [
+        "bg-accent1-700",
+        "text-accent1-700",
+        "border-accent1-700",
+        "bg-accent1-700/<opacity>",
+        "text-accent1-700/<opacity>",
+        "border-accent1-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-800",
+      "name": "accent1-800",
+      "value": "rgba(var(--ax-sys-color-accent1-800))",
+      "tailwind": [
+        "bg-accent1-800",
+        "text-accent1-800",
+        "border-accent1-800",
+        "bg-accent1-800/<opacity>",
+        "text-accent1-800/<opacity>",
+        "border-accent1-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-900",
+      "name": "accent1-900",
+      "value": "rgba(var(--ax-sys-color-accent1-900))",
+      "tailwind": [
+        "bg-accent1-900",
+        "text-accent1-900",
+        "border-accent1-900",
+        "bg-accent1-900/<opacity>",
+        "text-accent1-900/<opacity>",
+        "border-accent1-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-950",
+      "name": "accent1-950",
+      "value": "rgba(var(--ax-sys-color-accent1-950))",
+      "tailwind": [
+        "bg-accent1-950",
+        "text-accent1-950",
+        "border-accent1-950",
+        "bg-accent1-950/<opacity>",
+        "text-accent1-950/<opacity>",
+        "border-accent1-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent1-lightest",
+      "name": "accent1-lightest",
+      "value": "rgba(var(--ax-sys-color-accent1-lightest-surface))",
+      "tailwind": [
+        "bg-accent1-lightest",
+        "text-accent1-lightest",
+        "border-accent1-lightest",
+        "bg-accent1-lightest/<opacity>",
+        "text-accent1-lightest/<opacity>",
+        "border-accent1-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-lightest",
+      "name": "on-accent1-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent1-lightest-surface))",
+      "tailwind": [
+        "text-on-accent1-lightest",
+        "text-on-accent1-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-lightest",
+      "name": "border-accent1-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent1-lightest-surface))",
+      "tailwind": [
+        "border-accent1-lightest",
+        "border-border-accent1-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent1-lighter",
+      "name": "accent1-lighter",
+      "value": "rgba(var(--ax-sys-color-accent1-lighter-surface))",
+      "tailwind": [
+        "bg-accent1-lighter",
+        "text-accent1-lighter",
+        "border-accent1-lighter",
+        "bg-accent1-lighter/<opacity>",
+        "text-accent1-lighter/<opacity>",
+        "border-accent1-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-lighter",
+      "name": "on-accent1-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent1-lighter-surface))",
+      "tailwind": [
+        "text-on-accent1-lighter",
+        "text-on-accent1-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-lighter",
+      "name": "border-accent1-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent1-lighter-surface))",
+      "tailwind": [
+        "border-accent1-lighter",
+        "border-border-accent1-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent1-light",
+      "name": "accent1-light",
+      "value": "rgba(var(--ax-sys-color-accent1-light-surface))",
+      "tailwind": [
+        "bg-accent1-light",
+        "text-accent1-light",
+        "border-accent1-light",
+        "bg-accent1-light/<opacity>",
+        "text-accent1-light/<opacity>",
+        "border-accent1-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-light",
+      "name": "on-accent1-light",
+      "value": "rgba(var(--ax-sys-color-on-accent1-light-surface))",
+      "tailwind": [
+        "text-on-accent1-light",
+        "text-on-accent1-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-light",
+      "name": "border-accent1-light",
+      "value": "rgba(var(--ax-sys-color-border-accent1-light-surface))",
+      "tailwind": [
+        "border-accent1-light",
+        "border-border-accent1-light"
+      ]
+    },
+    {
+      "token": "--color-accent1",
+      "name": "accent1",
+      "value": "rgba(var(--ax-sys-color-accent1-surface))",
+      "tailwind": [
+        "bg-accent1",
+        "text-accent1",
+        "border-accent1",
+        "bg-accent1/<opacity>",
+        "text-accent1/<opacity>",
+        "border-accent1/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1",
+      "name": "on-accent1",
+      "value": "rgba(var(--ax-sys-color-on-accent1-surface))",
+      "tailwind": [
+        "text-on-accent1",
+        "text-on-accent1/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1",
+      "name": "border-accent1",
+      "value": "rgba(var(--ax-sys-color-border-accent1-surface))",
+      "tailwind": [
+        "border-accent1",
+        "border-border-accent1"
+      ]
+    },
+    {
+      "token": "--color-accent1-dark",
+      "name": "accent1-dark",
+      "value": "rgba(var(--ax-sys-color-accent1-dark-surface))",
+      "tailwind": [
+        "bg-accent1-dark",
+        "text-accent1-dark",
+        "border-accent1-dark",
+        "bg-accent1-dark/<opacity>",
+        "text-accent1-dark/<opacity>",
+        "border-accent1-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-dark",
+      "name": "on-accent1-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent1-dark-surface))",
+      "tailwind": [
+        "text-on-accent1-dark",
+        "text-on-accent1-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-dark",
+      "name": "border-accent1-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent1-dark-surface))",
+      "tailwind": [
+        "border-accent1-dark",
+        "border-border-accent1-dark"
+      ]
+    },
+    {
+      "token": "--color-accent1-darker",
+      "name": "accent1-darker",
+      "value": "rgba(var(--ax-sys-color-accent1-darker-surface))",
+      "tailwind": [
+        "bg-accent1-darker",
+        "text-accent1-darker",
+        "border-accent1-darker",
+        "bg-accent1-darker/<opacity>",
+        "text-accent1-darker/<opacity>",
+        "border-accent1-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-darker",
+      "name": "on-accent1-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent1-darker-surface))",
+      "tailwind": [
+        "text-on-accent1-darker",
+        "text-on-accent1-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-darker",
+      "name": "border-accent1-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent1-darker-surface))",
+      "tailwind": [
+        "border-accent1-darker",
+        "border-border-accent1-darker"
+      ]
+    },
+    {
+      "token": "--color-accent1-darkest",
+      "name": "accent1-darkest",
+      "value": "rgba(var(--ax-sys-color-accent1-darkest-surface))",
+      "tailwind": [
+        "bg-accent1-darkest",
+        "text-accent1-darkest",
+        "border-accent1-darkest",
+        "bg-accent1-darkest/<opacity>",
+        "text-accent1-darkest/<opacity>",
+        "border-accent1-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent1-darkest",
+      "name": "on-accent1-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent1-darkest-surface))",
+      "tailwind": [
+        "text-on-accent1-darkest",
+        "text-on-accent1-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent1-darkest",
+      "name": "border-accent1-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent1-darkest-surface))",
+      "tailwind": [
+        "border-accent1-darkest",
+        "border-border-accent1-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent2",
+      "name": "accent2",
+      "value": "rgba(var(--ax-sys-color-accent2-surface))",
+      "tailwind": [
+        "bg-accent2",
+        "text-accent2",
+        "border-accent2",
+        "bg-accent2/<opacity>",
+        "text-accent2/<opacity>",
+        "border-accent2/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-50",
+      "name": "accent2-50",
+      "value": "rgba(var(--ax-sys-color-accent2-50))",
+      "tailwind": [
+        "bg-accent2-50",
+        "text-accent2-50",
+        "border-accent2-50",
+        "bg-accent2-50/<opacity>",
+        "text-accent2-50/<opacity>",
+        "border-accent2-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-100",
+      "name": "accent2-100",
+      "value": "rgba(var(--ax-sys-color-accent2-100))",
+      "tailwind": [
+        "bg-accent2-100",
+        "text-accent2-100",
+        "border-accent2-100",
+        "bg-accent2-100/<opacity>",
+        "text-accent2-100/<opacity>",
+        "border-accent2-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-200",
+      "name": "accent2-200",
+      "value": "rgba(var(--ax-sys-color-accent2-200))",
+      "tailwind": [
+        "bg-accent2-200",
+        "text-accent2-200",
+        "border-accent2-200",
+        "bg-accent2-200/<opacity>",
+        "text-accent2-200/<opacity>",
+        "border-accent2-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-300",
+      "name": "accent2-300",
+      "value": "rgba(var(--ax-sys-color-accent2-300))",
+      "tailwind": [
+        "bg-accent2-300",
+        "text-accent2-300",
+        "border-accent2-300",
+        "bg-accent2-300/<opacity>",
+        "text-accent2-300/<opacity>",
+        "border-accent2-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-400",
+      "name": "accent2-400",
+      "value": "rgba(var(--ax-sys-color-accent2-400))",
+      "tailwind": [
+        "bg-accent2-400",
+        "text-accent2-400",
+        "border-accent2-400",
+        "bg-accent2-400/<opacity>",
+        "text-accent2-400/<opacity>",
+        "border-accent2-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-500",
+      "name": "accent2-500",
+      "value": "rgba(var(--ax-sys-color-accent2-500))",
+      "tailwind": [
+        "bg-accent2-500",
+        "text-accent2-500",
+        "border-accent2-500",
+        "bg-accent2-500/<opacity>",
+        "text-accent2-500/<opacity>",
+        "border-accent2-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-600",
+      "name": "accent2-600",
+      "value": "rgba(var(--ax-sys-color-accent2-600))",
+      "tailwind": [
+        "bg-accent2-600",
+        "text-accent2-600",
+        "border-accent2-600",
+        "bg-accent2-600/<opacity>",
+        "text-accent2-600/<opacity>",
+        "border-accent2-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-700",
+      "name": "accent2-700",
+      "value": "rgba(var(--ax-sys-color-accent2-700))",
+      "tailwind": [
+        "bg-accent2-700",
+        "text-accent2-700",
+        "border-accent2-700",
+        "bg-accent2-700/<opacity>",
+        "text-accent2-700/<opacity>",
+        "border-accent2-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-800",
+      "name": "accent2-800",
+      "value": "rgba(var(--ax-sys-color-accent2-800))",
+      "tailwind": [
+        "bg-accent2-800",
+        "text-accent2-800",
+        "border-accent2-800",
+        "bg-accent2-800/<opacity>",
+        "text-accent2-800/<opacity>",
+        "border-accent2-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-900",
+      "name": "accent2-900",
+      "value": "rgba(var(--ax-sys-color-accent2-900))",
+      "tailwind": [
+        "bg-accent2-900",
+        "text-accent2-900",
+        "border-accent2-900",
+        "bg-accent2-900/<opacity>",
+        "text-accent2-900/<opacity>",
+        "border-accent2-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-950",
+      "name": "accent2-950",
+      "value": "rgba(var(--ax-sys-color-accent2-950))",
+      "tailwind": [
+        "bg-accent2-950",
+        "text-accent2-950",
+        "border-accent2-950",
+        "bg-accent2-950/<opacity>",
+        "text-accent2-950/<opacity>",
+        "border-accent2-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent2-lightest",
+      "name": "accent2-lightest",
+      "value": "rgba(var(--ax-sys-color-accent2-lightest-surface))",
+      "tailwind": [
+        "bg-accent2-lightest",
+        "text-accent2-lightest",
+        "border-accent2-lightest",
+        "bg-accent2-lightest/<opacity>",
+        "text-accent2-lightest/<opacity>",
+        "border-accent2-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-lightest",
+      "name": "on-accent2-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent2-lightest-surface))",
+      "tailwind": [
+        "text-on-accent2-lightest",
+        "text-on-accent2-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-lightest",
+      "name": "border-accent2-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent2-lightest-surface))",
+      "tailwind": [
+        "border-accent2-lightest",
+        "border-border-accent2-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent2-lighter",
+      "name": "accent2-lighter",
+      "value": "rgba(var(--ax-sys-color-accent2-lighter-surface))",
+      "tailwind": [
+        "bg-accent2-lighter",
+        "text-accent2-lighter",
+        "border-accent2-lighter",
+        "bg-accent2-lighter/<opacity>",
+        "text-accent2-lighter/<opacity>",
+        "border-accent2-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-lighter",
+      "name": "on-accent2-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent2-lighter-surface))",
+      "tailwind": [
+        "text-on-accent2-lighter",
+        "text-on-accent2-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-lighter",
+      "name": "border-accent2-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent2-lighter-surface))",
+      "tailwind": [
+        "border-accent2-lighter",
+        "border-border-accent2-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent2-light",
+      "name": "accent2-light",
+      "value": "rgba(var(--ax-sys-color-accent2-light-surface))",
+      "tailwind": [
+        "bg-accent2-light",
+        "text-accent2-light",
+        "border-accent2-light",
+        "bg-accent2-light/<opacity>",
+        "text-accent2-light/<opacity>",
+        "border-accent2-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-light",
+      "name": "on-accent2-light",
+      "value": "rgba(var(--ax-sys-color-on-accent2-light-surface))",
+      "tailwind": [
+        "text-on-accent2-light",
+        "text-on-accent2-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-light",
+      "name": "border-accent2-light",
+      "value": "rgba(var(--ax-sys-color-border-accent2-light-surface))",
+      "tailwind": [
+        "border-accent2-light",
+        "border-border-accent2-light"
+      ]
+    },
+    {
+      "token": "--color-accent2",
+      "name": "accent2",
+      "value": "rgba(var(--ax-sys-color-accent2-surface))",
+      "tailwind": [
+        "bg-accent2",
+        "text-accent2",
+        "border-accent2",
+        "bg-accent2/<opacity>",
+        "text-accent2/<opacity>",
+        "border-accent2/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2",
+      "name": "on-accent2",
+      "value": "rgba(var(--ax-sys-color-on-accent2-surface))",
+      "tailwind": [
+        "text-on-accent2",
+        "text-on-accent2/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2",
+      "name": "border-accent2",
+      "value": "rgba(var(--ax-sys-color-border-accent2-surface))",
+      "tailwind": [
+        "border-accent2",
+        "border-border-accent2"
+      ]
+    },
+    {
+      "token": "--color-accent2-dark",
+      "name": "accent2-dark",
+      "value": "rgba(var(--ax-sys-color-accent2-dark-surface))",
+      "tailwind": [
+        "bg-accent2-dark",
+        "text-accent2-dark",
+        "border-accent2-dark",
+        "bg-accent2-dark/<opacity>",
+        "text-accent2-dark/<opacity>",
+        "border-accent2-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-dark",
+      "name": "on-accent2-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent2-dark-surface))",
+      "tailwind": [
+        "text-on-accent2-dark",
+        "text-on-accent2-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-dark",
+      "name": "border-accent2-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent2-dark-surface))",
+      "tailwind": [
+        "border-accent2-dark",
+        "border-border-accent2-dark"
+      ]
+    },
+    {
+      "token": "--color-accent2-darker",
+      "name": "accent2-darker",
+      "value": "rgba(var(--ax-sys-color-accent2-darker-surface))",
+      "tailwind": [
+        "bg-accent2-darker",
+        "text-accent2-darker",
+        "border-accent2-darker",
+        "bg-accent2-darker/<opacity>",
+        "text-accent2-darker/<opacity>",
+        "border-accent2-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-darker",
+      "name": "on-accent2-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent2-darker-surface))",
+      "tailwind": [
+        "text-on-accent2-darker",
+        "text-on-accent2-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-darker",
+      "name": "border-accent2-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent2-darker-surface))",
+      "tailwind": [
+        "border-accent2-darker",
+        "border-border-accent2-darker"
+      ]
+    },
+    {
+      "token": "--color-accent2-darkest",
+      "name": "accent2-darkest",
+      "value": "rgba(var(--ax-sys-color-accent2-darkest-surface))",
+      "tailwind": [
+        "bg-accent2-darkest",
+        "text-accent2-darkest",
+        "border-accent2-darkest",
+        "bg-accent2-darkest/<opacity>",
+        "text-accent2-darkest/<opacity>",
+        "border-accent2-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent2-darkest",
+      "name": "on-accent2-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent2-darkest-surface))",
+      "tailwind": [
+        "text-on-accent2-darkest",
+        "text-on-accent2-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent2-darkest",
+      "name": "border-accent2-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent2-darkest-surface))",
+      "tailwind": [
+        "border-accent2-darkest",
+        "border-border-accent2-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent3",
+      "name": "accent3",
+      "value": "rgba(var(--ax-sys-color-accent3-surface))",
+      "tailwind": [
+        "bg-accent3",
+        "text-accent3",
+        "border-accent3",
+        "bg-accent3/<opacity>",
+        "text-accent3/<opacity>",
+        "border-accent3/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-50",
+      "name": "accent3-50",
+      "value": "rgba(var(--ax-sys-color-accent3-50))",
+      "tailwind": [
+        "bg-accent3-50",
+        "text-accent3-50",
+        "border-accent3-50",
+        "bg-accent3-50/<opacity>",
+        "text-accent3-50/<opacity>",
+        "border-accent3-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-100",
+      "name": "accent3-100",
+      "value": "rgba(var(--ax-sys-color-accent3-100))",
+      "tailwind": [
+        "bg-accent3-100",
+        "text-accent3-100",
+        "border-accent3-100",
+        "bg-accent3-100/<opacity>",
+        "text-accent3-100/<opacity>",
+        "border-accent3-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-200",
+      "name": "accent3-200",
+      "value": "rgba(var(--ax-sys-color-accent3-200))",
+      "tailwind": [
+        "bg-accent3-200",
+        "text-accent3-200",
+        "border-accent3-200",
+        "bg-accent3-200/<opacity>",
+        "text-accent3-200/<opacity>",
+        "border-accent3-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-300",
+      "name": "accent3-300",
+      "value": "rgba(var(--ax-sys-color-accent3-300))",
+      "tailwind": [
+        "bg-accent3-300",
+        "text-accent3-300",
+        "border-accent3-300",
+        "bg-accent3-300/<opacity>",
+        "text-accent3-300/<opacity>",
+        "border-accent3-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-400",
+      "name": "accent3-400",
+      "value": "rgba(var(--ax-sys-color-accent3-400))",
+      "tailwind": [
+        "bg-accent3-400",
+        "text-accent3-400",
+        "border-accent3-400",
+        "bg-accent3-400/<opacity>",
+        "text-accent3-400/<opacity>",
+        "border-accent3-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-500",
+      "name": "accent3-500",
+      "value": "rgba(var(--ax-sys-color-accent3-500))",
+      "tailwind": [
+        "bg-accent3-500",
+        "text-accent3-500",
+        "border-accent3-500",
+        "bg-accent3-500/<opacity>",
+        "text-accent3-500/<opacity>",
+        "border-accent3-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-600",
+      "name": "accent3-600",
+      "value": "rgba(var(--ax-sys-color-accent3-600))",
+      "tailwind": [
+        "bg-accent3-600",
+        "text-accent3-600",
+        "border-accent3-600",
+        "bg-accent3-600/<opacity>",
+        "text-accent3-600/<opacity>",
+        "border-accent3-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-700",
+      "name": "accent3-700",
+      "value": "rgba(var(--ax-sys-color-accent3-700))",
+      "tailwind": [
+        "bg-accent3-700",
+        "text-accent3-700",
+        "border-accent3-700",
+        "bg-accent3-700/<opacity>",
+        "text-accent3-700/<opacity>",
+        "border-accent3-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-800",
+      "name": "accent3-800",
+      "value": "rgba(var(--ax-sys-color-accent3-800))",
+      "tailwind": [
+        "bg-accent3-800",
+        "text-accent3-800",
+        "border-accent3-800",
+        "bg-accent3-800/<opacity>",
+        "text-accent3-800/<opacity>",
+        "border-accent3-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-900",
+      "name": "accent3-900",
+      "value": "rgba(var(--ax-sys-color-accent3-900))",
+      "tailwind": [
+        "bg-accent3-900",
+        "text-accent3-900",
+        "border-accent3-900",
+        "bg-accent3-900/<opacity>",
+        "text-accent3-900/<opacity>",
+        "border-accent3-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-950",
+      "name": "accent3-950",
+      "value": "rgba(var(--ax-sys-color-accent3-950))",
+      "tailwind": [
+        "bg-accent3-950",
+        "text-accent3-950",
+        "border-accent3-950",
+        "bg-accent3-950/<opacity>",
+        "text-accent3-950/<opacity>",
+        "border-accent3-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent3-lightest",
+      "name": "accent3-lightest",
+      "value": "rgba(var(--ax-sys-color-accent3-lightest-surface))",
+      "tailwind": [
+        "bg-accent3-lightest",
+        "text-accent3-lightest",
+        "border-accent3-lightest",
+        "bg-accent3-lightest/<opacity>",
+        "text-accent3-lightest/<opacity>",
+        "border-accent3-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-lightest",
+      "name": "on-accent3-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent3-lightest-surface))",
+      "tailwind": [
+        "text-on-accent3-lightest",
+        "text-on-accent3-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-lightest",
+      "name": "border-accent3-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent3-lightest-surface))",
+      "tailwind": [
+        "border-accent3-lightest",
+        "border-border-accent3-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent3-lighter",
+      "name": "accent3-lighter",
+      "value": "rgba(var(--ax-sys-color-accent3-lighter-surface))",
+      "tailwind": [
+        "bg-accent3-lighter",
+        "text-accent3-lighter",
+        "border-accent3-lighter",
+        "bg-accent3-lighter/<opacity>",
+        "text-accent3-lighter/<opacity>",
+        "border-accent3-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-lighter",
+      "name": "on-accent3-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent3-lighter-surface))",
+      "tailwind": [
+        "text-on-accent3-lighter",
+        "text-on-accent3-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-lighter",
+      "name": "border-accent3-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent3-lighter-surface))",
+      "tailwind": [
+        "border-accent3-lighter",
+        "border-border-accent3-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent3-light",
+      "name": "accent3-light",
+      "value": "rgba(var(--ax-sys-color-accent3-light-surface))",
+      "tailwind": [
+        "bg-accent3-light",
+        "text-accent3-light",
+        "border-accent3-light",
+        "bg-accent3-light/<opacity>",
+        "text-accent3-light/<opacity>",
+        "border-accent3-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-light",
+      "name": "on-accent3-light",
+      "value": "rgba(var(--ax-sys-color-on-accent3-light-surface))",
+      "tailwind": [
+        "text-on-accent3-light",
+        "text-on-accent3-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-light",
+      "name": "border-accent3-light",
+      "value": "rgba(var(--ax-sys-color-border-accent3-light-surface))",
+      "tailwind": [
+        "border-accent3-light",
+        "border-border-accent3-light"
+      ]
+    },
+    {
+      "token": "--color-accent3",
+      "name": "accent3",
+      "value": "rgba(var(--ax-sys-color-accent3-surface))",
+      "tailwind": [
+        "bg-accent3",
+        "text-accent3",
+        "border-accent3",
+        "bg-accent3/<opacity>",
+        "text-accent3/<opacity>",
+        "border-accent3/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3",
+      "name": "on-accent3",
+      "value": "rgba(var(--ax-sys-color-on-accent3-surface))",
+      "tailwind": [
+        "text-on-accent3",
+        "text-on-accent3/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3",
+      "name": "border-accent3",
+      "value": "rgba(var(--ax-sys-color-border-accent3-surface))",
+      "tailwind": [
+        "border-accent3",
+        "border-border-accent3"
+      ]
+    },
+    {
+      "token": "--color-accent3-dark",
+      "name": "accent3-dark",
+      "value": "rgba(var(--ax-sys-color-accent3-dark-surface))",
+      "tailwind": [
+        "bg-accent3-dark",
+        "text-accent3-dark",
+        "border-accent3-dark",
+        "bg-accent3-dark/<opacity>",
+        "text-accent3-dark/<opacity>",
+        "border-accent3-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-dark",
+      "name": "on-accent3-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent3-dark-surface))",
+      "tailwind": [
+        "text-on-accent3-dark",
+        "text-on-accent3-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-dark",
+      "name": "border-accent3-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent3-dark-surface))",
+      "tailwind": [
+        "border-accent3-dark",
+        "border-border-accent3-dark"
+      ]
+    },
+    {
+      "token": "--color-accent3-darker",
+      "name": "accent3-darker",
+      "value": "rgba(var(--ax-sys-color-accent3-darker-surface))",
+      "tailwind": [
+        "bg-accent3-darker",
+        "text-accent3-darker",
+        "border-accent3-darker",
+        "bg-accent3-darker/<opacity>",
+        "text-accent3-darker/<opacity>",
+        "border-accent3-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-darker",
+      "name": "on-accent3-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent3-darker-surface))",
+      "tailwind": [
+        "text-on-accent3-darker",
+        "text-on-accent3-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-darker",
+      "name": "border-accent3-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent3-darker-surface))",
+      "tailwind": [
+        "border-accent3-darker",
+        "border-border-accent3-darker"
+      ]
+    },
+    {
+      "token": "--color-accent3-darkest",
+      "name": "accent3-darkest",
+      "value": "rgba(var(--ax-sys-color-accent3-darkest-surface))",
+      "tailwind": [
+        "bg-accent3-darkest",
+        "text-accent3-darkest",
+        "border-accent3-darkest",
+        "bg-accent3-darkest/<opacity>",
+        "text-accent3-darkest/<opacity>",
+        "border-accent3-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent3-darkest",
+      "name": "on-accent3-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent3-darkest-surface))",
+      "tailwind": [
+        "text-on-accent3-darkest",
+        "text-on-accent3-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent3-darkest",
+      "name": "border-accent3-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent3-darkest-surface))",
+      "tailwind": [
+        "border-accent3-darkest",
+        "border-border-accent3-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent4",
+      "name": "accent4",
+      "value": "rgba(var(--ax-sys-color-accent4-surface))",
+      "tailwind": [
+        "bg-accent4",
+        "text-accent4",
+        "border-accent4",
+        "bg-accent4/<opacity>",
+        "text-accent4/<opacity>",
+        "border-accent4/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-50",
+      "name": "accent4-50",
+      "value": "rgba(var(--ax-sys-color-accent4-50))",
+      "tailwind": [
+        "bg-accent4-50",
+        "text-accent4-50",
+        "border-accent4-50",
+        "bg-accent4-50/<opacity>",
+        "text-accent4-50/<opacity>",
+        "border-accent4-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-100",
+      "name": "accent4-100",
+      "value": "rgba(var(--ax-sys-color-accent4-100))",
+      "tailwind": [
+        "bg-accent4-100",
+        "text-accent4-100",
+        "border-accent4-100",
+        "bg-accent4-100/<opacity>",
+        "text-accent4-100/<opacity>",
+        "border-accent4-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-200",
+      "name": "accent4-200",
+      "value": "rgba(var(--ax-sys-color-accent4-200))",
+      "tailwind": [
+        "bg-accent4-200",
+        "text-accent4-200",
+        "border-accent4-200",
+        "bg-accent4-200/<opacity>",
+        "text-accent4-200/<opacity>",
+        "border-accent4-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-300",
+      "name": "accent4-300",
+      "value": "rgba(var(--ax-sys-color-accent4-300))",
+      "tailwind": [
+        "bg-accent4-300",
+        "text-accent4-300",
+        "border-accent4-300",
+        "bg-accent4-300/<opacity>",
+        "text-accent4-300/<opacity>",
+        "border-accent4-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-400",
+      "name": "accent4-400",
+      "value": "rgba(var(--ax-sys-color-accent4-400))",
+      "tailwind": [
+        "bg-accent4-400",
+        "text-accent4-400",
+        "border-accent4-400",
+        "bg-accent4-400/<opacity>",
+        "text-accent4-400/<opacity>",
+        "border-accent4-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-500",
+      "name": "accent4-500",
+      "value": "rgba(var(--ax-sys-color-accent4-500))",
+      "tailwind": [
+        "bg-accent4-500",
+        "text-accent4-500",
+        "border-accent4-500",
+        "bg-accent4-500/<opacity>",
+        "text-accent4-500/<opacity>",
+        "border-accent4-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-600",
+      "name": "accent4-600",
+      "value": "rgba(var(--ax-sys-color-accent4-600))",
+      "tailwind": [
+        "bg-accent4-600",
+        "text-accent4-600",
+        "border-accent4-600",
+        "bg-accent4-600/<opacity>",
+        "text-accent4-600/<opacity>",
+        "border-accent4-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-700",
+      "name": "accent4-700",
+      "value": "rgba(var(--ax-sys-color-accent4-700))",
+      "tailwind": [
+        "bg-accent4-700",
+        "text-accent4-700",
+        "border-accent4-700",
+        "bg-accent4-700/<opacity>",
+        "text-accent4-700/<opacity>",
+        "border-accent4-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-800",
+      "name": "accent4-800",
+      "value": "rgba(var(--ax-sys-color-accent4-800))",
+      "tailwind": [
+        "bg-accent4-800",
+        "text-accent4-800",
+        "border-accent4-800",
+        "bg-accent4-800/<opacity>",
+        "text-accent4-800/<opacity>",
+        "border-accent4-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-900",
+      "name": "accent4-900",
+      "value": "rgba(var(--ax-sys-color-accent4-900))",
+      "tailwind": [
+        "bg-accent4-900",
+        "text-accent4-900",
+        "border-accent4-900",
+        "bg-accent4-900/<opacity>",
+        "text-accent4-900/<opacity>",
+        "border-accent4-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-950",
+      "name": "accent4-950",
+      "value": "rgba(var(--ax-sys-color-accent4-950))",
+      "tailwind": [
+        "bg-accent4-950",
+        "text-accent4-950",
+        "border-accent4-950",
+        "bg-accent4-950/<opacity>",
+        "text-accent4-950/<opacity>",
+        "border-accent4-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent4-lightest",
+      "name": "accent4-lightest",
+      "value": "rgba(var(--ax-sys-color-accent4-lightest-surface))",
+      "tailwind": [
+        "bg-accent4-lightest",
+        "text-accent4-lightest",
+        "border-accent4-lightest",
+        "bg-accent4-lightest/<opacity>",
+        "text-accent4-lightest/<opacity>",
+        "border-accent4-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-lightest",
+      "name": "on-accent4-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent4-lightest-surface))",
+      "tailwind": [
+        "text-on-accent4-lightest",
+        "text-on-accent4-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-lightest",
+      "name": "border-accent4-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent4-lightest-surface))",
+      "tailwind": [
+        "border-accent4-lightest",
+        "border-border-accent4-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent4-lighter",
+      "name": "accent4-lighter",
+      "value": "rgba(var(--ax-sys-color-accent4-lighter-surface))",
+      "tailwind": [
+        "bg-accent4-lighter",
+        "text-accent4-lighter",
+        "border-accent4-lighter",
+        "bg-accent4-lighter/<opacity>",
+        "text-accent4-lighter/<opacity>",
+        "border-accent4-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-lighter",
+      "name": "on-accent4-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent4-lighter-surface))",
+      "tailwind": [
+        "text-on-accent4-lighter",
+        "text-on-accent4-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-lighter",
+      "name": "border-accent4-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent4-lighter-surface))",
+      "tailwind": [
+        "border-accent4-lighter",
+        "border-border-accent4-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent4-light",
+      "name": "accent4-light",
+      "value": "rgba(var(--ax-sys-color-accent4-light-surface))",
+      "tailwind": [
+        "bg-accent4-light",
+        "text-accent4-light",
+        "border-accent4-light",
+        "bg-accent4-light/<opacity>",
+        "text-accent4-light/<opacity>",
+        "border-accent4-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-light",
+      "name": "on-accent4-light",
+      "value": "rgba(var(--ax-sys-color-on-accent4-light-surface))",
+      "tailwind": [
+        "text-on-accent4-light",
+        "text-on-accent4-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-light",
+      "name": "border-accent4-light",
+      "value": "rgba(var(--ax-sys-color-border-accent4-light-surface))",
+      "tailwind": [
+        "border-accent4-light",
+        "border-border-accent4-light"
+      ]
+    },
+    {
+      "token": "--color-accent4",
+      "name": "accent4",
+      "value": "rgba(var(--ax-sys-color-accent4-surface))",
+      "tailwind": [
+        "bg-accent4",
+        "text-accent4",
+        "border-accent4",
+        "bg-accent4/<opacity>",
+        "text-accent4/<opacity>",
+        "border-accent4/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4",
+      "name": "on-accent4",
+      "value": "rgba(var(--ax-sys-color-on-accent4-surface))",
+      "tailwind": [
+        "text-on-accent4",
+        "text-on-accent4/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4",
+      "name": "border-accent4",
+      "value": "rgba(var(--ax-sys-color-border-accent4-surface))",
+      "tailwind": [
+        "border-accent4",
+        "border-border-accent4"
+      ]
+    },
+    {
+      "token": "--color-accent4-dark",
+      "name": "accent4-dark",
+      "value": "rgba(var(--ax-sys-color-accent4-dark-surface))",
+      "tailwind": [
+        "bg-accent4-dark",
+        "text-accent4-dark",
+        "border-accent4-dark",
+        "bg-accent4-dark/<opacity>",
+        "text-accent4-dark/<opacity>",
+        "border-accent4-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-dark",
+      "name": "on-accent4-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent4-dark-surface))",
+      "tailwind": [
+        "text-on-accent4-dark",
+        "text-on-accent4-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-dark",
+      "name": "border-accent4-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent4-dark-surface))",
+      "tailwind": [
+        "border-accent4-dark",
+        "border-border-accent4-dark"
+      ]
+    },
+    {
+      "token": "--color-accent4-darker",
+      "name": "accent4-darker",
+      "value": "rgba(var(--ax-sys-color-accent4-darker-surface))",
+      "tailwind": [
+        "bg-accent4-darker",
+        "text-accent4-darker",
+        "border-accent4-darker",
+        "bg-accent4-darker/<opacity>",
+        "text-accent4-darker/<opacity>",
+        "border-accent4-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-darker",
+      "name": "on-accent4-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent4-darker-surface))",
+      "tailwind": [
+        "text-on-accent4-darker",
+        "text-on-accent4-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-darker",
+      "name": "border-accent4-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent4-darker-surface))",
+      "tailwind": [
+        "border-accent4-darker",
+        "border-border-accent4-darker"
+      ]
+    },
+    {
+      "token": "--color-accent4-darkest",
+      "name": "accent4-darkest",
+      "value": "rgba(var(--ax-sys-color-accent4-darkest-surface))",
+      "tailwind": [
+        "bg-accent4-darkest",
+        "text-accent4-darkest",
+        "border-accent4-darkest",
+        "bg-accent4-darkest/<opacity>",
+        "text-accent4-darkest/<opacity>",
+        "border-accent4-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent4-darkest",
+      "name": "on-accent4-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent4-darkest-surface))",
+      "tailwind": [
+        "text-on-accent4-darkest",
+        "text-on-accent4-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent4-darkest",
+      "name": "border-accent4-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent4-darkest-surface))",
+      "tailwind": [
+        "border-accent4-darkest",
+        "border-border-accent4-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent5",
+      "name": "accent5",
+      "value": "rgba(var(--ax-sys-color-accent5-surface))",
+      "tailwind": [
+        "bg-accent5",
+        "text-accent5",
+        "border-accent5",
+        "bg-accent5/<opacity>",
+        "text-accent5/<opacity>",
+        "border-accent5/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-50",
+      "name": "accent5-50",
+      "value": "rgba(var(--ax-sys-color-accent5-50))",
+      "tailwind": [
+        "bg-accent5-50",
+        "text-accent5-50",
+        "border-accent5-50",
+        "bg-accent5-50/<opacity>",
+        "text-accent5-50/<opacity>",
+        "border-accent5-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-100",
+      "name": "accent5-100",
+      "value": "rgba(var(--ax-sys-color-accent5-100))",
+      "tailwind": [
+        "bg-accent5-100",
+        "text-accent5-100",
+        "border-accent5-100",
+        "bg-accent5-100/<opacity>",
+        "text-accent5-100/<opacity>",
+        "border-accent5-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-200",
+      "name": "accent5-200",
+      "value": "rgba(var(--ax-sys-color-accent5-200))",
+      "tailwind": [
+        "bg-accent5-200",
+        "text-accent5-200",
+        "border-accent5-200",
+        "bg-accent5-200/<opacity>",
+        "text-accent5-200/<opacity>",
+        "border-accent5-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-300",
+      "name": "accent5-300",
+      "value": "rgba(var(--ax-sys-color-accent5-300))",
+      "tailwind": [
+        "bg-accent5-300",
+        "text-accent5-300",
+        "border-accent5-300",
+        "bg-accent5-300/<opacity>",
+        "text-accent5-300/<opacity>",
+        "border-accent5-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-400",
+      "name": "accent5-400",
+      "value": "rgba(var(--ax-sys-color-accent5-400))",
+      "tailwind": [
+        "bg-accent5-400",
+        "text-accent5-400",
+        "border-accent5-400",
+        "bg-accent5-400/<opacity>",
+        "text-accent5-400/<opacity>",
+        "border-accent5-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-500",
+      "name": "accent5-500",
+      "value": "rgba(var(--ax-sys-color-accent5-500))",
+      "tailwind": [
+        "bg-accent5-500",
+        "text-accent5-500",
+        "border-accent5-500",
+        "bg-accent5-500/<opacity>",
+        "text-accent5-500/<opacity>",
+        "border-accent5-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-600",
+      "name": "accent5-600",
+      "value": "rgba(var(--ax-sys-color-accent5-600))",
+      "tailwind": [
+        "bg-accent5-600",
+        "text-accent5-600",
+        "border-accent5-600",
+        "bg-accent5-600/<opacity>",
+        "text-accent5-600/<opacity>",
+        "border-accent5-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-700",
+      "name": "accent5-700",
+      "value": "rgba(var(--ax-sys-color-accent5-700))",
+      "tailwind": [
+        "bg-accent5-700",
+        "text-accent5-700",
+        "border-accent5-700",
+        "bg-accent5-700/<opacity>",
+        "text-accent5-700/<opacity>",
+        "border-accent5-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-800",
+      "name": "accent5-800",
+      "value": "rgba(var(--ax-sys-color-accent5-800))",
+      "tailwind": [
+        "bg-accent5-800",
+        "text-accent5-800",
+        "border-accent5-800",
+        "bg-accent5-800/<opacity>",
+        "text-accent5-800/<opacity>",
+        "border-accent5-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-900",
+      "name": "accent5-900",
+      "value": "rgba(var(--ax-sys-color-accent5-900))",
+      "tailwind": [
+        "bg-accent5-900",
+        "text-accent5-900",
+        "border-accent5-900",
+        "bg-accent5-900/<opacity>",
+        "text-accent5-900/<opacity>",
+        "border-accent5-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-950",
+      "name": "accent5-950",
+      "value": "rgba(var(--ax-sys-color-accent5-950))",
+      "tailwind": [
+        "bg-accent5-950",
+        "text-accent5-950",
+        "border-accent5-950",
+        "bg-accent5-950/<opacity>",
+        "text-accent5-950/<opacity>",
+        "border-accent5-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent5-lightest",
+      "name": "accent5-lightest",
+      "value": "rgba(var(--ax-sys-color-accent5-lightest-surface))",
+      "tailwind": [
+        "bg-accent5-lightest",
+        "text-accent5-lightest",
+        "border-accent5-lightest",
+        "bg-accent5-lightest/<opacity>",
+        "text-accent5-lightest/<opacity>",
+        "border-accent5-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-lightest",
+      "name": "on-accent5-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent5-lightest-surface))",
+      "tailwind": [
+        "text-on-accent5-lightest",
+        "text-on-accent5-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-lightest",
+      "name": "border-accent5-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent5-lightest-surface))",
+      "tailwind": [
+        "border-accent5-lightest",
+        "border-border-accent5-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent5-lighter",
+      "name": "accent5-lighter",
+      "value": "rgba(var(--ax-sys-color-accent5-lighter-surface))",
+      "tailwind": [
+        "bg-accent5-lighter",
+        "text-accent5-lighter",
+        "border-accent5-lighter",
+        "bg-accent5-lighter/<opacity>",
+        "text-accent5-lighter/<opacity>",
+        "border-accent5-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-lighter",
+      "name": "on-accent5-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent5-lighter-surface))",
+      "tailwind": [
+        "text-on-accent5-lighter",
+        "text-on-accent5-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-lighter",
+      "name": "border-accent5-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent5-lighter-surface))",
+      "tailwind": [
+        "border-accent5-lighter",
+        "border-border-accent5-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent5-light",
+      "name": "accent5-light",
+      "value": "rgba(var(--ax-sys-color-accent5-light-surface))",
+      "tailwind": [
+        "bg-accent5-light",
+        "text-accent5-light",
+        "border-accent5-light",
+        "bg-accent5-light/<opacity>",
+        "text-accent5-light/<opacity>",
+        "border-accent5-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-light",
+      "name": "on-accent5-light",
+      "value": "rgba(var(--ax-sys-color-on-accent5-light-surface))",
+      "tailwind": [
+        "text-on-accent5-light",
+        "text-on-accent5-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-light",
+      "name": "border-accent5-light",
+      "value": "rgba(var(--ax-sys-color-border-accent5-light-surface))",
+      "tailwind": [
+        "border-accent5-light",
+        "border-border-accent5-light"
+      ]
+    },
+    {
+      "token": "--color-accent5",
+      "name": "accent5",
+      "value": "rgba(var(--ax-sys-color-accent5-surface))",
+      "tailwind": [
+        "bg-accent5",
+        "text-accent5",
+        "border-accent5",
+        "bg-accent5/<opacity>",
+        "text-accent5/<opacity>",
+        "border-accent5/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5",
+      "name": "on-accent5",
+      "value": "rgba(var(--ax-sys-color-on-accent5-surface))",
+      "tailwind": [
+        "text-on-accent5",
+        "text-on-accent5/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5",
+      "name": "border-accent5",
+      "value": "rgba(var(--ax-sys-color-border-accent5-surface))",
+      "tailwind": [
+        "border-accent5",
+        "border-border-accent5"
+      ]
+    },
+    {
+      "token": "--color-accent5-dark",
+      "name": "accent5-dark",
+      "value": "rgba(var(--ax-sys-color-accent5-dark-surface))",
+      "tailwind": [
+        "bg-accent5-dark",
+        "text-accent5-dark",
+        "border-accent5-dark",
+        "bg-accent5-dark/<opacity>",
+        "text-accent5-dark/<opacity>",
+        "border-accent5-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-dark",
+      "name": "on-accent5-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent5-dark-surface))",
+      "tailwind": [
+        "text-on-accent5-dark",
+        "text-on-accent5-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-dark",
+      "name": "border-accent5-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent5-dark-surface))",
+      "tailwind": [
+        "border-accent5-dark",
+        "border-border-accent5-dark"
+      ]
+    },
+    {
+      "token": "--color-accent5-darker",
+      "name": "accent5-darker",
+      "value": "rgba(var(--ax-sys-color-accent5-darker-surface))",
+      "tailwind": [
+        "bg-accent5-darker",
+        "text-accent5-darker",
+        "border-accent5-darker",
+        "bg-accent5-darker/<opacity>",
+        "text-accent5-darker/<opacity>",
+        "border-accent5-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-darker",
+      "name": "on-accent5-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent5-darker-surface))",
+      "tailwind": [
+        "text-on-accent5-darker",
+        "text-on-accent5-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-darker",
+      "name": "border-accent5-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent5-darker-surface))",
+      "tailwind": [
+        "border-accent5-darker",
+        "border-border-accent5-darker"
+      ]
+    },
+    {
+      "token": "--color-accent5-darkest",
+      "name": "accent5-darkest",
+      "value": "rgba(var(--ax-sys-color-accent5-darkest-surface))",
+      "tailwind": [
+        "bg-accent5-darkest",
+        "text-accent5-darkest",
+        "border-accent5-darkest",
+        "bg-accent5-darkest/<opacity>",
+        "text-accent5-darkest/<opacity>",
+        "border-accent5-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent5-darkest",
+      "name": "on-accent5-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent5-darkest-surface))",
+      "tailwind": [
+        "text-on-accent5-darkest",
+        "text-on-accent5-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent5-darkest",
+      "name": "border-accent5-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent5-darkest-surface))",
+      "tailwind": [
+        "border-accent5-darkest",
+        "border-border-accent5-darkest"
+      ]
+    },
+    {
+      "token": "--color-accent6",
+      "name": "accent6",
+      "value": "rgba(var(--ax-sys-color-accent6-surface))",
+      "tailwind": [
+        "bg-accent6",
+        "text-accent6",
+        "border-accent6",
+        "bg-accent6/<opacity>",
+        "text-accent6/<opacity>",
+        "border-accent6/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-50",
+      "name": "accent6-50",
+      "value": "rgba(var(--ax-sys-color-accent6-50))",
+      "tailwind": [
+        "bg-accent6-50",
+        "text-accent6-50",
+        "border-accent6-50",
+        "bg-accent6-50/<opacity>",
+        "text-accent6-50/<opacity>",
+        "border-accent6-50/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-100",
+      "name": "accent6-100",
+      "value": "rgba(var(--ax-sys-color-accent6-100))",
+      "tailwind": [
+        "bg-accent6-100",
+        "text-accent6-100",
+        "border-accent6-100",
+        "bg-accent6-100/<opacity>",
+        "text-accent6-100/<opacity>",
+        "border-accent6-100/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-200",
+      "name": "accent6-200",
+      "value": "rgba(var(--ax-sys-color-accent6-200))",
+      "tailwind": [
+        "bg-accent6-200",
+        "text-accent6-200",
+        "border-accent6-200",
+        "bg-accent6-200/<opacity>",
+        "text-accent6-200/<opacity>",
+        "border-accent6-200/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-300",
+      "name": "accent6-300",
+      "value": "rgba(var(--ax-sys-color-accent6-300))",
+      "tailwind": [
+        "bg-accent6-300",
+        "text-accent6-300",
+        "border-accent6-300",
+        "bg-accent6-300/<opacity>",
+        "text-accent6-300/<opacity>",
+        "border-accent6-300/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-400",
+      "name": "accent6-400",
+      "value": "rgba(var(--ax-sys-color-accent6-400))",
+      "tailwind": [
+        "bg-accent6-400",
+        "text-accent6-400",
+        "border-accent6-400",
+        "bg-accent6-400/<opacity>",
+        "text-accent6-400/<opacity>",
+        "border-accent6-400/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-500",
+      "name": "accent6-500",
+      "value": "rgba(var(--ax-sys-color-accent6-500))",
+      "tailwind": [
+        "bg-accent6-500",
+        "text-accent6-500",
+        "border-accent6-500",
+        "bg-accent6-500/<opacity>",
+        "text-accent6-500/<opacity>",
+        "border-accent6-500/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-600",
+      "name": "accent6-600",
+      "value": "rgba(var(--ax-sys-color-accent6-600))",
+      "tailwind": [
+        "bg-accent6-600",
+        "text-accent6-600",
+        "border-accent6-600",
+        "bg-accent6-600/<opacity>",
+        "text-accent6-600/<opacity>",
+        "border-accent6-600/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-700",
+      "name": "accent6-700",
+      "value": "rgba(var(--ax-sys-color-accent6-700))",
+      "tailwind": [
+        "bg-accent6-700",
+        "text-accent6-700",
+        "border-accent6-700",
+        "bg-accent6-700/<opacity>",
+        "text-accent6-700/<opacity>",
+        "border-accent6-700/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-800",
+      "name": "accent6-800",
+      "value": "rgba(var(--ax-sys-color-accent6-800))",
+      "tailwind": [
+        "bg-accent6-800",
+        "text-accent6-800",
+        "border-accent6-800",
+        "bg-accent6-800/<opacity>",
+        "text-accent6-800/<opacity>",
+        "border-accent6-800/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-900",
+      "name": "accent6-900",
+      "value": "rgba(var(--ax-sys-color-accent6-900))",
+      "tailwind": [
+        "bg-accent6-900",
+        "text-accent6-900",
+        "border-accent6-900",
+        "bg-accent6-900/<opacity>",
+        "text-accent6-900/<opacity>",
+        "border-accent6-900/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-950",
+      "name": "accent6-950",
+      "value": "rgba(var(--ax-sys-color-accent6-950))",
+      "tailwind": [
+        "bg-accent6-950",
+        "text-accent6-950",
+        "border-accent6-950",
+        "bg-accent6-950/<opacity>",
+        "text-accent6-950/<opacity>",
+        "border-accent6-950/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-accent6-lightest",
+      "name": "accent6-lightest",
+      "value": "rgba(var(--ax-sys-color-accent6-lightest-surface))",
+      "tailwind": [
+        "bg-accent6-lightest",
+        "text-accent6-lightest",
+        "border-accent6-lightest",
+        "bg-accent6-lightest/<opacity>",
+        "text-accent6-lightest/<opacity>",
+        "border-accent6-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-lightest",
+      "name": "on-accent6-lightest",
+      "value": "rgba(var(--ax-sys-color-on-accent6-lightest-surface))",
+      "tailwind": [
+        "text-on-accent6-lightest",
+        "text-on-accent6-lightest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-lightest",
+      "name": "border-accent6-lightest",
+      "value": "rgba(var(--ax-sys-color-border-accent6-lightest-surface))",
+      "tailwind": [
+        "border-accent6-lightest",
+        "border-border-accent6-lightest"
+      ]
+    },
+    {
+      "token": "--color-accent6-lighter",
+      "name": "accent6-lighter",
+      "value": "rgba(var(--ax-sys-color-accent6-lighter-surface))",
+      "tailwind": [
+        "bg-accent6-lighter",
+        "text-accent6-lighter",
+        "border-accent6-lighter",
+        "bg-accent6-lighter/<opacity>",
+        "text-accent6-lighter/<opacity>",
+        "border-accent6-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-lighter",
+      "name": "on-accent6-lighter",
+      "value": "rgba(var(--ax-sys-color-on-accent6-lighter-surface))",
+      "tailwind": [
+        "text-on-accent6-lighter",
+        "text-on-accent6-lighter/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-lighter",
+      "name": "border-accent6-lighter",
+      "value": "rgba(var(--ax-sys-color-border-accent6-lighter-surface))",
+      "tailwind": [
+        "border-accent6-lighter",
+        "border-border-accent6-lighter"
+      ]
+    },
+    {
+      "token": "--color-accent6-light",
+      "name": "accent6-light",
+      "value": "rgba(var(--ax-sys-color-accent6-light-surface))",
+      "tailwind": [
+        "bg-accent6-light",
+        "text-accent6-light",
+        "border-accent6-light",
+        "bg-accent6-light/<opacity>",
+        "text-accent6-light/<opacity>",
+        "border-accent6-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-light",
+      "name": "on-accent6-light",
+      "value": "rgba(var(--ax-sys-color-on-accent6-light-surface))",
+      "tailwind": [
+        "text-on-accent6-light",
+        "text-on-accent6-light/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-light",
+      "name": "border-accent6-light",
+      "value": "rgba(var(--ax-sys-color-border-accent6-light-surface))",
+      "tailwind": [
+        "border-accent6-light",
+        "border-border-accent6-light"
+      ]
+    },
+    {
+      "token": "--color-accent6",
+      "name": "accent6",
+      "value": "rgba(var(--ax-sys-color-accent6-surface))",
+      "tailwind": [
+        "bg-accent6",
+        "text-accent6",
+        "border-accent6",
+        "bg-accent6/<opacity>",
+        "text-accent6/<opacity>",
+        "border-accent6/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6",
+      "name": "on-accent6",
+      "value": "rgba(var(--ax-sys-color-on-accent6-surface))",
+      "tailwind": [
+        "text-on-accent6",
+        "text-on-accent6/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6",
+      "name": "border-accent6",
+      "value": "rgba(var(--ax-sys-color-border-accent6-surface))",
+      "tailwind": [
+        "border-accent6",
+        "border-border-accent6"
+      ]
+    },
+    {
+      "token": "--color-accent6-dark",
+      "name": "accent6-dark",
+      "value": "rgba(var(--ax-sys-color-accent6-dark-surface))",
+      "tailwind": [
+        "bg-accent6-dark",
+        "text-accent6-dark",
+        "border-accent6-dark",
+        "bg-accent6-dark/<opacity>",
+        "text-accent6-dark/<opacity>",
+        "border-accent6-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-dark",
+      "name": "on-accent6-dark",
+      "value": "rgba(var(--ax-sys-color-on-accent6-dark-surface))",
+      "tailwind": [
+        "text-on-accent6-dark",
+        "text-on-accent6-dark/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-dark",
+      "name": "border-accent6-dark",
+      "value": "rgba(var(--ax-sys-color-border-accent6-dark-surface))",
+      "tailwind": [
+        "border-accent6-dark",
+        "border-border-accent6-dark"
+      ]
+    },
+    {
+      "token": "--color-accent6-darker",
+      "name": "accent6-darker",
+      "value": "rgba(var(--ax-sys-color-accent6-darker-surface))",
+      "tailwind": [
+        "bg-accent6-darker",
+        "text-accent6-darker",
+        "border-accent6-darker",
+        "bg-accent6-darker/<opacity>",
+        "text-accent6-darker/<opacity>",
+        "border-accent6-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-darker",
+      "name": "on-accent6-darker",
+      "value": "rgba(var(--ax-sys-color-on-accent6-darker-surface))",
+      "tailwind": [
+        "text-on-accent6-darker",
+        "text-on-accent6-darker/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-darker",
+      "name": "border-accent6-darker",
+      "value": "rgba(var(--ax-sys-color-border-accent6-darker-surface))",
+      "tailwind": [
+        "border-accent6-darker",
+        "border-border-accent6-darker"
+      ]
+    },
+    {
+      "token": "--color-accent6-darkest",
+      "name": "accent6-darkest",
+      "value": "rgba(var(--ax-sys-color-accent6-darkest-surface))",
+      "tailwind": [
+        "bg-accent6-darkest",
+        "text-accent6-darkest",
+        "border-accent6-darkest",
+        "bg-accent6-darkest/<opacity>",
+        "text-accent6-darkest/<opacity>",
+        "border-accent6-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-on-accent6-darkest",
+      "name": "on-accent6-darkest",
+      "value": "rgba(var(--ax-sys-color-on-accent6-darkest-surface))",
+      "tailwind": [
+        "text-on-accent6-darkest",
+        "text-on-accent6-darkest/<opacity>"
+      ]
+    },
+    {
+      "token": "--color-border-accent6-darkest",
+      "name": "border-accent6-darkest",
+      "value": "rgba(var(--ax-sys-color-border-accent6-darkest-surface))",
+      "tailwind": [
+        "border-accent6-darkest",
+        "border-border-accent6-darkest"
+      ]
+    }
+  ],
+  "surfaceUtilities": [
+    "primary-lightest-surface",
+    "primary-lighter-surface",
+    "primary-light-surface",
+    "primary-surface",
+    "primary-dark-surface",
+    "primary-darker-surface",
+    "primary-darkest-surface",
+    "secondary-lightest-surface",
+    "secondary-lighter-surface",
+    "secondary-light-surface",
+    "secondary-surface",
+    "secondary-dark-surface",
+    "secondary-darker-surface",
+    "secondary-darkest-surface",
+    "success-lightest-surface",
+    "success-lighter-surface",
+    "success-light-surface",
+    "success-surface",
+    "success-dark-surface",
+    "success-darker-surface",
+    "success-darkest-surface",
+    "warning-lightest-surface",
+    "warning-lighter-surface",
+    "warning-light-surface",
+    "warning-surface",
+    "warning-dark-surface",
+    "warning-darker-surface",
+    "warning-darkest-surface",
+    "danger-lightest-surface",
+    "danger-lighter-surface",
+    "danger-light-surface",
+    "danger-surface",
+    "danger-dark-surface",
+    "danger-darker-surface",
+    "danger-darkest-surface",
+    "lightest-surface",
+    "lighter-surface",
+    "light-surface",
+    "dark-surface",
+    "darker-surface",
+    "darkest-surface",
+    "accent-lightest-surface",
+    "accent-lighter-surface",
+    "accent-light-surface",
+    "accent-surface",
+    "accent-dark-surface",
+    "accent-darker-surface",
+    "accent-darkest-surface",
+    "accent1-lightest-surface",
+    "accent1-lighter-surface",
+    "accent1-light-surface",
+    "accent1-surface",
+    "accent1-dark-surface",
+    "accent1-darker-surface",
+    "accent1-darkest-surface",
+    "accent2-lightest-surface",
+    "accent2-lighter-surface",
+    "accent2-light-surface",
+    "accent2-surface",
+    "accent2-dark-surface",
+    "accent2-darker-surface",
+    "accent2-darkest-surface",
+    "accent3-lightest-surface",
+    "accent3-lighter-surface",
+    "accent3-light-surface",
+    "accent3-surface",
+    "accent3-dark-surface",
+    "accent3-darker-surface",
+    "accent3-darkest-surface",
+    "accent4-lightest-surface",
+    "accent4-lighter-surface",
+    "accent4-light-surface",
+    "accent4-surface",
+    "accent4-dark-surface",
+    "accent4-darker-surface",
+    "accent4-darkest-surface",
+    "accent5-lightest-surface",
+    "accent5-lighter-surface",
+    "accent5-light-surface",
+    "accent5-surface",
+    "accent5-dark-surface",
+    "accent5-darker-surface",
+    "accent5-darkest-surface",
+    "accent6-lightest-surface",
+    "accent6-lighter-surface",
+    "accent6-light-surface",
+    "accent6-surface",
+    "accent6-dark-surface",
+    "accent6-darker-surface",
+    "accent6-darkest-surface"
+  ],
+  "allUtilities": [
+    "bg-default",
+    "text-default",
+    "border-default",
+    "text",
+    "border-s-default",
+    "border-e-default",
+    "border-t-default",
+    "border-b-default",
+    "border-x-default",
+    "border-y-default",
+    "primary-lightest-surface",
+    "primary-lighter-surface",
+    "primary-light-surface",
+    "primary-surface",
+    "primary-dark-surface",
+    "primary-darker-surface",
+    "primary-darkest-surface",
+    "ax-default",
+    "ax-primary",
+    "secondary-lightest-surface",
+    "secondary-lighter-surface",
+    "secondary-light-surface",
+    "secondary-surface",
+    "secondary-dark-surface",
+    "secondary-darker-surface",
+    "secondary-darkest-surface",
+    "ax-secondary",
+    "success-lightest-surface",
+    "success-lighter-surface",
+    "success-light-surface",
+    "success-surface",
+    "success-dark-surface",
+    "success-darker-surface",
+    "success-darkest-surface",
+    "ax-success",
+    "warning-lightest-surface",
+    "warning-lighter-surface",
+    "warning-light-surface",
+    "warning-surface",
+    "warning-dark-surface",
+    "warning-darker-surface",
+    "warning-darkest-surface",
+    "ax-warning",
+    "danger-lightest-surface",
+    "danger-lighter-surface",
+    "danger-light-surface",
+    "danger-surface",
+    "danger-dark-surface",
+    "danger-darker-surface",
+    "danger-darkest-surface",
+    "ax-danger",
+    "lightest-surface",
+    "lighter-surface",
+    "light-surface",
+    "surface",
+    "dark-surface",
+    "darker-surface",
+    "darkest-surface",
+    "ax-surface",
+    "accent-lightest-surface",
+    "accent-lighter-surface",
+    "accent-light-surface",
+    "accent-surface",
+    "accent-dark-surface",
+    "accent-darker-surface",
+    "accent-darkest-surface",
+    "ax-accent",
+    "accent1-lightest-surface",
+    "accent1-lighter-surface",
+    "accent1-light-surface",
+    "accent1-surface",
+    "accent1-dark-surface",
+    "accent1-darker-surface",
+    "accent1-darkest-surface",
+    "ax-accent1",
+    "accent2-lightest-surface",
+    "accent2-lighter-surface",
+    "accent2-light-surface",
+    "accent2-surface",
+    "accent2-dark-surface",
+    "accent2-darker-surface",
+    "accent2-darkest-surface",
+    "ax-accent2",
+    "accent3-lightest-surface",
+    "accent3-lighter-surface",
+    "accent3-light-surface",
+    "accent3-surface",
+    "accent3-dark-surface",
+    "accent3-darker-surface",
+    "accent3-darkest-surface",
+    "ax-accent3",
+    "accent4-lightest-surface",
+    "accent4-lighter-surface",
+    "accent4-light-surface",
+    "accent4-surface",
+    "accent4-dark-surface",
+    "accent4-darker-surface",
+    "accent4-darkest-surface",
+    "ax-accent4",
+    "accent5-lightest-surface",
+    "accent5-lighter-surface",
+    "accent5-light-surface",
+    "accent5-surface",
+    "accent5-dark-surface",
+    "accent5-darker-surface",
+    "accent5-darkest-surface",
+    "ax-accent5",
+    "accent6-lightest-surface",
+    "accent6-lighter-surface",
+    "accent6-light-surface",
+    "accent6-surface",
+    "accent6-dark-surface",
+    "accent6-darker-surface",
+    "accent6-darkest-surface",
+    "ax-accent6",
+    "max-w-8xl",
+    "ax-state-disabled",
+    "ax-state-readonly",
+    "ax-fill",
+    "ax-flat",
+    "ax-solid",
+    "ax-solid-interactive",
+    "ax-outline",
+    "ax-outline-interactive",
+    "ax-twotone",
+    "ax-twotone-interactive",
+    "ax-blank",
+    "ax-blank-interactive",
+    "links",
+    "links-interactive",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "heading",
+    "heading-start",
+    "heading-center",
+    "heading-end",
+    "subtitle",
+    "tabs-fit",
+    "ax-xs",
+    "ax-sm",
+    "ax-md",
+    "ax-lg",
+    "ax-xl"
+  ],
+  "patterns": [
+    {
+      "name": "Component with color, look, and size",
+      "example": "<div class=\"ax-md ax-primary ax-solid\">...</div>",
+      "description": "Apply size on container; color context + look on component host."
+    },
+    {
+      "name": "Neutral surface layout",
+      "example": "<div class=\"bg-lightest text-on-lightest border border-border-lightest p-4\">...</div>",
+      "description": "Use @theme surface tokens via Tailwind bg/text/border utilities."
+    },
+    {
+      "name": "Semantic colored block",
+      "example": "<div class=\"bg-primary text-on-primary border border-primary p-4 rounded-default\">...</div>",
+      "description": "Primary palette surface with matching on-color and border."
+    },
+    {
+      "name": "Palette shade",
+      "example": "<span class=\"bg-primary-100 text-primary-800\">Badge</span>",
+      "description": "Use 50–950 palette steps: primary, secondary, success, warning, danger, surface, accent, accent1–6."
+    },
+    {
+      "name": "Dark mode",
+      "example": "<html class=\"ax-dark\"> ... <div class=\"bg-darkest text-on-darkest\">...</div>",
+      "description": "Toggle ax-dark on html; surface tokens invert automatically."
+    },
+    {
+      "name": "Editor / input focus ring",
+      "example": "<div class=\"ax-default ax-solid ax-editor-container\">...</div>",
+      "description": "Editor containers get primary focus ring via ax-editor-container modifier."
+    }
+  ],
+  "colorTokenGroups": {
+    "neutralSurfaces": [
+      "lightest",
+      "lighter",
+      "light",
+      "surface",
+      "dark",
+      "darker",
+      "darkest"
+    ],
+    "semanticPalettes": [
+      "primary",
+      "secondary",
+      "success",
+      "warning",
+      "danger"
+    ],
+    "accentPalettes": [
+      "accent",
+      "accent1",
+      "accent2",
+      "accent3",
+      "accent4",
+      "accent5",
+      "accent6"
+    ],
+    "surfaceSuffixes": [
+      "lightest",
+      "lighter",
+      "light",
+      "surface",
+      "dark",
+      "darker",
+      "darkest"
+    ],
+    "onPrefix": "on-{name} for foreground on a surface",
+    "borderPrefix": "border-{name} for borders on a surface"
+  }
+}

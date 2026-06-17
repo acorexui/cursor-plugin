@@ -1,0 +1,151 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Memoize Decorator",
+  "description": "A method decorator that caches synchronous method results using memoizee. Repeated calls with the same arguments return cached values; the cache is cleared automatically on ngOnDestroy to prevent memory leaks.",
+  "imports": [
+    "import { Memoize } from '@acorex/core/memoize';"
+  ],
+  "hints": [
+    {
+      "title": "Pure methods only",
+      "content": "Memoize caches by <strong>argument values</strong>. If the method also depends on changing <code>this</code> state (inputs, signals) that is not part of the args, results can become stale. Pass all relevant inputs as parameters.",
+      "status": "primary"
+    },
+    {
+      "title": "Object arguments use reference equality",
+      "content": "Two different object instances with identical content produce <strong>separate cache entries</strong>. Prefer primitive args or stable references.",
+      "status": "warning"
+    },
+    {
+      "title": "No module import needed",
+      "content": "Import <code>Memoize</code> directly from <code>@acorex/core/memoize</code>. The empty <code>MemoizeModule</code> is not required. Ensure <code>experimentalDecorators: true</code> is set in tsconfig.",
+      "status": "primary"
+    },
+    {
+      "title": "Lifecycle cleanup",
+      "content": "The decorator patches <code>ngOnDestroy</code> to call <code>memoizedMethod.clear()</code>. Implement <code>ngOnDestroy</code> on the class if you need custom teardown — the decorator chains your existing hook.",
+      "status": "primary"
+    }
+  ],
+  "types": [
+    {
+      "title": "Memoize",
+      "description": "Method decorator factory backed by memoizee.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Wraps a class method with memoizee caching.\n * Cache key = method arguments (memoizee default resolver).\n * On ngOnDestroy, calls .clear() on the memoized function.\n *\n * @returns MethodDecorator\n */\nMemoize(): MethodDecorator"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "What Memoize provides.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/memoize package exports a single @Memoize() method decorator.\n\nIt is designed for expensive, deterministic class methods that are called repeatedly with the same arguments — for example formatting cell text in a large data table.\n\nUnder the hood it uses the memoizee library. The decorator:\n\n• Replaces the method with a memoized wrapper\n• Returns cached output when arguments match a previous call\n• Patches ngOnDestroy to clear the cache when the instance is destroyed"
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Apply the decorator to a class method.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "example.component.ts",
+            "language": "typescript",
+            "content": "import { Component, OnDestroy } from '@angular/core';\nimport { Memoize } from '@acorex/core/memoize';\n\n@Component({\n  selector: 'app-example',\n  template: `<p>Result: {{ result }}</p>`,\n})\nexport class ExampleComponent implements OnDestroy {\n  result = 0;\n\n  @Memoize()\n  expensiveCalculation(n: number): number {\n    console.log('Calculating for:', n);\n    let sum = 0;\n    for (let i = 0; i < n; i++) {\n      for (let j = 0; j < n; j++) {\n        sum += i * j;\n      }\n    }\n    return sum;\n  }\n\n  constructor() {\n    this.result = this.expensiveCalculation(1000); // runs\n    this.result = this.expensiveCalculation(1000); // cached — no log\n    this.result = this.expensiveCalculation(500);  // runs again\n  }\n\n  ngOnDestroy() {\n    // Custom cleanup — decorator clears memoize cache before/after this\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "In a Service",
+      "description": "Memoize utility methods on injectable services.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "lookup.service.ts",
+            "language": "typescript",
+            "content": "import { Injectable, OnDestroy } from '@angular/core';\nimport { Memoize } from '@acorex/core/memoize';\n\n@Injectable({ providedIn: 'root' })\nexport class LookupService implements OnDestroy {\n  @Memoize()\n  buildTreePath(categoryId: string, depth: number): string[] {\n    // Expensive tree walk — only computed once per (categoryId, depth)\n    return this.walkCategoryTree(categoryId, depth);\n  }\n\n  private walkCategoryTree(id: string, depth: number): string[] {\n    /* ... */\n    return [];\n  }\n\n  ngOnDestroy() {\n    // Cache cleared automatically when service instance is destroyed\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Real-World: Data Table Formatting",
+      "description": "Production usage in AXDataTextColumnComponent.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "data-text-column.component.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXFormatService } from '@acorex/core/format';\nimport { Memoize } from '@acorex/core/memoize';\n\nexport class AXDataTextColumnComponent {\n  private formatService = inject(AXFormatService);\n\n  format = 'number';\n  formatOptions = { locale: 'en-US' };\n\n  getCellDisplayText(rowData: unknown, dataField: string): string {\n    if (rowData == null) return '';\n    return this.getDisplayText(rowData, dataField);\n  }\n\n  @Memoize()\n  protected getDisplayText(rowData: unknown, dataField: string): string {\n    const value = (rowData as Record<string, unknown>)[dataField];\n    return !this.format\n      ? String(value ?? '')\n      : this.formatService.format(value, this.format, this.formatOptions);\n  }\n}\n\n// Note: if this.format or this.formatOptions change at runtime,\n// include them in the method signature to avoid stale cache entries.\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Pass All Inputs as Arguments",
+      "description": "Avoid stale cache when instance state matters.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "safe-memoize.ts",
+            "language": "typescript",
+            "content": "import { Memoize } from '@acorex/core/memoize';\n\nexport class FormatterComponent {\n  format = 'number';\n  locale = 'en-US';\n\n  // ❌ Risky — format/locale not in cache key\n  @Memoize()\n  badFormat(value: number): string {\n    return `${this.locale}:${this.format}:${value}`;\n  }\n\n  // ✅ Safe — all dependencies are arguments\n  @Memoize()\n  goodFormat(value: number, format: string, locale: string): string {\n    return `${locale}:${format}:${value}`;\n  }\n\n  display(value: number) {\n    return this.goodFormat(value, this.format, this.locale);\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Argument Matching Rules",
+      "description": "How memoizee builds cache keys.",
+      "content": {
+        "type": "text",
+        "data": "memoizee uses argument identity (SameValueZero for primitives):\n\n• @Memoize() compute(5) and compute(5) → cache hit\n• @Memoize() compute(5) and compute(5.0) → cache hit (SameValueZero)\n• @Memoize() compute({ id: 1 }) twice with two different object literals → two cache entries\n• @Memoize() compute('a', 'b') vs compute('b', 'a') → different entries (order matters)\n\nFor row objects in tables, the same row reference on re-render produces cache hits — which is usually desired during virtual scroll repaints."
+      }
+    },
+    {
+      "title": "ngOnDestroy Chaining",
+      "description": "How cleanup interacts with your lifecycle hook.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "lifecycle.ts",
+            "language": "typescript",
+            "content": "import { Component, OnDestroy } from '@angular/core';\nimport { Memoize } from '@acorex/core/memoize';\n\n@Component({ selector: 'app-demo', template: '' })\nexport class DemoComponent implements OnDestroy {\n  @Memoize()\n  compute(x: number) {\n    return x * 2;\n  }\n\n  ngOnDestroy() {\n    console.log('My cleanup runs');\n    // Decorator wraps this: calls your hook, then memoizedMethod.clear()\n  }\n}\n\n// Classes without ngOnDestroy still get one added by the decorator\n// solely to clear the cache on destroy.\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "When to Use vs Avoid",
+      "description": "Decision guide.",
+      "content": {
+        "type": "text",
+        "data": "Use @Memoize() when:\n\n• The method is synchronous and expensive (formatting, parsing, tree walks)\n• Same arguments always produce the same result during the instance lifetime\n• The method is called many times in templates or virtual scroll loops\n\nAvoid @Memoize() when:\n\n• The method has side effects (HTTP calls, DOM writes, state mutation)\n• Results depend on time, randomness, or mutable this state not in args\n• Arguments are always new object references (cache never hits)\n• You need TTL or LRU eviction — memoizee keeps entries until clear()/destroy\n\nFor async HTTP caching, use RxJS shareReplay, Angular resources, or a dedicated cache service instead."
+      }
+    },
+    {
+      "title": "TypeScript Configuration",
+      "description": "Required compiler setting.",
+      "content": {
+        "type": "text",
+        "data": "The @Memoize() decorator uses legacy TypeScript method decorators. The AcoreX workspace enables this in tsconfig.base.json:\n\nexperimentalDecorators: true\n\nIf you consume @acorex/core/memoize in an external project, ensure the same flag is set. Angular's signal-based APIs do not replace this decorator — it targets classic class methods specifically."
+      }
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Format System",
+  "description": "A pluggable Angular formatting framework: registry-based formatters, built-in number and string formatters, reactive format pipe, structural directive, fluent API, and extension points for date-time, file size, and custom formatters.",
+  "imports": [
+    "import { AXFormatService, AXFormatModule, AXFormatPipe, AXFormatterDirective, AXFormatter, AXFormatterRegistryService, AXNumberFormatter, AXStringFormatter } from '@acorex/core/format';"
+  ],
+  "hints": [
+    {
+      "title": "Always use async with the pipe",
+      "content": "<code>AXFormatPipe</code> returns <code>Observable&lt;string&gt;</code>. In templates always chain <code>| async</code>: <code>{{ value | format: 'number' | async }}</code>.",
+      "status": "primary"
+    },
+    {
+      "title": "Register formatters via module",
+      "content": "Built-in <code>number</code> and <code>string</code> formatters are registered by <code>AXFormatModule.forRoot()</code> or <code>forChild()</code>. Import companion modules such as <code>AXDateTimeModule</code> or <code>AXFileModule</code> to add <code>date</code>, <code>timeleft</code>, <code>filesize</code>, etc.",
+      "status": "primary"
+    },
+    {
+      "title": "Reactive re-formatting",
+      "content": "The format pipe automatically re-evaluates when <code>AXSystemEvents</code> fire (language, locale, calendar changes). Formatters with <code>updateInterval</code> (e.g. <code>timeleft</code>) refresh periodically — no manual subscription needed in templates.",
+      "status": "primary"
+    },
+    {
+      "title": "Deprecated axDate pipe",
+      "content": "Do not use the legacy <code>axDate</code> pipe from <code>@acorex/core/date-time</code>. Prefer <code>{{ date | format: 'date' | async }}</code> or <code>format: 'datetime'</code> instead.",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormatter (abstract)",
+      "description": "Base class every formatter must extend.",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "Unique formatter key used in pipe and service calls (e.g. 'number', 'date')."
+        },
+        {
+          "name": "updateInterval?",
+          "type": [{ "name": "number" }],
+          "description": "When set (ms), AXFormatPipe re-formats at this interval. Used by timeleft."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Transforms a value into a display string.\n */\nabstract format(value: unknown, options?: AXFormatOptions | string): string"
+        }
+      ]
+    },
+    {
+      "title": "AXFormatOptionsMap",
+      "description": "Type map for formatter-specific options. Extended via TypeScript module augmentation in companion packages.",
+      "props": [
+        {
+          "name": "number",
+          "type": [{ "name": "AXNumberFormatterOptions" }],
+          "description": "Options for the built-in number formatter."
+        },
+        {
+          "name": "string",
+          "type": [{ "name": "AXStringFormatterOptions" }],
+          "description": "Options for the built-in string formatter."
+        }
+      ]
+    },
+    {
+      "title": "AXNumberFormatterOptions",
+      "description": "Configuration for the number formatter.",
+      "props": [
+        {
+          "name": "decimalPlaces?",
+          "type": [{ "name": "number" }],
+          "description": "Fixed number of decimal digits."
+        },
+        {
+          "name": "thousandSeparator?",
+          "type": [{ "name": "string" }],
+          "description": "Character between thousands groups. Defaults from locale via Intl."
+        },
+        {
+          "name": "decimalSeparator?",
+          "type": [{ "name": "string" }],
+          "description": "Character before fractional part. Defaults from locale."
+        },
+        {
+          "name": "zeroPadLength?",
+          "type": [{ "name": "number" }],
+          "description": "Minimum integer width, left-padded with zeros."
+        },
+        {
+          "name": "locale?",
+          "type": [{ "name": "string" }],
+          "description": "BCP 47 locale for separator detection (default: navigator.language)."
+        }
+      ]
+    },
+    {
+      "title": "AXFormatterRegistryService",
+      "description": "Root registry that holds all formatter plugin instances.",
+      "props": [
+        {
+          "name": "formatters",
+          "type": [{ "name": "AXFormatter[]" }],
+          "description": "All registered formatter instances."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Instantiates and registers formatter classes.\n * Duplicate names are ignored.\n */\nregister(...plugins: (new () => AXFormatter)[]): void"
+        },
+        {
+          "content": "/**\n * Resolves a formatter by name.\n * @throws Error when not found.\n */\nget(name: string): AXFormatter"
+        }
+      ]
+    },
+    {
+      "title": "AXFormatService",
+      "description": "Root service for imperative formatting and manual refresh triggers.",
+      "props": [
+        {
+          "name": "onRender",
+          "type": [{ "name": "Observable<void>" }],
+          "description": "Emits when render() is called — useful for custom refresh logic."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Formats a value with the named formatter.\n */\nformat(value: unknown, formatter: string, options?: unknown): string"
+        },
+        {
+          "content": "/**\n * Starts a type-safe fluent chain.\n * Example: formatService.format(1000).to('number', { locale: 'fa-IR' })\n */\nformat(value: unknown): AXFormatFluent"
+        },
+        {
+          "content": "/**\n * Notifies listeners that formatted output should refresh.\n */\nrender(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXFormatPipe",
+      "description": "Pure pipe that returns Observable<string> and re-formats on system events or updateInterval.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * @param value - Raw value to format.\n * @param name - Formatter key.\n * @param options - Formatter options object or shorthand string.\n * @returns Observable<string> — use with async pipe.\n */\ntransform(value: unknown, name: string, options?: AXFormatOptions | string): Observable<string>"
+        }
+      ]
+    },
+    {
+      "title": "AXFormatterDirective",
+      "description": "Structural directive that exposes a format() helper in the template context.",
+      "props": [],
+      "methods": []
+    },
+    {
+      "title": "AXFormatModule",
+      "description": "Registers built-in formatters and exports AXFormatPipe and AXFormatterDirective.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Root configuration. Registers number + string formatters\n * plus any custom formatters passed in configs.formatters.\n */\nstatic forRoot(configs?: { formatters?: (new () => AXFormatter)[] }): ModuleWithProviders<AXFormatModule>"
+        },
+        {
+          "content": "/**\n * Feature-level registration of additional formatters.\n */\nstatic forChild(configs?: { formatters?: (new () => AXFormatter)[] }): ModuleWithProviders<AXFormatModule>"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How the format system fits together.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/format package is the foundation for all display formatting in AcoreX.\n\n• AXFormatModule registers formatters into AXFormatterRegistryService.\n• AXFormatService formats values imperatively in TypeScript.\n• AXFormatPipe formats reactively in templates and listens to AXEventService system events.\n• Companion packages extend the system:\n  – @acorex/core/date-time → date, time, datetime, timeleft, time-duration\n  – @acorex/core/file → filesize\n\nBuilt-in formatters: number, string."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Register the built-in formatters once, then format values in templates or TypeScript.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "format-basic-usage.component.ts",
+            "language": "typescript",
+            "content": "import { AsyncPipe } from '@angular/common';\nimport { Component, computed, inject, signal } from '@angular/core';\nimport { AXFormatPipe, AXFormatService } from '@acorex/core/format';\n\n@Component({\n  selector: 'app-format-basic-usage',\n  imports: [AsyncPipe, AXFormatPipe],\n  template: `\n    <p>Pipe: {{ amount() | format: 'number': numberOptions | async }}</p>\n    <p>Service: {{ formattedAmount() }}</p>\n    <p>{{ greeting() }}</p>\n  `,\n})\nexport class FormatBasicUsageComponent {\n  private formatService = inject(AXFormatService);\n\n  protected amount = signal(1234567.89);\n  protected numberOptions = { locale: 'en-US', decimalPlaces: 2 };\n\n  protected formattedAmount = computed(() =>\n    this.formatService.format(this.amount(), 'number', this.numberOptions),\n  );\n\n  protected greeting = computed(() =>\n    this.formatService\n      .format('Hello {{ user.name }}!')\n      .to('string', { user: { name: 'AcoreX' } }),\n  );\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "AXFormatService — Direct Formatting",
+      "description": "Format values in component logic without the pipe.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "format-service.ts",
+            "language": "typescript",
+            "content": "import { Component, inject } from '@angular/core';\nimport { AXFormatService } from '@acorex/core/format';\n\n@Component({\n  selector: 'app-calendar-nav',\n  template: `<h2>{{ navText }}</h2>`,\n})\nexport class CalendarNavComponent {\n  private formatService = inject(AXFormatService);\n\n  navText = '';\n\n  setRange(start: Date, end: Date) {\n    const d1 = this.formatService.format(start, 'datetime', { format: 'MMM yyyy' });\n    const d2 = this.formatService.format(end, 'datetime', { format: 'MMM yyyy' });\n    this.navText = `${d1} - ${d2}`;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Fluent API",
+      "description": "Type-safe chaining with .to().",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "fluent-api.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXFormatService } from '@acorex/core/format';\n\nconst formatService = inject(AXFormatService);\n\n// Type-safe formatter name and options via AXFormatOptionsMap\nconst formatted = formatService\n  .format(9876543.21)\n  .to('number', { locale: 'fa-IR', decimalPlaces: 2 });\n\nconsole.log(formatted); // e.g. '9,876,543.21' or locale-specific separators\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Number Formatter",
+      "description": "Built-in number formatting with locale-aware separators.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "number-formatter.ts",
+            "language": "typescript",
+            "content": "import { AXFormatService } from '@acorex/core/format';\nimport { inject } from '@angular/core';\n\nconst formatService = inject(AXFormatService);\n\n// Locale-aware (uses Intl.NumberFormat for separators)\nformatService.format(1234567.89, 'number', { locale: 'en-US', decimalPlaces: 2 });\n// → '1,234,567.89'\n\nformatService.format(1234567.89, 'number', { locale: 'de-DE', decimalPlaces: 2 });\n// → '1.234.567,89'\n\n// Zero-padded integer part\nformatService.format(42, 'number', { zeroPadLength: 6 });\n// → '000042'\n"
+          },
+          {
+            "fileName": "number-pipe.html",
+            "language": "html",
+            "content": "<!-- In templates -->\n<span>{{ amount | format: 'number': { locale: 'fa-IR', decimalPlaces: 0 } | async }}</span>\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "String Formatter",
+      "description": "Template interpolation and key lookup.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "string-formatter.ts",
+            "language": "typescript",
+            "content": "import { AXFormatService } from '@acorex/core/format';\nimport { inject } from '@angular/core';\n\nconst formatService = inject(AXFormatService);\n\n// Interpolate {{ path }} placeholders using lodash get()\nformatService.format('Hello {{ user.name }}!', {\n  user: { name: 'Ali' },\n});\n// → 'Hello Ali!'\n\n// If options contains a key matching the entire value, that value is returned\nformatService.format('greeting.key', {\n  'greeting.key': 'Welcome back',\n});\n// → 'Welcome back'\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Format Pipe in Templates",
+      "description": "Reactive formatting with async pipe.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "templates.html",
+            "language": "html",
+            "content": "<!-- Number -->\n<p>{{ 12345 | format: 'number': { locale: 'en-US' } | async }}</p>\n\n<!-- Date (requires AXDateTimeModule) -->\n<p>{{ orderDate | format: 'date': 'short' | async }}</p>\n<p>{{ orderDate | format: 'date': { format: 'yyyy/MM/dd', calendar: 'solar-hijri' } | async }}</p>\n\n<!-- Time -->\n<p>{{ meetingTime | format: 'time': { format: 'HH:mm' } | async }}</p>\n\n<!-- Relative time — auto-updates every second -->\n<span>{{ message.timestamp | format: 'timeleft' | async }}</span>\n\n<!-- File size (requires AXFileModule) -->\n<span>{{ file.size | format: 'filesize' | async }}</span>\n"
+          },
+          {
+            "fileName": "component.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { AsyncPipe } from '@angular/common';\nimport { AXFormatPipe } from '@acorex/core/format';\n\n@Component({\n  selector: 'app-message-list',\n  imports: [AsyncPipe, AXFormatPipe],\n  templateUrl: './templates.html',\n})\nexport class MessageListComponent {\n  orderDate = new Date();\n  meetingTime = new Date();\n  message = { timestamp: new Date(Date.now() - 3600_000) };\n  file = { size: 1536000 };\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Formatter Directive",
+      "description": "Expose format() inside a template block.",
+      "content": {
+        "type": "code",
+        "language": "html",
+        "data": [
+          {
+            "fileName": "directive-usage.html",
+            "language": "html",
+            "content": "<ng-container *formatter=\"let format\">\n  <p>{{ format(12345, 'number', { locale: 'en-US' }) }}</p>\n  <p>{{ format(orderTotal, 'number', { decimalPlaces: 2 }) }}</p>\n</ng-container>\n"
+          },
+          {
+            "fileName": "directive-component.ts",
+            "language": "typescript",
+            "content": "import { Component } from '@angular/core';\nimport { AXFormatterDirective } from '@acorex/core/format';\n\n@Component({\n  selector: 'app-invoice',\n  imports: [AXFormatterDirective],\n  templateUrl: './directive-usage.html',\n})\nexport class InvoiceComponent {\n  orderTotal = 4999.5;\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Creating a Custom Formatter",
+      "description": "Extend AXFormatter and register via forChild.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "percent.formatter.ts",
+            "language": "typescript",
+            "content": "import { AXFormatOptions, AXFormatter } from '@acorex/core/format';\nimport { Injectable } from '@angular/core';\n\nexport interface AXPercentFormatterOptions extends AXFormatOptions {\n  decimalPlaces?: number;\n}\n\n// Extend the type map for fluent API autocomplete\ndeclare module '@acorex/core/format' {\n  interface AXFormatOptionsMap {\n    percent: AXPercentFormatterOptions;\n  }\n}\n\n@Injectable()\nexport class AXPercentFormatter implements AXFormatter {\n  get name() {\n    return 'percent';\n  }\n\n  format(value: unknown, options?: AXPercentFormatterOptions): string {\n    const num = Number(value);\n    if (Number.isNaN(num)) return '—';\n    const digits = options?.decimalPlaces ?? 1;\n    return `${(num * 100).toFixed(digits)}%`;\n  }\n}\n"
+          },
+          {
+            "fileName": "register-custom.ts",
+            "language": "typescript",
+            "content": "import { NgModule } from '@angular/core';\nimport { AXFormatModule } from '@acorex/core/format';\nimport { AXPercentFormatter } from './percent.formatter';\n\n@NgModule({\n  imports: [\n    AXFormatModule.forChild({ formatters: [AXPercentFormatter] }),\n  ],\n})\nexport class ReportsModule {}\n\n// Usage: {{ ratio | format: 'percent': { decimalPlaces: 0 } | async }}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Periodic Updates (updateInterval)",
+      "description": "Formatters that need live refresh.",
+      "content": {
+        "type": "text",
+        "data": "Some formatters define updateInterval (in milliseconds). When set, AXFormatPipe merges a shared RxJS interval with system event triggers so the displayed value updates automatically.\n\nThe timeleft formatter (from @acorex/core/date-time) sets updateInterval = 1000 and displays relative strings like '5 minutes ago'. No manual setInterval or signal refresh is needed in your component — just bind the pipe with async.\n\nTo build a live clock formatter:\n\n1. Set updateInterval on your AXFormatter subclass.\n2. Implement format() to return the current formatted value.\n3. Register via AXFormatModule.forChild()."
+      }
+    },
+    {
+      "title": "System Event Integration",
+      "description": "Automatic re-format on locale/language/calendar changes.",
+      "content": {
+        "type": "text",
+        "data": "AXFormatPipe subscribes to AXEventService.onEvent and re-formats when any AXSystemEvents value is emitted:\n\n• AXLanguageChanged / AXLanguageLoaded — translation language changed\n• AXLocaleChanged / AXLocaleLoaded — locale profile changed\n• AXCalendarChanged — active calendar system changed\n\nThis means date, number, and timeleft outputs in templates stay in sync with global settings without extra component logic. When you change formatting outside templates, call AXFormatService.render() or rely on the pipe's built-in triggers."
+      }
+    },
+    {
+      "title": "Available Formatter Names",
+      "description": "Built-in and companion-package formatters.",
+      "content": {
+        "type": "text",
+        "data": "Built-in (@acorex/core/format):\n• number — locale-aware numeric formatting\n• string — interpolation and key lookup\n\nFrom @acorex/core/date-time (import AXDateTimeModule):\n• date — date-only formatting with calendar/locale support\n• time — time-only formatting\n• datetime — combined date + time\n• timeleft — relative time ('5 minutes ago'), auto-refreshes every 1s\n• time-duration — duration display (e.g. audio player timestamps)\n\nFrom @acorex/core/file (import AXFileModule):\n• filesize — bytes to '1.46 MB'\n\nRegister custom formatters with any unique name via forRoot/forChild."
+      }
+    }
+  ]
+}

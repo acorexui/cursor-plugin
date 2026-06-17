@@ -1,0 +1,59 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Line Chart Data",
+  "description": "Interface definition for line chart data series configuration",
+  "imports": ["import { AXLineChartData } from '@acorex/charts/line-chart';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the line chart data interface.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "line-chart.type.ts",
+            "content": "export interface AXLineChartData {\n  id?: string;\n  label?: string;\n  tooltipLabel?: string;\n  lineColor?: string;\n  fillColor?: string;\n  data: Array<{ x: number | string; y: number; tooltipLabel?: string }>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXLineChartData",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier for the series"
+        },
+        {
+          "name": "label",
+          "type": [{ "name": "string" }],
+          "description": "Display label for the series"
+        },
+        {
+          "name": "tooltipLabel",
+          "type": [{ "name": "string" }],
+          "description": "Label to display in tooltip"
+        },
+        {
+          "name": "lineColor",
+          "type": [{ "name": "string" }],
+          "description": "Color for the line"
+        },
+        {
+          "name": "fillColor",
+          "type": [{ "name": "string" }],
+          "description": "Color for the area fill"
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "Array<{ x: number | string; y: number; tooltipLabel?: string }>" }],
+          "description": "Array of data points with x, y coordinates and optional tooltip label"
+        }
+      ]
+    }
+  ]
+}

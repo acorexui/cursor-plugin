@@ -1,0 +1,50 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXClickEvent",
+  "description": "The event emitted when the clickable element is clicked",
+  "imports": ["import { AXClickEvent } from '@acorex/cdk/common';"],
+
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "The event class definition.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXClickEvent extends AXHtmlEvent<MouseEvent> { \n /** * uses for extra data */ \n data?: any = null; \n override nativeEvent?: any = null; \n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXClickEvent",
+      "props": [
+        { "name": "component", "type": [{ "name": "any" }], "description": "The sender component." },
+        { "name": "htmlElement", "type": [{ "name": "HTMLElement" }], "description": "The root native element." },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "description": "Indicates if the event was triggered by user interaction.",
+          "default": "false"
+        },
+        {
+          "name": "nativeEvent",
+          "type": [{ "name": "any" }],
+          "default": "null",
+          "description": "The native click event. Overrides AXHtmlEvent to default to null."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "any" }],
+          "default": "null",
+          "description": "Optional extra data associated with the click."
+        }
+      ]
+    }
+  ]
+}

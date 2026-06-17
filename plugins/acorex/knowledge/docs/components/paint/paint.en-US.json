@@ -1,0 +1,241 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Paint",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/paint--documentation"
+    }
+  ],
+  "description": "A canvas-based drawing component that provides a comprehensive painting interface with multiple drawing tools, color customization, and image export capabilities. This component is commonly used for signature capture, image annotation, and basic drawing applications.",
+  "imports": [
+    "import { AXPaintModule } from '@acorex/components/paint';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-paint-container</code> with <code>ax-paint-view</code>",
+      "content": {
+        "type": "api",
+        "data": "paint/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Signature Box",
+      "description": "Creating a signature capture interface using the paint component with validation",
+      "content": {
+        "type": "api",
+        "data": "paint/signature-box"
+      },
+      "height": "400px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPaintContainerComponent",
+      "description": "The main container component that provides the paint interface with toolbars and drawing tools",
+      "props": [
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Defines the visual appearance style of the component. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the paint component is disabled. Inherited from MXInteractiveComponent.",
+          "default": "false"
+        },
+        {
+          "name": "editMode",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "When true, automatically activates the pen tool and hides the main toolbar",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The name attribute for the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The tab index for keyboard navigation. Inherited from MXInteractiveComponent.",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the canvas value changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the text content changes. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is pressed down. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is released. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted when a key is pressed. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component receives focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Emitted when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when the look style changes. Inherited from MXLookComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets the active drawing tool.\n *\n * @param tool - The tool to activate: 'pen', 'highlight', or 'eraser'\n */\nsetActiveTool(tool: 'pen' | 'highlight' | 'eraser'): void"
+        },
+        {
+          "content": "/**\n * Sets the pen color for drawing.\n *\n * @param color - The color to use for the pen tool\n */\nsetPenColor(color: string | CanvasGradient | CanvasPattern): void"
+        },
+        {
+          "content": "/**\n * Sets the highlight color for highlighting.\n *\n * @param color - The color to use for the highlight tool\n */\nsetHighlightColor(color: string | CanvasGradient | CanvasPattern): void"
+        },
+        {
+          "content": "/**\n * Sets the pen width for drawing.\n *\n * @param width - The width of the pen stroke in pixels\n */\nsetPenWidth(width: number): void"
+        },
+        {
+          "content": "/**\n * Sets the highlight width for highlighting.\n *\n * @param width - The width of the highlight stroke in pixels\n */\nsetHighlightWidth(width: number): void"
+        },
+        {
+          "content": "/**\n * Sets the eraser width for erasing.\n *\n * @param width - The width of the eraser in pixels\n */\nsetEraserWidth(width: number): void"
+        },
+        {
+          "content": "/**\n * Clears the entire canvas.\n */\nclear(): void"
+        }
+      ]
+    },
+    {
+      "title": "AXPaintViewComponent",
+      "description": "The canvas view component that handles the actual drawing operations",
+      "props": [
+        {
+          "name": "customClass",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Custom CSS class to apply to the component",
+          "default": "''"
+        },
+        {
+          "name": "paintBackgroundColor",
+          "type": [
+            {
+              "name": "'black'"
+            },
+            {
+              "name": "'white'"
+            }
+          ],
+          "description": "The background color of the paint canvas",
+          "default": "'white'"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Exports the canvas content as an image.\n *\n * @param format - The image format: 'image/webp', 'image/png', or 'image/jpeg'\n */\ngetOutPut(format: 'image/webp' | 'image/png' | 'image/jpeg'): void"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Download Response",
+  "description": "Represents the payload emitted during a download operation, including progress state, byte counts, status, and the Blob data on completion.",
+  "imports": ["import { AXDownloadResponse } from '@acorex/core/network';"],
+  "types": [
+    {
+      "title": "AXDownloadResponse",
+      "props": [
+        { "name": "progress", "type": [{ "name": "number" }], "description": "Progress percentage (0-100)." },
+        { "name": "bytesReceived", "type": [{ "name": "number" }], "description": "Number of bytes received so far." },
+        {
+          "name": "totalBytes",
+          "type": [{ "name": "number" }],
+          "description": "Total number of bytes expected to be downloaded."
+        },
+        {
+          "name": "status",
+          "type": [{ "name": "AXDownloadStatus", "link": "/en-US/docs/types/ax-download-status" }],
+          "description": "Current download status value."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "Blob" }],
+          "description": "The downloaded Blob data when the download completes."
+        }
+      ]
+    }
+  ]
+}

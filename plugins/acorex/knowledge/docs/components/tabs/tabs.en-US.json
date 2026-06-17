@@ -1,0 +1,346 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXTabsComponent } from '@acorex/components/tabs';",
+    "import { AXTabItemComponent } from '@acorex/components/tabs';"
+  ],
+  "title": "Tabs",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/tabs--documentation"
+    }
+  ],
+  "description": "A component that provides a tabbed interface, allowing users to switch between different views or sections of content.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-tabs</code>",
+      "content": {
+        "type": "api",
+        "data": "tabs/usage"
+      }
+    },
+    {
+      "title": "Decoration",
+      "description": "Example of tabs with decorative elements",
+      "content": {
+        "type": "api",
+        "data": "tabs/decoration"
+      }
+    },
+    {
+      "title": "Custom Template",
+      "description": "Example of tabs with custom templates",
+      "content": {
+        "type": "api",
+        "data": "tabs/custom-template"
+      }
+    },
+    {
+      "title": "Tab with Content",
+      "description": "Example of tabs with associated content",
+      "content": {
+        "type": "api",
+        "data": "tabs/tab-with-content"
+      }
+    },
+    {
+      "title": "Look Variants",
+      "description": "Explore different visual styles for tabs using the <code>look</code> property.",
+      "content": {
+        "type": "api",
+        "data": "tabs/look-variants"
+      }
+    },
+    {
+      "title": "Location Variants",
+      "height": "400px",
+      "description": "Explore different positions for tabs using the <code>location</code> property.",
+      "content": {
+        "type": "api",
+        "data": "tabs/location-variants"
+      }
+    },
+    {
+      "title": "Disabled State",
+      "description": "Example showing tabs with disabled state using the <code>disabled</code> property.",
+      "content": {
+        "type": "api",
+        "data": "tabs/disabled-state"
+      }
+    },
+    {
+      "title": "Event Handling",
+      "description": "Example showing how to handle tab change events using <code>onActiveTabChanged</code>.",
+      "content": {
+        "type": "api",
+        "data": "tabs/event-handling"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTabsComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component instance. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXTabLook",
+              "link": "/en-US/docs/types/tab-look"
+            }
+          ],
+          "default": "'default'",
+          "description": "Sets the appearance style of the tab component"
+        },
+        {
+          "name": "location",
+          "type": [
+            {
+              "name": "AXTabLocation",
+              "link": "/en-US/docs/types/tab-location"
+            }
+          ],
+          "default": "'bottom'",
+          "description": "Specifies the position of the tab component"
+        },
+        {
+          "name": "fitParent",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Specifies whether the component should resize to fit its parent container"
+        },
+        {
+          "name": "minWidth",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Applies a minimum width constraint to the component"
+        },
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "AXTabContentDirective"
+            }
+          ],
+          "description": "The AXTabContentDirective associated with the tab"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onActiveTabChanged",
+          "type": [
+            {
+              "name": "AXTabStripChangedEvent",
+              "link": "/en-US/docs/events/tab-strip-changed-event"
+            }
+          ],
+          "description": "Emitted when the active tab changes"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Activates the specified tab and updates the content.\n *\n * @param tab - The tab to select, either by index (number) or by component instance\n */\nselect(tab: number | AXTabItemComponent)"
+        }
+      ]
+    },
+    {
+      "title": "AXTabItemComponent",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component instance. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "text",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Defines the text content to be displayed within the component"
+        },
+        {
+          "name": "key",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Defines a unique identifier for the component instance"
+        },
+        {
+          "name": "headerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Defines a custom template for the component's header"
+        },
+        {
+          "name": "active",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Gets or sets the component's active state, controlling its behavior and appearance"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "If set to true, it disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex of the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "touched",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Indicates whether the component has been touched. Inherited from MXInteractiveComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event whenever the disabled state of the component changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets focused. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires each time the component gets blurred. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "activeChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emits an event when the active state of the component changes"
+        },
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emits an event when the component is clicked"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        },
+        {
+          "content": "/**\n * Gets the component's position and size statistics.\n *\n * @returns object with width, height, left, and top properties\n */\ngetStats()"
+        }
+      ]
+    }
+  ]
+}

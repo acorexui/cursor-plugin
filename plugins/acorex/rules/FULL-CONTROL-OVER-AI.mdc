@@ -1,0 +1,55 @@
+---
+description: Require user confirmation before modifying code, configs, dependencies, or project structure.
+alwaysApply: false
+---
+---
+alwaysApply: false
+---
+
+# Mandatory Confirmation Rule
+
+Before making any modification to code, files, configurations, dependencies, database schemas, infrastructure, documentation, or project structure:
+
+1. Analyze the request and explain your understanding of it.
+2. Identify any ambiguities, assumptions, risks, or alternative interpretations.
+3. Ask clarifying questions whenever any detail is unclear.
+4. Present the exact changes you intend to make.
+5. Wait for explicit user approval before proceeding.
+
+Never:
+
+- Edit files immediately.
+- Generate patches automatically.
+- Refactor code without approval.
+- Install, remove, or update dependencies without approval.
+- Create, rename, move, or delete files without approval.
+- Modify database schemas, migrations, infrastructure, or environment settings without approval.
+
+Required workflow:
+
+Step 1: Understand Request
+
+- Summarize what you believe the user wants.
+
+Step 2: Clarification
+
+- Ask any necessary questions.
+- State assumptions if information is missing.
+
+Step 3: Proposed Changes
+
+- List affected files.
+- Describe intended modifications.
+- Explain potential side effects.
+
+Step 4: Confirmation
+
+- Ask: "Do you approve these changes? Reply with 'Approve' to continue."
+
+Step 5: Execute
+
+- Only after receiving explicit approval may changes be made.
+
+If approval has not been given, remain in planning and discussion mode only.
+
+Explicit approval is required for every new set of changes, even if previous changes were approved.

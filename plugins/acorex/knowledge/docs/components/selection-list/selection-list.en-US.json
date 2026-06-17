@@ -1,0 +1,223 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXSelectionListComponent } from '@acorex/components/selection-list';"
+  ],
+  "title": "Selection List",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/selectionlist--documentation"
+    }
+  ],
+  "description": "Presents a list of selectable items with single/multiple modes, configurable direction and looks, optional controls, custom template and hint support.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-selection-list</code>",
+      "content": {
+        "type": "api",
+        "data": "selection-list/usage"
+      }
+    },
+    {
+      "title": "Multiple",
+      "description": "Enable multiple selection using the <code>multiple</code> property.",
+      "content": {
+        "type": "api",
+        "data": "selection-list/multiple"
+      }
+    },
+    {
+      "title": "Hide Control",
+      "description": "Toggle control visibility with <code>showControl</code> for a clean UI.",
+      "content": {
+        "type": "api",
+        "data": "selection-list/control"
+      }
+    },
+    {
+      "title": "Direction",
+      "description": "Change layout direction using the <code>direction</code> property.",
+      "content": {
+        "type": "api",
+        "data": "selection-list/horizontal"
+      }
+    },
+    {
+      "title": "Show Hint",
+      "description": "Display per-item hints by adding a <code>hint</code> field to items.",
+      "content": {
+        "type": "api",
+        "data": "selection-list/hint"
+      }
+    },
+    {
+      "title": "Custom Template",
+      "description": "Render items using a custom template via <code>customTemplate</code>.",
+      "content": {
+        "type": "api",
+        "data": "selection-list/custom"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionListComponent",
+      "props": [
+        {
+          "name": "items",
+          "type": [
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Items to display. Supports item fields like text/value/disabled/readonly and optional hint."
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "any"
+            },
+            {
+              "name": "any[]"
+            }
+          ],
+          "description": "Selected value(s). Inherited from MXSelectionValueComponent."
+        },
+        {
+          "name": "valueField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item field name used as value."
+        },
+        {
+          "name": "textField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item field name used for display text."
+        },
+        {
+          "name": "disabledField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item field name for disabled state."
+        },
+        {
+          "name": "readonlyField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item field name for readonly state."
+        },
+        {
+          "name": "multiple",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Whether multiple selection is allowed"
+        },
+        {
+          "name": "direction",
+          "type": [
+            {
+              "name": "AXDirection",
+              "link": "/en-US/docs/types/ax-direction"
+            }
+          ],
+          "description": "Layout direction.",
+          "default": "'horizontal'"
+        },
+        {
+          "name": "showControl",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Show checkbox/radio controls.",
+          "default": "true"
+        },
+        {
+          "name": "customTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            }
+          ],
+          "description": "Custom render template for items."
+        },
+        {
+          "name": "hintField",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Item field name for hint text.",
+          "default": "'hint'"
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXSelectionListLook",
+              "link": "/en-US/docs/types/ax-selection-list-look"
+            }
+          ],
+          "description": "Component look: 'solid' | 'divided' | 'card'.",
+          "default": "'solid'"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Disable component. Inherited.",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Readonly mode. Inherited.",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<any[]>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when selected value(s) change."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

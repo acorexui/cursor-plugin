@@ -1,0 +1,210 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Icon Resolver",
+  "description": "A pluggable icon resolution system: register custom AXIconResolver implementations via dependency injection, resolve icon keys to SVG strings or URLs through AXIconResolverService, with built-in caching and multi-resolver chaining.",
+  "imports": [
+    "import { AXIconResolverService, AXIconResolver, AX_ICON_RESOLVER, AXIconResolverDefault } from '@acorex/core/icon';"
+  ],
+  "hints": [
+    {
+      "title": "Provide a resolver",
+      "content": "Without at least one <code>AX_ICON_RESOLVER</code> provider, <code>AXIconResolverService.resolve()</code> has no resolvers to call and will throw. Register your resolver in <code>app.config.ts</code> or a feature module.",
+      "status": "primary"
+    },
+    {
+      "title": "Return null to skip",
+      "content": "Each resolver should return <code>null</code> when it cannot handle the icon key. The service tries the next resolver in the chain. Return a non-null string (SVG markup, image URL, etc.) when resolved.",
+      "status": "primary"
+    },
+    {
+      "title": "Results are cached",
+      "content": "Successful resolutions are stored in an internal <code>Map</code>. Subsequent calls to <code>resolve()</code> with the same key return the cached value without re-running resolvers.",
+      "status": "primary"
+    },
+    {
+      "title": "Multiple resolvers",
+      "content": "Register multiple resolvers with <code>multi: true</code>. They are tried in registration order — useful for splitting icon sets (e.g. map icons vs. UI icons).",
+      "status": "warning"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXIconResolver (abstract)",
+      "description": "Base class for icon resolution plugins.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Converts an icon key into its display value.\n * @param icon - Icon identifier (e.g. 'home', 'map-cloud')\n * @returns Resolved SVG/URL string, or null if this resolver cannot handle the key.\n */\nabstract resolve(icon: string): Promise<string | null>"
+        }
+      ]
+    },
+    {
+      "title": "AX_ICON_RESOLVER",
+      "description": "Injection token for registering one or more icon resolver implementations.",
+      "props": [
+        {
+          "name": "token",
+          "type": [{ "name": "InjectionToken<AXIconResolver | AXIconResolver[]>" }],
+          "description": "Provide a single resolver class or use multi: true to register several resolvers."
+        }
+      ],
+      "methods": []
+    },
+    {
+      "title": "AXIconResolverDefault",
+      "description": "Pass-through resolver that returns the icon key unchanged. Useful as a last-resort fallback.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Returns the icon string as-is.\n */\nresolve(icon: string): Promise<string | null>"
+        }
+      ]
+    },
+    {
+      "title": "AXIconResolverService",
+      "description": "Root singleton that orchestrates resolver chaining and caching.",
+      "props": [],
+      "methods": [
+        {
+          "content": "/**\n * Resolves an icon key to its final string representation.\n * 1. Returns cached value if available.\n * 2. Iterates registered resolvers until one returns non-null.\n * 3. Caches and returns the result.\n * @throws Error when no resolver succeeds.\n */\nresolve(icon: string): Promise<string>"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Overview",
+      "description": "How the icon resolver system works.",
+      "content": {
+        "type": "text",
+        "data": "The @acorex/core/icon package decouples icon keys from their actual content (inline SVG, image URLs, sprite references, etc.).\n\n• You register AXIconResolver implementations via the AX_ICON_RESOLVER token.\n• Components and services call AXIconResolverService.resolve('my-icon-key').\n• The service checks its cache, then asks each resolver in order until one returns a value.\n\nPrimary consumer: @acorex/components/map uses the resolver to turn POI iconKey values into Leaflet marker icons."
+      }
+    },
+    {
+      "title": "Basic Usage",
+      "description": "Create an icon resolver and register it at application bootstrap.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "app-icon.resolver.ts",
+            "language": "typescript",
+            "content": "import { Injectable } from '@angular/core';\nimport { AXIconResolver } from '@acorex/core/icon';\n\n@Injectable()\nexport class AppIconResolver implements AXIconResolver {\n  private readonly icons: Record<string, string> = {\n    home: '<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\"/></svg>',\n    image: '/assets/icons/logo.svg',\n  };\n\n  async resolve(icon: string): Promise<string | null> {\n    return this.icons[icon] ?? null;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Resolving Icons",
+      "description": "Use AXIconResolverService in components and services.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "icon-demo.component.ts",
+            "language": "typescript",
+            "content": "import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';\nimport { DomSanitizer, SafeHtml } from '@angular/platform-browser';\nimport { AXIconResolverService } from '@acorex/core/icon';\n\n@Component({\n  selector: 'app-icon-demo',\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  template: `\n    @if (homeSvg(); as svg) {\n      <span [innerHTML]=\"svg\"></span>\n    }\n  `,\n})\nexport class IconDemoComponent {\n  private readonly iconResolver = inject(AXIconResolverService);\n  private readonly sanitizer = inject(DomSanitizer);\n\n  readonly homeSvg = signal<SafeHtml | null>(null);\n\n  async ngOnInit() {\n    const svg = await this.iconResolver.resolve('home');\n    this.homeSvg.set(this.sanitizer.bypassSecurityTrustHtml(svg));\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Resolver Return Values",
+      "description": "What resolve() can return.",
+      "content": {
+        "type": "text",
+        "data": "A resolver may return any string that your consumer understands:\n\n• Inline SVG markup — common for map markers and UI icons\n• Image URL — e.g. 'https://example.com/icon.png' or '/assets/icons/star.svg'\n• Data URL — base64-encoded images\n• Raw path — if the consumer treats unresolved paths directly\n\nReturn null when the key is unknown to your resolver so the next resolver in the chain can try."
+      }
+    },
+    {
+      "title": "Dynamic / Async Resolution",
+      "description": "Load icons from HTTP or lazy bundles.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "http-icon.resolver.ts",
+            "language": "typescript",
+            "content": "import { HttpClient } from '@angular/common/http';\nimport { inject, Injectable } from '@angular/core';\nimport { firstValueFrom } from 'rxjs';\nimport { AXIconResolver } from '@acorex/core/icon';\n\n@Injectable()\nexport class HttpIconResolver implements AXIconResolver {\n  private http = inject(HttpClient);\n\n  async resolve(icon: string): Promise<string | null> {\n    // Only handle keys prefixed with 'asset:'\n    if (!icon.startsWith('asset:')) {\n      return null;\n    }\n\n    const path = icon.replace('asset:', '');\n    try {\n      return await firstValueFrom(this.http.get(path, { responseType: 'text' }));\n    } catch {\n      return null;\n    }\n  }\n}\n\n// Usage: await iconService.resolve('asset:/assets/icons/custom.svg');\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Multiple Resolvers",
+      "description": "Chain specialized resolvers with multi: true.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "multi-resolvers.config.ts",
+            "language": "typescript",
+            "content": "import { ApplicationConfig } from '@angular/core';\nimport { AX_ICON_RESOLVER, AXIconResolverDefault } from '@acorex/core/icon';\nimport { MapIconResolver } from './map-icon.resolver';\nimport { UiIconResolver } from './ui-icon.resolver';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [\n    // Tried first — handles map-* keys\n    { provide: AX_ICON_RESOLVER, useClass: MapIconResolver, multi: true },\n    // Tried second — handles ui-* keys\n    { provide: AX_ICON_RESOLVER, useClass: UiIconResolver, multi: true },\n    // Last resort — returns the key unchanged\n    { provide: AX_ICON_RESOLVER, useClass: AXIconResolverDefault, multi: true },\n  ],\n};\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Map Integration",
+      "description": "Real-world usage with @acorex/components/map POI markers.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "map-icon.resolver.ts",
+            "language": "typescript",
+            "content": "import { Injectable } from '@angular/core';\nimport { AXIconResolver } from '@acorex/core/icon';\n\n@Injectable()\nexport class MapIconResolver implements AXIconResolver {\n  private iconMap: Record<string, string> = {\n    'map-cloud': '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"25\" viewBox=\"0 0 640 512\">...</svg>',\n    'map-sun': '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"25\" viewBox=\"0 0 512 512\">...</svg>',\n    image: 'https://picsum.photos/200',\n  };\n\n  async resolve(icon: string): Promise<string | null> {\n    return this.iconMap[icon] ?? null;\n  }\n}\n"
+          },
+          {
+            "fileName": "poi-provider.ts",
+            "language": "typescript",
+            "content": "import { Injectable } from '@angular/core';\nimport { AXPoiMarker, AXPoiProvider } from '@acorex/components/map';\n\n@Injectable()\nexport class WeatherPoiProvider implements AXPoiProvider {\n  get key() {\n    return 'weather';\n  }\n\n  async provide(): Promise<AXPoiMarker[]> {\n    return [\n      {\n        latitude: 35.6895,\n        longitude: 139.6917,\n        title: 'Tokyo Weather',\n        iconKey: 'map-sun', // resolved by AXIconResolverService inside AXLeafletService\n        popup: '<strong>Tokyo</strong><br>Sunny, 28°C',\n      },\n    ];\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Error Handling",
+      "description": "What happens when resolution fails.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "error-handling.ts",
+            "language": "typescript",
+            "content": "import { inject } from '@angular/core';\nimport { AXIconResolverService } from '@acorex/core/icon';\n\nconst iconService = inject(AXIconResolverService);\n\nasync function loadIcon(key: string) {\n  try {\n    return await iconService.resolve(key);\n  } catch (error) {\n    // Thrown when no resolver returns a non-null value:\n    // Error: AXIconResolverService: Could not resolve icon \"unknown-key\"\n    console.warn('Icon not found, using fallback');\n    return null;\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Caching Behavior",
+      "description": "How the internal cache works.",
+      "content": {
+        "type": "text",
+        "data": "AXIconResolverService maintains a private Map<string, string>.\n\n• First successful resolve(icon) stores the result permanently for that key.\n• Later calls skip all resolvers and return the cached string immediately.\n• There is no public API to clear the cache — if icon content changes at runtime, restart the app or use a different key.\n\nDesign tip: keep icon keys stable and let resolvers be pure lookups for best cache efficiency."
+      }
+    },
+    {
+      "title": "Feature Registration",
+      "description": "Register resolvers in lazy-loaded route providers.",
+      "content": {
+        "type": "code",
+        "language": "typescript",
+        "data": [
+          {
+            "fileName": "map-feature.routes.ts",
+            "language": "typescript",
+            "content": "import { Routes } from '@angular/router';\nimport { AX_ICON_RESOLVER, AXIconResolverService } from '@acorex/core/icon';\nimport { MapIconResolver } from './map-icon.resolver';\n\nexport const mapFeatureRoutes: Routes = [\n  {\n    path: '',\n    providers: [\n      AXIconResolverService,\n      {\n        provide: AX_ICON_RESOLVER,\n        useClass: MapIconResolver,\n        multi: true,\n      },\n    ],\n    loadComponent: () => import('./map-page.component').then((m) => m.MapPageComponent),\n  },\n];\n"
+          }
+        ]
+      }
+    }
+  ]
+}

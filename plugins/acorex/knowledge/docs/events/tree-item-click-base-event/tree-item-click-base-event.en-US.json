@@ -1,0 +1,55 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTreeItemClickBaseEvent",
+  "description": "Event emitted when a tree item is clicked, selected, or interacted with.",
+  "imports": ["import { AXTreeItemClickBaseEvent } from '@acorex/components/tree-view';"],
+  "types": [
+    {
+      "title": "AXTreeItemClickBaseEvent",
+      "props": [
+        {
+          "name": "component",
+          "type": [{ "name": "any" }],
+          "description": "The sender component instance. Inherited from AXClickEvent."
+        },
+        {
+          "name": "htmlElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The root native element associated with the component. Inherited from AXClickEvent."
+        },
+        {
+          "name": "isUserInteraction",
+          "type": [{ "name": "boolean" }],
+          "default": "false",
+          "description": "Indicates whether the event was triggered by user interaction. Inherited from AXClickEvent."
+        },
+        {
+          "name": "data",
+          "type": [{ "name": "unknown" }],
+          "description": "The tree item data that was clicked."
+        },
+        {
+          "name": "nativeElement",
+          "type": [{ "name": "any" }],
+          "description": "The native DOM element of the clicked item."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Event Definition",
+      "description": "TypeScript definition of the event with inherited members expanded.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "tree-view.class.ts",
+            "content": "export class AXTreeItemClickBaseEvent extends AXClickEvent {\n  nativeElement: any;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

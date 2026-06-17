@@ -1,0 +1,191 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Number Box",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/numberbox--documentation"
+    }
+  ],
+  "description": "A component that provides a numeric input field with increment and decrement controls. It supports min/max values, step size, and custom formatting options.",
+  "imports": [
+    "import { AXNumberBoxModule } from '@acorex/components/number-box';",
+    "import { AXNumberBoxComponent } from '@acorex/components/number-box';"
+  ],
+  "sections": [
+    {
+      "title": "Basic Usage",
+      "description": "A simple example of using the <code>ax-number-box</code> component for numeric input",
+      "content": {
+        "type": "api",
+        "data": "number-box/usage"
+      }
+    },
+    {
+      "title": "Min/Max Values",
+      "description": "Set minimum and maximum values for the number box",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "number-box/max-min-value"
+      }
+    },
+    {
+      "title": "Step Size",
+      "description": "Configure the increment and decrement step size",
+      "height": "450px",
+      "content": {
+        "type": "api",
+        "data": "number-box/step-size"
+      }
+    },
+    {
+      "title": "Formatting",
+      "description": "Customize number formatting with prefixes, suffixes, and decimal places",
+      "content": {
+        "type": "api",
+        "data": "number-box/formatting"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNumberBoxComponent",
+      "description": "The main component for numeric input",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The current value of the number box",
+          "default": "undefined"
+        },
+        {
+          "name": "min",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The minimum allowed value",
+          "default": "undefined"
+        },
+        {
+          "name": "max",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The maximum allowed value",
+          "default": "undefined"
+        },
+        {
+          "name": "step",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The step size for increment/decrement",
+          "default": "1"
+        },
+        {
+          "name": "decimals",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "The number of decimal places to display",
+          "default": "0"
+        },
+        {
+          "name": "prefix",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Text to display before the number",
+          "default": "undefined"
+        },
+        {
+          "name": "suffix",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Text to display after the number",
+          "default": "undefined"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the number box is disabled",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether the number box is readonly",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "description": "Emitted when the value changes",
+          "type": "number"
+        },
+        {
+          "name": "blur",
+          "description": "Emitted when the number box loses focus",
+          "type": "void"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Increments the value by the step size\n */\nincrement(): void"
+        },
+        {
+          "content": "/**\n * Decrements the value by the step size\n */\ndecrement(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Focuses the component.\n */\nfocus(): void"
+        },
+        {
+          "content": "/**\n * Removes focus from the component.\n */\nblur(): void"
+        },
+        {
+          "content": "/**\n * Checks if the component is focused or has any focused element.\n *\n * @returns boolean - True if the component has focus.\n */\nhasFocus(): boolean"
+        },
+        {
+          "content": "/**\n * Registers a callback function to be called when the component is touched.\n *\n * @param fn - The callback function to register.\n */\nregisterOnTouched(fn: () => void): void"
+        },
+        {
+          "content": "/**\n * Sets the disabled state of the component.\n *\n * @param isDisabled - Whether the component should be disabled.\n */\nsetDisabledState(isDisabled: boolean): void"
+        }
+      ]
+    }
+  ]
+}

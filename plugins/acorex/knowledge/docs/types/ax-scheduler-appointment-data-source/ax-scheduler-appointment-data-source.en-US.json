@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler Appointment Data Source",
+  "description": "Defines the data source types for scheduler appointments.",
+  "imports": ["import { AXSchedulerAppointmentDataSource } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Union type defining different ways to provide appointment data to the scheduler.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerAppointmentDataSource = AXSchedulerAppointment[] | AXSchedulerAppointmentLoader | AXSchedulerAppointmentLoaderAsync;"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerAppointmentDataSource",
+      "props": [
+        {
+          "name": "AXSchedulerAppointmentDataSource",
+          "type": [
+            { "name": "AXSchedulerAppointment[]", "link": "/en-US/docs/types/ax-scheduler-appointment" },
+            { "name": "AXSchedulerAppointmentLoader", "link": "/en-US/docs/types/ax-scheduler-appointment-loader" },
+            {
+              "name": "AXSchedulerAppointmentLoaderAsync",
+              "link": "/en-US/docs/types/ax-scheduler-appointment-loader-async"
+            }
+          ],
+          "description": "Union type that can be either an array of appointments, a synchronous loader function, or an asynchronous loader function."
+        }
+      ]
+    }
+  ]
+}

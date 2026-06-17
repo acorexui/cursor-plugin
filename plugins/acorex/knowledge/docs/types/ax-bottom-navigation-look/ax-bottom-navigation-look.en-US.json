@@ -1,0 +1,41 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Bottom Navigation Look Type",
+  "imports": ["import { AXBottomNavigationLook } from '@acorex/components/bottom-navigation';"],
+  "description": "Type definition for the visual appearance style of the bottom navigation component. This type defines the different look variants available for styling the bottom navigation bar.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that defines the visual appearance style of the bottom navigation component. 'solid' provides a solid background, 'with-line' adds a line indicator, 'pills' creates pill-shaped items, and 'pills-color' creates colored pill-shaped items.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-bottom-navigation-look.ts",
+            "content": "export type AXBottomNavigationLook = 'solid' | 'with-line' | 'pills' | 'pills-color';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXBottomNavigationLook",
+      "props": [
+        {
+          "name": "AXBottomNavigationLook",
+          "type": [
+            { "name": "'solid'" },
+            { "name": "'with-line'" },
+            { "name": "'pills'" },
+            { "name": "'pills-color'" }
+          ],
+          "description": "Union of bottom navigation look styles."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

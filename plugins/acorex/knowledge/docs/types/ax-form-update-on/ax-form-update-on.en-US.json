@@ -1,0 +1,38 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Form Update On",
+  "description": "Type definition for when form validation and updates should be triggered. Determines the timing of form field validation and value updates.",
+  "imports": ["import { AXFormUpdateOn } from '@acorex/components/form';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The AXFormUpdateOn type definition showing all available update triggers",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "form.component.ts",
+            "content": "export type AXFormUpdateOn = 'change' | 'blur' | 'submit';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXFormUpdateOn",
+      "props": [
+        {
+          "name": "AXFormUpdateOn",
+          "type": [
+            { "name": "'change'" },
+            { "name": "'blur'" },
+            { "name": "'submit'" }
+          ],
+          "description": "Union type defining when form validation and updates should be triggered. 'change' validates on every input change, 'blur' validates when the field loses focus, and 'submit' validates only when the form is submitted."
+        }
+      ]
+    }
+  ]
+}

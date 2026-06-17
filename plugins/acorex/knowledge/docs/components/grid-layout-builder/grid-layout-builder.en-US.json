@@ -1,0 +1,225 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Grid Layout Builder",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/gridlayoutbuilder--documentation"
+    }
+  ],
+  "description": "A powerful grid layout builder component that allows users to create and manage dynamic grid layouts with draggable and resizable widgets. It provides features like responsive layouts, customizable grid options, and support for nested grids.",
+  "imports": [
+    "import { AXGridLayoutContainerComponent } from '@acorex/components/grid-layout-builder';",
+    "import { AXGridLayoutWidgetComponent } from '@acorex/components/grid-layout-builder';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-grid-layout-container</code> with widgets",
+      "content": {
+        "type": "api",
+        "data": "grid-layout-builder/usage"
+      },
+      "height": "600px"
+    },
+    {
+      "title": "API",
+      "description": "Explore inputs, events, and methods for the grid layout builder.",
+      "content": {
+        "type": "api",
+        "data": "grid-layout-builder/api"
+      },
+      "height": "550px"
+    },
+    {
+      "title": "Responsive",
+      "description": "Examples demonstrating responsive layouts using the <code>responsiveLayout</code> option.",
+      "content": {
+        "type": "api",
+        "data": "grid-layout-builder/responsive"
+      },
+      "height": "860px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXGridLayoutContainerComponent",
+      "description": "Main container component for the grid layout system",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            {
+              "name": "AXGridLayoutOptions",
+              "link": "/en-US/docs/types/ax-grid-layout-options"
+            }
+          ],
+          "description": "Set of options to configure the grid layout behavior and appearance"
+        },
+        {
+          "name": "isEmpty",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Indicates whether the grid layout container is empty (has no widgets)"
+        },
+        {
+          "name": "isRendered",
+          "type": [
+            {
+              "name": "Signal<boolean>"
+            }
+          ],
+          "description": "Readonly signal indicating whether the component has been rendered. Inherited from NXComponent."
+        },
+        {
+          "name": "nativeElement",
+          "type": [
+            {
+              "name": "HTMLElement"
+            }
+          ],
+          "description": "Gets the native DOM element of the component. Inherited from NXComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onAdded",
+          "type": [
+            {
+              "name": "AXGridLayoutEvent",
+              "link": "/en-US/docs/events/ax-grid-layout-event"
+            }
+          ],
+          "description": "Emitted when a widget is added to the grid layout"
+        },
+        {
+          "name": "onRemoved",
+          "type": [
+            {
+              "name": "AXGridLayoutEvent",
+              "link": "/en-US/docs/events/ax-grid-layout-event"
+            }
+          ],
+          "description": "Emitted when a widget is removed from the grid layout"
+        },
+        {
+          "name": "onWidgetChange",
+          "type": [
+            {
+              "name": "AXGridLayoutEvent",
+              "link": "/en-US/docs/events/ax-grid-layout-event"
+            }
+          ],
+          "description": "Emitted when a widget's properties change (position, size, etc.)"
+        },
+        {
+          "name": "onChange",
+          "type": [
+            {
+              "name": "AXGridLayoutEvent",
+              "link": "/en-US/docs/events/ax-grid-layout-event"
+            }
+          ],
+          "description": "Emitted when the overall grid layout changes"
+        },
+        {
+          "name": "onRender",
+          "type": [
+            {
+              "name": "void"
+            }
+          ],
+          "description": "Emitted when the grid layout has finished rendering"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Adds a widget to the grid layout.\n *\n * @param w - Widget configuration object.\n * @param withAutoArrange - Whether to compact the grid before adding the widget.\n * @returns AXGridLayoutWidgetElement | undefined - The created widget element or undefined if failed.\n */\naddWidget(w: AXGridLayoutWidget, withAutoArrange?: boolean): AXGridLayoutWidgetElement | undefined"
+        },
+        {
+          "content": "/**\n * Compacts the grid layout.\n *\n * @param layout - Layout type for compacting ('list' or 'compact').\n * @param doSort - Whether to sort items while compacting.\n * @returns void - No return value. The grid layout is compacted.\n */\ncompact(layout?: 'list' | 'compact', doSort?: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the cell height of the grid.\n *\n * @param val - New cell height value.\n * @param update - Whether to update the grid immediately.\n * @returns void - No return value. The cell height is updated.\n */\nsetCellHeight(val: number, update?: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the number of columns in the grid.\n *\n * @param column - Number of columns.\n * @param layout - Layout type for the change ('list', 'compact', 'moveScale', 'move', 'scale', or 'none').\n * @returns void - No return value. The column count is updated.\n */\nsetColumn(column: number, layout?: 'list' | 'compact' | 'moveScale' | 'move' | 'scale' | 'none'): void"
+        },
+        {
+          "content": "/**\n * Destroys the grid instance.\n *\n * @param removeDOM - Whether to remove DOM elements.\n * @returns void - No return value. The grid instance is destroyed.\n */\ndestroy(removeDOM?: boolean): void"
+        },
+        {
+          "content": "/**\n * Enables or disables moving of widgets.\n *\n * @param state - Whether to enable moving.\n * @param recurse - Whether to apply to all child widgets.\n * @returns void - No return value. The move state is updated.\n */\nsetMovable(state: boolean, recurse?: boolean): void"
+        },
+        {
+          "content": "/**\n * Enables or disables resizing of widgets.\n *\n * @param state - Whether to enable resizing.\n * @param recurse - Whether to apply to all child widgets.\n * @returns void - No return value. The resize state is updated.\n */\nsetResizable(state: boolean, recurse?: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the float property of the grid.\n *\n * @param val - Whether to enable floating widgets.\n * @returns void - No return value. The float state is updated.\n */\nsetFloat(val: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the margin between grid items.\n *\n * @param value - Margin value (number in pixels or string with units).\n * @returns void - No return value. The margin is updated.\n */\nsetMargin(value: number | string): void"
+        },
+        {
+          "content": "/**\n * Removes a specific widget from the grid.\n *\n * @param el - The widget element to remove.\n * @param removeDOM - Whether to remove the DOM element.\n * @param triggerEvent - Whether to trigger removal events.\n * @returns void - No return value. The widget is removed.\n */\nremoveWidget(el: AXGridLayoutWidgetElement, removeDOM?: boolean, triggerEvent?: boolean): void"
+        },
+        {
+          "content": "/**\n * Removes all widgets from the grid.\n *\n * @param removeDOM - Whether to remove DOM elements.\n * @returns void - No return value. All widgets are removed.\n */\nremoveAll(removeDOM?: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets the animation state for the grid.\n *\n * @param doAnimate - Whether to enable animations.\n * @returns void - No return value. The animation state is updated.\n */\nsetAnimation(doAnimate: boolean): void"
+        },
+        {
+          "content": "/**\n * Sets up draggable functionality for external elements.\n *\n * @param dragIn - CSS selector string or array of HTML elements to make draggable.\n * @param widgets - Optional widget configuration for dragged items.\n * @returns Promise<void> - Promise that resolves when drag setup is complete.\n */\nsetupDraggable(dragIn?: string | HTMLElement[], widgets?: AXGridLayoutWidget): Promise<void>"
+        },
+        {
+          "content": "/**\n * Gets the current grid options.\n *\n * @returns AXGridLayoutOptions - Current grid configuration options.\n */\ngetOptions(): AXGridLayoutOptions"
+        },
+        {
+          "content": "/**\n * Gets all child widgets in the grid.\n *\n * @returns AXGridLayoutNode[] - Array of all child widget nodes.\n */\ngetChildren(): AXGridLayoutNode[]"
+        },
+        {
+          "content": "/**\n * Finds an empty space in the grid for a widget.\n *\n * @param input - Dimensions of the widget with height and width.\n * @returns { x: number; y: number } - Object containing x and y coordinates of empty space.\n */\nfindEmptySpace(input: Required<Pick<AXGridLayoutPosition, 'height' | 'width'>>): Pick<AXGridLayoutPosition, 'x' | 'y'>"
+        }
+      ]
+    },
+    {
+      "title": "AXGridLayoutWidgetComponent",
+      "description": "Component for individual widgets in the grid layout",
+      "props": [
+        {
+          "name": "options",
+          "type": [
+            {
+              "name": "AXGridLayoutNode",
+              "link": "/en-US/docs/types/ax-grid-layout-node"
+            }
+          ],
+          "description": "Set of options to configure the grid layout behavior and appearance"
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Locks or unlocks the widget (prevents dragging and resizing).\n *\n * @param state - If true, the widget will be locked.\n * @returns void - No return value. The widget lock state is updated.\n */\nsetLockable(state: boolean): void"
+        },
+        {
+          "content": "/**\n * Enables or disables resizing of the widget.\n *\n * @param state - If true, resizing will be enabled.\n * @returns void - No return value. The widget resize state is updated.\n */\nsetResizable(state: boolean): void"
+        },
+        {
+          "content": "/**\n * Updates the widget options.\n *\n * @param options - The new options for the widget.\n * @returns void - No return value. The widget options are updated.\n */\nsetOptions(options: AXGridLayoutWidget): void"
+        },
+        {
+          "content": "/**\n * Returns the current options of the widget.\n *\n * @returns AXGridLayoutNode - The current widget options.\n */\ngetOptions(): AXGridLayoutNode"
+        },
+        {
+          "content": "/**\n * Returns the native DOM element of the widget.\n *\n * @returns AXGridLayoutWidgetElement - The native element.\n */\nget element(): AXGridLayoutWidgetElement"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXSkeletonComponent } from '@acorex/components/skeleton';"
+  ],
+  "title": "Skeleton",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/skeleton--documentation"
+    }
+  ],
+  "description": "A component that displays a placeholder loading state with animated shimmer effect, commonly used to indicate content is loading.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-skeleton</code>",
+      "content": {
+        "type": "api",
+        "data": "skeleton/usage"
+      }
+    },
+    {
+      "title": "Animated",
+      "description": "The <code>animated</code> property can enable animation on skeleton. Default value for <code>animated</code> is <code>true</code>",
+      "content": {
+        "type": "api",
+        "data": "skeleton/animated"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSkeletonComponent",
+      "props": [
+        {
+          "name": "animated",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Determines whether animations are enabled."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

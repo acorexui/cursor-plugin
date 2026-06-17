@@ -1,0 +1,169 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": [
+    "import { AXToastComponent } from '@acorex/components/toast';",
+    "import { AXToastService } from '@acorex/components/toast';"
+  ],
+  "title": "Toast",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/toast--documentation"
+    }
+  ],
+  "description": "A component that displays temporary notifications or messages to users, with support for different types, auto-dismissal, and custom positioning.",
+  "sections": [
+    {
+      "title": "Usage",
+      "height": "400px",
+      "description": "A simple example of using <code>ax-toast</code>",
+      "content": {
+        "type": "api",
+        "data": "toast/usage"
+      }
+    },
+    {
+      "title": "Color Variants",
+      "height": "350px",
+      "description": "Explore different color schemes for toast notifications using the <code>color</code> property.",
+      "content": {
+        "type": "api",
+        "data": "toast/color-variants"
+      }
+    },
+    {
+      "title": "Service Methods",
+      "height": "400px",
+      "description": "Convenience methods for different toast types using <code>AXToastService</code>.",
+      "content": {
+        "type": "api",
+        "data": "toast/service-methods"
+      }
+    },
+    {
+      "title": "Positioning",
+      "description": "Different locations for toast notifications using the <code>location</code> property.",
+      "height": "500px",
+      "content": {
+        "type": "api",
+        "data": "toast/positioning"
+      }
+    },
+    {
+      "title": "Timeout and Progress Bar",
+      "height": "450px",
+      "description": "Different timeout durations and progress bar options for auto-dismissal behavior.",
+      "content": {
+        "type": "api",
+        "data": "toast/timeout-progress"
+      }
+    },
+    {
+      "title": "Icon Customization",
+      "height": "400px",
+      "description": "Custom icons vs default icons based on color type for visual customization.",
+      "content": {
+        "type": "api",
+        "data": "toast/icon-customization"
+      }
+    },
+    {
+      "title": "Pause on Hover",
+      "description": "Interactive behavior when hovering over toast notifications to pause auto-dismissal.",
+      "content": {
+        "type": "api",
+        "data": "toast/pause-hover"
+      }
+    },
+    {
+      "title": "Translation Support",
+      "description": "Toast notifications with internationalization support using translation keys.",
+      "content": {
+        "type": "api",
+        "data": "toast/translation"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXToastComponent",
+      "props": [
+        {
+          "name": "config",
+          "type": [
+            {
+              "name": "AXToastData",
+              "link": "/en-US/docs/types/toast-data"
+            }
+          ],
+          "description": "Configuration object containing toast display options."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Closes the toast notification.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Closes all toast notifications.\n */\ncloseAll(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>)"
+        }
+      ]
+    },
+    {
+      "title": "AXToastService",
+      "methods": [
+        {
+          "content": "/**\n * Shows a toast notification with the specified configuration.\n *\n * @param config - The toast display configuration.\n * @returns AXToastRef - Reference to the created toast for programmatic control.\n */\nshow(config: AXToastDisplayConfig): AXToastRef"
+        },
+        {
+          "content": "/**\n * Shows a primary toast notification.\n *\n * @param content - The message content to display.\n */\nprimary(content: string): void"
+        },
+        {
+          "content": "/**\n * Shows a secondary toast notification.\n *\n * @param content - The message content to display.\n */\nsecondary(content: string): void"
+        },
+        {
+          "content": "/**\n * Shows a success toast notification.\n *\n * @param content - The message content to display.\n */\nsuccess(content: string): void"
+        },
+        {
+          "content": "/**\n * Shows a warning toast notification.\n *\n * @param content - The message content to display.\n */\nwarning(content: string): void"
+        },
+        {
+          "content": "/**\n * Shows a danger toast notification.\n *\n * @param content - The message content to display.\n */\ndanger(content: string): void"
+        },
+        {
+          "content": "/**\n * Shows a default toast notification.\n *\n * @param content - The message content to display.\n */\ndefault(content: string): void"
+        },
+        {
+          "content": "/**\n * Hides all active toast notifications.\n */\nhideAll(): void"
+        }
+      ]
+    }
+  ]
+}

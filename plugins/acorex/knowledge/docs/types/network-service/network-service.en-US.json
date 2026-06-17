@@ -1,0 +1,120 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXNetworkService",
+  "imports": ["import { AXNetworkService } from '@acorex/core/network';"],
+  "description": "Service class for network operations including upload, download, and HTTP requests.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Network service public API shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "network-service.ts",
+            "content": "class AXNetworkService {\n  uploadTasks: AXUploadTask[];\n  downloadTasks: AXDownloadTask[];\n  baseUrl: string;\n  timeout: number;\n  upload(file: File): Promise<AXUploadTask>;\n  download(url: string): Promise<AXDownloadTask>;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXNetworkService",
+      "props": [
+        {
+          "name": "uploadTasks",
+          "type": [{ "name": "AXUploadTask[]", "link": "/en-US/docs/types/upload-task" }],
+          "description": "Array of active upload tasks."
+        },
+        {
+          "name": "downloadTasks",
+          "type": [{ "name": "AXDownloadTask[]", "link": "/en-US/docs/types/download-task" }],
+          "description": "Array of active download tasks."
+        },
+        {
+          "name": "baseUrl",
+          "type": [{ "name": "string" }],
+          "description": "Base URL for API requests."
+        },
+        {
+          "name": "timeout",
+          "type": [{ "name": "number" }],
+          "description": "Default timeout for network requests in milliseconds."
+        }
+      ],
+      "description": "Comprehensive network service that handles file uploads, downloads, and HTTP requests with progress tracking and error handling.",
+      "methods": [
+        {
+          "name": "upload",
+          "description": "Uploads a file with progress tracking and cancellation support."
+        },
+        {
+          "name": "download",
+          "description": "Downloads a file with progress tracking and cancellation support."
+        },
+        {
+          "name": "get",
+          "description": "Performs an HTTP GET request."
+        },
+        {
+          "name": "post",
+          "description": "Performs an HTTP POST request."
+        },
+        {
+          "name": "put",
+          "description": "Performs an HTTP PUT request."
+        },
+        {
+          "name": "delete",
+          "description": "Performs an HTTP DELETE request."
+        },
+        {
+          "name": "cancelUpload",
+          "description": "Cancels an active upload task."
+        },
+        {
+          "name": "cancelDownload",
+          "description": "Cancels an active download task."
+        },
+        {
+          "name": "getUploadProgress",
+          "description": "Returns the progress of an upload task."
+        },
+        {
+          "name": "getDownloadProgress",
+          "description": "Returns the progress of a download task."
+        },
+        {
+          "name": "setBaseUrl",
+          "description": "Sets the base URL for API requests."
+        },
+        {
+          "name": "setTimeout",
+          "description": "Sets the default timeout for network requests."
+        },
+        {
+          "name": "onUploadProgress",
+          "description": "Registers a callback to be called when upload progress updates."
+        },
+        {
+          "name": "onDownloadProgress",
+          "description": "Registers a callback to be called when download progress updates."
+        },
+        {
+          "name": "onUploadComplete",
+          "description": "Registers a callback to be called when upload completes."
+        },
+        {
+          "name": "onDownloadComplete",
+          "description": "Registers a callback to be called when download completes."
+        },
+        {
+          "name": "onNetworkError",
+          "description": "Registers a callback to be called when network errors occur."
+        }
+      ]
+    }
+  ]
+}

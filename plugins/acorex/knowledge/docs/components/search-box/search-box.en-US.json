@@ -1,0 +1,196 @@
+{
+  "$schema": "../../document.schema.json",
+  "imports": ["import { AXSearchBoxComponent } from '@acorex/components/search-box';"],
+  "title": "Search Box",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/searchbox--documentation"
+    }
+  ],
+  "description": "An input component for searching text with debounce, clear button, customizable looks and sizes.",
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-search-box</code>",
+      "content": {
+        "type": "api",
+        "data": "search-box/usage"
+      }
+    },
+    {
+      "title": "Using Decorators",
+      "description": "Use <code>ax-prefix</code> and <code>ax-suffix</code> to add content before/after the input.",
+      "content": {
+        "type": "api",
+        "data": "search-box/using-decorators"
+      }
+    },
+    {
+      "title": "Changing Default Icon",
+      "description": "Use <code>ax-icon</code> to change the default search icon.",
+      "content": {
+        "type": "api",
+        "data": "search-box/using-decorators"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSearchBoxComponent",
+      "props": [
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text.",
+          "default": "''"
+        },
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Current value. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "delayTime",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Debounce time in milliseconds before emitting value changes.",
+          "default": "500"
+        },
+        {
+          "name": "type",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Input type attribute (e.g. 'text', 'number')."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Visual style. Inherited from MXLookComponent.",
+          "default": "'solid'"
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Disable the input. Inherited from MXInputBaseValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Readonly mode. Inherited from MXInputBaseValueComponent.",
+          "default": "false"
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Tab index. Inherited.",
+          "default": "0"
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Input name attribute. Inherited."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Component id. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when value changes (debounced). Inherited from MXValueComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires on key down. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires on key up. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Fires on key press. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": []
+    }
+  ]
+}

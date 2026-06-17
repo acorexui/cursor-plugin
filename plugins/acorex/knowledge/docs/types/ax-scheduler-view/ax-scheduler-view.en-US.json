@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Scheduler View Type",
+  "description": "Defines the available view modes for the scheduler component.",
+  "imports": ["import { AXSchedulerView } from '@acorex/components/scheduler';"],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Union type defining all available scheduler view modes.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "scheduler.class.ts",
+            "content": "export type AXSchedulerView = 'day' | 'week' | 'month' | 'timeline-day' | 'timeline-multi-day' | 'timeline-month' | 'timeline-year' | 'agenda';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSchedulerView",
+      "props": [
+        {
+          "name": "AXSchedulerView",
+          "type": [
+            { "name": "'day'" },
+            { "name": "'week'" },
+            { "name": "'month'" },
+            { "name": "'timeline-day'" },
+            { "name": "'timeline-multi-day'" },
+            { "name": "'timeline-month'" },
+            { "name": "'timeline-year'" },
+            { "name": "'agenda'" }
+          ],
+          "description": "Union type defining all available scheduler view modes. Each view provides a different way to display and interact with appointments."
+        }
+      ]
+    }
+  ]
+}

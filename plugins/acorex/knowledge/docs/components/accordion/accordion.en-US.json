@@ -1,0 +1,222 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Accordion",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/accordion--documentation"
+    }
+  ],
+  "description": "The Accordion component provides a collapsible content panel UI, supporting single or multiple open items, custom headers, and loading states.",
+  "imports": ["import { AXAccordionGroupComponent, AXAccordionItemComponent } from '@acorex/components/accordion';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-accordion-group</code> and <code>ax-accordion-item</code> to create collapsible panels.",
+      "content": {
+        "type": "api",
+        "data": "accordion/usage"
+      },
+      "height": "280px"
+    },
+    {
+      "title": "Accordion Mode",
+      "description": "Use the <code>accordion</code> input to allow only one item open at a time (accordion mode) or multiple (panel mode).",
+      "content": {
+        "type": "api",
+        "data": "accordion/accordion-mode"
+      },
+      "height": "280px"
+    },
+    {
+      "title": "Custom Header Template",
+      "description": "Customize item headers using template references for more control over the header appearance.",
+      "content": {
+        "type": "api",
+        "data": "accordion/custom-header-template"
+      }
+    },
+    {
+      "title": "Header Icon",
+      "description": "Add icons to accordion headers to enhance visual appeal and provide better context.",
+      "content": {
+        "type": "api",
+        "data": "accordion/header-icon"
+      },
+      "height": "280px"
+    },
+    {
+      "title": "Loading",
+      "description": "Show loading states for accordion items to provide feedback during data fetching or processing.",
+      "content": {
+        "type": "api",
+        "data": "accordion/loading"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXAccordionGroupComponent",
+      "props": [
+        {
+          "name": "accordion",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Enable accordion mode (single open item)."
+        },
+        {
+          "name": "activeIndex",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "number[]"
+            }
+          ],
+          "default": "null",
+          "description": "Index of the active item(s). Supports two-way binding."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "solid",
+          "description": "Visual look (e.g., 'solid')."
+        },
+        {
+          "name": "collapsedOnItemClick",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Whether to collapse items when clicked (default: true)."
+        }
+      ],
+      "events": [
+        {
+          "name": "activeIndexChange",
+          "type": [
+            {
+              "name": "number"
+            },
+            {
+              "name": "number[]"
+            }
+          ],
+          "description": "Emitted when the active index changes (two-way binding)."
+        }
+      ]
+    },
+    {
+      "title": "AXAccordionItemComponent",
+      "props": [
+        {
+          "name": "isCollapsed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Collapsed state of the item. Supports two-way binding."
+        },
+        {
+          "name": "icon",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Icon for the header."
+        },
+        {
+          "name": "caption",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "''",
+          "description": "Caption for the header."
+        },
+        {
+          "name": "isLoading",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Show loading state for the item. Supports two-way binding."
+        },
+        {
+          "name": "headerTemplate",
+          "type": [
+            {
+              "name": "TemplateRef<any>"
+            }
+          ],
+          "default": "null",
+          "description": "Custom template for the header."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "solid",
+          "description": "Visual look (e.g., 'solid')."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disable the item."
+        }
+      ],
+      "events": [
+        {
+          "name": "onClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the header is clicked."
+        }
+      ],
+      "methods": [
+        { "content": "/**\n * Opens the accordion item (sets isCollapsed to false).\n */\nopen(): void" },
+        { "content": "/**\n * Closes the accordion item (sets isCollapsed to true).\n */\nclose(): void" },
+        {
+          "content": "/**\n * Toggles the accordion item state (opens if closed, closes if open).\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n * Inherited from MXBaseComponent.\n*\n* @returns T - The native DOM element associated with this component.\n*/\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n * Inherited from MXBaseComponent.\n*\n* @param option - The option configuration containing the name, value and optional before/after callbacks.\n*/\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        }
+      ]
+    }
+  ]
+}

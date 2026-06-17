@@ -1,0 +1,388 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Color Box",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/colorbox--documentation"
+    }
+  ],
+  "description": "The Color Box component is a tool for selecting and displaying colors, featuring a popover color palette and support for disabled/readonly states.",
+  "imports": ["import { AXColorBoxComponent } from '@acorex/components/color-box';"],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using `ax-color-box`.",
+      "height": "860px",
+      "content": {
+        "type": "api",
+        "data": "color-box/usage"
+      }
+    },
+    {
+      "title": "Using Decorators",
+      "description": "You can use decorators like `ax-prefix` and `ax-suffix`.",
+      "height": "860px",
+      "content": {
+        "type": "api",
+        "data": "color-box/using-decorators"
+      }
+    },
+    {
+      "title": "Read-only",
+      "description": "You can make `ax-color-box` readonly using the `readonly` property.",
+      "height": "860px",
+      "content": {
+        "type": "api",
+        "data": "color-box/read-only"
+      }
+    },
+    {
+      "title": "Disabled",
+      "description": "You can disable `ax-color-box` using the `disabled` property.",
+      "height": "400px",
+      "content": {
+        "type": "api",
+        "data": "color-box/disable"
+      }
+    },
+    {
+      "title": "Clear behavior",
+      "description": "Demonstrates clear button, resetting to null, and placeholder rendering.",
+      "height": "860px",
+      "content": {
+        "type": "api",
+        "data": "color-box/clear-behavior"
+      }
+    },
+    {
+      "title": "Visual toggles",
+      "description": "Toggle badge, value text, and icon visibility with signals.",
+      "height": "860px",
+      "content": {
+        "type": "api",
+        "data": "color-box/visual-toggles"
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXColorBoxComponent",
+      "props": [
+        {
+          "name": "value",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "The value of the color box."
+        },
+        {
+          "name": "showBadge",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows/hides the color badge."
+        },
+        {
+          "name": "showValue",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows/hides the hex color value."
+        },
+        {
+          "name": "showClearButton",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows/hides the clear button."
+        },
+        {
+          "name": "showIcon",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Shows/hides the dropdown icon."
+        },
+        {
+          "name": "look",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "default": "'solid'",
+          "description": "Defines the visual appearance style. Inherited from MXLookComponent."
+        },
+        {
+          "name": "color",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "default": "'default'",
+          "description": "Defines the color scheme. Inherited from MXColorComponent."
+        },
+        {
+          "name": "disabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Disables the component. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "readonly",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "false",
+          "description": "Makes the component read-only. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "tabIndex",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "0",
+          "description": "Specifies the tabindex. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "placeholder",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Placeholder text. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "state",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "default": "'clear'",
+          "description": "Visual validation state. Inherited from MXValueComponent."
+        },
+        {
+          "name": "name",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Name associated with the component. Inherited from MXValueComponent."
+        },
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier of the component. Inherited from MXBaseComponent."
+        }
+      ],
+      "events": [
+        {
+          "name": "valueChange",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Fires when the value changes."
+        },
+        {
+          "name": "onValueChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<any>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the value changes with details. Inherited from MXValueComponent."
+        },
+        {
+          "name": "stateChange",
+          "type": [
+            {
+              "name": "AXComponentState",
+              "link": "/en-US/docs/types/component-state"
+            }
+          ],
+          "description": "Emitted when the validation state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "readonlyChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the readonly state changes. Inherited from MXValueComponent."
+        },
+        {
+          "name": "disabledChange",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the disabled state changes. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onFocus",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component gains focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "onBlur",
+          "type": [
+            {
+              "name": "AXFocusEvent",
+              "link": "/en-US/docs/events/focus-event"
+            }
+          ],
+          "description": "Fires when the component loses focus. Inherited from MXInteractiveComponent."
+        },
+        {
+          "name": "lookChange",
+          "type": [
+            {
+              "name": "AXStyleLookType",
+              "link": "/en-US/docs/types/style-look-type"
+            }
+          ],
+          "description": "Emitted when look changes. Inherited from MXLookComponent."
+        },
+        {
+          "name": "colorChange",
+          "type": [
+            {
+              "name": "AXStyleColorType",
+              "link": "/en-US/docs/types/style-color-type"
+            }
+          ],
+          "description": "Emitted when color changes. Inherited from MXColorComponent."
+        },
+        {
+          "name": "onOpened",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the dropdown opens. Inherited from MXDropdownBoxBaseComponent."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted when the dropdown closes. Inherited from MXDropdownBoxBaseComponent."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onKeyDown",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted on key down. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyUp",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted on key up. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onKeyPress",
+          "type": [
+            {
+              "name": "AXHtmlEvent<KeyboardEvent>",
+              "link": "/en-US/docs/events/html-event"
+            }
+          ],
+          "description": "Emitted on key press. Inherited from MXInputBaseValueComponent."
+        },
+        {
+          "name": "onTextChanged",
+          "type": [
+            {
+              "name": "AXValueChangedEvent<string>",
+              "link": "/en-US/docs/events/value-changed-event"
+            }
+          ],
+          "description": "Emitted when the typed text changes. Inherited from MXInputBaseValueComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Toggles the dropdown if not disabled.\n *\n * @returns void - No return value. Switches between open and closed states.\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Opens the dropdown if it is not already open and not disabled.\n *\n * @returns void - No return value. The dropdown becomes open and receives focus.\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Closes the dropdown if it is open and not disabled.\n *\n * @returns void - No return value. The dropdown is closed and focus returns to the host.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Sets focus on the component.\n *\n * @returns void - No return value.\n */\nfocus(): void"
+        }
+      ]
+    }
+  ]
+}

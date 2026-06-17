@@ -1,0 +1,36 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Selection Group Selected Keys",
+  "description": "Type definition for the selected keys in a selection group. This type represents either a single selected key or an array of selected keys, depending on whether multiple selection is enabled.",
+  "imports": [
+    "import { AXSelectionGroupSelectedKeys } from '@acorex/cdk/selection';"
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "The canonical TypeScript definition for the selection group selected keys type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "selection-group.directive.ts",
+            "language": "typescript",
+            "content": "export type AXSelectionGroupSelectedKeys = unknown | unknown[];"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionGroupSelectedKeys",
+      "props": [
+        {
+          "name": "AXSelectionGroupSelectedKeys",
+          "type": [{ "name": "unknown" }, { "name": "unknown[]" }],
+          "description": "Union type that can be either a single selected key (unknown) for single selection mode or an array of selected keys (unknown[]) for multiple selection mode."
+        }
+      ]
+    }
+  ]
+}

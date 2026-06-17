@@ -1,0 +1,119 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXUploadRequest",
+  "description": "Represents a file upload request with progress tracking, status management, and event handling.",
+  "imports": ["import { AXUploadRequest } from '@acorex/components/uploader';"],
+  "types": [
+    {
+      "title": "AXUploadRequest",
+      "props": [
+        {
+          "name": "name",
+          "type": [{ "name": "string" }],
+          "description": "The name of the file being uploaded."
+        },
+        {
+          "name": "ext",
+          "type": [{ "name": "string" }],
+          "description": "The file extension extracted from the filename."
+        },
+        {
+          "name": "size",
+          "type": [{ "name": "number" }],
+          "description": "The size of the file in bytes."
+        },
+        {
+          "name": "file",
+          "type": [{ "name": "File" }],
+          "description": "The original File object being uploaded."
+        },
+        {
+          "name": "progress",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "Signal containing the upload progress percentage (0-100)."
+        },
+        {
+          "name": "estimateTime",
+          "type": [{ "name": "Signal<number>" }],
+          "description": "Signal containing the estimated time remaining for upload in milliseconds."
+        },
+        {
+          "name": "status",
+          "type": [{ "name": "Signal<AXUploadStatus>" }],
+          "description": "Signal containing the current upload status."
+        },
+        {
+          "name": "message",
+          "type": [{ "name": "Signal<string | null>" }],
+          "description": "Signal containing any status message or error message."
+        },
+        {
+          "name": "isDetermined",
+          "type": [{ "name": "Signal<boolean>" }],
+          "description": "Signal indicating whether the upload progress has been determined."
+        },
+        {
+          "name": "metaData",
+          "type": [{ "name": "any" }],
+          "description": "Additional metadata associated with the upload request."
+        },
+        {
+          "name": "onCancel",
+          "type": [{ "name": "Subject<void>" }],
+          "description": "Subject that emits when the upload is canceled."
+        },
+        {
+          "name": "onStart",
+          "type": [{ "name": "Subject<void>" }],
+          "description": "Subject that emits when the upload starts."
+        },
+        {
+          "name": "onFailed",
+          "type": [{ "name": "Subject<void>" }],
+          "description": "Subject that emits when the upload fails."
+        },
+        {
+          "name": "onComplete",
+          "type": [{ "name": "BehaviorSubject<void>" }],
+          "description": "Subject that emits when the upload completes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Sets the number of bytes transferred during upload.\n * @param value - The number of bytes transferred\n */\nsetTransferredBytes(value: number)"
+        },
+        {
+          "content": "/**\n * Starts the upload process.\n * @returns Promise that resolves when upload starts\n */\nupload(): Promise<void>"
+        },
+        {
+          "content": "/**\n * Cancels the upload and resets progress.\n */\ncancel(): void"
+        },
+        {
+          "content": "/**\n * Restarts the upload process.\n */\nredo(): void"
+        },
+        {
+          "content": "/**\n * Marks the upload as failed with an error message.\n * @param message - The error message\n */\nerror(message: string): void"
+        },
+        {
+          "content": "/**\n * Marks the upload as completed.\n * @param data - Optional data to pass with completion\n */\nfinish(data?: any): void"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "TypeScript definition of the AXUploadRequest class.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "uploader.models.ts",
+            "content": "export class AXUploadRequest {\n  get name(): string;\n  get ext(): string;\n  get size(): number;\n  get file(): File;\n  \n  progress: Signal<number>;\n  estimateTime: Signal<number>;\n  status: Signal<AXUploadStatus>;\n  message: Signal<string | null>;\n  isDetermined: Signal<boolean>;\n  \n  metaData: any;\n  \n  onCancel: Subject<void>;\n  onStart: Subject<void>;\n  onFailed: Subject<void>;\n  onComplete: BehaviorSubject<void>;\n  \n  constructor(uploadFile: File);\n  \n  setTransferredBytes(value: number): void;\n  upload(): Promise<void>;\n  cancel(): void;\n  redo(): void;\n  error(message: string): void;\n  finish(data?: any): void;\n}"
+          }
+        ]
+      }
+    }
+  ]
+}

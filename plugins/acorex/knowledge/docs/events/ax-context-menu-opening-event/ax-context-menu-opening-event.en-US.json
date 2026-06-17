@@ -1,0 +1,44 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Context Menu Opening Event",
+  "imports": ["import { AXContextMenuOpeningEvent } from '@acorex/components/menu';"],
+  "description": "Represents the event payload when a context menu is about to open. This event allows you to modify the menu items or cancel the opening process.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Payload for context menu opening.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-context-menu-opening-event.ts",
+            "content": "interface AXContextMenuOpeningEvent {\n  items: AXMenuItem[];\n  canceled: boolean;\n  targetElement: HTMLElement;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXContextMenuOpeningEvent",
+      "props": [
+        {
+          "name": "items",
+          "type": [{ "name": "AXMenuItem[]" }],
+          "description": "The array of menu items that will be displayed in the context menu."
+        },
+        {
+          "name": "canceled",
+          "type": [{ "name": "boolean" }],
+          "description": "A flag that can be set to true to cancel the opening of the context menu."
+        },
+        {
+          "name": "targetElement",
+          "type": [{ "name": "HTMLElement" }],
+          "description": "The HTML element that triggered the context menu opening."
+        }
+      ]
+    }
+  ]
+}

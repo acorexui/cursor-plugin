@@ -1,0 +1,174 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Drawer",
+  "description": "Drawer component is a sliding panel that emerges from the side of the screen, offering additional content or navigation options without occupying permanent space. It is ideal for menus, settings, or supplementary information, and can be easily toggled open or closed by the user.",
+  "imports": [
+    "import { AXDrawer2Component  } from '@acorex/components/drawer-2';",
+    "import {  AXDrawer2ContainerComponent  } from '@acorex/components/drawer-2';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-drawer</code>",
+      "content": {
+        "type": "api",
+        "data": "drawer/usage"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Location",
+      "description": "You can change location of <code>ax-drawer</code> with <code>location</code> property",
+      "content": {
+        "type": "api",
+        "data": "drawer/location"
+      },
+      "height": "500px"
+    },
+    {
+      "title": "Mode",
+      "description": "You can change mode of <code>ax-drawer</code> with <code>mode</code> property",
+      "content": {
+        "type": "api",
+        "data": "drawer/mode"
+      },
+      "height": "500px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDrawer2Component",
+      "props": [
+        {
+          "name": "id",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Unique identifier for the component. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "location",
+          "type": [
+            {
+              "name": "AXDrawerLocation",
+              "link": "/en-US/docs/types/ax-drawer-location"
+            }
+          ],
+          "default": "'start'",
+          "description": "Drawer location: 'start', 'end', 'top', or 'bottom'."
+        },
+        {
+          "name": "showBackdrop",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Show a backdrop behind the drawer."
+        },
+        {
+          "name": "mode",
+          "type": [
+            {
+              "name": "AXDrawerMode",
+              "link": "/en-US/docs/types/ax-drawer-mode"
+            }
+          ],
+          "default": "'overlay'",
+          "description": "Drawer mode: 'overlay' or 'push'."
+        },
+        {
+          "name": "transition",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "default": "100",
+          "description": "Transition duration in milliseconds."
+        },
+        {
+          "name": "closeOnBackdropClick",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Close drawer when backdrop is clicked."
+        },
+        {
+          "name": "backdropClass",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "default": "'ax-bg-black/45'",
+          "description": "CSS class for the backdrop styling."
+        },
+        {
+          "name": "collapsed",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "default": "true",
+          "description": "Collapsed state of the drawer."
+        }
+      ],
+      "events": [
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        },
+        {
+          "name": "onBackdropClick",
+          "type": [
+            {
+              "name": "AXClickEvent",
+              "link": "/en-US/docs/events/click-event"
+            }
+          ],
+          "description": "Emitted when the backdrop is clicked."
+        },
+        {
+          "name": "collapsedStateChanged",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Emitted when the collapsed state changes."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Gets the host HTML element of the component.\n *\n * @returns T - The native DOM element associated with this component. Inherited from MXBaseComponent.\n */\ngetHostElement<T = HTMLElement>(): T"
+        },
+        {
+          "content": "/**\n * Sets a component option with optional lifecycle callbacks.\n *\n * @param option - The option configuration containing the name, value and optional before/after callbacks. Inherited from MXBaseComponent.\n */\nsetOption<T = any>(option: MXComponentSetOption<T>): void"
+        },
+        {
+          "content": "/**\n * Opens the drawer.\n *\n * @returns void - No return value. The drawer is expanded.\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Closes the drawer.\n *\n * @returns void - No return value. The drawer is collapsed.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Toggles the drawer state between open and closed.\n *\n * @returns void - No return value. The drawer state is toggled.\n */\ntoggle(): void"
+        }
+      ]
+    }
+  ]
+}

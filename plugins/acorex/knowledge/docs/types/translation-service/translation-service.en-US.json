@@ -1,0 +1,100 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXTranslationService",
+  "imports": ["import { AXTranslationService } from '@acorex/core/translation';"],
+  "description": "Service class for managing translations, loading translation files, and providing translation functionality throughout the application.",
+  "sections": [
+    {
+      "title": "Service Definition",
+      "description": "Translation service API shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "translation-service.ts",
+            "content": "class AXTranslationService {\n  translate(key: string, params?: Record<string, unknown>): string;\n  setLanguage(lang: string): Promise<void>;\n  getLanguage(): string;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXTranslationService",
+      "props": [
+        {
+          "name": "currentLang",
+          "type": [{ "name": "AXTranslateLang", "link": "/en-US/docs/types/translate-lang" }],
+          "description": "Current language code being used for translations."
+        },
+        {
+          "name": "translations",
+          "type": [{ "name": "AXTranslateHashMap", "link": "/en-US/docs/types/translate-hash-map" }],
+          "description": "Loaded translation data organized by language and scope."
+        },
+        {
+          "name": "defaultLang",
+          "type": [{ "name": "AXTranslateLang", "link": "/en-US/docs/types/translate-lang" }],
+          "description": "Default language code to use when translations are not available."
+        },
+        {
+          "name": "fallbackLang",
+          "type": [{ "name": "AXTranslateLang", "link": "/en-US/docs/types/translate-lang" }],
+          "description": "Fallback language code to use when current language translations are missing."
+        }
+      ],
+      "description": "Central service for managing internationalization and translation functionality in the application.",
+      "methods": [
+        {
+          "name": "translate",
+          "description": "Translates a key to the current language with optional parameters."
+        },
+        {
+          "name": "instant",
+          "description": "Immediately translates a key without async loading."
+        },
+        {
+          "name": "setLang",
+          "description": "Sets the current language and loads corresponding translation files."
+        },
+        {
+          "name": "getLang",
+          "description": "Returns the current language code."
+        },
+        {
+          "name": "loadTranslations",
+          "description": "Loads translation files for a specific language and scope."
+        },
+        {
+          "name": "addTranslation",
+          "description": "Adds translation data for a specific language and scope."
+        },
+        {
+          "name": "hasTranslation",
+          "description": "Checks if a translation key exists for the current language."
+        },
+        {
+          "name": "getAvailableLangs",
+          "description": "Returns an array of available language codes."
+        },
+        {
+          "name": "onLangChange",
+          "description": "Registers a callback to be called when the language changes."
+        },
+        {
+          "name": "onTranslationLoad",
+          "description": "Registers a callback to be called when translations are loaded."
+        },
+        {
+          "name": "onTranslationError",
+          "description": "Registers a callback to be called when translation loading fails."
+        },
+        {
+          "name": "onTranslationMissing",
+          "description": "Registers a callback to be called when a translation key is missing."
+        }
+      ]
+    }
+  ]
+}

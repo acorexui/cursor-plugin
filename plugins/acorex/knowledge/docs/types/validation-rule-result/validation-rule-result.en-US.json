@@ -1,0 +1,51 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXValidationRuleResult",
+  "imports": ["import { AXValidationRuleResult } from '@acorex/core/validation';"],
+  "description": "Interface representing the result of a validation rule execution, containing validation status and error information.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Validation rule result shape.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "validation-rule-result.ts",
+            "content": "interface AXValidationRuleResult<T = unknown> {\n  valid: boolean;\n  message?: string;\n  ruleName: string;\n  value?: T;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXValidationRuleResult",
+      "props": [
+        {
+          "name": "valid",
+          "type": [{ "name": "boolean" }],
+          "description": "Whether the validation passed (true) or failed (false)."
+        },
+        {
+          "name": "message",
+          "type": [{ "name": "string" }],
+          "description": "Error message to display when validation fails."
+        },
+        {
+          "name": "ruleName",
+          "type": [{ "name": "string" }],
+          "description": "Name of the validation rule that produced this result."
+        },
+        {
+          "name": "value",
+          "type": [{ "name": "any" }],
+          "description": "The value that was validated."
+        }
+      ],
+      "description": "Result object returned by validation rules indicating whether validation passed or failed, along with relevant error information.",
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXSelectionValueChangedEvent",
+  "description": "Emitted when the selection value changes, providing the new and old values, selected keys, and selected items.",
+  "imports": ["import { AXSelectionValueChangedEvent } from '@acorex/cdk/common';"],
+  "sections": [
+    {
+      "title": "Class Definition",
+      "description": "Event for selection changes including keys and selected items.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "fileName": "events.class.ts",
+            "language": "ts",
+            "content": "export class AXSelectionValueChangedEvent extends AXValueChangedEvent<any | any[]> {\n  override value?: any = null;\n  override oldValue?: any = null;\n  selectedKeys?: any[] = [];\n  selectedItems?: any[] = [];\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXSelectionValueChangedEvent",
+      "props": [
+        { "name": "value", "type": [{ "name": "any" }], "description": "The new value or values." },
+        { "name": "oldValue", "type": [{ "name": "any" }], "description": "The previous value or values." },
+        { "name": "selectedKeys", "type": [{ "name": "any[]" }], "description": "The keys of the selected items." },
+        { "name": "selectedItems", "type": [{ "name": "any[]" }], "description": "The selected items." }
+      ]
+    }
+  ],
+  "tokens": []
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "AXStyleLookType",
+  "imports": ["import { AXStyleLookType } from '@acorex/cdk/common';"],
+  "description": "Type definition for component visual appearance styles used throughout the UI library.",
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "A union type that specifies the available visual appearance styles for components. Used to define how components should be rendered visually.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "style-look-type.ts",
+            "content": "type AXStyleLookType = 'solid' | 'blank' | 'outline' | 'twotone' | 'flat' | 'fill' | 'link' | 'none';"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXStyleLookType",
+      "props": [
+        {
+          "name": "AXStyleLookType",
+          "type": [
+            { "name": "'solid'" },
+            { "name": "'blank'" },
+            { "name": "'outline'" },
+            { "name": "'twotone'" },
+            { "name": "'flat'" },
+            { "name": "'fill'" },
+            { "name": "'link'" },
+            { "name": "'none'" }
+          ],
+          "description": "Union type defining supported look styles across components."
+        }
+      ]
+    }
+  ]
+}

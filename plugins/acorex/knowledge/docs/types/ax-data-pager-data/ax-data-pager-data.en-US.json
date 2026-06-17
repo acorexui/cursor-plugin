@@ -1,0 +1,61 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Data Pager Data",
+  "imports": ["import { AXDataPagerData } from '@acorex/components/data-pager';"],
+  "description": "Represents the data structure containing pagination information including page details, range, and pagination metadata.",
+  "sections": [
+    {
+      "title": "Interface Definition",
+      "description": "Shape of the data pager output model.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "ax-data-pager-data.ts",
+            "content": "interface AXDataPagerData {\n  range: { from: number; to: number };\n  page: number;\n  skip: number;\n  take: number;\n  totalPages: number;\n  totalItems: number;\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "title": "AXDataPagerData",
+      "props": [
+        {
+          "name": "range",
+          "type": [{ "name": "{ from: number; to: number }" }],
+          "description": "The range of items currently displayed (from and to indices)."
+        },
+        {
+          "name": "page",
+          "type": [{ "name": "number" }],
+          "description": "The current page number."
+        },
+        {
+          "name": "skip",
+          "type": [{ "name": "number" }],
+          "description": "The number of items to skip (offset)."
+        },
+        {
+          "name": "take",
+          "type": [{ "name": "number" }],
+          "description": "The number of items to take (page size)."
+        },
+        {
+          "name": "totalPages",
+          "type": [{ "name": "number" }],
+          "description": "The total number of pages available."
+        },
+        {
+          "name": "totalItems",
+          "type": [{ "name": "number" }],
+          "description": "The total number of items in the dataset."
+        }
+      ],
+      "events": [],
+      "methods": []
+    }
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Popover",
+  "extraLinks": [
+    {
+      "text": "Storybook",
+      "icon": "icon-storybook",
+      "href": "https://storybook.acorex.io/?path=/docs/popover--documentation"
+    }
+  ],
+  "description": "A component that displays a floating panel containing additional content or controls. It can be positioned relative to a target element and supports various placement options.",
+  "imports": [
+    "import { AXPopoverComponent } from '@acorex/components/popover';"
+  ],
+  "sections": [
+    {
+      "title": "Usage",
+      "description": "A simple example of using <code>ax-popover</code>",
+      "content": {
+        "type": "api",
+        "data": "popover/usage"
+      },
+      "height": "300px"
+    },
+    {
+      "title": "Open on Hover",
+      "description": "Open the popover when hovering over the target element.",
+      "content": {
+        "type": "api",
+        "data": "popover/hover"
+      },
+      "height": "300px"
+    },
+    {
+      "title": "Close on Leave",
+      "description": "Close the popover when the pointer leaves the target or popover.",
+      "content": {
+        "type": "api",
+        "data": "popover/leave"
+      },
+      "height": "300px"
+    },
+    {
+      "title": "Open and Close Methods",
+      "description": "Programmatically open, close, or toggle the popover.",
+      "content": {
+        "type": "api",
+        "data": "popover/methods"
+      },
+      "height": "300px"
+    }
+  ],
+  "types": [
+    {
+      "title": "AXPopoverComponent",
+      "props": [
+        {
+          "name": "target",
+          "type": [
+            {
+              "name": "Element"
+            },
+            {
+              "name": "ElementRef"
+            },
+            {
+              "name": "MXBaseComponent"
+            }
+          ],
+          "description": "The element the popover is positioned relative to. Accepts Element, ElementRef, or MXBaseComponent.",
+          "default": "undefined"
+        },
+        {
+          "name": "placement",
+          "type": [
+            {
+              "name": "AXPlacementType",
+              "link": "/en-US/docs/types/placement-type"
+            }
+          ],
+          "description": "Placement of the popover relative to the target.",
+          "default": "'bottom-start'"
+        },
+        {
+          "name": "content",
+          "type": [
+            {
+              "name": "TemplateRef<unknown>"
+            },
+            {
+              "name": "ComponentType<unknown>"
+            }
+          ],
+          "description": "Content to display inside the popover. Can be a TemplateRef or a ComponentType."
+        },
+        {
+          "name": "openOn",
+          "type": [
+            {
+              "name": "'manual'"
+            },
+            {
+              "name": "'click'"
+            },
+            {
+              "name": "'hover'"
+            },
+            {
+              "name": "'toggle'"
+            }
+          ],
+          "description": "Trigger for opening the popover.",
+          "default": "'toggle'"
+        },
+        {
+          "name": "closeOn",
+          "type": [
+            {
+              "name": "'manual'"
+            },
+            {
+              "name": "'clickOut'"
+            },
+            {
+              "name": "'leave'"
+            }
+          ],
+          "description": "Trigger for closing the popover.",
+          "default": "'clickOut'"
+        },
+        {
+          "name": "hasBackdrop",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Whether to show a backdrop behind the popover.",
+          "default": "false"
+        },
+        {
+          "name": "openAfter",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before opening after the trigger.",
+          "default": "200"
+        },
+        {
+          "name": "closeAfter",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Delay in milliseconds before closing after the trigger.",
+          "default": "200"
+        },
+        {
+          "name": "backdropClass",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "CSS class to apply to the backdrop element."
+        },
+        {
+          "name": "panelClass",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "CSS class to apply to the panel element."
+        },
+        {
+          "name": "adaptivityEnabled",
+          "type": [
+            {
+              "name": "boolean"
+            }
+          ],
+          "description": "Enables action sheet style on small screens.",
+          "default": "false"
+        },
+        {
+          "name": "width",
+          "type": [
+            {
+              "name": "string"
+            }
+          ],
+          "description": "Overlay width. Can be 'auto' or a CSS length value.",
+          "default": "'auto'"
+        },
+        {
+          "name": "offsetX",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Horizontal offset from the target.",
+          "default": "0"
+        },
+        {
+          "name": "offsetY",
+          "type": [
+            {
+              "name": "number"
+            }
+          ],
+          "description": "Vertical offset from the target.",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "onOpened",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted after the popover is opened."
+        },
+        {
+          "name": "onClosed",
+          "type": [
+            {
+              "name": "AXEvent",
+              "link": "/en-US/docs/events/event"
+            }
+          ],
+          "description": "Emitted after the popover is closed."
+        },
+        {
+          "name": "onOptionChanged",
+          "type": [
+            {
+              "name": "AXOptionChangedEvent",
+              "link": "/en-US/docs/events/option-changed-event"
+            }
+          ],
+          "description": "Fired when an option related to the component changes. Inherited from MXBaseComponent."
+        }
+      ],
+      "methods": [
+        {
+          "content": "/**\n * Toggles the component's open state.\n */\ntoggle(): void"
+        },
+        {
+          "content": "/**\n * Closes the component if it's open, detaches the overlay, restores focus, and emits the closed event.\n */\nclose(): void"
+        },
+        {
+          "content": "/**\n * Opens the component if it's not already open, saves focus, opens the overlay, and emits the opened event.\n */\nopen(): void"
+        },
+        {
+          "content": "/**\n * Updates the position of the overlay and focuses on it.\n */\nupdatePosition(): void"
+        },
+        {
+          "content": "/**\n * Focuses the overlay element.\n */\nfocus(): void"
+        }
+      ]
+    }
+  ]
+}

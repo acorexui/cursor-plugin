@@ -1,0 +1,48 @@
+{
+  "$schema": "../../document.schema.json",
+  "title": "Flow Chart Edges",
+  "description": "Represents a connection between two nodes in the flow chart, including identifiers and endpoint anchors.",
+  "imports": [
+    "import { AXFlowChartEdges } from '@acorex/components/flow-chart';"
+  ],
+  "types": [
+    {
+      "title": "AXFlowChartEdges",
+      "props": [
+        {
+          "name": "id",
+          "type": [{ "name": "string" }],
+          "description": "Unique identifier of the edge."
+        },
+        {
+          "name": "source",
+          "type": [{ "name": "{ id: string; anchor: string }" }],
+          "description": "Source endpoint of the edge, including node id and anchor name."
+        },
+        {
+          "name": "target",
+          "type": [{ "name": "{ id: string; anchor: string }" }],
+          "description": "Target endpoint of the edge, including node id and anchor name."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "title": "Type Definition",
+      "description": "Canonical TypeScript definition of the edge type.",
+      "content": {
+        "type": "code",
+        "data": [
+          {
+            "language": "typescript",
+            "fileName": "flow-chart.type.ts",
+            "content": "export interface AXFlowChartEdges { id: string; source: { id: string; anchor: string }; target: { id: string; anchor: string }; }"
+          }
+        ]
+      }
+    }
+  ]
+}
+
+
