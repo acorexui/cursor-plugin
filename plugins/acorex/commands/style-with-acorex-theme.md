@@ -23,6 +23,8 @@ Apply ACoreX design system styling using the embedded Tailwind theme.
 
 5. Output templates using only theme-backed Tailwind utilities — no hardcoded colors.
 
+6. **Never use `-surface` as a Tailwind utility suffix** (`bg-lightest-surface` is wrong). Use `bg-lightest`, `text-on-lightest`, `border-border-lightest`. Reserve `-surface` for standalone shortcut utilities only (`success-surface`, `lightest-surface`).
+
 ## Quick examples
 
 | Request | Classes |

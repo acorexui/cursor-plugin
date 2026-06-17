@@ -22,14 +22,30 @@ Start with `knowledge/theme/TAILWIND-GUIDE.md`, then `knowledge/theme/tailwind-t
 
 | Need | Use |
 | --- | --- |
-| Page/section background | `bg-lightest`, `bg-surface`, `bg-default` |
-| Text on surface | `text-on-lightest`, `text-on-surface`, `text-default` |
-| Borders | `border-border-lightest`, `border-border-surface` |
+| Page/section background | `bg-lightest`, `bg-lighter`, `bg-surface`, `bg-default` |
+| Text on surface | `text-on-lightest`, `text-on-lighter`, `text-on-surface`, `text-default` |
+| Borders | `border-border-lightest`, `border-border-lighter`, `border-border-surface` |
 | Brand / CTA | `bg-primary`, `text-on-primary`, `bg-primary-500` |
 | Success / warning / danger | `bg-success`, `bg-warning-100`, `text-danger-800` |
 | Subtle badge/chip | `bg-primary-100 text-primary-800` |
 | Border radius | `rounded-default` |
 | Spacing density | Parent class `ax-md` (or `ax-sm`, `ax-lg`) |
+
+### Common token naming mistake
+
+CSS variables end in `-surface` (e.g. `--ax-sys-color-lightest-surface`), but **Tailwind `@theme` tokens drop that suffix**:
+
+| ❌ Wrong | ✅ Correct |
+| --- | --- |
+| `bg-lightest-surface` | `bg-lightest` |
+| `bg-lighter-surface` | `bg-lighter` |
+| `text-on-lightest-surface` | `text-on-lightest` |
+| `border-border-lightest-surface` | `border-border-lightest` |
+| `bg-success-lighter-surface` | `bg-success-lighter` |
+| `text-success-surface` | `text-success` |
+| `bg-success-surface` | `bg-success` or standalone `success-surface` utility |
+
+Standalone `@utility` classes like `lightest-surface`, `success-surface`, `danger-lighter-surface` apply bg + text + border together — use them **without** `bg-`/`text-`/`border-` prefixes.
 
 ### 3. Component host pattern
 
@@ -79,6 +95,11 @@ Read `knowledge/theme/default.css` for exact CSS variable values and `@utility` 
 - ❌ `bg-[#2b7fff]` or `color: #333`
 - ❌ Bootstrap/Material color names not in theme
 - ❌ `ngClass` with dynamic color strings — use theme utilities or component `color` input
+- ❌ **Wrong:** `bg-lightest-surface`, `text-on-lightest-surface`, `border-border-lightest-surface`, `bg-success-lighter-surface`, `text-success-surface`
+- ❌ **Wrong:** `bg-success-surface` (no such `bg-*` token — use `bg-success` or the `success-surface` shortcut utility alone)
+- ✅ `bg-lightest text-on-lightest border-border-lightest`
+- ✅ `bg-success-lighter/30 text-success`
+- ✅ `success-surface` (shortcut utility on a host element — no `bg-`/`text-` prefix)
 - ✅ `bg-primary text-on-primary`
 - ✅ `ax-primary ax-solid` on component host
 - ✅ Component `[color]="'primary'" [look]="'solid'"`

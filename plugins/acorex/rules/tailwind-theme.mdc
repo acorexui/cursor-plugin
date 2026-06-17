@@ -20,9 +20,13 @@ The ACoreX design system theme lives in `knowledge/theme/default.css` (source: `
 ## Required styling rules
 
 1. **Use Tailwind utilities mapped to @theme tokens:**
-   - Surfaces: `bg-lightest`, `bg-surface`, `bg-darkest`, `text-on-lightest`, `border-border-lightest`
-   - Semantic: `bg-primary`, `text-on-primary`, `bg-success-100`, `text-danger-800`
+   - Surfaces: `bg-lightest`, `bg-lighter`, `bg-surface`, `bg-darkest`, `text-on-lightest`, `text-on-surface`, `border-border-lightest`, `border-border-surface`
+   - Semantic: `bg-primary`, `text-on-primary`, `bg-success`, `text-success`, `bg-success-100`, `text-danger-800`
    - Defaults: `bg-default`, `text-default`, `rounded-default`
+
+   **Never append `-surface` to Tailwind utility prefixes.** CSS variables use `--ax-sys-color-lightest-surface`, but `@theme` exposes them as `--color-lightest` → use `bg-lightest`, not `bg-lightest-surface`. Same for `text-on-lightest` (not `text-on-lightest-surface`) and `border-border-lightest` (not `border-border-lightest-surface`).
+
+   **`-surface` suffix is only for standalone `@utility` shortcut classes** that set background + text + border together, e.g. `success-surface`, `lightest-surface`, `danger-lighter-surface`. Do not combine them with `bg-*`, `text-*`, or `border-*` prefixes.
 
 2. **Component color/look/size** — on `ax-*` components and custom hosts:
    - Size: `ax-xs`, `ax-sm`, `ax-md`, `ax-lg`, `ax-xl`

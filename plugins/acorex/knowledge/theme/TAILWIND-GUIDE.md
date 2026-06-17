@@ -63,9 +63,12 @@ Use standard Tailwind utilities — tokens resolve to ACoreX CSS variables.
 
 ```html
 <div class="bg-lightest text-on-lightest border-border-lightest">...</div>
+<div class="bg-lighter text-on-lighter border-border-lighter">...</div>
 <div class="bg-surface text-on-surface border-border-surface">...</div>
 <div class="bg-darkest text-on-darkest border-border-darkest">...</div>
 ```
+
+> **Note:** Use `bg-lightest`, not `bg-lightest-surface`. The `-surface` suffix exists on CSS variables and on standalone shortcut utilities (`lightest-surface`), not on `bg-*` / `text-*` / `border-*` Tailwind prefixes.
 
 ### Semantic palettes (50–950 + surfaces)
 
@@ -93,13 +96,26 @@ Each palette has:
 | `border-default` | Default border |
 | `rounded-default` | `var(--ax-sys-border-radius)` |
 
+### Common token naming mistake
+
+| ❌ Wrong | ✅ Correct |
+| --- | --- |
+| `bg-lightest-surface` | `bg-lightest` |
+| `text-on-lightest-surface` | `text-on-lightest` |
+| `border-border-lightest-surface` | `border-border-lightest` |
+| `bg-success-lighter-surface` | `bg-success-lighter` |
+| `text-success-surface` | `text-success` |
+| `bg-success-surface` | `bg-success` or `success-surface` (shortcut utility) |
+
 ## Typography utilities
 
 `h1`–`h6` · `heading` · `heading-start` · `heading-center` · `heading-end` · `subtitle` · `links`
 
 ## Surface shortcut utilities
 
-`primary-lightest-surface` · `primary-lighter-surface` · `primary-light-surface` · `primary-surface` · `primary-dark-surface` · `primary-darker-surface` · `primary-darkest-surface` · `secondary-lightest-surface` · `secondary-lighter-surface` · `secondary-light-surface` · `secondary-surface` · `secondary-dark-surface` …
+Standalone `@utility` classes (apply bg + text + border — **do not** prefix with `bg-`/`text-`/`border-`):
+
+`lightest-surface` · `lighter-surface` · `light-surface` · `surface` · `dark-surface` · `darker-surface` · `darkest-surface` · `primary-lightest-surface` · `primary-lighter-surface` · `success-surface` · `danger-lighter-surface` · …
 
 Full list in `knowledge/theme/tailwind-theme.json` → `surfaceUtilities`.
 
@@ -118,10 +134,12 @@ Key tokens (use in custom CSS or `bg-[...]` arbitrary values):
 ## Rules for the agent
 
 1. **Never hardcode hex colors** — use theme tokens (`bg-primary`, `text-on-surface`, etc.)
-2. **Match component API** — use `color` and `look` inputs on `ax-*` components; use Tailwind utilities for layout/custom markup
-3. **Read component tokens** — check `tokens` in component blueprint JSON for `--ax-comp-*` variables
-4. **Dark mode** — always consider `dark:` / `ax-dark` variants
-5. **Full reference** — read `knowledge/theme/tailwind-theme.json` and `knowledge/theme/default.css`
+2. **Never append `-surface` to `bg-` / `text-` / `border-` utilities** — `@theme` maps `--color-lightest` (not `--color-lightest-surface`). Use `bg-lightest`, `text-on-lightest`, `border-border-lightest`.
+3. **Use `-surface` suffix only on standalone shortcut utilities** — e.g. `class="success-surface"` or `class="lightest-surface"`, not `bg-success-surface`.
+4. **Match component API** — use `color` and `look` inputs on `ax-*` components; use Tailwind utilities for layout/custom markup
+5. **Read component tokens** — check `tokens` in component blueprint JSON for `--ax-comp-*` variables
+6. **Dark mode** — always consider `dark:` / `ax-dark` variants
+7. **Full reference** — read `knowledge/theme/tailwind-theme.json` and `knowledge/theme/default.css`
 
 ## Structured data
 
