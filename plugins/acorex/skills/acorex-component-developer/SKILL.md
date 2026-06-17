@@ -35,11 +35,13 @@ description: Build and extend ACoreX UI Angular components. Use when scaffolding
 
 3. **Apply Angular standards** — Standalone components, signal `input()` / `output()`, `ChangeDetectionStrategy.OnPush`, native control flow (`@if`, `@for`), `inject()` for DI, host bindings in the `host` object (not `@HostBinding`).
 
-4. **Trace inheritance** — Document all mixin/base class properties, events, and methods. Include defaults only when defined in code.
+4. **Organize source files** — Section comments in `.html`, `//#region` tags in `.ts` per `code-organization`.
 
-5. **Add showcase case** — Create `apps/showcase/src/app/cases/<component-name>/` with `.page.ts` and `.page.html` demonstrating usage sections.
+5. **Trace inheritance** — Document all mixin/base class properties, events, and methods. Include defaults only when defined in code.
 
-6. **Build and verify**:
+6. **Add showcase case** — Create `apps/showcase/src/app/cases/<component-name>/` with `.page.ts` and `.page.html` demonstrating usage sections.
+
+7. **Build and verify**:
    ```bash
    nx build components
    nx run showcase:serve
@@ -56,5 +58,6 @@ description: Build and extend ACoreX UI Angular components. Use when scaffolding
 ## References
 
 - Angular rule: `rules/angular-rule.mdc`
+- Code organization: `rules/code-organization.mdc`
 - Secondary entry points: `rules/secondary-entry-points-rules.mdc`
 - Nx tasks: `rules/nx-rules.mdc`

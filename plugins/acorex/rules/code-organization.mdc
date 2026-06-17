@@ -1,0 +1,136 @@
+---
+description: Organize Angular component HTML and TypeScript with section comments and #region tags for readability and maintainability.
+alwaysApply: true
+---
+
+# Code Organization — HTML Comments & TS Regions
+
+When generating or editing Angular component `.html` and `.ts` files, structure code so sections are easy to scan. Use **HTML comments** for template sections and **`//#region` / `//#endregion`** for TypeScript logic groups.
+
+## TypeScript (`.ts`)
+
+Group related code by **topic / responsibility**. Use collapsible region tags (IDE-friendly) with clear names.
+
+### Standard regions (use what applies; skip empty sections)
+
+| Region | Contents |
+| --- | --- |
+| `//#region Types` | Local types, interfaces, type aliases |
+| `//#region Dependencies` | `inject()` calls, `viewChild` / `viewChildren` |
+| `//#region State` | `signal()`, `model()`, writable state |
+| `//#region Derived state` | `computed()` |
+| `//#region Lifecycle` | `constructor`, lifecycle hooks, `afterNextRender` |
+| `//#region Event handlers` | User interaction handlers (`onClick`, `onSubmit`, …) |
+| `//#region Navigation` | Tab/step routing, view switching |
+| `//#region Form` | Form state, validation, submit logic |
+| `//#region API` | HTTP calls, data loading, side effects |
+| `//#region Helpers` | Pure utility functions private to the component |
+
+### Rules
+
+- One blank line before each `//#region` and after each `//#endregion`.
+- Region names: **PascalCase**, short and descriptive (e.g. `//#region File upload`, `//#region Tab navigation`).
+- Do **not** wrap single one-liners in their own region — merge small related items.
+- Do **not** add regions inside `@Component({ ... })` metadata — only around class body members.
+- Imports stay **outside** regions at the top of the file (no region around imports unless the file is very large).
+
+### Example
+
+```typescript
+import { Component, computed, inject, signal } from '@angular/core';
+
+type ViewMode = 'list' | 'detail';
+
+@Component({ /* ... */ })
+export class MyPage {
+  //#region Dependencies
+  private readonly api = inject(MyApiService);
+  //#endregion
+
+  //#region State
+  protected readonly viewMode = signal<ViewMode>('list');
+  protected readonly items = signal<Item[]>([]);
+  //#endregion
+
+  //#region Derived state
+  protected readonly isEmpty = computed(() => this.items().length === 0);
+  //#endregion
+
+  //#region Event handlers
+  protected onItemSelect(item: Item): void {
+    this.viewMode.set('detail');
+  }
+  //#endregion
+}
+```
+
+## HTML templates (`.html`)
+
+Add **section comments** above major blocks so the template reads top-to-bottom like a page outline.
+
+### What to comment
+
+- Page shell (wrapper, layout)
+- Header / footer / toolbar
+- Main content areas
+- Wizard steps, tabs, or conditional views (`@if` branches)
+- Repeated card/list sections
+- Sticky action bars (submit, navigation buttons)
+- Status screens (loading, success, error)
+
+### Comment format
+
+```html
+<!-- Section name -->
+...markup...
+
+<!-- / Section name -->
+```
+
+- Use a short **title case** label (e.g. `<!-- Header -->`, `<!-- Step 2: Documents -->`, `<!-- Submit actions -->`).
+- Close optional for top-level sections; use `<!-- / Section name -->` when nesting is deep or sections are long.
+- Place the opening comment on its own line **immediately above** the element it describes.
+- Do **not** comment every `<div>` — only meaningful UI sections.
+- Do **not** restate obvious markup (`<!-- div -->`). Describe **purpose**, not tag names.
+
+### Example
+
+```html
+<!-- Page shell -->
+<div class="flex min-h-dvh flex-col">
+  <!-- Header -->
+  <header>...</header>
+
+  @if (view() === 'form') {
+    <!-- Wizard tabs -->
+    <ax-tabs>...</ax-tabs>
+
+    <!-- Step 1: Personal info -->
+  <ax-form>...</ax-form>
+  }
+
+  @if (view() === 'success') {
+    <!-- Success state -->
+    <section>...</section>
+  }
+
+  <!-- Footer actions -->
+  <footer>...</footer>
+</div>
+<!-- / Page shell -->
+```
+
+## When generating new components or pages
+
+1. Plan sections first (header, form, actions, states).
+2. Write the HTML skeleton with section comments.
+3. Implement the `.ts` file with matching region names where helpful (e.g. `//#region Form` aligns with `<!-- Personal info form -->`).
+4. Keep region/comment names **consistent** between `.ts` and `.html` when they represent the same feature.
+
+## Anti-patterns
+
+- ❌ No structure in a 100+ line file
+- ❌ `//#region stuff` / `<!-- div -->` — vague labels
+- ❌ Region per property or per HTML element
+- ❌ Comments that duplicate visible UI text verbatim without adding structure
+- ✅ Clear section map at a glance in both files

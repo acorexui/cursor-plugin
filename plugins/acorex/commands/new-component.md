@@ -21,12 +21,14 @@ Scaffold a new component in the ACoreX UI monorepo.
 
 4. Create showcase case at `apps/showcase/src/app/cases/<name>/`.
 
-5. Build to verify:
+5. Apply **code-organization** — section comments in component `.html`, `//#region` tags in `.ts`.
+
+6. Build to verify:
    ```bash
    nx build components
    ```
 
-6. Offer follow-up: documentation JSON, Storybook stories, or both.
+7. Offer follow-up: documentation JSON, Storybook stories, or both.
 
 ## Naming conventions
 

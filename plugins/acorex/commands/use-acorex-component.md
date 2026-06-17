@@ -25,7 +25,9 @@ Find and apply the official ACoreX documentation blueprint for a component or pa
 
 6. Implement the feature using the blueprint API. If inside the monorepo, cross-check `apps/showcase/src/app/cases/` for the `showcasePath` demos.
 
-7. For related types or events referenced in the blueprint, load those JSON files too.
+7. Organize generated `.html` / `.ts` per **code-organization** (section comments + `//#region` tags).
+
+8. For related types or events referenced in the blueprint, load those JSON files too.
 
 ## Examples
 

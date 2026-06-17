@@ -38,8 +38,9 @@ nx affected -t build
 
 1. Check **secondary-entry-points-rules** for existing `@acorex/*` exports.
 2. Follow **angular-rule** for component implementation.
-3. Use **nx-rules** — run tasks through `nx`, not raw CLI.
-4. Add docs via **component-docs-rules** and Storybook via **create-story-book**.
+3. Follow **code-organization** — section comments in `.html`, `//#region` tags in `.ts`.
+4. Use **nx-rules** — run tasks through `nx`, not raw CLI.
+5. Add docs via **component-docs-rules** and Storybook via **create-story-book**.
 
 ## Links
 

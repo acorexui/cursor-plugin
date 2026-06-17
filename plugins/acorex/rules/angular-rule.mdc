@@ -47,6 +47,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Keep templates simple and avoid complex logic
 - Use native control flow (`@if`, `@for`, `@switch`) instead of `*ngIf`, `*ngFor`, `*ngSwitch`
 - Use the async pipe to handle observables
+- Add **section comments** in `.html` files and organize `.ts` class bodies with **`//#region`** tags — see **code-organization**
 
 ## Services
 

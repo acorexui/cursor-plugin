@@ -25,6 +25,8 @@ Apply ACoreX design system styling using the embedded Tailwind theme.
 
 6. **Never use `-surface` as a Tailwind utility suffix** (`bg-lightest-surface` is wrong). Use `bg-lightest`, `text-on-lightest`, `border-border-lightest`. Reserve `-surface` for standalone shortcut utilities only (`success-surface`, `lightest-surface`).
 
+7. Organize `.html` with section comments and `.ts` with `//#region` tags per **code-organization**.
+
 ## Quick examples
 
 | Request | Classes |

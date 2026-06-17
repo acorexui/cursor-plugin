@@ -57,6 +57,7 @@ From the blueprint JSON:
 - Apply props and events from the blueprint API
 - Match section patterns (Usage first, then advanced sections)
 - Use `ChangeDetectionStrategy.OnPush`, signals, and standalone components per `angular-rule`
+- Structure templates with section comments and `.ts` with `//#region` tags per `code-organization`
 - For related types/events, read linked blueprints under `knowledge/docs/types/` and `knowledge/docs/events/`
 
 ### 5. Verify

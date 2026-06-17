@@ -18,6 +18,8 @@ description: Write styles using the ACoreX Tailwind theme from default.css. Use 
 
 Start with `knowledge/theme/TAILWIND-GUIDE.md`, then `knowledge/theme/tailwind-theme.json` for full token lists.
 
+When writing template markup, add section comments per **code-organization** (e.g. `<!-- Header -->`, `<!-- Form card -->`).
+
 ### 2. Choose the right token category
 
 | Need | Use |
@@ -107,5 +109,6 @@ Read `knowledge/theme/default.css` for exact CSS variable values and `@utility` 
 ## Related
 
 - Rule: `rules/tailwind-theme.mdc`
+- Rule: `rules/code-organization.mdc`
 - Setup: `knowledge/docs/get-started/tailwind-compatibility/tailwind-compatibility.en-US.json`
 - Theming docs: `knowledge/docs/styles/theming/theming.en-US.json`
