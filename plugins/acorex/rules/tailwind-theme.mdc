@@ -35,6 +35,34 @@ The ACoreX design system theme lives in `knowledge/theme/default.css` (source: `
 
 3. **Dark mode** — use `ax-dark` on `<html>`; apply `dark:` variants for custom markup.
 
+   **Surface level reversal (required):** When using neutral or semantic surface-level tokens in custom markup, always pair the light token with its inverted dark counterpart via `dark:`:
+
+   | Light (default) | Dark (`dark:`) |
+   | --- | --- |
+   | `lightest` | `darkest` |
+   | `lighter` | `darker` |
+   | `light` | `dark` |
+   | `on-lightest` | `on-darkest` |
+   | `on-lighter` | `on-darker` |
+   | `border-lightest` | `border-darkest` |
+   | `border-lighter` | `border-darker` |
+
+   Same reversal applies to semantic palettes: `primary-lighter` → `dark:primary-darker`, `danger-lighter` → `dark:danger-darker`, etc.
+
+   ```html
+   <!-- ✅ Correct — reversed surface levels -->
+   <div class="bg-lighter dark:bg-darker text-on-lightest dark:text-on-darkest">
+   <div class="bg-lightest dark:bg-darkest border border-border-lightest dark:border-border-darkest">
+   <div class="bg-primary-lighter/30 dark:bg-primary-darker/30">
+   <div class="lightest-surface dark:darkest-surface">
+
+   <!-- ❌ Wrong — missing dark: reversal -->
+   <div class="bg-lighter text-on-lightest">
+   <div class="bg-lightest border-border-lightest">
+   ```
+
+   Shade steps (`primary-500`, `secondary-500`) and base semantic tokens (`bg-primary`, `text-primary`) do not follow this reversal — they adapt via CSS variables under `ax-dark`.
+
 4. **Component-specific tokens** — when styling `ax-*` components, also read `tokens` from the component blueprint JSON (`--ax-comp-*` variables).
 
 5. **Never** invent colors outside the theme. If a token is missing, use the closest palette step (50–950) or surface level.
@@ -43,7 +71,7 @@ The ACoreX design system theme lives in `knowledge/theme/default.css` (source: `
 
 ```html
 <!-- Layout with neutral surface -->
-<div class="bg-lightest text-on-lightest border border-border-lightest p-4 rounded-default">
+<div class="bg-lightest dark:bg-darkest text-on-lightest dark:text-on-darkest border border-border-lightest dark:border-border-darkest p-4 rounded-default">
 
 <!-- Semantic block -->
 <div class="bg-primary-50 text-primary-900 border border-primary-200 p-3">

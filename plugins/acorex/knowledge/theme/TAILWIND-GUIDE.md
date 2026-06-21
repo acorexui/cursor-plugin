@@ -24,6 +24,38 @@ Import `@acorex/styles` in your project. See `knowledge/docs/get-started/tailwin
 - Add `ax-dark` class on `<html>` to enable dark theme
 - Custom variant: `dark:` maps to `.ax-dark` descendants
 
+### Surface level reversal (required)
+
+When using surface-level tokens (`lightest`, `lighter`, `light`, and their `on-*` / `border-*` counterparts) in custom markup, **always pair each light token with its inverted dark counterpart** via `dark:`:
+
+| Light (default) | Dark (`dark:`) |
+| --- | --- |
+| `lightest` | `darkest` |
+| `lighter` | `darker` |
+| `light` | `dark` |
+| `on-lightest` | `on-darkest` |
+| `on-lighter` | `on-darker` |
+| `border-lightest` | `border-darkest` |
+| `border-lighter` | `border-darker` |
+
+Applies to neutral and semantic palettes: `bg-primary-lighter` → `dark:bg-primary-darker`, `danger-lighter-surface` → `dark:danger-darker-surface`, etc.
+
+```html
+<!-- Page shell -->
+<div class="bg-lighter dark:bg-darker text-on-lightest dark:text-on-darkest">
+
+<!-- Card on page -->
+<div class="bg-lightest dark:bg-darkest border border-border-lightest dark:border-border-darkest">
+
+<!-- Semantic tint -->
+<div class="bg-primary-lighter/30 dark:bg-primary-darker/30 text-primary">
+
+<!-- Shortcut utility -->
+<div class="lightest-surface dark:darkest-surface">
+```
+
+Shade steps (`primary-500`, `secondary-500`) and base semantic tokens (`bg-primary`, `text-primary`) adapt automatically via CSS variables under `ax-dark` — no reversal needed.
+
 ## Size scale (apply on container or component)
 
 | Class | Use |
@@ -62,8 +94,8 @@ Use standard Tailwind utilities — tokens resolve to ACoreX CSS variables.
 ### Neutral surfaces
 
 ```html
-<div class="bg-lightest text-on-lightest border-border-lightest">...</div>
-<div class="bg-lighter text-on-lighter border-border-lighter">...</div>
+<div class="bg-lightest dark:bg-darkest text-on-lightest dark:text-on-darkest border-border-lightest dark:border-border-darkest">...</div>
+<div class="bg-lighter dark:bg-darker text-on-lighter dark:text-on-darker border-border-lighter dark:border-border-darker">...</div>
 <div class="bg-surface text-on-surface border-border-surface">...</div>
 <div class="bg-darkest text-on-darkest border-border-darkest">...</div>
 ```
@@ -138,7 +170,7 @@ Key tokens (use in custom CSS or `bg-[...]` arbitrary values):
 3. **Use `-surface` suffix only on standalone shortcut utilities** — e.g. `class="success-surface"` or `class="lightest-surface"`, not `bg-success-surface`.
 4. **Match component API** — use `color` and `look` inputs on `ax-*` components; use Tailwind utilities for layout/custom markup
 5. **Read component tokens** — check `tokens` in component blueprint JSON for `--ax-comp-*` variables
-6. **Dark mode** — always consider `dark:` / `ax-dark` variants
+6. **Dark mode** — always pair surface-level tokens with reversed `dark:` variants (see [Surface level reversal](#surface-level-reversal-required)); shade steps and base semantic tokens adapt via CSS variables
 7. **Full reference** — read `knowledge/theme/tailwind-theme.json` and `knowledge/theme/default.css`
 
 ## Structured data

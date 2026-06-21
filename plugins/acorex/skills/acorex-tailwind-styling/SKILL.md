@@ -61,12 +61,29 @@ For elements that should match ACoreX component styling:
 
 ### 4. Dark mode
 
+Toggle with `ax-dark` on `<html>`. The `dark:` variant maps to `.ax-dark` context.
+
+#### Surface level reversal (required)
+
+Every surface-level token in custom markup must include its inverted `dark:` pair:
+
+| Light | Dark |
+| --- | --- |
+| `bg-lightest` | `dark:bg-darkest` |
+| `bg-lighter` | `dark:bg-darker` |
+| `bg-light` | `dark:bg-dark` |
+| `text-on-lightest` | `dark:text-on-darkest` |
+| `border-border-lightest` | `dark:border-border-darkest` |
+| `bg-primary-lighter` | `dark:bg-primary-darker` |
+| `lightest-surface` | `dark:darkest-surface` |
+| `danger-lighter-surface` | `dark:danger-darker-surface` |
+
 ```html
-<html class="ax-dark">
-  <div class="bg-darkest text-on-darkest dark:bg-darkest">
+<div class="bg-lighter dark:bg-darker text-on-lightest dark:text-on-darkest">
+  <div class="bg-lightest dark:bg-darkest border border-border-lightest dark:border-border-darkest">
 ```
 
-The `dark:` variant maps to `.ax-dark` context.
+Shade steps (`primary-500`) and base tokens (`bg-primary`) do **not** need reversal — they adapt via CSS variables under `ax-dark`.
 
 ### 5. Cross-reference component blueprints
 
@@ -99,7 +116,9 @@ Read `knowledge/theme/default.css` for exact CSS variable values and `@utility` 
 - ❌ `ngClass` with dynamic color strings — use theme utilities or component `color` input
 - ❌ **Wrong:** `bg-lightest-surface`, `text-on-lightest-surface`, `border-border-lightest-surface`, `bg-success-lighter-surface`, `text-success-surface`
 - ❌ **Wrong:** `bg-success-surface` (no such `bg-*` token — use `bg-success` or the `success-surface` shortcut utility alone)
-- ✅ `bg-lightest text-on-lightest border-border-lightest`
+- ❌ **Wrong:** surface tokens without `dark:` reversal — `bg-lighter`, `bg-lightest`, `border-border-lightest`, `text-on-lightest` used alone
+- ✅ `bg-lighter dark:bg-darker text-on-lightest dark:text-on-darkest`
+- ✅ `bg-lightest dark:bg-darkest border-border-lightest dark:border-border-darkest`
 - ✅ `bg-success-lighter/30 text-success`
 - ✅ `success-surface` (shortcut utility on a host element — no `bg-`/`text-` prefix)
 - ✅ `bg-primary text-on-primary`
